@@ -1,0 +1,31 @@
+# USB PD Specification Parser - Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core PDF processing
+pdfplumber==0.10.3
+PyMuPDF==1.23.8
+
+# Alternative PDF libraries (optional)
+pdfminer.six==20221105
+
+# Data modeling and validation
+pydantic==2.5.0
+
+# Text processing
+nltk==3.8.1
+regex==2023.10.3
+
+# Fuzzy matching for validation
+python-Levenshtein==0.23.0
+
+# Optional: Advanced features
+# sentence-transformers==2.2.2  # For semantic chunking
+# networkx==3.2.1  # For knowledge graphs
+# langchain==0.1.0  # For LLM integration
+
+# Development and testing
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.12.1
+flake8==6.1.0
+mypy==1.7.1

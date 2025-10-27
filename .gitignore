@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg
+*.egg-info/
+dist/
+build/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.tox/
+
+# Project specific
+data/*.pdf
+*.jsonl
+!examples/*.jsonl
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
