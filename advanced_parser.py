@@ -4,6 +4,7 @@ from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass, asdict
 import pdfplumber
 import json
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -27,131 +28,134 @@ class ContentChunk:
 class AdvancedUSBPDParser:
     """Advanced parser with logical chunking and content extraction."""
     
-    HEADING_PATTERN = r'^(\d+(?:\.\d+)*)\s+([A-Z].*?)$'
-    FIGURE_PATTERN = r'Figure\s+(\d+[-\.\d]*):?\s*(.*?)(?=\n|$)'
-    TABLE_PATTERN = r'Table\s+(\d+[-\.\d]*):?\s*(.*?)(?=\n|$)'
+    HEADING_PATTERN = re.compile(r'^(\d+(?:\.\d+))\s+([A-Z].?)$', re.MULTILINE)
+    FIGURE_PATTERN = re.compile(r'Figure\s+(\d+[-\.\d]):?\s(.*?)(?=\n|$)', re.MULTILINE | re.DOTALL)
+    TABLE_PATTERN = re.compile(r'Table\s+(\d+[-\.\d]):?\s(.*?)(?=\n|$)', re.MULTILINE | re.DOTALL)
     
-    def __init__(self, pdf_path: str):
-        self.pdf_path = pdf_path
+    def _init_(self, pdf_path: str):
+        self.pdf_path = Path(pdf_path)
         self.chunks: List[ContentChunk] = []
+        self._pages_text: Dict[int, str] = {}
     
-    def extract_full_document(self, start_page: int = 0, end_page: Optional[int] = None) -> Dict[int, str]:
-        """Extract all text from PDF by page."""
-        logger.info(f"Extracting full document from {self.pdf_path}")
-        pages_text = {}
-        
+    def run(self, output_path: str = "chunks.jsonl", start_page: int = 10) -> List[ContentChunk]:
+        """Run the full parsing pipeline and return chunks."""
+        logger.info(f"Starting advanced parsing of {self.pdf_path}")
+        self._extract_pages(start_page=start_page)
+        self._build_chunks()
+        self._save_chunks(output_path)
+        logger.info(f"Parsing complete. {len(self.chunks)} chunks generated.")
+        return self.chunks
+
+    def _extract_pages(self, start_page: int = 0, end_page: Optional[int] = None) -> None:
+        """Extract raw text per page into internal cache."""
+        self._pages_text.clear()
         with pdfplumber.open(self.pdf_path) as pdf:
             end = end_page or len(pdf.pages)
-            for i, page in enumerate(pdf.pages[start_page:end], start=start_page):
+            pages = pdf.pages[start_page:end]
+            for page in pages:
                 text = page.extract_text()
                 if text:
-                    pages_text[i + 1] = text
-        
-        logger.info(f"Extracted {len(pages_text)} pages")
-        return pages_text
-    
-    def detect_headings(self, text: str) -> List[Dict[str, any]]:
-        """Detect section headings in text."""
+                    self._pages_text[page.page_number] = text
+        logger.info(f"Extracted text from {len(self._pages_text)} pages")
+
+    def _detect_headings_in_page(self, text: str, page_num: int) -> List[Dict[str, any]]:
+        """Detect headings within a single page's text."""
         headings = []
-        lines = text.split('\n')
-        
-        for line_num, line in enumerate(lines):
-            match = re.match(self.HEADING_PATTERN, line.strip())
-            if match:
-                section_id = match.group(1)
-                title = match.group(2).strip()
-                level = len(section_id.split('.'))
-                
-                headings.append({
-                    'section_id': section_id,
-                    'title': title,
-                    'level': level,
-                    'line_num': line_num,
-                    'full_path': f"{section_id} {title}"
-                })
-        
+        for match in self.HEADING_PATTERN.finditer(text):
+            section_id = match.group(1).strip()
+            title = match.group(2).strip()
+            level = len(section_id.split('.'))
+            line_offset = text.count('\n', 0, match.start())
+            
+            headings.append({
+                'section_id': section_id,
+                'title': title,
+                'level': level,
+                'page_num': page_num,
+                'line_offset': line_offset,
+                'full_path': f"{section_id} {title}"
+            })
         return headings
-    
-    def extract_figures_and_tables(self, text: str) -> Tuple[List[str], List[str]]:
-        """Extract figure and table references from text."""
-        figures = re.findall(self.FIGURE_PATTERN, text, re.MULTILINE)
-        tables = re.findall(self.TABLE_PATTERN, text, re.MULTILINE)
-        
-        figure_list = [f"Figure {fig[0]}" + (f": {fig[1]}" if fig[1] else "") for fig in figures]
-        table_list = [f"Table {tbl[0]}" + (f": {tbl[1]}" if tbl[1] else "") for tbl in tables]
-        
-        return figure_list, table_list
-    
-    def chunk_by_headings(self, pages_text: Dict[int, str]) -> List[ContentChunk]:
-        """Create logical chunks based on section headings."""
-        chunks = []
-        current_chunk = None
-        current_content = []
-        current_pages = []
-        
-        for page_num, text in sorted(pages_text.items()):
+
+    def _extract_figures_and_tables(self, text: str) -> Tuple[List[str], List[str]]:
+        """Extract formatted figure/table captions from text."""
+        figures = [
+            f"Figure {m.group(1)}" + (f": {m.group(2)}" if m.group(2).strip() else "")
+            for m in self.FIGURE_PATTERN.finditer(text)
+        ]
+        tables = [
+            f"Table {m.group(1)}" + (f": {m.group(2)}" if m.group(2).strip() else "")
+            for m in self.TABLE_PATTERN.finditer(text)
+        ]
+        return figures, tables
+
+    def _build_chunks(self) -> None:
+        """Split document into logical ContentChunk objects."""
+        self.chunks = []
+        current: Optional[Dict[str, any]] = None
+        buffer_text: List[str] = []
+        buffer_pages: List[int] = []
+
+        all_headings = []
+        for page_num, text in sorted(self._pages_text.items()):
+            page_headings = self._detect_headings_in_page(text, page_num)
+            all_headings.extend(page_headings)
+
+        all_headings.sort(key=lambda h: (h['page_num'], h['line_offset']))
+
+        for page_num, text in sorted(self._pages_text.items()):
+            page_headings = [h for h in all_headings if h['page_num'] == page_num]
+            heading_idx = 0
+
             lines = text.split('\n')
-            headings = self.detect_headings(text)
-            
-            for heading in headings:
-                # Save previous chunk
-                if current_chunk:
-                    content = '\n'.join(current_content)
-                    figures, tables = self.extract_figures_and_tables(content)
+            for line_idx, line in enumerate(lines):
+                if (heading_idx < len(page_headings) and 
+                    page_headings[heading_idx]['line_offset'] == line_idx):
                     
-                    chunk = ContentChunk(
-                        section_path=current_chunk['full_path'],
-                        start_heading=current_chunk['full_path'],
-                        content=content,
-                        tables=tables,
-                        figures=figures,
-                        page_range=(min(current_pages), max(current_pages)),
-                        section_id=current_chunk['section_id'],
-                        level=current_chunk['level']
-                    )
-                    chunks.append(chunk)
-                
-                # Start new chunk
-                current_chunk = heading
-                current_content = []
-                current_pages = [page_num]
-            
-            # Add content to current chunk
-            if current_chunk:
-                current_content.append(text)
-                if page_num not in current_pages:
-                    current_pages.append(page_num)
-        
-        # Save last chunk
-        if current_chunk and current_content:
-            content = '\n'.join(current_content)
-            figures, tables = self.extract_figures_and_tables(content)
-            
-            chunk = ContentChunk(
-                section_path=current_chunk['full_path'],
-                start_heading=current_chunk['full_path'],
+                    if current:
+                        content = '\n'.join(buffer_text).strip()
+                        figures, tables = self._extract_figures_and_tables(content)
+                        self.chunks.append(ContentChunk(
+                            section_path=current['full_path'],
+                            start_heading=current['full_path'],
+                            content=content,
+                            tables=tables,
+                            figures=figures,
+                            page_range=(min(buffer_pages), max(buffer_pages)),
+                            section_id=current['section_id'],
+                            level=current['level']
+                        ))
+                    
+                    current = page_headings[heading_idx]
+                    buffer_text = [line]
+                    buffer_pages = [page_num]
+                    heading_idx += 1
+                else:
+                    if current:
+                        buffer_text.append(line)
+                        if page_num not in buffer_pages:
+                            buffer_pages.append(page_num)
+
+        if current and buffer_text:
+            content = '\n'.join(buffer_text).strip()
+            figures, tables = self._extract_figures_and_tables(content)
+            self.chunks.append(ContentChunk(
+                section_path=current['full_path'],
+                start_heading=current['full_path'],
                 content=content,
                 tables=tables,
                 figures=figures,
-                page_range=(min(current_pages), max(current_pages)),
-                section_id=current_chunk['section_id'],
-                level=current_chunk['level']
-            )
-            chunks.append(chunk)
-        
-        logger.info(f"Created {len(chunks)} content chunks")
-        return chunks
-    
-    def save_chunks_to_jsonl(self, output_path: str):
-        """Save chunks to JSONL format."""
-        with open(output_path, 'w', encoding='utf-8') as f:
+                page_range=(min(buffer_pages), max(buffer_pages)),
+                section_id=current['section_id'],
+                level=current['level']
+            ))
+
+        logger.info(f"Built {len(self.chunks)} content chunks")
+
+    def _save_chunks(self, output_path: str) -> None:
+        """Write chunks to JSONL file."""
+        path = Path(output_path)
+        with path.open('w', encoding='utf-8') as f:
             for chunk in self.chunks:
                 f.write(json.dumps(chunk.to_dict(), ensure_ascii=False) + '\n')
-        logger.info(f"Saved {len(self.chunks)} chunks to {output_path}")
-    
-    def run(self, output_path: str = "chunks.jsonl", start_page: int = 10):
-        """Run advanced parsing pipeline."""
-        pages_text = self.extract_full_document(start_page=start_page)
-        self.chunks = self.chunk_by_headings(pages_text)
-        self.save_chunks_to_jsonl(output_path)
-        return self.chunks
+        logger.info(f"Saved {len(self.chunks)} chunks to {path.resolve()}")

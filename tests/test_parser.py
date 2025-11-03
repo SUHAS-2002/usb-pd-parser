@@ -2,11 +2,13 @@
 import pytest
 from pathlib import Path
 import sys
+import json
+from unittest.mock import Mock, patch
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from usb_pd_parser import USBPDParser, TOCEntry
+from usb_pd_parser import USBPDParser, TOCEntry, AdvancedUSBPDParser, ContentChunk
 
 
 def test_toc_entry_creation():
@@ -28,7 +30,7 @@ def test_toc_entry_creation():
 
 def test_calculate_level():
     """Test level calculation from section ID"""
-    parser = USBPDParser.__new__(USBPDParser)
+    parser = USBPDParser()
     assert parser.calculate_level("2") == 1
     assert parser.calculate_level("2.1") == 2
     assert parser.calculate_level("2.1.3") == 3
@@ -37,7 +39,7 @@ def test_calculate_level():
 
 def test_get_parent_id():
     """Test parent ID extraction"""
-    parser = USBPDParser.__new__(USBPDParser)
+    parser = USBPDParser()
     assert parser.get_parent_id("2") is None
     assert parser.get_parent_id("2.1") == "2"
     assert parser.get_parent_id("2.1.3") == "2.1"
@@ -46,8 +48,7 @@ def test_get_parent_id():
 
 def test_parse_toc_line():
     """Test ToC line parsing"""
-    parser = USBPDParser.__new__(USBPDParser)
-    parser.TOC_PATTERNS = USBPDParser.TOC_PATTERNS
+    parser = USBPDParser()
     
     # Test different formats
     line1 = "2.1.2 Power Delivery Contract Negotiation ........... 53"
@@ -67,8 +68,7 @@ def test_parse_toc_line():
 
 def test_generate_tags():
     """Test automatic tag generation"""
-    parser = USBPDParser.__new__(USBPDParser)
-    parser.generate_tags = USBPDParser.generate_tags.__get__(parser)
+    parser = USBPDParser()
     
     tags1 = parser.generate_tags("Power Delivery Contract Negotiation")
     assert any(tag in tags1 for tag in ["contract", "power"])
@@ -99,6 +99,58 @@ def test_to_dict():
     assert entry_dict['level'] == 2
     assert entry_dict['tags'] == ["test"]
 
+
+def test_full_toc_parsing(tmp_path: Path):
+    """Test end-to-end ToC file parsing"""
+    toc_file = tmp_path / "toc.txt"
+    toc_file.write_text(
+        "1 Scope ........................................ 1\n"
+        "2.1 Overview .................................. 12\n"
+        "2.1.1 PD Messages ............................. 15\n",
+        encoding="utf-8",
+    )
+
+    parser = USBPDParser()
+    entries = parser.parse_toc_file(toc_file, doc_title="USB-PD Spec")
+
+    assert len(entries) == 3
+    assert entries[0].section_id == "1"
+    assert entries[1].section_id == "2.1"
+    assert entries[2].parent_id == "2.1"
+    assert entries[2].level == 3
+
+
+def test_advanced_parser_run(monkeypatch, tmp_path: Path):
+    """Test AdvancedUSBPDParser with mocked PDF"""
+    pdf_path = tmp_path / "spec.pdf"
+    pdf_path.touch()
+
+    fake_pages = [
+        Mock(page_number=10, extract_text=lambda: "2.1 Overview of PD\nText\nFigure 2-1: Diagram"),
+        Mock(page_number=11, extract_text=lambda: "2.1.1 PD Messages\nMore\nTable 2-1: Codes"),
+    ]
+
+    def fake_open(*_, **__):
+        pdf = Mock()
+        pdf.pages = fake_pages
+        return pdf
+
+    monkeypatch.setattr("pdfplumber.open", fake_open)
+
+    parser = AdvancedUSBPDParser(str(pdf_path))
+    chunks = parser.run(output_path=str(tmp_path / "out.jsonl"), start_page=10)
+
+    assert len(chunks) == 2
+    assert chunks[0].section_id == "2.1"
+    assert "Figure 2-1: Diagram" in chunks[0].figures
+    assert chunks[1].section_id == "2.1.1"
+    assert "Table 2-1: Codes" in chunks[1].tables
+
+    with open(tmp_path / "out.jsonl") as f:
+        lines = f.readlines()
+        assert len(lines) == 2
+        data = json.loads(lines[0])
+        assert data["section_id"] == "2.1"
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
