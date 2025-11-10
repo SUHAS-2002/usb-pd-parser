@@ -1,5 +1,6 @@
 """
-USB PD Content Validator 
+USB PD Content Validator
+Validates USB Power Delivery content against a table of contents.
 """
 
 import logging
@@ -16,9 +17,20 @@ logger = logging.getLogger(__name__)
 
 
 class TOCValidator:
-    """Main validator orchestrating loading, matching, and reporting."""
+    """Orchestrates loading, matching, and reporting for USB PD validation."""
 
-    def __init__(self, similarity_threshold: float = 0.85, strict: bool = False):
+    def __init__(
+        self,
+        similarity_threshold: float = 0.85,
+        strict: bool = False
+    ):
+        """
+        Initialize the validator with configuration.
+
+        Args:
+            similarity_threshold (float): Threshold for matching similarity (0.0-1.0).
+            strict (bool): Enable strict validation mode.
+        """
         self.threshold = similarity_threshold
         self.strict = strict
         self.loader = DataLoader()
@@ -29,9 +41,22 @@ class TOCValidator:
         self,
         toc_path: str,
         chunks_path: str,
-        output: str = "validation_report.json",
-    ):
-        """Run full validation pipeline."""
+        output: str = "validation_report.json"
+    ) -> dict:
+        """
+        Run the full validation pipeline.
+
+        Args:
+            toc_path (str): Path to the TOC file (JSONL format).
+            chunks_path (str): Path to the content chunks file (JSONL format).
+            output (str): Path to save the validation report.
+
+        Returns:
+            dict: Validation report containing results and quality score.
+
+        Raises:
+            ValueError: If TOC entries cannot be loaded.
+        """
         logger.info("=" * 70)
         logger.info("Starting USB PD Validation v2.1")
         logger.info("=" * 70)
@@ -50,15 +75,41 @@ class TOCValidator:
 
 
 def main() -> int:
+    """
+    Parse command-line arguments and run the validator.
+
+    Returns:
+        int: Exit code (0: success, 1: score >= 70, 2: score < 70, 3: error).
+    """
     import argparse
 
     parser = argparse.ArgumentParser(description="USB PD Validator v2.1")
     parser.add_argument("toc_file", help="Path to toc.jsonl")
     parser.add_argument("chunks_file", help="Path to content.jsonl")
-    parser.add_argument("-o", "--output", default="validation_report.json")
-    parser.add_argument("-t", "--threshold", type=float, default=0.85)
-    parser.add_argument("--strict", action="store_true")
-    parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument(
+        "-o",
+        "--output",
+        default="validation_report.json",
+        help="Output report path"
+    )
+    parser.add_argument(
+        "-t",
+        "--threshold",
+        type=float,
+        default=0.85,
+        help="Similarity threshold (0.0-1.0)"
+    )
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Enable strict validation mode"
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Enable verbose logging"
+    )
 
     args = parser.parse_args()
     if args.verbose:
@@ -66,9 +117,7 @@ def main() -> int:
 
     try:
         validator = TOCValidator(args.threshold, args.strict)
-        report = validator.validate(
-            args.toc_file, args.chunks_file, args.output
-        )
+        report = validator.validate(args.toc_file, args.chunks_file, args.output)
         score = report.quality_score
         return 0 if score >= 85 else 1 if score >= 70 else 2
     except Exception as e:

@@ -1,17 +1,14 @@
 """
 USB Power Delivery Specification Parser - Full Document Version
 ================================================================
-Extracts Table of Contents and COMPLETE content from large USB PD PDFs (1000+ pages)
-
+Extracts Table of Contents and full content from large USB PD PDFs (1000+ pages)
 Key Features:
 - Scans entire PDF for ToC entries
 - Extracts all content without page limits
 - Memory-efficient chunked processing
 - Robust section boundary detection
-
 Version: 3.0 - Full PDF Support
 """
-
 import json
 import logging
 import re
@@ -19,7 +16,6 @@ from collections import defaultdict
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
-
 import pdfplumber
 
 logging.basicConfig(
@@ -28,11 +24,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 @dataclass
 class TocEntry:
     """Table of Contents entry with full metadata."""
-
     doc_title: str
     section_id: str
     title: str
@@ -45,11 +39,9 @@ class TocEntry:
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
-
 @dataclass
 class ContentChunk:
     """Represents a parsed content section."""
-
     doc_title: str
     section_id: str
     section_path: str
@@ -65,21 +57,17 @@ class ContentChunk:
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
-
 @dataclass
 class ParserConfig:
     """Configuration for parser run."""
-
     output_toc: str = "usb_pd_toc.jsonl"
     output_content: str = "usb_pd_content.jsonl"
     extract_content: bool = True
     scan_all_toc: bool = True
     batch_size: int = 50
 
-
 class TocExtractor:
     """Handles TOC extraction and parsing."""
-
     TOC_PATTERNS = [
         r"^(\d+(?:\.\d+)*)\s+([^\.\d][^\n]+?)\s*\.{2,}\s*(\d+)\s*$",
         r"^(\d+(?:\.\d+)*)\s+([^\.\d][^\n]+?)\s{3,}(\d+)\s*$",
@@ -95,26 +83,21 @@ class TocExtractor:
         logger.info(f"Opening PDF: {self.parser.pdf_path}")
         toc_text = ""
         toc_pages = []
-
         try:
             with pdfplumber.open(self.parser.pdf_path) as pdf:
                 self.parser.total_pdf_pages = len(pdf.pages)
                 logger.info(f"Total pages in PDF: {self.parser.total_pdf_pages}")
-
                 max_scan = (
                     self.parser.total_pdf_pages
                     if scan_all
                     else min(50, self.parser.total_pdf_pages)
                 )
                 logger.info(f"Scanning first {max_scan} pages for ToC...")
-
                 for i in range(max_scan):
                     if i % 10 == 0:
-                        logger.info(f"  Scanning page {i + 1}/{max_scan}...")
-
+                        logger.info(f" Scanning page {i + 1}/{max_scan}...")
                     page = pdf.pages[i]
                     text = page.extract_text() or ""
-
                     has_toc = any(
                         ind in text.lower()
                         for ind in ["table of contents", "contents"]
@@ -122,15 +105,12 @@ class TocExtractor:
                     has_numbers = bool(
                         re.search(r"^\d+(?:\.\d+)+\s+", text, re.MULTILINE)
                     )
-
                     if has_toc or has_numbers:
                         toc_text += text + "\n"
                         toc_pages.append(i + 1)
-
         except Exception as e:
             logger.error(f"Error extracting PDF text: {e}")
             raise
-
         logger.info(f"Extracted ToC from {len(toc_pages)} pages")
         return toc_text, toc_pages
 
@@ -139,32 +119,25 @@ class TocExtractor:
         line = line.strip()
         if not line or len(line) < 5:
             return None
-
         for pattern in self.TOC_PATTERNS:
             match = re.match(pattern, line)
             if not match:
                 continue
-
             section_id = match.group(1).strip()
             title = match.group(2).strip()
             page = match.group(3).strip()
-
             title = re.sub(r"\.{2,}", "", title).strip()
             title = re.sub(r"\s{2,}", " ", title).strip()
             title = title.rstrip(".")
-
             if not re.match(r"^\d+(\.\d+)*$", section_id):
                 continue
-
             try:
                 page_num = int(page)
                 if not (1 <= page_num <= 10000):
                     continue
             except ValueError:
                 continue
-
             return {"section_id": section_id, "title": title, "page": page_num}
-
         return None
 
     def parse_toc(self, toc_text: str) -> List[TocEntry]:
@@ -173,110 +146,120 @@ class TocExtractor:
         entries = []
         seen = set()
         lines = toc_text.split("\n")
-
         for line in lines:
             parsed = self.parse_toc_line(line)
             if not parsed:
                 continue
-
             section_id = parsed["section_id"]
             if section_id in seen:
                 continue
-
             seen.add(section_id)
             entry = TocEntry(
                 doc_title=self.parser.doc_title,
-                section_id=section_id,
+                section_id=parsed["section_id"],
                 title=parsed["title"],
-                full_path=self.parser.build_full_path(section_id, parsed["title"]),
+                full_path=self.parser.build_full_path(
+                    parsed["section_id"], parsed["title"]
+                ),
                 page=parsed["page"],
-                level=self.parser.calculate_level(section_id),
-                parent_id=self.parser.get_parent_id(section_id),
+                level=self.parser.calculate_level(parsed["section_id"]),
+                parent_id=self.parser.get_parent_id(parsed["section_id"]),
                 tags=self.parser.generate_tags(parsed["title"]),
             )
             entries.append(entry)
             self.parser.toc_page_map[section_id] = parsed["page"]
-
         entries.sort(key=lambda x: [int(p) for p in x.section_id.split(".")])
         logger.info(f"Successfully parsed {len(entries)} unique ToC entries")
         return entries
 
-
 class ContentExtractor:
     """Handles content extraction from PDF."""
-
     def __init__(self, parser: "USBPDParser"):
         self.parser = parser
 
     def extract_full_content(self, batch_size: int = 50) -> None:
-        """Extract COMPLETE content from entire PDF."""
-        logger.info("Extracting FULL document content from ALL pages...")
+        """Extract complete content from entire PDF."""
+        if not self.initialize_extraction():
+            return
+        self.process_all_sections(batch_size)
+        self.finalize_extraction()
 
+    def initialize_extraction(self) -> bool:
+        """Initialize content extraction with validation; return True if valid."""
+        logger.info("Extracting FULL document content from ALL pages...")
         if not self.parser.toc_entries:
             logger.warning("No ToC entries found. Run parse_toc first.")
-            return
-
+            return False
         if not self.parser.total_pdf_pages:
             self.parser.total_pdf_pages = self.parser.get_pdf_page_count()
-
         logger.info(f"Processing ALL {self.parser.total_pdf_pages} pages...")
+        return True
 
+    def process_all_sections(self, batch_size: int) -> None:
+        """Process all sections to extract content."""
         try:
             boundaries = self.build_section_boundaries()
-
             with pdfplumber.open(self.parser.pdf_path) as pdf:
                 for idx, entry in enumerate(self.parser.toc_entries, 1):
-                    section_id = entry.section_id
-                    start_pg, end_pg = boundaries.get(
-                        section_id, (entry.page, entry.page)
+                    self.process_section_content(
+                        pdf, entry, boundaries, batch_size, idx
                     )
-
-                    if idx % 10 == 0:
-                        logger.info(
-                            f"  Processing section {idx}/"
-                            f"{len(self.parser.toc_entries)}: {section_id}"
-                        )
-
-                    content = self.extract_section_batched(
-                        pdf, start_pg, end_pg, batch_size
-                    )
-
-                    if content:
-                        chunk = ContentChunk(
-                            doc_title=self.parser.doc_title,
-                            section_id=section_id,
-                            section_path=entry.full_path,
-                            start_heading=entry.title,
-                            start_page=start_pg,
-                            end_page=end_pg,
-                            content=content,
-                            subsections=self.parser.find_subsections(section_id),
-                            word_count=len(content.split()),
-                        )
-                        self.parser.content_chunks.append(chunk)
-
-            logger.info(
-                f"Extracted {len(self.parser.content_chunks)} "
-                "content sections from ENTIRE PDF"
-            )
-
         except Exception as e:
             logger.error(f"Error extracting content: {e}")
             raise
+
+    def process_section_content(
+        self,
+        pdf,
+        entry: TocEntry,
+        boundaries: Dict[str, Tuple[int, int]],
+        batch_size: int,
+        idx: int,
+    ) -> None:
+        """Extract content for a single section."""
+        section_id = entry.section_id
+        start_pg, end_pg = boundaries.get(
+            section_id, (entry.page, entry.page)
+        )
+        if idx % 10 == 0:
+            logger.info(
+                f" Processing section {idx}/"
+                f"{len(self.parser.toc_entries)}: {section_id}"
+            )
+        content = self.extract_section_batched(
+            pdf, start_pg, end_pg, batch_size
+        )
+        if content:
+            chunk = ContentChunk(
+                doc_title=self.parser.doc_title,
+                section_id=section_id,
+                section_path=entry.full_path,
+                start_heading=entry.title,
+                start_page=start_pg,
+                end_page=end_pg,
+                content=content,
+                subsections=self.parser.find_subsections(section_id),
+                word_count=len(content.split()),
+            )
+            self.parser.content_chunks.append(chunk)
+
+    def finalize_extraction(self) -> None:
+        """Finalize extraction and log results."""
+        logger.info(
+            f"Extracted {len(self.parser.content_chunks)} "
+            "content sections from ENTIRE PDF"
+        )
 
     def build_section_boundaries(self) -> Dict[str, Tuple[int, int]]:
         """Build start/end page boundaries for all sections."""
         boundaries = {}
         sorted_entries = sorted(self.parser.toc_entries, key=lambda x: x.page)
-
         for i, entry in enumerate(sorted_entries):
             start_page = entry.page
             end_page = self.find_end_page(sorted_entries, i, entry)
             end_page = min(end_page, self.parser.total_pdf_pages)
-
             boundaries[entry.section_id] = (start_page, end_page)
             logger.debug(f"Section {entry.section_id}: pages {start_page}-{end_page}")
-
         return boundaries
 
     def find_end_page(
@@ -297,7 +280,6 @@ class ContentExtractor:
         parts = []
         start_idx = max(0, start_page - 1)
         end_idx = min(len(pdf.pages), end_page)
-
         for batch_start in range(start_idx, end_idx, batch_size):
             batch_end = min(batch_start + batch_size, end_idx)
             for page_num in range(batch_start, batch_end):
@@ -308,13 +290,10 @@ class ContentExtractor:
                 cleaned = self.parser.clean_content_text(text)
                 if cleaned.strip():
                     parts.append(cleaned)
-
         return "\n\n".join(parts)
-
 
 class USBPDParser:
     """Enhanced parser for complete USB PD specification extraction."""
-
     def __init__(
         self,
         pdf_path: str,
@@ -326,10 +305,8 @@ class USBPDParser:
         self.content_chunks: List[ContentChunk] = []
         self.toc_page_map: Dict[str, int] = {}
         self.total_pdf_pages: int = 0
-
         if not self.pdf_path.exists():
             raise FileNotFoundError(f"PDF file not found: {pdf_path}")
-
         self.toc_extractor = TocExtractor(self)
         self.content_extractor = ContentExtractor(self)
 
@@ -365,7 +342,6 @@ class USBPDParser:
             "testing": ["test", "validation", "verification", "compliance"],
             "state": ["state", "machine", "transition", "mode"],
         }
-
         tags = []
         title_lower = title.lower()
         for tag, terms in keywords.items():
@@ -451,10 +427,8 @@ class USBPDParser:
                 "pages_covered": 0,
             },
         }
-
         for entry in self.toc_entries:
             stats["toc_statistics"]["by_level"][entry.level] += 1
-
         if self.content_chunks:
             cs = stats["content_statistics"]
             cs["avg_words_per_section"] = cs["total_words"] / len(self.content_chunks)
@@ -464,12 +438,10 @@ class USBPDParser:
                 for p in range(c.start_page, c.end_page + 1)
             }
             cs["pages_covered"] = len(pages)
-
         if self.toc_entries:
             stats["content_statistics"]["coverage_percentage"] = (
                 len(self.content_chunks) / len(self.toc_entries) * 100
             )
-
         return stats
 
     def run(self, config: ParserConfig) -> Dict[str, Any]:
@@ -477,26 +449,19 @@ class USBPDParser:
         logger.info("=" * 70)
         logger.info("USB PD Parser v3.0 - FULL PDF EXTRACTION")
         logger.info("=" * 70)
-
         self.total_pdf_pages = self.get_pdf_page_count()
         logger.info(f"PDF has {self.total_pdf_pages} total pages")
-
         toc_text, _ = self.toc_extractor.extract_toc_pages(config.scan_all_toc)
         self.toc_entries = self.toc_extractor.parse_toc(toc_text)
-
         if not self.toc_entries:
             logger.error("No ToC entries found! Check PDF format.")
             return {}
-
         self.save_toc_jsonl(config.output_toc)
-
         if config.extract_content:
             self.content_extractor.extract_full_content(config.batch_size)
             self.save_content_jsonl(config.output_content)
-
         stats = self.generate_statistics()
         self.display_summary(stats)
-
         logger.info("=" * 70)
         logger.info("COMPLETE PARSING FINISHED!")
         logger.info("=" * 70)
@@ -507,31 +472,26 @@ class USBPDParser:
         logger.info("\n" + "=" * 70)
         logger.info("COMPLETE PARSING SUMMARY")
         logger.info("=" * 70)
-
         pdf = stats["pdf_info"]
         logger.info(f"PDF: {pdf['total_pages']} total pages")
-
         toc = stats["toc_statistics"]
         logger.info(f"\nToC Entries: {toc['total_entries']}")
         logger.info(f"Page Range: {toc['page_range']['min']} - {toc['page_range']['max']}")
         logger.info("Entries by Level:")
         for level, count in sorted(toc["by_level"].items()):
-            logger.info(f"  Level {level}: {count} sections")
-
+            logger.info(f" Level {level}: {count} sections")
         if stats["content_statistics"]["total_chunks"] > 0:
             cs = stats["content_statistics"]
             logger.info(f"\nContent Extraction:")
-            logger.info(f"  Sections Extracted: {cs['total_chunks']}")
-            logger.info(f"  Total Words: {cs['total_words']:,}")
-            logger.info(f"  Pages Covered: {cs['pages_covered']}/{pdf['total_pages']}")
-            logger.info(f"  Avg Words/Section: {cs['avg_words_per_section']:.0f}")
-            logger.info(f"  Coverage: {cs['coverage_percentage']:.1f}%")
-
+            logger.info(f" Sections Extracted: {cs['total_chunks']}")
+            logger.info(f" Total Words: {cs['total_words']:,}")
+            logger.info(f" Pages Covered: {cs['pages_covered']}/{pdf['total_pages']}")
+            logger.info(f" Avg Words/Section: {cs['avg_words_per_section']:.0f}")
+            logger.info(f" Coverage: {cs['coverage_percentage']:.1f}%")
 
 def main() -> int:
     """Main entry point with full PDF support."""
     import argparse
-
     parser = argparse.ArgumentParser(
         description="USB PD Parser v3.0 - COMPLETE PDF Extraction (1000+ pages)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -542,7 +502,6 @@ Examples:
   %(prog)s spec.pdf -o toc.jsonl
         """,
     )
-
     parser.add_argument("pdf_path", help="Path to USB PD specification PDF")
     parser.add_argument("-o", "--output-toc", default="usb_pd_toc.jsonl")
     parser.add_argument("-c", "--output-content", default="usb_pd_content.jsonl")
@@ -551,11 +510,9 @@ Examples:
     parser.add_argument("--batch-size", type=int, default=50)
     parser.add_argument("--no-scan-all-toc", action="store_true")
     parser.add_argument("-v", "--verbose", action="store_true")
-
     args = parser.parse_args()
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
-
     try:
         pd_parser = USBPDParser(args.pdf_path, args.title)
         config = ParserConfig(
@@ -570,7 +527,6 @@ Examples:
     except Exception as e:
         logger.error(f"Fatal error: {e}", exc_info=args.verbose)
         return 1
-
 
 if __name__ == "__main__":
     exit(main())

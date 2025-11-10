@@ -5,7 +5,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
 class SectionMatcher:
     """Matches TOC entries to content chunks with deep analysis."""
 
@@ -43,7 +42,13 @@ class SectionMatcher:
                 }
                 matched.append(info)
                 if sim < self.threshold:
-                    title_mismatches.append({**info, "issue": "low_similarity"})
+                    title_mismatches.append({
+                        "section_id": sid,
+                        "toc_title": t["title"],
+                        "chunk_title": c["start_heading"],
+                        "similarity": sim,
+                        "issue": "low_similarity",
+                    })
             else:
                 missing.append({"section_id": sid, "title": t["title"]})
 

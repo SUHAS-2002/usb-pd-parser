@@ -9,7 +9,6 @@ import pdfplumber
 
 logger = logging.getLogger(__name__)
 
-
 @dataclass
 class ContentChunk:
     """Represents a logical section with content and metadata."""
@@ -24,7 +23,6 @@ class ContentChunk:
 
     def to_dict(self):
         return asdict(self)
-
 
 class HeadingDetector:
     """Detects section headings in page text."""
@@ -52,7 +50,6 @@ class HeadingDetector:
             })
         return headings
 
-
 class MediaExtractor:
     """Extracts figure and table captions."""
     FIGURE_PAT = re.compile(
@@ -67,16 +64,16 @@ class MediaExtractor:
     @classmethod
     def extract(cls, text: str) -> Tuple[List[str], List[str]]:
         """Extract figures and tables from text block."""
-        figures = [
-            f"Figure {m.group(1)}" + (f": {m.group(2)}" if m.group(2).strip() else "")
-            for m in cls.FIGURE_PAT.finditer(text)
-        ]
-        tables = [
-            f"Table {m.group(1)}" + (f": {m.group(2)}" if m.group(2).strip() else "")
-            for m in cls.TABLE_PAT.finditer(text)
-        ]
+        figures = [cls._format_caption("Figure", m) for m in cls.FIGURE_PAT.finditer(text)]
+        tables = [cls._format_caption("Table", m) for m in cls.TABLE_PAT.finditer(text)]
         return figures, tables
 
+    @staticmethod
+    def _format_caption(prefix: str, match: re.Match) -> str:
+        """Format a caption for figure or table."""
+        identifier = match.group(1)
+        caption = match.group(2).strip()
+        return f"{prefix} {identifier}" + (f": {caption}" if caption else "")
 
 class PageTextCache:
     """Caches extracted page text."""
@@ -100,7 +97,6 @@ class PageTextCache:
                     self.text_by_page[page.page_number] = text
         logger.info(f"Extracted {len(self.text_by_page)} pages")
 
-
 class ChunkBuilder:
     """Builds ContentChunk objects from headings and text."""
     def __init__(self):
@@ -111,41 +107,47 @@ class ChunkBuilder:
         page_texts: Dict[int, str],
         all_headings: List[Dict],
     ) -> List[ContentChunk]:
-        """Main chunking logic - now < 40 lines."""
+        """Main chunking logic with reduced nesting."""
         self.chunks = []
+        heading_map = {
+            (h["page_num"], h["line_offset"]): h for h in sorted(
+                all_headings, key=lambda h: (h["page_num"], h["line_offset"])
+            )
+        }
         current = None
         buffer_lines = []
         buffer_pages = []
 
-        # Sort headings by appearance order
-        headings_sorted = sorted(
-            all_headings, key=lambda h: (h["page_num"], h["line_offset"])
-        )
-
-        heading_map = {
-            (h["page_num"], h["line_offset"]): h for h in headings_sorted
-        }
-
         for page_num, text in sorted(page_texts.items()):
-            lines = text.split("\n")
-            for line_idx, line in enumerate(lines):
-                key = (page_num, line_idx)
-                if key in heading_map:
-                    self._flush_current(
-                        current, buffer_lines, buffer_pages
-                    )
-                    current = heading_map[key]
-                    buffer_lines = [line]
-                    buffer_pages = [page_num]
-                else:
-                    if current:
-                        buffer_lines.append(line)
-                        if page_num not in buffer_pages:
-                            buffer_pages.append(page_num)
+            self._process_page(page_num, text, heading_map, current, buffer_lines, buffer_pages)
 
         self._flush_current(current, buffer_lines, buffer_pages)
         logger.info(f"Built {len(self.chunks)} chunks")
         return self.chunks
+
+    def _process_page(
+        self,
+        page_num: int,
+        text: str,
+        heading_map: Dict[Tuple[int, int], Dict],
+        current: Optional[Dict],
+        buffer_lines: List[str],
+        buffer_pages: List[int]
+    ) -> None:
+        """Process a single page's text and update buffers."""
+        lines = text.split("\n")
+        for line_idx, line in enumerate(lines):
+            key = (page_num, line_idx)
+            if key in heading_map:
+                self._flush_current(current, buffer_lines, buffer_pages)
+                current = heading_map[key]
+                buffer_lines[:] = [line]
+                buffer_pages[:] = [page_num]
+            else:
+                if current:
+                    buffer_lines.append(line)
+                    if page_num not in buffer_pages:
+                        buffer_pages.append(page_num)
 
     def _flush_current(
         self,
@@ -171,7 +173,6 @@ class ChunkBuilder:
             level=current["level"],
         )
         self.chunks.append(chunk)
-
 
 class AdvancedUSBPDParser:
     """Main parser orchestrating all components."""
@@ -217,7 +218,6 @@ class AdvancedUSBPDParser:
                 json.dump(chunk.to_dict(), f, ensure_ascii=False)
                 f.write("\n")
         logger.info(f"Saved to {path.resolve()}")
-
 
 # === USAGE ===
 if __name__ == "__main__":
