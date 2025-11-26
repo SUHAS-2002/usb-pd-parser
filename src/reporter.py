@@ -12,7 +12,6 @@ class Report:
     quality_score: float
     match_percentage: float
     recommendations: List[str]
-    # Additional fields from input data
     matched: List
     total_toc: int
     title_mismatches: List
@@ -23,7 +22,6 @@ class ReportGenerator:
     """Generates and saves validation reports with console output."""
     
     def _calculate_quality_score(self, data: Dict) -> float:
-        """Calculate quality score based on data metrics."""
         total = data["total_toc"]
         if total == 0:
             return 0.0
@@ -36,9 +34,10 @@ class ReportGenerator:
         return round(max(0, score), 2)
 
     def _generate_recommendation(self, key: str, match_pct: float) -> str:
-        """Generate a single recommendation based on data key."""
         recommendations = {
-            "low_coverage": f"Only {match_pct:.1f}% coverage — fix missing sections",
+            "low_coverage": (
+                f"Only {match_pct:.1f}% coverage — fix missing sections"
+            ),
             "title_mismatches": "Title extraction needs improvement",
             "out_of_order": "Check PDF structure for out-of-order sections",
             "page_discrepancies": "Page numbers off — adjust offset logic",
@@ -47,7 +46,6 @@ class ReportGenerator:
         return recommendations[key]
 
     def _build_recommendations(self, data: Dict) -> List[str]:
-        """Build list of recommendations based on data analysis."""
         recs = []
         match_pct = len(data["matched"]) / data["total_toc"] * 100
 
@@ -65,11 +63,12 @@ class ReportGenerator:
         return recs
 
     def build_report(self, data: Dict, toc: List, chunks: List) -> Report:
-        """Build a report object from validation data."""
         score = self._calculate_quality_score(data)
+        match_pct = len(data["matched"]) / len(toc) * 100
+
         return Report(
             quality_score=score,
-            match_percentage=len(data["matched"]) / len(toc) * 100,
+            match_percentage=match_pct,
             recommendations=self._build_recommendations(data),
             matched=data["matched"],
             total_toc=data["total_toc"],
@@ -85,7 +84,6 @@ class ReportWriter:
         self.output_path = output_path
 
     def _get_status(self, quality_score: float) -> str:
-        """Determine report status based on quality score."""
         if quality_score >= 95:
             return "EXCELLENT"
         if quality_score >= 85:
@@ -93,7 +91,6 @@ class ReportWriter:
         return "NEEDS WORK"
 
     def save(self, report: Report):
-        """Save report summary to JSON file."""
         summary = {
             "summary": {
                 "quality_score": report.quality_score,
@@ -107,7 +104,6 @@ class ReportWriter:
             json.dump(summary, f, indent=2, ensure_ascii=False)
 
     def print_summary(self, report: Report):
-        """Print report summary to console."""
         print("\n" + "=" * 70)
         print("VALIDATION COMPLETE")
         print(f"Quality Score: {report.quality_score:.1f}/100")
@@ -118,7 +114,6 @@ class ReportWriter:
         print("=" * 70 + "\n")
 
 def main():
-    """Example usage of ReportGenerator and ReportWriter."""
     sample_data = {
         "matched": [1, 2, 3],
         "total_toc": 5,
