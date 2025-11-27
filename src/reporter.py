@@ -80,7 +80,7 @@ class ReportGenerator:
 class ReportWriter:
     """Handles saving and printing of reports."""
     
-    def __init__(self, output_path: str):
+    def _init_(self, output_path: str):
         self.output_path = output_path
 
     def _get_status(self, quality_score: float) -> str:

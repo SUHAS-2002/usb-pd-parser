@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class TOCValidator:
     """Orchestrates loading, matching, and reporting for USB PD validation."""
 
-    def __init__(self, similarity_threshold: float = 0.85, strict: bool = False):
+    def _init_(self, similarity_threshold: float = 0.85, strict: bool = False):
         """
         Initialize the validator with configuration.
 

@@ -89,43 +89,74 @@ class SectionContext:
     idx: int
 
 
+def roman_to_int(s: str) -> Optional[int]:
+    s = s.strip().upper()
+    if not s:
+        return None
+    roman_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    total = 0
+    prev = 0
+    try:
+        for ch in s[::-1]:
+            val = roman_map.get(ch, 0)
+            if val < prev:
+                total -= val
+            else:
+                total += val
+            prev = val
+        return total if total > 0 else None
+    except Exception:
+        return None
+
+
 class TocExtractor:
     """Handles TOC extraction and parsing."""
 
-    TOC_PATTERNS = [
-        r"^(\d+(?:\.\d+)*)\s+([^\.\d][^\n]+?)\s*\.{2,}\s*(\d+)\s*$",
-        r"^(\d+(?:\.\d+)*)\s+([^\.\d][^\n]+?)\s{3,}(\d+)\s*$",
-        r"^(\d+(?:\.\d+)*)\s+([^\.\d].+?)\s+(\d+)\s*$",
-        r"^(\d+(?:\.\d+)*)\s*[:\-]\s*([^\n]+?)\s*\.{2,}\s*(\d+)\s*$",
-    ]
+    # One main robust regex: leading numeric id (any-depth), title, dot leaders/ellipsis/dashes/spaces, and page number
+    TOC_MAIN = re.compile(
+        r"^\s*(?P<section_id>\d+(?:\.\d+)*)\.?\s+"
+        r"(?P<title>.+?)\s*(?:\.{2,}|…|[\t\-–—]{2,}|\s{2,})\s*(?P<page>(?:\d+|[ivxlcdmIVXLCDM]+))\s*$"
+    )
+    # Fallback: title ends with page number but id may be embedded earlier
+    TOC_FALLBACK = re.compile(
+        r"^\s*(?P<line>.+?)\s*(?P<page>(?:\d+|[ivxlcdmIVXLCDM]+))\s*$"
+    )
 
-    def __init__(self, parser: "USBPDParser"):
+    def __init__(self, parser: "USBPDParser", debug: bool = False):
         self.parser = parser
+        self.debug = debug
+
+    def _normalize(self, text: str) -> str:
+        # replace NBSP and other weird whitespace characters
+        text = text.replace("\u00A0", " ")
+        text = re.sub(r'[\u200b\u202f\uFEFF]', '', text)
+        return text
 
     def extract_toc_pages(self, scan_all: bool = True) -> Tuple[str, List[int]]:
         """Extract text from ToC pages - scans entire PDF by default."""
         logger.info(f"Opening PDF: {self.parser.pdf_path}")
         toc_text = ""
-        toc_pages = []
+        toc_pages: List[int] = []
 
         try:
-            with pdfplumber.open(self.parser.pdf_path) as pdf:
+            with pdfplumber.open(str(self.parser.pdf_path)) as pdf:
                 self.parser.total_pdf_pages = len(pdf.pages)
                 logger.info(f"Total pages in PDF: {self.parser.total_pdf_pages}")
 
                 max_scan = (
-                    self.parser.total_pdf_pages if scan_all else min(50, self.parser.total_pdf_pages)
+                    self.parser.total_pdf_pages if scan_all else min(60, self.parser.total_pdf_pages)
                 )
                 logger.info(f"Scanning first {max_scan} pages for ToC...")
 
                 for i in range(max_scan):
-                    if i % 10 == 0:
+                    if i % 20 == 0:
                         logger.debug(f" Scanning page {i + 1}/{max_scan}...")
                     page = pdf.pages[i]
                     text = page.extract_text() or ""
+                    text = self._normalize(text)
+                    # Simple heuristics to decide the page is ToC: contains 'contents' or numeric hierarchical tokens with dots
                     has_toc = any(ind in text.lower() for ind in ["table of contents", "contents"])
-                    has_numbers = bool(re.search(r"^\d+(?:\.\d+)+\s+", text, re.MULTILINE))
-
+                    has_numbers = bool(re.search(r"\b\d+(?:\.\d+)+\b", text))
                     if has_toc or has_numbers:
                         toc_text += text + "\n"
                         toc_pages.append(i + 1)
@@ -137,70 +168,103 @@ class TocExtractor:
         return toc_text, toc_pages
 
     def parse_toc_line(self, line: str) -> Optional[Dict[str, Any]]:
-        """Parse a single ToC line."""
-        line = line.strip()
-        if not line or len(line) < 5:
+        """Parse a single ToC line using robust rules and fallbacks."""
+        if not line or len(line.strip()) < 3:
             return None
+        raw = self._normalize(line).strip()
 
-        for pattern in self.TOC_PATTERNS:
-            match = re.match(pattern, line)
-            if not match:
-                continue
+        # Try main pattern
+        m = self.TOC_MAIN.match(raw)
+        if m:
+            sec_id = m.group("section_id").rstrip(".")
+            title = m.group("title").strip()
+            page_token = m.group("page").strip()
+            if page_token.isdigit():
+                page = int(page_token)
+            else:
+                # Try roman
+                rv = roman_to_int(page_token)
+                if rv is None:
+                    return None
+                page = rv
+            # Validate section id numeric only
+            if not re.match(r"^\d+(?:\.\d+)*$", sec_id):
+                return None
+            return {"section_id": sec_id, "title": title, "page": page}
 
-            section_id = match.group(1).strip()
-            title = match.group(2).strip()
-            page = match.group(3).strip()
-
-            title = re.sub(r"\.{2,}", "", title).strip()
-            title = re.sub(r"\s{2,}", " ", title).strip()
-            title = title.rstrip(".")
-
-            if not re.match(r"^\d+(\.\d+)*$", section_id):
-                continue
-
-            try:
-                page_num = int(page)
-                if not (1 <= page_num <= 10000):
+        # Fallback: capture title+page, then try to pick id token from earlier tokenized parts
+        m2 = self.TOC_FALLBACK.match(raw)
+        if m2:
+            page_token = m2.group("page").strip()
+            if page_token.isdigit():
+                page = int(page_token)
+            else:
+                rv = roman_to_int(page_token)
+                if rv is None:
+                    return None
+                page = rv
+            # look for section id anywhere earlier in the line
+            # find first token matching id pattern
+            tokens = re.split(r"\s+", raw[:-len(page_token)].strip())
+            section_id = None
+            title_tokens = []
+            for t in tokens:
+                tt = t.strip(".,;:")
+                if re.match(r"^\d+(?:\.\d+)*\.?$", tt):
+                    section_id = tt.rstrip(".")
                     continue
-            except ValueError:
-                continue
+                title_tokens.append(tt)
+            title = " ".join(title_tokens).strip()
+            if section_id:
+                return {"section_id": section_id, "title": title, "page": page}
 
-            return {"section_id": section_id, "title": title, "page": page_num}
-
+        # Nothing matched
         return None
 
-    def parse_toc(self, toc_text: str) -> List[TocEntry]:
-        """Parse entire ToC with validation."""
+    def parse_toc(self, toc_text: str, debug_limit: int = 20) -> List[TocEntry]:
+        """Parse entire ToC with validation and deduplication."""
         logger.info("Parsing Table of Contents...")
-        entries = []
+        entries: List[TocEntry] = []
         seen = set()
-        lines = toc_text.split("\n")
-
-        for line in lines:
+        unmatched_samples = []
+        for line in toc_text.splitlines():
             parsed = self.parse_toc_line(line)
             if not parsed:
+                # store some unmatched examples for debugging
+                if self.debug and len(unmatched_samples) < debug_limit:
+                    s = line.strip()
+                    if s:
+                        unmatched_samples.append(s)
                 continue
-
             section_id = parsed["section_id"]
             if section_id in seen:
                 continue
             seen.add(section_id)
-
+            title = parsed["title"].rstrip(".").strip()
+            page = parsed["page"]
+            level = self.parser.calculate_level(section_id)
+            parent_id = self.parser.get_parent_id(section_id)
             entry = TocEntry(
                 doc_title=self.parser.doc_title,
                 section_id=section_id,
-                title=parsed["title"],
-                full_path=self.parser.build_full_path(section_id, parsed["title"]),
-                page=parsed["page"],
-                level=self.parser.calculate_level(section_id),
-                parent_id=self.parser.get_parent_id(section_id),
-                tags=self.parser.generate_tags(parsed["title"]),
+                title=title,
+                full_path=self.parser.build_full_path(section_id, title),
+                page=page,
+                level=level,
+                parent_id=parent_id,
+                tags=self.parser.generate_tags(title),
             )
             entries.append(entry)
-            self.parser.toc_page_map[section_id] = parsed["page"]
+            self.parser.toc_page_map[section_id] = page
 
-        entries.sort(key=lambda x: [int(p) for p in x.section_id.split(".")])
+        # Numeric sort by broken out integer parts
+        def numeric_sort_key(e: TocEntry):
+            return [int(p) for p in e.section_id.split(".")]
+
+        entries.sort(key=numeric_sort_key)
         logger.info(f"Successfully parsed {len(entries)} unique ToC entries")
+        if self.debug and unmatched_samples:
+            logger.debug("Sample unmatched ToC lines (up to %d):\n%s", len(unmatched_samples), "\n".join(unmatched_samples))
         return entries
 
 
@@ -216,7 +280,7 @@ class ContentExtractor:
             return
 
         try:
-            with pdfplumber.open(self.parser.pdf_path) as pdf:
+            with pdfplumber.open(str(self.parser.pdf_path)) as pdf:
                 boundaries = self.build_section_boundaries()
 
                 for idx, entry in enumerate(self.parser.toc_entries, 1):
@@ -284,7 +348,7 @@ class ContentExtractor:
 
     def build_section_boundaries(self) -> Dict[str, Tuple[int, int]]:
         """Build start/end page boundaries for all sections."""
-        boundaries = {}
+        boundaries: Dict[str, Tuple[int, int]] = {}
         sorted_entries = sorted(self.parser.toc_entries, key=lambda x: x.page)
 
         for i, entry in enumerate(sorted_entries):
@@ -309,7 +373,7 @@ class ContentExtractor:
         self, pdf: "PDF", start_page: int, end_page: int, batch_size: int
     ) -> str:
         """Extract text from page range in memory-efficient batches."""
-        parts = []
+        parts: List[str] = []
         start_idx = max(0, start_page - 1)
         end_idx = min(len(pdf.pages), end_page)
 
@@ -367,7 +431,7 @@ class ContentExtractor:
 class USBPDParser:
     """Enhanced parser for complete USB PD specification extraction."""
 
-    def __init__(self, pdf_path: str, doc_title: str = "USB Power Delivery Specification"):
+    def __init__(self, pdf_path: str | Path, doc_title: str = "USB Power Delivery Specification"):
         self.pdf_path = Path(pdf_path)
         self.doc_title = doc_title
         self.toc_entries: List[TocEntry] = []
@@ -384,7 +448,7 @@ class USBPDParser:
     def get_pdf_page_count(self) -> int:
         """Get total page count from PDF."""
         try:
-            with pdfplumber.open(self.pdf_path) as pdf:
+            with pdfplumber.open(str(self.pdf_path)) as pdf:
                 return len(pdf.pages)
         except Exception as e:
             logger.error(f"Error reading PDF: {e}")
@@ -410,7 +474,7 @@ class USBPDParser:
             "testing": ["test", "validation", "verification", "compliance"],
             "state": ["state", "machine", "transition", "mode"],
         }
-        tags = []
+        tags: List[str] = []
         title_lower = title.lower()
         for tag, terms in keywords.items():
             if any(term in title_lower for term in terms):
@@ -422,7 +486,7 @@ class USBPDParser:
 
     def clean_content_text(self, text: str) -> str:
         lines = text.split("\n")
-        cleaned = []
+        cleaned: List[str] = []
         for line in lines:
             if re.match(r"^\s*\d+\s*$", line):
                 continue
@@ -464,7 +528,7 @@ class USBPDParser:
             raise
 
     def generate_statistics(self) -> Dict[str, Any]:
-        stats = {
+        stats: Dict[str, Any] = {
             "pdf_info": {"total_pages": self.total_pdf_pages, "file_path": str(self.pdf_path)},
             "toc_statistics": {
                 "total_entries": len(self.toc_entries),
@@ -508,6 +572,10 @@ class USBPDParser:
 
         self.total_pdf_pages = self.get_pdf_page_count()
         logger.info(f"PDF has {self.total_pdf_pages} total pages")
+
+        # Set debug on toc_extractor if needed
+        if config.scan_all_toc and hasattr(self.toc_extractor, "debug"):
+            self.toc_extractor.debug = True if config.scan_all_toc else False
 
         toc_text, _ = self.toc_extractor.extract_toc_pages(config.scan_all_toc)
         self.toc_entries = self.toc_extractor.parse_toc(toc_text)
@@ -553,7 +621,6 @@ class USBPDParser:
             logger.info(f" Pages Covered: {cs['pages_covered']}/{pdf['total_pages']}")
             logger.info(f" Avg Words/Section: {cs['avg_words_per_section']:.0f}")
             logger.info(f" Coverage: {cs['coverage_percentage']:.1f}%")
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(

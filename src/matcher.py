@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 class SectionMatcher:
     """Matches TOC entries to content chunks with deep analysis."""
 
-    def __init__(self, threshold: float = 0.85):
+    def _init_(self, threshold: float = 0.85):
         self.threshold = threshold
 
     def _normalize(self, text: str) -> str:
