@@ -1,0 +1,52 @@
+Page 772
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.14.3.3
+  Initiator to Responder Discover Modes (BUSY)
+Figure 8.110, "Initiator to Responder Discover Modes (BUSY)" shows an example sequence between an Initiator and 
+Responder, where both Port Partners are in an Explicit Contract and the Initiator attempts to discover Mode 
+information from the Responder but receives a BUSY.
+Figure 8.110 Initiator to Responder Discover Modes (BUSY)
+: Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+Initiator
+Responder
+1: Send Discover_Modes
+2: Discover_Modes
+3: Discover_Modes + CRC
+4: Discover_Modes
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Discover_Modes received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9: Discover_Modes sent
+Start VDMResponseTimer
+10: Send Discover_Modes BUSY
+11: Discover_Modes BUSY
+12: Discover_Modes BUSY + CRC
+13: Discover_Modes BUSY
+Check MessageID against local copy
+Store copy of MessageID
+14: Discover_Modes BUSY received
+Stop VDMResponseTimer
+DPM evaluates Modes 
+information
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Discover_Modes BUSY sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Explicit PD Contract
+Explicit PD Contract
+Request Modes information from 
+Device Policy Manager

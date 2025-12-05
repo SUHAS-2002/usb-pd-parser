@@ -1,0 +1,37 @@
+Page 960
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.27
+  BIST State diagrams
+8.3.3.27.1
+  BIST Carrier Mode State Diagram
+Figure 8.215, "BIST Carrier Mode State Diagram" shows the state diagram required by a UUT, which can be either a 
+Source, Sink or Cable Plug, when operating in BIST Carrier Mode. Transitions Shall be from either the 
+PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready states.
+Figure 8.215 BIST Carrier Mode State Diagram
+8.3.3.27.1.1
+  PE_BIST_Carrier_Mode State
+The Source, Sink or Cable Plug Shall enter the PE_BIST_Carrier_Mode state from either the PE_SRC_Ready, 
+PE_SNK_Ready or PE_CBL_Ready state when:
+
+A BIST Message is received with a BIST Carrier Mode BIST Data Object and 
+
+VBUS is at vSafe5V.
+On entry to the PE_BIST_Carrier_Mode state the Policy Engine Shall tell the Protocol Layer to go to BIST Carrier 
+Mode (see Section 6.4.3.1, "BIST Carrier Mode") and Shall initialize and run the BISTContModeTimer.
+BIST message received
+with Data Object BIST Carrier Mode &
+VBUS = vSafe5V
+BISTContModeTimer
+timeout
+PE_BIST_Carrier_Mode
+Actions on entry:
+Tell Protocol Layer to go to BIST Carrier Mode
+Initialize and run BISTContModeTimer
+PE_SRC_Transition_to_default or 
+PE_SNK_Transition_to_default or
+PE_CBL_Ready
+PE_SRC_Ready or 
+PE_SNK_Ready or
+PE_CBL_Ready
+VBUS = vSafe5V
+PD = Connected

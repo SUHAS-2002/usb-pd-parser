@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 153
+Sinks with Accessory Support do not source VBUS (see [USB Type-C 2.4]). Sinks with Accessory Support are still 
+considered Sources when sourcing VCONN to an Accessory even though VBUS is not applied; in this case they Shall 
+Advertise vSafe5V with the Maximum Current field set to 0mA in the first Power Data Object. The main purpose of 
+this is to enable the Sink with Accessory Support to get into the PE_SRC_Ready State to enter an Alternate Mode.
+A Sink in SPR Mode Shall evaluate every Source_Capabilities Message it receives and Shall respond with a Request 
+Message. If its power consumption exceeds the Source Capabilities it Shall Re-negotiate so as not to exceed the 
+Source's most recently Advertised Capabilities.
+A Sink, in SPR Mode, in an Explicit Contract with a PPS APDO, Shall periodically re-request the PPS APDO at least 
+every tPPSRequest until either:
+
+The Sink requests something other than PPS APDO.
+
+There is a Power Role Swap.
+
+There is a Hard Reset.
+
+There is Error Recovery.
+A Sink in EPR Mode that receives a Source_Capabilities Message in response to a Get_Source_Cap Message Shall 
+Not respond with a Request Message. If a Sink in EPR Mode receives a Source_Capabilities Message, not in response 
+to a Get_Source_Cap Message, the Sink Shall initiate a Hard Reset.
+A Source that has accepted a Request Message with a Programmable RDO Shall issue Hard Reset Signaling if it has 
+not received a Request Message with a Programmable RDO within tPPSTimeout. The Source Shall discontinue this 
+behavior after:
+
+Receiving a Request Message with a Fixed Supply, Variable Supply or Battery Supply RDO.
+
+There is a Power Role Swap.
+
+There is a Hard Reset.
+
+There is Error Recovery.
+6.4.1.6
+  SPR Sink Capabilities Message
+Sinks send a Sink_Capabilities Message (see Section 6.4.2, "Request Message") in response to a Get_Sink_Cap 
+Message. See Section 6.5.15.3, "EPR_Sink_Capabilities Message" for more information about the Capabilities Message.
+A USB Power Delivery capable Sink, upon detecting vSafe5V on VBUS and after a SinkWaitCapTimer timeout 
+without seeing a Source_Capabilities Message, Shall send a Hard Reset. If the Attached Source is USB Power 
+Delivery capable, it responds by sending Source_Capabilities Messages thus allowing power Negotiations to begin.
+A Sink Port Shall report power levels it is able to operate at in a series of 32-bit Power Data Objects (see Section 
+Table 6.7, "Power Data Object"). These are returned as part of a Sink_Capabilities Message in response to a 
+Get_Sink_Cap Message (see Figure 6.13, "Example Capabilities Message with 2 Power Data Objects"). This is similar 
+to that used for Source Port Capabilities with equivalent Power Data Objects for Fixed Supply, Variable Supply and 
+Battery Supply as defined in this section. Power Data Objects are used to convey the Sink Port's operational power 
+requirements including Dual-Role Power Ports presently operating as a Source.
+Each Power Data Object Shall describe a specific Sink operational power level, such as a Battery Supply (e.g., 2.8-
+4.1V) or a Fixed Supply (e.g., 15V). The Number of Data Objects field in the Message Header Shall define the 
+number of Power Data Objects that follow the Message Header in a Data Message.
+All Sinks Shall minimally offer one Power Data Object with a power level at which the Sink can operate. A Sink Shall 
+Not offer multiple Power Data Objects of the same type (Fixed Supply, Variable Supply, Battery Supply) and the same 
+voltage but Shall instead offer one Power Data Object with the highest available current for that Sink capability and 
+voltage.
+All Sinks Shall include one Power Data Object that reports vSafe5V even if they require additional power to operate 
+fully. In the case where additional power is required for full operation the Higher Capability bit Shall be set.

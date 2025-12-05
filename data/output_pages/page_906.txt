@@ -1,0 +1,59 @@
+Page 906
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 8.179 Dual-role Port in Sink to Source Fast Role Swap State Diagram
+PE_FRS_SNK_SRC_
+Transition_to_off
+Actions on entry:
+Initialize and run PSSourceOffTimer
+Power = Implicit Contract
+PD = Connected
+Fast Swap signal detected on CC Wire
+PE_FRS_SNK_SRC_
+Send_Swap
+Actions on entry:
+Send FR_Swap Message
+Initialize and run 
+SenderResponseTimer
+Power = Implicit Contract
+PD = Connected
+Accept Message
+received
+PE_FRS_SNK_SRC_
+Source_on
+Actions on entry:
+Send PS_RDY Message
+Power = Transition to source on
+PD = Connected
+PS_RDY Message sent
+PE_SRC_Startup
+PE_FRS_SNK_SRC_
+Assert_Rp
+Actions on entry:
+Request DPM to assert Rp
+Power = Implicit Contract
+PD = Connected
+PS_RDY Message received
+Rp asserted
+ErrorRecovery
+PS_RDY Message not sent 
+after retries (no GoodCRC received)
+PSSourceOffTimer timeout
+SenderResponseTimer timeout |
+FR_Swap Message not sent 
+after retries (no GoodCRC received)
+PE_FRS_SNK_SRC_Vbus_Applied
+Actions on entry:
+Request Device Policy Manager to notify 
+when vSafe5v is being applied by the local 
+power source.
+Power = Implicit Contract
+PD = Connected
+New Source is applying vSafe5V
+PE_FRS_SNK_SRC_
+Start_AMS
+Actions on entry:
+Notify the Protocol Layer that the first 
+Message in the AMS will follow.
+Power = Implicit Contract
+PD = Connected
+Protocol Layer notified

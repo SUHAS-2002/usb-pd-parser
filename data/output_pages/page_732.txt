@@ -1,0 +1,15 @@
+Page 732
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+16
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+17
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Security_Response Message was successfully sent.
+The security exchange is complete.
+Table 8.123  Steps for a Source requesting a security exchange with a Sink Sequence
+Step
+Source Port
+Sink Port

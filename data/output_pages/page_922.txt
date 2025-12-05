@@ -1,0 +1,48 @@
+Page 922
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.21.1
+  Initiator Structured VDM Discover Identity State Diagram
+Figure 8.191, "Initiator to Port VDM Discover Identity State Diagram" shows the state diagram for an Initiator when 
+discovering the identity of its Port Partner or Cable Plug.
+Figure 8.191 Initiator to Port VDM Discover Identity State Diagram
+8.3.3.21.1.1
+  PE_INIT_PORT_VDM_Identity_Request State
+The Policy Engine transitions to the PE_INIT_PORT_VDM_Identity_Request state from either the PE_SRC_Ready or 
+PE_SNK_Ready state when:
+
+The Device Policy Manager requests the discovery of the identity of the Port Partner or Cable Plug or
+
+The DiscoverIdentityTimer times out.
+The Policy Engine transitions to the PE_INIT_PORT_VDM_Identity_Request state from the 
+PE_SRC_EPR_Mode_Discover_Cable state when:
+
+The Cable Plug Discovery Process has been initiated.
+PE_SRC_Ready, PE_SNK_Ready or 
+PE_SRC_EPR_Mode_Discover_Cable
+PE_INIT_PORT_VDM_Identity_Request
+Actions on entry:
+Send Discover Identity request
+Start VDMResponseTimer
+Power = Explicit Contract
+PD = Connected
+DPM requests identity discovery1 |
+DiscoverIdentityTimer timeout
+Discover Identity ACK
+received
+PE_INIT_PORT_VDM_Identity_ACKed
+Actions on entry:
+Inform DPM of identity
+Power = Explicit Contract
+PD = Connected
+PE_INIT_PORT_VDM_Identity_NAKed
+Actions on entry:
+Inform DPM of result
+Power = Explicit Contract
+PD = Connected
+Discover Identity NAK/BUSY |
+VDMResponseTimer Timeout
+DPM informed
+DPM informed
+PE_SRC_Ready, PE_SNK_Ready or PE_SRC_EPR_Mode_Evaluate_Cable_EPR
+1)
+The DPM in an EPR Source Shall request the discovery of the identity of the Cable Plug at startup.

@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 423
+
+Provider/Consumers not using large external sources ("Unconstrained Powered" bit cleared) Should al-
+ways accept a Power Role Swap request from a Consumer/Provider using large external power sources 
+("Unconstrained Power" bit set) unless the requester is not able to provide the requirements of the 
+present Provider/Consumer.
+8.2.7
+  Interface to the Policy Engine
+The Device Policy Manager Shall maintain an interface to the Policy Engine for each Port in the device.
+8.2.7.1
+  Device Policy Manager in a Provider
+The Device Policy Manager in a Provider Shall also provide the following functions to the Policy Engine:
+
+Inform the Policy Engine of changes in cable/ device Attachment status for a given cable.
+
+Inform the Policy Engine whenever the Source Capabilities available for a Port change.
+
+Evaluate requests from an Attached Consumer and provide responses to the Policy Engine.
+
+Respond to requests for power supply transitions from the Policy Engine.
+
+Indication to Policy Engine when power supply transitions are complete.
+
+Maintain a power reserve for devices operating on a Port at less than maximum power.
+8.2.7.2
+  Device Policy Manager in a Consumer
+The Device Policy Manager in a Consumer Shall also provide the following functions to the Policy Engine:
+
+Inform the Policy Engine of changes in cable/device Attachment status.
+
+Inform the Policy Engine whenever the power requirements for a Port change.
+
+Evaluate Source Capabilities and provide suitable responses:
+
+Request from offered Capabilities.
+
+Indicate whether additional power is required.
+
+Respond to requests for Sink transitions from the Policy Engine.
+8.2.7.3
+  Device Policy Manager in a Dual-Role Power Device
+The Device Policy Manager in a Dual-Role Power Device Shall provide the following functions to the Policy Engine:
+
+Provider Device Policy Manager
+
+Consumer Device Policy Manager
+
+Interface for the Policy Engine to request power supply transitions from Source to Sink and vice versa.
+
+Indications to Policy Engine during Power Role Swap transitions.
+8.2.7.4
+  Device Policy Manager in a Dual-Role Power Device Dead Bat-
+tery handling
+The Device Policy Manager in a Dual-Role Power Device with a Dead Battery Should:
+
+Switch Ports to Sink-only or Sink DFP operation to obtain power from the next Attached Source.
+
+Use VBUS from the Attached Source to power the USB Power Delivery communications as well as 
+charging to enable the Negotiation of higher input power.

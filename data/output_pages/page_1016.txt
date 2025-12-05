@@ -1,0 +1,5 @@
+Page 1016
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+B
+ Message Sequence Examples (Deprecated)
+This appendix has been Deprecated.

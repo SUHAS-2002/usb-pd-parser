@@ -1,0 +1,71 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 37
+1.4
+  Conventions
+1.4.1
+  Precedence
+If there is a conflict between text, figures, and tables, the precedence Shall be tables, figures, and then text.
+In there is a conflict between a generic statement and a more specific statement, the more specific statement Shall 
+apply.
+1.4.2
+  Keywords
+The following keywords differentiate between the levels of requirements and options.
+Table 1.2  Keywords
+Keyword
+Definition
+Conditional Normative
+Conditional Normative is a keyword used to indicate a feature that is mandatory 
+when another related feature has been implemented. Designers are mandated to 
+implement all such requirements, when the dependent features have been 
+implemented, to ensure interoperability with other compliant devices.
+Deprecated
+Deprecated is a keyword used to indicate a feature, supported in previous 
+releases of the specification, which is no longer supported.
+Discard
+See Discarded.
+Discarded
+Discard, Discards and Discarded are equivalent keywords indicating that a 
+Packet when received Shall be thrown away by the PHY Layer and not passed to 
+the Protocol Layer for processing. No GoodCRC Message Shall be sent in response 
+to the Packet.
+Discards
+See Discarded.
+Ignore
+See Ignored.
+Ignored
+Ignore, Ignores and Ignored are equivalent keywords indicating Messages or 
+Message fields which, when received, Shall result in no special action by the 
+receiver. An Ignored Message Shall only result in returning a GoodCRC Message 
+to acknowledge Message receipt. A Message with an Ignored field Shall be 
+processed normally except for any actions relating to the Ignored field.
+Ignores
+See Ignored.
+Informative
+Informative is a keyword indicating text with no specific requirements, 
+provided only to improve understanding.
+Invalid
+Invalid is a keyword when used in relation to a Packet indicates that the Packet’s 
+usage or fields fall outside of the defined specification usage. When Invalid is 
+used in relation to an Explicit Contract it indicates that a previously established 
+Explicit Contract which can no longer be maintained by the Source. When Invalid 
+is used in relation to individual K-codes or K-code sequences indicates that the 
+received Signaling falls outside of the defined specification.
+May
+May is a keyword that indicates a choice with no implied preference.
+May Not
+May Not is a keyword that is the inverse of May. Indicates a choice to not 
+implement a given feature with no implied preference.
+N/A
+N/A is a keyword that indicates that a field or value is not applicable and has no 
+defined value and Shall Not be checked or used by the recipient.
+Normative
+See Shall.
+Optional
+Optional, Optionally and Optional Normative are equivalent keywords that 
+describe features not mandated by this specification. However, if an Optional 
+feature is implemented, the feature Shall be implemented as defined by this 
+specification.
+Optional Normative
+See Optional.
+Optionally
+See Optional.

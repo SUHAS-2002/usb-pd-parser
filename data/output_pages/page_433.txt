@@ -1,0 +1,112 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 433
+EPR Explicit Contract 
+Negotiation (Accept)
+1.
+EPR_Source_Capabilities 
+Message
+2.
+EPR_Request Message
+3.
+Accept Message
+4.
+PS_RDY Message
+Started by Source, 
+EPR Mode
+Section 8.3.2.2.2.2.1
+Section 8.3.3.2,
+Section 8.3.3.3
+EPR Explicit Contract 
+Negotiation (Reject)
+1.
+EPR_Source_Capabilities 
+Message
+2.
+EPR_Request Message
+3.
+Reject Message
+Section 8.3.2.2.2.2.2
+EPR Explicit Contract 
+Negotiation (Wait)
+1.
+EPR_Source_Capabilities 
+Message
+2.
+EPR_Request Message
+3.
+Wait Message
+Section 8.3.2.2.2.2.3
+EPR Keep Alive
+1.
+EPR_KeepAlive Message
+2.
+EPR_KeepAlive_Ack 
+Message
+Started by Sink, 
+EPR Mode
+Section 8.3.2.2.2.3
+Exiting EPR Mode (Sink 
+Initiated)
+1.
+EPR_Mode (Exit) 
+Message
+2.
+SPR Explicit Contract 
+Negotiation AMS
+Started by Sink, 
+EPR Mode
+Section 8.3.2.2.2.4.1,
+Section 8.3.2.2.1.1
+Section 8.3.3.25.3,
+Section 8.3.3.25.4,
+Section 8.3.3.2,
+Section 8.3.3.3
+Exiting EPR Mode 
+(Source Initiated)
+1.
+EPR_Mode (Exit) 
+Message
+2.
+SPR Explicit Contract 
+Negotiation AMS
+Started by Source, 
+EPR Mode
+Section 8.3.2.2.2.4.2,
+Section 8.3.2.2.1.1
+EPR Sink Makes 
+Request (Accept)
+1.
+EPR_Request Message
+2.
+Accept Message
+3.
+PS_RDY Message
+Started by Sink, 
+EPR Mode
+Section 8.3.2.2.2.5.1
+Section 8.3.3.2,
+Section 8.3.3.3
+EPR Sink Makes 
+Request (Reject)
+1.
+EPR_Request Message
+2.
+Reject Message
+Started by Sink, 
+EPR Mode
+Section 8.3.2.2.2.5.2
+EPR Sink Makes 
+Request (Wait)
+1.
+EPR_Request Message
+2.
+Wait Message
+Started by Sink, 
+EPR Mode
+Section 8.3.2.2.2.5.3
+Table 8.6  AMS: Power Negotiation (EPR)
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref

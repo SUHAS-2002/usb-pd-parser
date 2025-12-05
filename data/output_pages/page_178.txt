@@ -1,0 +1,14 @@
+Page 178
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Cable) field is 50V, a Fixed Supply of 48V can be Negotiated as part of an Explicit Contract where the absolute 
+maximum voltage that can be applied to the cable is 50.9V. Maximum VBUS Voltage (Passive Cable) field values of 
+01b and 10b (formerly 30V and 40V) Shall be treated if they were 00b (20V).
+6.4.4.3.1.6.9
+  VBUS Current Handling Capability Field
+The VBUS Current Handling Capability (Passive Cable) field (B6…5) Shall indicate whether the cable is capable 
+of carrying 3A or 5A.
+6.4.4.3.1.6.10
+  USB Highest Speed Field
+The USB Highest Speed (Passive Cable) field (B2…0) Shall indicate the highest rate the cable supports. The DFP 
+Shall consider all values indicated in this field that are higher than the highest value that the DFP recognizes as 
+being Valid and functionally compatible with the highest speed that the DFP supports.

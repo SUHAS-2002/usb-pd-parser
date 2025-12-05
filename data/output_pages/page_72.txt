@@ -1,0 +1,41 @@
+Page 72
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+2.6.5.3
+  Dual-Role Data Ports
+Dual-Role Data Ports have the ability to operate as either a DFP or a UFP and to swap between the two Data Roles 
+using Data Role Swap. 
+Note:
+Products can be Dual-Role Data Ports without being Dual-Role Power Ports that is they can switch 
+logically between DFP and UFP Data Roles even if they are Source-only or Sink-only Ports.
+2.6.6
+  Cable and Connectors
+The USB Power Delivery specification assumes certified USB cables and associated detection mechanisms as 
+defined in the [USB Type-C 2.4] specification.
+2.6.6.1
+  USB-C Port Control
+The USB-C® Port Control block provides mechanisms to:
+
+Inform the Device Policy Manager of cable Attach/Detach events.
+
+Inform Sink's Device Policy Manager of the Rp value.
+
+Allow Source's Device Policy Manager to set the Rp value.
+2.6.7
+  Interactions between Non-PD, BC, and PD devices
+USB Power Delivery only operates when two USB Power Delivery devices are directly connected. When a device 
+finds itself a mixed environment, where the other device does not support the USB Power Delivery Specification, 
+the existing rules on supplying vSafe5V as defined in the [USB 2.0], [USB 3.2], [USBBC 1.2] or [USB Type-C 2.4] 
+specifications are applied.
+There are two primary cases to consider:
+
+The USB Host (DFP/Source) is non-PD and as such will not send any Advertisements. An Attached PD 
+Capable device will not see any Advertisements and operates using the rules defined in the [USB 2.0], 
+[USB 3.2], [USBBC 1.2] or [USB Type-C 2.4] specifications.
+
+The Device (UFP/Sink) is non-PD and as such will not see any Advertisements and therefore will not 
+respond. The USB Host (DFP/Source) will continue to supply vSafe5V to VBUS as specified in the [USB 
+2.0], [USB 3.2], [USBBC 1.2] or [USB Type-C 2.4] specifications.
+2.6.8
+  Power Rules
+Power Rules define voltages and current ranges that are offered by compliant USB Power Delivery Sources and used 
+by a USB Power Delivery Sink for a given value of PDP Rating. See Chapter 10 "Power Rules" for further details.

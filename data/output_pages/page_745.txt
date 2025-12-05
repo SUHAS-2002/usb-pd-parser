@@ -1,0 +1,46 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 745
+8.3.2.13.3
+  VCONN Source requests firmware update exchange with Cable 
+Plug
+Figure 8.101, "VCONN Source requests firmware update exchange with Cable Plug" shows an example sequence for a 
+firmware update exchange between a VCONN Source and a Cable Plug. 
+Figure 8.101 VCONN Source requests firmware update exchange with Cable Plug
+: Protocol
+1: Send Firmware_Update_Request
+: PHY
+: PHY
+: Protocol
+2:Firmware_Update_Request
+3: Firmware_Update_Request + CRC
+4: Firmware_Update_Request
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Firmware_Update_Request received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Firmware_Update_Request sent
+10: Send Firmware_Update_Response
+11: Firmware_Update_Response
+12: Firmware_Update_Response + CRC
+13: Firmware_Update_Response
+Check MessageID against local copy
+Store copy of MessageID
+14: Firmware_Update_Response received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get firmware update 
+response from DPM
+: Policy Engine
+: Policy Engine
+VCONN Source
+Cable Plug
+18: Firmware_Update_Response sent

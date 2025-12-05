@@ -1,0 +1,59 @@
+Page 212
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.11
+  Source_Info Message
+The Source_Info Message Shall be sent in response to a Get_Source_Info Message. The Source_Info Message 
+contains one Source Information Data Object (SIDO).
+The Source_Info Message returns a SIDO whose format Shall be as shown in Figure 6.35, "Source_Info Message" and 
+Table 6.51, "Source_Info Data Object (SIDO)". The Number of Data Objects field in the Source_Info Message Shall 
+be set to 1.
+The Port Maximum PDP, Port Present PDP, Port Reported PDP and the Port Type are used to identify Capabilities 
+of a Source Port.
+Figure 6.35 Source_Info Message
+6.4.11.1
+  Port Type Field
+Port Type is a Static field that Shall be used to indicate whether the amount of power the Port can provide is fixed 
+or can change dynamically.
+For Ports that are part of a Shared Capacity Group, the Port Type field Shall be set to Managed Capability Port.
+For Ports not part of a Shared Capacity Group, the Port Type field May be set to either Managed Capability Port or 
+Guaranteed Capability Port.
+6.4.11.2
+  Port Maximum PDP Field
+Port Maximum PDP is a Static field that Shall report the integer portion of the PDP Rating of the Port. A 
+Guaranteed Capability Port (as indicated by the Port Type field being set to '1') Shall always be capable of 
+supplying this amount of power. A Managed Capability Port (as indicated by the Port Type field being set to '0') 
+Shall be able to offer this amount of power at some time.
+The Port Maximum PDP Shall be the same as the larger of the SPR Source PDP Rating and the EPR Source PDP 
+Rating in the Source_Capabilities_Extended Message.
+6.4.11.3
+  Port Present PDP Field
+The Port Present PDP field Shall indicate the integer part of the amount of power the Port is presently capable of 
+supplying including limitations due to Cable Capabilities or abnormal operating conditions (e.g., elevated 
+temperature, low input voltage, etc.).
+A Guaranteed Capability Port Shall always set its Port Present PDP to be the same as its Port Maximum PDP or 
+the highest possible value when limited.
+Table 6.51  Source_Info Data Object (SIDO)
+Bit(s)
+Field
+Description
+B31
+Port Type
+
+0 = Managed Capability Port
+
+1 = Guaranteed Capability Port
+B30…24
+Reserved
+Shall be set to zero
+B23...16
+Port Maximum PDP
+Power the Port is designed to supply
+B15…8
+Port Present PDP
+Power the Port is presently capable of supplying
+B7…0
+Port Reported PDP
+Power the Port is actually advertising
+Header
+No. of Data Objects = 1
+SIDO

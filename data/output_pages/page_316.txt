@@ -1,0 +1,70 @@
+Page 316
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 7.5  PPS Negative Voltage Transitions
+Section 7.1.14, "Non-application of VBUS Slew Rate Limits" lists transitions that are exempt from the vPpsSlewNeg 
+and vPpsSlewPos limits.
+See Section 7.1.8.1, "AVS/PPS Output Voltage Ripple" for output voltage ripple limits.
+See Section 7.1.8.2, "AVS/PPS DNL Errors and Output Voltage/Current Tolerance" for output voltage and current 
+DNL step adjustments.
+7.1.4.2.2
+   SPR Programmable Power Supply Current Limit
+The Programmable Power Supply operating in SPR PPS Mode Shall limit its output current to the Operating 
+Current field value in the RDO when the Sink attempts to draw more current than the Operating Current field 
+value level. The programming step size for the Operating Current is iPpsCLStep. All programming changes of the 
+Operating Current Shall settle to the new Operating Current field value within tPpsCLProgramSettle. The SPR 
+PPS Operating Current regulation accuracy during Current Limit is defined as iPpsCLNew. The minimum 
+programmable Current Limit level is iPpsCLMin. A Source that supports SPR PPS Mode Shall support Current Limit 
+programmability between iPpsCLMin and the Maximum Current value in the SPR PPS APDO. A Source which 
+receives a request for current below iPpsCLMin Should reject the request. A Source that accepts a request for 
+current below iPpsCLMin Shall set its current limit at 1A.
+The response of an SPR PPS to a load change depends on the Operating mode of the SPR PPS and the magnitude of 
+the load change. These dependencies lead to one of four possible responses of an SPR PPS to any load change. They 
+are differentiated by the value of the PPS Status OMF before and after the load change:
+
+If the PPS Status OMF is cleared both before and after the load change, the SPR PPS responds solely by 
+maintaining the output voltage. The SPR PPS output voltage Shall remain within vPpsValid range. The 
+SPR PPS response to the load change Shall settle within the vPpsNew tolerance band by the time 
+tPpsTransient. The Operating Mode Flag Shall remain cleared during the load change response of the 
+SPR PPS.
+
+If the PPS Status OMF is cleared before the load change and set after the load change, the SPR PPS 
+responds by reducing its output voltage to limit the SPR PPS output current. The SPR PPS output current 
+Shall stay within the iPpsCVCLTransient range once it reaches the iPpsCVCLTransient range. The SPR 
+vPpsMinVoltage
+V(c) = 1 + vPpsMinVoltage
+vPpsMinVoltage V(d)
+�
+�
+Programmable Power Supply Output Range
+�
+V(b) = 1 + n + vPpsMinVoltage
+�
+�
+0 Volts
+vPpsMaxVoltage
+�
+�
+�
+�
+�
+�
+vPpsValid
+vPpsNew
+�
+�
+vPpsValid
+Nominal V(c)
+Nominal V(b)
+vPpsMaxVoltage V(a)
+V(b) < V(a)
+V(d) < V(c)
+V(c) < V(b)
+vPpsValid
+vPpsNew
+�
+�
+vPpsValid
+�
+vPpsSlewNeg
+vPpsSlewNeg
+vPpsSlewNeg

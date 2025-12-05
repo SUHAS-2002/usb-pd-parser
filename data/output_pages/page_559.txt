@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 559
+8.3.2.8
+  Fast Role Swap
+This is an example of a successful Fast Role Swap operation initiated by a Port that is initially a Source and therefore 
+has Rp pulled up on its CC wire and which has lost power and needs to get vSafe5V quickly. It does not include any 
+subsequent Power Negotiation which is required in order to establish an Explicit Contract (see Section 8.3.2.2, 
+"Power Negotiation"). 
+There are several distinct phases to the Fast Role Swap Negotiation:
+
+The Initial Source stops driving its power output which starts transitioning to vSafe0V and send the 
+Fast Role Swap Request on the CC wire; these could occur in either order or simultaneously.
+
+The Initial Sink stops sinking power. At this point the New Source still has Rd asserted and the New Sink 
+still has Rp asserted.
+
+An FR_Swap Message is sent by the New Source within tFRSwapInit of detecting the Fast Swap signal.
+
+An Accept Message is sent by the New Sink in response to the FR_Swap Message.
+
+The New Sink asserts Rd and sends a PS_RDY Message indicating that the voltage on VBUS is at or below 
+vSafe5V.
+
+The New Source asserts Rp and sends a PS_RDY Message indicating that it is acting as a Source and is sup-
+plying vSafe5V.
+Note:
+The New Source can start applying VBUS when VBUS is at or below vSafe5V (max) but will start driving 
+VBUS to vSafe5V no later than tSrcFRSwap after detecting both the Fast Role Swap Request and that VBUS 
+has dropped below vSafe5V (min).
+Figure 8.39, "Successful Fast Role Swap Sequence" shows the Messages as they flow across the bus and within the 
+devices to accomplish the Fast Role Swap.

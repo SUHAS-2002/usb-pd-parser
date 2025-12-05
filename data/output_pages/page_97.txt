@@ -1,0 +1,86 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 97
+Figure 5.16 BMC Tx 'ZERO' Mask
+Table 5.14  BMC Tx Mask Definition, X Values
+Name
+Description
+Value
+Units
+X1Tx
+Left Edge of Mask
+0.015
+UI
+X2Tx
+see figure
+0.07
+UI
+X3Tx
+see figure
+0.15
+UI
+X4Tx
+see figure
+0.25
+UI
+X5Tx
+see figure
+0.35
+UI
+X6Tx
+see figure
+0.43
+UI
+X7Tx
+see figure
+0.485
+UI
+X8Tx
+see figure
+0.515
+UI
+X9Tx
+see figure
+0.57
+UI
+X10Tx
+see figure
+0.65
+UI
+X11Tx
+see figure
+0.75
+UI
+X12Tx
+see figure
+0.85
+UI
+X13Tx
+see figure
+0.93
+UI
+X14Tx
+Right Edge of Mask
+0.985
+UI
+Y5
+Y4
+Y3
+Y2
+Y1
+X1
+X2
+X3
+X4
+X5
+X6 X7 X8
+0.5UI
+1UI
+Y6
+Y7
+Y8
+Y9
+X9
+X10
+X11
+X12
+X13 X14

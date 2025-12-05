@@ -1,0 +1,53 @@
+Page 118
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Messages initiated by the Policy Engine, such as the PS_RDY Message sent to indicate that VBUS is ready, 
+will have the Port Power Role field set to Source.
+The Port Power Role field of a received Message Shall Not be verified by the receiver and Shall Not lead to Soft 
+Reset, Hard Reset or Error Recovery if it is incorrect.
+The Port Power Role field Shall only be defined for SOP Packets.
+6.2.1.1.5
+  Specification Revision
+The Specification Revision field Shall be one of the following values (except 11b):
+
+00b - Revision 1.0 (Deprecated)
+
+01b - Revision 2.0
+
+10b - Revision 3.x
+
+11b - Reserved, Shall Not be used.
+To ensure interoperability with existing PDUSB products, PDUSB products Shall support every PD Specification 
+Revision starting from [USB 2.0] for SOP*; the only exception to this is a VPD which Shall Ignore Messages sent with 
+PD Specification Revision 2.0 and earlier.
+After a physical or logical (USB Type-C® Error Recovery) Attach, a Port discovers the common Specification Revision 
+level between itself and its Port Partner and/or the Cable Plug(s), and uses this Specification Revision level until a 
+Detach, Hard Reset or Error Recovery happens.
+After detection of the Specification Revision to be used, all PD communications Shall comply completely with the 
+relevant Revision of the PD specification.
+The 2-bit Specification Revision field of a GoodCRC Message does not carry any meaning and Shall be considered 
+as don't care by the recipient of the Message. The sender of a GoodCRC Message Shall set the Specification Revision 
+field to 01b (Revision 2.0) when responding to a Message that contains 01b in the Specification Revision field of 
+the Message Header. The sender of a GoodCRC Message May set the Specification Revision field to 01b or 10b when 
+responding to a Message that contains 10b (Revision 3.x) in the Specification Revision field of the Message Header.
+The Specification Revision field Shall apply to all SOP* Packet types. 
+An Attach event or a Hard Reset Shall cause the detection of the applicable Specification Revision to be performed 
+for both Ports and Cable Plugs according to the rules stated below:
+When the Source Port first communicates with the Sink Port the Specification Revision field Shall be used as 
+described by the following steps:
+1)
+The Source Port sends a Source_Capabilities Message to the Sink Port setting the Specification 
+Revision field to the highest Revision of the Power Delivery Specification the Source Port supports.
+2)
+The Sink Port responds with a Request Message setting the Specification Revision field to the highest 
+Revision of the Power Delivery Specification the Sink Port supports that is equal to or lower than the 
+Specification Revision received from the Source Port.
+3)
+The Source and Sink Ports Shall use the Specification Revision in the Request Message from the Sink in 
+step 2 in all subsequent communications until a Detach, Hard Reset, or Error Recovery happens.
+Prior to entering the First Explicit Contract, the VCONN Source Shall use the following steps to establish a 
+Specification Revision level:
+1)
+The VCONN Source sends a Discover Identity REQ to the Cable Plug (SOP’) setting the Specification 
+Revision field in the Message to the highest Revision of the Power Delivery Specification the VCONN 
+Source supports. After a VCONN Swap the required Soft_Reset / Accept Message exchange is used for the 
+same purpose (see Section 6.3.13, "Soft Reset Message").

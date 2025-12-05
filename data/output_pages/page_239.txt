@@ -1,0 +1,100 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 239
+6.5.13
+  Sink_Capabilities_Extended Message
+The Sink_Capabilities_Extended Message Shall be sent in response to a Get_Sink_Cap_Extended Message. The 
+Sink_Capabilities_Extended Message enables a Sink or a DRP to inform the Source about its Capabilities as a Sink.
+The Sink_Capabilities_Extended Message Shall return a 24-byte Sink Capabilities Extended Data Block (SKEDB) 
+whose format Shall be as shown in Figure 6.52, "Sink_Capabilities_Extended Message" and Table 6.65, "Sink 
+Capabilities Extended Data Block (SKEDB)".
+Figure 6.52 Sink_Capabilities_Extended Message
+Table 6.65   Sink Capabilities Extended Data Block (SKEDB)
+Offset (Byte)
+Field
+Size 
+(Bytes)
+Type
+Description
+0
+VID
+2
+Numeric
+Vendor ID (assigned by the USB-IF)
+2
+PID
+2
+Numeric
+Product ID (assigned by the manufacturer)
+4
+XID
+4
+Numeric
+Value provided by the USB-IF assigned to the product
+8
+FW Version
+1
+Numeric
+Firmware version number 
+9
+HW Version
+1
+Numeric
+Hardware version number 
+10
+SKEDB Version
+1
+Numeric
+SKEDB Version (not the specification Version): 
+
+Version 1.0 = 1 
+Values 0 and 2-255 are Reserved and Shall Not be used.
+11
+Load Step
+1
+Bit Field
+Bit
+Description
+0...1
+
+00b: 150mA/μs Load Step (default)
+
+01b: 500mA/μs Load Step
+11b…10b: Reserved and Shall Not be used.
+2...7
+Reserved and Shall be set to zero
+12
+Sink Load 
+Characteristics
+2
+Bit Field
+Bit
+Description
+0...4
+Percent overload in 10% increments.
+Values higher than 25 (11001b) are clipped to 
+250%. 00000b is the default.
+5...10
+Overload period in 20ms when bits 0...4 non-zero.
+1...14
+Duty cycle in 5% increments when bits 0...4 are 
+non-zero.
+15
+Can tolerate VBUS voltage droop
+14
+Compliance
+1
+Bit Field
+Bit
+Description
+0
+Requires LPS Source when set
+1
+Requires PS1 Source when set
+2
+Requires PS2 Source when set
+3...7
+Reserved and Shall be set to zero
+Extended Header
+Data Size = 24
+SKEDB
+(24 byte Data Block)

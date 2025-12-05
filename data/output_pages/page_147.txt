@@ -1,0 +1,42 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 147
+capability is intended for direct Port to Charger connections only and Shall Not be offered to downstream Sinks via 
+a Hub.
+Every EPR AVS APDO Shall contain a Peak Current (Source EPR AVS) field. Supplies that want to offer a set of 
+overload Capabilities Shall Advertise this through the Peak Current (Source EPR AVS) field in the corresponding 
+EPR AVS APDO (see Table 6.16, "EPR AVS Power Source Peak Current Capability". Supplies that do not support an 
+overload capability Shall set these bits to 00b in the corresponding EPR AVS APDO. Supplies that support an 
+extended overload capability specified in the PeakCurrent1…3 fields of the Source_Capabilities_Extended 
+Message (see Section 6.5.1, "Source_Capabilities_Extended Message") Shall set these bits to 00b. Sinks wishing to 
+utilize these Extended Capabilities Shall first send a Get_Source_Cap_Extended Message to determine what 
+Capabilities, if any are supported by the Source.
+Table 6.16  EPR AVS Power Source Peak Current Capability
+Bits 21…20
+Description
+00
+Peak current equals IoC (default) or look at the Source_Capabilities_Extended Message (send 
+Get_Source_Cap_Extended Message)
+01
+Overload Capabilities:
+1.
+Peak current equals 150% IoC for 1ms @ 5% duty cycle (low current equals 97% IoC for 19ms)
+2.
+Peak current equals 125% IoC for 2ms @ 10% duty cycle (low current equals 97% IoC for 18ms)
+3.
+Peak current equals 110% IoC for 10ms @ 50% duty cycle (low current equals 90% IoC for 10ms)
+10
+Overload Capabilities:
+1.
+Peak current equals 200% IoC for 1ms @ 5% duty cycle (low current equals 95% IoC for 19ms)
+2.
+Peak current equals 150% IoC for 2ms @ 10% duty cycle (low current equals 94% IoC for 18ms)
+3.
+Peak current equals 125% IoC for 10ms @ 50% duty cycle (low current equals 75% IoC for 10ms)
+11
+Overload Capabilities:
+1.
+Peak current equals 200% IoC for 1ms @ 5% duty cycle (low current equals 95% IoC for 19ms)
+2.
+Peak current equals 175% IoC for 2ms @ 10% duty cycle (low current equals 92% IoC for 18ms)
+3.
+Peak current equals 150% IoC for 10ms @ 50% duty cycle (low current equals 50% IoC for 10ms)

@@ -1,0 +1,12 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 945
+8.3.3.25.2.3.2
+  PE_DFP_VCS_CBL_Send_Cable_Reset State
+The PE_DFP_VCS_CBL_Send_Cable_Reset state Shall be entered from any state when the Device Policy Manager 
+requests a Cable Reset.
+On entry to the PE_DFP_VCS_CBL_Send_Cable_Reset state the DFP Policy Engine Shall request the Protocol Layer 
+to send Cable Reset Signaling.
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state, depending on the VCONN 
+Source's Power Role, when:
+
+Cable Reset Signaling has been sent.

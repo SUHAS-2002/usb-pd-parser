@@ -1,0 +1,78 @@
+Page 680
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.106, "Steps for a Source getting Sink Battery status Sequence" below provides a detailed explanation of what 
+happens at each labeled step in Figure 8.79, "Source Gets Sink's Battery Status" above.
+Table 8.106  Steps for a Source getting Sink Battery status Sequence
+Step
+Source Port
+Sink Port
+1
+The Port has Port Power Role set to Source and the Rp 
+pull up on its CC wire.
+Policy Engine directs the Protocol Layer to send a 
+Get_Battery_Status Message containing the number of 
+the Battery for which status is being requested.
+The Port has Port Power Role set to Sink with the Rd pull 
+down on its CC wire.
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the 
+Get_Battery_Status Message. Starts CRCReceiveTimer.
+PHY Layer receives the Get_Battery_Status Message 
+and checks the CRC to verify the Message.
+4
+PHY Layer removes the CRC and forwards the 
+Get_Battery_Status Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Get_Battery_Status Message information to the Policy 
+Engine that consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Get_Battery_Status Message was successfully sent. 
+Policy Engine starts SenderResponseTimer.
+10
+Policy Engine requests the DPM for the present Source 
+Battery status, for the requested Battery number, which 
+are provided. 
+The Policy Engine tells the Protocol Layer to form a 
+Battery_Status Message.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the 
+Battery_Status Message.
+PHY Layer appends a CRC and sends the Battery_Status 
+Message. Starts CRCReceiveTimer.
+13
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Battery_Status Message information to the Policy 
+Engine that consumes it.
+14
+The Policy Engine stops the SenderResponseTimer.
+15
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.

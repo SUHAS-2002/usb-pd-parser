@@ -1,0 +1,42 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 247
+6.5.16
+  Vendor_Defined_Extended Message
+The Vendor_Defined_Extended Message (VDEM) is provided to allow vendors to exchange information outside of 
+that defined by this specification using the Extended Message format.
+A Vendor_Defined_Extended Message Shall consist of at least one Vendor Data Object, the VDM Header, and May 
+contain up to a maximum of 256 additional data bytes.
+To ensure vendor uniqueness of Vendor_Defined_Extended Messages, all Vendor_Defined_Extended Messages 
+Shall contain a Valid USB Standard or Vendor ID (SVID) allocated by USB-IF in the VDM Header.
+A VDEM does not define any structure and Messages May be created in any manner that the vendor chooses.
+Vendor_Defined_Extended Messages Shall Not be used for direct power Negotiation. They May however be used 
+to alter Local Policy, affecting what is offered or consumed via the normal PD Messages. For example, a 
+Vendor_Defined_Extended Message could be used to enable the Source to offer additional power via a 
+Source_Capabilities Message.
+Vendor_Defined_Extended Messages Shall Not be used where equivalent functionality is contained in the PD 
+Specification e.g., authentication or firmware update.
+The Message format Shall be as shown in Figure 6.56, "Vendor_Defined_Extended Message".
+Figure 6.56 Vendor_Defined_Extended Message
+The VDM Header Shall be the first 4-bytes in a Vendor Defined Extended Message. The VDM Header provides 
+Command space to allow vendors to customize Messages for their own purposes.
+The VDM Header in the VDEM Shall follow the Unstructured VDM Header format as defined in Section 6.4.4.1, 
+"Unstructured VDM".
+VDEMs Shall only be sent and received after an Explicit Contract has been established.
+A VDEM AMS Shall Not interrupt any other PD AMS.
+The VDEM does not define the contents of bits B14…0 in the VDM Header. Their definition and use are the sole 
+responsibility of the vendor indicated by the SVID. The Port Partners and Cable Plugs Shall exit any states entered 
+using a VDEM according to the rules defined in Section 6.4.4.3.4, "Enter Mode Command".
+The following rules apply to the use of VDEM Messages:
+
+VDEMs Shall Not be initiated or responded to under any other circumstances than the following:
+
+VDEMs Shall only be used when an Explicit Contract is in place.
+
+Prior to establishing an Explicit Contract VDEMs Shall Not be sent and Shall be Ignored if received.
+
+Cable Plugs Shall Not initiate VDEMs.
+Extended Header
+Data Size = 4...260
+VDM Header
+VDEDB
+(0...256-byte Data Block)

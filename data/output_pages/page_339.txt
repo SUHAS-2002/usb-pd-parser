@@ -1,0 +1,71 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 339
+7.3
+  Transitions
+The following sections illustrate the power supply's response to various types of Negotiations. The Negotiations 
+are triggered by certain Messages or Signaling. It provides examples of the transitions and is organized around each 
+of the Messages and Signals that result in a response from the power supply. The response to a Message or Signal 
+can result in different transitions depending upon the power supply's starting conditions and the requested 
+change.
+
+Transitions caused by a Request Message:
+
+Generic transition between (A)PDO s:
+
+Increase the current.
+
+Increase the voltage.
+
+Increase the voltage and the current.
+
+Increase the voltage and decrease the current.
+
+Decrease the voltage and increase the current.
+
+Decrease the voltage and the current.
+
+No change in Current or voltage.
+
+Transitions within the same PDO (Fixed Supply, Battery Supply, Variable Supply):
+
+Increase the current.
+
+Decrease the current.
+
+No change in current.
+
+Transitions within the same PPS APDO:
+
+Increasing the Programmable Power Supply (PPS) voltage.
+
+Decreasing the Programmable Power Supply (PPS) voltage. 
+
+Increasing the Programmable Power Supply (PPS) Current.
+
+Decreasing the Programmable Power Supply (PPS) Current.
+
+Same Request Programmable Power Supply (PPS).
+
+Transitions within the same AVS APDO:
+
+Increasing the Adjustable Voltage Supply (AVS) voltage
+
+Decreasing the Adjustable Voltage Supply (AVS) voltage
+
+Same Request Adjustable Voltage Supply (AVS) 
+
+Transitions caused by the PR_Swap Message:
+
+Source requests a Power Role Swap
+
+Sink requests a Power Role Swap
+
+Transitions caused by Hard Reset Signaling:
+
+Source issues Hard Reset Signaling.
+
+Sink issues Hard Reset Signaling.
+
+Transitions caused by the Fast Role Swap Request:
+
+Source asserts Rd at its preferred [USB Type-C 2.4] current.

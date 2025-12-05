@@ -1,0 +1,56 @@
+Page 920
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or 
+PE_SRC_EPR_Mode_Discover_Cable state when:
+
+A Reject Message is received or
+
+A Wait Message is received or
+
+The SenderResponseTimer times out.
+The Policy Engine May transition to the PE_VCS_Force_VCONN state when:
+
+A Not_Supported Message is received and
+
+The Port is not presently the VCONN Source.
+8.3.3.20.2
+  PE_VCS_Evaluate_Swap State
+The PE_VCS_Evaluate_Swap state is entered from either the PE_SRC_Ready or PE_SNK_Ready state when the 
+Policy Engine receives a VCONN_Swap Message.
+On entry to the PE_VCS_Evaluate_Swap state the Policy Engine Shall request the Device Policy Manager for an 
+evaluation of the VCONN Swap request.
+The Policy Engine Shall transition to the PE_VCS_Accept_Swap state when:
+
+The Device Policy Manager indicates that a VCONN Swap is OK.
+The Policy Engine Shall transition to the PE_VCS_Reject_Swap state when:
+
+The Port is not presently the VCONN Source and the Device Policy Manager indicates that a VCONN Swap 
+is not OK or
+
+The Device Policy Manager indicates that a VCONN Swap cannot be done at this time.
+8.3.3.20.3
+  PE_VCS_Accept_Swap State
+On entry to the PE_VCS_Accept_Swap state the Policy Engine Shall send an Accept Message.
+The Policy Engine Shall transition to the PE_VCS_Wait_For_VCONN state when:
+
+The Accept Message has been sent and
+
+The Port's VCONN is on.
+The Policy Engine Shall transition to the PE_VCS_Turn_On_VCONN state when:
+
+The Accept Message has been sent and
+
+The Port's VCONN is off.
+8.3.3.20.4
+  PE_VCS_Reject_Swap State
+On entry to the PE_VCS_Reject_Swap state the Policy Engine Shall request the Protocol Layer to send:
+
+A Reject Message if the device is unable to perform a VCONN Swap at this time.
+
+A Wait Message if further evaluation of the VCONN Swap request is required.
+Note:
+In this case it is expected that the Port will send a VCONN_Swap Message at a later time.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or 
+PE_SRC_EPR_Mode_Discover_Cable state when:
+
+The Reject or Wait Message has been sent.

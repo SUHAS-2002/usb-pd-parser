@@ -1,0 +1,41 @@
+Page 330
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Test conditions require a change in both positive and negative load steps from 1Hz to 5000Hz, up to the Advertised 
+Load Step Magnitude of the full load output including from both 10 mA and 10% initial load. The Source Shall 
+ensure that PD Communications meet the transmit and receive masks as specified in Section 5.8.2, "Transmit and 
+Receive Masks" under all load conditions.
+7.1.12.1.2
+  Load Step Magnitude
+The default load step magnitude rate Shall be 25% of IoC. The Source May report higher capability tolerating a load 
+step of 90% of IoC.
+7.1.12.2
+  Holdup Time Field
+The Holdup Time field Shall return a numeric value of the number of milliseconds the output voltage stays in 
+regulation upon a short interruption of the AC Supply. 
+An AC Supplied Source Shall report its holdup time in this field. The holdup time is measured with the load at rated 
+maximum, with the AC Supply at 115VAC rms and 60Hz (or at 230VAC rms and 50Hz for a Source that does not 
+support 115VAC AC Supply). The reported time describes the minimum length of time from the last completed AC 
+Supply input cycle (zero-degree phase angle) until when the output voltage decays below vSrcValid (min). Sources 
+are recommended to support a minimum of 3ms and are preferred to support over 10 milliseconds holdup time 
+(equivalent to a half cycle drop from the AC Supply). See Figure 7.15, "Holdup Time Measurement".
+Figure 7.15 Holdup Time Measurement
+7.1.12.3
+  Compliance Field
+An SPR Source claiming LPS, PS1 or PS2 compliance (see [IEC 62368-1]) Shall report its Capabilities in the 
+Compliance field. Since the SPR Source May have several potential output voltage and current settings, every SPR 
+Source supply (each indicated by a PDO) Shall be compliant to LPS requirements. 
+Note:
+According to the requirements of [IEC 60950-1] and/or [IEC 62368-3], a device tested and certified with 
+an LPS Source (SPR Source or EPR Source operating in SPR Mode) is prohibited from using a non-LPS 
+Source (EPR Source operating in EPR Mode). Alternatively, [IEC 62368-1], classifies power sources 
+according to their maximum, constrained power output (15watts or 100watts).
+7.1.12.4
+  Peak Current
+The Source reports its ability to source peak current delivery in excess of the Negotiated amount in the Peak 
+Current field. The duration of peak current Shall be followed by a current consumption below the Operating 
+Current (IoC) in order to maintain average power delivery below the IoC current. 
+vSrcValid(min)
+Hold Up Time
+�
+VBUS
+AC mains voltage

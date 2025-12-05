@@ -1,0 +1,47 @@
+Page 288
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.12.2.2.1.8
+  PRL_Tx_Check_RetryCounter State
+On entry to the PRL_Tx_Check_RetryCounter state the Protocol Layer in a DFP or UFP Shall increment the value of 
+the RetryCounter and then check it in order to determine whether it is necessary to retry sending the Message.
+Note:
+Cable Plugs do not retry Messages and so do not use the RetryCounter.
+The Protocol Layer Shall transition to the PRL_Tx_Construct_Message state in order to retry Message sending 
+when:
+
+RetryCounter ≤ nRetryCount and
+
+This is not a Cable Plug and
+
+This is an Extended Message with Data Size ≤ MaxExtendedMsgLegacyLen or 
+
+This is an Extended Message that has been Chunked.
+The Protocol Layer Shall transition to the PRL_Tx_Transmission_Error state when:
+
+RetryCounter > nRetryCount or
+
+This is a Cable Plug, which does not retry.
+
+This is an Extended Message with Data Size > MaxExtendedMsgLegacyLen that has not been Chunked.
+6.12.2.2.1.9
+  PRL_Tx_Transmission_Error State
+On entry to the PRL_Tx_Transmission_Error state the Protocol Layer Shall increment the MessageIDCounter and 
+inform the Policy Engine of the transmission error.
+The Protocol Layer Shall transition to the PRL_Tx_Wait_for_Message_Request state when:
+
+The Policy Engine has been informed of the transmission error.
+6.12.2.2.1.10
+  PRL_Tx_Discard_Message State
+Protocol Layer Message transmission Shall enter the PRL_Tx_Discard_Message state whenever:
+
+Protocol Layer Message reception receives an incoming Message or
+
+The Fast Role Swap Request is being transmitted (see Section 5.8.5.6, "Fast Role Swap Transmission")
+
+The Fast Role Swap Request is detected (see Section 5.8.6.3, "Fast Role Swap Detection").
+On entry to the PRL_Tx_Discard_Message state, if there is a Message queued awaiting transmission, the Protocol 
+Layer Shall Discard the Message according to the rules in Section 6.11, "Message Discarding" and increment the 
+MessageIDCounter.
+The Protocol Layer Shall transition to the PRL_Tx_PHY_Layer_Reset state when:
+
+Discarding is complete i.e., the Message queue is empty.

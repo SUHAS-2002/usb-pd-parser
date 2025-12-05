@@ -1,0 +1,200 @@
+Page 8
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Juan Fantin
+Google Inc.
+Lee Leppo
+HP Inc.
+Ken Wu
+Google Inc.
+Rahul Lakdawala
+HP Inc.
+Kyle Tso
+Google Inc.
+Robin Castell
+HP Inc.
+Mark Hayter
+Google Inc.
+Roger Benson
+HP Inc.
+Nathan Kolluru
+Google Inc.
+Steve Chen
+HP Inc.
+Nithya Jagannathan
+Google Inc.
+Bai Sean
+Huawei Technologies Co., Ltd.
+Srikanth Lakshmikanthan
+Google Inc.
+Chunjiang Zhao
+Huawei Technologies Co., Ltd.
+Todd Broch
+Google Inc.
+JianQuan Wu
+Huawei Technologies Co., Ltd.
+Toshak Singhal
+Google Inc.
+Li Zongjian
+Huawei Technologies Co., Ltd.
+Vincent Palatin
+Google Inc.
+Liansheng Zheng
+Huawei Technologies Co., Ltd.
+Xuelin Wu
+Google Inc.
+Lihua Duan
+Huawei Technologies Co., Ltd.
+Zhenxue Xu
+Google Inc.
+Min Chen
+Huawei Technologies Co., Ltd.
+Alan Kinningham
+Granite River Labs
+Wang Feng
+Huawei Technologies Co., Ltd.
+Anand Murugan
+Granite River Labs
+Wei Haihong
+Huawei Technologies Co., Ltd.
+Balamurugan Manialagan
+Granite River Labs
+Zhenning Shi
+Huawei Technologies Co., Ltd.
+Medipalli Sowmya
+Granite River Labs
+James Xie
+Hynetek Semiconductor Co., Ltd
+Mike Engbretson
+Granite River Labs
+Yingyang Ou
+Hynetek Semiconductor Co., Ltd
+Mike Wu
+Granite River Labs
+Robert Heaton
+Indie Semiconductor
+Mukesh Tatiya
+Granite River Labs
+Vincent Wang
+Indie Semiconductor
+Naresh Botsa
+Granite River Labs
+Benjamin Kropf
+Infineon Technologies
+PoornaKumar M.
+Granite River Labs
+Sie Boo Chiang
+Infineon Technologies
+Prajwal Rathod
+Granite River Labs
+Tue Fatt David Wee
+Infineon Technologies
+Rajaraman V
+Granite River Labs
+Wee Tar Richard Ng
+Infineon Technologies
+Saai Ghoutham Revathi 
+Selvam
+Granite River Labs
+Wolfgang Furtner
+Infineon Technologies
+Sivan Perumal
+Granite River Labs
+Aruni Nelson
+Intel Corporation
+Sivaram Murugesan
+Granite River Labs
+Bob Dunstan
+Intel Corporation
+Tim Lin
+Granite River Labs
+Brad Saunders
+Intel Corporation
+Vijay S.
+Granite River Labs
+Chee Lim Nge
+Intel Corporation
+Vijayakumar P
+Granite River Labs
+Christine Krause
+Intel Corporation
+Vishal Kakade
+Granite River Labs
+Chuen Ming Tan
+Intel Corporation
+Yogeshwaran Venkatesan
+Granite River Labs
+Dan Froelich
+Intel Corporation
+Jerry Qin
+GuangDong OPPO Mobile 
+Telecommunications Corp., Ltd.
+David Harriman
+Intel Corporation
+Alan Berkema
+Hewlett Packard
+David Hines
+Intel Corporation
+Lee Atkinson
+Hewlett Packard
+David Thompson
+Intel Corporation
+Rahul Lakdawala
+Hewlett Packard
+Guobin Liu
+Intel Corporation
+Robin Castell
+Hewlett Packard
+Harry Skinner
+Intel Corporation
+Ron Schooley
+Hewlett Packard
+Henrik Leegaard
+Intel Corporation
+Steve Chen
+Hewlett Packard
+Jenn Chuan Cheng
+Intel Corporation
+Suketa Partiwala
+Hewlett Packard
+Jervis Lin
+Intel Corporation
+Vaibhav Malik
+Hewlett Packard
+John Howard
+Intel Corporation
+Walter Fry
+Hewlett Packard
+Karthi Vadivelu
+Intel Corporation
+Hideyuki HAYAFUJI
+Hosiden Corporation
+Leo Heiland
+Intel Corporation
+Keiji Mine
+Hosiden Corporation
+Maarit Harkonen
+Intel Corporation
+Masaki Yamaoka
+Hosiden Corporation
+Nge Chee Lim
+Intel Corporation
+Takashi Muto
+Hosiden Corporation
+Paul Durley
+Intel Corporation
+Yasunori Nishikawa
+Hosiden Corporation
+Rahman Ismail
+Intel Corporation
+Alan Berkema
+HP Inc.
+Rajaram Regupathy
+Intel Corporation
+Kenneth Chan
+HP Inc.
+Ronald Swartz
+Intel Corporation
+Lee Atkinson
+HP Inc.
+Sarah Sharp
+Intel Corporation

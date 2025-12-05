@@ -1,0 +1,88 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1019
+B20
+Reserved
+0
+B19…18
+USB Type-C plug to USB Type-C/Captive
+10b (USB Type-C®)
+B17
+EPR Capable (Active Cable)
+0 (not EPR Capable)
+B16…13
+Cable Latency
+0001b (<10ns (~1m))
+B12…11
+Cable Termination Type (Active Cable)
+11b (Both ends Active, VCONN required)
+B10…9
+Maximum VBUS Voltage (Active Cable)
+00b (20V)
+B8
+SBU Supported
+0 (SBUs connections supported)
+B7
+SBU Type
+0 (SBU is passive)
+B6…5
+VBUS Current Handling Capability (Active Cable)
+01b (3A)
+B4
+VBUS Through Cable
+1 (Yes)
+B3
+SOP’’ Controller Present
+1 (SOP’’ controller present)
+B2…0
+Reserved
+0
+Cable VDO2 (returned for Product Type “Active Cable”)
+B31…24
+Maximum Operating Temperature
+70
+B23…16
+Shutdown Temperature
+80
+B15
+Reserved
+0
+B14…12
+U3/CLd Power
+010b (1-5mW)
+B11
+U3 to U0 transition mode
+00b (U3 to U0 direct)
+B10
+Physical connection
+0 (Copper)
+B9
+Active element
+0 (Active Re-driver)
+B8
+USB4 Supported
+0 (USB4 Supported)
+B7…6
+USB 2.0 Hub Hops Consumed
+2
+B5
+USB 2.0 Supported
+0 ([USB 2.0] supported)
+B4
+USB 3.2 Supported
+0 ([USB 3.2] SuperSpeed supported)
+B3
+USB Lanes Supported
+1b (Two lanes)
+B2
+Optically Isolated Active Cable
+0 (Not supported)
+B1
+USB4 Asymmetric Mode Supported
+0 (Not Supported)
+B0
+USB Gen
+1b (Gen 2 or higher)
+Table C.2  Discover Identity Command response from Active Cable Responder Example
+Bit(s)
+Field
+Value

@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 831
+On entry to the PE_SRC_Ready state if this is a VCONN Source which needs to establish communication with a Cable 
+Plug, the Policy Engine Shall:
+
+Initialize and run the DiscoverIdentityTimer (no GoodCRC Message response yet received to Discover 
+Identity Message).
+On entry to the PE_SRC_Ready state if the current Explicit Contract is for an SPR PPS APDO, then the Policy Engine 
+Shall do the following: 
+
+Initialize and run the SourcePPSCommTimer.
+On entry to the PE_SRC_Ready state if the current Explicit Contract is for EPR Mode, then the Policy Engine Shall do 
+the following:
+
+Initialize and run the SourceEPRKeepAliveTimer.
+On exit from the PE_SRC_Ready, if the Source is initiating an AMS, then the Policy Engine Shall notify the Protocol 
+Layer that the first Message in an AMS will follow.
+The Policy Engine Shall transition to the PE_SRC_Send_Capabilities state when:
+
+The Device Policy Manager indicates that Source Capabilities have changed or
+
+A Get_Source_Cap Message is received, and the Source is in SPR Mode or
+
+An EPR_Get_Source_Cap Message is received, and the Source is in EPR Mode.
+The Policy Engine Shall transition to the PE_SRC_Negotiate_Capability state when:
+
+A Request Message is received, and the Source is in SPR Mode or
+
+An EPR_Request Message is received, and the Source is in EPR Mode.
+The Policy Engine Shall transition to the PE_SRC_Get_Sink_Cap state when:
+
+The Device Policy Manager asks for the Sink Capabilities.
+The Policy Engine Shall transition to the PE_SRC_Hard_Reset state when:
+
+The Source is operating as an SPR PPS and the SourcePPSCommTimer Timer times-out or
+
+The Source is in EPR Mode and the SourceEPRKeepAliveTimer Timer times-out.
+The Policy Engine Shall transition to the PE_SRC_EPR_Keep_Alive state when:
+
+An EPR_KeepAlive Message is received.
+The Policy Engine Shall transition to the PE_SRC_Give_Source_Cap State when:
+
+In EPR Mode and a Get_Source_Cap Message is received or
+
+In SPR Mode and an EPR_Get_Source_Cap Message is received.
+8.3.3.2.7
+  PE_SRC_Disabled State
+In the PE_SRC_Disabled state the PD Source supplies default power and is unresponsive to USB Power Delivery 
+messaging, but not to Hard Reset Signaling.
+8.3.3.2.8
+  PE_SRC_Capability_Response State
+The Policy Engine Shall enter the PE_SRC_Capability_Response state if there is a Request received from the Sink 
+that cannot be met based on the present capabilities. When the present Explicit Contract is not within the present 
+capabilities it is regarded as Invalid and a Hard Reset will be triggered.
+On entry to the PE_SRC_Hard_Reset state the Policy Engine Shall request the Protocol Layer to send one of the 
+following:

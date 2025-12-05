@@ -1,0 +1,83 @@
+Page 42
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Chunked
+See Chunking.
+Chunked Extended Message
+Extended Message which has been broken up into Chunks.
+Chunking
+The process of breaking up a Data Block larger than MaxExtendedMsgLegacyLen (26-bytes) 
+into two or more Chunks.
+Chunking Layer
+Part of the Protocol Layer responsible for Chunking.
+CL
+See Current Limit.
+Cold Socket
+A Port that does not apply vSafe5V on VBUS until a Sink is Attached.
+Collision Avoidance
+Mechanisms to prevent simultaneous communication by the Source, Sink and Cable Plug on CC.
+Command
+Request and response pair defined as part of a Structured Vendor Defined Message (see Section 
+6.4.4.2, "Structured VDM").
+Configuration Channel
+Single wire used by the BMC PHY Layer Signaling Scheme (see [USB Type-C 2.4]).
+Connect
+See Connected.
+Connected
+USB Power Delivery ports that have exchanged a Message and a GoodCRC Message response 
+using the USB Power Delivery protocol so that both Port Partners know that each is PD Capable.
+Constant Voltage
+A constant voltage feature of an SPR PPS Source. The SPR PPS Source output voltage remains 
+constant as the load changes up to its Current Limit.
+Consumer
+The capability of a PD Port (typically a Device's UFP) to sink power from the power conductor 
+(e.g., VBUS). This corresponds to a USB Type-C Port with Rd asserted on its CC wire.
+Consumer/Provider
+A Consumer with the additional capability to function as a Provider. This corresponds to a Dual-
+Role Power Port with Rd asserted on its CC wire.
+Continuous BIST Mode
+The BIST Mode where the Port or Cable Plug being tested sends a continuous stream of test data.
+Contract
+An agreement on both power level and direction is reached between a Port Pair. A Contract 
+could be explicitly Negotiated between the Port Pair or could be an implicit power level defined 
+by the current State. While operating in Power Delivery mode there will always be either an 
+Explicit Contract or Implicit Contract in place. The Contract can only be altered in the case of a 
+Negotiation/Re-negotiation, Power Role Swap,  Fast Role Swap, Hard Reset, Error Recovery or 
+failure of the Source.
+Control Message
+A Control Message is defined as a Message with the Number of Data Objects field in the Message 
+Header is set to zero. The Control Message consists only of a Message Header and a CRC.
+CRC
+CRC stands for Cyclic Redundancy Check. It is an error-detecting code used to determine if a 
+block of data has been corrupted.
+CT-VPD
+See VCONN Powered USB Charge Through Device.
+Current Limit
+A current limiting feature of an SPR PPS Source. When a Sink operating in SPR PPS mode 
+attempts to draw more current from the Source than the requested Current Limit value, the 
+Source reduces its output voltage so the current it supplies remains at or below the requested 
+value.
+Note: Current Limit is not supported by SPR AVS and EPR AVS Sources.
+CV
+See Constant Voltage.
+Data Block
+An Extended Message Payload data unit. The size of each type of Data Block is specified as a series 
+of bytes up to MaxExtendedMsgLen bytes in length. This is distinct from a Data Object used by 
+a Data Message which is always a 32-bit object.
+Data Message
+A Data Message consists of a Message Header followed by one or more Data Objects. Data 
+Messages are easily identifiable because the Number of Data Objects field in the Message 
+Header is always a non-zero value.
+Data Object
+A Data Message Payload data unit. This 32-bit object contains information specific to different 
+types of Data Message. For example Power, Request, BIST, and Vendor Data Objects are defined.
+Data Reset
+Process which resets USB Communication.
+Data Role
+A Port Partner will be in one of two Data Roles; either DFP (USB Host) or UFP (USB Device).
+Data Role Swap
+Process of exchanging the Data Roles between Port Partners.
+Dead Battery
+A device has a Dead Battery when the Battery in a device is unable to power its functions.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

@@ -1,0 +1,45 @@
+Page 204
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.8.1
+  USB Mode Field
+The USB Mode field Shall be used by the DFP to direct the USB Mode the Port Partner is to enter.
+6.4.8.2
+  USB4® DRD Field
+The USB4 DRD field Shall be set when the Host DFP is capable of operating as a [USB4] Device. A [USB4] Host DFP 
+that sets the USB4 DRD field Shall also be capable of operating as a [USB 2.0] Device.
+6.4.8.3
+  USB3 DRD Field
+The USB3 DRD field Shall be set when the Host DFP is capable of operating as a [USB 3.2] Device. A [USB 3.2] Host 
+DFP that sets the USB3 DRD field Shall also be capable of operating as a [USB 2.0] Device.
+6.4.8.4
+  Cable Speed Field
+The Cable Speed field Shall be used to indicate the cable's maximum speed. The value is read from the Cable Plug 
+and interpreted by the DFP as defined by [USB Type-C 2.4] in the USB4 Discovery and Entry Section.
+6.4.8.5
+  Cable Type Field
+The Cable Type field Shall be used to indicate whether the cable is passive or active. Further if the cable is active, 
+it indicates the type of active circuits in the cable and if the cable is optically isolated. The value is read from the 
+Cable Plug and interpreted by the DFP as defined by [USB Type-C 2.4] in the USB4 Discovery and Entry Section.
+6.4.8.6
+  Cable Current Field
+The Cable Current field Shall be used to indicate the cable's current carrying capability. The value is reported by 
+the Cable Plug in the VBUS Current Handling Capability (Passive Cable)/VBUS Current Handling Capability 
+(Active Cable) field.
+6.4.8.7
+  PCIe Support Field
+The PCIe Support field Shall be set when the Host DFP is capable of tunneling PCIe over [USB4].
+The PCIe Support field May be set speculatively when the Hub's DFP is capable of tunneling PCIe over [USB4].
+6.4.8.8
+  DP Support Field
+The DP Support field Shall be set when the Host DFP is capable of tunneling DP over [USB4].
+The DP Support field May be set speculatively when the Hub's DFP is capable of tunneling DP over [USB4].
+6.4.8.9
+  TBT Support Field
+The TBT Support field Shall be set when the Host DFP is capable of tunneling ThunderboltTM over [USB4] and that 
+the Connection Manager (CM) supports discovery and configuration of Thunderbolt 3 devices connected to the 
+DFP of [USB4] Hubs.
+The TBT Support field May be set speculatively when the Hub's DFP is capable of tunneling Thunderbolt over 
+[USB4].
+6.4.8.10
+  Host Present Field
+The Host Present field Shall be set to indicate that a Host is present upstream.

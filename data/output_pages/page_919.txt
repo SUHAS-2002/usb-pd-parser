@@ -1,0 +1,122 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 919
+8.3.3.20
+  VCONN Swap State Diagram
+The State Diagram in this section Shall apply to Ports that supply VCONN. Figure 8.190, "VCONN Swap State Diagram" 
+shows the state operation for a Port on sending or receiving a VCONN Swap request.
+Figure 8.190 VCONN Swap State Diagram
+8.3.3.20.1
+  PE_VCS_Send_Swap State
+The PE_VCS_Send_Swap state is entered from either the PE_SRC_Ready or PE_SNK_Ready state when the Policy 
+Engine receives a request from the Device Policy Manager to perform a VCONN Swap.
+On entry to the PE_VCS_Send_Swap state the Policy Engine Shall send a VCONN_Swap Message and start the 
+SenderResponseTimer.
+The Policy Engine Shall transition to the PE_VCS_Wait_For_VCONN state when:
+
+An Accept Message is received and
+
+The Port is presently the VCONN Source.
+The Policy Engine Shall transition to the PE_VCS_Turn_On_VCONN state when:
+
+An Accept Message is received and
+
+The Port is not presently the VCONN Source.
+PE_VCS_Evaluate_Swap
+Actions on entry:
+Get evaluation of VCONN swap request 
+from Device Policy Manager 
+Power = Explicit Contract
+PD = Connected
+PE_VCS_Turn_On_VCONN
+Actions on entry:
+Tell Device Policy Manager to turn on 
+VCONN
+PE_VCS_Send_PS_Rdy
+Actions on entry:
+Send PS_RDY Message
+PE_VCS_Accept_Swap
+Actions on entry:
+Send Accept Message
+Power = Explicit Contract
+PD = Connected
+PE_VCS_Reject_VCONN_Swap
+Actions on entry:
+Send Reject or Wait Message as 
+appropriate
+Power = Explicit Contract
+PD = Connected
+Message sent
+VCONN_Swap Message received
+VCONN Swap ok
+(Not Presently VCONN SOURCE &
+VCONN Swap not ok) |
+Further evaluation 
+Required
+Accept Message sent & 
+Not presently VCONN Source1
+VCONN turned on
+PS_RDY Message
+sent
+VCONNOnTimer Timeout
+Hard Reset:
+Consumer/Provider -> PE_SNK_Hard_Reset
+Provider/Consumer -> PE_SRC_Hard_Reset
+Power = Explicit Contract
+PD = Connected
+Power = Explicit Contract
+PD = Connected
+PE_VCS_Wait_for_VCONN
+Actions on entry:
+Start VCONNOnTimer
+Power = Explicit Contract
+PD = Connected
+Accept Message sent & 
+Presently VCONN Source1
+PE_VCS_Turn_Off_VCONN
+Actions on entry:
+Tell Device Policy Manager to turn off 
+VCONN
+Power = Explicit Contract
+PD = Connected
+PS_RDY Message
+received
+Device Policy Manager Informed
+VCONN Swap required (indication from Device Policy Manager)
+PE_VCS_Send_Swap
+Actions on entry:
+Send VCONN_Swap Message
+Initialize and run 
+SenderResponseTimer
+Power = Explicit Contract
+PD = Connected
+Reject Message received |
+Wait Message received |
+SenderResponseTimer 
+timeout
+Accept Message received &
+Presently VCONN Source1
+Accept Message received &
+Not presently VCONN Source1
+PE_VCS_Force_VCONN2
+Actions on entry:
+Tell Device Policy Manager to turn on 
+VCONN
+Power = Explicit Contract
+PD = Connected
+Not_Supported Message received &
+Not presently VCONN Source1
+VCONN turned on
+PE_SRC_Ready,
+PE_SNK_Ready or
+PE_SRC_EPR_Mode_Entry_ACK
+PE_SRC_Ready,
+PE_SNK_Ready or
+PE_SRC_EPR_Mode_Discover_Cable
+PE_SNK_EPR_Mode_Entry_Wait_For_Response
+PE_SRC_Ready,
+PE_SNK_Ready or
+PE_SRC_EPR_Mode_Discover_Cable
+1)
+A Port is presently the VCONN Source if it has the responsibility for supplying VCONN even if VCONN has been turned off.
+2)
+The PE_VCS_Force_VCONN state is Optional.

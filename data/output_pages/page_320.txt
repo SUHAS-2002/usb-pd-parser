@@ -1,0 +1,38 @@
+Page 320
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.1.4.3
+   Adjustable Voltage Supply (AVS)
+7.1.4.3.1
+  Adjustable Voltage Supply Voltage Transitions
+The Adjustable Voltage Supply (AVS) Shall transition VBUS over the defined voltage range in a controlled manner. 
+The Output Voltage value in the AVS RDO defines the nominal value of the AVS output voltage after completing a 
+voltage change and Shall settle within the limits defined by vAvsNew by tAvsSrcTransSmall for steps smaller than 
+or equal to vAvsSmallStep, or else, within the limits defined by vAvsNew by tAvsSrcTransLarge for steps larger 
+than vAvsSmallStep. Any overshoot beyond vAvsNew Shall Not exceed vAvsValid at any time. Any undershoot 
+beyond vAvsNew Shall Not exceed vAvsValid at any time. The AVS output voltage May change in a stepwise or 
+linear manner and the slew rate of either type of change Shall Not exceed vAvsSlewPos for voltage increases or 
+vAvsSlewNeg for voltage decreases. The nominal requested voltage of all linear voltage changes Shall equate to an 
+integer number of LSB changes. An LSB change of the AVS output voltage is defined as vAvsStep. An AVS Shall be 
+able to supply the Negotiated current level as it changes its output voltage to the requested level if the change of 
+output voltage is less than or equal to vAvsSmallStep relative to vAvsNew. All AVS voltage increases Shall result in 
+a voltage that is greater than or equal to the previous AVS output voltage. Likewise, all AVS voltage decreases Shall 
+result in a voltage that is less than or equal to the previous AVS output voltage. Any time the Source enters the AVS 
+range of operation that voltage transition is considered a voltage step larger than vAvsSmallStep.
+When the AVS voltage steps up or down, a PS_RDY Message Shall be sent within:
+
+tAvsSrcTransLarge after the last bit of the GoodCRC Message following the Accept Message for steps 
+larger than vAvsSmallStep.
+
+tAvsSrcTransSmall after the last bit of the GoodCRC Message following the Accept Message for steps 
+less than or equal to vAvsSmallStep provided the voltage on VBUS has reached vAvsNew.
+Figure 7.8, "AVS Positive Voltage Transitions" and Figure 7.9, "AVS Negative Voltage Transitions" below show the 
+output voltage behavior of an AVS in response to positive and negative voltage change requests. The parameters 
+vAvsMinVoltage and vAvsMaxVoltage define the lower and upper limits of the AVS range respectively:
+
+For SPR AVS Sources there are two possible voltage ranges where the vAvsMinVoltage is always 9V and 
+vAvsMaxVoltage is either 15V or 20V depending on the Source's PDP. See Table 10.9, "SPR Adjustable 
+Voltage Supply (AVS) Voltage Ranges". 
+
+For EPR AVS Sources vAvsMinVoltage corresponds to Minimum Voltage field (always 15V) in the EPR 
+AVS APDO and vAvsMaxVoltage corresponds to Maximum Voltage field in the EPR AVS APDO. See 
+Table 10.15, "EPR Adjustable Voltage Supply (AVS) Voltage Ranges" for required ranges.

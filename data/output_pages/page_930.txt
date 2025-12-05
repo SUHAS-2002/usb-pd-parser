@@ -1,0 +1,63 @@
+Page 930
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.22.2
+  Responder Structured VDM Discover SVIDs State Diagram
+Figure 8.196, "Responder Structured VDM Discover SVIDs State Diagram" shows the state diagram for a Responder 
+when receiving a Discover SVIDs Command.
+Figure 8.196 Responder Structured VDM Discover SVIDs State Diagram
+8.3.3.22.2.1
+  PE_RESP_VDM_Get_SVIDs State
+The Policy Engine transitions to the PE_RESP_VDM_Get_SVIDs state from either the PE_SRC_Ready, PE_SNK_Ready 
+or PE_CBL_Ready state when:
+
+A Structured VDM Discover SVIDs Command request is received.
+On entry to the PE_RESP_VDM_Get_SVIDs state the Responder Shall request SVIDs information from the Device 
+Policy Manager.
+The Policy Engine Shall transition to the PE_RESP_VDM_Send_SVIDs state when:
+
+SVIDs information is received from the Device Policy Manager.
+The Policy Engine Shall transition to the PE_RESP_VDM_Get_SVIDs_NAK state when:
+
+The Device Policy Manager indicates that the response to the Discover SVIDs Command request is NAK 
+or BUSY.
+8.3.3.22.2.2
+  PE_UFP_VDM_Send_SVIDs State
+On entry to the PE_RESP_VDM_Send_SVIDs state the Responder Shall send the Structured VDM Discover SVIDs ACK 
+Command response.
+The Policy Engine Shall transition to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state when:
+
+The Structured VDM Discover SVIDs ACK Command response has been sent.
+8.3.3.22.2.3
+  PE_UFP_VDM_Get_SVIDs_NAK State
+On entry to the PE_RESP_VDM_Get_SVIDs_NAK state the Policy Engine Shall send a Structured VDM Discover SVIDs 
+NAK or BUSY Command response as indicated by the Device Policy Manager.
+The Policy Engine Shall transition to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state when:
+
+The Structured VDM Discover SVIDs NAK or BUSY Command response has been sent.
+PE_RESP_VDM_Send_SVIDs
+Actions on entry:
+Send Discover SVIDs ACK
+Power = Explicit Contract
+PD = Connected
+Discover SVIDs
+request
+Discover SVIDs ACK
+sent
+PE_RESP_VDM_Get_SVIDs
+Actions on entry:
+Request SVIDs information from DPM
+Power = Explicit Contract
+PD = Connected
+SVIDs information 
+from DPM
+PE_RESP_VDM_Get_SVIDs_NAK
+Actions on entry:
+Send Discover SVIDs NAK/BUSY Command 
+response as requested
+Power = Explicit Contract
+PD = Connected
+DPM says
+NAK/BUSY
+Discover SVIDs NAK/BUSY 
+sent
+PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready

@@ -1,0 +1,44 @@
+Page 964
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.27.3
+  BIST Shared Capacity Test Mode State Diagram
+Figure 8.217, "BIST Shared Capacity Test Mode State Diagram" shows the state diagram required by a UUT, which 
+can be either a Source, Sink or Cable Plug, when operating in BIST Shared Capacity Test Mode. Transitions Shall be 
+from either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready states.
+Figure 8.217 BIST Shared Capacity Test Mode State Diagram
+8.3.3.27.3.1
+  PE_BIST_Shared_Capacity_Test_Mode State
+The Source, Sink or Cable Plug Shall enter the PE_BIST_Shared_Capacity_Test_Mode state from either the 
+PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state when:
+
+A BIST Message is received with a BIST Shared Test Mode Entry BIST Data Object and 
+
+VBUS is at vSafe5V.
+On entry to the PE_BIST_Shared_Capacity_Test_Mode state the Policy Engine Shall tell the Protocol Layer to go to 
+BIST Shared Capacity Test Mode (see Section 6.4.3.3, "BIST Shared Capacity Test Mode").
+The Policy Engine Shall transition to either the PE_SRC_Transition_to_default state, 
+PE_SNK_Transition_to_default state or PE_CBL_Ready state (as appropriate) when:
+
+A BIST Message is received with a BIST Shared Test Mode Exit BIST Data Object.
+BIST message received
+with Data Object BIST Shared Test Mode Entry
+BIST message received
+with Data Object BIST Shared Test Mode Exit
+PE_BIST_Shared Capacity_Test_Mode
+Actions on entry:
+Tell Protocol Layer to go to BIST Shared Capacity 
+Test Mode1.
+PE_SRC_Transition_to_default or 
+PE_SNK_Transition_to_default or
+PE_CBL_Ready
+PE_SRC_Ready or 
+PE_SNK_Ready or
+PE_CBL_Ready
+VBUS = vSafe5V
+PD = Connected
+1)
+The UUT Shall exit BIST Shared Capacity Test Mode when It is powered off. The UUT Shall remain in BIST Shared Capacity
+Test Mode for any PD event (except when a BIST Shared Test Mode Exit BIST Data Object, is received); specifically the 
+UUT Shall remain in BIST Shared Capacity Test Mode when any of the following PD events occurs: Hard Reset, Cable Reset, 
+Soft Reset, Data Role Swap, Power Role Swap, Fast Role Swap, VCONN Swap. The UUT May leave test mode if the tester 
+makes a request that exceeds the capabilities of the UUT.

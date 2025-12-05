@@ -1,0 +1,40 @@
+Page 822
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3
+  State Diagrams
+8.3.3.1
+  Introduction to state diagrams used in Chapter 8
+The state diagrams defined in Section 8.3.3, "State Diagrams" are Normative and Shall define the operation of the 
+Power Delivery Policy Engine.
+Note:
+These state diagrams are not intended to replace a well written and robust design.
+Figure 8.127 Outline of States
+Figure 8.127, "Outline of States" shows an outline of the states defined in the following sections. At the top there is 
+the name of the state. This is followed by "Actions on entry" a list of actions carried out on entering the state. If 
+there are also "Actions on exit" a list of actions carried out on exiting the state, then these are listed as well; 
+otherwise, this box is omitted from the state. At the bottom the status of PD is listed: 
+
+“Power" which indicates the present output power for a Source Port or input power for a Sink Port.
+
+“PD" which indicates the present Attachment status either "Attached", "Detached", or "unknown".
+Transitions from one state to another are indicated by arrows with the conditions listed on the arrow. Where there 
+are multiple conditions, these are connected using either a logical OR "|" or a logical AND "&".
+In some cases, there are transitions which can occur from any state to a particular state. These are indicated by an 
+arrow which is unconnected to a state at one end, but with the other end (the point) connected to the final state.
+In some state diagrams it is necessary to enter or exit from states in other diagrams (e.g., Source Port or Sink Port 
+state diagrams). Figure 8.128, "References to states" indicates how such references are made. The reference is 
+indicated with a hatched box. The box contains the name of the state and whether the state is a DFP or UFP. It has 
+also been necessary to indicate conditional entry to either Source Port or Sink Port state diagrams. This is achieved 
+by the use of a bulleted list indicating the preconditions (see example in Figure 8.129, "Example of state reference 
+with conditions"). It is also possible that the entry and return states are the same. Figure 8.130, "Example of state 
+reference with the same entry and exit" indicates a state reference where each referenced state corresponds to 
+either the entry state or the exit state.
+<Name of State>
+Actions on entry:
+“List of actions to carry out on entering the 
+state”
+Power (VI) = “Present power level” 
+PD = “attachment status”
+Actions on exit:
+“List of actions to carry out on exiting the 
+state”

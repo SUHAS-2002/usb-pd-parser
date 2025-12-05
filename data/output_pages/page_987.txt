@@ -1,0 +1,111 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 987
+9.2.2
+  Battery Info Capability Descriptor
+A PDUSB Device Shall support the capability descriptor shown in Table 9.3, "Battery Info Capability Descriptor" if it 
+reported that one of its power sources was a Battery in the bmPowerSource field in its Power Deliver Capability 
+Descriptor. It Shall return one BATTERY_INFO_CAPABILITY Descriptor per Battery it supports.
+8
+bcdBCVersion
+2
+BCD
+Battery Charging Specification Release Number in Binary-Coded 
+Decimal (e.g., V1.20 is 120H). This field Shall only be Valid if the 
+device indicates that it supports [USBBC 1.2] in the bmAttributes 
+field.
+10
+bcdPDVersion
+2
+BCD
+USB Power Delivery Specification Release Number in Binary-Coded 
+Decimal. This field Shall only be Valid if the device indicates that it 
+supports PD in the bmAttributes field.
+12
+bcdUSBTypeCVersion
+2
+BCD
+USB Type-C Specification Release Number in Binary-Coded Decimal. 
+This field Shall only be Valid if the device indicates that it supports 
+USB Type-C in the bmAttributes field.
+Table 9.3  Battery Info Capability Descriptor
+Offset
+Field
+Size
+Value
+Description
+0
+bLength
+1
+Number
+Size of descriptor
+1
+bDescriptorType
+1
+Constant
+DEVICE CAPABILITY Descriptor type
+2
+bDevCapabilityType
+1
+Constant
+Capability type: BATTERY_INFO_CAPABILITY
+3
+iBattery
+1
+Index
+Index of string descriptor Shall contain the user-friendly 
+name for this Battery.
+4
+iSerial 
+1
+Index
+Index of string descriptor Shall contain the Serial 
+Number String for this Battery.
+5
+iManufacturer
+1
+Index
+Index of string descriptor Shall contain the name of the 
+Manufacturer for this Battery.
+6
+bBatteryId
+1
+Number
+Value Shall be used to uniquely identify this Battery in 
+status Messages.
+7
+bReserved
+1
+Number
+Reserved and Shall be set to zero.
+8
+dwChargedThreshold
+4
+mWh
+ Shall contain the Battery charge value above which this 
+Battery is considered to be fully charged but not 
+necessarily “topped off.”
+12
+dwWeakThreshold
+4
+mWh
+Shall contain the minimum charge level of this Battery 
+such that above this threshold, a device can be assured 
+of being able to power up successfully (see [USBBC 
+1.2]).
+16
+dwBatteryDesignCapacity
+4
+mWh
+Shall contain the design capacity of the Battery.
+20
+dwBatteryLastFullchargeCapacity
+4
+mWh
+Shall contain the maximum capacity of the Battery 
+when fully charged.
+Table 9.2  USB Power Delivery Capability Descriptor
+Offset
+Field
+Size
+Value
+Description

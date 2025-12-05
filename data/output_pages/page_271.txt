@@ -1,0 +1,29 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 271
+If the Hard Reset is insufficient to clear the error condition, then the Port Shall use USB Type-C ErrorRecovery as 
+defined in [USB Type-C 2.4].
+A Sink Shall be able to send Hard Reset Signaling regardless of the value of Rp (see Section 5.7, "Collision 
+Avoidance").
+6.8.3.1
+  Cable Plugs and Hard Reset
+Cable Plugs Shall Not generate Hard Reset Signaling but Shall monitor for Hard Reset Signaling between the Port 
+Partners and Shall reset when this is detected (see Section 8.3.3.25.2.2, "Cable Plug Hard Reset State Diagram"). The 
+Cable Plugs Shall perform the equivalent of a power cycle returning to their initial power up state. This allows the 
+Port Partners to be in a state where they can re-establish USB PD communication.
+6.8.3.2
+  Modal Operation and Hard Reset
+A Hard Reset Shall cause EPR Mode and all Active Modes to be exited by both Port Partners and any Cable Plugs (see 
+Section 6.4.4.3.4, "Enter Mode Command").
+6.8.4
+  Cable Reset
+Cable Resets are signaled by an ordered set as defined in Section 5.6.5, "Cable Reset". Both the sender and recipient 
+of Cable Reset Signaling Shall reset their respective Protocol Layers. The Cable Plugs Shall perform the equivalent 
+of a power cycle returning to their initial power up state. This allows the Port Partners to be in a state where they 
+can re-establish USB PD communication. 
+The DFP must be supplying VCONN prior to a Cable Reset. If VCONN has been turned off the DFP Shall turn on VCONN 
+prior to generating Cable Reset Signaling. If there has been a VCONN Swap and the UFP is currently supplying VCONN, 
+the DFP Shall perform a VCONN Swap such that it is supplying VCONN prior to generating Cable Reset Signaling. 
+Only a DFP Shall generate Cable Reset Signaling. A DFP Shall only generate Cable Reset Signaling within an 
+Explicit Contract.
+A Cable Reset Shall cause all Active Modes in the Cable Plugs to be exited (see Section 6.4.4.3.4, "Enter Mode 
+Command").

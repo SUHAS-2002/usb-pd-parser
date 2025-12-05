@@ -1,0 +1,15 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 341
+7.3.1.1.1
+  Examples of changes from one (A)PDO to another (A)PDO
+The seven examples of (A)PDO change transitions below illustrate the most common transitions.
+7.3.1.1.1.1
+  Increasing the Voltage
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed when changing from 
+one (A)PDO to another while increasing the voltage is shown in Figure 7.22, "Transition Diagram for Increasing the 
+Voltage". The sequence that Shall be followed is described in Table 7.1, "Sequence Description for Increasing the 
+Voltage". The timing parameters that Shall be followed are listed in Table 7.23, "Source Electrical Parameters", 
+Table 7.24, "Sink Electrical Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In Figure 7.22, "Transition Diagram for Increasing the Voltage", the Sink has previously sent a Request 
+Message to the Source.

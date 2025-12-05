@@ -1,0 +1,81 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 321
+Figure 7.8 AVS Positive Voltage Transitions
+Figure 7.9 AVS Negative Voltage Transitions
+See Section 7.1.8.1, "AVS/PPS Output Voltage Ripple" for output voltage ripple limits.
+See Section 7.1.8.2, "AVS/PPS DNL Errors and Output Voltage/Current Tolerance" for output voltage DNL step 
+adjustments.
+vAvsMinVoltage
+V(2) = 1 + vAvsMinVoltage
+vAvsMinVoltage V(1)
+�
+�
+Adjustable Voltage Supply Output Range
+�
+vAvsSlewPos
+V(3) = 1+n + vAvsMinVoltage
+�
+�
+0 Volts
+vAvsMaxVoltage
+�
+�
+�
+vAvsSlewPos
+vAvsSlewPos
+�
+�
+�
+�
+vAvsValid
+� vAvsNew
+�
+vAvsValid
+vAvsValid
+� vAvsNew
+�
+vAvsValid
+Nominal V(2)
+Nominal V(3)
+vAvsMaxVoltage V(4)
+V(2) > V(1)
+V(3) > V(2)
+V(4) > V(3)
+vAvsMinVoltage
+V(c) = 1 + vAvsMinVoltage
+vAvsMinVoltage V(d)
+�
+�
+Adjustable Voltage Supply Output Range
+�
+V(b) = 1 + n + vAvsMinVoltage
+�
+�
+0 Volts
+vAvsMaxVoltage
+�
+�
+�
+�
+�
+�
+vAvsValid
+vAvsNew
+�
+�
+vAvsValid
+Nominal V(c)
+Nominal V(b)
+vAvsMaxVoltage V(a)
+V(b) < V(a)
+V(d) < V(c)
+V(c) < V(b)
+vAvsValid
+vAvsNew
+�
+�
+vAvsValid
+�
+vAvsSlewNeg
+vAvsSlewNeg
+vAvsSlewNeg

@@ -1,0 +1,9 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 285
+6.12.2.1.4.3
+  RTR_Tx_Chunks State
+On entry to the RTR_Tx_Chunks state the Chunked Message Router Shall:
+
+Send the Message to the Chunked Tx State Machine.
+
+Transition to the RTR_Wait_for_Message_From_Protocol_Layer state.

@@ -1,0 +1,46 @@
+Page 386
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 7.16  Sequence Description for Decreasing the Adjustable Voltage Supply Voltage
+Step
+Source Port
+Sink Port
+1
+Policy Engine sends the Accept Message to the Sink.
+Policy Engine receives the Accept Message.
+2
+Protocol Layer receives the GoodCRC Message from 
+the Sink. The Policy Engine tells the Device Policy 
+Manager to instruct the power supply to decrease its 
+output voltage. 
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then and starts the 
+PSTransitionTimer and evaluates the Accept 
+Message.
+3
+After sending the Accept Message, the AVS starts to 
+decrease its output voltage. The AVS new voltage set-
+point Shall be reached by tAvsSrcTransLarge for 
+steps larger than vAvsSmallStep or else by 
+tAvsSrcTransSmall. The power supply informs the 
+Device Policy Manager that it has reached the new 
+level. The power supply status is passed to the Policy 
+Engine.
+4
+The Policy Engine sends the PS_RDY Message to the 
+Sink starting within tAvsSrcTransSmall or 
+tAvsSrcTransLarge of the end of the GoodCRC 
+Message following the Accept Message.
+The Policy Engine receives the PS_RDY Message from 
+the Source.
+5
+Protocol Layer receives the GoodCRC Message from 
+the Sink.
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then stops the 
+PSTransitionTimer, evaluates the PS_RDY Message 
+from the Source and tells the Device Policy Manager 
+that the Source is operating at the new voltage set 
+point (corresponding to vAvsNew).
+If the PS_RDY Message is not received before 
+PSTransitionTimer times out the Sink sends Hard 
+Reset Signaling.

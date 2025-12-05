@@ -1,0 +1,137 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 441
+8.3.2.1.3.16
+  AMS: Manufacturer Information
+8.3.2.1.3.17
+  AMS: Country Codes
+8.3.2.1.3.18
+  AMS: Country Information
+Table 8.20  AMS: Manufacturer Information
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine 
+Ref
+Source Gets Port 
+Manufacturer 
+Information from a Sink
+1.
+Get_Manufacturer_Info Message
+2.
+Manufacturer_Info Message
+Started by 
+Source
+Section 8.3.2.11.6.1
+Section 8.3.3.12.1,
+Section 8.3.3.12.2
+Sink Gets Port 
+Manufacturer 
+Information from a 
+Source
+1.
+Get_Manufacturer_Info Message
+2.
+Manufacturer_Info Message
+Started by Sink Section 8.3.2.11.6.2
+Source Gets Battery 
+Manufacturer 
+Information from a Sink
+1.
+Get_Manufacturer_Info Message
+2.
+Manufacturer_Info Message
+Started by 
+Source
+Section 8.3.2.11.6.3
+Sink Gets Battery 
+Manufacturer 
+Information from a 
+Source
+1.
+Get_Manufacturer_Info Message
+2.
+Manufacturer_Info Message
+Started by Sink Section 8.3.2.11.6.4
+VCONN Source Gets 
+Manufacturer 
+Information from a Cable 
+Plug
+1.
+Get_Manufacturer_Info Message
+2.
+Manufacturer_Info Message
+Started by 
+VCONN Source
+Section 8.3.2.11.6.5
+Table 8.21  AMS: Country Codes
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+Source Gets Country 
+Codes from a Sink
+1.
+Get_Country_Codes Message
+2.
+Country_Codes Message
+Started by 
+Source
+Section 8.3.2.11.7.1
+Section 8.3.3.14.1,
+Section 8.3.3.14.2
+Sink Gets Country 
+Codes from a Source
+1.
+Get_Country_Codes Message
+2.
+Country_Codes Message
+Started by Sink Section 8.3.2.11.7.2
+VCONN Source Gets 
+Country Codes from 
+a Cable Plug
+1.
+Get_Country_Codes Message
+2.
+Country_Codes Message
+Started by 
+VCONN Source
+Section 8.3.2.11.7.3
+Table 8.22  AMS: Country Information
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+Source Gets Country 
+Information from a 
+Sink
+1.
+Get_Country_Info Message
+2.
+Country_Info Message
+Started by 
+Source
+Section 8.3.2.11.8.1
+Section 8.3.3.14.3,
+Section 8.3.3.14.4
+Sink Gets Country 
+Information from a 
+Source
+1.
+Get_Country_Info Message
+2.
+Country_Info Message
+Started by Sink
+Section 8.3.2.11.8.2
+VCONN Source Gets 
+Country Information 
+from a Cable Plug
+1.
+Get_Country_Info Message
+2.
+Country_Info Message
+Started by 
+VCONN Source
+Section 8.3.2.11.8.3

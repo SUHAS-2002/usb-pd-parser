@@ -1,0 +1,54 @@
+Page 78
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+4
+ Electrical Requirements 
+This chapter covers the platform's electrical requirements for implementing USB Power Delivery. 
+4.1
+  Interoperability with other USB Specifications
+USB Power Delivery May be implemented alongside the [USB 2.0], [USB 3.2], [USB4], [USBBC 1.2] and [USB Type-
+C 2.4] (USB Type-C) specifications. In the case where a Device requests power via [USBBC 1.2] and then the USB 
+Power Delivery Specification, it Shall follow the USB Power Delivery Specification until the Port Pair is Detached 
+or there is a Hard Reset. If the USB Power Delivery connection is lost, the Port Shall return to its default state, see 
+Section 6.8.3, "Hard Reset".
+4.2
+  Dead Battery Detection / Unpowered Port Detection
+Dead Battery/unpowered operation is when a USB Device needs to provide power to a USB Host under the 
+circumstances where the USB Host:
+
+Has a Dead Battery that requires charging or
+
+Has lost its power source or
+
+Does not have a power source or
+
+Does not want to provide power.
+Dead Battery charging operation for connections between USB Type-C connectors is defined in [USB Type-C 2.4].
+4.3
+  Cable IR Ground Drop (IR Drop)
+Every PD Sink Port capable of USB Communication can be susceptible to unreliable USB Communication if the 
+voltage drop across ground falls outside of the acceptable common mode range for the USB Hi-Speed transceivers 
+data lines due to excessive current draw. Certified USB cabling is specified such that such errors don't typically 
+occur (See [USB Type-C 2.4]).
+4.4
+  Cable Type Detection
+Standard USB Type-C® cable assemblies are rated for PD voltages higher than vSafe5V and current levels of at least 
+3A (See [USB Type-C 2.4]). The Source Shall limit maximum Capabilities it offers so as not to exceed the Capabilities 
+of the type of cabling detected.
+Sources capable of offering more than 3A Shall detect the type of Attached cable and limit the Capabilities they offer 
+based on the current carrying capability of the cable determined by the Cable Capabilities determined using the 
+Discover Identity Command (see Section 6.4.4.3.1, "Discover Identity") sent using SOP’ Communication (see Section 
+2.4, "SOP* Communication") to the Cable Plug. The Cable VDO returned as part of the Discover Identity Command 
+details the maximum current and voltage values that Shall be Negotiated for a given cable as part of an Explicit 
+Contract.
+The Cable Discovery process is usually run when the Source is powered up, after a Power Role Swap or Fast Role 
+Swap or when power is applied to a Sink. The method used to detect these events Shall meet the following 
+requirements:
+
+Sources Shall run the Cable Discovery process prior to the Source sending Source_Capabilities Messag-
+es offering currents in excess of 3A and/or voltages in excess of 20V.
+
+Sinks with USB Type-C connectors Shall select Capabilities from the offered Source Capabilities assum-
+ing that the Source has already determined the Capabilities of the cable.
+
+Sinks with the Dual-Role Power bit set, Shall respond to a Get_Source_Cap Message by declaring their 
+full Source Capabilities, without limiting them based on the cable's Capabilities. 

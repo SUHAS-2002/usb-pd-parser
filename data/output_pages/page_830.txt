@@ -1,0 +1,57 @@
+Page 830
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Note:
+That in either case the Attached device is assumed to be unresponsive. The Policy Engine Should operate 
+as if the device is Detached until such time as a Detach/Re-attach is detected.
+The Policy Engine Shall go to the ErrorRecovery state when:
+
+The Port Partners have previously been PD Connected (the Source Port remains Attached to a Port it has 
+had a PD Connection with during this Attachment)
+
+And the NoResponseTimer times out.
+
+And the HardResetCounter > nHardResetCount.
+8.3.3.2.4
+  PE_SRC_Negotiate_Capability State
+On entry to the PE_SRC_Negotiate_Capability state the Policy Engine Shall ask the Device Policy Manager to 
+evaluate the Request from the Attached Sink. The response from the Device Policy Manager Shall be one of the 
+following:
+
+The Request can be met.
+
+The Request cannot be met
+
+The Request could be met later from the Power Reserve.
+The Policy Engine Shall transition to the PE_SRC_Transition_Supply state when:
+
+The Request can be met.
+The Policy Engine Shall transition to the PE_SRC_Capability_Response state when:
+
+The Request cannot be met.
+
+Or the Request can be met later from the Power Reserve.
+8.3.3.2.5
+  PE_SRC_Transition_Supply State
+The Policy Engine Shall be in the PE_SRC_Transition_Supply state while the power supply is transitioning from one 
+power to another.
+On entry to the PE_SRC_Transition_Supply state, the Policy Engine Shall request the Protocol Layer to send an 
+Accept Message and inform the Device Policy Manager that it Shall transition the power supply to the Requested 
+power level.
+Note:
+If the power supply is currently operating at the requested power no change will be necessary.
+On exit from the PE_SRC_Transition_Supply state the Policy Engine Shall request the Protocol Layer to send a 
+PS_RDY Message.
+The Policy Engine Shall transition to the PE_SRC_Ready state when:
+
+The Device Policy Manager informs the Policy Engine that the power supply is ready.
+The Policy Engine Shall transition to the PE_SRC_Hard_Reset state when:
+
+A Protocol Error occurs.
+8.3.3.2.6
+  PE_SRC_Ready State
+In the PE_SRC_Ready state the PD Source Shall be operating at a stable power with no ongoing Negotiation. It Shall 
+respond to requests from the Sink, events from the Device Policy Manager.
+On entry to the PE_SRC_Ready state the Source Shall notify the Protocol Layer of the end of the Atomic Message 
+Sequence (AMS). If the transition into PE_SRC_Ready is the result of Protocol Error that has not caused a Soft Reset 
+(see Section 8.3.3.4.1, "SOP Source Port Soft Reset and Protocol Error State Diagram") then the notification to the 
+Protocol Layer of the end of the AMS Shall Not be sent since there is a Message to be processed.

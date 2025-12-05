@@ -1,0 +1,59 @@
+Page 838
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+On entry to the PE_SNK_Ready state if the current Explicit Contract is for an SPR PPS APDO, then the Policy Engine 
+Shall do the following: 
+
+Initialize and run the SinkPPSPeriodicTimer.
+On entry to the PE_SNK_Ready state if the Sink supports Fast Role Swap, then the Policy Engine Shall do the 
+following:
+
+Send a Get_Sink_Cap Message.
+On exit from the PE_SNK_Ready state, if the transition is as a result of a DPM request to start a new Atomic Message 
+Sequence (AMS) then the Policy Engine Shall notify the Protocol Layer that the first Message in an AMS will follow. 
+The Policy Engine Shall transition to the PE_SNK_Evaluate_Capability state when:
+
+In SPR Mode and a Source_Capabilities Message is received or
+
+In EPR Mode and an EPR_Source_Capabilities Message is received.
+The Policy Engine Shall transition to the PE_SNK_Select_Capability state when:
+
+A new power level is requested by the Device Policy Manager or
+
+A SinkRequestTimer timeout occurs or
+
+A SinkPPSPeriodicTimer timeout occurs.
+The Policy Engine Shall transition to the PE_SNK_Give_Sink_Cap state when:
+
+Get_Sink_Cap Message is received or
+
+EPR_Get_Sink_Cap Message is received.
+The Policy Engine Shall transition to the PE_SNK_Get_Source_Cap state when:
+
+The Device Policy Manager requests an update of the remote Source Capabilities. 
+The Policy Engine Shall transition to the PE_SNK_EPR_Keep_Alive state when:
+
+The SinkEPRKeepAliveTimer timeouts out. 
+8.3.3.3.8
+  PE_SNK_Hard_Reset State
+The Policy Engine Shall transition to the PE_SNK_Hard_Reset state from any state when:
+
+(PSTransitionTimer times out) and
+
+(HardResetCounter ≤ nHardResetCount)) |
+
+Hard Reset request from Device Policy Manager or
+
+In EPR Mode and
+
+An EPR_Source_Capabilities Message is received with an EPR (A)PDO in object positions 1…7 or
+
+A Source_Capabilities Message is received that has not been requested using a Get_Source_Cap 
+Message.
+The Policy Engine May transition to the PE_SNK_Hard_Reset state from any state when:
+
+SinkWaitCapTimer times out
+Note:
+If the SinkWaitCapTimer times out and the HardResetCounter is greater than nHardResetCount the 
+Sink Shall assume that the Source is non-responsive.
+Note:
+The HardResetCounter is reset on a power cycle or Detach. 

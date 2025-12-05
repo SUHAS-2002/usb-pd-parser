@@ -1,0 +1,55 @@
+Page 182
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.1.7.7
+  Cable Termination Type Field
+The Cable Termination Type (Active Cable) field (B12…11) Shall contain a value corresponding to whether the 
+Active Cable has one or two Cable Plugs requiring power from VCONN.
+6.4.4.3.1.7.8
+  Maximum VBUS Voltage Field
+The Maximum VBUS Voltage (Active Cable) field (B10…9) Shall contain the maximum voltage that Shall be 
+Negotiated as part of an Explicit Contract where the maximum voltage that Shall be applied to the cable is vSrcNew 
+max + vSrcValid max. When this field is set to 20V, the cable will safely carry a Programmable Power Supply APDO 
+of 20V where the absolute maximum voltage that can be applied to the cable is 21.55V. Similarly, when the 
+Maximum VBUS Voltage (Active Cable) field is 50V, a Fixed Supply of 48V can be Negotiated as part of an Explicit 
+Contract where the absolute maximum voltage that can be applied to the cable is 50.9V. Maximum VBUS Voltage 
+(Active Cable) field values of 01b and 10b (formerly 30V and 40V) Shall be treated if they were 00b (20V).
+6.4.4.3.1.7.9
+  SBU Supported Field
+The SBU Supported field (B8) Shall indicate whether the cable supports the SBUs in the cable.
+6.4.4.3.1.7.10
+  SBU Type Field
+The SBU Type field (B7) Shall indicate whether the SBUs are passive or active (e.g., digital).
+6.4.4.3.1.7.11
+  VBUS Current Handling Capability Field
+The VBUS Current Handling Capability (Active Cable) field (B6…5) Shall indicate whether the cable is capable of 
+carrying 3A or 5A. The VBUS Current Handling Capability (Active Cable) field Shall only be Valid when the VBUS 
+Current Handling Capability (Active Cable) field indicates an end-to-end VBUS wire.
+6.4.4.3.1.7.12
+   VBUS Through Cable Field
+The VBUS Through Cable field (B4) Shall indicate whether the cable contains an end-to-end VBUS wire.
+6.4.4.3.1.7.13
+  SOP'' Controller Present Field
+The SOP’’ Controller Present field (B3) Shall indicate whether one of the Cable Plugs is capable of SOP’’ 
+Communication in addition to the Normative SOP’ Communication.
+6.4.4.3.1.7.14
+  USB Highest Speed Field
+The USB Highest Speed (Active Cable) field (B2…0) Shall indicate the highest rate the cable supports. The DFP 
+Shall consider all values indicated in this field that are higher than the highest value that the DFP recognizes as 
+being Valid and functionally compatible with the highest speed that the DFP supports.
+6.4.4.3.1.7.15
+  Maximum Operating Temperature Field
+Maximum Operating Temperature field (B31…24) Shall report the maximum allowable operating temperature 
+inside the plug in °C.
+6.4.4.3.1.7.16
+  Shutdown Temperature Field
+Shutdown Temperature field (B23…16) Shall indicate the temperature inside the plug, in °C, at which the plug 
+will shut down its active signaling components. When this temperature is reached, it will be reported in the Active 
+Cable Status Message through the Thermal Shutdown bit. 
+6.4.4.3.1.7.17
+  U3/CLd Power Field
+The U3/CLd Power field (B14…12) Shall indicate the power the cable consumes while in [USB 3.2] U3 or [USB4] 
+CLd.
+6.4.4.3.1.7.18
+  U3 to U0 Transition Mode Field
+The U3 to U0 transition mode field (B11) Shall indicate which U3 to U0 mode the cable supports. This does not 
+include the power in U3S if supported.

@@ -1,0 +1,95 @@
+Page 110
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.8.6
+  BMC Receiver Specifications
+The receiver Shall meet the specifications defined in Table 5.19, "BMC Receiver Normative Requirements".
+5.8.6.1
+  Definition of Idle
+BMC Collision Avoidance is performed by the detection of signal transitions at the receiver. Detection is active when 
+nTransitionCount transitions occur at the receiver within a time window of tTransitionWindow. After waiting 
+tTransitionWindow without detecting nTransitionCount transitions the bus Shall be declared Idle.
+Refer to Section 5.8.5.4, "Inter-Frame Gap" for details of when transmissions May start.
+Table 5.19  BMC Receiver Normative Requirements
+Name
+Description
+Min Nom
+Max
+Units
+Comment
+cReceiver
+CC receiver capacitance
+200
+600
+pF
+The DFP or UFP system Shall have ca-
+pacitance within this range when not 
+transmitting on the line.
+nBER
+Bit error rate, S/N = 25 dB
+10-6
+nTransitionCount
+Transitions for signal detect
+3
+Number of transitions to be detected to 
+declare bus non-Idle.
+tFRSwapRx
+Fast Role Swap Request de-
+tection time
+30
+50
+µs
+A Fast Role Swap Request results in the 
+receiver detecting a signal low for at 
+least this amount of time.
+tRxFilter
+Rx bandwidth limiting filter 
+(digital or analog)
+100
+ns
+Time constant of a single pole filter to 
+limit broad-band noise ingression1.
+tTransitionWindow
+Time window for detecting 
+non-Idle
+12
+20
+µs
+vFRSwapCableTx
+Fast Role Swap Request volt-
+age detection threshold
+490
+520
+550
+mV
+The Fast Role Swap Request must be be-
+low this voltage threshold to be detect-
+ed.
+vIRDropGNDC
+Cable Ground IR Drop
+250
+mV
+As specified in [USB Type-C 2.4].
+vNoiseActive
+Noise amplitude when BMC 
+is active.
+165
+mV
+Peak-to-peak noise from VBUS, [USB 
+2.0] and SBU lines after the Rx band-
+width limiting filter with the time con-
+stant tRxFilter has been applied.
+vNoiseIdle
+Noise amplitude when BMC 
+is Idle.
+300
+mV
+Peak-to-peak noise from VBUS, [USB 
+2.0] and SBU lines after the Rx band-
+width limiting filter with the time con-
+stant tRxFilter has been applied.
+zBmcRx
+Receiver Input Impedance
+1
+MΩ
+1)
+Broad-band noise ingression is due to coupling in the cable interconnect.

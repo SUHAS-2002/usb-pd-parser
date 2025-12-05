@@ -1,0 +1,40 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 113
+5.9
+  Built in Self-Test (BIST)
+The following sections define BIST functionality which Shall be supported.
+5.9.1
+  BIST Carrier Mode
+In BIST Carrier Mode, the PHY Layer Shall send out a BMC encoded continuous string of alternating "1"s and "0"s. 
+This enables the measurement of power supply noise and frequency drift. 
+Note:
+This transmission is a purely a sequence of alternating bits and Shall Not be formatted as a Packet. 
+See also Section 6.4.3, "BIST Message". 
+5.9.2
+  BIST Test Data Mode
+A BIST Test Data Message is used by the Tester to send various Tester generated Test Patterns to the UUT in order 
+to test the UUT's receiver. See also Section 6.4.3, "BIST Message".
+Figure 5.29, "Test Frame" shows the Test Frame which Shall be sent by the Tester to the UUT. The BIST Message, 
+with a BIST Test Data BIST Data Object consists of a Preamble, followed by SOP*, followed by the Message Header 
+with a data length of 7 Data Objects, followed a BIST Test Data BIST Data Object, followed by 6 Data Objects 
+containing test data, followed by the CRC and then an EOP.
+Figure 5.29 Test Frame
+Preamble(training for receiver)
+SOP* (Start 
+Of Packet)
+Test Data 192 bits ...
+LEGEND:
+Preamble, not encoded 
+with 4b5b
+Provided by the Physical 
+layer, encoded with 4b5b
+Header
+Data Objects = 7
+BIST Test Data 
+BDO
+Provided by the Protocol 
+layer, encoded with 4b5b
+CRC
+EOP (End Of 
+Packet)
+...

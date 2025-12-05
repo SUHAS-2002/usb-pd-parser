@@ -1,0 +1,74 @@
+Page 458
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.1.2
+  SPR PPS Keep Alive
+This is an example of SPR PPS keep alive operation during an Explicit Contract with SPR PPS as the APDO. Figure 
+8.8, "SPR PPS Keep Alive" shows the Messages as they flow across the bus and within the devices to accomplish the 
+keep alive.
+Figure 8.8 SPR PPS Keep Alive
+: Source Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Sink Policy Engine
+1: Send Request
+2: Request
+3: Request + CRC
+4: Request
+Check MessageID against local copy
+Store copy of MessageID
+5: Request received
+Stop SenderResponseTimer
+Stop PPSCommTimer
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Request sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Start SenderResponseTimer
+Stop PPSRequestTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+14: Accept received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+18: Accept sent
+Power supply adjusted to negotiated output
+Send Ping if required to maintain activity
+Stop SenderResponseTimer
+Start PSTransitionTimer
+Reduce current
+19: Send PS_RDY
+20: PS_RDY
+21: PS_RDY + CRC
+22: PS_RDY
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+23: PS_RDY received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+27: PS_RDY sent
+Stop PSTransitionTimer
+Start PPSRequestTimer
+New Power level
+Evaluate Request
+Prepare for new power
+Source
+Sink
+PPSRequestTimer Timeout
+Start PPSCommTimer

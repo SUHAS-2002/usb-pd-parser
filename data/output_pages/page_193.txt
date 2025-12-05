@@ -1,0 +1,41 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 193
+Figure 6.26 Command request/response sequence
+In order for the Initiator to know that the Command request was actually consumed, it needs an acknowledgment 
+from the Responder. There are three responses that indicate the Responder received and processed the Command 
+request:
+
+ACK
+
+NAK
+
+BUSY
+The Responder Shall complete:
+
+Enter Mode requests within tVDMEnterMode.
+
+Exit Mode requests within tVDMExitMode.
+
+Other requests within tVDMReceiverResponse.
+An Initiator not receiving a response within the following times Shall timeout and return to either the 
+PE_SRC_Ready or PE_SNK_Ready state (as appropriate):
+
+Enter Mode requests within tVDMWaitModeEntry.
+
+Exit Mode requests within tVDMWaitModeExit.
+
+Other requests within tVDMSenderResponse.
+The Responder Shall respond with:
+
+ACK if it recognizes the SVID and can process it at this time. 
+
+NAK:
+
+if it recognizes the SVID but cannot process the Command request
+Initiator
+Responder
+Command (request)
+GoodCRC
+GoodCRC
+Command (response)
+Command Complete

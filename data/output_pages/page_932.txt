@@ -1,0 +1,27 @@
+Page 932
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.22.4
+  Receiving a Structured VDM Attention State Diagram
+Figure 8.198, "Receiving a Structured VDM Attention State Diagram" shows the state diagram when receiving an 
+Attention Command request.
+Figure 8.198 Receiving a Structured VDM Attention State Diagram
+8.3.3.22.4.1
+  PE_RCV_VDM_Attention_Request State
+The Policy Engine transitions to the PE_RCV_VDM_Attention_Request state from either the PE_SRC_Ready or 
+PE_SNK_Ready state when:
+
+An Attention Command request is received.
+On entry to the PE_RCV_VDM_Attention_Request state the Policy Engine Shall inform the Device Policy Manager of 
+the Attention Command request.
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state when:
+
+The Device Policy Manager has been informed.
+PE_SRC_Ready or PE_SNK_Ready
+PE_RCV_VDM_Attention_Request
+Actions on entry:
+Inform Device Policy Manager of Attention Command request
+Power = Explicit Contract
+PD = Connected
+Attention Command
+request received
+DPM informed

@@ -1,0 +1,198 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 7
+Junjie cui
+Cypress Semiconductor
+Chien-Cheng Kuo
+eEver Technology, Inc.
+Manu Kumar
+Cypress Semiconductor
+Shyanjia Chen
+eEver Technology, Inc.
+Muthu M
+Cypress Semiconductor
+Abel Astley
+Ellisys
+Nicholas Bodnaruk
+Cypress Semiconductor
+Chuck Trefts
+Ellisys
+Pradeep Bajpai
+Cypress Semiconductor
+Emmanuel Durin
+Ellisys
+Rajaram R
+Cypress Semiconductor
+Mario Pasquali
+Ellisys
+Rama Vakkantula
+Cypress Semiconductor
+Tim Wei
+Ellisys
+Rushil Kadakia
+Cypress Semiconductor
+Chien-Cheng Kuo
+Etron Technology, Inc.
+Simon Nguyen
+Cypress Semiconductor
+Jack Yang
+Etron Technology, Inc.
+Steven Wong
+Cypress Semiconductor
+Richard Crisp
+Etron Technology, Inc.
+Subu Sankaran
+Cypress Semiconductor
+Shyanjia Chen
+Etron Technology, Inc.
+Sumeet Gupta
+Cypress Semiconductor
+TsungTa Lu
+Etron Technology, Inc.
+Tejender Sheoran
+Cypress Semiconductor
+Christian Klein
+Fairchild Semiconductor
+Venkat Mandagulathar
+Cypress Semiconductor
+Oscar Freitas
+Fairchild Semiconductor
+Xiaofeng Shen
+Cypress Semiconductor
+Souhib Harb
+Fairchild Semiconductor
+Zeng Wei
+Cypress Semiconductor
+Amanda Ying
+Feature Integration Technology Inc.
+Adie Tan
+Dell Inc.
+Jacky Chan
+Feature Integration Technology Inc.
+Adolfo Montero
+Dell Inc.
+Kenny Hsieh
+Feature Integration Technology Inc.
+Bruce Montag
+Dell Inc.
+KungAn Lin
+Feature Integration Technology Inc.
+Gary Verdun
+Dell Inc.
+Paul Yang
+Feature Integration Technology Inc.
+Ken Nicholas
+Dell Inc.
+Su Jaden
+Feature Integration Technology Inc.
+Marcin Nowak
+Dell Inc.
+Yu-Lin Chu
+Feature Integration Technology Inc.
+Merle Wood
+Dell Inc.
+Yulin Lan
+Feature Integration Technology Inc.
+Mohammed Hijazi
+Dell Inc.
+AJ Yang
+Foxconn / Hon Hai
+Siddhartha Reddy
+Dell Inc.
+Bob Hall
+Foxconn / Hon Hai
+Terry Matula
+Dell Inc.
+Chihyin Kan
+Foxconn / Hon Hai
+Jay Hu
+Derun Semiconductor
+Fred Fons
+Foxconn / Hon Hai
+Shelly Liu
+Derun Semiconductor
+Jie Zheng
+Foxconn / Hon Hai
+Bindhu Vasu
+Dialog Semiconductor (UK) Ltd
+Patrick Casher
+Foxconn / Hon Hai
+Chanchal Gupta
+Dialog Semiconductor (UK) Ltd
+Shruti Deore
+Foxconn / Hon Hai
+Dipti Baheti
+Dialog Semiconductor (UK) Ltd
+Steve Sedio
+Foxconn / Hon Hai
+Duc Doan
+Dialog Semiconductor (UK) Ltd
+Terry Little
+Foxconn / Hon Hai
+Holger Petersen
+Dialog Semiconductor (UK) Ltd
+Bob McVay
+Fresco Logic Inc.
+Jianming Yao
+Dialog Semiconductor (UK) Ltd
+Christopher Meyers
+Fresco Logic Inc.
+John Shi
+Dialog Semiconductor (UK) Ltd
+Dian Kurniawan
+Fresco Logic Inc.
+KE Hong
+Dialog Semiconductor (UK) Ltd
+Tom Burton
+Fresco Logic Inc.
+Kevin Mori
+Dialog Semiconductor (UK) Ltd
+Abraham Levkoy
+Google Inc.
+Larry Ping
+Dialog Semiconductor (UK) Ltd
+Adam Rodriguez
+Google Inc.
+Mengfei Liu
+Dialog Semiconductor (UK) Ltd
+Alec Berg
+Google Inc.
+Scott Brown
+Dialog Semiconductor (UK) Ltd
+Bartosz Szpila
+Google Inc.
+Yimin Chen
+Dialog Semiconductor (UK) Ltd
+Benson Leung
+Google Inc.
+Yong Li
+Dialog Semiconductor (UK) Ltd
+Chao Fei
+Google Inc.
+Justin Lee
+Diodes Incorporated
+Dave Bernard
+Google Inc.
+Dan Ellis
+DisplayLink (UK) Ltd.
+David Schneider
+Google Inc.
+Jason Young
+DisplayLink (UK) Ltd.
+Diana Zigterman
+Google Inc.
+Kevin Jacobs
+DisplayLink (UK) Ltd.
+Eric Herrmann
+Google Inc.
+Paulo Alcobia
+DisplayLink (UK) Ltd.
+George-Daniel Matei
+Google Inc.
+Peter Burgers
+DisplayLink (UK) Ltd.
+Jameson Thies
+Google Inc.
+Richard Petrie
+DisplayLink (UK) Ltd.
+Jim Guerin
+Google Inc.

@@ -1,0 +1,60 @@
+Page 228
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.5
+  Battery_Capabilities Message
+The Battery_Capabilities Message is sent in response to a Get_Battery_Cap Message. The Battery_Capabilities 
+Message contains one Battery Capability Data Block (BCDB) for one of the Batteries its supports as reported by 
+Number of Batteries/Battery Slots field in the Source_Capabilities_Extended Message. The returned BCDB Shall 
+correspond to the Battery requested in the Battery Cap Ref field contained in the Get_Battery_Cap Message.
+The Battery_Capabilities Message returns a 9-byte BCDB whose format Shall be as shown in Figure 6.42, 
+"Battery_Capabilities Message" and Table 6.59, "Battery Capability Data Block (BCDB)”".
+Figure 6.42 Battery_Capabilities Message
+6.5.5.1
+  Vendor ID (VID)
+The VID field Shall contain the manufacturer VID associated with the Battery, as assigned by the USB-IF, or 0xFFFF 
+in the case that no such VID exists.
+If the Battery Cap Ref field in the Get_Battery_Cap Message is Invalid, the VID field Shall be 0xFFFF.
+6.5.5.2
+  Product ID (PID)
+The following rules apply to the PID field. When the VID:
+Table 6.59   Battery Capability Data Block (BCDB)”
+Offset 
+(Byte)
+Field
+Description
+0
+VID
+Vendor ID (assigned by the USB-IF)
+2
+PID
+Product ID (assigned by the manufacturer)
+4
+Battery Design Capacity
+Battery’s design capacity in 0.1 WH
+Note: 
+
+0x0000 = Battery not present
+
+0xFFFF = design capacity unknown
+6
+Battery Last Full Charge Capacity
+Battery’s last full charge capacity in 0.1 WH
+Note: 
+
+0x0000 = Battery not present
+
+0xFFFF = last full charge capacity unknown
+8
+Battery Type
+Bit
+Field
+Description
+0
+Invalid Battery Reference Invalid Battery reference when 
+set.
+1...7
+---
+Reserved
+Extended Header
+Data Size = 9
+BCDB

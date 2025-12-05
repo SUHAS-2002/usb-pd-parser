@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 685
+8.3.2.11.6.2
+  Sink Gets Port Manufacturer Information from a Source
+Figure 8.81, "Sink Gets Source's Port Manufacturer Information" shows an example sequence between a Source and 
+a Sink when the Source gets the Sink's Manufacturer information for the Port. 
+Figure 8.81 Sink Gets Source's Port Manufacturer Information
+: Protocol
+1: Send Get_Manufacturer_Info
+: PHY
+: PHY
+: Protocol
+2:Get_Manufacturer_Info
+3: Get_Manufacturer_Info + CRC
+4: Get_Manufacturer_Info
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Manufacturer_Info 
+received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Manufacturer_Info sent
+Start SenderResponseTimer
+10: Send Manufacturer_Info
+11: Manufacturer_Info
+12: Manufacturer_Info
++ CRC
+13: Manufacturer_Info
+Check MessageID against local copy
+Store copy of MessageID
+14: Manufacturer_Info
+received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Manufacturer 
+Information from DPM
+: Policy Engine
+: Policy Engine
+Sink Port
+Source Port
+Stop SenderResponseTimer
+18: Manufacturer_Info sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

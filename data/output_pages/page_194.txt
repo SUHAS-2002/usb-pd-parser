@@ -1,0 +1,36 @@
+Page 194
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+or if it does not recognize the SVID 
+
+or if it does not support the Command
+
+or if a VDO contains a field which is Invalid.
+
+BUSY if it recognizes the SVID and the Command but cannot process the Command request at this time.
+The ACK, NAK or BUSY response Shall contain the same SVID as the Command request.
+6.4.4.4.1
+  Discovery Process
+The Initiator (usually the DFP) always begins the Discovery Process. The Discovery Process has two phases. In the 
+first phase, the Discover SVIDs Command request is sent by the Initiator to get the list of SVIDs the Responder 
+supports. In the second phase, the Initiator sends a Discover Modes Command request for each SVID supported by 
+both the Initiator and Responder.
+6.4.4.4.2
+  Enter Vendor Mode / Exit Vendor Mode Processes
+The result of the Discovery Process is that both the Initiator and Responder identify the Modes they mutually 
+support. The Initiator (DFP), upon finding a suitable Alternate Mode, uses the Enter Mode Command to enable the 
+Alternate Mode.
+The Responder (UFP or Cable Plug) and Initiator continue using the Active Mode until the Active Mode is exited.
+In a managed termination, using the Exit Mode Command, the Active Mode Shall be exited in a controlled manner 
+as described in Section 6.4.4.3.5, "Exit Mode Command".
+In an unmanaged termination, triggered by:
+
+A Power Delivery Hard Reset (i.e. Hard Reset Signaling sent by either Port Partner) or 
+
+By cable Detach (device unplugged) or
+
+By Error Recovery
+the Active Mode Shall still be exited but there Shall Not be a transition through the USB Safe State.
+In both the managed and unmanaged terminations, the Initiator and Responder return to USB operation as defined 
+in [USB Type-C 2.4] following an exit from an Alternate Mode.
+The overall Message flow is illustrated in Figure 6.27, "Enter/Exit Mode Process".

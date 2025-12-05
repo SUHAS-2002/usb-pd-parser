@@ -1,0 +1,40 @@
+Page 290
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.12.2.2.2.1
+  PRL_Tx_Src_Sink_Tx State
+In the PRL_Tx_Src_Sink_Tx state the Source sets Rp to SinkTxOK allowing the Sink to start an Atomic Message 
+Sequence (AMS). 
+The Protocol Layer in a Source Shall transition from the PRL_Tx_Wait_for_Message_Request state to the 
+PRL_Tx_Src_Sink_Tx state when:
+
+A notification is received from the Policy Engine that the end of an AMS has been reached.
+On entry to the PRL_Tx_Src_Sink_Tx state the Protocol Layer Shall request the PHY Layer to Rp to SinkTxOK.
+The Protocol Layer Shall transition to the PRL_Tx_Wait_for_Message_Request state when:
+
+Rp has been set.
+6.12.2.2.2.2
+  PRL_Tx_Src_Source_Tx State
+In the PRL_Tx_Src_Source_Tx state the Source sets Rp to SinkTxNG allowing the Source to start an Atomic Message 
+Sequence (AMS). 
+The Protocol Layer in a Source Shall transition from the PRL_Tx_Wait_for_Message_Request state to the 
+PRL_Tx_Src_Source_Tx state when:
+
+A notification is received from the Policy Engine that an AMS will be starting.
+On entry to the PRL_Tx_Src_Source_Tx state the Protocol Layer Shall set Rp to SinkTxNG.
+The Protocol Layer Shall transition to the PRL_Tx_Src_Pending state when:
+
+A Message request is received from the Policy Engine.
+6.12.2.2.2.3
+  PRL_Tx_Src_Pending State
+In the PRL_Tx_Src_Pending state the Protocol Layer has a Message buffered ready for transmission. 
+On entry to the PRL_Tx_Src_Pending state the SinkTxTimer Shall be initialized and run.
+The Protocol Layer Shall transition to the PRL_Tx_Construct_Message state when:
+
+The pending Message request from the Policy Engine is not a Soft_Reset Message and
+
+The SinkTxTimer times out.
+The Protocol Layer Shall transition to the PRL_Tx_Layer_Reset_for_Transmit state when:
+
+The pending Message request from the Policy Engine is a Soft_Reset Message and
+
+The SinkTxTimer times out.

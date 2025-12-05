@@ -1,0 +1,76 @@
+Page 796
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.145, "Steps for BIST Shared Capacity Test Mode Test" below provides a detailed explanation of what happens 
+at each labeled step in Figure 8.118, "BIST Share Capacity Mode Test" above.
+Table 8.145  Steps for BIST Shared Capacity Test Mode Test
+Step
+Tester
+UUT
+1
+The Policy Engine directs the Protocol Layer to 
+generate a BIST Message, with a BIST Data Object of 
+BIST Shared Test Mode Entry, to put the UUT into BIST 
+Shared Capacity Test Mode.
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the BIST Message. 
+Starts CRCReceiveTimer.
+PHY Layer receives the BIST Message and checks the CRC 
+to verify the Message.
+4
+PHY Layer removes the CRC and forwards the BIST 
+Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received BIST Message 
+information to the Policy Engine that consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC and checks the CRC 
+to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY LayerPHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the BIST 
+Message was successfully sent. 
+10
+Policy Engine tells Protocol Layer to go into BIST 
+Shared Capacity Test Mode. The Policy Engine goes to 
+BIST Shared Capacity Test Mode.
+11
+Protocol Layer tells PHY Layer to go into BIST Shared 
+Capacity Test Mode.
+UUT enters BIST Shared Capacity Test Mode. Tester performs tests.
+12
+The Policy Engine directs the Protocol Layer to 
+generate a BIST Message, with a BIST Data Object of 
+BIST Shared Test Mode Exit, to take the UUT out of BIST 
+Shared Capacity Test Mode.
+13
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+14
+PHY Layer appends CRC and sends the BIST Message. 
+Starts CRCReceiveTimer.
+PHY Layer receives the BIST Message and checks the 
+CRC to verify the Message.
+15
+PHY Layer removes the CRC and forwards the BIST 
+Message to the Protocol Layer.
+16
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received BIST Message 
+information to the Policy Engine that consumes it.

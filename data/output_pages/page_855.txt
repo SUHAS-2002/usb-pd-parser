@@ -1,0 +1,40 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 855
+8.3.3.7.2
+  Sink Port Source Alert State Diagram
+Figure 8.141, "Sink Port Source Alert State Diagram" shows the state diagram for an Alert Message received by a 
+Sink Port.
+Figure 8.141 Sink Port Source Alert State Diagram
+8.3.3.7.2.1
+  PE_SNK_Source_Alert_Received State
+The PE_SNK_Source_Alert_Received state Shall be entered from the PE_SNK_Ready state when an Alert Message 
+is received.
+On entry to the PE_SNK_Source_Alert_Received state the Policy Engine Shall inform the Device Policy Manager of 
+the details of the Source alert.
+The Policy Engine Shall transition to the PE_Get_Status State (see Figure 8.150, "Get Status State Diagram") when:
+
+The DPM requests status.
+The Policy Engine Shall transition back to the PE_SNK_Ready State (see Figure 8.133, "Sink Port State Diagram") 
+when:
+
+The DPM does not request status.
+PE_SRC_Send_Source_Alert
+Actions on entry:
+Send Alert Message
+Power = Explicit Contract 
+PD = connected
+DPM indicates Source 
+alert condition
+Alert 
+Message sent 
+PE_SRC_Ready
+SenderResponseTimer
+Timeout
+PE_SRC_Wait_for_Get_Status
+Actions on entry:
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+PE_Give_Status
+Get_Status
+Message received

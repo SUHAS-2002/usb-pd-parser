@@ -1,0 +1,110 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 21
+Figure  6.59
+Chunking architecture Showing Message and Control Flow.........................................................277
+Figure  6.60
+Chunked Rx State Diagram...........................................................................................................................278
+Figure  6.61
+Chunked Tx State Diagram...........................................................................................................................281
+Figure  6.62
+Chunked Message Router State Diagram...............................................................................................284
+Figure  6.63
+Common Protocol Layer Message Transmission State Diagram.................................................286
+Figure  6.64
+Source Protocol Layer Message Transmission State Diagram......................................................289
+Figure  6.65
+Sink Protocol Layer Message Transmission State Diagram...........................................................291
+Figure  6.66
+Protocol layer Message reception.............................................................................................................293
+Figure  6.67
+Hard/Cable Reset.............................................................................................................................................295
+7
+Power Supply . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 312
+Figure  7.1
+Placement of Source Bulk Capacitance...................................................................................................312
+Figure  7.2
+Transition Envelope for Positive Voltage Transitions .....................................................................313
+Figure  7.3
+Transition Envelope for Negative Voltage Transitions....................................................................314
+Figure  7.4
+PPS Positive Voltage Transitions...............................................................................................................315
+Figure  7.5
+ PPS Negative Voltage Transitions............................................................................................................316
+Figure  7.6
+SPR PPS Programmable Voltage and Current Limit..........................................................................318
+Figure  7.7
+SPR PPS Constant Power...............................................................................................................................319
+Figure  7.8
+AVS Positive Voltage Transitions ..............................................................................................................321
+Figure  7.9
+AVS Negative Voltage Transitions.............................................................................................................321
+Figure  7.10
+Source VBUS and VCONN Response to Hard Reset................................................................................323
+Figure  7.11
+Application of vSrcNew and vSrcValid limits after tSrcReady......................................................325
+Figure  7.12
+Expected AVS/PPS Ripple Relative to an LSB......................................................................................326
+Figure  7.13
+Allowed DNL errors and tolerance of Voltage and Current in AVS/PPS mode.....................327
+Figure  7.14
+Source Peak Current Overload ...................................................................................................................329
+Figure  7.15
+Holdup Time Measurement.........................................................................................................................330
+Figure  7.16
+VBUS Power during Fast Role Swap ..........................................................................................................331
+Figure  7.17
+VBUS detection and timing during Fast Role Swap, initial VBUS (at new source) > 
+vSafe5V(min)......................................................................................................................................................332
+Figure  7.18
+ VBUS detection and timing during Fast Role Swap, initial VBUS (at new source) < 
+vSafe5V(min)......................................................................................................................................................332
+Figure  7.19
+Data Reset UFP VCONN Power Cycle .........................................................................................................333
+Figure  7.20
+Data Reset DFP VCONN Power Cycle .........................................................................................................334
+Figure  7.21
+Placement of Sink Bulk Capacitance ........................................................................................................335
+Figure  7.22
+Transition Diagram for Increasing the Voltage...................................................................................342
+Figure  7.23
+Transition Diagram for Increasing the Voltage and Current.........................................................345
+Figure  7.24
+Transition Diagram for Increasing the Voltage and Decreasing the Current.........................348
+Figure  7.25
+Transition Diagram for Decreasing the Voltage and Increasing the Current.........................351
+Figure  7.26
+Transition Diagram for Decreasing the Voltage..................................................................................354
+Figure  7.27
+Transition Diagram for Decreasing the Voltage and the Current................................................357
+Figure  7.28
+Transition Diagram for no change in Current or Voltage...............................................................360
+Figure  7.29
+Transition Diagram for Increasing the Current ..................................................................................362
+Figure  7.30
+Transition Diagram for Decreasing the Current.................................................................................365
+Figure  7.31
+Transition Diagram for Increasing the Programmable Power Supply Voltage.....................368
+Figure  7.32
+Transition Diagram for Decreasing the Programmable Power Supply Voltage ...................371
+Figure  7.33
+Transition Diagram for increasing the Current in PPS mode........................................................374
+Figure  7.34
+Transition Diagram for decreasing the Current in PPS mode.......................................................377
+Figure  7.35
+Transition Diagram for no change in Current or Voltage in PPS mode....................................380
+Figure  7.36
+Transition Diagram for Increasing the Adjustable Power Supply Voltage..............................382
+Figure  7.37
+Transition Diagram for Decreasing the Adjustable Voltage Supply Voltage..........................385
+Figure  7.38
+Transition Diagram for no change in Current or Voltage in AVS mode....................................387
+Figure  7.39
+Transition Diagram for a Sink Requested Power Role Swap ........................................................389
+Figure  7.40
+Transition Diagram for a Source Requested Power Role Swap...................................................393
+Figure  7.41
+Transition Diagram for a Source Initiated Hard Reset.....................................................................397
+Figure  7.42
+Transition Diagram for a Sink Initiated Hard Reset..........................................................................399
+Figure  7.43
+Transition Diagram for Fast Role Swap..................................................................................................401

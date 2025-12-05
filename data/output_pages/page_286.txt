@@ -1,0 +1,119 @@
+Page 286
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.12.2.2
+  Protocol Layer Message Transmission
+6.12.2.2.1
+  Common Protocol Layer Message Transmission State Diagram
+Figure 6.63, "Common Protocol Layer Message Transmission State Diagram" shows the state behavior, common 
+between the Source and the Sink, for the Protocol Layer when transmitting a Message. 
+Figure 6.63 Common Protocol Layer Message Transmission State Diagram
+6.12.2.2.1.1
+  PRL_Tx_PHY_Layer_Reset State
+The Protocol Layer Shall enter the PRL_Tx_PHY_Layer_Reset state:
+
+At startup.
+
+As a result of a Soft Reset request being received by the PHY Layer.
+
+On exit from a Hard Reset.
+On entry to the PRL_Tx_PHY_Layer_Reset state the Protocol Layer Shall reset the PHY Layer (clear any outstanding 
+Messages and enable communications).
+The Protocol Layer Shall transition to the PRL_Tx_Wait_for_Message_Request state when:
+
+When the PHY Layer reset is complete.
+6.12.2.2.1.2
+  PRL_Tx_Wait_for_Message_Request State 
+In the PRL_Tx_Wait_for_Message_Request state the Protocol Layer waits until the Policy Engine directs it to send 
+a Message. 
+
+On entry to the PRL_Tx_Wait_for_Message_Request state the Protocol Layer Shall reset the 
+RetryCounter.
+Message request received 
+from Policy Engine (except Soft Reset)
+Message sent to 
+PHY Layer
+CRCReceiveTimer
+Timeout |
+Message discarded bus Idle2
+GoodCRC response 
+received from  PHY Layer
+MessageID mismatch
+(RetryCounter � nRetryCount) &
+not Cable Plug &
+small Extended Message3
+(RetryCounter 
+> nRetryCount) |
+Cable Plug |
+large
+Extended Message3 
+Policy Engine informed 
+of Transmission Error
+MessageID match
+Policy Engine 
+informed
+message sent
+PRL_Tx_Check_RetryCounter
+Actions on entry:
+If DFP or UFP increment and check 
+RetryCounter
+PRL_Tx_Transmission_Error
+Actions on entry:
+Increment MessageIDCounter
+Inform Policy Engine of 
+Transmission Error
+PRL_Tx_Construct_Message
+Actions on entry:
+Construct message
+Pass message to PHY Layer
+PRL_Tx_Wait_for_PHY_response
+Actions on entry:
+Initialize and run CRCReceiveTimer1
+PRL_Tx_Match_MessageID
+Actions on entry:
+Match MessageIDCounter and 
+response MessageID
+Soft Reset Message request received 
+from Policy Engine
+Layer Reset Complete
+PRL_Tx_Message_Sent
+Actions on entry:
+Increment MessageIDCounter
+Inform Policy Engine message sent
+PRL_Tx_Layer_Reset_for_Transmit
+Actions on entry:
+Reset MessageIDCounter.
+Protocol Layer message reception transitions to 
+PRL_Rx_Wait_for_PHY_Message state.
+PRL_Tx_Wait_for_Message_Request
+Actions on entry:
+Reset RetryCounter
+PRL_Tx_Discard_Message
+Actions on entry:
+If any message is currently awaiting 
+transmission Discard4 and 
+increment MessageID Counter
+Discarding
+complete
+Protocol Layer
+message reception
+in PRL_Rx_Store_MessageID state |
+Fast Role Swap signal transmitted |
+Fast Role Swap signal detected  
+Start
+Soft Reset Message from PHY Layer |
+Exit from Hard Reset
+PRL_Tx_PHY_Layer_Reset
+Actions on entry:
+Reset PHY Layer
+PHY Layer reset
+complete
+1)
+The CRCReceiveTimer is only started after the PHY has sent the message.  If the message is not sent due to a busy channel, then the CRCReceiveTimer will not be started (see Section 6.6.1 “CRCReceiveTimer”).
+2)
+This indication is sent by the PHY Layer when a message has been Discarded due to CC being busy, and after CC becomes idle again (see Section 5.7 “Collision Avoidance”).  The CRCReceiveTimer is not running
+in this case since no message has been sent.
+3)
+A “small” Extended Message is either an Extended Message with Data Size ��MaxExtendedMsgLegacyLen bytes or an Extended Message with Data Size > MaxExtendedMsgLegacyLen bytes that has been
+Chunked.  A “large” Extended Message is an Extended Message with Data Size > MaxExtendedMsgLegacyLen bytes that has not been Chunked. 
+4)
+See Section 6.11 “Message Discarding” for details of when Messages are Discarded .

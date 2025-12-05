@@ -1,0 +1,36 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 275
+6.12
+  State behavior
+6.12.1
+  Introduction to state diagrams used in Chapter 6
+The state diagrams defined in Section 6.12, "State behavior" are Normative and Shall define the operation of the 
+Power Delivery Protocol Layer.
+Note:
+These state diagrams are not intended to replace a well written and robust design.
+Figure 6.57, "Outline of States" shows an outline of the states defined in the following sections. At the top there is 
+the name of the state. This is followed by "Actions on entry" a list of actions carried out on entering the state and 
+in some states "Actions on exit" a list of actions carried out on exiting the state.
+Figure 6.57 Outline of States
+Transitions from one state to another are indicated by arrows with the conditions listed on the arrow. Where there 
+are multiple conditions, these are connected using either a logical OR "|" or a logical AND "&." The inverse of a 
+condition is shown with a "NOT" in front of the condition.
+In some cases, there are transitions which can occur from any state to a particular state. These are indicated by an 
+arrow which is unconnected to a state at one end, but with the other end (the point) connected to the final state.
+In some state diagrams it is necessary to enter or exit from states in other diagrams. Figure 6.57, "Outline of States" 
+indicates how such references are made. The reference is indicated with a hatched box. The box contains the name 
+of the referenced state.
+Figure 6.58 References to states
+Timers are included in many of the states. Timers are initialized (set to their starting condition) and run (timer is 
+counting) in the state it is referenced. As soon as the state is exited then the timer is no longer active. Timeouts of 
+the timers are listed as conditions on state transitions.
+Conditions listed on state transitions will come from one of three sources:
+<Name of State>
+Actions on entry:
+“List of actions to carry out on entering the 
+state”
+Actions on exit:
+“List of actions to carry out on exiting the 
+state”
+<Name of reference state> 
+(<DFP | UFP>)

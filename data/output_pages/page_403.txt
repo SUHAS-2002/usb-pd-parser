@@ -1,0 +1,30 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 403
+5
+Policy Engine sends a PS_RDY Message to the Initial 
+Sink that is transitioning to be the New Source. The 
+Policy Engine Shall start the PS_RDY Message at least 
+tFRSwap5V after it has sent the Accept Message, and 
+when Step D1 has also been completed.
+Policy Engine receives the PS_RDY Message from the 
+New Sink.
+6
+Protocol Layer receives the GoodCRC Message from 
+the New Source.
+Protocol Layer sends the GoodCRC Message from the 
+Initial Sink that has completed the transition to New 
+Source. Policy Engine then evaluates the PS_RDY 
+Message.
+7
+Policy Engine receives the PS_RDY Message from the 
+New Source.
+Policy Engine sends a PS_RDY Message to the New 
+Sink. The Policy Engine Shall wait for Step E before 
+sending the PS_RDY Message, and Shall send the 
+PS_RDY Message within tFRSwapComplete of 
+receiving the PS_RDY Message from the Initial Source 
+Port.
+Table 7.22  Sequence Description for Fast Role Swap (Continued)
+Step
+Initial Source Port New Sink Port
+Initial Sink Port  New Source Port

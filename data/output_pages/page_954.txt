@@ -1,0 +1,57 @@
+Page 954
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.26.1.2
+  PE_SRC_EPR_Mode_Entry_Ack State
+On entry to the PE_SRC_EPR_Mode_Entry_Ack state the Policy Engine Shall send a EPR_Mode (Enter 
+Acknowledged) Message.
+The Policy Engine Shall transition to the PE_SRC_EPR_Mode_Evaluate_Cable_EPR state when:
+
+The EPR_Mode (Enter Acknowledged) Message has been sent and
+
+The Source is not the VCONN Source and
+
+The cable is a captive cable or a known EPR Cable.
+The Policy Engine Shall transition to the PE_VCS_Send_Swap state when:
+
+The EPR_Mode (Enter Acknowledged) Message has been sent and
+
+The Source is not the VCONN Source and
+
+The cable is unknown.
+The Policy Engine Shall transition to the PE_SRC_EPR_Mode_Discover_Cable state when:
+
+The EPR_Mode (Enter Acknowledged) Message has been sent and
+
+The Source is the VCONN Source and
+
+The cable is unknown.
+8.3.3.26.1.3
+  PE_SRC_EPR_Mode_Discover_Cable State
+The Policy Engine transitions to the PE_SRC_EPR_Mode_Discover_Cable state from the PE_VCS_Force_VCONN state 
+or PE_VCS_Send_Ps_Rdy state when:
+
+A Source initiated VCONN Swap process has completed.
+The Policy Engine Shall transition to the PE_INIT_PORT_VDM_Identity_Request state in order to perform Cable 
+Plug discovery when:
+
+The Source is the VCONN Source.
+The Policy Engine Shall transition to the PE_SRC_EPR_Mode_Entry_Failed state when:
+
+The VCONN Swap process failed (the Source is not the VCONN Source).
+8.3.3.26.1.4
+  PE_SRC_EPR_Mode_Evaluate_Cable_EPR State
+In the PE_SRC_EPR_Mode_Evaluate_Cable_EPR state the Policy Engine requests the DPM to evaluate the Cable 
+Discovery results.
+The Policy Engine Shall transition to the PE_SRC_EPR_Mode_Entry_Succeeded state when:
+
+The Cable Plug is capable of EPR Mode.
+The Policy Engine Shall transition to the PE_SRC_EPR_Mode_Entry_Failed state when:
+
+The Cable Plug is not capable of EPR Mode.
+8.3.3.26.1.5
+  PE_SRC_EPR_Mode_Entry_Succeeded State
+On entry to the PE_SRC_EPR_Mode_Entry_Succeeded state the Policy Engine Shall send a EPR_Mode (Enter 
+Succeeded) Message and enter EPR Mode.
+The Policy Engine Shall transition to the PE_SRC_Send_Capabilities state when:
+
+EPR Mode has been entered.

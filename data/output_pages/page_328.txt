@@ -1,0 +1,40 @@
+Page 328
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.1.9
+  Charging and Discharging the Bulk Capacitance on VBUS
+The Source Shall charge and discharge the bulk capacitance on VBUS whenever the Source voltage is Negotiated to 
+a different value. The charging or discharging occurs during the voltage transition and Shall Not interfere with the 
+Source's ability to meet tSrcReady.
+7.1.10
+  Swap Standby for Sources
+Sources and Sinks of a Dual-Role Power Port Shall support Swap Standby. Swap Standby occurs for the Source after 
+the Source power supply has discharged the bulk capacitance on VBUS to vSafe0V as part of the Power Role Swap 
+transition.
+While in Swap Standby:
+
+The Source Shall Not drive VBUS that is therefore expected to remain at vSafe0V.
+
+Any discharge circuitry that was used to achieve vSafe0V Shall be removed from VBUS.
+
+The Dual-Role Power Port Shall be configured as a Sink.
+
+The USB connection Shall Not reset even though vSafe5V is no longer present on VBUS (see Section 9.1.2, 
+"Mapping to USB Device States").
+The PS_RDY Message associated with the Source being in Swap Standby Shall be sent after the VBUS drive is 
+removed. The time for the Source to transition to Swap Standby Shall Not exceed tSrcSwapStdby. Upon entering 
+Swap Standby, the Source has relinquished its Power Role as Source and is ready to become the New Sink. The 
+transition time from Swap Standby to being the New Sink Shall be no more than tNewSnk. The New Sink May start 
+using power after the new Source sends the PS_RDY Message.
+7.1.11
+  Source Peak Current Operation
+A Source that has the Fixed Supply PDO or AVS APDO Peak Current bits set to 01b, 10b and 11b Shall be designed 
+to support one of the overload Capabilities defined in Table 6.10, "Fixed Power Source Peak Current Capability" or 
+Table 6.16, "EPR AVS Power Source Peak Current Capability" respectively. The overload conditions are bound in 
+magnitude, duration and duty cycle as listed in Table 6.10, "Fixed Power Source Peak Current Capability" or 
+Table 6.16, "EPR AVS Power Source Peak Current Capability". Sources are not required to support continuous 
+overload operation. When overload conditions occur, the Source is allowed the range of vSrcPeak (instead of 
+vSrcNew) relative to the nominal value (see Figure 7.14, "Source Peak Current Overload"). When the overload 
+capability is exceeded, the Source is expected take whatever action is necessary to prevent electrical or thermal 
+damage to the Source. The Source May send a new Source_Capabilities Message with the Fixed Supply PDO or AVS 
+APDO Peak Current bits set to 00b to prohibit overload operation even if an overload capability was previously 
+Negotiated with the Sink.

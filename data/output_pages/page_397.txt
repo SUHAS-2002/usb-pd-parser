@@ -1,0 +1,95 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 397
+Figure 7.41 Transition Diagram for a Source Initiated Hard Reset
+Table 7.20  Sequence Description for a Source Initiated Hard Reset
+Step
+Source Port
+Sink Port
+1
+Policy Engine sends Hard Reset Signaling to the Sink.
+Sink receives Hard Reset Signaling.
+2
+Policy Engine is informed of the Hard Reset. Policy 
+Engine tells the Device Policy Manager to instruct the 
+power supply to prepare for a Hard Reset.
+3
+The Sink prepares for the Hard Reset within 
+tSnkHardResetPrepare (t1) and passes an 
+indication to the Device Policy Manager The Sink 
+Shall Not draw more than iSafe0mA when VBUS is 
+driven to vSafe0V.
+4
+Policy Engine waits tPSHardReset after sending 
+Hard Reset Signaling and then tells the Device Policy 
+Manager to instruct the power supply to perform a 
+Hard Reset. The transition to vSafe0V Shall occur 
+within tSafe0V (t2).
+5
+After tSrcRecover the Source applies power to VBUS 
+in an attempt to re-establish communication with the 
+Sink and resume USB Default Operation. The 
+transition to vSafe5V Shall occur within tSrcTurnOn 
+(t3).
+The Sink Shall Not violate the transient load 
+behavior defined in Section 7.2.6, "Transient Load 
+Behavior" while transitioning to and operating at the 
+new power level.
+t3
+Source VOLD
+Send
+Hard Reset
+Sink
+Prepare
+VOLD
+Source
+Hard Reset
+1
+� IOLD
+iSafe0mA
+Source Port
+Policy Engine
+Sink Port
+Policy Engine
+Source Port
+Device Policy Mgr
+Source Port
+Power Supply
+Sink Port
+Device Policy Mgr
+Sink Port
+Power Supply
+Source Port
+Voltage
+Sink Port
+Current
+vSafe0V
+3
+vSafe5V
+Default current draw
+�
+�
+Source vSafe5V
+4
+Source vSafe0V
+Sink � IOLD
+Ready to recover and power up
+Source 
+Recover
+tSrcRecover
+5
+Process
+Hard Reset
+tPSHardReset
+Port to Port 
+Messaging
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+2
+t2
+t1

@@ -1,0 +1,12 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 809
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Accept Message was successfully sent.
+Cable Plug enters [USB4] operation.
+Table 8.149  Steps for Cable Plug USB4 Mode Entry (Accept)
+Step
+DFP
+Cable Plug

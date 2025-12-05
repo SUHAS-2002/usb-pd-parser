@@ -1,0 +1,84 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 49
+Sink Port
+Port operating as a Sink.
+Sink Standby
+During Sink Standby the Sink reduces its current draw to iSnkStdby
+Soft Reset
+A process that resets the PD communications engine to its default state.
+SOP
+K-code marker used for communication between Port Partners. See also Start of Packet.
+SOP Communication
+Communication using SOP Packets also implies that an AMS is being followed.
+SOP Packet
+Any Power Delivery Packet which starts with an SOP.
+SOP’ Communication
+Communication with a Cable Plug using SOP’ Packets, also implies that an AMS is being followed.
+SOP’ Packet
+Any Power Delivery Packet which starts with an SOP’ used to communicate with a Cable Plug.
+SOP’’ Communication
+Communication with a Cable Plug using SOP’’ Packets, also implies that an AMS is being followed.
+SOP’’ Packet
+Any Power Delivery Packet which starts with an SOP’’ used to communicate with a Cable Plug 
+when SOP’ Packets are being used to communicate with the other Cable Plug.
+SOP’
+SOP’’
+K-code marker used for communication between a Port and a Cable Plug. See also Start of Packet.
+SOP*
+Used to generically refer to K-code markers: SOP, SOP’ and SOP’’. See also Start of Packet.
+SOP* Communication
+Communication using SOP* Packets, also implies an AMS is being followed.
+SOP* Packet
+A term referring to any Power Delivery Packet starting with either SOP, SOP’, or SOP’’.
+Source
+The Power Role a Port is operating in to supply power over VBUS; most commonly a USB Host or 
+Hub downstream port.
+Source Capabilities
+Capabilities offered by a Source.
+Source Port
+Port operating as a Source.
+Specification Revision
+See Revision.
+SPM
+See System Policy Manager.
+SPR
+See Standard Power Range.
+SPR AVS
+An SPR Source whose output voltage can be adjusted to an operating voltage within its 
+Advertised range. Unlike SPR PPS, it does not support current limit. The SPR AVS Capabilities are 
+exposed by the SPR AVS APDO (see Section 6.4.1.2.4.2, "SPR Adjustable Voltage Supply APDO").
+SPR AVS Mode
+A SPR Source, currently operating in an SPR AVS Contract, is said to be operating in SPR AVS 
+Mode.
+SPR Capabilities
+An SPR Capabilities Message (Source_Capabilities Message or Sink_Capabilities Message) has at 
+least one Power Data Object for vSafe5V followed by up to 6 additional Power Data Objects.
+SPR Contract
+Explicit Contract Negotiated, in SPR Mode, based on SPR (A)PDOs.
+SPR Mode
+The classic mode of PD operation where Explicit Contracts are Negotiated using SPR (A)PDOs.
+SPR (A)PDO
+Fixed Supply PDO that offers up to 20V and no more than 100W.
+Variable Supply PDO whose Maximum voltage offers up to 21V and no more than 100W.
+Battery Supply PDO whose Maximum voltage offers up to 21V and no more than 100W.
+Adjustable Voltage Supply (AVS) APDO whose Maximum voltage is up to 20V and no more than 
+100W.
+Programmable Power Supply (PPS) APDO whose Maximum voltage is up to 21V and no more 
+than 100W.
+SPR PPS
+A power supply whose output voltage and output current can be programmatically adjusted in 
+small increments over its Advertised range. It supports current limit unlike SPR AVS and EPR 
+AVS. The Capabilities are exposed by the Programmable Power Supply APDOs (see Section 
+6.4.1.2.4, "Augmented Power Data Object (APDO)").
+SPR PPS Mode
+A power supply, currently operating in an SPR PPS Contract, is said to be operating in SPR PPS 
+Mode.
+SPR Sink
+A Sink which only supports SPR Mode and does not support EPR Mode.
+SPR Sink Port
+A Port exposed on an SPR Sink.
+SPR Source
+A Source which only supports SPR Mode and does not support EPR Mode.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

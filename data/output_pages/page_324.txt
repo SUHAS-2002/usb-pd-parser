@@ -1,0 +1,51 @@
+Page 324
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.1.7.2
+  Over Temperature Protection
+Sources Shall implement Over Temperature Protection (OTP) to prevent damage from temperature that exceeds 
+the thermal capability of the Source. The definition of thermal capability and the monitoring locations used to 
+trigger the over temperature protection are left to the discretion of the Source implementation. 
+In order to avoid reaching an OTP event, Sources May proactively reduce the available power being offered to the 
+Sink, even though these offers might be lower than the Source would be expected to offer during normal thermal 
+operating conditions. Prior to reducing power, the Source Should generate Alert Message indicating an Operating 
+Condition Change and set the Temperature Status bit in the SOP Status Message to Warning (10b).
+Sources Should attempt to send Hard Reset Signaling when OTP engages followed by an Alert Message indicating 
+an OTP event once an Explicit Contract has been established. The OTP response May engage at either the Port or 
+system level. Systems or ports that have engaged OTP Should attempt to resume USB Default Operation and May 
+latch off to protect the Port or system.
+The Source Shall Re-negotiate with the Sink after choosing to resume USB Default Operation. The decision of how 
+to Re-negotiate after an over temperature event is left to the discretion of the Source implementation.
+The Source Shall prevent continual system or Port cycling if over temperature protection continues to engage after 
+initially resuming either USB Default Operation or Re-negotiation. Latching off the Port or system is an acceptable 
+response to recurring over temperature.
+During the OTP and subsequent system or Port shutdown, all affected Source ports operating with VBUS greater 
+than vSafe5V Shall discharge VBUS to vSafe5V by the time tSafe5V and vSafe0V by the time tSafe0V. 
+7.1.7.3
+  vSafe5V Externally Applied to Ports Supplying vSafe5V
+Safe operation mandates that Power Delivery Sources Shall be tolerant of vSafe5V being present on VBUS when 
+simultaneously applying power to VBUS. Normal USB PD communication Shall be supported when this vSafe5V to 
+vSafe5V connection exists.
+7.1.7.4
+  Detach
+A USB Detach is detected electrically using CC detection on the USB Type-C connector. When the Source is Detached 
+the Source Shall transition to vSafe0V by tSafe0V relative to when the Detach event occurred. During the transition 
+to vSafe0V the VBUS voltage Shall be below vSafe5V max by tSafe5V relative to when the Detach event occurred 
+and Shall Not exceed vSafe5V max after this time.
+Sources operating in EPR Mode need to avoid creating large differential voltages at the connector. See Appendix H 
+in the [USB Type-C 2.4] specification for background information. To achieve this, Sources operating in EPR Mode, 
+upon detecting a disconnect, Shall stop sourcing current and minimize VBUS capacitance. There May continue to be 
+current sourced from the Source bulk capacitance, but that Should also be minimized by disconnecting as much of 
+the Source bulk capacitance as possible. For example, the Source can stop sourcing from the Power Supply and the 
+C1 portion of the Source bulk capacitance in Figure 7.1, "Placement of Source Bulk Capacitance" by disabling the 
+Ohmic Interconnect switch.
+The Source Should detect the disconnect, stop sourcing current, and minimize the VBUS capacitance as quickly as 
+practical. If this is done after the CC contacts disconnect and before the VBUS contacts disconnect there is less risk 
+of large differential voltages at the connector.
+Note:
+A USB-PD transmission by the Source during a disconnect event will delay disconnect detection by the 
+Source.
+7.1.7.5
+  Output Voltage Limit
+The output voltage of Sources Shall account for vSrcNew, vSrcValid or vPpsNew, vPpsValid or vAvsNew, 
+vAvsValid as determined by the Negotiated VBUS value. Sources Shall meet applicable safety and regulatory 
+requirements.

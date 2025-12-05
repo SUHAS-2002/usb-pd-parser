@@ -1,0 +1,46 @@
+Page 250
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.6.3.1
+  SourceCapabilityTimer
+Prior to the First Explicit Contract a Source Shall use the SourceCapabilityTimer to periodically send out a 
+Source_Capabilities Message every tTypeCSendSourceCap while:
+
+The Port is Attached.
+
+The Source is not in an active connection with a PD Sink Port.
+Whenever there is a SourceCapabilityTimer timeout the Source Shall send a Source_Capabilities Message. It 
+Shall then re-initialize and restart the SourceCapabilityTimer. The SourceCapabilityTimer Shall be stopped 
+when the last bit of the EOP corresponding to the GoodCRC Message has been received by the PHY Layer since a PD 
+connection has been established. At this point, the Source waits for a Request Message or a response timeout.
+Note:
+The Source can also stop sending Source_Capabilities Message after nCapsCount Messages have been 
+sent without a GoodCRC Message response (see Section 6.7.4, "Capabilities Counter").
+See Section 8.3.3.2, "Policy Engine Source Port State Diagram" for more details of when Source_Capabilities 
+Messages are transmitted.
+6.6.3.2
+  SinkWaitCapTimer
+The Sink Shall support the SinkWaitCapTimer.
+While in a Default Contract or an Implicit Contract when a Sink observes an absence of Source_Capabilities 
+Messages, after VBUS is present, for a duration of tTypeCSinkWaitCap the Sink May issue Hard Reset Signaling in 
+order to restart the sending of Source_Capabilities Messages by the Source (see Section 6.7.4, "Capabilities 
+Counter") or continue to operate at USB Type-C current.
+When a Sink, entering EPR Mode, observes an absence of EPR_Source_Capabilities Messages, after the GoodCRC 
+Message acknowledging the EPR_Mode Message with the Action field set to 3 (Enter Succeeded), for a duration of 
+tTypeCSinkWaitCap the Sink Shall issue Hard Reset Signaling in order to exit EPR Mode (see Section 6.4.10, 
+"EPR_Mode Message").
+When a Sink, exiting EPR Mode, observes an absence of Source_Capabilities Messages, after the GoodCRC Message 
+acknowledging the EPR_Mode Message with the Action field set to 5 (Exit), for a duration of tTypeCSinkWaitCap 
+the Sink Shall issue Hard Reset Signaling in order to restart the sending of Source_Capabilities Messages by the 
+Source (see Section 6.7.4, "Capabilities Counter").
+See Section 8.3.3.3, "Policy Engine Sink Port State Diagram" for more details of when the SinkWaitCapTimer is run.
+6.6.3.3
+  tFirstSourceCap
+After Port Partners are Attached or after a Hard Reset or after a Power Role Swap or after a Fast Role Swap a Source 
+Shall send its first Source_Capabilities Message within tFirstSourceCap of VBUS reaching vSafe5V.
+After Soft Reset, a Source Shall send its first Source Capabilities Message within tFirstSourceCap after last bit of the 
+GoodCRC Message EOP corresponding to Accept Message.
+This ensures that the Sink receives a Source Capabilities Message before the Sink's SinkWaitCapTimer expires.
+A Source entering EPR Mode Shall send its first EPR_Source_Capabilities Message within tFirstSourceCap of the 
+GoodCRC Message acknowledging the EPR_Mode Message with the Action field set to 3 (Enter Succeeded). 
+A Source exiting EPR Mode Shall send its first Source_Capabilities Message within tFirstSourceCap of the 
+GoodCRC Message acknowledging the EPR_Mode Message with the Action field set to 5 (Exit).

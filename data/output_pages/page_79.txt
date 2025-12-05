@@ -1,0 +1,36 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 79
+5
+ Physical Layer
+5.1
+  Physical Layer Overview
+The Physical Layer (PHY Layer) defines the Signaling technology for USB Power Delivery. This chapter defines the 
+electrical requirements and parameters of the PHY Layer required for interoperability between PDUSB Devices.
+5.2
+  Physical Layer Functions
+The USB PD PHY Layer consists of a pair of transmitters and receivers that communicate across a single signal wire 
+(CC). All communication is half duplex. The PHY Layer practices Collision Avoidance to minimize communication 
+errors on the channel.
+The transmitter performs the following functions:
+
+Receive Packet data from the Protocol Layer.
+
+Calculate and append a CRC.
+
+Encode the Packet data including the CRC (i.e., the Payload).
+
+Transmit the Packet (Preamble, SOP*, Payload, CRC and EOP) across the channel using Bi-phase Mark 
+Coding (BMC) over CC.
+The receiver performs the following functions:
+
+Recover the clock and lock onto the Packet from the Preamble.
+
+Detect the SOP*.
+
+Decode the received data including the CRC.
+
+Detect the EOP and validate the CRC:
+
+If the CRC is Valid, deliver the Packet data to the Protocol Layer. 
+
+If the CRC is Invalid, flush the received data.

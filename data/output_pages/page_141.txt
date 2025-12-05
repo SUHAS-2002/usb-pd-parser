@@ -1,0 +1,75 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 141
+6.4.1.2
+  Source Power Data Objects
+This section lists the types of PDOs a Source can use in an SPR Capabilities or EPR Capabilities Message.
+6.4.1.2.1
+  Fixed Supply Power Data Object 
+Table 6.9, "Fixed Supply PDO – Source" describes the Fixed Supply (00b) PDO. See Section 7.1.3, "Types of Sources"for 
+the electrical requirements of the power supply.
+Since all USB Providers support vSafe5V, the required vSafe5V Fixed Supply Power Data Object is also used to 
+convey additional information that is returned in bits 29…23. All other Fixed Supply Power Data Objects Shall set 
+bits 29…23 to zero.
+For a Source offering no Capabilities, the Voltage field (B19…10) Shall be set to 5V and theMaximum Current field 
+Shall be set to 0mA. This is used in cases such as a Dual-Role Power device which offers no Capabilities in its default 
+Power Role or when external power is required to offer power.
+When a Source wants a Sink, consuming power from VBUS, to go to its lowest power state, the Voltage field 
+(B19…10) Shall be set to 5V and the Maximum Current field Shall be set to 0mA. This is used in cases where the 
+Source wants the Sink to draw pSnkSusp.
+6.4.1.2.1.1
+  Dual-Role Power
+The Dual-Role Power bit Shall be set when the Port is Dual-Role Power capable i.e., supports the PR_Swap Message. 
+This is a Static capability which Shall remain fixed for a given device regardless of the device's present Power Role. 
+If the Dual-Role Power bit is set to one in the Source_Capabilities Message the Dual-Role Power bit in the 
+Sink_Capabilities Message Shall also be set to one. If the Dual-Role Power bit is set to zero in the 
+Source_Capabilities Message the Dual-Role Power bit in the Sink_Capabilities Message Shall also be set to zero.
+6.4.1.2.1.2
+  USB Suspend Supported
+Prior to an Explicit Contract or when the USB Communications Capable bit is set to zero, the USB Suspend 
+Supported flag is undefined and Sinks Shall follow the rules for suspend as defined in [USB 2.0], [USB 3.2], [USB4], 
+[USB Type-C 2.4] or [USBBC 1.2]. After an Explicit Contract has been Negotiated:
+
+If the USB Suspend Supported flag is set, then the Sink Shall follow the [USB 2.0], [USB 3.2] or [USB4] 
+rules for suspend and resume. A PDUSB Peripheral May draw up to pSnkSusp during suspend; a PDUSB 
+Hub May draw up to pHubSusp during suspend (see Section 7.2.3, "Sink Standby").
+Table 6.9  Fixed Supply PDO – Source
+Bit(s)
+Field
+Description
+B31…30
+Fixed Supply
+00b - Fixed Supply PDO
+B29
+Dual-Role Power
+Set to ‘1’ for Dual-Role Power device.
+B28
+USB Suspend Supported
+Set to ‘1’ if USB suspend is supported.
+B27
+Unconstrained Power
+Set to ‘1’ if unconstrained power is available.
+B26
+USB Communications Capable
+Set to ‘1’ if capable of USB Communications capable
+B25
+Dual-Role Data
+Set to ‘1’ for a Dual-Role Data device.
+B24
+Unchunked Extended Messages 
+Supported
+Set to ‘1 if Unchunked Extended Messages are supported.
+B23
+EPR Capable
+Set to ‘1 if EPR Capable.
+B22
+Reserved
+Reserved – Shall be set to zero.
+B21…20
+Peak Current
+Peak Current value.
+B19…10
+Voltage
+Voltage in 50mV units
+B9…0
+Maximum Current
+Maximum current in 10mA units 

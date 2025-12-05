@@ -1,0 +1,53 @@
+Page 956
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.26.2
+  Sink EPR Mode Entry State Diagram
+Figure 8.212, "Sink EPR Mode Entry State Diagram" shows the state diagram for an EPR Sink initiating the EPR Mode 
+Entry process.
+Figure 8.212 Sink EPR Mode Entry State Diagram
+8.3.3.26.2.1
+  PE_SNK_Send_EPR_Mode_Entry State
+The Policy Engine transitions to the PE_SNK_Send_EPR_Mode_Entry state from the PE_SNK_Ready state when:
+
+The DPM requests entry into EPR Mode.
+On Entry to the PE_SNK_Send_EPR_Mode_Entry state the Policy Engine Shall send an EPR_Mode (Enter) Message 
+and starts the SenderResponseTimer and the SinkEPREnterTimer.
+Note:
+The SinkEPREnterTimer Shall continue to run in every state until it is stopped or times out.
+The Policy Engine Shall transition to the PE_SNK_EPR_Mode_Wait_For_Response state when:
+
+An EPR_Mode (Enter Acknowledge) Message is received.
+The Policy Engine Shall transition to the PE_SNK_Send_Soft_Reset state when:
+
+An EPR_Mode Message is received which is not Enter Succeeded or
+DPM Request EPR Mode Entry
+PE_SNK_EPR_Mode_Entry_Wait_For_Response
+Actions on entry:
+Wait for EPR Enter Mode response
+PE_SNK_Send_EPR Mode_Entry
+Actions on entry:
+Send EPR Mode Entry Message
+Start SenderResponse Timer
+Start SinkEPREnterTimer
+Power = Explicit Contract
+PD = Connected
+EPR Enter Mode Acknowledge received
+PE_SNK_Ready
+EPR Enter Mode Succeeded received
+Power = Explicit Contract
+PD = Connected
+PE_SNK_Send_Soft_Reset
+EPR Enter Mode received (!Succceded) |
+SenderResponseTimer timeout |
+SinkEPREnterTimer timeout
+EPR Enter Mode received (!Succceded) |
+SinkEPREnterTimer timeout
+Actions on exit:
+Stop the SinkEPRTimer
+Enter EPR Mode
+PE_SNK_Wait_For_Capabilities
+PE_VCS_Evaluate_Swap
+VCONN Swap Process
+VCONN_Swap Message Received
+VCONN Swap Process completed
+PE_VCS_Turn_Off_VCONN

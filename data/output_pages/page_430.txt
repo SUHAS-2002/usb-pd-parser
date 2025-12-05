@@ -1,0 +1,102 @@
+Page 430
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.1.3
+  Atomic Message Sequences
+The types of Atomic Message Sequences (AMS) are listed in Table 8.4, "Atomic Message Sequences". The following 
+tables list sequences of either Messages or combinations of Messages and one or more embedded AMSes which are 
+Non-interruptible. Where there is an embedded AMS the entire Message sequence is treated as an AMS and the Rp 
+value used for Collision Avoidance (see Section 5.7, "Collision Avoidance") Shall only be changed on leaving or 
+entering the ready state at the beginning or end of the entire Message sequence, and not at the start or end of the 
+embedded AMS.
+Note:
+An AMS is has not started until the first Message in the sequence has been successfully sent (i.e., a 
+GoodCRC Message has been received acknowledging the Message).
+Table 8.31, "AMS: Hard Reset" details a Hard Reset (which is Signaling not an AMS) followed by an SPR Contract 
+Negotiation AMS which Shall be treated as Non-interruptible.
+Table 8.4  Atomic Message Sequences
+Type of AMS
+Table Reference
+Section Reference
+Power Negotiation (SPR)
+Table 8.5, "AMS: Power Negotiation (SPR)"
+Section 8.3.2.2.1
+Power Negotiation (EPR)
+Table 8.6, "AMS: Power Negotiation (EPR)"
+Section 8.3.2.2.2
+Unsupported Message
+Table 8.7, "AMS: Unsupported Message"
+Section 8.3.2.3
+Soft Reset
+Table 8.8, "AMS: Soft Reset"
+Section 8.3.2.4
+Data Reset
+Table 8.9, "AMS: Data Reset"
+Section 8.3.2.5
+Hard Reset
+Table 8.31, "AMS: Hard Reset"
+Section 8.3.2.6
+Power Role Swap
+Table 8.10, "AMS: Power Role Swap"
+Section 8.3.2.7
+Fast Role Swap
+Table 8.11, "AMS: Fast Role Swap"
+Section 8.3.2.8
+Data Role Swap
+Table 8.12, "AMS: Data Role Swap"
+Section 8.3.2.9
+VCONN Swap
+Table 8.13, "AMS: VCONN Swap"
+Section 8.3.2.10
+Alert
+Table 8.14, "AMS: Alert"
+Section 8.3.2.11.1
+Status
+Table 8.15, "AMS: Status"
+Section 8.3.2.11.2
+Source Capabilities/
+Sink Capabilities (SPR)
+Table 8.16, "AMS: Source/Sink Capabilities (SPR)"
+Section 8.3.2.11.3.1
+Source Capabilities/
+Sink Capabilities (EPR)
+Table 8.17, "AMS: Source/Sink Capabilities (EPR)"
+Section 8.3.2.11.3.2
+Extended Capabilities
+Table 8.18, "AMS: Extended Capabilities"
+Section 8.3.2.11.4
+Battery Capabilities and Status
+Table 8.19, "AMS: Battery Capabilities"
+Section 8.3.2.11.5
+Manufacturer Information
+Table 8.20, "AMS: Manufacturer Information"
+Section 8.3.2.11.6
+Country Codes
+Table 8.21, "AMS: Country Codes"
+Section 8.3.2.11.7
+Country Information
+Table 8.22, "AMS: Country Information"
+Section 8.3.2.11.8
+Revision Information
+Table 8.23, "AMS: Revision Information"
+Section 8.3.2.11.9
+Source Information
+Table 8.24, "AMS: Source Information"
+Section 8.3.2.11.10
+Security
+Table 8.25, "AMS: Security"
+Section 8.3.2.12
+Firmware Update
+Table 8.26, "AMS: Firmware Update"
+Section 8.3.2.13
+Structured VDM
+Table 8.27, "AMS: Structured VDM"
+Section 8.3.2.14
+Built-In Self-Test (BIST)
+Table 8.28, "AMS: Built-In Self-Test (BIST)"
+Section 8.3.2.15
+Enter USB
+Table 8.29, "AMS: Enter USB"
+Section 8.3.2.16
+Unstructured VDM
+Table 8.30, "AMS: Unstructured VDM"
+Section 8.3.2.17

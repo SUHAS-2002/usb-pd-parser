@@ -1,0 +1,82 @@
+Page 246
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.15.2
+  EPR_Source_Capabilities Message
+The EPR_Source_Capabilities is an EPR Capabilities Message containing a list of Power Data Objects that the EPR 
+Source is capable of supplying. It is sent by an EPR Source in order to convey its Capabilities to a Sink. An EPR Source 
+Shall send the EPR_Source_Capabilities Message:
+
+When entering EPR Mode
+
+While in EPR Modes when its Capabilities change
+
+In response to an EPR_Get_Source_Cap Message
+
+After a Soft Reset while in EPR Mode
+An EPR Sink operating in EPR Mode Shall evaluate every EPR_Source_Capabilities Message it receives and Shall 
+respond with a EPR_Request Message. If its power consumption exceeds the Source Capabilities, it Shall Re-
+negotiate so as not to exceed the Source's most recently Advertised Source Capabilities.
+While operating in SPR Mode, an EPR Sink receiving an EPR_Source_Capabilities Message in response to an 
+EPR_Get_Source_Cap Messages Shall Not respond with an EPR_Request Message.
+The (A)PDOs in an EPR_Source_Capabilities Message Shall only be requested using the EPR_Request Message and 
+only when in EPR Mode.
+When Source wants to exit EPR Mode, if not already in power contract with an SPR (A)PDO, it Shall send an 
+EPR_Source_Capabilities Message with no EPR (A)PDOs (i.e. seven SPR (A)PDOs including any zero padded ones). 
+See Figure 6.55, "EPR_Source_Capabilities message with no EPR PDOs".
+Figure 6.55 EPR_Source_Capabilities message with no EPR PDOs
+6.5.15.3
+  EPR_Sink_Capabilities Message
+The EPR_Sink_Capabilities is an EPR Capabilities Message that contains a list of Power Data Objects that the EPR 
+Sink requires to operate. It is sent by an EPR Sink in order to convey its power requirements to an EPR Source. The 
+EPR Sink Shall only send the EPR_Sink_Capabilities Message in response to an EPR_Get_Sink_Cap Message.
+Header
+2 bytes
+Extended Header
+4 bytes
+SPR PDO
+1
+SPR PDO
+2
+SPR PDO
+3
+SPR PDO
+4
+SPR PDO
+5
+SPR PDO
+6
+SPR PDO
+7
+SPR PDO
+1
+SPR PDO
+2
+SPR PDO
+3
+SPR PDO
+4
+SPR PDO
+5
+SPR PDO
+6
+SPR PDO
+7
+001b
+010b
+011b
+100b
+101b
+110b
+111b
+Capabilities
+EPR Capabilities
+001b
+010b
+011b
+100b
+101b
+110b
+111b
+PDOs 20V1
+1)
+See Section 10 “Power Rules” for rules, on which SPR (A)PDOs are allowed to be used for a given PDP.

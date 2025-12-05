@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 137
+
+Section 9.1.2, "Mapping to USB Device States" for VBUS mapping to USB states.
+6.3.20
+  Get_PPS_Status
+The Get_PPS_Status Message is sent by the Sink to request additional information about a Source's status. The Port 
+Shall respond by returning a PPS_Status Message (see Section 6.5.10, "PPS_Status Message").
+6.3.21
+  Get_Country_Codes
+The Get_Country_Codes Message is sent by a Port to request the alpha-2 country codes its Port Partner supports as 
+defined in [ISO 3166]. The Port Partner Shall respond by returning a Country_Codes Message (see Section 6.5.11, 
+"Country_Codes Message").
+6.3.22
+  Get_Sink_Cap_Extended Message
+The Get_Sink_Cap_Extended (Get Sink Capabilities Extended) Message is sent by a Port to request additional 
+information about a Port's Sink Capabilities. The Port Shall respond by returning a Sink_Capabilities_Extended 
+Message (see Section 6.5.13, "Sink_Capabilities_Extended Message").
+6.3.23
+  Get_Source_Info Message
+The Get_Source_Info Message is sent by a Port to request the type, maximum Capabilities and present Capabilities 
+of the Port when it is operating as a Source. The Port Shall respond by returning the Source_Info Message (See 
+Section 6.4.11, "Source_Info Message").
+6.3.24
+  Get_Revision Message
+The Get_Revision Message is sent by a Port using SOP to request the Revision and Version of the Power Delivery 
+Specification its Port Partner supports. 
+The Port Partner Shall respond by returning a Revision Message (See Section 6.4.12, "Revision Message").
+The Get_Revision Message May also be sent to a Cable Plug to request the Revision and Version of the Power 
+Delivery Specification it supports using SOP’/SOP’’. 
+The Active Cable Shall respond by returning a Revision Message (see Section 6.4.12, "Revision Message").

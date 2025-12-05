@@ -1,0 +1,25 @@
+Page 202
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.8
+  Enter_USB Message
+The Enter_USB Message Shall be sent by the DFP to its UFP Port Partner and to the Cable Plug(s) of an Active Cable, 
+when in an Explicit Contract, to enter a specified USB Mode of operation. The recipient of the Message Shall respond 
+by sending an Accept Message, a Wait Message or a Reject Message (see Section 6.9, "Accept, Reject and Wait").
+When entering [USB4] operation, the Enter_USB Message Shall be sent by a [USB4] PDUSB Hub's DFP(s) or [USB4] 
+PDUSB Host's DFP(s) within tEnterUSB:
+
+following a PD Connection.
+
+after a Data Reset to enter [USB4] operation is completed.
+
+after a Data Role Swap is completed.
+The Enter_USB Message May be sent by a PDUSB Hub's DFP(s) or PDUSB Host's DFP(s) within tEnterUSB following 
+a PD Connection or after a Data Reset to enter [USB 3.2] or [USB 2.0] operation.
+The Enter_USB Message Shall be used by a PDUSB Hub's DFP(s) to speculatively train the USB links or enter 
+[DPTC2.1] or [TBT3] Alternate Modes prior to the presence of a host. In this case, the Host Present bit Shall be 
+cleared. When the Host is Connected the Enter_USB Message Shall be resent with the Host Present bit set. The 
+Enter_USB Message's Enter USB Data Object (EUDO), received from the Root Hub when the USB Host is connected, 
+Shall be propagated down through the Hub tree.
+See [USB Type-C 2.4] USB4® Hub Connection Requirements.
+The Enter_USB Message Shall be as shown in Figure 6.31, "Enter_USB Message" and Table 6.49, "Enter_USB Data 
+Object (EUDO)".

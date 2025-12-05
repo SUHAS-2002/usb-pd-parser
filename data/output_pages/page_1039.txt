@@ -1,0 +1,41 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1039
+Figure E.2 Slow VBUS Discharge
+Old Voltage
+0V
+vSafe5V(min)
+tSrcFRSwap
+�
+New Source may 
+turn on at any time 
+after VBUS falls below 
+vSafe5V(max)
+VBUS at Hub & 
+Notebook
+Old Source detects power loss and 
+signals Fast Role Swap
+tFRSwapTx
+CC
+N3
+H2
+N1
+vSafe5V(max)
+VBUS voltage when it discharges slowly 
+(assume very small cable IR drop prior to FR swap) 
+VBUS at 
+Notebook
+VBUS at
+Hub
+0A
++3A
+Current from Notebook to Hub
+In this example the Notebook is drawing little current prior to the 
+FRS signaling. In other cases it may be drawing more current.
+Cable IR 
+drop
+O
+H1
+N2
+N4
+<iSnkStdby
+tSnkFRSwap

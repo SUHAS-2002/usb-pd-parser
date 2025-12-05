@@ -1,0 +1,100 @@
+Page 176
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.1.6
+  Passive Cable VDO
+The Passive Cable VDO defined in this section Shall be sent when the Product Type is given as Passive Cable. 
+Table 6.41, "Passive Cable VDO" defines the Cable VDO which Shall be sent.
+A Passive Cable has a USB Plug on each end at least one of which is a Cable Plug supporting SOP’ Communication. A 
+Passive Cable Shall Not incorporate data bus signal conditioning circuits and hence has no concept of Super Speed 
+Directionality. A Passive Cable Shall include a VBUS wire and Shall only respond to SOP’ Communication. Passive 
+Cables Shall support the Structured VDM Discover Identity Command and Shall return the Passive Cable VDO in a 
+Discover Identity Command ACK as shown in Table 6.41, "Passive Cable VDO".
+Table 6.41  Passive Cable VDO
+Bit(s)
+Field
+Description
+B31…28
+HW Version
+0000b…1111b assigned by the VID owner
+B27…24
+Firmware Version
+0000b…1111b assigned by the VID owner
+B23…21
+VDO Version
+Version Number of the VDO (not this specification Version):
+
+Version 1.0 = 000b
+Values 001b…111b are Reserved and Shall Not be used.
+B20
+Reserved
+Shall be set to zero.
+B19…18
+USB Type-C plug to USB 
+Type-C/Captive 
+(Passive Cable)
+
+00b = Reserved and Shall Not be used
+
+01b = Reserved and Shall Not be used
+
+10b = USB Type-C
+
+11b = Captive
+B17
+EPR Capable (Passive 
+Cable)
+
+0b – Cable is not EPR Capable
+
+1b = Cable is EPR Capable
+B16…13
+Cable Latency (Passive 
+Cable)
+
+0000b – Reserved and Shall Not be used
+
+0001b – <10ns (~1m)
+
+0010b – 10ns to 20ns (~2m)
+
+0011b – 20ns to 30ns (~3m)
+
+0100b – 30ns to 40ns (~4m)
+
+0101b – 40ns to 50ns (~5m)
+
+0110b – 50ns to 60ns (~6m)
+
+0111b – 60ns to 70ns (~7m)
+
+1000b – > 70ns (>~7m)
+Note: 1001b ….1111b Reserved and Shall Not be used
+B12…11
+Cable Termination Type 
+(Passive Cable)
+
+00b = VCONN not required. Cable Plugs that only support Discover Identity 
+Commands Shall set these bits to 00b.
+
+01b = VCONN required
+
+10b…11b = Reserved and Shall Not be used
+B10…9
+Maximum VBUS Voltage 
+(Passive Cable)
+Maximum Cable VBUS Voltage2:
+
+00b – 20V
+
+01b – 30V1 (Deprecated)
+
+10b – 40V1 (Deprecated)
+
+11b – 50V
+B8…7
+Reserved
+Shall be set to zero.
+1)
+Values no longer allowed. When present the field Shall be interpreted as if it was 00b.
+2)
+EPR Sinks with a captive cable Shall report 50V.

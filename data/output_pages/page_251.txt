@@ -1,0 +1,51 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 251
+6.6.4
+  Wait Timers and Times
+6.6.4.1
+  SinkRequestTimer
+The SinkRequestTimer is used to ensure that the time before the next Sink Request Message, after a Wait Message 
+has been received from the Source in response to a Sink Request Message, is a minimum of tSinkRequest min (see 
+Section 6.3.12, "Wait Message").
+The SinkRequestTimer Shall be started when the EOP of a Wait Message has been received and Shall be stopped 
+if any other Message is received or during a Hard Reset.
+The Sink Shall wait at least tSinkRequest, after receiving the EOP of a Wait Message sent in response to a Sink 
+Request Message, before sending a new Request Message. Whenever there is a SinkRequestTimer timeout the Sink 
+May send a Request Message. It Shall then re-initialize and restart the SinkRequestTimer. 
+6.6.4.2
+  tPRSwapWait
+The time before the next PR_Swap Message, after a Wait Message has been received in response to a PR_Swap 
+Message is a minimum of tPRSwapWait min (see Section 6.3.12, "Wait Message"). The Port Shall wait at least 
+tPRSwapWait after receiving the EOP of a Wait Message sent in response to a PR_Swap Message, before sending a 
+new PR_Swap Message.
+6.6.4.3
+  tDRSwapWait
+The time before the next DR_Swap Message, after a Wait Message has been received in response to a DR_Swap 
+Message is a minimum of tDRSwapWait min (see Section 6.3.12, "Wait Message"). The Port Shall wait at least 
+tDRSwapWait after receiving the EOP of a Wait Message sent in response to a DR_Swap Message, before sending 
+a new DR_Swap Message.
+6.6.4.4
+  tVCONNSwapWait
+The time before the next VCONN_Swap Message, after a Wait Message has been received in response to a 
+VCONN_Swap Message is a minimum of tVCONNSwapWait min (see Section 6.3.12, "Wait Message"). The Port Shall 
+wait at least tVCONNSwapWait after receiving the EOP of a Wait Message sent in response to a VCONN_Swap 
+Message, before sending a new VCONN_Swap Message.
+6.6.4.5
+  tVCONNSwapDelayDFP
+The time delay for DFP after losing VCONN Source role due to an incoming VCONN Swap request from UFP and before 
+sending the next VCONN_Swap Message. The DFP Shall wait at least tVCONNSwapDelayDFP after sending the EOP 
+of the GoodCRC Message in response to PS_RDY Message received at the end of the previous VCONN Swap AMS.
+6.6.4.6
+  tVCONNSwapDelayUFP
+The time delay for UFP after losing VCONN Source role due to an incoming VCONN Swap request from DFP and before 
+sending the next VCONN_Swap Message. The UFP Shall wait at least tVCONNSwapDelayUFP after sending the EOP 
+of the GoodCRC Message in response to PS_RDY Message received at the end of the previous VCONN Swap AMS.
+6.6.4.7
+  tEnterUSBWait
+The time before the next Enter_USB Message, after a Wait Message has been received in response to a Enter_USB 
+Message is a minimum of tEnterUSBWait min (see Section 6.3.12, "Wait Message"). The DFP Shall wait at least 
+tEnterUSBWait after receiving the EOP of a Wait Message sent in response to an Enter_USB Message, before 
+sending a new Enter_USB Message.
+6.6.5
+  Power Supply Timers
+See Section 7.3, "Transitions" for diagrams showing the usage of the timers in this section.

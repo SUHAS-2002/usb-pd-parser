@@ -1,0 +1,59 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 89
+5.6.3
+  Packet Detection Errors
+CRC errors, or errors detected while decoding encoded symbols using the code table, Shall be treated the same 
+way; the Message Shall be Discarded and a GoodCRC Message Shall Not be returned.
+While the receiver is processing a Packet, if at any time the CC-line becomes Idle the receiver Shall stop processing 
+the Packet and Discard it (no GoodCRC Message is returned). See Section 5.8.6.1, "Definition of Idle" for the 
+definition of BMC Idle.
+5.6.4
+  Hard Reset
+Hard Reset Signaling is an ordered set of bytes sent with the purpose to be recognized by the PHY Layer. The Hard 
+Reset Signaling ordered set is defined as: three RST-1 K-codes followed by one RST-2 K-code (see Table 5.11, "Hard 
+Reset Ordered Set").
+A device Shall perform a Hard Reset when it receives Hard Reset Signaling. After receiving the Hard Reset 
+Signaling, the device Shall reset as described in Section 6.8.3, "Hard Reset". If a Valid Hard Reset is not detected (see 
+Table 5.3, "Validation of Ordered Sets") then the whole transmission Shall be Discarded.
+A Cable Plug Shall perform a Hard Reset when it detects Hard Reset Signaling being sent between the Port Partners. 
+After receiving the Hard Reset Signaling, the device Shall reset as described in Section 6.8.3, "Hard Reset".
+The procedure for sending Hard Reset Signaling Shall be as follows:
+
+If the PHY Layer is currently sending a Message, the Message Shall be interrupted by sending an EOP K-
+code and the rest of the Message Discarded.
+
+If CC is not Idle, wait for it to become Idle (see Section 5.8.6.1, "Definition of Idle").
+
+Wait tInterFrameGap.
+
+If CC is still Idle send the Preamble followed by the 4 K-codes for Hard Reset Signaling.
+
+Disable the channel (i.e., stop sending and receiving), reset the PHY Layer and inform the Protocol Layer 
+that the PHY Layer has been reset.
+
+Re-enable the channel when requested by the Protocol Layer.
+Figure 5.5, "Line format of Hard Reset" shows the line format of Hard Reset Signaling which is a Preamble followed 
+by the Hard Reset Ordered Set.
+Figure 5.5 Line format of Hard Reset
+Table 5.11  Hard Reset Ordered Set
+K-Code Number
+K-Code in Code 
+Table
+1
+RST-1
+2
+RST-1
+3
+RST-1
+4
+RST-2
+Preamble(training for receiver)
+RST-1
+LEGEND:
+Preamble provided by the Physical layer, 
+not encoded with 4b5b
+Provided by the Physical 
+layer, encoded with 4b5b
+RST-1
+RST-1
+RST-2

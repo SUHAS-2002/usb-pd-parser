@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 39
+1.5
+  Related Documents
+Document references listed in Table 1.3, "Document References" are inclusive of all approved and published ECNs 
+and Errata.
+Table 1.3  Document References
+Bookmark Reference
+Title
+[DPTC2.1]
+DisplayPortTM Alt Mode on USB Type-C Standard www.vesa.org.
+[IEC 60950-1]
+IEC 60950-1:2005 Information technology equipment – Safety – Part 1: General 
+requirements: Amendment 1:2009, Amendment 2:2013. www.iec.ch.
+[IEC 60958-1]
+IEC 60958-1:2021 Digital Audio Interface Part:1 General. www.iec.ch.
+[IEC 62368-1]
+IEC 62368-1:2018 Audio/Video, information, and communication technology 
+equipment – Part 1: Safety requirements. www.iec.ch.
+[IEC 62368-3]
+IEC 62368-3:2017 Audio/video, information, and communication technology 
+equipment - Part 3: Safety aspects for DC power transfer through communication cables 
+and ports www.iec.ch.
+[IEC 63002]
+IEC 63002:2021 Interoperability specifications and communication method for external 
+power supplies used with computing and consumer electronics devices www.iec.ch.
+[ISO 3166]
+ISO 3166 international Standard for country codes and codes for their subdivisions. 
+http://www.iso.org/iso/home/standards/country_codes.htm.
+[TBT3]
+see [USB4] Chapter 13 for ThunderboltTM 3 device operation.
+[UCSI]
+USB Type-C Connector System Software Interface (UCSI) Specification https://
+www.usb.org/documents.
+[USB 2.0]
+Universal Serial Bus 2.0 Specification, https://www.usb.org/documents.
+[USB 3.2]
+Universal Serial Bus 3.2 Specification https://www.usb.org/documents.
+[USB Type-C 2.4]
+Universal Serial Bus Type-C Cable and Connector Specification, https://www.usb.org/
+documents.
+[USB4]
+Universal Serial Bus 4 Specification (USB4®), https://www.usb.org/documents.
+[USBBC 1.2]
+Universal Serial Bus Battery Charging Specification plus Errata (referred to in this 
+document as the Battery Charging specification). https://www.usb.org/documents.
+[USBPD 2.0]
+Universal Serial Bus Power Delivery Specification, https://www.usb.org/documents.
+[USBPDCompliance]
+USB Power Delivery Compliance Test Specification, https://www.usb.org/documents.
+[USBPDFirmwareUpdate 1.0]
+Universal Serial Bus Power Delivery Firmware Update Specification, https://
+www.usb.org/documents.
+[USBTypeCAuthentication 1.0]
+Universal Serial Bus Type-C Authentication Specification, https://www.usb.org/
+documents.
+[USBTypeCBridge 1.1]
+Universal Serial Bus Type-C Bridge Specification, https://www.usb.org/documents.

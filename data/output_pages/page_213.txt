@@ -1,0 +1,15 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 213
+A Managed Capability Port that is part of a Shared Capacity Group Shall set its Port Present PDP to Shared Port 
+Power Available as defined in [USB Type-C 2.4] or to a lower value when limited.
+A Managed Capability Port that is part of an Assured Capacity Group Shall set its Port Present PDP to the Port 
+Maximum PDP or the highest value possible when limited.
+6.4.11.4
+  Port Reported PDP Field
+The Port Reported PDP field Shall track the amount of power the Port is offering in its Source_Capabilities 
+Message or EPR_Source_Capabilities Message. The Port Reported PDP field May be dynamic or Static depending 
+on the Port's other characteristics such as Managed/Guaranteed Capability, SPR/EPR Mode, its power policy etc.
+Note:
+The Port Reported PDP field is computed as the integer part of, the largest of the products of the voltage 
+times current of the Fixed Supply PDOs returned in the Source_Capabilities Message or 
+EPR_Source_Capabilities Messages.

@@ -1,0 +1,49 @@
+Page 218
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.1.2
+  Product ID (PID) Field
+The PID field Shall contain the 16-bit Product ID (PID) assigned by the Source's vendor. Devices that have a USB 
+data interface Shall report the same PID as the idProduct in the Standard Device Descriptor (see [USB 2.0] and 
+[USB 3.2]).
+6.5.1.3
+  XID Field
+The XID field Shall contain the 32-bit XID provided by the USB-IF to the vendor who in turns assigns it to a product. 
+If the vendor does not have an XID, then it Shall return zero in this field (see [USB 2.0] and [USB 3.2]).
+6.5.1.4
+  Firmware Version Field
+The FW Version field Shall contain an 8-bit firmware version number assigned to the device by the vendor. 
+6.5.1.5
+  Hardware Version Field
+The HW Version field Shall contain an 8-bit hardware version number assigned to the device by the vendor. 
+6.5.1.6
+  Voltage Regulation Field
+The Voltage Regulation field contains bits covering Load Step Slew Rate and Magnitude. 
+See Section 7.1.12.1, "Voltage Regulation Field" for further details.
+6.5.1.6.1
+  Load Step Slew Rate 
+The Source Shall report its load step response capability in bits 0…1 of the Voltage Regulation bit field. 
+6.5.1.6.2
+  Load Step Magnitude
+The Source Shall report its load step magnitude rate as a percentage of IoC in bit 2 of the Voltage Regulation field.
+6.5.1.7
+  Holdup Time Field
+The Holdup Time field Shall contain the Source's holdup time (see Section 7.1.12.2, "Holdup Time Field").
+6.5.1.8
+  Compliance Field
+The Compliance is Static and Shall contain the standards the Source is compliant with in SPR (see Section 7.1.12.3, 
+"Compliance Field").
+6.5.1.9
+  Touch Current Field
+The Touch Current field reports whether the Source meets certain leakage current levels and if it has a ground pin.
+A Source Shall set the Touch Current bit (bit 0) when their leakage current is less than 65µA rms when Source's 
+maximum capability is less than or equal to 30W, or when their leakage current is less than 100 µA rms when its 
+power capability is between 30W and 100W. The total combined leakage current Shall be measured in accordance 
+with [IEC 60950-1] when tested at 250VAC rms at 50 Hz. 
+A Source with a ground pin Shall set the Ground pin bit (bit 1). 
+A Source whose Ground pin is intended to be connected to a protective earth Shall set both bit1 and bit 2.
+6.5.1.10
+  Peak Current Field
+The Peak Current1/Peak Current2/Peak Current3 fields Shall contain the combinations of Peak Current that the 
+Source supports (see Section 7.1.12.4, "Peak Current").
+Peak Current provides a means for Source report its ability to provide current in excess of the Negotiated amount 
+for short periods. The Peak Current descriptor defines up to three combinations of% overload, duration and duty 

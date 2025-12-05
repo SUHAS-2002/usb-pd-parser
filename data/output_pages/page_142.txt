@@ -1,0 +1,57 @@
+Page 142
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+If the USB Suspend Supported flag is cleared, then the Sink Shall Not apply the [USB 2.0], [USB 3.2] or 
+[USB4] rules for suspend and May continue to draw the Negotiated power. 
+Note:
+When USB is suspended, the USB device state is also suspended.
+Sinks May indicate to the Source that they would prefer to have the USB Suspend Supported flag cleared by setting 
+the No USB Suspend flag in a Request Message (see Section 6.4.2.5, "No USB Suspend").
+6.4.1.2.1.3
+  Unconstrained Power
+The Unconstrained Power bit Shall be set when an external source of power is available that is sufficient to 
+adequately power the system while charging external devices, or when the device's primary function is to charge 
+external devices.
+To set the Unconstrained Power bit because of an external source, the external source of power Should be either:
+
+An AC Supply, e.g., a Charger, directly connected to the Sink.
+
+Or, in the case of a PDUSB Hub:
+
+A PD Source with its Unconstrained Power bit set.
+
+Multiple PD Sources all with their Unconstrained Power bits set.
+6.4.1.2.1.4
+  USB Communications Capable
+The USB Communications Capable bit Shall only be set for Sources capable of communication over the USB data 
+lines (e.g., D+/- or SS Tx/Rx).
+6.4.1.2.1.5
+  Dual-Role Data
+The Dual-Role Data bit Shall be set when the Port is Dual-Role Data capable i.e., it supports the DR_Swap Message. 
+This is a Static capability which Shall remain fixed for a given device regardless of the device's present Power Role 
+or Data Role. If the Dual-Role Data bit is set to one in the Source_Capabilities Message the Dual-Role Data bit in 
+the Sink_Capabilities Message Shall also be set to one. If the Dual-Role Data bit is set to zero in the 
+Source_Capabilities Message the Dual-Role Data bit in the Sink_Capabilities Message Shall also be set to zero.
+6.4.1.2.1.6
+  Unchunked Extended Messages Supported
+The Unchunked Extended Messages Supported bit Shall be set when the Port can send and receive Extended 
+Messages with Data Size > MaxExtendedMsgLegacyLen bytes in a single, Unchunked Extended Message.
+6.4.1.2.1.7
+  EPR Mode Capable
+The EPR Capable bit is a Static bit that Shall be set if the Source is designed to supply more than 100W and operate 
+in EPR Mode.
+When this bit is set, an EPR Source:
+
+Operating in SPR Mode Shall only send an EPR_Source_Capabilities Message in response to an 
+EPR_Get_Source_Cap Message
+
+May only enter EPR Mode when the Cable and the Sink also report that they are EPR Capable.
+6.4.1.2.1.8
+  Peak Current
+The USB Power Delivery Fixed Supply is only required to deliver the amount of current requested in the Operating 
+Current field (IoC) of an RDO. In some usages however, for example computer systems, where there are short 
+bursts of activity, it might be desirable to overload the Source for short periods.
+For example, when a computer system tries to maintain average power consumption, the higher the peak current, 
+the longer the low current (see Section 7.2.8, "Sink Peak Current Operation") period needed to maintain such 
+average power. The Peak Current field allows a Source to Advertise this additional capability. This capability is 
+intended for direct Port to Port connections only and Shall Not be offered to downstream Sinks via a Hub.

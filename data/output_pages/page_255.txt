@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 255
+6.6.10.2
+  tDataReset
+The DFP Shall complete the Data_Reset process (as defined in Section 6.3.14, "Data_Reset Message") within 
+tDataReset of the last bit of the GoodCRC Message EOP, corresponding to the Accept Message, being transmitted 
+by the PHY Layer.
+6.6.10.3
+  DataResetFailTimer
+The DataResetFailTimer Shall be used by the DFP's Policy Engine to ensure the Data Reset process completes 
+within tDataResetFail of the last bit of the GoodCRC acknowledging the Accept Message in response to the 
+Data_Reset Message. If the DFP's DataResetFailTimer expires, the DFP Shall enter the ErrorRecovery State.
+6.6.10.4
+  DataResetFailUFPTimer
+The DataResetFailUFPTimer Shall be used by the UFP's Policy Engine to ensure the Data Reset process completes 
+within tDataResetFailUFP of the last bit of the GoodCRC acknowledging the Accept Message in response to the 
+Data_Reset Message. If the UFP's DataResetFailUFPTimer expires, the UFP Shall enter the ErrorRecovery State.
+6.6.11
+  Hard Reset Timers
+6.6.11.1
+  HardResetCompleteTimer
+The HardResetCompleteTimer is used by the Protocol Layer in the case where it has asked the PHY Layer to send 
+Hard Reset Signaling and the PHY Layer is unable to send the Signaling within a reasonable time due to a non-Idle 
+channel. If the PHY Layer does not indicate that the Hard Reset Signaling has been sent within tHardResetComplete 
+of the Protocol Layer requesting transmission, then the Protocol Layer Shall inform the Policy Engine that the Hard 
+Reset Signaling has been sent in order to ensure the power supply is reset in a timely fashion.
+6.6.11.2
+  PSHardResetTimer
+The PSHardResetTimer is used by the Policy Engine in a Source to ensure that the Sink has had sufficient time to 
+process Hard Reset Signaling before turning off its power supply to VBUS. 
+When a Hard Reset occurs the Source, stops driving VCONN, removes Rp from the CC pin and starts to transition the 
+VBUS voltage to vSafe0V either:
+
+tPSHardReset after the last bit of the Hard Reset Signaling has been received from the Sink or 
+
+tPSHardReset after the last bit of the Hard Reset Signaling has been sent by the Source.
+See Section 7.1.5, "Response to Hard Resets".
+6.6.11.3
+  tDRSwapHardReset
+If a DR_Swap Message is received during Modal Operation then a Hard Reset Shall be initiated by the recipient of 
+the unexpected DR_Swap Message; Hard Reset Signaling Shall be generated within tDRSwapHardReset of the EOP 
+of the GoodCRC sent in response to the DR_Swap Message.
+6.6.11.4
+  tProtErrHardReset
+If a Protocol Error occurs that directly leads to a Hard Reset, the transmission of the Hard Reset Signaling Shall be 
+completed within tProtErrHardReset of the EOP of the GoodCRC sent in response to the Message that caused the 
+Protocol Error.
+6.6.12
+  Structured VDM Timers
+6.6.12.1
+  VDMResponseTimer
+The VDMResponseTimer Shall be used by the Initiator's Policy Engine to ensure that a Structured VDM Command 
+request needing a response (e.g. Discover Identity Command request) is responded to within a bounded time of 
+tVDMSenderResponse. The VDMResponseTimer Shall be applied to all Structured VDM Commands except the 

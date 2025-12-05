@@ -1,0 +1,39 @@
+Page 230
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.6
+  Get_Manufacturer_Info Message
+The Get_Manufacturer_Info (Get Manufacturer Info) Message is sent by a Port to request manufacturer specific 
+information relating to its Port Partner, Cable Plug or of a Battery behind a Port. The Port Shall respond by 
+returning a Manufacturer_Info Message (Section 6.5.7, "Manufacturer_Info Message") containing a Manufacturer 
+Info Data Block (MIDB). Support for this feature by the Cable Plug is Optional Normative.
+The Get_Manufacturer_Info Message contains a 2-byte Get Manufacturer Info Data Block (GMIDB). This block 
+defines whether it is the Device or Battery manufacturer information being requested and for which Battery the 
+request is being made.
+The Get_Manufacturer_Info Message returns a GMIDB whose format Shall be as shown in Figure 6.43, 
+"Get_Manufacturer_Info Message" and Table 6.60, "Get Manufacturer Info Data Block (GMIDB)".
+Figure 6.43 Get_Manufacturer_Info Message
+Table 6.60  Get Manufacturer Info Data Block (GMIDB)
+Offset
+Field
+Description
+0
+Manufacturer Info Target
+
+0: Port/Cable Plug
+
+1: Battery
+
+255…2: Reserved and Shall Not be used.
+1
+Manufacturer Info Ref
+If the Manufacturer Info Target field is Battery (01b) the Manufacturer Info 
+Ref field Shall contain the Battery number reference which is the number of the 
+Battery indexed from zero: 
+
+Values 0…3 represent the Fixed Batteries.
+
+Values 4…7 represent the Hot Swappable Batteries.
+Otherwise, this field is Reserved and Shall be set to zero.
+Extended Header
+Data Size = 2
+GMIDB

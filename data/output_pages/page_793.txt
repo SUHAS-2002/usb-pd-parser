@@ -1,0 +1,67 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 793
+Table 8.144, "Steps for BIST Test Data Test" below provides a detailed explanation of what happens at each labeled 
+step in Figure 8.117, "BIST Test Data Test" above.
+Table 8.144  Steps for BIST Test Data Test
+Step
+Tester
+UUT
+1
+The Policy Engine directs the Protocol Layer to 
+generate a BIST Message, with a BIST Data Object of 
+BIST Test Data, to put the UUT into BIST Test Data 
+Mode.
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the BIST Message. 
+Starts CRCReceiveTimer.
+PHY Layer receives the BIST Message and checks the CRC 
+to verify the Message.
+4
+PHY Layer removes the CRC and forwards the BIST 
+Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received BIST Message 
+information to the Policy Engine that consumes it.
+The Policy Engine goes into BIST Test Data Mode Mode 
+where it sends no further Messages except for GoodCRC 
+Messages in response to received Messages (see Section 
+6.4.3.2, "BIST Test Data Mode").
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC and checks the CRC to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the BIST 
+Message was successfully sent. 
+UUT enters BIST Test Data Mode.
+10
+The Policy Engine directs the Protocol Layer to 
+generate a BIST Message, with a BIST Data Object of 
+BIST Test Data, to put the UUT into BIST Test Data 
+Mode.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer appends CRC and sends the BIST Message. 
+Starts CRCReceiveTimer.
+PHY Layer receives the BIST Message and checks the CRC 
+to verify the Message.
+13
+PHY Layer removes the CRC and forwards the BIST 
+Message to the Protocol Layer.

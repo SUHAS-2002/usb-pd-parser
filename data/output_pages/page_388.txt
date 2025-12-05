@@ -1,0 +1,14 @@
+Page 388
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.3.2
+  Transitions Caused by Power Role Swap
+7.3.2.1
+  Sink Requested Power Role Swap
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed during a Sink requested 
+Power Role Swap is shown in Figure 7.39, "Transition Diagram for a Sink Requested Power Role Swap". The sequence 
+that Shall be followed is described in Table 7.18, "Sequence Description for a Sink Requested Power Role Swap". The 
+timing parameters that Shall be followed are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink 
+Electrical Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In Figure 7.39, "Transition Diagram for a Sink Requested Power Role Swap", the Sink has previously sent 
+a PR_Swap Message to the Source.

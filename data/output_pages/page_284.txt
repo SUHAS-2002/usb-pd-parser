@@ -1,0 +1,52 @@
+Page 284
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Chunked Tx State Machine Shall transition to the TCH_Wait_For_Message_Request_From_Policy_Engine state 
+when: 
+
+The error has been reported.
+6.12.2.1.4
+  Chunked Message Router State Diagram
+Figure 6.62, "Chunked Message Router State Diagram" shows the state behavior for the Chunked Message Router. 
+This determines to which state machine an incoming Message is routed to (Chunked Rx, Chunked Tx or direct to 
+Policy Engine).
+Figure 6.62 Chunked Message Router State Diagram
+6.12.2.1.4.1
+  RTR_Wait_for_Message_From_Protocol_Layer State
+In the RTR_Wait_for_Message_From_Protocol_Layer state the Chunked Message Router waits until the Protocol 
+Layer sends it a received Message.
+The Chunked Message Router Shall transition to the RTR_Rx_Chunks state when: 
+
+A Message is received from the Protocol Layer, and the combined Chunking is not doing Tx Chunks.
+The Chunked Message Router Shall transition to the RTR_Tx_Chunks state when:
+
+A Message is received from the Protocol Layer, and the combined Chunking is doing Tx Chunks.
+6.12.2.1.4.2
+  RTR_Rx_Chunks State
+On entry to the RTR_Rx_Chunks state the Chunked Message Router Shall:
+
+Send the Message to the Chunked Rx State Machine.
+
+Transition to the RTR_Wait_for_Message_From_Protocol_Layer state.
+RTR_Wait_for_Message_From_Protocol_Layer 
+Actions on entry:
+RTR_Rx_Chunks 
+Actions on entry:
+Send message to Rx Chunk Machine
+RTR_Tx_Chunks 
+Actions on entry:
+Send message to Tx Chunk Machine
+Message Received from 
+Protocol Layer &
+Not Doing Tx Chunks1
+Message Received from 
+Protocol Layer &
+Doing Tx Chunks1
+Sent
+Soft Reset occured |
+Exit from Hard Reset
+Start
+Sent
+1)
+Doing Tx Chunks means that Chunked Tx State Machine is not in the TCH_Wait_For_Message_Request_From_Policy_Engine state.
+2)
+Messages are taken to include notification about transmission success or otherwise of Messages.

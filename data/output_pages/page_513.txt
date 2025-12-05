@@ -1,0 +1,13 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 513
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Accept Message was successfully sent.
+The reset is complete and protocol communication can restart. Port Partners perform an Explicit Contract Negotiation to re-
+synchronize their state machines.
+Table 8.52  Steps for a Soft Reset
+Step
+Reset Initiator
+Reset Responder

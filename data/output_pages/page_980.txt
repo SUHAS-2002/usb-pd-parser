@@ -1,0 +1,52 @@
+Page 980
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+9.1.2
+  Mapping to USB Device States
+As mentioned in Section 9.1, "Overview" a PDUSB Device reports itself as a self-powered device. However, the device 
+Shall determine whether or not it is in the USB Attached State or USB Powered States as described in Figure 9.4, 
+"USB Attached to USB Powered State Transition", Figure 9.5, "Any USB State to USB Attached State Transition (When 
+operating as a Consumer)" and Figure 9.6, "Any USB State to USB Attached State Transition (When operating as a 
+Provider)" All other USB states of the PDUSB Device Shall be as described in Chapter 9 of [USB 2.0] and [USB 3.2].
+Figure 9.4, "USB Attached to USB Powered State Transition" shows how a PDUSB Device determines when to 
+transition from the USB Attached State to the USB Powered State. USB Type-C Dead Battery operation does not 
+require special handling since the default state at Attach or after a Hard Reset is that the USB Device is a Sink. 
+Figure 9.4 USB Attached to USB Powered State Transition
+Figure 9.5, "Any USB State to USB Attached State Transition (When operating as a Consumer)" shows how a PDUSB 
+Device determines when to transition from the USB Powered State to the USB Attached State when the device is a 
+Consumer. A PDUSB Device determines that it is performing a Power Role Swap as described in Section 8.3.3.19.3, 
+"Policy Engine in Source to Sink Power Role Swap State Diagram" and Section 8.3.3.19.4, "Policy Engine in Sink to 
+Source Power Role Swap State Diagram". See Section 7.1.5, "Response to Hard Resets" for additional information on 
+device behavior during Hard Resets.
+VBUS
+Present
+No
+Yes
+Can 
+enumerate?
+Yes
+Device is a 
+Source?
+Attached
+Sink?
+USB
+Attached
+Yes
+Device 
+in Sink 
+Mode
+No
+Negotiate 
+enough 
+Power?
+No
+USB
+Powered
+No
+No
+Yes
+Device in 
+Source 
+Mode  (5V)
+Yes
+Hard 
+Reset

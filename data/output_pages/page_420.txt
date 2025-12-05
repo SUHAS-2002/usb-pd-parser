@@ -1,0 +1,55 @@
+Page 420
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.2.5
+  Managing Power Requirements
+It is the responsibility of the Device Policy Manager in a Provider to be aware of the power requirements of all 
+devices connected to its Source Ports. This includes being aware of any reserve power that might be required by 
+devices in the future and ensuring that power is shared optimally amongst Attached PD Capable devices. This is a 
+key function of the Device Policy Manager; whose implementation is critical to ensuring that all PD Capable devices 
+get the power they require in a timely fashion in order to facilitate smooth operation. This is balanced by the fact 
+that the Device Policy Manager is responsible for managing the sources of power that are, by definition, finite.
+The Consumer's Device Policy Manager Shall ensure that it takes no more power than is required to perform its 
+functions and when its requirements change, it Should make a new Request. The Provider, after satisfying the 
+Request, Should reclaim any unused power to ensure that it can meet total power requirements of Attached Sinks 
+on at least one Port.
+Note:
+It is expected that a future design guide will provide additional guidance.
+8.2.5.1
+  Managing the Power Reserve
+There might be some products where a Device has certain functionality at one power level and a greater 
+functionality at another, for example a Printer/Scanner that operates only as a printer with one power level and as 
+a scanner if it can get more power. While the visibility of the linkage between power and functionality might only 
+be apparent to the USB Host; the Device Policy Manager Should provide mechanisms to manage the power 
+requirements of such Devices.
+It is the Device Policy Manager's responsibility to allocate power and maintain a power reserve so as not to over-
+subscribe its available power resource. A Device with multiple ports such as a Hub Shall always attempt to meet 
+the incremental demands of the Port requiring the highest incremental power from its power reserve.
+8.2.5.2
+  Power Capability Mismatch
+A Capabilities Mismatch occurs when a Consumer cannot obtain required power from a Provider (or the Source is 
+not PD Capable) and the Consumer requires such Capabilities to operate. Different actions are taken by the Device 
+Policy Manager and the System Policy Manager in this case.
+8.2.5.2.1
+  Local device handling of mismatch
+The Consumer's Device Policy Manager Shall cause a notification to be displayed to the end user that a power 
+Capabilities Mismatch has occurred. Examples of such feedback can include:
+
+For a simple Device an LED May be used to indicate the failure. For example, during connection the LED 
+could be solid amber. If the connection is successful, the LED could change to green. If the connection 
+fails, it could be red or alternately blink amber.
+
+A more sophisticated Device with a user interface, e.g., a mobile device or monitor, Should provide no-
+tification through the user interface on the Device.
+The Provider's Device Policy Manager May cause a notification to be displayed to the user of the power Capabilities 
+Mismatch.
+Because the Capabilities Mismatch might not cause operational failure, the Provider's Device Policy Manager Should 
+Not display a notification to the user if the power offered to the Sink meets or exceeds the SPR Sink Minimum PDP/
+EPR Sink Minimum PDP Advertised in the Sink_Capabilities_Extended Message (see Section 6.5.13, 
+"Sink_Capabilities_Extended Message"). If a notification is displayed, it Should Not be shown as an error unless the 
+power offered to the Sink is less than the SPR Sink Minimum PDP/EPR Sink Minimum PDP Advertised in the 
+Sink_Capabilities_Extended Message.
+8.2.5.2.2
+  Device Policy Manager Communication with System Policy
+In a USB Power Delivery aware system with an active System Policy Manager (see Section 8.2.2, "System Policy"), the 
+Device Policy Manager Shall notify the System Policy Manager of the mismatch. This information Shall be passed 
+back to the System Policy Manager using the mechanisms described in [UCSI]. The System Policy Manager Should 

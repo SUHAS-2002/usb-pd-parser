@@ -1,0 +1,84 @@
+Page 998
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+SPR Managed Capability Ports when power constrained are defined to offer Valid (A)PDOs based on  the port's Port 
+Maximum PDP (as per Table 10.2, "SPR Normative Voltages and Minimum Currents") at lower Port Present PDP 
+(as per Table 10.3, "SPR Source Capabilities When Port Present PDP is less than Port Maximum PDP") because these 
+voltages would otherwise be available if the Managed Capability Port power hadn't been constrained.
+Table 10.3  SPR Source Capabilities When Port Present PDP is less than Port Maximum PDP
+Port Present 
+PDP (W)
+5V Fixed
+9V Fixed
+15V Fixed
+20V Fixed
+SPR AVS with Max Voltage of 15V or 
+20V per Table 10.26
+5 < x ≤ 15
+(PDP/5)A3
+(PDP/9)A3,7, 8
+(PDP/15)A3,7,8
+(PDP/20)A3,7,8
+(9V – 15V):
+
+(15V Fixed Supply Max Current) A4, 6, 8
+(15V – 20V):
+
+(20V Fixed Supply Max Current) A6,8
+15 < x ≤ 27
+3A2
+(PDP/9)A3
+(PDP/15)A3,7
+(PDP/20)A3,7
+(9V – 15V):
+
+(15V Fixed Supply Max Current) A4
+(15V – 20V):
+
+(20V Fixed Supply Max Current) A6
+27 < x ≤ 45
+3A2
+3A2
+(PDP/15)A3
+45 < x ≤ 60
+3A2
+3A2
+3A2
+(PDP/20)A3
+(9V – 15V):
+
+(15V Fixed Supply Max Current) A4
+(15V – 20V):
+
+(20V Fixed Supply Max Current) A
+60 < x ≤ 100
+3A2
+3A2
+3A2
+(PDP/20)A1, 3
+(9V – 15V):
+
+(15V Fixed Supply Max Current) A4, 5
+(15V – 20V):
+
+(20V Fixed Supply Max Current) A1, 5
+1)
+Requires a 5A cable.
+2)
+The Fixed Supply PDOs Maximum Current field Shall Advertise at least 3A, but May Advertise up to RoundUp (PDP/voltage) to the 
+nearest 10mA. Requires a 5A cable if over 3A is Advertised.
+3)
+The Fixed Supply PDOs Maximum Current field Shall Advertise either RoundDown (PDP/voltage) or RoundUp (PDP/voltage) to the 
+nearest 10mA.
+4)
+SPR AVS current for this voltage range is the maximum current as Advertised by the 15V Fixed Supply PDO. This current can be higher 
+than 3A (refer to Note 2). Requires a 5A cable if over 3A is Advertised.
+5)
+The Sink is allowed to request up to the 20V Fixed Supply Max Current when the requested voltage is 15.0V.
+6)
+The Max Voltage for SPR AVS is what is allowed by Table 10.2, "SPR Normative Voltages and Minimum Currents" based on the port's 
+Port Maximum PDP.
+7)
+This SPR Fixed Supply voltage is only available if allowed by Table 10.2, "SPR Normative Voltages and Minimum Currents" based on the 
+port's Port Maximum PDP.
+8)
+SPR Sources May offer (A)PDOs at this Port Present PDP

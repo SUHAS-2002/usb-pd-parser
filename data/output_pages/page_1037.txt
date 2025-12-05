@@ -1,0 +1,11 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1037
+Figure D.10 Output of the BMC LPF1 in blue dash curve and the Subtractor in red solid curve (a) at Power 
+Source (b) at Power Sink
+D.2.4
+  Noise Zone and Detection Zone 
+The zone definition is the same as defined in Section D.1.4, "Noise Zone and Detection Zone". The sizes of the noise 
+zone and detection zone of the Subtraction Scheme are dependent on the filter time constant. When the time 
+constant of the first and second LPF are 200ns and 300ns, respectively, Vdetect is 250mV and Vnoise is 50mV. It is 
+highly recommended that the product implemented with the similar techniques indicates the performance with 
+the range of Vnoise and Vdetect in the electrical specification.

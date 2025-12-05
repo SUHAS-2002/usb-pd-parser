@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 933
+8.3.3.23
+  DFP Structured VDM State Diagrams
+The State Diagrams in this section Shall apply to all DFPs that support Structured VDMs.
+8.3.3.23.1
+  DFP Structured VDM Mode Entry State Diagram
+Figure 8.199, "DFP VDM Mode Entry State Diagram" shows the state operation for a DFP when entering a Mode.
+Figure 8.199 DFP VDM Mode Entry State Diagram
+8.3.3.23.1.1
+  PE_DFP_VDM_Mode_Entry_Request State
+The Policy Engine transitions to the PE_DFP_VDM_Mode_Entry_Request state from either the PE_SRC_Ready or 
+PE_SNK_Ready state for a DFP when:
+
+The Device Policy Manager requests that the Port Partner or a Cable Plug enter a Mode.
+On entry to the PE_DFP_VDM_Mode_Entry_Request state the Policy Engine Shall send a Structured VDM Enter 
+Mode Command request and Shall start the VDMModeEntryTimer.
+The Policy Engine Shall transition to the PE_DFP_VDM_Mode_Entry_ACKed state when:
+
+A Structured VDM Enter Mode ACK Command response is received.
+The Policy Engine Shall transition to the PE_DFP_VDM_Mode_Entry_NAKed state when:
+
+A Structured VDM Enter Mode NAK or BUSY Command response is received or
+
+The VDMModeEntryTimer times out.
+PE_SRC_Ready or PE_SNK_Ready
+(DFP)
+DPM requests
+Mode entry1
+PE_DFP_VDM_Mode_Entry_ACKed
+Actions on entry:
+Request DPM to enter the mode
+Power = Explicit Contract
+PD = Connected
+PE_DFP_VDM_Mode_Entry_Request
+Actions on entry:
+Send Mode Entry request
+Start VDMModeEntryTimer
+Power = Explicit Contract
+PD = Connected
+Mode Entry ACK
+received
+Mode entered
+PE_DFP_VDM_Mode_Entry_NAKed
+Actions on entry:
+Inform DPM of reason for failure
+Power = Explicit Contract
+PD = Connected
+Mode Entry NAK/BUSY
+Received |
+VDMModeEntryTimer timeout |
+Protocol Error3
+DPM informed2
+1)
+The Device Policy Manager Shall have placed the system into USB Safe State before issuing this request when entering Modal operation.
+2)
+The Device Policy Manager Shall have returned the system to USB operation if not in Modal operation at this point.
+3)
+Protocol Errors are handled by informing the DPM, returning to USB Safe State and then processing the Message once the PE_SRC_Ready or
+PE_SNK_Ready state has been entered.

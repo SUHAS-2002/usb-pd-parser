@@ -1,0 +1,66 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 351
+Figure 7.25 Transition Diagram for Decreasing the Voltage and Increasing the Current
+t2
+Source VOLD
+Source VNEW
+Source
+� V � I
+3
+Source Port
+Policy Engine
+Sink Port
+Policy Engine
+Source Port
+Device Policy Mgr
+Source Port
+Power Supply
+Port to Port 
+Messaging
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+Send
+Accept
+Evaluate
+Accept
+Send
+PS_RDY
+Evaluate
+PS_RDY
+1
+2
+4
+5
+PSTransitionTimer
+tSrcTransition
+Good 
+CRC
+tSrcTransReq
+Good 
+CRC
+�����������
+Sink ��IOLD
+� IOLD
+� INEW
+VNEW
+VOLD
+Sink Port
+Device Policy Mgr
+Sink Port
+Power Supply
+Source Port
+Voltage
+Sink Port
+Current
+Sink
+� I 
+...
+6
+7
+t1

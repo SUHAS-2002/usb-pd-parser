@@ -1,0 +1,90 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 847
+8.3.3.5.2
+  UFP Data_Reset Message State Diagrams
+Figure 8.137, "UFP Data_Reset Message State Diagram" shows the state diagram for a Data_Reset Message sent or 
+received by a UFP.
+Figure 8.137 UFP Data_Reset Message State Diagram
+8.3.3.5.2.1
+  PE_UDR_Send_Data_Reset State
+The PE_UDR_Send_Data_Reset State Shall be entered from the PE_SRC_Ready or PE_SNK_Ready State when 
+requested by the Device Policy Manager.
+On entry to the PE_UDR_Send_Data_Reset State the Policy Engine Shall request the Protocol Layer to send a 
+Data_Reset Message and then initialize and run the SenderResponseTimer.
+On exit from the PE_UDR_Send_Data_Reset State the Policy Engine Shall initialize and run the 
+DataResetFailUFPTimer.
+The Policy Engine Shall transition to the PE_UDR_Turn_Off_VCONN State when:
+
+An Accept Message has been received and
+
+The UFP is presently the VCONN Source.
+The Policy Engine Shall transition to the PE_UDR_Wait_For_Data_Reset_Complete State when:
+
+An Accept Message has been received and
+
+The UFP is not presently the VCONN Source.
+The Policy Engine Shall transition to ErrorRecovery when:
+PE_UDR_Send_Data_Reset
+Actions on entry:
+Send Data_Reset Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = connected
+Data Reset request from DPM
+Accept Message Received & 
+VCONN Source
+PE_SRC_Ready or 
+PE_SNK_Ready (UFP)
+PE_UDR_Data_Reset_Received
+Actions on entry:
+Inform Device Policy Manager of Data_Reset Message
+Send Accept Message
+Power = Explicit Contract 
+PD = connected
+Data_Reset Message 
+received
+Accept Message Sent &
+VCONN Source
+ErrorRecovery
+SenderResponseTimer Timeout |
+Protocol Error
+PE_UDR_Turn_Off_VCONN
+Actions on entry:
+Tell Device Policy Manager to turn off VCONN
+Power = Explicit Contract 
+PD = connected
+PE_UDR_Send_Ps_Rdy
+Actions on entry:
+Send PS_RDY Message
+Power = Explicit Contract 
+PD = connected
+VCONN Off1
+PE_SRC_Ready or 
+PE_SNK_Ready (UFP)
+Accept Message Received & 
+Not VCONN Source
+PS_RDY Message Sent
+Accept Message Sent &
+Not VCONN Source
+Protocol Error
+PE_UDR_Wait_For_Data_Reset_Complete
+Actions on entry:
+Wait for Data_Reset_Complete Message
+Power = Explicit Contract 
+PD = connected
+Data_Reset_Complete Message
+received
+Protocol Error
+Protocol Error
+DataResetFailUFPTimer Timeout2 |
+Protocol Error
+Actions on exit:
+Stop DataResetFailUFPTimer2
+Actions on exit:
+Initialize and run DataResetFailUFPTimer2
+Actions on exit:
+Initialize and run DataResetFailUFPTimer2
+1)
+VCONN Shall be fully discharged see Section 7.1.15 “Vconn Power Cycle”.
+2)
+Note that the DataResetFailUFPTimer Shall continue to run in every state until it is stopped or times out.

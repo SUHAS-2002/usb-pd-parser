@@ -1,0 +1,72 @@
+Page 522
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Accept Message was successfully sent.
+The Policy Engine requests the DPM to turn off VCONN.
+19
+When the DPM indicates VCONN has been turned off the 
+Policy Engine tells the Protocol Layer to form an 
+PS_RDY Message.
+20
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+21
+PHY Layer receives the Message and compares the CRC it 
+calculated with the one sent to verify the Message.
+PHY Layer appends a CRC and sends the Accept 
+Message. Starts CRCReceiveTimer.
+22
+Protocol Layer stores the MessageID of the incoming 
+Message.
+23
+The Protocol Layer forwards the received PS_RDY 
+Message information to the Policy Engine that consumes 
+it.
+The Policy Engine stops the VCONNDischargeTimer and 
+tells the DPM to perform a Data Reset.
+The DPM proceeds to turn on VCONN and then reset the 
+data connection.
+24
+Protocol Layer generates a GoodCRC Message and passes 
+it PHY Layer.
+25
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+26
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+27
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+PS_RDY Message was successfully sent.
+28
+The DPM indicates that the Data Reset process is 
+complete.
+The Policy Engine directs the Protocol Layer to generate 
+a Data_Reset_Complete Message. 
+29
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+30
+PHY Layer appends CRC and sends the 
+Data_Reset_Complete Message. Starts CRCReceiveTimer.
+PHY Layer receives the Data_Reset_Complete Message 
+and compares the CRC it calculated with the one sent to 
+verify the Message.
+31
+PHY Layer removes the CRC and forwards the 
+Data_Reset_Complete Message to the Protocol Layer.
+Table 8.55  Steps for a DFP Initiated Data Reset where the UFP is the VCONN Source
+Step
+DFP (Reset Initiator)
+UFP/VCONN Source (Reset Responder)

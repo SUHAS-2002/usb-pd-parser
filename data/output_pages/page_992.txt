@@ -1,0 +1,79 @@
+Page 992
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+If wValue or wLength are not as specified above, then the behavior of the PDUSB Device is not specified.
+If wIndex refers to a Battery that does not exist, then the PDUSB Device Shall respond with a Request Error.
+If the PDUSB Device is not configured, the PDUSB Hub's response to this request is undefined.
+If the PDUSB Hub is not configured, the PDUSB Hub's response to this request is undefined.
+9.4.2
+  SetPDFeature
+The request shown in Table 9.11, "Set PD Feature" sets the value requested in the PDUSB Hub/Peripheral.
+Setting a feature enables that feature or starts a process associated with that feature; see Table 9.8, "PD Feature 
+Selectors" for the feature selector definitions. Features that May be set with this request are:
+
+BATTERY_WAKE_MASK.
+
+CHARGING_POLICY.
+3
+bRemoteWakeCapStatus
+1
+Bitmap
+If the device supports remote wake, then the device 
+Shall support Battery Remote wake events. The 
+default value for the Remote wake events Shall be 
+turned off (set to zero) and can be enable/disabled by 
+the host as required. If set to one the device Shall 
+generate a wake event when a change of status 
+occurs. See Section 9.4.2, "SetPDFeature" for more 
+details.
+Value
+Description
+0
+Battery present event
+1
+Charging flow
+2
+Battery error
+7:3
+Reserved and Shall be set to zero
+4
+wRemainingOperatingTime
+2
+Number
+Shall contain the operating time (in minutes) until the 
+Weak Battery threshold is reached, based on Present 
+Battery Strength and the device's present operational 
+power needs.
+Note: This value Shall exclude any additional power re-
+ceived from charging.
+A Battery that is not capable of returning this information 
+Shall return a value of 0xFFFF.
+6
+wRemainingChargeTime
+2
+Number
+Shall contain the remaining time (in minutes) until the 
+Charged Battery threshold is reached based on Present 
+Battery Strength, charging power and the device's present 
+operational power needs. Value Shall only be Valid if the 
+Charging Flow is "Charging".
+A Battery that is not capable of returning this information 
+Shall return a value of 0xFFFF.
+Table 9.11  Set PD Feature
+bmRequestType
+bRequest
+wValue
+wIndex
+wLength
+Data
+00000000B
+set_ feature
+Feature Selector
+Feature Specific
+Zero
+None
+Table 9.10  Battery Status Structure
+Offset
+Field
+Size
+Value
+Description

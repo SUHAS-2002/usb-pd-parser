@@ -1,0 +1,116 @@
+Page 22
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8
+Device Policy  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 416
+Figure  8.1
+Example of daisy chained displays ...........................................................................................................422
+Figure  8.2
+Basic Message Exchange (Successful).....................................................................................................426
+Figure  8.3
+Basic Message flow indicating possible errors....................................................................................427
+Figure  8.4
+Basic Message Flow with Bad followed by a Retry............................................................................428
+Figure  8.5
+Successful Fixed, Variable or Battery SPR Power Negotiation.....................................................448
+Figure  8.6
+Rejected Fixed, Variable or Battery SPR Power Negotiation.........................................................452
+Figure  8.7
+Wait response to Fixed, Variable or Battery SPR Power Negotiation.......................................455
+Figure  8.8
+SPR PPS Keep Alive..........................................................................................................................................458
+Figure  8.9
+SPR Sink Makes Request (Accept) ............................................................................................................461
+Figure  8.10
+SPR Sink Makes Request (Reject)..............................................................................................................464
+Figure  8.11
+SPR Sink Makes Request (Wait).................................................................................................................467
+Figure  8.12
+Entering EPR Mode (Success).....................................................................................................................470
+Figure  8.13
+Entering EPR Mode (Failure due to non-EPR cable).........................................................................473
+Figure  8.14
+Entering EPR Mode (Failure of VCONN Swap).......................................................................................476
+Figure  8.15
+Successful Fixed EPR Power Negotiation ..............................................................................................480
+Figure  8.16
+Rejected Fixed EPR Power Negotiation..................................................................................................484
+Figure  8.17
+Wait response to Fixed EPR Power Negotiation.................................................................................487
+Figure  8.18
+EPR Keep Alive ..................................................................................................................................................490
+Figure  8.19
+Exiting EPR Mode (Sink Initiated) ............................................................................................................493
+Figure  8.20
+Exiting EPR Mode (Source Initiated).......................................................................................................496
+Figure  8.21
+EPR Sink Makes Request (Accept)............................................................................................................499
+Figure  8.22
+EPR Sink Makes Request (Reject) .............................................................................................................502
+Figure  8.23
+EPR Sink Makes Request (Wait) ................................................................................................................505
+Figure  8.24
+Unsupported message....................................................................................................................................508
+Figure  8.25
+Soft Reset .............................................................................................................................................................511
+Figure  8.26
+DFP Initiated Data Reset where the DFP is the VCONN Source......................................................514
+Figure  8.27
+DFP Receives Data Reset where the DFP is the VCONN Source .....................................................517
+Figure  8.28
+DFP Initiated Data Reset where the UFP is the VCONN Source......................................................520
+Figure  8.29
+DFP Receives a Data Reset where the UFP is the VCONN Source..................................................524
+Figure  8.30
+Source initiated Hard Reset.........................................................................................................................528
+Figure  8.31
+Sink Initiated Hard Reset..............................................................................................................................531
+Figure  8.32
+Source initiated reset - Sink long reset...................................................................................................534
+Figure  8.33
+Successful Power Role Swap Sequence Initiated by the Source..................................................538
+Figure  8.34
+Rejected Power Role Swap Sequence Initiated by the Source......................................................542
+Figure  8.35
+Power Role Swap Sequence with wait Initiated by the Source....................................................545
+Figure  8.36
+Successful Power Role Swap Sequence Initiated by the Sink .......................................................549
+Figure  8.37
+Rejected Power Role Swap Sequence Initiated by the Sink...........................................................553
+Figure  8.38
+Power Role Swap Sequence with wait Initiated by the Sink.........................................................556
+Figure  8.39
+Successful Fast Role Swap Sequence .......................................................................................................560
+Figure  8.40
+Data Role Swap, UFP operating as Sink initiates................................................................................564
+Figure  8.41
+Rejected Data Role Swap, UFP operating as Sink initiates.............................................................567
+Figure  8.42
+Data Role Swap with Wait, UFP operating as Sink initiates...........................................................570
+Figure  8.43
+Data Role Swap, UFP operating as Source initiates...........................................................................573
+Figure  8.44
+Rejected Data Role Swap, UFP operating as Source initiates........................................................576
+Figure  8.45
+Data Role Swap with Wait, UFP operating as Source initiates .....................................................579
+Figure  8.46
+Data Role Swap, DFP operating as Source initiates...........................................................................582
+Figure  8.47
+Rejected Data Role Swap, DFP operating as Source initiates........................................................585
+Figure  8.48
+Data Role Swap with Wait, DFP operating as Source initiates .....................................................588
+Figure  8.49
+Data Role Swap, DFP operating as Sink initiates................................................................................591
+Figure  8.50
+Rejected Data Role Swap, DFP operating as Sink initiates.............................................................594
+Figure  8.51
+Data Role Swap with Wait, DFP operating as Sink initiates...........................................................597
+Figure  8.52
+Successful VCONN Source Swap, initiated by VCONN Source.........................................................600
+Figure  8.53
+Rejected VCONN Source Swap, initiated by VCONN Source.............................................................603
+Figure  8.54
+VCONN Source Swap with Wait, initiated by VCONN Source.............................................................606
+Figure  8.55
+VCONN Source Swap, initiated by non-VCONN Source.........................................................................609
+Figure  8.56
+Rejected VCONN Source Swap, initiated by non-VCONN Source......................................................612

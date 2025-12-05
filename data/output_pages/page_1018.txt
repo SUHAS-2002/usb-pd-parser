@@ -1,0 +1,101 @@
+Page 1018
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+C.1.2
+  Discover Identity Command response - Active Cable.
+Table C.2, "Discover Identity Command response from Active Cable Responder Example" shows the contents of the 
+key fields in the Message Header and VDM Header for a Responder returning VDOs in response to a Discover 
+Identity Command request. In this illustration, the Responder is an active Gen2 cable which supports Modal 
+Operation.
+Table C.2  Discover Identity Command response from Active Cable Responder Example
+Bit(s)
+Field
+Value
+Message Header
+15
+Reserved
+0
+14…12
+Number of Data Objects
+5 (VDM Header + ID Header VDO + Cert Stat VDO + 
+Product VDO + Cable VDO)
+11…9
+MessageID
+0…7
+8
+Cable Plug
+1
+7…6
+Specification Revision
+10b (Revision 3.x)
+5…4
+Reserved
+0
+3…0
+Message Type
+1111b (Vendor Defined Message)
+VDM Header
+B31…16
+Standard or Vendor ID (SVID)
+0xFF00 (PD SID)
+B15
+VDM Type
+1 (Structured VDM)
+B14…13
+Structured VDM Version (Major)
+01b (Version 2.0)
+B12…11
+Structured VDM Version (Minor)
+01b (Version 2.1)
+B10…8
+Object Position
+000b
+B7…6
+Command Type
+01b (Responder ACK)
+B5
+Reserved
+0
+B4…0
+Command
+2 (Discover Identity)
+ID Header VDO
+B31
+USB Communications Capable as USB Host
+0 (not USB Communications capable as a USB 
+Host)
+B30
+USB Communications Capable as a USB Device
+0 (not data capable as a Device)
+B29…27
+SOP’ Product Type (Cable Plug/VPD)
+100b (Active Cable)
+B26
+Modal Operation Supported
+1 (supports Modes)
+B25…16
+Reserved. Shall be set to zero.
+0
+B15…0
+16-bit unsigned integer. USB Vendor ID
+USB-IF assigned VID for this cable vendor
+Cert Stat VDO
+B31…0
+32-bit unsigned integer
+USB-IF assigned XID for this cable
+Product VDO
+B31…16
+16-bit unsigned integer. USB Product ID
+Product ID assigned by the cable vendor
+B15…0
+16-bit unsigned integer. bcdDevice
+Device version assigned by the cable vendor
+Cable VDO1 (returned for Product Type “Active Cable”)
+B31…28
+HW Version
+Cable HW version number (vendor defined)
+B27…24
+Firmware Version
+Cable FW version number (vendor defined)
+B23…21
+VDO Version
+010b (Version 1.2)

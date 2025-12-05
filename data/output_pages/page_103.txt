@@ -1,0 +1,62 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 103
+5.8.3
+  Transmitter Load Model
+The transmitter load model Shall be equivalent to the circuit outlined in Figure 5.23, "Transmitter Load Model for 
+BMC Tx from a Source" for a Source and Figure 5.24, "Transmitter Load Model for BMC Tx from a Sink" for a Sink. It 
+is formed by the concatenation of a cable load model and a receiver load model. See [USB Type-C 2.4] for details of 
+the Rp and Rd resistors. 
+Note:
+The parameters zCable_CC, tCableDelay_CC and cCablePlug_CC are defined in [USB Type-C 2.4].
+Figure 5.23 Transmitter Load Model for BMC Tx from a Source
+Figure 5.24 Transmitter Load Model for BMC Tx from a Sink
+The transmitter system components rOutput and cShunt are illustrated for Informative purposes, and do not form 
+part of the transmitter load model. See Section 5.8.5, "BMC Transmitter Specifications" for a description of the 
+transmitter system design.
+The value of the modeled cable inductance, La, (in nH) Shall be calculated from the following formula:
+La= tCableDelay_CCmax* zCable_CCmin
+tCableDelay_CC is the modeled signal propagation delay through the cable, and zCable_CC is the modeled cable 
+impedance.
+The modeled cable inductance is 640nH for a cable with zCable_CCmin = 32Ω and tCableDelay_CCmax = 20ns.
+The value of the modeled cable capacitance, Ca, (in pF) Shall be calculated from the following formula:
+Ca=tCableDelay_CCmax/zCable_CCmin 
+The modeled cable capacitance is Ca = 625pF for a cable with zCable_CCmin = 32Ω and tCableDelay_CCmax = 20ns. 
+Therefore, Ca/2 = 312.5pF.
+cCablePlug_CC models the capacitance of the plug at each end of the cable. cReceiver models the capacitance of the 
+receiver. The maximum values Shall be used in each case.
+cCablePlug_CC
+cShunt
+Connector
+ca
+2
+La
+cReceiver
+Receiver 
+Load Model
+Transmitter Load 
+Model Output
+Cable Model
+cCablePlug_CC
+ca
+2
+rOutput
+Rp
+Rd
+cCablePlug_CC
+cShunt
+Connector
+ca
+2
+La
+cReceiver
+Receiver 
+Load Model
+Transmitter Load 
+Model Output
+Cable Model
+cCablePlug_CC
+ca
+2
+rOutput
+Rp
+Rd

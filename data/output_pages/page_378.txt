@@ -1,0 +1,44 @@
+Page 378
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 7.13  Sequence Description for decreasing the Current in PPS mode
+Step
+Source Port
+Sink Port
+1
+Policy Engine sends the Accept Message to the Sink.
+Policy Engine receives the Accept Message.
+2
+Protocol Layer receives the GoodCRC Message from 
+the Sink. The Policy Engine tells the Device Policy 
+Manager to instruct the power supply to decrease its 
+set-point for the current limit.
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then evaluates the Accept 
+Message and instructs the Sink to reduce its current to 
+below the new Negotiated current level and starts the 
+PSTransitionTimer.
+3
+The Power Supply decreases its Current Limit set-
+point to the new Negotiated value.
+The Sink reduces its current to less than the new 
+Negotiated current to prevent the Source from going 
+into Current Limit.
+4
+The Policy Engine sends the PS_RDY Message to the 
+Sink starting within tPpsSrcTransSmall of the end of 
+the GoodCRC Message following the Accept Message.
+5
+Policy Engine receives the GoodCRC Message from 
+the Sink.
+Policy Engine receives the PS_RDY Message.
+6
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then stops the 
+PSTransitionTimer and evaluates the PS_RDY 
+Message.
+If the PS_RDY Message is not received before 
+PSTransitionTimer times out the Sink sends Hard 
+Reset Signaling.
+7
+The Sink is allowed to draw INEW but must be aware 
+the voltage on VBUS can drop doing so.

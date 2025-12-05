@@ -1,0 +1,12 @@
+Page 384
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.3.1.4.2
+  Decreasing the Adjustable Voltage Supply (AVS) Voltage
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed when decreasing the 
+voltage is shown in Figure 7.37, "Transition Diagram for Decreasing the Adjustable Voltage Supply Voltage". The 
+sequence that Shall be followed is described in Table 7.16, "Sequence Description for Decreasing the Adjustable 
+Voltage Supply Voltage". The timing parameters that Shall be followed are listed in Table 7.23, "Source Electrical 
+Parameters", Table 7.24, "Sink Electrical Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In Figure 7.37, "Transition Diagram for Decreasing the Adjustable Voltage Supply Voltage", the Sink has 
+previously sent a Request Message to the Source. 

@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 329
+Figure 7.14 Source Peak Current Overload
+7.1.12
+   Source Capabilities Extended Parameters
+Implementers can choose to make available certain characteristics of a PDUSB Source as a set of Static and/or 
+dynamic parameters to improve interoperability between external power sources and portable computing 
+devices. The complete list of reportable Static parameters is described in full in Section 6.5.1, 
+"Source_Capabilities_Extended Message" and listed in Figure 6.37, "Source_Capabilities_Extended Message". The 
+subset of parameters listed below directly represent Source Capabilities and are described in the rest of this 
+section.
+
+Voltage Regulation.
+
+Holdup Time.
+
+Compliance.
+
+Peak Current.
+
+Source Inputs.
+
+Batteries.
+7.1.12.1
+  Voltage Regulation Field
+The power consumption of a device can change dynamically. The ability of the Source to regulate its voltage output 
+might be important if the device is sensitive to fluctuations in voltage. The Voltage Regulation bit field is used to 
+convey information about the Sources output regulation and tolerance to various load steps.
+7.1.12.1.1
+  Load Step Slew Rate
+The default load step slew rate is established at 150mA/µs. A Source Shall meet the following requirements under 
+the load step reported in the Source_Capabilities_Extended Message:
+
+The Source Shall maintain VBUS regulation within the vSrcValid range.
+
+The noise on the CC line Shall remain below vNoiseIdle and vNoiseActive.
+Sink Port Current
+Source Port Voltage
+vSrcNew(max)/
+vSrcPeak(max)
+Nominal Voltage
+vSrcNew(min)
+vSrcPeak(min)
+IOC level
+as requested in the Operating 
+Current field of an RDO
+% level with respect to IOC
+as advertised in the Peak Current 
+field of Fixed Supply PDO
+Additional operating range for 
+Fixed Supply that supports 
+overload capability
+Operating range for supply that DOES 
+NOT support overload capability

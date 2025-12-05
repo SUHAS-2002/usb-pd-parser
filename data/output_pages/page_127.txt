@@ -1,0 +1,79 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 127
+Figure 6.10 Example byte transmission for a Security_Response Message Chunk request (Chunked bit is set 
+to 1)
+Figure 6.11, "Example Chunk 1 of Security_Response Message of Data Size 30 (Chunked bit set to 1)" shows Chunk 
+Number one of the Security_Response Message shown in Figure 6.7, "Example Security_Request sequence Chunked 
+(Chunked bit = 1)" in more detail including the byte ordering on the bus and padding. Two bytes of padding are 
+added to ensure that the Payload is a multiple of 32 bits, corresponding to 2 Data Objects. The Number of Data 
+Objects field is set to 2 to indicate the length of this Chunk and the Data Size field is set to 30 to indicate the length 
+of the whole Extended Message.
+Figure 6.11 Example Chunk 1 of Security_Response Message of Data Size 30 (Chunked bit set to 1)
+Message Header
+(16 bit)
+Message Type = 
+Security_Response
+Number of Data 
+Objects = 1
+Extended Message 
+Header
+(16 bit)
+Chunked = 1
+Chunk Number = 1
+Request Chunk = 1
+Data Size = 0
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+P0
+(0x00)
+P1
+(0x00)
+Padding (2 bytes)
+Data Object 0
+Message Header
+(16 bit)
+Message Type = 
+Security_Response
+Number of Data 
+Objects = 2
+Data (4 bytes)
+Extended Message 
+Header
+(16 bit)
+Chunked = 1
+Chunk Number = 1
+Request Chunk = 0
+Data Size = 30
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+B0
+B1
+B2
+B3
+P0
+(0x00)
+P1
+(0x00)
+Padding (2 bytes)
+Data Object 0
+Data Object 1

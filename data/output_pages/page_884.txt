@@ -1,0 +1,29 @@
+Page 884
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.17.3
+  Security Response Received State Diagram
+Figure 8.170, "Security response received State Diagram" shows the state diagram for a Source or Sink on receiving 
+a Security_Response Message. See also Section 6.5.8, "Security Messages".
+Figure 8.170 Security response received State Diagram
+8.3.3.17.3.1
+  PE_Security_Response_Received State
+The Policy Engine Shall transition to the PE_Security_Response_Received state, from either the PE_SRC_Ready or 
+PE_SNK_Ready when a Security_Response Message is received. 
+On entry to the PE_Security_Response_Received state the Policy Engine Shall inform the Device Policy Manager of 
+the details of the security response.
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready state as appropriate (see 
+Figure 8.132, "Source Port State Diagram", Figure 8.133, "Sink Port State Diagram" and Figure 8.203, "Cable Ready 
+State Diagram") when:
+
+The Device Policy Manager has been informed.
+Security_Response Message
+received
+DPM informed
+PE_SRC_Ready or
+PE_SNK_Ready
+PE_Security_Response_Received
+Actions on entry:
+Inform Device Policy Manager of the security response 
+details.
+Power = Explicit Contract
+PD = Connected

@@ -1,0 +1,81 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 45
+Guaranteed Capability Port
+A Guaranteed Capability Port is always capable of delivering its Port Maximum PDP and 
+indicates this by setting its Port Present PDP to be the same as its Port Maximum PDP except 
+when limited by the cable’s Capabilities. This is a Static capability.
+Hard Reset
+This is initiated by Hard Reset Signaling from either Port Partner. It restores VBUS to USB Default 
+Operation and resets the PD communications engine to its default State in both Port Partners as 
+well as in any Attached Cable Plugs. It restores both Port Partners to their default Data Roles and 
+returns the VCONN Source to the Source Port. A DRP Source Port operating as a Source will 
+continue to operate as a Source.
+Host
+See USB Host.
+Hot Swappable Battery
+A Battery that is easily accessible for a user to remove or change for another Battery.
+Hub
+A USB Device that provides additional connections to the USB.
+ID Header VDO
+The VDO in a Discover Identity Command immediately following the VDM Header. The ID 
+Header VDO contains information corresponding to the Power Delivery Product.
+Idle
+Condition on CC where there are no signal transitions within a given time window. See Section 
+5.8.6.1, "Definition of Idle".
+Implicit Contract
+An agreement on power levels between a Port Pair which occurs, not because of the Power 
+Delivery Negotiation process, but because of a Power Role Swap or Fast Role Swap. Implicit 
+Contracts are transitory since the Port Pair is required to immediately Negotiate an Explicit 
+Contract after the Power Role Swap. An Implicit Contract Shall be limited to USB Type-C current 
+(see [USB Type-C 2.4]).
+Initial Sink
+Sink at the start of a Power Role Swap or Fast Role Swap which transitions to being the New 
+Source.
+Initial Source
+Source at the start of a Power Role Swap or Fast Role Swap which transitions to being the New 
+Sink.
+Initiator
+The initial sender of a Command request in the form of a query.
+Invariant PDOs
+A Source Port that offers Invariant PDOs will always Advertise the same PDOs except when 
+limited by the cable.
+IoC
+The Negotiated current value as defined in [IEC 63002].
+IR Drop
+The voltage drop across the cable and connectors between the Source and the Sink as defined in 
+[USB Type-C 2.4]. It is a function of the resistance of the ground and power wire in the cable plus 
+the contact resistance in the connectors times the current flowing over the path.
+K-code
+Special symbols provided by the 4b5b coding scheme. K-codes are used to signal Hard Reset and 
+Cable Reset and delineate Packet boundaries.
+Local Policy
+Every PD Capable device has its own Policy, called the Local Policy that is executed by its Policy 
+Engine to control its power delivery behavior. The Local Policy at any given time might be the 
+default policy, hard coded or modified by changes in operating parameters or one provided by 
+the system USB Host or some combination of these. The Local Policy Optionally can be changed 
+by a System Policy Manager.
+LPS
+Limited Power Supply as defined in [IEC 62368-1].
+LSB
+An abbreviation for Least Significant Bit.
+Managed Capability Port
+A Managed Capability Port can have its Port Present PDP set to a different value than its Port 
+Maximum PDP. Its Port Present PDP value can be dynamic and change during normal 
+operation.
+Message
+The Packet Payload consisting of a Message Header for Control Messages and a Message Header 
+and data for Data Messages and Extended Messages as defined in Section 6.2, "Messages".
+Message Header
+Every Message starts with a 16-bit Message Header containing basic information about the 
+Message and the PD Port’s Capabilities.
+Messaging
+Communication in the form of Messages as defined in Section 6, "Protocol Layer".
+Modal Operation
+Operation where there are one or more Active Modes. Modal Operation ends when there are no 
+longer any Active Modes.
+Mode
+Mode is a general term used to describe a particular type of operation of a given device. 
+Examples of modes are: Alternate Mode, EPR Mode, SPR Mode.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

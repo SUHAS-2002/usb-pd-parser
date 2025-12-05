@@ -1,0 +1,12 @@
+Page 154
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.1.6.1
+  Use by Dual-Role Power devices
+Dual-Role Power devices send a Source_Capabilities Message (see Section 6.4.1.5, "SPR Source Capabilities 
+Message") as part of advertising Port Capabilities when operating in Source role. Dual-Role Power devices send a 
+Source_Capabilities Message in response to a Get_Source_Cap Message regardless of their present operating role. 
+Similarly Dual-Role Power devices send a Sink_Capabilities Message (see Section 6.4.1.6, "SPR Sink Capabilities 
+Message") in response to a Get_Sink_Cap Message regardless of their present operating role.
+6.4.1.6.2
+  Management of the Power Reserve
+This section has been removed. Refer to Section 8.2.5, "Managing Power Requirements".

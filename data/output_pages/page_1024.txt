@@ -1,0 +1,70 @@
+Page 1024
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+C.3.2
+  Discover Modes Command response
+The Responder to the Discover Modes Command request returns a Message Header with the Number of Data 
+Objects field set to a value of 1 to 7 (the actual value is the number of Mode objects plus one) followed by a VDM 
+Header with the Command Type (B7…6) set to 1 indicating the Command is from a Responder and the Command 
+(B4…0) set to 3 indicating the following objects describe the Modes the device supports. If the ID is a VID, the 
+structure and content of the VDO is left to the vendor. If the ID is a SID, the structure and content of the VDO is 
+defined by the Standard. 
+Table C.7, "Discover Modes Command response from Responder Example" shows the contents of the key fields in the 
+Message Header and VDM Header for a Responder returning VDOs in response to a Discover Modes Command 
+request. In this illustration, the value 2 in the Message Header Number of Data Objects field indicates that the 
+device is returning one VDO describing the Mode it supports. It is possible for a Responder to report up to six 
+different Modes.
+Table C.7  Discover Modes Command response from Responder Example
+Bit(s)
+Field
+Value
+Message Header
+15
+Reserved
+0
+14…12
+Number of Data Objects
+2 (VDM Header + 1 Mode VDO)
+11…9
+MessageID
+0…7
+8
+Port Power Role
+0 or 1
+7…6
+Specification Revision
+10b (Revision 3.x)
+5…4
+Reserved
+0
+3…0
+Message Type
+1111b (Vendor Defined Message)
+VDM Header
+B31…16
+Standard or Vendor ID (SVID)
+SVID for which Modes were requested
+B15
+VDM Type
+1 (Structured VDM)
+B14…13
+Structured VDM Version (Major)
+01b (Version 2.0)
+B12…11
+Structured VDM Version (Minor)
+01b (Version 2.1)
+B10…8
+Object Position
+000b
+B7…6
+Command Type
+01b (Responder ACK)
+B5
+Reserved
+0
+B4…0
+Command
+3 (Discover Modes)
+Mode VDO
+B31…0
+Mode 1
+Standard or Vendor defined Mode value

@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 253
+The PSSourceOnTimer Shall be started when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the transmitted PS_RDY Message, is re-
+ceived by the PHY Layer.
+
+The PSSourceOnTimer Shall be stopped when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the received PS_RDY Message, is transmit-
+ted by the PHY Layer.
+The PSSourceOnTimer relates to the time taken for the remote Dual-Role Power Device to start sourcing power 
+(see also Section 7.3.2.1, "Sink Requested Power Role Swap" and Section 7.3.2.2, "Source Requested Power Role Swap") 
+and will time out if a PS_RDY Message indicating this has not been received within tPSSourceOn.
+6.6.5.3.2
+  Use during Fast Role Swap
+The PSSourceOnTimer is used by the Policy Engine in Dual-Role Power Device that has just stopped sourcing power 
+and is waiting to start sinking power to timeout on a PS_RDY Message during a Fast Role Swap. This condition leads 
+to USB Type-C Error Recovery.
+The PSSourceOnTimer Shall be started when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the transmitted PS_RDY Message, is re-
+ceived by the PHY Layer.
+The PSSourceOnTimer Shall be stopped when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the received PS_RDY Message, is transmit-
+ted by the PHY Layer.
+The PSSourceOnTimer relates to the time taken for the remote Dual-Role Power Device to start sourcing power 
+(see also Section 7.2.10, "Fast Role Swap" and Section 7.3.4, "Transitions Caused by Fast Role Swap") and will time 
+out if a PS_RDY Message indicating this has not been received within tPSSourceOn.
+6.6.6
+  NoResponseTimer
+The NoResponseTimer is used by the Policy Engine in a Source to determine that its Port Partner is not responding 
+after a Hard Reset. When the NoResponseTimer times out, the Policy Engine Shall issue up to nHardResetCount 
+additional Hard Resets before determining that the Port Partner is non-responsive to USB Power Delivery 
+messaging.
+If the Source fails to receive a GoodCRC Message in response to a Source_Capabilities Message within tNoResponse 
+of: 
+
+The last bit of a Hard Reset Signaling being sent by the PHY Layer if the Hard Reset Signaling was initi-
+ated by the Sink.
+
+The last bit of a Hard Reset Signaling being received by the PHY Layer if the Hard Reset Signaling was 
+initiated by the Source.
+Then the Source Shall issue additional Hard Resets up to nHardResetCount times (see Section 6.8.3, "Hard Reset").
+For a non-responsive device, the Policy Engine in a Source May either decide to continue sending 
+Source_Capabilities Messages or to go to non-USB Power Delivery operation and cease sending 
+Source_Capabilities Messages.
+6.6.7
+  BIST Timers
+6.6.7.1
+  tBISTCarrierMode
+tBISTCarrierMode is used to define the maximum time that a UUT has to enter BIST Carrier Mode when requested 
+by a Tester. 

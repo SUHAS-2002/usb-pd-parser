@@ -1,0 +1,65 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 3
+3.1
+1.5
+Editorial changes
+This version incorporates the following ECNs:
+
+Timer Description Corrections
+
+Change Source_Info Requirements
+
+AMS Update
+July 2022
+3.1
+1.6
+Editorial changes
+This version incorporates the following ECNs:
+
+USB4® V2 Updates
+
+Data Reset Issues
+
+Increase tSenderResponse
+
+PPS Power Limit Bit Update
+
+Support for Asymmetric Mode
+
+Timer Description Corrections Revisited
+October 2022
+3.1
+1.7
+Editorial Changes
+This version incorporates the following ECNs:
+
+Data Reset Invalid Reject Handling
+
+Source request
+
+Source Transition
+
+EPR Entry
+January 2023
+3.1
+1.8
+Editorial Changes
+This version incorporates the following ECNs:
+
+Slew rate exemption for Power Role Swap.
+
+EUDO cable speed clarification.
+
+Update to PPS Requirements.
+
+Deprecate Interruptibility.
+
+Section 7.3 restructure and update.
+April 2023
+3.1
+1.9
+Editorial Changes
+July 2023
+Revision Version
+Comments
+Issue Date

@@ -1,0 +1,75 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 515
+Table 8.53, "Steps for a DFP Initiated Data Reset where the DFP is the VCONN Source" below provides a detailed 
+explanation of what happens at each labeled step in Figure 8.26, "DFP Initiated Data Reset where the DFP is the 
+VCONN Source" above. 
+Table 8.53  Steps for a DFP Initiated Data Reset where the DFP is the VCONN Source
+Step
+DFP/VCONN Source (Reset Initiator)
+UFP (Reset Responder)
+1
+The Policy Engine directs the Protocol Layer to 
+generate a Data_Reset Message to request a Data Reset. 
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the Data_Reset 
+Message. Starts CRCReceiveTimer.
+PHY Layer receives the Data_Reset Message and 
+compares the CRC it calculated with the one sent to verify 
+the Message.
+4
+PHY Layer removes the CRC and forwards the 
+Data_Reset Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received Data_Reset 
+Message information to the Policy Engine that 
+consumes it.
+The Policy Engine informs the DPM that a Data_Reset 
+Message has been received.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC and checks the CRC to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Data_Reset Message was successfully sent. Policy 
+Engine starts SenderResponseTimer.
+10
+Policy Engine tells the Protocol Layer to form an Accept 
+Message.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the Message.
+PHY Layer appends a CRC and sends the Accept Message. 
+Starts CRCReceiveTimer.
+13
+Protocol Layer stores the MessageID of the incoming 
+Message.
+14
+The Protocol Layer forwards the received Accept 
+Message information to the Policy Engine that 
+consumes it.
+The Policy Engine stops the SenderResponseTimer 
+and tells the DPM to perform a Data Reset. 
+The DPM proceeds to cycle VCONN and then reset the 
+data connection.
+15
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.

@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 163
+
+Unstructured VDMs Shall only be used during Modal Operation in the context of an Active Mode i.e., only 
+after the UFP has Ack'ed the Enter Mode Command can Unstructured VDMs be sent or received. The 
+Active Mode and the associated Unstructured VDMs Shall use the same SVID.
+
+Unstructured VDMs May be used with SOP* Packets.
+
+When a DFP or UFP does not support Unstructured VDMs or does not recognize the VID it Shall return 
+a Not_Supported Message.
+Table 6.28, "Unstructured VDM Header" illustrates the VDM Header bits.
+6.4.4.1.1
+  USB Vendor ID
+The Vendor ID (VID) field Shall contain the 16-bit Vendor ID value assigned to the vendor by the USB-IF (VID). No 
+other value Shall be present in this field.
+6.4.4.1.2
+  VDM Type
+The VDM Type field Shall be set to zero indicating that this is an Unstructured VDM.
+6.4.4.2
+  Structured VDM
+Setting the VDM Type field to 1 (Structured VDM) defines the use of bits B14…0 in the Structured VDM Header. The 
+fields in the Structured VDM Header are defined in Table 6.29, "Structured VDM Header".
+The following rules apply to the use of Structured VDM Messages:
+
+Structured VDMs Shall only be used when an Explicit Contract is in place with the following exception:
+
+Prior to establishing the First Explicit Contract, a Source May issue Discover Identity Messages, to a 
+Cable Plug using SOP’ Packets, as an Initiator (see Section 8.3.3.25.3, "Source Startup Structured VDM 
+Discover Identity of a Cable Plug State Diagram").
+
+Either Port May be an Initiator of Structured VDMs except for the Enter Mode and Exit Mode Commands 
+which Shall only be initiated by the DFP.
+
+A Cable Plug Shall only be a Responder to Structured VDMs.
+
+Structured VDMs Shall Not be initiated or responded to under any other circumstances.
+
+When a DFP or UFP does not support Structured VDMs any Structured VDMs received Shall return a 
+Not_Supported Message.
+
+When using any of the SVID Specific Commands in the Structured VDM Header (VDM Header b4…0 - 
+value 16 - 31) the Responder Shall NAK Messages where the SVID in the VDM Header is not recognized 
+as an SVID that uses SVID Specific Commands or the use of SVID Specific Commands is not supported for 
+the SVID.
+
+When a Cable Plug does not support Structured VDMs any Structured VDMs received Shall be Ignored.
+Table 6.28  Unstructured VDM Header
+Bit(s)
+Parameter
+Description
+B31…16
+Vendor ID (VID)
+Unique 16-bit unsigned integer. Assigned by the USB-IF to the Vendor.
+B15
+VDM Type
+0 = Unstructured VDM
+B14…0
+Available for Vendor Use
+Content of this field is defined by the vendor.

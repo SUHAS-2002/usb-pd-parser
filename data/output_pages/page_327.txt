@@ -1,0 +1,35 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 327
+Figure 7.13 Allowed DNL errors and tolerance of Voltage and Current in AVS/PPS mode
+7.1.8.3
+  Programmable Power Supply Output Voltage Tolerance and 
+Range
+After a voltage transition of a Programmable Power Supply is complete (i.e. after tPpsSrcTransSmall or 
+tPpsSrcTransLarge) and during static load conditions the Source output voltage Shall remain within the vPpsNew 
+limits. The range defined by vPpsNew accounts for DC regulation accuracy, line regulation, load regulation and 
+output ripple. After a voltage transition is complete (i.e. after tPpsSrcTransSmall or tPpsSrcTransLarge) and 
+during transient load conditions the Source output voltage Shall Not go beyond the range specified by vPpsValid. 
+The amount of time the Source output voltage can be in the band between vPpsNew and vPpsValid Shall Not 
+exceed tPpsTransient.
+7.1.8.4
+  Adjustable Voltage Supply Output Voltage tolerance and Range
+After a voltage transition of an AVS is complete (i.e. after tAvsSrcTransSmall or tAvsSrcTransLarge) and during 
+static load conditions the Source output voltage Shall remain within the vAvsNew limits. The range defined by 
+vAvsNew accounts for DC regulation accuracy, line regulation, load regulation and output ripple. After a voltage 
+transition is complete (i.e. after tAvsSrcTransSmall or tAvsSrcTransLarge) and during transient load conditions 
+the Source output voltage Shall Not go beyond the range specified by vAvsValid. The amount of time the Source 
+output voltage can be in the band between vAvsNew and vAvsValid Shall Not exceed tAvsTransient.
+Code
+Voltage, Current
+1 LSB
+DNL < 0 LSB
+Max DNL = 1 LSB
+vPpsNew,vAvsNew, 
+iPpsNew
+(max)
+vPpsNew,vAvsNew, 
+iPpsNew
+(min)
+vPpsNew,vAvsNew, 
+iPpsNew
+DNL = -1 LSB

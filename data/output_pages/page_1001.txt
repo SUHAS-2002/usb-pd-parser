@@ -1,0 +1,76 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1001
+Figure 10.2 SPR Source Power Rule Example For Fixed Supply PDOs
+Table 10.5, "Fixed Supply PDO - Source 5V", Table 10.6, "Fixed Supply PDO - Source 9V", Table 10.7, "Fixed Supply PDO 
+- Source 15V" and Table 10.8, "Fixed Supply PDO - Source 20V" show the Fixed Supply PDOs that Shall be supported 
+for each of the Normative voltages defined in Table 10.2, "SPR Normative Voltages and Minimum Currents".
+Table 10.5  Fixed Supply PDO - Source 5V
+Bit(s)
+Description
+B31…30
+Fixed Supply
+B29
+Dual-Role Power
+B28
+USB Suspend Supported
+B27
+Unconstrained Power
+B26
+USB Communications Capable
+B25
+Dual-Role Data
+B24
+Unchunked Extended Messages Supported
+B23
+EPR Capable
+B22
+Reserved – Shall be set to zero.
+B21…20
+Peak Current
+B19…10
+5V
+B9...0
+Current based on PDP
+PDP Rating (x)
+Current (A)
+0.5 ≤ x ≤ 15
+x ÷ 5
+15 < x ≤ 25
+3 ≤ A ≤ x ÷ 5
+25 < x ≤ 100
+3 ≤ A ≤ 5 
+0
+1
+2
+3
+4
+5
+6
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+5V
+9V
+15V
+5 + 9V
+5 + 9 + 15V
+20V
+7.5W
+15W
+27W
+45W
+Source PDP Rating (W)
+Current (A)
+RP1
+RP2
+50W
+20V
+5 + 9 + 15V

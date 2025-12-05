@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 123
+Figure 6.4 Example Security_Request sequence Unchunked (Chunked bit = 0)
+Figure 6.5, "Example byte transmission for Security_Request Message of Data Size 7 (Chunked bit is set to zero)" 
+details the Security_Request Message shown in Figure 6.4, "Example Security_Request sequence Unchunked 
+(Chunked bit = 0)". The figure shows the byte ordering on the bus as well as the fact that there is no padding in this 
+case. The Number of Data Objects field has a value of 0 since it is Reserved when the Chunked bit is zero. The Data 
+Size field indicates the length of the Extended Message when the Chunked bit is set to 0, which in this case is 7 bytes.
+Figure 6.5 Example byte transmission for Security_Request Message of Data Size 7 (Chunked bit is set to 
+zero)
+Figure 6.6, "Example byte transmission for Security_Response Message of Data Size 30 (Chunked bit is set to zero)" 
+details the Security_Response Message shown in Figure 6.4, "Example Security_Request sequence Unchunked 
+(Chunked bit = 0)". The figure shows the byte ordering on the bus as well as the fact that there is no padding in this 
+case. The Number of Data Objects field has a value of 0 since it is Reserved when the Chunked bit is zero. The Data 
+Size field indicates the length of the Extended Message when the Chunked bit is set to zero, which in this case is 30 
+bytes.
+Host
+Charger
+Security_Request 
+(Data Size = 7, Chunked = 0)
+GoodCRC
+GoodCRC
+Security_Response 
+(Data Size = 30, Chunked = 0)
+Message Header
+(16 bit)
+Message Type = 
+Security_Request
+Number of Data 
+Objects = 0 (Reserved)
+Data (7 bytes)
+Extended Message 
+Header
+(16 bit)
+Chunked = 0
+Data Size = 7
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+B0
+B1
+B2
+B3
+B4
+B5
+B6

@@ -1,0 +1,38 @@
+Page 96
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.8.2
+  Transmit and Receive Masks
+5.8.2.1
+  Transmit Masks
+The transmitted signal Shall Not violate the masks defined in Figure 5.15, "BMC Tx 'ONE' Mask", Figure 5.16, "BMC 
+Tx 'ZERO' Mask", Table 5.14, "BMC Tx Mask Definition, X Values" and Table 5.15, "BMC Tx Mask Definition, Y Values" 
+at the output of a load equivalent to the cable model and receiver load model described in Section 5.8.3, 
+"Transmitter Load Model". The masks apply to the full range of Rp/Rd values as defined in [USB Type-C 2.4].
+Note:
+The measurement of the transmitter does not need to accommodate a change in signal offset due to the 
+ground offset when current is flowing in the cable.
+The transmitted signal Shall have a rise time no faster than tRise. The transmitted signal Shall have a fall time no 
+faster than tFall. The maximum limits on the rise and fall times are enforced by the Tx inner masks.
+Figure 5.15 BMC Tx 'ONE' Mask
+Y5
+Y4
+Y3
+Y2
+Y1
+X1
+X2
+X3
+X4
+X5
+X6 X7 X8
+0.5UI
+1UI
+Y6
+Y7
+Y8
+Y9
+X9
+X10
+X11
+X12
+X13 X14

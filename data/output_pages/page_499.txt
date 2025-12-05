@@ -1,0 +1,70 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 499
+8.3.2.2.2.5
+  EPR Sink Makes Request
+8.3.2.2.2.5.1
+  EPR Sink Makes Request (Accept)
+This is an example of EPR when a Sink makes a Request which is Accepted during an Explicit Contract. Figure 8.21, 
+"EPR Sink Makes Request (Accept)" shows the Messages as they flow across the bus and within the devices to 
+accomplish the keep alive.
+Figure 8.21 EPR Sink Makes Request (Accept)
+: Source Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Sink Policy Engine
+1: Send EPR_Request
+2: EPR_Request
+3: EPR_Request + CRC
+4: EPR_Request
+Check MessageID against local copy
+Store copy of MessageID
+5: EPR_Request received
+Stop SenderResponseTimer
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: EPR_Request sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Start SenderResponseTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+14: Accept received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+18: Accept sent
+Power supply adjusted to negotiated output
+Stop SenderResponseTimer
+Start PSTransitionTimer
+Reduce current
+19: Send PS_RDY
+20: PS_RDY
+21: PS_RDY + CRC
+22: PS_RDY
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+23: PS_RDY received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+27: PS_RDY sent
+Stop PSTransitionTimer
+New Power level
+Evaluate EPR_Request
+Prepare for new power
+Source
+Sink

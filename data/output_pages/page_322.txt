@@ -1,0 +1,43 @@
+Page 322
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.1.4.3.2
+  Adjustable Voltage Supply Current 
+The AVS Shall maintain its output voltage at the value requested in the AVS RDO for all static and dynamic load 
+conditions that do not exceed the Operating Current in the RDO. Unlike the SPR PPS programmable current, the AVS 
+programmable power May range from zero to the PDP.
+The maximum operating current:
+
+For SPR Sources, the maximum operating current is defined in the SPR Source_Capabilities Message 
+Maximum Current 15V/Maximum Current 20V fields.
+
+For EPR Sources, the maximum operating current has to be calculated as the lower of the PDP field 
+value/Output Voltage or 5A whichever is lower. See Table 10.12, "EPR Source Capabilities based on the 
+Port Maximum PDP and using an EPR Capable Cable"
+7.1.5
+  Response to Hard Resets
+Hard Reset Signaling indicates a communication failure has occurred and the Source Shall stop driving VCONN, 
+Shall remove Rp from the VCONN pin and Shall drive VBUS to vSafe0V as shown in Figure 7.10, "Source VBUS and 
+VCONN Response to Hard Reset". The USB connection May reset during a Hard Reset since the VBUS voltage will be 
+less than vSafe5V for an extended period of time. After establishing the vSafe0V voltage condition on VBUS, the 
+Source Shall wait tSrcRecover before re-applying VCONN and restoring VBUS to vSafe5V. A Source Shall conform to 
+the VCONN timing as specified in [USB Type-C 2.4].
+A Sink that enters Hard Reset can have cSnkBulkPd present until VBUS drops below vSafe0V. The Source Shall take 
+this into consideration.
+Device operation during and after a Hard Reset is defined as follows:
+
+Self-powered devices Should Not disconnect from USB during a Hard Reset (see Section 9.1.2, "Mapping 
+to USB Device States").
+
+Self-powered devices operating at more than vSafe5V May Not maintain full functionality after a Hard 
+Reset.
+
+Bus powered devices will disconnect from USB during a Hard Reset due to the loss of their power 
+source.
+When a Hard Reset occurs the Source Shall stop driving VCONN, Shall remove Rp from the VCONN pin and Shall start 
+to transition the VBUS voltage to vSafe0V either:
+
+tPSHardReset after the last bit of the Hard Reset Signaling has been received from the Sink or 
+
+tPSHardReset after the last bit of the Hard Reset Signaling has been sent by the Source.
+The Source Shall meet both tSafe5V and tSafe0V relative to the start of the voltage transition as shown in Figure 
+7.10, "Source VBUS and VCONN Response to Hard Reset".

@@ -1,0 +1,29 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 787
+8.3.2.14.4.5
+  Initiator to Responder Attention
+Figure 8.115, "Initiator to Responder Attention" shows an example sequence between an Initiator and a Responder, 
+where the Initiator requests attention from the Responder.
+Figure 8.115 Initiator to Responder Attention
+: Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+Responder
+Initiator
+1: Send Attention
+2: Attention
+3: Attention + CRC
+4: Attention
+Check MessageID against local copy
+Store copy of MessageID
+5: Attention received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Attention sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer

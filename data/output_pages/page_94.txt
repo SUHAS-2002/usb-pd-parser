@@ -1,0 +1,52 @@
+Page 94
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 5.11 Transmitting or Receiving BMC Encoded Frame Terminated by Zero with High-to-Low Last 
+Transition
+Figure 5.12 Transmitting or Receiving BMC Encoded Frame Terminated by One with High-to-Low Last 
+Transition
+If the trailing edge results in the transmitter driving CC high (i.e., the final half-UI of the Frame is low, see Figure 
+5.13, "Transmitting or Receiving BMC Encoded Frame Terminated by Zero with Low to High Last Transition" and 
+Figure 5.14, "Transmitting or Receiving BMC Encoded Frame Terminated by One with Low to High Last Transition"), 
+then the transmitter:
+
+Shall continue to drive CC high for 1 UI.
+
+Then Shall drive CC low for tHoldLowBMC.
+
+Should release CC to high impedance as soon as possible after min tHoldLowBMC and Shall release CC 
+by max tEndDriveBMC.
+Figure 5.13, "Transmitting or Receiving BMC Encoded Frame Terminated by Zero with Low to High Last Transition" 
+illustrates the ending of a BMC encoded Frame that ends with an encoded zero for which the final bit of the Frame 
+is terminated by a low to high transition. Figure 5.14, "Transmitting or Receiving BMC Encoded Frame Terminated 
+by One with Low to High Last Transition" illustrates the ending of a BMC encoded Frame that ends with an encoded 
+one for which the final bit of the Frame is terminated by a low to high transition. Both figures also illustrate the 
+tInterFrameGap timing requirement before the start of the next Frame when the Port has either been transmitting 
+or receiving the previous Frame (see Section 5.8.5.4, "Inter-Frame Gap").
+1UI
+max tEndDriveBMC
+tInterFrameGap
+min tHoldLowBMC
+final bit
+of frame
+0
+pre-amable for 
+next frame
+0
+trailing edge of 
+final bit
+High Impedance 
+(level set by Rp/Rd)
+1UI
+max tEndDriveBMC
+tInterFrameGap
+min tHoldLowBMC
+final bit
+of frame
+0
+pre-amable for 
+next frame
+0
+trailing edge of 
+final bit
+High Impedance 
+(level set by Rp/Rd)

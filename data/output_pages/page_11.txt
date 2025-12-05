@@ -1,0 +1,211 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 11
+Max Huang
+Richtek Technology Corporation
+Shannon Cash
+SMSC
+TZUHSIEN CHUANG
+Richtek Technology Corporation
+Mark Bohm
+SMSC 
+Tatsuya Irisawa
+Ricoh Company Ltd.
+Tim Knowlton
+SMSC 
+Akihiro Ono
+Rohm Co. Ltd.
+William Chiechi
+SMSC
+Chris Lin
+Rohm Co. Ltd.
+Shigenori Tagami
+Sony Corporation
+Hidenori Nishimoto
+Rohm Co. Ltd.
+Shinichi Hirata
+Sony Corporation
+Kris Bahar
+Rohm Co. Ltd.
+Amanda Hosler
+Specwerkz
+Manabu Miyata
+Rohm Co. Ltd.
+Bob Dunstan
+Specwerkz
+Ruben Balbuena
+Rohm Co. Ltd.
+Brad Saunders
+Specwerkz
+Takashi Sato
+Rohm Co. Ltd.
+Diane Lenox
+Specwerkz
+Vijendra Kuroodi
+Rohm Co. Ltd.
+Michael Munn
+StarTech.com Ltd.
+Yusuke Kondo
+Rohm Co. Ltd.
+Fabien Friess
+ST-Ericsson
+Kazuomi Nagai
+ROHM Co., Ltd.
+Giuseppe Platania
+ST-Ericsson
+Matti Kulmala
+Salcomp Plc
+Jean-Francois Gatto
+ST-Ericsson
+Toni Lehimo
+Salcomp Plc
+Milan Stamenkovic
+ST-Ericsson
+Edward Lee
+Samsung Electronics Co. Ltd.
+Nicolas Florenchie
+ST-Ericsson
+Tong Kim
+Samsung Electronics Co. Ltd.
+Patrizia Milazzo
+ST-Ericsson
+Amit Bouzaglo
+Scosche Industries
+Christophe Cochard
+STMicroelectronics
+Alvin Cox
+Seagate Technology LLC
+Christophe Lorin
+STMicroelectronics
+Emmanuel Lemay
+Seagate Technology LLC
+Filippo Bonaccorso
+STMicroelectronics
+John Hein
+Seagate Technology LLC
+Jessy Guilbot
+STMicroelectronics
+Marc Noblitt
+Seagate Technology LLC
+Joel Huloux
+STMicroelectronics
+Michael Morgan
+Seagate Technology LLC
+John Bloomfield
+STMicroelectronics
+Ronald Rueckert
+Seagate Technology LLC
+Massimo Panzica
+STMicroelectronics
+Tony Priborsky
+Seagate Technology LLC
+Meriem Mersel
+STMicroelectronics
+Chin Chang
+Semtech Corporation
+Nathalie Ballot
+STMicroelectronics
+Tom Farkas
+Semtech Corporation
+Pascal Legrand
+STMicroelectronics
+Ankit Garg
+Siemens Industry Software Inc.
+Patrizia Milazzo
+STMicroelectronics
+Ning Dai
+Silergy Corp.
+Richard O’Connor
+STMicroelectronics
+Wanfeng Zhang
+Silergy Corp.
+Morten Christiansen
+Synopsys, Inc.
+Kafai Leung
+Silicon Laboratories, Inc.
+Nivin George
+Synopsys, Inc.
+Kok Hong Soh
+Silicon Laboratories, Inc.
+Prishkit Abrol
+Synopsys, Inc.
+Sorin Badiu
+Silicon Laboratories, Inc.
+Zongyao Wen
+Synopsys, Inc.
+Steven Ghang
+Silicon Laboratories, Inc.
+Joan Marrinan
+Tektronix
+Abhishek Sardeshpande
+SiliConch Systems Private 
+Limited
+Kimberley McKay
+Teledyne-LeCroy
+Aniket Mathad
+SiliConch Systems Private 
+Limited
+Matthew Dunn
+Teledyne-LeCroy
+Chandana N
+SiliConch Systems Private 
+Limited
+Tony Minchell
+Teledyne-LeCroy
+Jaswanth Ammineni
+SiliConch Systems Private 
+Limited
+Anand Dabak
+Texas Instruments
+Jinisha Patel
+SiliConch Systems Private 
+Limited
+Annamalai Kasthuri
+Texas Instruments
+Kaustubh Kumar
+SiliConch Systems Private 
+Limited
+BIJU Erayamkot 
+Panayamthatta
+Texas Instruments
+Nitish
+SiliConch Systems Private 
+Limited
+Bill Waters
+Texas Instruments
+Pavitra Balasubramanian
+SiliConch Systems Private 
+Limited
+Bing Lu
+Texas Instruments
+Rakesh Polasa
+SiliConch Systems Private 
+Limited
+Deric Waters
+Texas Instruments
+Satish Anand Verkila
+SiliConch Systems Private 
+Limited
+Grant Ley
+Texas Instruments
+Shubham Paliwal
+SiliConch Systems Private 
+Limited
+Gregory Watkins
+Texas Instruments
+Vishnu Pusuluri
+SiliConch Systems Private 
+Limited
+Ingolf Frank
+Texas Instruments
+John Sisto
+SMSC
+Ivo Huber
+Texas Instruments
+Ken Gay
+SMSC 
+Javed Ahmad
+Texas Instruments
+Richard Wahler
+SMSC 
+Jean Picard
+Texas Instruments

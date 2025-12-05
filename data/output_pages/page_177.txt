@@ -1,0 +1,75 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 177
+6.4.4.3.1.6.1
+  HW Version Field
+The HW Version (B31…28) contains a HW version assigned by the VID owner.
+6.4.4.3.1.6.2
+  FW Version Field
+The Firmware Version field (B27…24) contains a FW version assigned by the VID owner.
+6.4.4.3.1.6.3
+  VDO Version Field
+The VDO Version field (B23…20) contains a VDO Version for this VDM Version number. This field indicates the 
+expected content for this VDO.
+6.4.4.3.1.6.4
+  USB Type-C plug to USB Type-C/Captive Field
+The USB Type-C plug to USB Type-C/Captive (Passive Cable) field (B19…18) Shall contain a value indicating 
+whether the opposite end from the USB Type-C plug is another USB Type-C plug (i.e., a detachable Standard USB 
+Type-C Cable Assembly) or is a Captive Cable Assembly.
+6.4.4.3.1.6.5
+  EPR Mode Capable
+The EPR Capable (Passive Cable) bit is a Static bit which Shall only be set when the cable is specifically designed 
+for safe operation when carrying up to 48 volts at 5 amps.
+6.4.4.3.1.6.6
+  Cable Latency Field
+The Cable Latency (Passive Cable) field (B16…13) Shall contain a value corresponding to the signal latency 
+through the cable which can be used as an approximation for its length.
+6.4.4.3.1.6.7
+  Cable Termination Type Field
+The Cable Termination Type (Passive Cable) field (B12…11) Shall contain a value indicating whether the Passive 
+Cable needs VCONN only initially in order to support the Discover Identity Command, after which it can be removed, 
+or the Passive Cable needs VCONN to be continuously applied in order to power some feature of the Cable Plug.
+6.4.4.3.1.6.8
+  Maximum VBUS Voltage Field
+The Maximum VBUS Voltage (Passive Cable) field (B10…9) Shall contain the maximum voltage that Shall be 
+Negotiated using a Fixed Supply over the cable as part of an Explicit Contract where the maximum voltage that Shall 
+be applied to the cable is vSrcNew max + vSrcValid max. For example, when the Maximum VBUS Voltage (Passive 
+Cable) field is 20V, a Fixed Supply of 20V can be Negotiated as part of an Explicit Contract where the absolute 
+maximum voltage that can be applied to the cable is 21.55V. Similarly, when the Maximum VBUS Voltage (Passive 
+B6…5
+VBUS Current Handling 
+Capability (Passive 
+Cable)
+
+00b = Reserved and Shall Not be used
+
+01b = 3A
+
+10b = 5A
+
+11b = Reserved and Shall Not be used
+B4…3
+Reserved
+Shall be set to zero.
+B2…0
+USB Highest Speed 
+(Passive Cable)
+
+000b = [USB 2.0] only, no SuperSpeed support 
+
+001b = [USB 3.2] Gen1
+
+010b = [USB 3.2]/[USB4] Gen2
+
+011b = [USB4] Gen3
+
+100b = [USB4] Gen4
+
+101b…111b = Reserved and Shall Not be used
+Table 6.41  Passive Cable VDO (Continued)
+Bit(s)
+Field
+Description
+1)
+Values no longer allowed. When present the field Shall be interpreted as if it was 00b.
+2)
+EPR Sinks with a captive cable Shall report 50V.

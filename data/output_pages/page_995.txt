@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 995
+10
+ Power Rules
+10.1
+  Introduction
+The flexibility of power provision on USB Type-C® is expected to lead to power adapter re-use and the increasingly 
+widespread provision of USB power outlets in domestic and public places and in transport of all kinds. 
+Environmental considerations could result in unbundled power adapters. Rules are needed to avoid 
+incompatibility between the Sources and the Sinks they are used to power, in order to avoid user confusion and to 
+meet user expectations. This section specifies a set of rules that Sources and Sinks Shall follow. These rules provide 
+a simple and consistent user experience. 
+The PDP Rating is a manufacturer declared value placed on packaging to help the user understand the capabilities 
+of a Charger or the size of Charger required to power their device. For PDP values of 10W and above the PDP Shall 
+be declared as an integer number of Watts. For PDP values less than 10W, the PDP Shall be declared in increments 
+of 0.5W.
+The Source Power Rules define a PDP to provide a simple way to tell the user about the capabilities of their power 
+adapter or device. PDP Rating is akin to the wattage rating of a light bulb - bigger numbers mean more capability. 
+The Sink Power Rules define a PDP to provide a simple way to tell the user which Sources will provide adequate 
+power for their Sink.
+10.2
+  Source Power Rules
+The Source Power Rules defined in this section include both Normative and Optional rules. For all of the defined 
+rules, the capabilities a Source exposes are based on the Port Maximum PDP, or if power constrained, the Port 
+Present PDP of the Port.
+For a Guaranteed Capability Port, the Source Shall always include in every Source_Capabilities or 
+EPR_Source_Capabilities Message sent to a Sink all the (A)PDOs that are defined by the Normative (and Optional 
+when implemented) rules based on the Port’s Port Maximum PDP and Mode of operation (i.e., SPR Mode or EPR 
+Mode).
+For a Managed Capability Port, except before the First Explicit Contract or before the Explicit Contract after the Port 
+Present PDP changes on a Shared Capacity Charger Port, the Source Shall always include in every 
+Source_Capabilities or EPR_Source_Capabilities Message sent to a Sink all the (A)PDOs that are defined by the 
+Normative (and Optional when implemented) rules based on the Port’s Port Present PDP and Mode of operation 
+(i.e., SPR Mode or EPR Mode). After the First Explicit Contract, this requirement assures that the attached Sink will 
+always know what voltages (or voltage modes) are presently available from the Source.
+In order to meet the expectations of the user, the Maximum Current/Power in the Source Capabilities PDO or APDO 
+for Sources with a PDP Rating of x Watts Shall be as follows:
+
+Maximum current for Normative and Optional Fixed Supply/Variable Supply PDOs Shall be either 
+RoundUp(x/voltage) or RoundDown(x/voltage) to the nearest 10mA.
+
+Maximum current for SPR Programmable Power Supply APDOs Shall be as defined in Table 10.10, "SPR 
+Programmable Power Supply PDOs and APDOs based on the Port Maximum PDP".
+Note:
+When the Constant Power bit is set in the APDO, the programmable power supply's output current is as 
+defined in Table 10.10, "SPR Programmable Power Supply PDOs and APDOs based on the Port Maximum 
+PDP" however the programmable power supply will limit its output current so that the product of its 
+actual output voltage times the output current does not exceed the PDP.
+
+If a 9V Prog, 15V Prog or 20V Prog Programmable Power Supply APDO is Advertised when not required 
+by Table 10.10, "SPR Programmable Power Supply PDOs and APDOs based on the Port Maximum PDP", 
+then the maximum current Shall be RoundDown (x/Prog Voltage) to the nearest 50mA. When the PPS 
+Power Limited bit is clear the Source Shall provide this current at Maximum Voltage.
+
+Maximum power for Optional Battery Supply PDOs Shall be ≤ x.

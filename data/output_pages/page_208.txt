@@ -1,0 +1,95 @@
+Page 208
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 6.34 Illustration of process to enter EPR Mode
+The entry process Shall follow these steps in order:
+1)
+The Sink Shall send the EPR_Mode Message with the Action field set to 1 (Enter) and the Data field set 
+to its Operational PDP. If the EPR Source receives an EPR_Mode Message with the Action field not set to 
+Enter it Shall initiate a Soft Reset.
+2)
+The Source Shall do the following:
+EPR_Mode
+Enter
+#1
+Start
+SPR Mode
+EPR Mode
+Sink
+Source
+Cable
+EPR Entry process
+SPR contract in place
+#2.a
+Sink EPR Capable?
+Abort EPR Entry
+Send Entry Failed 
+– Sink not EPR 
+Capable
+#2.b
+Source EPR 
+Capable?
+Abort EPR Entry
+Send Entry Failed 
+– Source not EPR 
+Capable
+#2.c
+Source EPR 
+Capable Now?
+Abort EPR Entry 
+Send Entry Failed 
+– Source unable 
+to enter EPR
+#2.d
+Send EPR Ack
+#3
+Received EPR 
+Ack?
+#4
+Known Cable?
+#7
+Send Enter 
+Succeeded
+N
+N
+N
+N
+N
+#5
+Is VCONN Source?
+#8
+Received Enter 
+successful?
+N
+Error
+Send 
+Soft Reset
+#6.a-d
+EPR Cable?
+Abort EPR Entry 
+Send Entry Failed 
+– Source not 
+VCONN Source
+N
+Y
+Y
+Y
+Y
+EPR_MODE
+Enter Succeeded
+Y
+Y
+Y
+#5
+Is VCONN Source?
+N
+#5 VCONN Swap
+N
+Abort EPR Entry 
+Send Entry Failed 
+– Not EPR Cable
+Y
+Y
+#4
+EPR Capable?
+Y
+N

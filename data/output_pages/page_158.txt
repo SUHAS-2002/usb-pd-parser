@@ -1,0 +1,53 @@
+Page 158
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.2.4
+  USB Communications Capable
+The USB Communications Capable flag Shall be set to one when the Sink has USB data lines and is capable of 
+communicating using either [USB 2.0], [USB 3.2] or [USB4] protocols. The USB Communications Capable flag 
+Shall be set to zero when the Sink does not have USB data lines or is otherwise incapable of communicating using 
+either [USB 2.0], [USB 3.2] or [USB4] protocols. This is used by the Source to determine operation in certain cases 
+such as USB suspend. If the USB Communications Capable flag has been set to zero by a Sink, then the Source needs 
+to be aware that USB Suspend rules cannot be observed by the Sink.
+6.4.2.5
+  No USB Suspend
+The No USB Suspend flag May be set by the Sink to indicate to the Source that this device is requesting to continue 
+its Explicit Contract during USB Suspend. Sinks setting this flag typically have functionality that can use power for 
+purposes other than USB Communication e.g., for charging a Battery.
+The Source uses this flag to evaluate whether it Should re-issue the Source_Capabilities Message with the USB 
+Suspend Supported flag cleared.
+6.4.2.6
+  Unchunked Extended Messages Supported
+The Unchunked Extended Messages Supported bit Shall be set when the Port can send and receive Extended 
+Messages with Data Size > MaxExtendedMsgLegacyLen bytes in a single, Unchunked Extended Message.
+6.4.2.7
+  EPR Mode Capable
+The EPR Capable bit Shall indicate whether or not the Sink is capable of operating in EPR Mode. When the Sink's 
+ability to operate in EPR Mode changes, it Shall send a new Request Message with the updated EPR Capable bit set 
+in the RDO.
+6.4.2.8
+  Operating Current 
+The Operating Current field in the Request Data Object Shall be set to the highest current the Sink will draw during 
+the Explicit Contract. A new Request Message or EPR_Request Message, with an updated Operating Current value, 
+Shall be issued whenever the Sink's power needs change. 
+The Operating Current field in the SPR Programmable Request Data Object is used in addition by the Sink to 
+request the Source for the Current Limit level it needs. When the request is accepted the Source's output current 
+supplied into any load Shall be less than or equal to the Operating Current value. When the Sink attempts to 
+consume more current, the Source Shall reduce the output voltage so as not to exceed the Operating Current 
+value.
+The Operating Current field in the AVS Request Data Object Shall be set to the highest current the Sink will draw 
+during the Explicit Contract. 
+Note:
+A Source in AVS Mode, unlike the SPR Source in PPS Mode, does not support current limit; the Sink is 
+responsible not to take more current than it requested. 
+A new Request / EPR_Request Message, with an updated Operating Current value, Shall be issued whenever the 
+Sink's power needs change.
+The value in the Operating Current field Shall Not exceed the value in the Maximum Current field of the 
+Source_Capabilities Message. For EPR AVS, the Operating Current field Shall Not exceed the PDP / Output voltage 
+rounded down to the nearest 50 mA.
+This field Shall apply to the Fixed Supply, Variable Supply, Programmable and AVS RDOs.
+6.4.2.9
+  Maximum Operating Current 
+The Maximum Operating Current field has been functionally Deprecated. In order to maintain backward 
+compatibility with Sources that may try to interpret the Maximum Operating Current field in the Request Message 
+or EPR_Request Message, the field Shall be set equal to the value of the Operating Current field. To ensure 
+backward compatibility, the Source Should Ignore this field.

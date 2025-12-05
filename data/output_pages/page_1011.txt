@@ -1,0 +1,64 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1011
+EPR Sources when operating in an AVS Explicit Contract are required to stay within their PDP as such they Shall 
+respond to any request (VA) for more than the PDP with a Reject Message. Figure 10.6, "Valid EPR AVS Operating 
+Region" illustrates the definition of the Valid operating range for an EPR Source operating in an AVS Explicit 
+Contract based on its Advertised PDP.
+Figure 10.6 Valid EPR AVS Operating Region
+Figure 10.7, "EPR Source Power Rule Illustration for Fixed PDOs" illustrates the minimum current that an EPR Source 
+Shall support at each voltage for a given PDP Rating.
+Note:
+Not illustrated are that currents higher than 3A are allowed to be offered up to a limit of 5A given that a 
+5A cable is detected by the Source and the voltage times current remains within the Source PDP Rating.
+160W
+36W
+1.29A
+1A1
+Not offered
+36V@36W1
+120W
+36W
+1.29A
+Not offered
+Not offered
+28V@36W
+Table 10.14  EPR Source Examples when Port Present PDP is less than Port Maximum PDP
+Port Maximum 
+PDP
+Port Present 
+PDP
+Offers
+28V Fixed
+36V Fixed
+48V Fixed
+AVS
+1)
+These Capabilities are not required but may be offered at this Port Present PDP.
+0
+1
+2
+3
+4
+5
+6
+0
+15
+30
+45
+60
+RDO Current (A)
+RDO Voltage (V)
+5A
+Invalid Requests
+(Crosshatched Area)
+Valid Operating Region  
+for EPR AVS Sink Requests
+Valid RDO Requests
+Advertised
+Voltage =  
+28, 36 or 48V
+15V
+Voltage =  
+PDP/5A
+Current =  
+Advertised PDP/Advertised Voltage

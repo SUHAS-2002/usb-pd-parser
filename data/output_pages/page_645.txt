@@ -1,0 +1,21 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 645
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Sink_Capabilities Message was successfully sent.
+The Dual-Role Power Source has informed the Dual-Role Power Sink of its Capabilities as a Sink.
+Table 8.94  Steps for a Dual-Role Sink getting Dual-Role Source capabilities as a Sink Sequence
+Step
+Dual-Role Sink Port
+Dual-Role Source Port

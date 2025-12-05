@@ -1,0 +1,44 @@
+Page 1008
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+10.2.3.3
+  Optional Normative Extended Power Range (EPR)
+Support of EPR Mode is Optional. An EPR Capable port has a PDP Rating that is >100W and ≤ 240W. An EPR Capable 
+Source Port (EPR Source Port) May operate in either SPR Mode or EPR Mode when operating at 100W or less.
+An EPR Source Port operating in SPR Mode May offer less than 100W to avoid violating safety regulations. When 
+operating in EPR Mode, an EPR Source Port Shall offer 100W in Fixed 20V when not constrained by multi- port 
+sharing limits.
+An EPR Source May include multiple ports and these ports can be functionally implemented as Shared Capacity 
+Charger or Assured Capacity Charger ports as defined in [USB Type-C 2.4].
+Any port on an EPR Source that has a Port Present PDP of 100W or less Shall follow the Normative requirements 
+for SPR Source Ports and Shall operate only in SPR Mode. Any port on an EPR Source that is operating with a cable 
+that is not EPR Capable Shall operate only in SPR Mode. An EPR Source, when operating in SPR Mode with a 5A cable, 
+May offer less than 5A due to design tolerances in order to meet applicable safety standards. For best user 
+experience it Should be as close to 100W as possible.
+Table 10.12, "EPR Source Capabilities based on the Port Maximum PDP and using an EPR Capable Cable" and 
+Table 10.13, "EPR Source Capabilities when Port Present PDP is less than Port Maximum PDP and using an EPR-
+capable cable" define the Normative requirements EPR Source Ports. While not included in these tables, any EPR 
+Source Port that also supports SPR PPS Shall offer the SPR Fixed 20V PDO and PPS 20V Prog APDO at 100W (or the 
+maximum available PDP when the port is operating at an Equivalent PDP <100W) when in EPR Mode:
+
+When an EPR Source Port is capable of supplying its PDP Rating, it Shall adhere to the requirements 
+defined in Table 10.12, "EPR Source Capabilities based on the Port Maximum PDP and using an EPR 
+Capable Cable" based on its PDP Rating of x Watts. 
+
+When a Source Port on an EPR Charger is unable to provide its Port Maximum PDP, it Shall adhere to 
+the requirements defined in Table 10.13, "EPR Source Capabilities when Port Present PDP is less than 
+Port Maximum PDP and using an EPR-capable cable" based on a Port Present PDP of x Watts. Some 
+examples:
+
+An EPR Source Port May be unable to provide its PDP Rating because it is thermally constrained at 
+the time of power Negotiation.
+
+A Shared port on a multi-port EPR Charger that is limited by the remaining available power.
+
+When an EPR Charger is in an Adjustable Voltage Supply (AVS) Explicit Contract: 
+
+It Shall Reject all Requests outside of the defined voltage range (see Table 10.15, "EPR Adjustable 
+Voltage Supply (AVS) Voltage Ranges") or for a requested voltage and Current that results in a power 
+level that is more than the Port's Advertised PDP.
+
+In no case Shall a Source Advertise a Current or accept a Current requested by a Sink that exceeds the 
+Attached cable's current rating.

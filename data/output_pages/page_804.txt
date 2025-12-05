@@ -1,0 +1,44 @@
+Page 804
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.16.1.3
+  UFP Entering USB4 Mode (Wait)
+This is an example of an Enter USB operation where the DFP requests [USB4] mode when this is not possible for 
+the UFP at this time. Figure 8.121, "UFP Entering USB4 Mode (Wait)" shows the Messages as they flow across the bus 
+and within the devices to accomplish the Enter USB process.
+Figure 8.121 UFP Entering USB4 Mode (Wait)
+: Protocol
+1: Send Enter_USB (USB4)
+: PHY
+: PHY
+: Protocol
+2: Enter_USB (USB4)
+3: Enter_USB (USB4) + CRC
+4: Enter_USB (USB4)
+Start CRCReceiveTimer
+5: Enter_USB (USB4) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Enter_USB (USB4) sent
+Start SenderResponseTimer
+10: Send Wait
+11: Wait
+12: Wait + CRC
+13: Wait
+14: Wait received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Wait sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+USB4 Mode not entered; USB link is negotiated via legacy mechanisms
+DFP
+UFP
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer

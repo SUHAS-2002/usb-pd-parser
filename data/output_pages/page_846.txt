@@ -1,0 +1,57 @@
+Page 846
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+The DFP is not presently the VCONN Source.
+The Policy Engine Shall transition to ErrorRecovery when:
+
+A SenderResponseTimer timeout occurs or
+
+A Protocol Error occurs.
+8.3.3.5.1.2
+  PE_DDR_Data_Reset_Received State
+The PE_DDR_Data_Reset_Received State Shall be entered from the PE_SRC_Ready or PE_SNK_Ready State when a 
+Data_Reset Message is received.
+On entry to the PE_DDR_Data_Reset_Received State the Policy Engine Shall inform the Device Policy Manager and 
+then Shall send an Accept Message.
+On exit from the PE_DDR_Data_Reset_Received State the Policy Engine Shall initialize and start the 
+DataResetFailTimer.
+The Policy Engine Shall transition to the PE_DDR_Perform_Data_Reset State when:
+
+An Accept Message has been sent and
+
+The DFP is presently the VCONN Source.
+The Policy Engine Shall transition to the PE_DDR_Wait_For_VCONN_Off State when:
+
+An Accept Message has been sent and
+
+The DFP is not presently the VCONN Source.
+The Policy Engine Shall transition to ErrorRecovery when:
+
+A Protocol Error occurs.
+8.3.3.5.1.3
+  PE_DDR_Wait_For_VCONN_Off State
+On entry to the PE_DDR_Wait_For_VCONN_Off State the Policy Engine Shall initialize and start the 
+VCONNDischargeTimer.
+The Policy Engine Shall transition to the PE_DDR_Perform_Data_Reset State when:
+
+A PS_RDY Message is received.
+The Policy Engine Shall transition to ErrorRecovery when:
+
+The VCONNDischargeTimer has timed out or
+
+A Protocol Error occurs.
+8.3.3.5.1.4
+  PE_DDR_Perform_Data_Reset State
+On entry to the PE_DDR_Perform_Data_Reset State the Policy Engine Shall request the Device Policy Manager to 
+complete the Data Reset process as defined in Section 6.3.14, "Data_Reset Message".
+On exit from the PE_DDR_Perform_Data_Reset State the Policy Engine Shall stop the DataResetFailTimer and 
+send a Data_Reset_Complete Message.
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready State depending on the DFP's 
+Power Role when:
+
+The DPM indicates that Data Reset process is complete (see Section 6.3.14, "Data_Reset Message").
+The Policy Engine Shall transition to ErrorRecovery when:
+
+The DataResetFailTimer times out
+
+A Protocol Error occurs.

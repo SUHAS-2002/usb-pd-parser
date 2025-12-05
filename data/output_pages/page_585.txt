@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 585
+8.3.2.9.3.2
+  Data Role Swap, Initiated by DFP Operating as Source (Reject)
+Figure 8.47, "Rejected Data Role Swap, DFP operating as Source initiates" shows an example sequence between a 
+Port, which is initially a UFP (Device) and a Sink (Rd asserted), and a Port which is initially a DFP and a Source (Rp 
+asserted). A Data Role Swap is initiated by the DFP. During the process the Port Partners maintain their operation 
+as either a Source or a Sink (power and Rp/Rd remain constant) and the exchange of Data Roles is rejected.
+Figure 8.47 Rejected Data Role Swap, DFP operating as Source initiates
+: Protocol
+10: Send Reject
+: PHY
+: PHY
+: Protocol
+11:Reject
+12: Reject + CRC
+13: Reject
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+14: Reject received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+18:Reject sent
+: Policy Engine
+: Policy Engine
+Initial UFP Sink Port
+Initial DFP Source Port
+Stop SenderResponseTimer
+CC = Rd (Sink)
+Port Data Role -> UFP (Device)
+1: Send Dr_Swap
+2: Dr_Swap
+3: Dr_Swap + CRC
+4: Dr_Swap
+Check MessageID against local copy
+Store copy of MessageID
+5: Dr_Swap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Dr_Swap sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Evaluate Dr_Swap request
+CC = Rd (Sink)
+Port Data Role =UFP (Device)
+Start SenderResponseTimer
+CC = Rp (Source)
+Port Data Role = DFP (Host)
+CC = Rd (Sink)
+Port Data Role = UFP (Device)
+CC = Rp (Source)
+Port Data Role = DFP (Host)
+CC = Rp (Source)
+Port Data Role -> DFP (Host)

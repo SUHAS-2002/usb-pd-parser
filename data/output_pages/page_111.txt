@@ -1,0 +1,46 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 111
+5.8.6.2
+  Multi-Drop
+The BMC Signaling Scheme is suitable for use in Multi-Drop configurations containing one or two BMC Multi-Drop 
+transceivers connected to the CC wire, where one or both ends of a cable contains a Multi-Drop transceiver. In this 
+specification the location of the Multi-Drop transceiver is referred to as the Cable Plug.
+Figure 5.27, "Example Multi-Drop Configuration showing two DRPs" below illustrates a typical Multi-Drop 
+configuration with two DRPs.
+Figure 5.27 Example Multi-Drop Configuration showing two DRPs
+The Multi-Drop transceiver Shall obey all the electrical characteristics specified in this section except for those 
+relating to capacitance. The maximum capacitance allowed for the Multi-Drop node when not driving the line is 
+cCablePlug_CC defined in [USB Type-C 2.4]. There are no constraints as to the distance of the Multi-Drop 
+transceiver from the end of the plug. The Multi-Drop transceiver(s) May be located anywhere along the cable 
+including the plugs. The Multi-Drop transceiver suffers less from ground offset compared to the transceivers in the 
+USB Host or USB Device and contributes no significant reflections.
+It is possible to have a configuration at Attach where one Port can be a VCONN Source and the other Port is not able 
+to be a VCONN Source, such that there is no switch in the second Port. An example of a DFP with a switch Attached 
+to a UFP without a switch is outlined in Figure 5.28, "Example Multi-Drop Configuration showing a DFP and UFP". 
+The capacitance on the CC line for a Port not able to be a VCONN Source Shall still be within cReceiver except when 
+transmitting.
+Figure 5.28 Example Multi-Drop Configuration showing a DFP and UFP
+cReceiver
+Switch
+VCONN
+cCablePlug
+cCablePlug
+Connector
+Connector
+Cable
+DRP
+DRP
+cReceiver
+Switch
+VCONN
+cReceiver
+Switch
+VCONN
+cCablePlug
+cCablePlug
+Connector
+Connector
+Cable
+DFP
+UFP
+cReceiver

@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 157
+6.4.2.1
+  Object Position
+The value in the Object Position field Shall indicate which object in the Source_Capabilities Message or 
+EPR_Source_Capabilities Message the RDO refers to. The value 0001b always indicates the 5V Fixed Supply PDO as 
+it is the first object following the Source_Capabilities Message’s Message Header or EPR_Source_Capabilities 
+Message’s Extended Message Header. The number 0010b refers to the next PDO and so forth.
+The Object Position field values 0001b…0111b Shall only be used to refer to SPR (A)PDOs. SPR (A)PDOs May be 
+requested by either a Request or an EPR_Request Message. Object positions 1000b…1011b Shall only be used to 
+refer to EPR (A)PDOs. EPR (A)PDOs Shall only be requested by an EPR_Request Message. If the Object Position field 
+in a Request Message contains a value greater than 0111b, the Source Shall send Hard Reset Signaling.
+6.4.2.2
+  GiveBack Flag (Deprecated)
+The Giveback flag has been Deprecated and Shall be set to zero.
+6.4.2.3
+  Capability Mismatch
+A Capabilities Mismatch occurs when the Source cannot satisfy the Sink's power requirements based on the Source 
+Capabilities it has offered. In this case the Sink Shall make a Valid request from the offered Source Capabilities and 
+Shall set the Capability Mismatch bit (see Section 8.2.5.2, "Power Capability Mismatch"). When a Capabilities 
+Mismatch condition does not exist, the Sink Shall Not set the Capability Mismatch bit.
+When a Sink returns a Request Data Object with the Capability Mismatch bit set in response to a Source Capabilities 
+Message, it indicates that it wants more power than the Source is currently offering. This can be due to either a 
+specific voltage that is not being offered or there is not sufficient current for the voltages that are being offered.
+Sources whose Port Reported PDP is less than their Port Present PDP (see Section 6.4.11, "Source_Info Message") 
+Shall respond to the Requests with the Capability Mismatch bit set as follows. The Source within 
+tCapabilitiesMismatchResponse of the PS_RDY Message Shall send a new Source Capabilities Message that offers 
+either:
+1)
+The set of Source Capabilities to minimally satisfy the Sink's requirements based on what it actually 
+requires for full operation by evaluating the:
+a)
+Sink_Capabilities_Extended Message(if supported by the Sink) and/or
+b)
+Sink_Capabilities or EPR_Sink_Capabilities Message.
+2)
+The set of Source Capabilities the Source can supply at this time based on the Port Present PDP.
+To prevent looping, Sources Should Not send a new Source Capabilities Message in response to subsequent Request 
+Message with the Capability Mismatch flag set until its Port Present PDP changes.
+Once a Guaranteed Capability Source that has responded to a Capability Mismatch, it Shall Not subsequently send 
+out another Source Capabilities Message at a lower PDP unless the power required by the Sink (as indicated in its 
+Sink Capabilities Message or Sink_Capabilities_Extended Message) has also been reduced. Sources wishing to 
+manage their power May periodically check the Sink Capabilities Message or Sink_Capabilities_Extended Message 
+to determine whether these have changed.
+Note:
+A Source Capabilities Message refers to a Source_Capabilities Message or an EPR_Source_Capabilities 
+Message, and a Sink Capabilities Message refers to a Sink_Capabilities Message or EPR_Sink_Capabilities 
+Message, Request refers to a Request Message or EPR_Request depending on operating mode.
+In this context a Valid Request Message means the following:
+
+The Object Position field Shall contain a reference to an object that was present in the last received 
+Source Capabilities Message.
+
+The Operating Current/Operating Power field Shall contain a value which is less than or equal to the 
+maximum current/power offered by the selected (A)PDO the Source Capabilities Message.

@@ -1,0 +1,95 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1005
+10.2.3
+  Optional Voltages/Currents
+10.2.3.1
+  Optional Normative Fixed, Variable and Battery Supply
+In addition to the voltages and currents specified in Section 10.2.2, "Normative Voltages and Currents", an SPR 
+Source that is optimized for use with a specific Sink or a specific class of Sinks May Optionally supply additional 
+voltages and increased currents. However, the Optional voltages Shall Not exceed 9V.
+Optional voltages Shall Not be implemented on EPR Source including for both SPR Mode and EPR Modes of 
+operation. EPR versions of Variable Supply and Battery Supply PDOs are not defined and Shall Not be implemented, 
+however SPR Variable Supply and Battery Supply PDOs are allowed in EPR Mode.
+While allowed, the use of Optional voltages and currents is not recommended as two Sources with the same PDP 
+Rating but not supporting the same Optional voltages and currents can behave differently thus confusing the user.
+See Section 10.2, "Source Power Rules" for the rules that Shall apply to Optional PDOs in order to be consistent with 
+the declared PDP Rating and the Normative voltages and currents.
+10.2.3.2
+  Optional Normative SPR Programmable Power Supply
+The voltages and currents a Programmable Power Supply with a PDP Rating of x Watts Shall support are as defined 
+Table 10.10, "SPR Programmable Power Supply PDOs and APDOs based on the Port Maximum PDP".
+When Optional Programmable Power Supply APDOs are offered, the following requirements Shall apply:
+
+A Source that Advertises Optional Programmable Power Supply APDOs Shall Advertise the PDOs and 
+APDOs shown in Table 10.10, "SPR Programmable Power Supply PDOs and APDOs based on the Port 
+Maximum PDP".
+
+A Source Shall Advertise Optional Programmable Power Supply APDOs with Maximum Voltage and 
+Minimum Voltages for nominal voltage as defined in Table 10.11, "SPR Programmable Power Supply 
+Voltage Ranges". 
+
+A Source Shall Not Advertise a Programmable Power Supply APDO that does not follow the Minimum 
+Voltage and Maximum Voltage defined in Table 10.11, "SPR Programmable Power Supply Voltage 
+Ranges".
+
+In no case Shall a Source Advertise a current that exceeds the Attached cable's current rating.
+
+The Max Voltage Shall Not exceed 21V while in SPR Mode.
+Table 10.10  SPR Programmable Power Supply PDOs and APDOs based on the Port Maximum PDP
+PDP Maximum PDP 
+(W)
+SPR Fixed and AVS
+9V Prog3
+15V Prog3
+20V Prog3
+x < 15W
+Required per Table 10.2, "SPR Normative Voltages 
+and Minimum Currents" (or Table 10.3, "SPR 
+Source Capabilities When Port Present PDP is less 
+than Port Maximum PDP" when applicable)
+-
+-
+-
+15W
+-
+-
+-
+15 < x < 27W
+(PDP/9)A1
+-
+-
+27W
+3A
+-
+-
+27 < x < 45W
+3A2
+(PDP/15)A1
+-
+45W
+-
+3A
+-
+45 < x < 60W
+-
+3A2
+(PDP/20)A1
+60W
+-
+-
+3A
+60 < x < 100W
+-
+-
+(PDP/20)A1
+100W
+-
+-
+5A
+1)
+The SPR PPS APDOs Maximum Current field Shall Advertise RoundDown (PDP/Prog Voltage) to the nearest 50mA.
+2)
+The SPR PPS APDOs Maximum Current field Shall Advertise at least 3A, but May Advertise up to RoundDown(PDP/Prog Voltage) 
+to the nearest 50mA.
+3)
+Applies to APDOs regardless of value of the PPS Power Limited bit.

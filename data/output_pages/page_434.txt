@@ -1,0 +1,124 @@
+Page 434
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.1.3.3
+  AMS: Unsupported Message
+8.3.2.1.3.4
+  AMS: Soft Reset
+8.3.2.1.3.5
+  AMS: Data Reset
+Table 8.7  AMS: Unsupported Message
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State 
+Machine Ref
+Unsupported Message
+1.
+Any Message which is not supported 
+by the Source or Sink
+2.
+Not_Supported Message
+Started by 
+Source or Sink
+Section 8.3.2.3
+Section 
+8.3.3.6.2
+Table 8.8  AMS: Soft Reset
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State 
+Machine Ref
+Soft Reset
+1.
+Soft_Reset Message
+2.
+Accept Message
+3.
+In SPR Mode: SPR Explicit Contract 
+Negotiation AMS 
+4.
+or in EPR Mode: EPR Explicit Contract 
+Negotiation AMS.
+Started by 
+Source or Sink
+Section 8.3.2.4,
+Section 
+8.3.2.2.1.1,
+Section 
+8.3.2.2.1.1,
+Section 
+8.3.2.2.2.2
+Section 
+8.3.3.4.1,
+Section 
+8.3.3.4.2,
+Section 
+8.3.3.25.2.1,
+Section 
+8.3.3.25.2.3,
+Section 
+8.3.3.25.2.4,
+Section 8.3.3.2,
+Section 8.3.3.3
+Table 8.9  AMS: Data Reset
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State 
+Machine Ref
+DFP Initiated Data Reset 
+where the DFP is the VCONN 
+Source
+1.
+Data_Reset Message
+2.
+Accept Message
+3.
+Data_Reset_Complete Message
+Started by DFP
+Section 8.3.2.5.1
+Section 
+8.3.3.5.1,
+Section 
+8.3.3.5.2
+DFP Receives Data Reset 
+where the DFP is the VCONN 
+Source
+1.
+Data_Reset Message
+2.
+Accept Message
+3.
+Data_Reset_Complete Message
+Started by UFP
+Section 8.3.2.5.2
+DFP Initiated Data Reset 
+where the UFP is the VCONN 
+Source
+1.
+Data_Reset Message
+2.
+Accept Message
+3.
+PS_RDY Message
+4.
+Data_Reset_Complete Message
+Started by DFP
+Section 8.3.2.5.3
+DFP Receives Data Reset 
+where the UFP is the VCONN 
+Source
+1.
+Data_Reset Message
+2.
+Accept Message
+3.
+PS_RDY Message
+4.
+Data_Reset_Complete Message
+Started by UFP
+Section 8.3.2.5.4

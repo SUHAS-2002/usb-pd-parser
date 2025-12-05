@@ -1,0 +1,9 @@
+Page 398
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.3.3.2
+  Sink Initiated Hard Reset
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed during a Sink Initiated 
+Hard Reset is shown in Figure 7.42, "Transition Diagram for a Sink Initiated Hard Reset". The sequence that Shall be 
+followed is described in Table 7.21, "Sequence Description for a Sink Initiated Hard Reset". The timing parameters 
+that Shall be followed are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink Electrical 
+Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".

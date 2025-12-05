@@ -1,0 +1,67 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 63
+
+A Sink operating in the SPR PPS Mode periodically sends Request Message within tPPSRequest even 
+if its request is unchanged.
+
+A Sink operating in the EPR Mode periodically communicates with the Source (i.e., sends an 
+EPR_KeepAlive Message or any other Message) within tSourceEPRKeepAlive.
+
+The Sink will always have Rd asserted on its CC wire.
+
+When this Port is a DRP, the Sink can initiate or receive a request for the exchange of Power Roles. 
+After the Power Role Swap this Port will be a Source and an Implicit Contract will be in place until an 
+Explicit Contract is Negotiated immediately afterwards.
+
+When this Port is a DRD the Sink can initiate or receive a request for an exchange of Data Roles. After 
+a Data Role Swap the UFP (USB Device) becomes a DFP (USB Host). The Port remains a Sink and 
+VCONN Source role (or not) remains unchanged.
+
+The Sink can initiate or receive a request for an exchange of VCONN Source. During a VCONN Swap 
+VCONN is applied by both ends (make before break). The Port remains a Sink and DFP/UFP Data Roles 
+remain unchanged.
+
+The Sink when it is the VCONN Source can communicate with a Cable Plug using SOP’ Communication 
+or SOP’’ Communication at any time it is not engaged in any other SOP Communication:
+
+If SOP Packets are received by the Sink, during SOP’ Communication or SOP’’ Communication, the 
+SOP’ Communication or SOP’’ Communication is immediately terminated (the Cable Plug times 
+out and does not retry)
+
+If the Sink needs to initiate an SOP Communication during an ongoing SOP’ Communication or 
+SOP’’ Communication (e.g., for a Capabilities change) then the SOP’ Communication or SOP’’ 
+Communications will be interrupted. 
+
+When the Sink Port is also a DFP:
+
+The Sink can initiate Unstructured VDMs or Structured VDMs.
+
+The Sink can control the Mode Entry and Mode Exit of Modes in the Source and control Modal 
+Operation (e.g. [USB4]).
+
+Detach or Communications Failure:
+
+A Sink detects the removal of VBUS and interprets this as the end of the PD Connection:
+
+This is unless the vSafe0V is due to either a Hard Reset, Power Role Swap or Fast Role Swap.
+
+A Sink detects plug removal (i.e., absence of Rp or VBUS) and discharges VBUS.
+
+When the Sink detects the failure to receive a GoodCRC Message in response to a Message within 
+tReceive:
+
+Leads to a Soft Reset, within tSoftReset of the CRCReceiveTimer expiring.
+
+If the Soft Reset process cannot be completed a Hard Reset will be issued within tHardReset of 
+the CRCReceiveTimer to restore VBUS to USB Default Operation within ~1-1.5s.
+
+Receiving no response to further attempts at communication is interpreted by the Sink as an 
+error (see Error handling).
+
+When the Sink operating in the SPR PPS Mode fails to send periodic communication (i.e. a Request 
+Message) to the Source within tPPSRequest, the Source will issue a Hard Reset that results in VBUS 
+going to vSafe5V.
+
+When the Sink operating in the EPR Mode fails to send periodic communication (i.e. an 
+EPR_KeepAlive Message or any other Message) to the Source within tSourceEPRKeepAlive the 
+Source will issue a Hard Reset that results in VBUS going to vSafe5V.

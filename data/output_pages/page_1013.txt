@@ -1,0 +1,59 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1013
+10.3
+  Sink Power Rules
+10.3.1
+  Sink Power Rule Considerations
+The Sink Power Rules are designed to ensure the best possible user experience when a given Sink used with a 
+compliant Source of arbitrary Output Power Rating that only supplies the Normative voltages and currents. 
+The Sink Power Rules are based on the following considerations:
+
+Low power Sources (e.g., 5V) are expected to be very common and will be used with Sinks designed for 
+a higher PDP. 
+
+Optimizing the user experience when Sources with a higher PDP Rating are used with low power Sinks.
+
+Preventing Sinks that only function well (or at all) when using Optional voltages and currents.
+10.3.2
+  Normative Sink Rules
+Sinks designed to use Sources with a PDP Rating of x W Shall:
+
+Either operate or charge from Sources that have a PDP Rating ≥ x W.
+
+Either operate, charge or indicate a Capabilities Mismatch (see Section 6.4.2.3, "Capability Mismatch") 
+from Sources that have a PDP Rating < x W and ≥ 0.5W.
+A Sink optimized for a Source with Optional voltages and currents or power as described in Section 10.2.3, "Optional 
+Voltages/Currents" with a PDP Rating of x W Shall provide a similar user experience when powered from a Source 
+with a PDP Rating of ≥ x W that supplies only the Normative voltages and currents as specified in Section 10.2.2, 
+"Normative Voltages and Currents". For example, a 60W Source might not offer 9V Prog or 15V Prog since 20V Prog 
+is a suitable substitute for both (as shown in Table 10.10, "SPR Programmable Power Supply PDOs and APDOs based 
+on the Port Maximum PDP").
+The Operational Current/Power in the Sink Capabilities PDO for Sinks with an Operational PDP of x Watts Shall be 
+as follows:
+
+Operational current for Fixed Supply/Variable Supply PDOs: RoundDown(x/voltage) to the nearest 
+10mA.
+
+Operational power for Battery Supply PDOs: ≤ x.
+
+Operational current for Programmable Power Supply APDOs as defined in Table 10.10, "SPR 
+Programmable Power Supply PDOs and APDOs based on the Port Maximum PDP": RoundDown (x/Prog 
+Voltage) to the nearest 50mA.
+The Maximum Current/Power in the Sink RDO for Sinks with an Operational PDP of x Watts and Maximum PDP of y 
+Watts Shall be as follows:
+
+Maximum current for Fixed Supply/Variable Supply RDOs from Sinks without a Battery: RoundDown(x/
+voltage) to the nearest 10mA.
+
+Maximum current for Fixed Supply/Variable Supply RDOs from Sinks with a Battery: RoundDown(y/
+Voltage) to the nearest 10mA.
+
+Maximum power for Battery Supply RDOs from Sinks without a Battery: ≤ x.
+
+Maximum power for Battery Supply RDOs from Sinks with a Battery: ≤ y.
+
+Maximum current for PPS Supply RDOs from Source PDOs as defined in Table 10.10, "SPR 
+Programmable Power Supply PDOs and APDOs based on the Port Maximum PDP" or Table 10.14, "EPR 
+Source Examples when Port Present PDP is less than Port Maximum PDP": RoundDown (y/Prog Voltage) 
+to the nearest 50mA.
+The following requirements Shall apply to the Advertised Sink Capabilities:

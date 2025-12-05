@@ -1,0 +1,19 @@
+Page 1034
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure D.4 Scaled BMC Signal Derivative with 50ns Sampling Rate (a) without USB 2.0 Noise (b) with USB 
+2.0 Noise
+To remove the high frequency content of the [USB 2.0] noise, Finite Difference technique with the proper time 
+interval is applied to the BMC waveform with [USB 2.0] noise in Figure D.3, "Sample BMC Signals (a) without USB 
+2.0 SE0 Noise (b) with USB 2.0 SE0 Noise". Using Backward Finite Difference Calculator, ΔVcc = Vcc (t) - Vcc(t- Δt), 
+Figure D.5, "BMC Signal and Finite Difference Output with Various Time Steps" shows the Finite Difference Output 
+while Δt = 500ns. The larger the time interval Δt is, the larger the peak-to-peak magnitude of the Finite Difference 
+Output will be. However, the time interval is bounded by the rise time of the BMC signal so that 300ns to 500ns is 
+a good range of the time interval.
+Figure D.5 BMC Signal and Finite Difference Output with Various Time Steps
+D.1.3
+  Data Recovery 
+The edge detection is followed by the Finite Difference Calculation. At the input of the edge detector, if the voltage 
+is larger than Vth, H at the rising edge, the output will become high voltage level, VH, if the voltage is smaller than 
+Vth, L at the falling edge, the output will become low voltage level, VL. In this example, Vth, H and Vth, L are 0.2V and 
+-0.2V, respectively. The solid curve in Figure D.6, "Output of Finite Difference in dash line and Edge Detector in solid 
+line" represents the output of the edge detector, where VH is 0.5V and VL is -0.5V. 

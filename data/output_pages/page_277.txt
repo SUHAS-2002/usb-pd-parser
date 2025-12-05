@@ -1,0 +1,38 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 277
+Figure 6.59 Chunking architecture Showing Message and Control Flow
+6.12.2.1.1.1
+  Optional Abort Mechanism
+Long Chunked Messages bring with them the potential problem that they could prevent urgent Messages from being 
+transmitted in a timely manner. An Optional Abort mechanism is provided to remedy this problem. 
+The Abort Flag referred to in the diagrams below May be set and examined by the Policy Engine. The specific means 
+are left to the implementer.
+6.12.2.1.1.2
+  Aborting Sending a Long-Chunked Message
+A long-Chunked Message being sent May be aborted by setting the Optional Abort Flag. The Message Shall be 
+considered aborted when the Abort Flag is again cleared by the Chunked Tx state machine.
+6.12.2.1.1.3
+  Aborting Receiving a Long-Chunked Message
+If the Optional Abort mechanism has been implemented, any Message sent while a Chunked Message receive is in 
+progress will result in an error report being received by the Policy Engine, to indicate that the Message request has 
+been Discarded. If the Message was urgent the Policy Engine might set the Abort Flag, which will result in the 
+incoming Chunked Message being aborted. The Abort Flag being cleared by the Chunked Rx state machine indicates 
+that the urgent Message can now be sent.
+6.12.2.1.2
+  Chunked Rx State Diagram
+Figure 6.60, "Chunked Rx State Diagram" shows the state behavior for the Chunked Rx State Machine. This 
+recognizes whether Chunked received Messages are involved and deals with requesting chunks when they are. It 
+also performs validity checks on all Messages related to Chunking.
+Policy Engine
+Protocol Layer Rx
+Protocol Layer Tx
+PHY Layer
+Rp Control or 
+Detection
+Chunked Rx
+Chunked Tx
+Chunking
+Protocol Layer
+Hard Reset
+Chunked Message Router
+AMS Notification

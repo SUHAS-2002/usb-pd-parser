@@ -1,0 +1,9 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 955
+8.3.3.26.1.6
+  PE_SRC_EPR_Mode_Entry_Failed State
+On entry to the PE_SRC_EPR_Mode_Entry_Failed state the Policy Engine Shall send a EPR_Mode (Enter Failed) 
+Message.
+The Policy Engine Shall transition to the PE_SRC_Ready state when:
+
+The EPR_Mode (Enter Failed) Message has been sent.

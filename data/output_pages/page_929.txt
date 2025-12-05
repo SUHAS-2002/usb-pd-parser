@@ -1,0 +1,65 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 929
+8.3.3.22
+  Responder Structured VDM State Diagrams
+8.3.3.22.1
+  Responder Structured VDM Discover Identity State Diagram
+Figure 8.195, "Responder Structured VDM Discover Identity State Diagram" shows the state diagram for a Responder 
+receiving a Discover Identity Command request.
+Figure 8.195 Responder Structured VDM Discover Identity State Diagram
+8.3.3.22.1.1
+  PE_RESP_VDM_Get_Identity State
+The Policy Engine transitions to the PE_RESP_VDM_Get_Identity state from either the PE_SRC_Ready, 
+PE_SNK_Ready or PE_CBL_Ready state when:
+
+A Structured VDM Discover Identity Command request is received.
+On entry to the PE_RESP_VDM_Get_Identity state the Responder Shall request identity information from the Device 
+Policy Manager.
+The Policy Engine Shall transition to the PE_RESP_VDM_Send_Identity state when:
+
+Identity information is received from the Device Policy Manager.
+The Policy Engine Shall transition to the PE_RESP_VDM_Get_Identity_NAK state when:
+
+The Device Policy Manager indicates that the response to the Discover Identity Command request is 
+NAK or BUSY.
+8.3.3.22.1.2
+  PE_RESP_VDM_Send_Identity State
+On entry to the PE_RESP_VDM_Send_Identity state the Responder Shall send the Structured VDM Discover Identity 
+ACK Command response.
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state for a UFP when:
+
+The Structured VDM Discover Identity ACK Command response has been sent.
+8.3.3.22.1.3
+  PE_RESP_VDM_Get_Identity_NAK State
+On entry to the PE_RESP_VDM_Get_Identity_NAK state the Policy Engine Shall send a Structured VDM Discover 
+Identity NAK or BUSY Command response as indicated by the Device Policy Manager.
+The Policy Engine Shall transition to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state when:
+
+The Structured VDM Discover Identity NAK or BUSY Command response has been sent.
+PE_RESP_VDM_Send_Identity
+Actions on entry:
+Send Discover Identity ACK
+Power = Explicit Contract
+PD = Connected
+Discover Identity
+request
+Discover Identity ACK
+sent
+PE_RESP_VDM_Get_Identity
+Actions on entry:
+Request Identity information from DPM
+Power = Explicit Contract
+PD = Connected
+Identity information 
+from DPM
+PE_RESP_VDM_Get_Identity_NAK
+Actions on entry:
+Send Discover Identity NAK/BUSY Command 
+response as requested
+Power = Explicit Contract
+PD = Connected
+DPM says
+NAK/BUSY
+Discover Identity NAK/BUSY 
+sent
+PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready

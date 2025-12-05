@@ -1,0 +1,61 @@
+Page 832
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+Reject Message - if the request cannot be met or the present Explicit Contract is Invalid.
+
+Wait Message - if the request could be met later from the Power Reserve. A Wait Message Shall Not be 
+sent if the present Explicit Contract is Invalid.
+The Policy Engine Shall transition to the PE_SRC_Ready state when:
+
+There is an Explicit Contract and
+
+A Reject Message has been sent and the present Explicit Contract is still Valid or
+
+A Wait Message has been sent.
+The Policy Engine Shall transition to the PE_SRC_Hard_Reset state when:
+
+There is an Explicit Contract and
+
+The Reject Message has been sent and the present Explicit Contract is Invalid (i.e., the Sink had to 
+request a new value so instead we will return to USB Default Operation).
+The Policy Engine Shall transition to the PE_SRC_Wait_New_Capabilities state when:
+
+There is no Explicit Contract and
+
+A Reject Message has been sent or
+
+A Wait Message has been sent.
+8.3.3.2.9
+  PE_SRC_Hard_Reset State
+The Policy Engine Shall transition to the PE_SRC_Hard_Reset state from any state when:
+
+Hard Reset request from Device Policy Manager or
+
+In EPR Mode and a Request Message is received or
+
+EPR Capable and in SPR Mode and an EPR_Request Message is received.
+On entry to the PE_SRC_Hard_Reset state the Policy Engine Shall: 
+
+request the generation of Hard Reset Signaling by the PHY Layer
+
+initialize and run the NoResponseTimer.
+Note:
+The NoResponseTimer Shall continue to run in every state until it is stopped or times out.
+
+initialize and run the PSHardResetTimer and increment the HardResetCounter.
+The Policy Engine Shall transition to the PE_SRC_Transition_to_default state when:
+
+The PSHardResetTimer times out.
+8.3.3.2.10
+  PE_SRC_Hard_Reset_Received State
+The Policy Engine Shall transition from any state to the PE_SRC_Hard_Reset_Received state when:
+
+Hard Reset Signaling is detected.
+On entry to the PE_SRC_Hard_Reset_Received state the Policy Engine Shall:
+
+initialize and run the PSHardResetTimer
+
+initialize and run the NoResponseTimer.
+Note:
+The NoResponseTimer Shall continue to run in every state until it is stopped or times out.
+The Policy Engine Shall transition to the PE_SRC_Transition_to_default state when:

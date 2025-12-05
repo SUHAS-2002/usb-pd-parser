@@ -1,0 +1,72 @@
+Page 426
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.1.1
+  Basic Message Exchange
+Figure 8.2, "Basic Message Exchange (Successful)" below illustrates how a Message is sent. Table 8.1, "Basic Message 
+Flow" details the steps in the flow. Note that the sender might be either a Source or Sink while the receiver might 
+be either a Sink or Source. The basic Message sequence is the same. It starts when the Message Sender's Protocol 
+Layer at the behest of its Policy Engine forms a Message that it passes to the PHY Layer.
+Figure 8.2 Basic Message Exchange (Successful)
+Table 8.1  Basic Message Flow
+Step
+Message Sender
+Message Receiver
+1
+Policy Engine directs Protocol Layer to send a Message. 
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends a CRC and sends the Message. Starts 
+CRCReceiveTimer.
+PHY Layer receives the Message and checks the CRC to 
+verify the Message.
+4
+PHY Layer removes the CRC and forwards the Message 
+to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+Protocol Layer forwards the received Message 
+information to the Policy Engine that consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it to the PHY Layer.
+7
+PHY Layer receives the Message and checks the CRC to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+Protocol Layer checks and increments the 
+MessageIDCounter and stops CRCReceiveTimer.
+9
+Protocol Layer informs the Policy Engine that the 
+Message was successfully sent. 
+: Policy Engine
+: Protocol
+1: Send message
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+2: Message
+3: Message + CRC
+4: Message
+Start CRCReceiveTimer
+Check MessageID against 
+local copy
+Store copy of MessageID
+5: Message received
+Consume message
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9: Message sent
+Message Sender
+Message Receiver

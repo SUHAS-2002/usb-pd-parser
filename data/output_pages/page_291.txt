@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 291
+6.12.2.2.3
+  Sink Protocol Layer Message Transmission State Diagram
+Figure 6.65, "Sink Protocol Layer Message Transmission State Diagram" shows the state behavior for the Protocol 
+Layer in a Sink when transmitting a Message.
+Figure 6.65 Sink Protocol Layer Message Transmission State Diagram
+6.12.2.2.3.1
+  PRL_Tx_Snk_Start_of_AMS State
+In the PRL_Tx_Snk_Start_of_AMS state the Protocol Layer waits for the first Message in a Sink initiated AMS.
+The Protocol Layer in a Sink Shall transition from the PRL_Tx_Wait_for_Message_Request state to the 
+PRL_Tx_Snk_Start_of_AMS state when:
+
+A notification is received from the Policy Engine that the next Message the Sink will send is the start of 
+an AMS.
+The Protocol Layer Shall transition to the PRL_Tx_Snk_Pending state when:
+
+A Message request is received from the Policy Engine.
+PRL_Tx_Wait_for_Message_Request
+First Message in AMS notification received 
+from Policy Engine
+PRL_Tx_Snk_Pending
+Actions on entry:
+PRL_Tx_Layer_Reset_for_Transmit
+PRL_Tx_Construct_Message
+Soft Reset Message pending
+Message pending (except Soft Reset) &
+Rp = SinkTxOk
+PRL_Tx_Snk_Start_of_AMS
+Actions on entry:
+Message Request from Policy Engine

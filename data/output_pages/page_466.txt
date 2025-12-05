@@ -1,0 +1,20 @@
+Page 466
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+15
+PHY Layer receives the GoodCRC Message and 
+compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+16
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. The Protocol Layer verifies and 
+increments the MessageIDCounter and stops the 
+CRCReceiveTimer.
+17
+The Protocol Layer informs the Policy Engine that a 
+Reject Message was successfully sent.
+Table 8.37  Steps for SPR Sink Makes Request (Reject)
+Step
+Source
+Sink

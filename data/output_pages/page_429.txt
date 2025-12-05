@@ -1,0 +1,51 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 429
+Table 8.3  Basic Message Flow with CRC failure
+Step
+Message Sender
+Message Receiver
+1
+Policy Engine directs Protocol Layer to send a Message. 
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends a CRC and sends the Message. Starts 
+CRCReceiveTimer.
+PHY Layer receives no Message or a Message with an 
+incorrect CRC. Nothing is passed to Protocol Layer.
+4
+Since no response is received, the CRCReceiveTimer 
+will expire and trigger the first retry by the Protocol 
+Layer. The RetryCounter is incremented. Protocol Layer 
+passes the Message to the PHY Layer.
+5
+PHY Layer appends a CRC and sends the Message. Starts 
+CRCReceiveTimer.
+PHY Layer receives the Message and checks the CRC to 
+verify the Message.
+6
+PHY Layer removes the CRC and forwards the Message 
+to the Protocol Layer.
+7
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+Protocol Layer forwards the received Message 
+information to the Policy Engine that consumes it.
+8
+Protocol Layer generates a GoodCRC Message and 
+passes it to the PHY Layer.
+9
+PHY Layer receives the Message and checks the CRC to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+10
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+11
+Protocol Layer verifies the MessageID, stops 
+CRCReceiveTimer and resets the RetryCounter. 
+Protocol Layer informs the Policy Engine that the 
+Message was successfully sent.

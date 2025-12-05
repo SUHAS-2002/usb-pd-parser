@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 715
+8.3.2.11.9
+  Revision Information
+8.3.2.11.9.1
+  Source Gets Revision Information from a Sink
+Figure 8.91, "Source Gets Sink's Revision Information" shows an example sequence between a Source and a Sink when 
+the Source gets the Sink's Revision information. 
+Figure 8.91 Source Gets Sink's Revision Information
+: Protocol
+1: Send Get_Revision
+: PHY
+: PHY
+: Protocol
+2:Get_Revision
+3: Get_Revision + CRC
+4: Get_Revision
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Revision 
+received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Revision sent
+Start SenderResponseTimer
+10: Send Revision
+11: Revision
+12: Revision
++ CRC
+13: Revision
+Check MessageID against local copy
+Store copy of MessageID
+14: Revision
+received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Country Information 
+from DPM
+: Policy Engine
+: Policy Engine
+Sink Port
+Source Port
+Stop SenderResponseTimer
+18: Revision sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

@@ -1,0 +1,15 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 373
+7.3.1.3.3
+  Increasing the Programmable Power Supply (PPS) Current
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed when increasing the 
+current limit in the same APDO, not exceeding the maximum for that APDO and without changing the requested 
+voltage is shown in Figure 7.33, "Transition Diagram for increasing the Current in PPS mode". The sequence that 
+Shall be followed is described in Table 7.12, "Sequence Description for increasing the Current in PPS mode". The 
+timing parameters that Shall be followed are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink 
+Electrical Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In Figure 7.33, "Transition Diagram for increasing the Current in PPS mode", the Sink has previously sent 
+a Request Message to the Source. 
+The Sink May draw current equal to the increasing Current Limit of the Source before it has received the PS_RDY 
+Message for the new Request.

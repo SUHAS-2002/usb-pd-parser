@@ -1,0 +1,84 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 173
+6.4.4.3.1.4.1
+  VDO Version Field
+The UFP VDO Version field contains a VDO Version for this VDM Version number. This field indicates the expected 
+content for the UFP VDOs.
+6.4.4.3.1.4.2
+  Device Capability Field
+The Device Capability bit-field describes the UFP's Capabilities when operating as either a PDUSB Device or PDUSB 
+Hub.
+B10…8
+VCONN Power
+When the VCONN Required field is set to “Yes” the VCONN 
+Power Field indicates the VCONN power needed by the AMA for 
+full functionality:
+
+000b = 1W
+
+001b = 1.5W
+
+010b = 2W
+
+011b = 3W
+
+100b = 4W
+
+101b = 5W
+
+110b = 6W
+111b = Reserved, Shall Not be used.
+When the VCONN Required field is set to “No” the VCONN Power 
+field is Reserved and Shall be set to zero.
+B7
+VCONN Required
+Indicates whether the AMA requires VCONN in order to 
+function.
+
+0 = No
+
+1 = Yes
+When the Alternate Modes field indicates no modes are 
+supported, the VCONN Required field is Reserved and Shall be 
+set to zero.
+B6
+VBUS Required
+Indicates whether the AMA requires VBUS in order to function.
+
+0 = Yes
+
+1 = No
+When the Alternate Modes field indicates no modes are 
+supported, the VBUS Required field is Reserved and Shall be 
+set to zero.
+B5…3
+Alternate Modes
+Bit
+Description
+0
+Supports [TBT3] Alternate Mode
+1
+Supports Alternate Modes that reconfigure the 
+signals on the [USB Type-C 2.4] connector – 
+except for [TBT3].
+2
+Supports Alternate Modes that do not reconfigure 
+the signals on the [USB Type-C 2.4] connector.
+B2…0
+USB Highest Speed
+
+000b = [USB 2.0] only, no SuperSpeed support
+
+001b = [USB 3.2] Gen1
+
+010b = [USB 3.2]/[USB4] Gen2
+
+011b = [USB4] Gen3
+
+100b =[USB4] Gen4
+
+101b…111b = Reserved and Shall be set to zero.
+Table 6.39  UFP VDO (Continued)
+Bit(s)
+Description
+Reference

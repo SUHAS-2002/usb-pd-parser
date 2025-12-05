@@ -1,0 +1,119 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 411
+vPpsSmallStep
+PPS Step size defined 
+as a small step relative 
+to the previous 
+vPpsNew.
+-500
+500
+mV
+Section 7.1.4.2.2
+vPpsStep
+PPS voltage 
+programming step size 
+(1 LSB).
+20
+mV
+Section 7.1.8.3
+vPpsValid
+The range in addition 
+to vPpsNew which the 
+Programmable Power 
+Supply output is 
+considered Valid in 
+response to a load step. 
+-0.1
+0.1
+V
+Section 7.1.8.3
+vSmallStep
+VBUS step size increase 
+defined as a small step 
+relative to the 
+previous VBUS when 
+Requesting a different 
+(A)PDO.
+500
+mV
+Section 7.1.4.3.1
+vSrcNeg
+Most negative voltage 
+allowed during 
+transition.
+-0.3
+V
+Figure 7.10
+vSrcNew
+Fixed Supply output 
+measured at the 
+Source receptacle.
+PDO 
+Voltage 
+*0.95
+PDO 
+Voltage
+PDO 
+Voltage 
+*1.05
+V
+Table 7.2
+Variable Supply output 
+measured at the 
+Source receptacle.
+PDO 
+Minimum 
+Voltage
+PDO 
+Maximum 
+Voltage
+V
+Battery Supply output 
+measured at the 
+Source receptacle.
+PDO 
+Minimum 
+Voltage
+PDO 
+Maximum 
+Voltage
+V
+vSrcPeak
+The range that a Fixed 
+Supply or EPR AVS in 
+Peak Current 
+operation is allowed 
+when overload 
+conditions occur.
+PDO 
+Voltage 
+*0.90
+PDO 
+Voltage 
+*1.05
+V
+Table 6.10
+Table 6.16
+Figure 7.14
+vSrcSlewNeg
+Maximum slew rate 
+allowed for negative 
+voltage transitions. 
+Limits current based 
+on a 3 A connector 
+rating and maximum 
+Sink bulk capacitance 
+of 100 µF.
+-30
+mV/µs Section 7.1.4.2
+Table 7.2
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

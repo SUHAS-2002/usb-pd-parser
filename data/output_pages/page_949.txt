@@ -1,0 +1,59 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 949
+8.3.3.25.4
+  Cable Plug Mode Entry/Exit
+8.3.3.25.4.1
+  Cable Plug Structured VDM Enter Mode State Diagram
+Figure 8.209, "Cable Plug Structured VDM Enter Mode State Diagram" shows the state diagram for a Cable Plug in 
+response to an Enter Mode Command.
+Figure 8.209 Cable Plug Structured VDM Enter Mode State Diagram
+8.3.3.25.4.1.1
+  PE_CBL_Evaluate_Mode_Entry State
+The Policy Engine transitions to the PE_CBL_Evaluate_Mode_Entry state from the PE_CBL_Ready state when:
+
+A Structured VDM Enter Mode Command request is received from the DFP.
+On Entry to the PE_CBL_Evaluate_Mode_Entry state the Policy Engine Shall request the Device Policy Manager to 
+evaluate the Enter Mode Command request and enter the Mode indicated in the Command request if the request is 
+acceptable.
+The Policy Engine Shall transition to the PE_CBL_Mode_Entry_ACK state when:
+
+The Device Policy Manager indicates that the Mode has been entered.
+The Policy Engine Shall transition to the PE_CBL_Mode_Entry_NAK state when:
+
+The Device Policy Manager indicates that the response to the Mode request is NAK.
+8.3.3.25.4.1.2
+  PE_CBL_Mode_Entry_ACK State
+On entry to the PE_CBL_Mode_Entry_ACK state the Policy Engine Shall send a Structured VDM Enter Mode ACK 
+Command response.
+PE_CBL_Ready
+Actions on entry:
+Cable = Awake/Asleep
+PD = Not Connected/Connected
+Enter Modes
+request1
+PE_CBL_Mode_Entry_ACK
+Actions on entry:
+Send Enter Mode ACK Command
+Cable = Awake
+PD = Connected
+Enter Mode ACK
+sent
+PE_CBL_Evaluate_Mode_Entry
+Actions on entry:
+Request DPM to evaluate request to enter 
+a Mode
+Cable = Awake
+PD = Connected
+PE_CBL_Mode_Entry_NAK
+Actions on entry:
+Send Enter Mode NAK Command response 
+as requested
+Cable = Awake
+PD = Connected
+DPM says
+NAK
+DPM says 
+Mode entered
+Enter Mode NAK sent
+1)
+The Cable is required to be in USB operation or USB Safe State at this point.

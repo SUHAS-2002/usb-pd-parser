@@ -1,0 +1,50 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 257
+6.6.12.4
+  tVDMBusy
+The Initiator Shall wait at least tVDMBusy, after receiving a BUSY Command response, before repeating the 
+Structured VDM request again.
+6.6.13
+  VCONN Timers
+6.6.13.1
+  VCONNOnTimer
+The VCONNOnTimer is used during a VCONN Swap.
+The VCONNOnTimer Shall be started when:
+
+The last bit of GoodCRC Message EOP, corresponding to the Accept Message, is transmitted or received 
+by the PHY Layer.
+The VCONNOnTimer Shall be stopped when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the PS_RDY Message, is transmitted by the 
+PHY Layer.
+Prior to sending the PS_RDY Message, the Port Shall have turned VCONN On.
+6.6.13.2
+  tVCONNSourceOff
+The tVCONNSourceOff time applies during a VCONN Swap. The initial VCONN Source Shall cease sourcing VCONN within 
+tVCONNSourceOff of the last bit of the GoodCRC Message EOP, corresponding to the PS_RDY Message, being 
+transmitted by the PHY Layer.
+6.6.14
+  tCableMessage
+Ports compliant with Revision 3.x of the specification Shall Not wait tCableMessage before sending an SOP’ Packet 
+or SOP’’ Packet even when communicating using [USBPD 2.0] with a Cable Plug. This specification defines Collision 
+Avoidance mechanisms that obviate the need for this time.
+Cable Plugs Shall only wait tCableMessage before sending an SOP’ Packet or SOP’’ Packet when operating at 
+[USBPD 2.0]. When operating at Revisions higher than [USBPD 2.0] Cable Plugs Shall Not wait tCableMessage 
+before sending an SOP’ Packet or SOP’’ Packet.
+6.6.15
+  DiscoverIdentityTimer
+The DiscoverIdentityTimer is used prior to or during an Explicit Contract when discovering whether a Cable Plug 
+is PD Capable using SOP’. When performing Cable Discovery during an Explicit Contract the Discover Identity 
+Command request Shall be sent every tDiscoverIdentity. No more than nDiscoverIdentityCount Discover 
+Identity Messages without a GoodCRC Message response Shall be sent. If no GoodCRC Message response is received 
+after nDiscoverIdentityCount Discover Identity Command requests have been sent by a Port, the Port Shall Not 
+send any further SOP’/SOP’’ Messages.
+6.6.16
+  Collision Avoidance Timers
+6.6.16.1
+  SinkTxTimer
+The SinkTxTimer is used by the Protocol Layer in a Source to allow the Sink to complete its transmission before 
+initiating an AMS. 
+The Source Shall wait a minimum of tSinkTx after changing Rp from SinkTxOK to SinkTxNG before initiating an 
+AMS by sending a Message.
+A Sink Shall only initiate an AMS when it has determined that Rp is set to SinkTxOK. 

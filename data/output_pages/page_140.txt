@@ -1,0 +1,24 @@
+Page 140
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Augmented Power Data Object (APDO) is defined to allow support for more than the four PDO types by 
+extending the Power Data Object field from 2 to 4 bits when the B31…B30 are 11b. The generic APDO structure is 
+shown in Table 6.8, "Augmented Power Data Object".
+Table 6.8  Augmented Power Data Object
+Bit(s)
+Description
+Value
+Parameter
+B31…30
+11b
+Augmented Power Data Object (APDO)
+B29…28
+00b
+SPR PPS
+01b
+EPR AVS
+10b
+SPR AVS
+11b
+Reserved
+B27…0
+Specific Power Capabilities are described by the APDOs in the following sections.

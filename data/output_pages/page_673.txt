@@ -1,0 +1,51 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 673
+8.3.2.11.5.2
+  Source Gets Battery Capabilities
+Figure 8.77, "Source Gets Sink's Battery Capabilities" shows an example sequence between a Source and a Sink when 
+the Source gets the Sink's Battery capabilities for a given Battery.
+Figure 8.77 Source Gets Sink's Battery Capabilities
+: Protocol
+1: Send Get_Battery_Cap
+: PHY
+: PHY
+: Protocol
+2:Get_Battery_Cap
+3: Get_Battery_Cap + CRC
+4: Get_Battery_Cap
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Battery_Cap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Battery_Cap sent
+Start SenderResponseTimer
+10: Send Battery_Capabilities
+11: Battery_Capabilities
+12: Battery_Capabilities + CRC
+13: Battery_Capabilities
+Check MessageID against local copy
+Store copy of MessageID
+14: Battery_Capabilities received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Battery capability 
+Information from DPM
+: Policy Engine
+: Policy Engine
+Source Port
+Sink Port
+Stop SenderResponseTimer
+18: Battery_Capabilities sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

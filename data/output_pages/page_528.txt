@@ -1,0 +1,70 @@
+Page 528
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.6
+  Hard Reset
+The following sections describe the steps required for a USB Power Delivery Hard Reset. The Hard Reset returns 
+the operation of the USB Power Delivery to default Power Role/Data Role and operating voltage/current. During 
+the Hard Reset USB Power Delivery PHY Layer communications Shall be disabled preventing communication 
+between the Port Partner.
+Note:
+Hard Reset, in this case, is applied to the USB Power Delivery capability of an individual Port on which 
+the Hard Reset is requested. A side effect of the Hard Reset is that it might reset other functions on the 
+Port such as USB.
+8.3.2.6.1
+  Source Initiated Hard Reset
+This is an example of a Hard Reset operation when initiated by a Source. Figure 8.30, "Source initiated Hard Reset" 
+shows the Messages as they flow across the bus and within the devices to accomplish the Hard Reset.
+Figure 8.30 Source initiated Hard Reset
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+: Policy Engine
+Source
+Sink
+Hard Reset Complete
+Reset MessageIDCounter and 
+RetryCounter
+Reset MessageIDCounter and 
+RetryCounter
+8: Power Supply Reset
+6: Power Sink Reset
+10: Send Capabilities
+11: Capabilities
+12: Capabilities + CRC
+13: Capabilities
+Start CRCReceiveTimer
+Store copy of MessageID
+14: Capabilities received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+18: Capabilities sent
+Stop NoResponseTimer
+Start SenderResponseTimer
+Evaluate Capabilities
+7: Hard Reset Complete
+Power Sink Reset
+Power Supply Reset
+Turn on VCONN
+9: Hard Reset Complete
+Channel enabled
+Channel enabled
+1: Send Hard Reset
+2: Send Hard Reset
+3: Hard Reset
+4: Hard Reset received
+Start NoResponseTimer
+Wait tPSHardReset
+Reset Power Supply
+Reset Port Data Role to DFP
+Turn off VCONN
+5: Hard Reset received
+Reset Power Sink
+Reset Port Data Role to UFP
+Turn off VCONN
+Channel disabled
+Channel disabled

@@ -1,0 +1,38 @@
+Page 274
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.11
+  Message Discarding
+On receiving a received Message on SOP, the Protocol Layer Shall Discard any pending SOP* Messages. A received 
+Message on SOP’/SOP’’ Shall Not cause any pending SOP* Messages to be Discarded. 
+It is assumed that Messages using SOP’/SOP’’ constitute a simple request/response AMS, with the Cable Plug 
+providing the response so there is no reason for a pending SOP* Message to be Discarded. There can only be one 
+AMS between the Port Partners, and these also take priority over Cable Plug communications so a Message received 
+on SOP will always cause a Message pending on SOP* to be Discarded.
+Table 6.74, "Message Discarding" for details of the Messages that Shall/ Shall Not be Discarded.
+Table 6.74  Message Discarding
+Message pending transmission Message received
+Message to be Discarded
+SOP
+SOP
+Outgoing Message
+SOP
+SOP’/SOP’’
+Incoming Message
+SOP’
+SOP
+Outgoing Message
+SOP’
+SOP’
+Incoming Message
+SOP’
+SOP’’
+Incoming Message 
+SOP’’
+SOP
+Outgoing Message
+SOP’’
+SOP’
+Incoming Message
+SOP’’
+SOP’’
+Incoming Message

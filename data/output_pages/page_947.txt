@@ -1,0 +1,64 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 947
+8.3.3.25.3
+  Source Startup Structured VDM Discover Identity of a Cable Plug 
+State Diagram
+Figure 8.208, "Source Startup Structured VDM Discover Identity State Diagram" shows the state diagram for Source 
+discovery of identity information from a Cable Plug during the startup sequence.
+Figure 8.208 Source Startup Structured VDM Discover Identity State Diagram
+8.3.3.25.3.1
+  PE_SRC_VDM_Identity_Request State
+The Policy Engine Shall transition to the PE_SRC_VDM_Identity_Request state from the PE_SRC_Startup state 
+when:
+
+The Device Policy Manager requests the discovery of the identity of the Cable Plug.
+The Policy Engine Shall transition to the PE_SRC_VDM_Identity_Request state from the PE_SRC_Discovery state 
+when:
+
+The Device Policy Manager requests the discovery of the identity of the Cable Plug and
+
+The DiscoverIdentityCounter < nDiscoverIdentityCount.
+Even though there has been a transition out of the PE_SRC_Discovery state the SourceCapabilityTimer Shall 
+continue to run during the states shown in Figure 8.208, "Source Startup Structured VDM Discover Identity State 
+Diagram" and Shall Not be initialized on re-entry to PE_SRC_Discovery. 
+PE_SRC_Send_Capabilities or 
+PE_SRC_Discovery1
+PE_SRC_VDM_Identity_Request
+Actions on entry:
+Send Discover Identity request
+Increment the DiscoverIdentityCounter
+Start VDMResponseTimer
+Power = No or Implicit Contract
+Cable Plug = Not PD Connected
+DPM requests identity discovery3 &
+Protocol Layer Reset Complete
+Discover Identity ACK
+received
+PE_SRC_VDM_Identity_ACKed
+Actions on entry:
+Inform DPM of identity
+PE_SRC_VDM_Identity_NAKed
+Actions on entry:
+Inform DPM of result
+Power =No or Implicit Contract
+Cable Plug = PD Connected
+Discover Identity NAK/BUSY |
+VDMResponseTimer Timeout |
+Discover Identity request sending 
+failure (without GoodCRC)
+DPM informed
+DPM informed
+PE_SRC_Startup
+DPM requests identity discovery &
+DiscoverIdentityCounter < nDiscoverIdentityCount2
+PE_SRC_Discovery
+Power = No or Implicit Contract
+Cable Plug = PD Connected
+1)
+If the Discover Identity Command is being sent at startup, then the Policy Engine will subsequently transition to the PE_SRC_Send_Capabilities state as
+normal.  Otherwise, the Policy Engine will transition to the PE_SRC_Discovery state.
+2)
+The SourceCapabilityTimer continues to run during the states defined in this diagram even though there has been an exit from the PE_SRC_Discovery
+state.  This ensures that Source_Capabilities Messages are sent out at a regular rate.
+3)
+The DPM in an EPR Source Shall request the discovery of the identity of the Cable Plug at startup.

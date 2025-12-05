@@ -1,0 +1,13 @@
+Page 890
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+A Reject Message if the device is unable to perform a Data Role Swap at this time.
+
+A Wait Message if further evaluation of the Data Role Swap request is required.
+Note:
+In this case it is expected that one of the Port Partners will send a DR_Swap Message at a later time (see 
+Section 6.3.12.3, "Wait in response to a DR_Swap Message").
+The Policy Engine Shall continue as a DFP and Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state 
+when:
+
+The Reject or Wait Message has been sent.

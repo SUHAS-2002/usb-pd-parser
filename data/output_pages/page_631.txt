@@ -1,0 +1,52 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 631
+8.3.2.11.2.4
+  Sink Gets Source PPS Status
+Figure 8.63, "Sink Gets Source PPS Status" shows an example sequence between a Source and a Sink where, after the 
+Sink has received an alert (see Section 8.3.2.11.2, "Status") that there has been a PPS status change, the Sink gets 
+more details on the change. 
+Figure 8.63 Sink Gets Source PPS Status
+: Protocol
+1: Send Get_PPS_Status
+: PHY
+: PHY
+: Protocol
+2:Get_PPS_Status
+3: Get_PPS_Status + CRC
+4: Get_PPS_Status
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_PPS_Status received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_PPS_Status sent
+Start SenderResponseTimer
+10: Send PPS_Status
+11: PPS_Status
+12: PPS_Status + CRC
+13: PPS_Status
+Check MessageID against local copy
+Store copy of MessageID
+14: PPS_Status received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Source PPS Status 
+Information from DPM
+: Policy Engine
+: Policy Engine
+Sink Port
+Source Port
+Stop SenderResponseTimer
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd
+18: PPS_Status sent

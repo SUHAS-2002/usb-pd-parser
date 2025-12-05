@@ -1,0 +1,71 @@
+Page 966
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.29
+  Policy Engine States
+Table 8.154, "Policy Engine States" lists the states used by the various state machines.
+Table 8.154  Policy Engine States
+State name
+Reference
+SenderResponseTimer
+SRT_Stopped
+Section 8.3.3.1.1.1
+SRT_Running
+Section 8.3.3.1.1.2
+SRT_Expired
+Section 8.3.3.1.1.3
+Source Port
+PE_SRC_Startup
+Section 8.3.3.2.1
+PE_SRC_Discovery
+Section 8.3.3.2.2
+PE_SRC_Send_Capabilities
+Section 8.3.3.2.3
+PE_SRC_Negotiate_Capability
+Section 8.3.3.2.4
+PE_SRC_Transition_Supply
+Section 8.3.3.2.5
+PE_SRC_Ready
+Section 8.3.3.2.6
+PE_SRC_Disabled
+Section 8.3.3.2.7
+PE_SRC_Capability_Response
+Section 8.3.3.2.8
+PE_SRC_Hard_Reset
+Section 8.3.3.2.9
+PE_SRC_Hard_Reset_Received
+Section 8.3.3.2.10
+PE_SRC_Transition_to_default
+Section 8.3.3.2.11
+PE_SRC_Give_Source_Cap
+Section 8.3.3.2.15
+PE_SRC_Get_Sink_Cap
+Section 8.3.3.2.12
+PE_SRC_Wait_New_Capabilities
+Section 8.3.3.2.13
+PE_SRC_EPR_Keep_Alive
+Section 8.3.3.2.14
+Sink Port
+PE_SNK_Startup
+Section 8.3.3.3.1
+PE_SNK_Discovery
+Section 8.3.3.3.2
+PE_SNK_Wait_for_Capabilities
+Section 8.3.3.3.3
+PE_SNK_Evaluate_Capability
+Section 8.3.3.3.4
+PE_SNK_Select_Capability
+Section 8.3.3.3.5
+PE_SNK_Transition_Sink
+Section 8.3.3.3.6
+PE_SNK_Ready
+Section 8.3.3.3.7
+PE_SNK_Hard_Reset
+Section 8.3.3.3.8
+PE_SNK_Transition_to_default
+Section 8.3.3.3.9
+PE_SNK_Give_Sink_Cap
+Section 8.3.3.3.10
+PE_SNK_Get_Source_Cap
+Section 8.3.3.3.12
+PE_SNK_EPR_Keep_Alive
+Section 8.3.3.3.11

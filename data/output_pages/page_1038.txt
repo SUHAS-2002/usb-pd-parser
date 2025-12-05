@@ -1,0 +1,87 @@
+Page 1038
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+E
+ FRS System Level Example
+E.1
+  Overview
+Appendix E, "FRS System Level Example" is intended to clarify Fast Role Swap (FRS) functionality at the system level 
+through the use of an example implementation. 
+Figure E.1, "Example FRS Capable System" is an example of a Hub and laptop implementation that supports Fast Role 
+Swap (see Figure 7.16, "VBUS Power during Fast Role Swap"). It is not the only possible Hub or laptop architecture. 
+However, it is intended to provide an example system whose functionality is used here to illustrate how Fast Role 
+Swap works.
+Figure E.1 Example FRS Capable System
+This appendix describes two cases that cover a variety of behaviors that might be seen in practice. 
+
+Slow VBUS Discharge where VBUS between the Hub and the laptop takes more than 15ms (tFRSwapInit) 
+to discharge below 5.5 V (vSafe5V (max)). In this case the FR_Swap Message is sent by the laptop while 
+VBUS is still greater than vSafe5V (max). See Figure E.2, "Slow VBUS Discharge".
+
+Fast VBUS Discharge where VBUS between the Hub and the laptop discharges very quickly, perhaps be-
+fore the Fast Role Swap Request is even complete. See Figure E.3, "Fast VBUS Discharge".
+However, neither the Hub nor the laptop can anticipate how quickly VBUS will discharge until the power adapter is 
+disconnected from an AC Supply or it is unplugged from the Hub.
+The Fast Role Swap Request is the momentary low driven by the Hub on the CC wire which is detected by the laptop.
+Figure E.2, "Slow VBUS Discharge" and Figure E.3, "Fast VBUS Discharge" show the voltage seen on VBUS in 
+relationship to the Fast Role Swap Request They also show the transition between when the Hub stops supplying 
+VBUS and when the laptop starts supplying VBUS.
+Notebook
+������ F
+ F
+�����
+��
+2
+VB
+Hub
+������ F
+ F
+�����
+����
+ F
+�������
+����������
+FRS                 
+��
+4
+VB
+��
+1
+VB
+������
+������
+Power 
+Adapter
+ F
+��
+Peripheral
+��
+3
+VB
+������ F
+FRS
+�������
+����������
+������
+���������
+����������
+�������
+�������
+���������������
+��
+H3
+��
+H4
+��
+N3
+N4
+��
+VHubVB
+VNbVB
+������ F
+��������
+�������
+����
+�������
+�����
+H5
+H6

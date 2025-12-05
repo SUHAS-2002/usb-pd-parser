@@ -1,0 +1,23 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 479
+8.3.2.2.2.2
+  EPR Explicit Contract Negotiation
+8.3.2.2.2.2.1
+  EPR Explicit Contract Negotiation (Accept)
+Figure 8.15, "Successful Fixed EPR Power Negotiation" illustrates an example of a successful Message flow while 
+negotiating an Explicit Contract in EPR Mode. The Negotiation goes through several distinct phases:
+
+The Source sends out its power Capabilities in an EPR_Source_Capabilities Message.
+
+The Sink evaluates these Capabilities and, in the request phase, selects one power level by sending an 
+EPR_Request Message.
+
+The Source evaluates the request and accepts the request with an Accept Message.
+
+The Source transitions to the new power level and then informs the Sink by sending a PS_RDY Message.
+
+The Sink starts using the new power level.
+
+the Source starts its keep alive timer
+
+the Sink starts its request timer to send periodic EPR_KeepAlive Messages 

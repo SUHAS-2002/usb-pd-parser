@@ -1,0 +1,69 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 293
+6.12.2.3
+  Protocol Layer Message Reception
+Figure 6.66, "Protocol layer Message reception" shows the state behavior for the Protocol Layer when receiving a 
+Message. 
+Figure 6.66 Protocol layer Message reception
+6.12.2.3.1
+  PRL_Rx_Wait_for_PHY_Message state
+The Protocol Layer Shall enter the PRL_Rx_Wait_for_PHY_Message state:
+
+At startup.
+
+As a result of a Soft Reset request from the Policy Engine.
+
+On exit from a Hard Reset. 
+In the PRL_Rx_Wait_for_PHY_Message state the Protocol Layer waits until the PHY Layer passes up a received 
+Message.
+The Protocol Layer Shall transition to the PRL_Rx_Send_GoodCRC state when:
+
+A Message is passed up from the PHY Layer.
+The Protocol Layer Shall transition to the PRL_Rx_Layer_Reset_for_Receive state when:
+
+A Soft_Reset Message is received from the PHY Layer.
+Message received 
+from PHY (except Soft Reset)
+Message passed to
+Policy Engine
+(GoodCRC sent | Message discarded bus Idle1)
+MessageID <> stored
+ MessageID | 
+no stored value
+MessageID = stored
+ MessageID
+Start
+PRL_Rx_Send_GoodCRC
+Actions on entry:
+Send GoodCRC message to PHY
+PRL_Rx_Store_MessageID
+Actions on entry:
+Protocol Layer message transmission transitions 
+to PRL_Tx_Discard_Message state2.
+Store new MessageID
+Pass message to Policy Engine3
+PRL_Rx_Wait_for_PHY_message
+Actions on entry:
+PRL_Rx_Check_MessageID
+Actions on entry:
+If there is a stored value compare 
+MessageID with stored value.
+Soft Reset Message received 
+from PHY
+Soft Reset complete
+PRL_Rx_Layer_Reset_for_Receive
+Actions on entry:
+Reset MessageIDCounter and clear stored MessageID value
+Protocol Layer message transmission transitions to 
+PRL_Tx_PHY_Layer_Reset state.
+Soft Reset request from Policy Engine |
+Exit from Hard Reset
+Message discarded bus Idle1
+1)
+This indication is sent by the PHY when a message has been Discarded due to CC being busy, and after CC becomes idle again 
+(see Section 5.7 “Collision Avoidance”).  Two alternate allowable transitions are shown.
+2)
+In the case of a Ping message being received, in order to maintain robust communications in the presence of collisions, the outgoing message Should
+Not be Discarded.
+3)
+See Section 6.11 “Message Discarding” for details of when Messages are discarded.

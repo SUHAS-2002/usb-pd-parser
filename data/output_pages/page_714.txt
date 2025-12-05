@@ -1,0 +1,20 @@
+Page 714
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares the 
+CRC it calculated with the one sent to verify the Message.
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Country_Info Message was successfully sent.
+The Cable Plug has informed the Source of its country information.
+Table 8.117  Steps for a VCONN Source getting Sink's Country Information Sequence
+Step
+VCONN Source
+Cable Plug

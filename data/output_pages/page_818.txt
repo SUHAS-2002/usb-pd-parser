@@ -1,0 +1,20 @@
+Page 818
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+15
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares the 
+CRC it calculated with the one sent to verify the Message.
+16
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+17
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Unstructured Vendor_Defined Message was successfully 
+sent.
+Table 8.152  Steps for Unstructured VDM Message Sequence
+Step
+DFP
+UFP

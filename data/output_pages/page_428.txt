@@ -1,0 +1,60 @@
+Page 428
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 8.4, "Basic Message Flow with Bad followed by a Retry" illustrates one of these cases; the basic Message flow 
+with a retry due to a bad CRC at the Message Receiver. It starts when the Message Sender's Protocol Layer at the 
+behest of its Policy Engine forms a Message that it passes to the PHY Layer. The Protocol Layer is responsible for 
+retries on a “'n' strikes and you are out" basis (nRetryCount). Table 8.3, "Basic Message Flow with CRC failure" 
+details the steps in the flow.
+Figure 8.4 Basic Message Flow with Bad followed by a Retry
+F
+1)
+GoodCRC Message response does not arrive at the Message Sender side due to the noise on the channel.
+2)
+GoodCRC Message response arrives but has a bad CRC.
+A GoodCRC Message is not received by the Message Sender’s Protocol Layer. This leads to a CRCReceiveTimer 
+timeout in the Message Sender.
+G
+1)
+GoodCRC Message is received but does contain the same MessageID as the transmitted Message.
+2)
+A Message is received but it is not a GoodCRC Message (similar case to that of an unexpected or unknown 
+Message but this time detected in the Protocol Layer).
+Both of these issues indicate errors in receiving an expected GoodCRC Message which will lead to a 
+CRCReceiveTimer timeout in the Protocol Layer and a subsequent retry (except for communications with Cable 
+Plugs).
+Table 8.2  Potential issues in Basic Message Flow
+Point
+Possible issues
+: Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+4: Message
+5: Message + CRC
+6: Message
+Start CRCReceiveTimer
+Check MessageID against 
+local copy
+Store copy of MessageID
+7: Message received
+Consume message
+8: GoodCRC
+9: GoodCRC + CRC
+10: GoodCRC
+Check and increment MessageIDCounter
+Reset RetryCounter
+Stop CRCReceiveTimer
+11: Message sent
+1: Send message
+2: Message
+3: Message + CRC
+Start CRCReceiveTimer
+CRCReceiveTimer expires
+Retry and increment RetryCounter
+Message is not received or CRC 
+is bad so message is not passed 
+to the protocol layer
+Message Sender
+Message Receiver

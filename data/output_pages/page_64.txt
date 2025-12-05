@@ -1,0 +1,27 @@
+Page 64
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+Errors during power transitions will automatically lead to a Hard Reset to restore power to default 
+levels.
+
+Error handling:
+
+Protocol Errors are handled by a Soft_Reset Message issued by either Port Partner, that resets 
+counters, timers and states, but does not change the Negotiate voltage and current or the Port's role 
+(e.g., Sink, DFP/UFP, VCONN Source) and does not cause an exit from Modal Operation.
+
+Serious errors are handled by Hard Reset Signaling issued by either Port Partner. A Hard Reset: 
+
+resets protocol as for a Soft Reset but also returns the power supply to USB Default Operation 
+(vSafe0V or vSafe5V output) in order to protect the Sink.
+
+restores the Port's Data Role to UFP.
+
+when the Sink is the VCONN Source it removes VCONN then the Source Port is restored as the VCONN 
+Source.
+
+causes all Active Modes to be exited such that the Source is no longer in Modal Operation.
+
+After a Hard Reset it is expected that the Port Partner will respond within tTypeCSinkWaitCap. If this 
+does not occur, then two further Hard Resets are carried out before the UFP stays in the 
+PE_SNK_Wait_for_Capabilities state. 

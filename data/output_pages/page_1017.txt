@@ -1,0 +1,61 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1017
+C
+ VDM Command Examples
+C.1
+  Discover Identity Example
+C.1.1
+  Discover Identity Command request
+Table C.1, "Discover Identity Command request from Initiator Example" below shows the contents of the key fields 
+in the Message Header and VDM Header for an Initiator sending a Discover Identity Command request.
+Table C.1  Discover Identity Command request from Initiator Example
+Bit(s)
+Field
+Value
+Message Header
+15
+Reserved
+0
+14…12
+Number of Data Objects
+1 (VDM Header)
+11…9
+MessageID
+0…7
+8
+Port Power Role
+0 or 1
+7…6
+Specification Revision
+10b (Revision 3.x)
+5…4
+Reserved
+0
+3…0
+Message Type
+1111b (Vendor Defined Message)
+VDM Header
+B31…16
+Standard or Vendor ID (SVID)
+0xFF00 (PD SID)
+B15
+VDM Type
+1 (Structured VDM)
+B14…13
+Structured VDM Version (Major)
+01b (Version 2.0)
+B12…11
+Structured VDM Version (Minor)
+01b (Version 2.1)
+B10…8
+Object Position
+000b
+B7…6
+Command Type
+00b (Initiator)
+B5
+Reserved
+0
+B4…0
+Command
+1 (Discover Identity)

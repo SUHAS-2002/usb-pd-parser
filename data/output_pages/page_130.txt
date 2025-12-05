@@ -1,0 +1,60 @@
+Page 130
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+It Shall be sent to signal the Sink, in EPR Mode, that the Source is unable to meet the EPR_Request 
+Message. This May be due an Invalid request or because the Source can no longer provide what it 
+previously Advertised.
+
+It Shall be sent by the recipient of a PR_Swap Message to indicate it is unable to do a Power Role Swap.
+
+It Shall be sent by the recipient of a PR_Swap Message while in EPR Mode.
+
+It Shall be sent by the recipient of a DR_Swap Message to indicate it is unable to do a Data Role Swap.
+
+It Shall be sent by the recipient of a VCONN_Swap Message that is not presently the VCONN Source, to 
+indicate it is unable to do a VCONN Swap.
+
+It Shall be sent by UFP on receiving an Enter_USB Message to indicate it is unable to enter the requested 
+USB Mode.
+The sender of a Request, EPR_Request, PR_Swap, DR_Swap, VCONN_Swap, or Enter_USB Message, on receiving a 
+Reject Message response, Shall Not send this same Message to the recipient until one of the following has occurred:
+
+A New Explicit Contract Negotiation as a result of the Source sending a Source_Capabilities Message or 
+EPR_Source_Capabilities Message. This can be triggered by:
+
+The Source's Device Policy Manager.
+
+A Get_Source_Cap Message sent from the Sink to the Source in SPR Mode.
+
+An EPR_Get_Source_Cap Message sent from the Sink to the Source in EPR Mode.
+
+A Power Role Swap.
+
+A Soft Reset.
+
+A Hard Reset.
+
+A Disconnect/Re-connect.
+
+A Data Role Swap.
+
+A Data Reset.
+The Sink May send a different Request Message to the one which was rejected but Shall Not repeat the same 
+Request Message, using the same RDO, unless there has been a New Explicit Contract Negotiation, Data Role Swap 
+or Data Reset as described above.
+The Reject Message Shall be sent within tReceiverResponse of the receipt of the last bit of Message (see Section 
+6.6.2, "SenderResponseTimer"). 
+Note:
+The Reject Message is not a Valid response when a Message is not supported. In this case the 
+Not_Supported Message is returned (see Section 6.3.16, "Not_Supported Message").
+6.3.5
+  Ping Message
+The Ping (Deprecated) Message has been deprecated. The 0_0101 Message Type is no longer Valid.
+A Port that receives a Ping (Deprecated) Message May respond with a Not_Supported Message or Ignore the Ping 
+(Deprecated) Message. A Cable Plug that receives a Ping (Deprecated) Message Shall Ignore the Ping (Deprecated) 
+Message.
+6.3.6
+  PS_RDY Message
+The PS_RDY Message Shall be sent by the Source (or by both the New Sink and New Source during the Power Role 
+Swap AMS or Fast Role Swap AMS) to indicate its power supply has reached the desired operating condition (see 
+Section 8.3.2.2, "Power Negotiation").

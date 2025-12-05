@@ -1,0 +1,20 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 941
+8.3.3.25
+  Cable Plug Specific State Diagrams
+The State Diagrams in this section Shall apply to all Cable Plugs that support Structured VDMs.
+8.3.3.25.1
+  Cable Plug Cable Ready State Diagram
+Figure 8.203, "Cable Ready State Diagram" shows the Cable Ready state diagram for a Cable Plug.
+Figure 8.203 Cable Ready State Diagram
+8.3.3.25.1.1
+  PE_CBL_Ready State
+The PE_CBL_Ready state shown in the following sections is the normal operational state for a Cable Plug and where 
+it starts after power up or a Hard/Cable Reset.
+PE_CBL_Ready
+Actions on entry:
+Cable = Awake/Asleep
+PD = Not Connected/Connected
+Power up |
+Hard Reset Complete |
+Cable Reset Complete

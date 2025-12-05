@@ -1,0 +1,33 @@
+Page 916
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.19.14
+  Dual-Role (Source Port) Give Sink Capabilities Extended State 
+Diagram
+Figure 8.187, "Dual-Role (Source) Give Sink Capabilities Extended diagram" shows the state diagram for a Dual-Role 
+device, presently operating as a Sink, on receiving a Get_Sink_Cap_Extended Message. See also Section 6.5.13, 
+"Sink_Capabilities_Extended Message".
+Figure 8.187 Dual-Role (Source) Give Sink Capabilities Extended diagram
+8.3.3.19.14.1
+  PE_DR_SRC_Give_Sink_Cap_Ext State
+The Policy Engine Shall transition to the PE_DR_SRC_Give_Sink_Cap_Ext state, from the PE_SRC_Ready state, when 
+a Get_Sink_Cap_Extended Message is received. 
+On entry to the PE_DR_SRC_Give_Sink_Cap_Ext state the Policy Engine Shall request the present extended Sink 
+Capabilities from the Device Policy Manager and then send a Sink_Capabilities_Extended Message based on these 
+capabilities.
+The Policy Engine Shall transition back to the PE_SRC_Ready state (see Figure 8.132, "Source Port State 
+Diagram")when:
+
+The Sink_Capabilities_Extended Message has been successfully sent.
+_Get_Sink_Cap Message |
+EPR_Get_Sink_Cap Message
+Sink Capabilities
+Message sent
+PE_SRC_Ready
+PE_DR_SRC_Give_Sink_Cap
+Actions on entry:
+Get present extended sink capabilities from Device Policy Manager
+Send Sink_Capabilities_Extended Message (based on Device Policy Manager response):
+• If Get_Sink_Cap Message received send Sink_Capabilities Message.
+• In EPR_Get_Sink Cap Message received send EPR_Sink_Capabilities Message
+Power = Explicit Contract
+PD = Connected

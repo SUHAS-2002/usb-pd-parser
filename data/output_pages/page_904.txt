@@ -1,0 +1,8 @@
+Page 904
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+The PSSourceOnTimer times out or
+
+The PS_RDY Message is not sent after retries (a GoodCRC Message has not been received).
+Note:
+A Soft Reset Shall Not be initiated in this case.

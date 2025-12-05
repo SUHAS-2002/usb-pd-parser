@@ -1,0 +1,34 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 533
+13
+PHY Layer removes the CRC and forwards the 
+Source_Capabilities Message to the Protocol Layer.
+14
+Protocol Layer stores the MessageID of the incoming 
+Message.
+The Protocol Layer forwards the received 
+Source_Capabilities Message information to the Policy 
+Engine that consumes it.
+15
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+16
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Source_Capabilities Message was successfully sent. 
+Policy Engine stops the NoResponseTimer and starts 
+the SenderResponseTimer.
+USB Power Delivery communication is re-established.
+Table 8.58  Steps for Sink initiated Hard Reset
+Step
+Source
+Sink

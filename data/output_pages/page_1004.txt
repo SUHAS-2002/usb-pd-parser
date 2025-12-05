@@ -1,0 +1,42 @@
+Page 1004
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 10.5 Valid SPR AVS Operating Region for a Source advertising in the range of 60W < PDP ≤ 100W
+10.2.2.2.1
+  SPR Adjustable Voltage Supply (AVS) Voltage Ranges
+Table 10.12, "EPR Source Capabilities based on the Port Maximum PDP and using an EPR Capable Cable" shows the 
+Minimum and Maximum Voltage for the SPR AVS ranges.
+The voltage output at the Source's connector Shall be +/-5% for both the Maximum Voltage and the Minimum 
+Voltage.
+Table 10.9  SPR Adjustable Voltage Supply (AVS) Voltage Ranges
+AVS Voltage Range
+15V AVS
+20V AVS
+Maximum Voltage
+15V
+20V
+Minimum Voltage
+9V
+9V
+0
+1
+2
+3
+4
+5
+6
+30
+RDO Current (A)
+RDO Voltage (V)
+Invalid Requests
+(Crosshatched Area)
+Valid Operating Region
+for SPR AVS Sink Requests
+for 27W < PDP �����
+Valid RDO Requests
+20V  
+9V
+* At 15.0V, up to the (20V Fixed PDO 
+Current)A is allowed
+15V*
+20V Fixed PDO Max Current
+15V Fixed PDO Max Current  

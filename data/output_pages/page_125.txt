@@ -1,0 +1,33 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 125
+Figure 6.7 Example Security_Request sequence Chunked (Chunked bit = 1)
+Figure 6.8, "Example Security_Request Message of Data Size 7 (Chunked bit set to 1)" shows the Security_Request 
+Message shown in Figure 6.7, "Example Security_Request sequence Chunked (Chunked bit = 1)" in more detail 
+including the byte ordering on the bus and padding. Three bytes of padding have been added to the Message so that 
+the total number of bytes is a multiple of 32-bits, corresponding to 3 Data Objects. The Number of Data Objects 
+field is set to 3 to indicate the length of this Chunk. The Chunk Number is set to zero and the Data Size field is set 
+to 7 to indicate the length of the whole Extended Message.
+Host
+Charger
+Security_Request 
+(Number of Data Objects = 3,
+Chunked = 1, Chunk Number = 0,
+Request Chunk = 0, Data Size = 7)
+GoodCRC
+GoodCRC
+Security_Response 
+(Number of Data Objects = 7,
+Chunked = 1, Chunk Number = 0,
+Request Chunk = 0, Data Size = 30)
+Security_Response “Chunk request”
+(Number of Data Objects = 1,
+Chunked = 1, Chunk Number = 1,
+Request Chunk = 1, Data Size = 0)
+GoodCRC
+GoodCRC
+Security_Response 
+(Number of Data Objects = 2,
+Chunked = 1, Chunk Number = 1,
+Request Chunk = 0, Data Size = 30)
+Security_Request Chunk
+Security_Response

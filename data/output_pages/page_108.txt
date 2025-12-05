@@ -1,0 +1,41 @@
+Page 108
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.8.5.4
+  Inter-Frame Gap
+Figure 5.26, "Inter-Frame Gap Timings" illustrates the inter-Frame gap timings.
+Figure 5.26 Inter-Frame Gap Timings
+The transmitter Shall drive the bus for no longer than tEndDriveBMC after transmitting the final bit of the Frame.
+Before starting to transmit the next Frame's Preamble the transmitter of the next Frame Shall ensure that it waits 
+for tInterFrameGap after either:
+
+Transmitting the previous Frame, for example sending the next Message in an AMS immediately after 
+having sent a GoodCRC Message, or 
+
+Receiving the previous Frame, for example when responding to a received Message with a GoodCRC 
+Message, or 
+
+Observing an Idle condition on CC (see Section 5.7, "Collision Avoidance"). In this case the Port is waiting 
+to initiate an AMS observes Idle (see Section 5.8.6.1, "Definition of Idle") and then waits tInterFrameGap 
+before transmitting the Frame. See also Section 5.7, "Collision Avoidance" for details on when an AMS can 
+be initiated.
+Note:
+The transmitter is also required to verify a bus Idle condition immediately prior to starting transmission 
+of the next Frame (see Section 5.8.6.1, "Definition of Idle").
+The transmitter of the next Frame May vary the start of the Preamble by tStartDrive (see Section 5.8.1, "Encoding 
+and signaling").
+See also Section 5.8.1, "Encoding and signaling" for figures detailing the timings relating to transmitting, receiving, 
+and observing Idle in relating to Frames.
+5.8.5.5
+  Shorting of Transmitter Output
+A Transmitter in a Port or Cable Plug Shall tolerate having its output be shorted to ground for tFRSwapTx max. 
+This is due to the potential for Fast Role Swap to be signaled while the Transmitter is in the process of transmitting 
+(see Section 5.8.5.6, "Fast Role Swap Transmission").
+End of Frame
+Preamble
+Bus driven after end 
+of Frame
+Bus driven before 
+Preamble
+tEndDriveBMC
+tStartDrive
+tInterFrameGap

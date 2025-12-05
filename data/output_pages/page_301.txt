@@ -1,0 +1,169 @@
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+Page 301
+6.13.1
+  Applicability of Control Messages
+Table 6.77, "Applicability of Control Messages" details Control Messages that Shall/Should/Shall Not be transmitted 
+and received by a Source, Sink, Cable Plug or VPD. Requirements for Dual-Role Power Ports and Dual-Role Data Ports 
+Shall override any requirements for Source-only or Sink-Only Ports.
+Table 6.77  Applicability of Control Messages
+Message Type
+Source
+Sink
+Dual-Role 
+Power
+Dual-Role 
+Data
+Cable Plug
+VPD9
+Transmitted Message
+Accept
+N
+N
+N
+N
+Data_Reset
+CN10/R
+CN10/R
+NA
+NA
+DR_Swap
+O
+O
+N
+NA
+NA
+FR_Swap
+NA
+NA
+R
+NA
+NA
+Get_Country_Codes
+CN7/NA
+CN7/NA
+NA
+NA
+Get_PPS_Status
+NA
+CN6
+NA
+NA
+Get_Sink_Cap
+R
+NA
+N
+NA
+NA
+Get_Sink_Cap_Extended
+R
+NA
+R
+NA
+NA
+Get_Source_Cap
+NA
+R
+N
+NA
+NA
+Get_Source_Cap_Extended
+NA
+R
+R
+NA
+NA
+Get_Source_Info
+NA
+R
+R
+NA
+NA
+Get_Revision
+R
+R
+NA
+NA
+Get_Status
+R
+R
+NA
+NA
+GoodCRC
+N
+N
+N
+N
+GotoMin (Deprecated)
+NA
+NA
+NA
+NA
+Not_Supported
+N
+N
+NA
+NA
+Ping (Deprecated)
+NA
+NA
+NA
+NA
+PR_Swap
+NA
+NA
+N
+NA
+NA
+PS_RDY
+N
+CN1/NA
+N
+NA
+NA
+Reject
+N
+O
+O
+O
+CN10/NA
+NA
+Soft_Reset
+N
+N
+NA
+NA
+VCONN_Swap
+R
+R
+NA
+NA
+Wait
+O
+NA
+O
+O
+NA
+NA
+1)
+Shall be supported by any Port that can supply VCONN.
+2)
+Shall be supported products that support the Source_Capabilities_Extended Message.
+3)
+Shall be supported by Sources that support the Alert Message.
+4)
+Shall be supported when the Fast Role Swap Request is supported.
+5)
+Shall be supported when VCONN Swap is supported.
+6)
+Shall be supported when SPR PPS Mode is supported.
+7)
+Shall be supported when required by a country authority.
+8)
+Shall be supported by Active Cables.
+9)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a CT-VPD Shall only take 
+place when not Connected to a Charger.
+10)
+Shall be supported by products that support [USB4].
+11)
+Shall be supported by all Sources except single Port SPR Chargers with Invariant PDOs.

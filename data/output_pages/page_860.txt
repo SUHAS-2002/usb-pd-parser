@@ -1,0 +1,38 @@
+Page 860
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.8.3
+  Source Port Get Sink Capabilities Extended State Diagram
+Figure 8.146, "Source Port Get Sink Capabilities Extended State Diagram" shows the state diagram for a Source on 
+receiving a request from the Device Policy Manager to get the Port Partner's extended Sink Capabilities. See also 
+Section 6.5.13, "Sink_Capabilities_Extended Message".
+Figure 8.146 Source Port Get Sink Capabilities Extended State Diagram
+8.3.3.8.3.1
+  PE_SRC_Get_Sink_Cap_Ext State
+The Policy Engine Shall transition to the PE_SRC_Get_Sink_Cap_Ext state, from the PE_SRC_Ready state, due to a 
+request to get the remote extended Source Capabilities from the Device Policy Manager. 
+On entry to the PE_SRC_Get_Sink_Cap_Ext state the Policy Engine Shall send a Get_Sink_Cap_Extended Message and 
+initialize and run the SenderResponseTimer.
+On exit from the PE_SRC_Get_Sink_Cap_Ext state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (capabilities or response timeout).
+The Policy Engine Shall transition back to the PE_SRC_Ready state (see Figure 8.132, "Source Port State Diagram") 
+when:
+
+A Sink_Capabilities_Extended Message is received
+
+Or SenderResponseTimer times out.
+get extended Sink capabilities 
+request 
+from Device Policy Manager
+Sink_Capabilities_Extended
+Message received |
+SenderResponseTimer
+Timeout
+PE_SRC_Ready
+PE_SRC_Get_Sink_Cap_Ext
+Actions on entry:
+Send Get_Sink_Cap_Extended Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+Actions on exit:
+Pass sink extended capabilities/outcome to Device Policy Manager

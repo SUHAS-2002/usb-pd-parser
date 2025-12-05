@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 121
+When either Port Partner only supports Chunked Extended Messages:
+
+The Chunked bit in every Extended Message Shall be set to one.
+
+Every Extended Message of Data Size > MaxExtendedMsgLegacyLen Shall be transmitted between the 
+Port Partners in Chunks 
+
+The Number of Data Objects in the Message Header Shall indicate the number of Data Objects in the 
+Message padded to the 4-byte boundary including the Extended Message Header as part of the first Data 
+Object.
+The conditions listed above Shall apply until the Port Pair is Detached, there is a Hard Reset, there is Error Recovery 
+or the Source removes power (except during a Power Role Swap or Fast Role Swap when the Initial Source removes 
+power in order to for the New Source to apply power).
+When both Port Partners support Unchunked Extended Messages:
+
+The Chunked bit in every Extended Message Shall be set to zero.
+
+Every Extended Message Shall be transmitted between the Port Partners Unchunked.
+
+The Number of Data Objects in the Message Header is Reserved.
+The conditions listed above Shall apply until the Port Pair is Detached, there is a Hard Reset, there is Error Recovery 
+or the Source removes power (except during a Power Role Swap or Fast Role Swap when the Initial Source removes 
+power in order to for the New Source to apply power).
+When sending Extended Messages to the Cable Plug the VCONN Source Shall only send Chunked Extended Messages. 
+Cable Plugs Shall always send Extended Messages of Data Size > MaxExtendedMsgLegacyLen Chunked and Shall 
+set the Chunked bit in every Extended Message to one.
+When Extended Messages are supported Chunking Shall be supported.
+6.2.1.2.2
+  Chunk Number
+The Chunk Number field Shall only be Valid in a Message if the Chunked flag is set to one. If the Chunked flag is 
+set to zero the Chunk Number field Shall also be set to zero.
+The Chunk Number field is used differently depending on whether the Message is a request for Data, or a requested 
+Data Block being returned:
+
+In a request for data the Chunk Number field indicates the number of the Chunk being requested. The 
+requester Shall only set this field to the number of the next Chunk in the series (the next Chunk after the 
+last received Chunk).
+
+In the requested Data Block the Chunk Number field indicates the number of the Chunk being returned. 
+The Chunk Number for each Chunk in the series Shall start at zero and Shall increment for each Chunk 
+by one up to a maximum of 9 corresponding to 10 Chunks in total.
+6.2.1.2.3
+  Request Chunk
+The Request Chunk bit Shall only be used for the Chunked transfer of an Extended Message when the Chunked bit 
+is set to 1 (see Figure 6.7, "Example Security_Request sequence Chunked (Chunked bit = 1)"). For Unchunked Extended 
+Message transfers, Messages Shall be sent and received without the request/response mechanism (see Figure 6.4, 
+"Example Security_Request sequence Unchunked (Chunked bit = 0)").
+The Request Chunk bit Shall be set to one to indicate that this is a request for a Chunk of a Data Block and Shall be 
+set to zero to indicate that this is a Chunk response containing a Chunk. Except for Chunk zero, a requested Chunk 
+of a Data Block Shall only be returned as a Chunk response to a corresponding request for that Chunk. Both the 
+Chunk request and the Chunk response Shall contain the same value in the Message Type field. When the Request 
+Chunk bit is set to one the Data Size field Shall be zero.

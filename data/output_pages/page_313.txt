@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 313
+within the range defined by the relative tolerance vSrcNew and the absolute band vSrcValid as listed 
+in Table 7.23, "Source Electrical Parameters" and described in Section 7.1.8, "Output Voltage Tolerance 
+and Range".
+
+The Variable Supply (non-Battery) PDO exposes less well-regulated Sources. The output voltage of a 
+Variable Supply (non-Battery) Shall remain within the absolute maximum output voltage and the 
+absolute minimum output voltage exposed in the Variable Supply PDO.
+
+The Battery Supply PDO exposes Batteries than can be connected directly as a Source to VBUS. The output 
+voltage of a Battery Supply Shall remain within the absolute maximum output voltage and the absolute 
+minimum output exposed in the Battery Supply PDO.
+
+The Programmable Power Supply (PPS) Augmented Power Data Object (APDO) exposes a Source with 
+an output voltage that can be adjusted programmatically over a defined range. The output voltage of 
+the Programmable Power Supply Shall remain within a range defined by the relative tolerance 
+vPpsNew and the absolute band vPpsValid.
+
+The Adjustable Voltage Supply (AVS) Augmented Power Data Object (APDO) exposes a Source with an 
+output voltage that can be adjusted programmatically over a defined range. The output voltage of the 
+AVS Shall remain within a range defined by the relative tolerance vAvsNew and the absolute band 
+vAvsValid.
+7.1.4
+  Source Transitions
+7.1.4.1
+  Fixed Supply
+7.1.4.1.1
+  Fixed Supply Positive Voltage Transitions
+The Source Shall transition VBUS from the starting voltage to the higher new voltage in a controlled manner. The 
+Negotiated new voltage (e.g., 5V, 9V, 15V, …) defines the nominal value for vSrcNew. During the positive transition 
+the Source Should be able to supply the Sink Standby current and the transient current to charge the total bulk 
+capacitance on VBUS. The slew rate of the positive transition Shall Not exceed vSrcSlewPos. The transitioning 
+Source output voltage Shall settle within vSrcNew by tSrcSettle. The Source Shall be able to supply the Negotiated 
+power level at the new voltage by tSrcReady. The positive voltage transition Shall remain above vSrcValid min of 
+the previous Explicit Contract and below vSrcValid max of the new Explicit Contract (Figure 7.2, "Transition 
+Envelope for Positive Voltage Transitions"). The voltage Shall settle to vSrcNew within tSrcSettle. The starting time, 
+t0, in Figure 7.2, "Transition Envelope for Positive Voltage Transitions" starts tSrcTransition after the last bit of the 
+EOP of the GoodCRC Message has been received by the Source.
+Figure 7.2 Transition Envelope for Positive Voltage Transitions
+ At the start of the positive voltage transition the VBUS voltage level Shall Not droop vSrcValid min below either 
+vSrcNew (i.e., if the starting VBUS voltage level is not vSafe5V) or vSafe5V as applicable.
+Starting voltage
+vSrcNew(typ)
+t0
+vSrcSlewPos
+tSrcSettle
+vSrcValid(max)
+Upper bound of valid Source range
+vSrcNew(max)
+vSrcNew(min)
+tSrcReady
+Lower bound of valid Source range
+�
+�
+vSrcValid(min) beyond min/max limits of starting voltage

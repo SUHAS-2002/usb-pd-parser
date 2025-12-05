@@ -1,0 +1,79 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 151
+6.4.1.3.4.2
+  SPR Adjustable Voltage Supply APDO
+Table 6.21, "SPR Adjustable Voltage Supply APDO – Sink" below describes the SPR AVS (1110b) APDO for a Sink 
+operating in SPR AVS Mode. The Maximum Current 15V/Maximum Current 20V fields in the SPR AVS APDO for 
+the Sink is defined as the maximum current the device needs to fully support its function.
+6.4.1.3.4.3
+  EPR Adjustable Voltage Supply APDO
+Table 6.22, "EPR Adjustable Voltage Supply APDO – Sink" below describes a EPR AVS APDO for a Sink operating in 
+EPR AVS Mode. The PDP field in the EPR AVS APDO for the Sink is defined as the PDP the device needs to fully 
+support its function.
+6.4.1.4
+  SPR Capabilities Message Construction
+An SPR Capabilities Message (Source_Capabilities Message or Sink_Capabilities Message) Shall have at least one 
+Power Data Object for vSafe5V. The SPR Capabilities Message Shall also contain the sending Port's information 
+followed by up to 6 additional Power Data Objects. Power Data Objects in an SPR Capabilities Message Shall be sent 
+in the following order:
+1)
+The vSafe5V Fixed Supply PDO Shall always be the first (A)PDO.
+2)
+The remaining Fixed Supply PDOs, if present, Shall be sent in voltage order; lowest to highest.
+3)
+The Battery Supply PDOs if present Shall be sent in Minimum voltage order; lowest to highest.
+4)
+The Variable Supply (non-Battery) PDOs, if present, Shall be sent in Minimum voltage order; lowest to 
+highest.
+5)
+The SPR AVS APDO, if present, Shall be sent.
+6)
+The Programmable Power Supply APDOs, if present, Shall be sent in Maximum voltage order, lowest to 
+highest.
+Note:
+The EPR Capabilities Message construction is defined in Section 6.5.15.1, "EPR Capabilities Message 
+Construction".
+Table 6.21  SPR Adjustable Voltage Supply APDO – Sink
+Bit(s)
+Field
+Description
+B31…30 APDO
+11b – Augmented Power Data Object (APDO)
+B29…28 SPR AVS
+10b – SPR AVS
+B27…20 Reserved
+Reserved – Shall be set to zero.
+B19…10
+Maximum Current 15V
+For 9V – 15V range: Maximum current in 10mA units equal to the 
+Maximum Current field of the 15V Fixed Supply PDO
+B9…0
+Maximum Current 20V
+For 15V – 20V range: Maximum Current in 10mA units equal to the 
+Maximum Current field of the 20V Fixed Supply PDO, set to 0 if the 
+Maximum voltage in the SPR AVS range is 15V.
+Table 6.22  EPR Adjustable Voltage Supply APDO – Sink
+Bit(s)
+Field
+Description
+B31…30
+APDO
+11b – Augmented Power Data Object (APDO)
+B29…28
+EPR AVS
+01b – EPR AVS
+B27…26
+Reserved
+Reserved – Shall be set to zero.
+B25…17
+Maximum Voltage
+Maximum voltage in 100mV increments 
+B16
+Reserved
+Reserved – Shall be set to zero.
+B15…8
+Minimum Voltage
+Minimum voltage in 100mV increments
+B7…0
+PDP
+PDP in 1W increments

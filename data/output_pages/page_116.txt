@@ -1,0 +1,88 @@
+Page 116
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 6.2 USB Power Delivery Packet Format including Data Message Payload
+Figure 6.3, "USB Power Delivery Packet Format including an Extended Message Header and Payload" illustrates an 
+Extended Message as part of a Packet showing the parts are provided by the Protocol Layer and PHY Layer.
+Figure 6.3 USB Power Delivery Packet Format including an Extended Message Header and Payload
+6.2.1.1
+  Message Header
+Every Message Shall start with a Message Header as shown in:
+
+Figure 6.1, "USB Power Delivery Packet Format for a Control Message"
+
+Figure 6.2, "USB Power Delivery Packet Format including Data Message Payload"
+
+Figure 6.3, "USB Power Delivery Packet Format including an Extended Message Header and Payload"
+and as defined in Table 6.1, "Message Header". The Message Header contains basic information about the Message 
+and the PD Port Capabilities.
+The Message Header May be used standalone as a Control Message when the Number of Data Objects field is zero 
+or as the first part of a Data Message when the Number of Data Objects field is non-zero.
+6.2.1.1.1
+  Extended
+The 1-bit Extended field Shall be set to zero to indicate a Control Message or Data Message and set to one to indicate 
+an Extended Message.
+Table 6.1  Message Header
+Bit(s)
+Start of Packet
+Field Name
+Reference
+15
+SOP*
+Extended
+Section 6.2.1.1.1
+14…12
+SOP*
+Number of Data Objects
+Section 6.2.1.1.2
+11…9
+SOP*
+MessageID
+Section 6.2.1.1.3
+8
+SOP only
+Port Power Role
+Section 6.2.1.1.4
+SOP’/SOP’’
+Cable Plug
+Section 6.2.1.1.7
+7…6
+SOP*
+Specification Revision
+Section 6.2.1.1.5
+5
+SOP only
+Port Data Role
+Section 6.2.1.1.6
+SOP’/SOP’’
+Reserved
+Section 1.4.2
+4…0
+SOP*
+Message Type
+Section 6.2.1.1.8
+Preamble
+SOP* (Start 
+Of Packet)
+CRC
+EOP (End Of 
+Packet)
+Message Header 
+(16 bit)
+0..7 Data Object(s)
+Legend:
+PHY Layer
+Protocol Layer
+Preamble
+SOP* (Start 
+Of Packet)
+CRC
+EOP (End Of 
+Packet)
+Message Header
+(16 bit)
+Data (0..260 bytes)
+Legend:
+PHY Layer
+Protocol Layer
+Extended Message Header
+(16 bit)

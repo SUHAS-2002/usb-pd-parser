@@ -1,0 +1,21 @@
+Page 232
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+If the in Manufacturer Info Target field in the Get_Manufacturer_Info Message is associated with this 
+Port/Cable Plug, the PID field Shall contain the device's 16-bit product identifier designated by the 
+device vendor.
+
+If the in Manufacturer Info Target field in the Get_Manufacturer_Info Message is associated with a 
+Battery:
+
+And the VID belongs to the Battery vendor, the PID field Shall contain the Battery's 16-bit product 
+identifier designated by the Battery vendor.
+
+And the VID belongs to the Device vendor, the PID field Shall contain the Battery's 16-bit product 
+identifier designated by the Device vendor.
+6.5.7.3
+  Manufacturer String
+The Manufacturer String field Shall contain the device’s or Battery's manufacturer string as defined by the 
+vendor. 
+If the Manufacturer Info Target field or Manufacturer Info Ref field in the Get_Manufacturer_Info Message is 
+unrecognized the field Shall return a null terminated ASCII text string "Not Supported".

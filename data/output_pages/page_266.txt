@@ -1,0 +1,39 @@
+Page 266
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+Extended Messages of Data Size ≤ MaxExtendedMsgLegacyLen (Chunked flag set to zero or one) Shall 
+be retried.
+
+Extended Messages of Data Size > MaxExtendedMsgLegacyLen that are Chunked (Chunked flag set to 
+one) individual Chunks Shall be retried.
+When Messages are not retried, then the RetryCounter is not used. Higher layer protocols are expected to 
+accommodate Message delivery failure or failure to receive a GoodCRC Message.
+6.7.3
+  Hard Reset Counter
+The HardResetCounter is used to retry the Hard Reset whenever there is no response from the remote device (see 
+Section 6.6.6, "NoResponseTimer"). Once the Hard Reset has been retried nHardResetCount times then it Shall be 
+assumed that the remote device is non-responsive.
+6.7.4
+  Capabilities Counter
+The CapsCounter is used to count the number of Source_Capabilities Messages which have been sent by a Source 
+at power up or after a Hard Reset. Implementation of the CapsCounter is Optional but May be used by any Source 
+which wishes to preserve power by not sending Source_Capabilities Messages after a period of time. 
+When the CapsCounter is implemented and the Source detects that a Sink is Attached then after nCapsCount 
+Source_Capabilities Messages have been sent the Source Shall decide that the Sink is non-responsive, stop sending 
+Source_Capabilities Messages and disable PD.
+A Sink Shall use the SinkWaitCapTimer to trigger the resending of Source_Capabilities Messages by a USB Power 
+Delivery capable Source which has previously stopped sending Source_Capabilities Messages. Any Sink which is 
+Attached and does not detect a Source_Capabilities Message, Shall issue Hard Reset Signaling when the 
+SinkWaitCapTimer times out in order to reset the Source. Resetting the Source Shall also reset the CapsCounter 
+and restart the sending of Source_Capabilities Messages.
+6.7.5
+  Discover Identity Counter
+When sending Discover Identity Messages to a Cable Plug a Port Shall maintain a count of Messages sent 
+(DiscoverIdentityCounter). No more than nDiscoverIdentityCount Discover Identity Messages Shall be sent by 
+the Port without receiving a GoodCRC Message response. A VCONN Swap Shall reset the DiscoverIdentityCounter.
+6.7.6
+  VDMBusyCounter
+When sending Responder BUSY responses to a Structured Vendor_Defined Message a UFP or Cable Plug Shall 
+maintain a count of Messages sent (VDMBusyCounter). No more than nBusyCount Responder BUSY responses 
+Shall be sent. The VDMBusyCounter Shall be reset on sending a non-BUSY response. Products wishing to meet 
+[USB Type-C 2.4] requirements for Alternate Mode entry Should use an nBusyCount of 1.

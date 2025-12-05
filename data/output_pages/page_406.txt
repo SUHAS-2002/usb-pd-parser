@@ -1,0 +1,61 @@
+Page 406
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+tPpsSrcTransSmall
+The time the 
+Programmable Power 
+Supply’s set-point 
+Shall transition 
+between requested 
+voltages for steps less 
+than or equal to 
+vPpsSmallStep.
+0
+25
+ms
+Section 7.3.1.3
+tPpsTransient
+The maximum time for 
+the Programmable 
+Power Supply to be 
+between vPpsNew and 
+vPpsValid in response 
+to a load transient 
+when target load is 
+greater than or equal 
+to 60mA.
+5
+ms
+Section 7.1.8.3
+The maximum time for 
+the Programmable 
+Power Supply to be 
+between vPpsNew and 
+vPpsValid in response 
+to a load transient 
+when target load is less 
+than 60mA.
+150
+ms
+Section 7.1.8.3
+tSrcFRSwap
+Time from the Initial 
+Sink detecting that 
+VBUS has dropped 
+below vSafe5V until 
+the Initial Sink/new 
+Source is able to supply 
+USB Type-C Current 
+(see [USB Type-C 2.4]) 
+150
+µs
+Section 7.1.13
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

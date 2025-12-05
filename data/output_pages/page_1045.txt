@@ -1,0 +1,62 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1045
+Table E.3  Sequence for slow VBUS discharge (it discharges after FR_Swap message is sent)
+Step #
+Hub
+Laptop
+1
+The power adapter’s AC Supply power is lost. 
+2
+Hub detects the power adapter disconnect (H1) as 
+quickly as possible.
+3
+Hub sends Fast Role Swap Request on CC (H2) and 
+starts monitoring VHubVB (H3). Hub also starts a 
+tSnkFRSwap timer after the FRS signal begins and 
+VBUS has fallen below vSafe5V (min).
+4
+Laptop detects Fast Role Swap Request on CC (N1) 
+that triggers sending of the FR_Swap Message. This 
+can happen at any point in the following steps so 
+long as it is within 15 ms (tFRSwapInit). 
+5
+Laptop opens the sinking switch (N2), as quickly as 
+possible to minimize power drained from Hub after 
+the Fast Role Swap Request.
+6
+Laptop begins monitoring VBUS (N3) to know when 
+to turn the laptop into a Source
+. 
+7
+Hub opens the sourcing switch (H4) while VHubVB > 
+5.5V (after the Fast Role Swap Request is sent). 
+However, the sourcing switch (H4) must be kept 
+closed until VHubVB is as close to 5.5V as possible. It is 
+important for the Hub to open its sourcing switch (H4) 
+before the laptop’s sourcing switch (N4) gets closed to 
+minimize inrush current. 
+8
+Hub closes the switch (H5) to use the hold-up 
+capacitor to supply VBUS to the peripheral(s). 
+Systems with a holding cap permanently in place do 
+not need the switch (H5). Hub does not draw more 
+than iSnkStdby from VBUS, until the tSnkFRSwap timer 
+expires.
+9
+Laptop detects VBUS < VNbVB (N1) before closing the 
+sourcing switch (N4) when VNbVB is as close as 
+possible to 5.5V. This minimizes the time when VBUS 
+is not sourced.
+10
+Laptop closes sourcing switch (N4). When this 
+occurs the Hub’s input capacitance on VBUS will be 
+less than 10F (cSnkBulk).
+11
+Hub’s tSnkFRSwap timer expires (H6).
+12
+Hub draws up to the current it Advertised in the Fast 
+Role Swap required USB Type-C Current field of its 
+Sink_Capabilities Message.
+13
+Hubs with (H5) will open (H5) and remove the Hold-
+Up capacitor.

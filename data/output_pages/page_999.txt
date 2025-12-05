@@ -1,0 +1,105 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 999
+In reference to Table 10.3, "SPR Source Capabilities When Port Present PDP is less than Port Maximum PDP", 
+Table 10.4, "SPR Source Port Present PDP less than Port Maximum PDP Examples" gives examples of which SPR 
+capabilities are Advertised based on Port Present PDP on a Managed Capability Port and the port's Port Maximum 
+PDP and cable's current rating.
+Table 10.4  SPR Source Port Present PDP less than Port Maximum PDP Examples
+Port Maximum PDP 
+and Cable Rating
+Port Present 
+PDP
+Offers
+5V Fixed
+9V Fixed
+15V Fixed
+20V Fixed
+SPR AVS
+80W / 5A
+65W
+3A1
+3A1
+3A1
+3.25A
+9V – 15V: 3A
+15V – 20V: 3.25A
+80W / 5A
+40W
+3A1
+3A1
+2.67A
+2A
+9V – 15V: 2.67A
+15V – 20V: 2A
+80W / 3A
+40W
+3A1
+3A
+2.67A
+2A
+9V – 15V: 2.67A
+15V – 20V: 2A
+40W / 5A
+40W
+3A1
+3A1
+2.67A
+Not Offered
+9V – 15V: 2.67A
+40W / 3A
+40W
+3A1
+3A
+2.67A
+Not Offered
+9V – 15V: 2.67A
+80W / 5A
+20W
+3A1
+2.22A
+1.33A
+1A
+9V – 15V: 1.33A
+15V – 20V: 1A
+80W / 3A
+20W
+3A1
+2.22A
+1.33A
+1A
+9V – 15V: 1.33A
+15V – 20V: 1A
+40W / 5A
+20W
+3A1
+2.22A
+1.33A
+Not Offered
+9V – 15V: 1.33A
+40W / 3A
+20W
+3A1
+2.22A
+1.33A
+Not Offered
+9V – 15V: 1.33A
+80W/3A
+15W
+3A
+1.67A2
+1A2
+0.75A2
+9V - 15V: 1A2
+15V - 20V: 0.75A2
+40W/3A
+15W
+3A
+1.67A2
+1A2
+Not offered
+9V - 15V: 1A2
+1)
+The Fixed Supply PDO Maximum Current field will Advertise at least 3A but May Advertise up to RoundUp (PDP/voltage) to the 
+nearest 10mA.
+2)
+These Capabilities are not required but may be offered at this Port Present PDP.

@@ -1,0 +1,23 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 985
+9.2
+  PD Specific Descriptors
+A PDUSB Device Shall return all relevant descriptors mentioned in this section.
+The device Shall return its capability descriptors as part of the device's Binary Object Store (BOS) descriptor set. 
+Table 9.1, "USB Power Delivery Type Codes" lists the type of PD device capabilities.
+Table 9.1  USB Power Delivery Type Codes
+Capability Code
+Value
+Description
+POWER_DELIVERY_CAPABILITY
+06H
+Defines the various PD Capabilities of this device
+BATTERY_INFO_CAPABILITY
+07H
+Provides information on each Battery supported by the device
+PD_CONSUMER_PORT_CAPABILITY
+08H
+The Consumer characteristics of a Port on the device
+PD_PROVIDER_PORT_CAPABILITY
+09H
+The Provider characteristics of a Port on the device

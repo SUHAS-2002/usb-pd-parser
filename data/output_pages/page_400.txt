@@ -1,0 +1,16 @@
+Page 400
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.3.4
+  Transitions Caused by Fast Role Swap
+7.3.4.1
+  Fast Role Swap
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed during a Fast Role Swap 
+is shown in Figure 7.43, "Transition Diagram for Fast Role Swap". The parallel sequences that Shall be followed are 
+described in Table 7.22, "Sequence Description for Fast Role Swap". The timing parameters that Shall be followed 
+are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink Electrical Parameters", and Table 7.25, 
+"Common Source/Sink Electrical Parameters". Negotiations between the New Source and the New Sink May occur 
+after the New Source sends the final PS_RDY Message.
+Note:
+In Figure 7.43, "Transition Diagram for Fast Role Swap". and Table 7.22, "Sequence Description for Fast 
+Role Swap" numbers are used to indicate Message related steps and letters are used to indicate other 
+events.

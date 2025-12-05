@@ -1,0 +1,72 @@
+Page 852
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.6.2
+  Sink Port Not Supported Message State Diagram
+Figure 8.139, "Sink Port Not Supported Message State Diagram" shows the state diagram for a Not_Supported 
+Message sent or received by a Sink Port.
+Figure 8.139 Sink Port Not Supported Message State Diagram
+8.3.3.6.2.1
+  PE_SNK_Send_Not_Supported State
+The PE_SNK_Send_Not_Supported state Shall be entered from the PE_SNK_Ready state either as the result of a 
+Protocol Error received during an interruptible AMS or as a result of an Unsupported Message being received in the 
+PE_SNK_Ready state directly except for the first Chunk in a multi-Chunk Message (see also Section 6.12.2.1, 
+"Protocol Layer Chunking" and Section 8.3.3.4.1, "SOP Source Port Soft Reset and Protocol Error State Diagram").
+On entry to the PE_SNK_Send_Not_Supported state (from the PE_SNK_Ready state) the Policy Engine Shall request 
+the Protocol Layer to send a Not_Supported Message.
+The Policy Engine Shall transition back to the previous state (PE_SNK_Ready see Figure 8.133, "Sink Port State 
+Diagram") when:
+
+The Not_Supported Message has been successfully sent.
+8.3.3.6.2.2
+  PE_SNK_Not_Supported_Received State
+The PE_SNK_Not_Supported_Received state Shall be entered from the PE_SNK_Ready state when a 
+Not_Supported Message is received.
+On entry to the PE_SNK_Not_Supported_Received state the Policy Engine Shall inform the Device Policy Manager.
+The Policy Engine Shall transition back to the previous state (PE_SNK_Ready see Figure 8.133, "Sink Port State 
+Diagram") when:
+
+The Device Policy Manager has been informed.
+8.3.3.6.2.3
+  PE_SNK_Chunk_Received State
+The PE_SNK_Chunk_Received state Shall be entered from the PE_SNK_Ready state as a result of an Unsupported 
+Message being received in the PE_SNK_Ready state directly where the Message is a Chunk in a multi-Chunk Message 
+(see also Section 6.12.2.1, "Protocol Layer Chunking" and Section 8.3.3.4.1, "SOP Source Port Soft Reset and Protocol 
+Error State Diagram").
+On entry to the PE_SNK_Chunk_Received state (from the PE_SNK_Ready state) the Policy Engine Shall initialize and 
+run the ChunkingNotSupportedTimer.
+The Policy Engine Shall transition to PE_SNK_Send_Not_Supported when:
+PE_SNK_Send_Not_Supported
+Actions on entry:
+Send Not_Supported Message
+Power = Explicit Contract 
+PD = connected
+Protocol Error1 &
+not a Chunk from 
+a multi-Chunk Message
+Not_Supported 
+Message sent 
+PE_SNK_Ready
+PE_SNK_Not_Supported_Received
+Actions on entry:
+Inform Device Policy Manager of Not_Supported Message
+Power = Explicit Contract 
+PD = connected
+Not_Supported Message 
+received1
+DPM informed
+PE_SNK_Chunk_Received
+Actions on entry:
+Start ChunkingNotSupportedTimer
+Power = Explicit Contract 
+PD = connected
+Protocol Error1 &
+Chunk from 
+a multi-Chunk Message2
+ChunkingNotSupportedTimer
+timeout
+1)
+Transition as a result of an unsupported Message being received in the PE_SNK_Ready state directly 
+(see also Section 8.3.3.4.2 “SOP Sink Port Soft Reset and Protocol Error State Diagram”).
+2)
+Transition can only occur where a manufacturer has opted not to implement a Chunking state machine (see Section 6.12.2.1 “Protocol Layer Chunking”)
+and is communicating with a system which is attempting to send it Chunks.

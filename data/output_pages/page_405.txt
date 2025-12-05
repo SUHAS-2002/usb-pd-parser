@@ -1,0 +1,106 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 405
+iPpsCVCLTransient
+CV to CL transient 
+current bounds 
+assuming the 
+Operating Voltage 
+reduction of Section 
+7.2.3.1, "Programmable 
+Power Supply Sink 
+Standby".
+iPpsCLNe
+w - 100
+New load + 
+500
+mA
+Section 7.1.4.2.2
+tAvsTransient
+The maximum time for 
+the AVS to be between 
+vAvsNew and 
+vAvsValid in response 
+to a load transient.
+5
+ms
+Section 7.1.8.4
+tAvsSrcTransLarge
+The time the AVS set-
+point Shall transition 
+between requested 
+voltages for steps 
+larger than 
+vAvsSmallStep.
+0
+700
+ms
+Section 7.1.4.3.1
+tAvsSrcTransSmall
+The time the AVS set-
+point Shall transition 
+between requested 
+voltages for steps 
+smaller than 
+vAvsSmallStep.
+0
+50
+ms
+Section 7.1.4.3.1
+tNewSnk
+Time allowed for an 
+Initial Source in Swap 
+Standby to transition 
+New Sink operation.
+15
+ms
+Section 7.1.10
+Figure 7.39
+Figure 7.40
+tPpsCLCVTransient
+CL to CV transient 
+voltage settling time.
+275
+ms
+Section 7.1.4.2.2
+tPpsCLProgramSettle
+SPR PPS Current Limit 
+programming settling 
+time.
+250
+ms
+Section 7.1.4.2.2
+tPpsCLSettle
+CL load transient 
+current settling time.
+250
+ms
+Section 7.1.4.2.2
+tPpsCVCLTransient
+CV to CL transient 
+settling time.
+250
+ms
+Section 7.1.8.3
+tPpsSrcTransLarge
+The time the 
+Programmable Power 
+Supply’s set-point 
+Shall transition 
+between requested 
+voltages for steps 
+larger than 
+vPpsSmallStep.
+0
+275
+ms
+Section 7.3.1.3
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

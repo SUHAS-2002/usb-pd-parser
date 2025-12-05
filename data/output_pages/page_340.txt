@@ -1,0 +1,39 @@
+Page 340
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.3.1
+  Transitions caused by a Request Message
+This section describes transitions that are caused by a Request Message.
+7.3.1.1
+  Changing the Source between Different (A)PDOs
+In these transition descriptions the term (A)PDO is used to describe any Power Data Object, regardless of whether 
+it is a PDO or an APDO in the Capabilities Message.
+This section describes transitions in response to a Request Message:
+
+From one (A)PDO to another (A)PDO 
+
+From an Implicit Contract to an Explicit Contract
+
+From [USB Type-C 2.4]operation to the First Explicit Contract
+These transitions usually result in a voltage change but is not required.
+The interaction of the Device Policy Manager, the Port Policy Engine and the Power Supply that Shall be followed 
+when increasing the current is shown in Figure 7.23, "Transition Diagram for Increasing the Voltage and Current" 
+and Figure 7.25, "Transition Diagram for Decreasing the Voltage and Increasing the Current".
+The Source voltage as the transition starts Shall be any voltage within the Valid VBUS range of the previous Source 
+PDO or APDO. The Source voltage after the transition is complete Shall be any voltage within the Valid VBUS range 
+of the New Source PDO or APDO. The sequence that Shall be followed is described in Table 7.2, "Sequence Diagram 
+for Increasing the Voltage and Current" and Table 7.4, "Sequence Description for Decreasing the Voltage and 
+Increasing the Current". The timing parameters that Shall be followed are listed in Table 7.23, "Source Electrical 
+Parameters", Table 7.24, "Sink Electrical Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In this figure, the Sink has previously sent a Request Message to the Source. 
+The voltage is considered to increase if the change from VOLD to VNEW is greater than vSmallStep. The 
+determination Shall be based on the nominal (A)PDO voltage before and after, unless either (A)PDO is Battery 
+Supply or Variable Supply when the worst case of the following is assumed in making this determination.
+
+Minimum voltage to voltage.
+
+Minimum voltage to Maximum voltage.
+
+Voltage to Maximum voltage.
+The following sections begin with a description of the generic process followed by more specific examples of the 
+most common transitions.

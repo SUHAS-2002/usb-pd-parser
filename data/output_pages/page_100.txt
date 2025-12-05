@@ -1,0 +1,34 @@
+Page 100
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 5.18 BMC Rx 'ZERO' Mask when Sourcing Power
+Figure 5.19 BMC Rx 'ONE' Mask when Power neutral
+Y5
+Y4
+Y3
+Y2
+Y1
+X1
+X2
+X3
+X4
+X5
+X6
+X7
+X8
+0.5UI
+1UI
+Y5
+Y4
+Y3
+Y2
+Y1
+X1
+X2
+X3
+X4
+X5
+X6
+X7
+X8
+0.5UI
+1UI

@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 873
+8.3.3.13.2
+  Give Manufacturer Information State Diagram
+Figure 8.159, "Give Manufacturer Information State Diagram" shows the state diagram for a Source, Sink or Cable 
+Plug on receiving a Get_Manufacturer_Info Message. See also Section 6.5.6, "Get_Manufacturer_Info Message".
+Figure 8.159 Give Manufacturer Information State Diagram
+8.3.3.13.2.1
+  PE_Give_Manufacturer_Info State
+The Policy Engine Shall transition to the PE_Give_Manufacturer_Info state, from either the PE_SRC_Ready, 
+PE_SNK_Ready or PE_CBL_Ready state, when a Get_Manufacturer_Info Message is received. 
+On entry to the PE_Give_Manufacturer_Info state the Policy Engine Shall request the manufacturer information 
+from the Device Policy Manager and then send a Manufacturer_Info Message based on this status.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state as 
+appropriate (see Figure 8.132, "Source Port State Diagram", Figure 8.133, "Sink Port State Diagram" and Figure 
+8.203, "Cable Ready State Diagram") when:
+
+The Manufacturer_Info Message has been successfully sent.
+Get_Manufacturer_Info Message
+received
+Manufacturer_Info
+Message sent
+PE_SRC_Ready, 
+PE_SNK_Ready or 
+PE_CBL_Ready
+PE_Give_Manufacturer_Info
+Actions on entry:
+Get present Manufacturer Information from Device Policy Manager
+Send Manufacturer_Info Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

@@ -1,0 +1,56 @@
+Page 836
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+4)
+The DiscoverIdentityTimer is run when this is a VCONN Source and a PD Connection with a Cable Plug needs to be es-
+tablished i.e. no GoodCRC Message has yet been received in response to a Discover Identity Command.
+5)
+The SinkPPSPeriodicTimer is only initialized and run when the present Explicit Contract is for an SPR PPS APDO. 
+Sinks that do not support PPS do not need to implement the SinkPPSPeriodicTimer.
+6)
+A Sink that is a VPD May use VCONN as a proxy for VBUS.
+7)
+To be sent once, and only required if Fast Role Swap is supported by the Sink.
+8.3.3.3.1
+  PE_SNK_Startup State
+PE_SNK_Startup Shall be the starting state for a Sink Policy Engine either on power up or after a Hard Reset. On 
+entry to this state the Policy Engine Shall reset the Protocol Layer.
+Note:
+Resetting the Protocol Layer will also reset the MessageIDCounter and stored MessageID (see Section 
+6.12.2.3, "Protocol Layer Message Reception").
+Once the reset process completes, the Policy Engine Shall transition to the PE_SNK_Discovery state.
+8.3.3.3.2
+  PE_SNK_Discovery State
+In the PE_SNK_Discovery state the Sink Policy Engine waits for VBUS to be present.
+The Policy Engine Shall transition to the PE_SNK_Wait_for_Capabilities state when:
+
+The Device Policy Manager indicates that VBUS has been detected.
+8.3.3.3.3
+  PE_SNK_Wait_for_Capabilities State
+On entry to the PE_SNK_Wait_for_Capabilities state the Policy Engine Shall initialize and start the 
+SinkWaitCapTimer.
+The Policy Engine Shall transition to the PE_SNK_Evaluate_Capability state when:
+
+The Sink is in SPR Mode and a Source_Capabilities Message is received or
+
+The Sink is in EPR Mode and an EPR_Source_Capabilities Message is received.
+When the SinkWaitCapTimer times out, the Policy Engine will perform a Hard Reset.
+8.3.3.3.4
+  PE_SNK_Evaluate_Capability State
+The PE_SNK_Evaluate_Capability state is first entered when the Sink receives its first Source_Capabilities 
+Message from the Source. At this point the Sink knows that it is Attached to and communicating with a PD capable 
+Source.
+On entry to the PE_SNK_Evaluate_Capability state the Policy Engine Shall request the Device Policy Manager to 
+evaluate the supplied Source Capabilities based on Local Policy. The Device Policy Manager Shall indicate to the 
+Policy Engine the new power level required, selected from the present offered capabilities. The Device Policy 
+Manager Shall also indicate to the Policy Engine a Capabilities Mismatch if the offered power does not meet the 
+device's requirements.
+The Policy Engine Shall transition to the PE_SNK_Select_Capability state when:
+
+A response is received from the Device Policy Manager.
+8.3.3.3.5
+  PE_SNK_Select_Capability State
+On entry to the PE_SNK_Select_Capability state the Policy Engine Shall request the Protocol Layer to send a 
+response Message, based on the evaluation from the Device Policy Manager. The Message Shall be one of the 
+following:
+
+A Request from the offered Source Capabilities.

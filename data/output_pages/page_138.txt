@@ -1,0 +1,117 @@
+Page 138
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4
+  Data Message
+A Data Message Shall consist of a Message Header and be followed by one or more Data Objects. Data Messages are 
+easily identifiable because the Number of Data Objects field in the Message Header is a non-zero value.
+There are many types of Data Objects used to compose Data Messages. Some examples are:
+
+Power Data Object (PDO) used to expose a Source Port's power Capabilities or a Sink's power 
+requirements.
+
+Request Data Object (RDO) used by a Sink Port to Negotiate an Explicit Contract.
+
+Vendor Data Object (VDO) used to convey vendor specific information.
+
+BIST Data Object (BDO) used for PHY Layer compliance testing.
+
+Battery Status Data Object (BSDO) used to convey Battery status information.
+
+Alert Data Object (ADO) used to indicate events occurring on the Source or Sink.
+The type of Data Object being used in a Data Message is defined by the Message Header's Message Type field and 
+is summarized in Table 6.6, "Data Message Types". The Sent by column indicates entities which May send the given 
+Message (Source, Sink or Cable Plug); entities not listed Shall Not issue the corresponding Message. The "Valid Start 
+of Packet" column indicates the Messages which Shall only be issued in SOP Packets and the Messages which May 
+be issued in SOP* Packets.
+Table 6.6  Data Message Types
+Bits 4…0
+Type
+Sent by
+Description
+Valid Start of 
+Packet
+0_0000
+Reserved
+N/A
+All values not explicitly defined are 
+Reserved and Shall Not be used.
+N/A
+0_0001
+Source_Capabilities
+Source or Dual-Role Power
+See Section 6.4.1.5
+SOP only
+0_0010
+Request
+Sink only
+See Section 6.4.2
+SOP only
+0_0011
+BIST
+Tester, Source or Sink
+See Section 6.4.3
+SOP*
+0_0100
+Sink_Capabilities
+Sink or Dual-Role Power
+See Section 6.4.2
+SOP only
+0_0101
+Battery_Status
+Source or Sink
+See Section 6.4.5
+SOP only
+0_0110
+Alert
+Source or Sink
+See Section 6.4.6
+SOP only
+0_0111
+Get_Country_Info
+Source or Sink
+See Section 6.4.7
+SOP only
+0_1000
+Enter_USB
+DFP
+See Section 6.4.8
+SOP*
+0_1001
+EPR_Request
+Sink
+See Section 6.4.9
+SOP only
+0_1010
+EPR_Mode
+Source or Sink
+See Section 6.4.10
+SOP only
+0_1011
+Source_Info
+Source
+See Section 6.4.11
+SOP only
+0_1100
+Revision
+Source, Sink or Cable Plug
+See Section 6.4.12
+SOP*
+0_1101…0
+_1110
+Reserved
+N/A
+All values not explicitly defined are 
+Reserved and Shall Not be used.
+N/A
+0 1111
+Vendor_Defined
+Source, Sink or Cable Plug
+See Section 6.4.4
+SOP*
+1_0000…1
+_1111
+Reserved
+N/A
+All values not explicitly defined are 
+Reserved and Shall Not be used.
+N/A

@@ -1,0 +1,174 @@
+Page 6
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Editors
+Contributors
+Bob Dunstan
+Richard Petrie
+Charles Wang
+ACON, Advanced-Connectek, Inc.
+Zaki Moussaoui
+Apple
+Conrad Choy
+ACON, Advanced-Connectek, Inc.
+Jeff Liu
+ASMedia Technology Inc.
+Dennis Chuang
+ACON, Advanced-Connectek, Inc.
+Kuo Lung Li
+ASMedia Technology Inc.
+Steve Sedio
+ACON, Advanced-Connectek, Inc.
+Ming-Wei Hsu
+ASMedia Technology Inc.
+Sunney Yang
+ACON, Advanced-Connectek, Inc.
+PS Tseng
+ASMedia Technology Inc.
+Vicky Chuang
+ACON, Advanced-Connectek, Inc.
+Sam Tzeng
+ASMedia Technology Inc.
+Joseph Scanlon
+Advanced Micro Devices
+Thomas Hsu
+ASMedia Technology Inc.
+Sujan Thomas
+Advanced Micro Devices
+Weikao Chang
+ASMedia Technology Inc.
+Caspar Lin
+Allion Labs, Inc.
+Yang Cheng
+ASMedia Technology Inc.
+Casper Lee
+Allion Labs, Inc.
+Aaron Hou
+Bizlink Technology Inc.
+Danny Shih
+Allion Labs, Inc.
+Shawn Meng
+Bizlink Technology Inc.
+Howard Chang
+Allion Labs, Inc.
+Bernard Shyu
+Bizlink Technology, Inc.
+Greg Stewart
+Analogix Semiconductor, Inc.
+Eric Wu
+Bizlink Technology, Inc.
+Mehran Badii
+Analogix Semiconductor, Inc.
+Morphy Hsieh
+Bizlink Technology, Inc.
+Alexei Kosut
+Apple
+Sean O'Neal
+Bizlink Technology, Inc.
+Bill Cornelius
+Apple
+Tiffany Hsiao
+Bizlink Technology, Inc.
+Carlos Colderon
+Apple
+Weichung Ooi
+Bizlink Technology, Inc.
+Chris Uiterwijk
+Apple
+Rahul Bhushan
+Broadcom Corp.
+Colin Whitby-Strevens
+Apple
+Asila nahas
+Cadence Design Systems, Inc.
+Corey Axelowitz
+Apple
+Claire Ying
+Cadence Design Systems, Inc.
+Corey Lange
+Apple
+Jie min
+Cadence Design Systems, Inc.
+Dave Conroy
+Apple
+Mark Summers
+Cadence Design Systems, Inc.
+David Sekowski
+Apple
+Michal Staworko
+Cadence Design Systems, Inc.
+Girault Jones
+Apple
+Sathish Kumar Ganesan
+Cadence Design Systems, Inc.
+James Orr
+Apple
+Alessandro Ingrassia
+Canova Tech
+Jason Chung
+Apple
+Andrea Colognese
+Canova Tech
+Jay Kim
+Apple
+Antonio Orzelli
+Canova Tech
+Jeff Wilcox
+Apple
+Davide Ghedin
+Canova Tech
+Jennifer Tsai
+Apple
+Matteo Casalin
+Canova Tech
+Karl Bowers
+Apple
+Michael Marioli
+Canova Tech
+Keith Porthouse
+Apple
+Nicola Scantamburlo
+Canova Tech
+Kevin Hsiue
+Apple
+Paolo Pilla
+Canova Tech
+Matt Mora
+Apple
+Ray Huang
+Canyon Semiconductor
+Paul Baker
+Apple
+Yi-Feng Lin
+Canyon Semiconductor
+Reese Schreiber
+Apple
+YuHung Lin
+Canyon Semiconductor
+Ricardo Janezic Pregitzer
+Apple
+David Tsai
+Chrontel, Inc.
+Ruchi Chaturvedi
+Apple
+Anshul Gulati
+Cypress Semiconductor
+Sameer Kelkar
+Apple
+Anup Nayak
+Cypress Semiconductor
+Sasha Tietz
+Apple
+Benjamin Kropf
+Cypress Semiconductor
+Scott Jackson
+Apple
+Dhanraj Rajput
+Cypress Semiconductor
+Sree Raman
+Apple
+Ganesh Subramaniam
+Cypress Semiconductor
+William Ferry
+Apple
+Jagadeesan Raj
+Cypress Semiconductor

@@ -1,0 +1,74 @@
+Page 540
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares the 
+CRC it calculated with the one sent to verify the Message.
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Accept Message was successfully sent. The Policy 
+Engine starts the PSSourceOffTimer and tells the power 
+supply to stop sinking current.
+19
+The Policy Engine determines its power supply is no 
+longer supplying VBUS. The Policy Engine requests the 
+DPM to assert the Rd pull down on the CC wire. The 
+Policy Engine then directs the Protocol Layer to 
+generate a PS_RDY Message, with the Port Power Role 
+Messageset to Sink, to tell its Port Partner that it can 
+begin to source VBUS.
+20
+Protocol Layer sets the Port Power Role Message to 
+Sink, creates the Message and passes to PHY Layer.
+21
+PHY Layer appends CRC and sends the PS_RDY 
+Message. Starts CRCReceiveTimer.
+PHY Layer receives the PS_RDY Message and checks the 
+CRC to verify the Message.
+22
+PHY Layer removes the CRC and forwards the PS_RDY 
+Message to the Protocol Layer.
+23
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received PS_RDY 
+Message information to the Policy Engine that 
+consumes it. The Policy Engine stops the 
+PSSourceOffTimer, directs the DPM to apply the Rp pull 
+up and then starts switching the power supply to 
+vSafe5V Source operation.
+24
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+25
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+26
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+27
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+PS_RDY Message was successfully sent. Policy Engine 
+starts PSSourceOnTimer.
+28
+Policy Engine, when its power supply is ready to supply 
+power, tells the Protocol Layer to form a PS_RDY 
+Message. The Port Power Role Messageis set to Source.
+29
+Protocol Layer creates the PS_RDY Message and passes 
+to PHY Layer.
+Table 8.60  Steps for a Successful Source Initiated Power Role Swap Sequence
+Step
+Initial Source Port
+Initially Sink Port

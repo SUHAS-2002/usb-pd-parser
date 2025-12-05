@@ -1,0 +1,87 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 843
+8.3.3.4.2
+  SOP Sink Port Soft Reset and Protocol Error State Diagram
+Figure 8.135, "Sink Port Soft Reset and Protocol Error Diagram" below shows the state diagram for the Policy Engine 
+in a Sink Port when performing a Soft Reset of its Port Partner i.e., using SOP. The following sections describe 
+operation in each of the states.
+Figure 8.135 Sink Port Soft Reset and Protocol Error Diagram
+8.3.3.4.2.1
+  PE_SNK_Send_Soft_Reset State
+The PE_SNK_Send_Soft_Reset state Shall be entered from any state when:
+
+A Protocol Error on SOP is detected by the Protocol Layer during an AMS (see Section 6.8.1, "Soft Reset 
+and Protocol Error") or
+
+A Message has not been sent after retries to the Sink or
+
+When not in an Explicit Contract and Protocol Errors occurred on SOP during any AMS where the first 
+Message in the AMS has not yet been sent i.e., an unexpected Message is received instead of the expected 
+GoodCRC Message response.
+
+When in SPR Mode and the EPR Mode entry process fails.
+The main exceptions to this rule are when:
+
+When the voltage is in transition due to a new Explicit Contract being Negotiated (see Section 8.3.3.3, 
+"Policy Engine Sink Port State Diagram"). In this case a Hard Reset will be generated.
+
+During a Power Role Swap when the power supply is in transition (see Section 8.3.3.19.3, "Policy Engine 
+in Source to Sink Power Role Swap State Diagram" and Section 8.3.3.19.4, "Policy Engine in Sink to Source 
+Power Role Swap State Diagram"). In this case a Hard Reset will be triggered directly.
+
+During a Data Role Swap when the DFP/UFP Data Roles are changing. In this case USB Type-C Error 
+Recovery will be triggered directly.
+Note:
+Protocol Errors occurring in the following situations Shall Not lead to a Soft Reset, but Shall result in a 
+transition to the PE_SNK_Ready state where the Message received will be handled as if it had been 
+received in the PE_SNK_Ready state:
+
+When in an Explicit Contract and Protocol Errors occurred on SOP during any AMS where the first 
+Message in the AMS has not yet been sent i.e., an unexpected Message is received instead of the expected 
+GoodCRC Message response.
+PE_SNK_Send_Soft_Reset
+Actions on entry:
+Reset SOP Protocol Layer
+Send Soft Reset Message to SOP
+Initialize and run SenderResponseTimer
+Power = DefauIt/Implicit or Explicit Contract
+PD = Connected
+Message not sent after retries on SOP (no GoodCRC received)1  |
+Protocol Error2 on SOP during AMS |
+(Not in Explicit Contract &
+Protocol Error on SOP before first Message 
+in AMS sent (no GoodCRC received) |
+(SPR Mode & EPR Mode Entry process fails)3
+SenderResponseTimer
+Timeout |
+Transmission
+Error indication 
+from Protocol Layer
+Accept Message
+Received on SOP
+Accept Message
+Sent to SOP
+Soft Reset Message 
+Received on SOP
+PE_SNK_Soft_Reset
+Actions on entry:
+Reset SOP Protocol Layer
+Send Accept Message to SOP
+Power = DefauIt/Implicit or 
+Explicit Contract 
+PD = Connected
+PE_SNK_Wait_for_Capabilities
+Transmission
+Error indication 
+from Protocol Layer
+PE_SNK_Ready
+In Explicit Contract &
+Protocol Error2 on SOP before first Message 
+in AMS sent (no GoodCRC received)
+PE_SNK_Hard_Reset
+1)
+Excludes the Soft_Reset Message itself.
+2)
+An Unrecognized or Unsupported Message will result in a Not_Supported Message response being generated (see Section 6.3.16 “Not_Supported Message”).
+3)
+See Section 6.4.10.1 “Process to enter EPR Mode” for the conditions when a Soft_Reset Message Shall be sent by the Sink during the EPR Mode entry process.

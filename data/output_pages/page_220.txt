@@ -1,0 +1,13 @@
+Page 220
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.1.14
+  SPR Source PDP Rating Field
+For an SPR Source the SPR Source PDP Rating field Shall report the integer portion of the PDP Rating of the Port.
+For an EPR Source, the SPR Source PDP Rating field Shall report the integer portion of the maximum amount of 
+power that the Port is designed to deliver in SPR Mode.
+The SPR Source PDP Rating field that is reported Shall be Static.
+6.5.1.15
+  EPR Source PDP Rating Field
+For an EPR Source the EPR Source PDP Rating field Shall report the integer portion of the PDP Rating of the Port.
+For an SPR Source this field Shall be set to zero.
+The EPR Source PDP Rating field that is reported Shall be Static.

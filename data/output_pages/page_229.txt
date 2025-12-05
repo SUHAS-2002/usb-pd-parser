@@ -1,0 +1,28 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 229
+
+Belongs to the Battery vendor the PID field Shall contain the Battery's 16-bit product identifier 
+designated by the Battery vendor.
+
+Belongs to the Device vendor the PID field Shall contain the Battery's 16-bit product identifier 
+designated by the Device vendor.
+
+Is 0xFFFF the PID field Shall be set to 0x0000.
+6.5.5.3
+  Battery Design Capacity Field
+The Battery Design Capacity field Shall return the Battery's design capacity in tenths of WH. If the Battery is Hot 
+Swappable and is not present, the Battery Design Capacity field Shall be set to zero. If the Battery is unable to 
+report its Design Capacity, the Battery Design Capacity field Shall be set to 0xFFFF.
+6.5.5.4
+  Battery Last Full Charge Capacity Field
+The Battery Last Full Charge Capacity field Shall contain the Battery's last full charge capacity in tenths of WH. If 
+the Battery is Hot Swappable and is not present, the Battery Last Full Charge Capacity field Shall be set to zero. 
+If the Battery is unable to report its Design Capacity, the Battery Last Full Charge Capacity field Shall be set to 
+0xFFFF.
+6.5.5.5
+  Battery Type Field
+The Battery Type field is used to report additional information about the Battery's Capabilities. 
+6.5.5.5.1
+  Invalid Battery Reference
+The Invalid Battery Reference bit Shall be set when the Get_Battery_Cap Message contains a reference to a 
+Battery that does not exist.

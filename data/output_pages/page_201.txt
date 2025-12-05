@@ -1,0 +1,21 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 201
+6.4.7
+  Get_Country_Info Message
+The Get_Country_Info Message Shall be sent by a Port to get country specific information from its Port Partner 
+using the country's Alpha-2 Country Code defined by [ISO 3166]. The Port Partner responds with a Country_Info 
+Message that contains the country specific information. The Get_Country_Info Message Shall be as shown in Figure 
+6.30, "Get_Country_Info Message" and Table 6.48, "Country Code Data Object (CCDO)".
+For example, if the request is for China information, then the Country Code Data Object (CCDO) would be CCDO 
+[31:0] = 434E0000h for "CN" country code.
+Figure 6.30 Get_Country_Info Message
+Table 6.48  Country Code Data Object (CCDO)
+Bit(s)
+Description
+B31…24 First character of the Alpha-2 Country Code defined by [ISO 3166]
+B23…16 Second character of the Alpha-2 Country Code defined by [ISO 3166]
+B15…0
+Reserved, Shall be set to zero.
+Header
+No. of Data Objects = 1
+CCDO

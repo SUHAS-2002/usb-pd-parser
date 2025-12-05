@@ -1,0 +1,43 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 233
+6.5.8
+  Security Messages
+The authentication process between Port Partners or a Port and Cable Plug is fully described in 
+[USBTypeCAuthentication 1.0]. This specification describes two Extended Messages used by the authentication 
+process when applied to PD.
+ In the authentication process described in [USBTypeCAuthentication 1.0] there are three basic exchanges that 
+serve to:
+
+Get the Port or Cable Plug's certificates.
+
+Get the Port or Cable Plug's digest.
+
+Challenge the Port Partner or Cable Plug.
+Certificates are used to convey information, attested to by a signer, which attests to the Port Partner's or Cable 
+Plug's authenticity. The Port's or Cable Plug's certificates are needed when a Port encounters a Port Partner or 
+Cable Plug it has not been Attached to before. To minimize calculations after the initial Attachment, a Port can also 
+use a digest consisting of hashes of the certificates rather than the certificates themselves. Once the Port has the 
+certificates and has calculated the hashes, it stores the hashes and uses the digest in future exchanges. After the 
+Port gets the certificates or digest, it challenges its Port Partner or the Cable Plug to detect replay attacks. 
+ For further details refer to [USBTypeCAuthentication 1.0]. 
+6.5.8.1
+  Security_Request
+The Security_Request Message is used by a Port to pass a security data structure to its Port Partner or a Cable Plug.
+The Security_Request Message contains a Security Request Data Block (SRQDB) whose format Shall be as shown 
+in Figure 6.45, "Security_Request Message". The contents of the SRQDB and its use are defined in 
+[USBTypeCAuthentication 1.0].
+Figure 6.45 Security_Request Message
+6.5.8.2
+  Security_Response
+The Security_Response Message is used by a Port or Cable Plug to pass a security data structure to the Port that 
+sent the Security_Request Message.
+The Security_Response Message contains a Security Response Data Block (SRPDB) whose format Shall be as 
+shown in Figure 6.46, "Security_Response Message". The contents of the SRPDB and its use are defined in 
+[USBTypeCAuthentication 1.0].
+Figure 6.46 Security_Response Message
+Extended Header
+Data Size = 4..260
+SRQDB
+Extended Header
+Data Size = 4..260
+SRPDB

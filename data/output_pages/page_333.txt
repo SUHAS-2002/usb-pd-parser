@@ -1,0 +1,44 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 333
+Scenarios where vSrcSlewNeg and vPpsSlewNeg VBUS slew rate limits do not apply and VBUS May transition faster 
+than specified are as follows:
+
+When discharging VBUS to vSafe0V during a Hard Reset.
+
+When discharging VBUS to vSafe0V as part of a Power Role Swap to Sink Power Role.
+
+When discharging VBUS to vSafe0V after a Detach.
+
+During a Fast Role Swap when the VBUS power source connected to the Hub UFP stops sourcing power.
+7.1.15
+  VCONN Power Cycle
+7.1.15.1
+  UFP VCONN Power Cycle
+The Data Reset process requires the DFP to be the VCONN Source by the end of the process. In the case where the 
+UFP is the VCONN Source, the following steps Shall be followed:
+
+Following the last bit of the GoodCRC Message acknowledging the Accept Message in response to the 
+Data_Reset Message, the UFP Shall turn off VCONN and ensure it is below vRaReconnect (see [USB Type-
+C 2.4]) within tVCONNZero.
+
+When VCONN is below vRaReconnect, the UFP Shall send a PS_RDY Message.
+Note:
+If the UFP was not sourcing VCONN, it still sends the PS_RDY Message. 
+
+The DFP Shall wait tVCONNReapplied following the last bit of the GoodCRC Message acknowledging the 
+PS_RDY Message before sourcing VCONN. The DFP Shall ensure VCONN is within vVCONNValid (see [USB 
+Type-C 2.4]) within tVCONNValid.
+Figure 7.19, "Data Reset UFP VCONN Power Cycle" below illustrates the UFP VCONN Power Cycle process.
+Figure 7.19 Data Reset UFP VCONN Power Cycle
+0V
+Accept 
+(DFP/UFP)
+vVCONNValid
+vRaReconnect
+tVCONNZero
+tVCONNValid
+tVCONNReapplied
+PS_RDY 
+(UFP)
+UFP
+DFP

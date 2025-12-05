@@ -1,0 +1,16 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 925
+8.3.3.21.2.2
+  PE_INIT_VDM_SVIDs_ACKed State
+On entry to the PE_INIT_VDM_SVIDs_ACKed state the Policy Engine Shall inform the Device Policy Manager of the 
+SVIDs information.
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state when:
+
+The Device Policy Manager has been informed.
+8.3.3.21.2.3
+  PE_INIT_VDM_SVIDs_NAKed State
+On entry to the PE_INIT_VDM_SVIDs_NAKed state the Policy Engine Shall inform the Device Policy Manager of the 
+result (NAK, BUSY or timeout).
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state when:
+
+The Device Policy Manager has been informed.

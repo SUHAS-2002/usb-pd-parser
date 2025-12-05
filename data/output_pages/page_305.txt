@@ -1,0 +1,154 @@
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+Page 305
+6.13.3
+  Applicability of Extended Messages
+Table 6.79, "Applicability of Extended Messages" details Extended Messages (except for VDEM Commands) that 
+Shall/Should/ Shall Not be transmitted and received by a Source, Sink, Cable Plug or VPD. Requirements for Dual-
+Role Power Ports Shall override any requirements for Source-only or Sink-Only Ports.
+Table 6.79  Applicability of Extended Messages
+Message Type
+Source
+Sink
+Dual-Role 
+Power
+Cable
+Plug SOP’
+Cable
+Plug SOP’’
+VPD13
+Transmitted Message
+Battery_Capabilities
+CN1/NA
+CN1/NA
+NA
+NA
+NA
+Country_Codes
+CN10/NA
+CN10/NA
+NA
+NA
+NA
+Country_Info
+CN10/NA
+CN10/NA
+NA
+NA
+NA
+EPR_Source_Capabilities
+CN14/NA
+NA
+CN14/NA
+NA
+NA
+NA
+EPR_Sink_Capabilities
+NA
+CN14/NA
+CN14/NA
+NA
+NA
+NA
+Extended_Control
+See Section 6.13.4 for details
+Firmware_Update_Request
+CN7/NA
+CN7/NA
+NA
+NA
+NA
+Firmware_Update_Response
+CN7/NA
+CN7/NA
+CN7/NA
+O
+NA
+Get_Battery_Cap
+R
+R
+NA
+NA
+NA
+Get_Battery_Status
+R
+R
+NA
+NA
+NA
+Get_Manufacturer_Info
+R
+R
+NA
+NA
+NA
+Manufacturer_Info
+R
+R
+R
+NA
+NA
+PPS_Status
+CN8/NA
+NA
+NA
+NA
+NA
+Security_Request
+CN6/NA
+CN6/NA
+NA
+NA
+NA
+Security_Response
+CN6/NA
+CN6/NA
+CN6/NA
+NA
+NA
+Sink_Capabilities_Extended
+NA
+N
+N
+NA
+NA
+NA
+Source_Capabilities_Extended
+R
+NA
+R
+NA
+NA
+NA
+1)
+Shall be supported by products that contain batteries.
+2)
+Shall be supported by products that can transmit the Get_Source_Cap_Extended Message.
+3)
+Shall be supported by products that can transmit the Get_Status Message.
+4)
+Shall be supported by products that can transmit the Get_Battery_Cap Message.
+5)
+Shall be supported by products that can transmit the Get_Manufacturer_Info Message.
+6)
+Shall be supported by products that support USB security communication as defined in [USBTypeCAuthentication 
+1.0].
+7)
+Shall be supported by products that support USB firmware update communication as defined in 
+[USBPDFirmwareUpdate 1.0].
+8)
+Shall be supported when PPS is supported.
+9)
+Shall be supported by products that can transmit the Get_PPS_Status Message.
+10)
+Shall be supported when required by a country authority.
+11)
+Shall be supported by products that can transmit the Get_Sink_Cap_Extended Message.
+12)
+Shall be supported by Active Cables.
+13)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a CT-VPD Shall only take place 
+when not Connected to a Charger.
+14)
+Shall be supported by products that support operation in EPR Mode.
+15)
+Shall be supported by Sources that support the Alert Message.

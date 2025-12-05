@@ -1,0 +1,25 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 205
+6.4.9
+  EPR_Request Message
+An EPR_Request Message Shall be sent by a Sink, operating in EPR Mode, to request power, typically during the 
+request phase of a power Negotiation. The EPR_Request Message Shall be sent in response to the most recent 
+EPR_Source_Capabilities Message. The EPR_Request Message Shall return a Sink Request Data Object (RDO) that 
+Shall identify the Power Data Object being requested followed by a copy of the Power Data Object being requested.
+Note:
+The requested Power Data Object May be either an EPR (A)PDO or SPR (A)PDO.
+The EPR_Request Message Shall be as shown in Figure 6.32, "EPR_Request Message".
+Figure 6.32 EPR_Request Message
+The Source Shall verify the PDO in the EPR_Request Message exactly matches the PDO in the latest 
+EPR_Source_Capabilities Message pointed to by the Object Position field in the RDO. 
+The Source Shall respond to an EPR_Request Message in the same manner as it responds to a Request Message with 
+an Accept Message, or a Reject Message (see Section 6.9, "Accept, Reject and Wait"). The Explicit Contract 
+Negotiation process for EPR is the same as the process for SPR Mode except that the Source_Capabilities Message 
+is replaced by the EPR_Source_Capabilities and the Request Message is replaced by the EPR_Request Message.
+An EPR Source operating in SPR Mode that receives a EPR_Request Message Shall initiate a Hard Reset.
+The RDO takes a different form depending on the kind of power requested. The PDO and APDO formats are detailed 
+in Section 6.4.2, "Request Message".
+Header
+No. of Data Objects = 2
+RDO
+Copy of PDO

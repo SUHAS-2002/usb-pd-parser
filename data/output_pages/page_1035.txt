@@ -1,0 +1,17 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1035
+Figure D.6 Output of Finite Difference in dash line and Edge Detector in solid line
+The duty cycle of the output signal from the edge detector varies depending on the thresholds, Vth, H and Vth, L, as 
+well as jitter and noise from silicon and channel. The techniques such as integrating receiver can be used to recover 
+the BMC signal.
+D.1.4
+  Noise Zone and Detection Zone 
+Figure D.7, "Noise Zone and Detect Zone of BMC Receiver" shows the output of Finite Difference when the time 
+interval of Finite Difference is set to 300ns. The noise Zone is defined in between +Vnoise and -Vnoise, in which the 
+noise glitches occur. The detect zone is defined in between +Vdetect and -Vdetect, excluding the noise zone. The 
+thresholds of the edge detectors, Vth, H and Vth, L, must be properly set within the detect zone so that the data can 
+be recovered successfully. 
+In this example, Vdetect is 250mV and Vnoise is 50mV. It is highly recommended that the product implemented 
+with the similar techniques indicates the performance with the range of Vnoise and Vdetect in the electrical 
+specification. 
+Figure D.7 Noise Zone and Detect Zone of BMC Receiver

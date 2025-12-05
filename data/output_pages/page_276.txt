@@ -1,0 +1,39 @@
+Page 276
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+Messages received from the PHY Layer.
+
+Events triggered within the Protocol Layer e.g., timer timeouts
+
+Message and related indications passed up to the Policy Engine from the Protocol Layer (Message sent; 
+Message received etc.)
+6.12.2
+  State Operation
+The following section details Protocol Layer State Operation when sending and receiving SOP* Packets. 
+For each SOP’ Communication being sent and received there Shall be separate Protocol Layer Transmission and 
+Protocol Layer Reception and Hard Reset State Machine instances, with their own counter and timer instances. 
+When Chunking is supported there Shall be separate Chunked Tx, Chunked Tx, and Chunked Message Router State 
+Machine instances.
+Soft Reset Shall only apply to the State Machine instances it is targeted at based on the type of SOP* Packet used to 
+send the Soft_Reset Message. The Hard Reset State Machine (including Cable Reset) Shall apply simultaneously to 
+all Protocol Layer State Machine instances active in the DFP, UFP and Cable Plug (if present).
+6.12.2.1
+  Protocol Layer Chunking
+6.12.2.1.1
+  Architecture of Device Including Chunking Layer
+The Chunking component resides in the Protocol Layer between the Policy Engine and Protocol Tx/Rx. Figure 6.59, 
+"Chunking architecture Showing Message and Control Flow" illustrates the relationship between components.
+The Chunking Layer comprises three related state machines:
+
+Chunked Rx.
+
+Chunked Tx.
+
+Chunked Message Router.
+Note:
+The consequence of this architecture is that the Policy Engine deals entirely in Unchunked Messages. It 
+will not receive (and might not respond to) a Message until all the related chunks have been collated.
+If a PD device or Cable Plug has no requirement to handle any Message requiring more than one Chunk of any 
+Extended Message, it May omit the Chunking Layer. In this case it Shall implement the 
+ChunkingNotSupportedTimer to ensure compatible operation with partners which support Chunking (see Section 
+6.6.18.1, "ChunkingNotSupportedTimer" and Section 8.3.3.6, "Not Supported Message State Diagrams").

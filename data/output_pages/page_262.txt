@@ -1,0 +1,187 @@
+Page 262
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.6.22
+  Time Values and Timers
+Table 6.68, "Time Values" summarizes the values for the timers listed in this section. For each Timer Value, a given 
+implementation Shall pick a fixed value within the range specified. Table 6.69, "Timers" lists the timers.
+Table 6.68  Time Values
+Parameter
+Value 
+(min)
+Value 
+(Nom)
+Value 
+(max)
+Units
+Reference
+tACTempUpdate
+500
+ms
+Section 6.5.2.2.1
+tBISTContMode
+30
+45
+60
+ms
+Section 6.6.7.2
+tBISTCarrierMode
+300
+ms
+Section 6.6.7.1
+tBISTSharedTestMode
+1
+s
+Section 6.6.7.3
+tCableMessage
+750
+µs
+Section 6.6.14
+tCapabilitiesMismatchResponse
+2
+s
+Section 6.4.2.3
+tChunkingNotSupported
+40
+45
+50
+ms
+Section 6.6.18.1
+tChunkReceiverRequest
+15
+ms
+Section 6.6.18.2
+tChunkReceiverResponse
+15
+ms
+Section 6.6.18.3
+tChunkSenderRequest
+24
+27
+30
+ms
+Section 6.6.18.2
+tChunkSenderResponse
+24
+27
+30
+ms
+Section 6.6.18.3
+tDataReset
+200
+225
+250
+ms
+Section 6.6.10.2
+tDataResetFail
+300
+400
+ms
+Section 6.6.10.3
+tDataResetFailUFP
+450
+550
+ms
+Section 6.6.10.4
+tDiscoverIdentity
+40
+50
+ms
+Section 6.6.14
+tDRSwapHardReset
+15
+ms
+Section 6.6.11.3
+tDRSwapWait
+100
+ms
+Section 6.6.4.3
+tEnterUSB
+500
+ms
+Section 6.6.20
+tEnterUSBWait
+100
+ms
+Section 6.6.4.7
+tEnterEPR
+450
+500
+550
+ms
+Section 6.6.21.1
+tEPRSourceCableDiscovery
+2
+s
+Section 6.6.21.4
+tFirstSourceCap
+250
+ms
+Section 6.6.3.3
+tFRSwap5V
+15
+ms
+Section 6.6.17.1
+tFRSwapComplete
+15
+ms
+Section 6.6.17.2
+tFRSwapInit
+15
+ms
+Section 6.6.17.3
+tHardReset
+5
+ms
+Section 6.3.13
+tHardResetComplete
+4
+4.5
+5
+ms
+Section 6.6.9
+tSourceEPRKeepAlive
+0.750
+0.875
+1.000
+s
+Section 6.6.21.3
+tSinkEPRKeepAlive
+0.250
+0.375
+0.500
+s
+Section 6.6.21.2
+tNoResponse
+4.5
+5.0
+5.5
+s
+Section 6.6.6
+tPPSRequest
+10
+s
+Section 6.6.19.1
+tPPSTimeout
+12.0
+13.5
+15.0
+s
+Section 6.6.19.2
+tProtErrHardReset
+15
+ms
+Section 6.6.11.4
+tProtErrSoftReset
+15
+ms
+Section 6.6.9.2
+tPRSwapWait
+100
+ms
+Section 6.6.4.2
+tPSHardReset
+25
+30
+35
+ms
+Section 6.6.11.2

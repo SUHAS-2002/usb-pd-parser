@@ -1,0 +1,11 @@
+Page 396
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.3.3
+  Transitions Caused by Hard Reset
+7.3.3.1
+  Source Initiated Hard Reset
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed during a Source 
+Initiated Hard Reset is shown in Figure 7.41, "Transition Diagram for a Source Initiated Hard Reset". The sequence 
+that Shall be followed is described in Table 7.20, "Sequence Description for a Source Initiated Hard Reset". The 
+timing parameters that Shall be applied are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink 
+Electrical Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".

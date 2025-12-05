@@ -1,0 +1,18 @@
+Page 982
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 9.7 Any USB State to USB Attached State Transition (After a USB Type-C Data Role Swap)
+VBUS
+Present
+Yes
+Swapping 
+Data
+Roles?
+Any USB 
+State
+USB
+Attached
+No
+Yes
+Hard Reset
+Changes Data 
+Role

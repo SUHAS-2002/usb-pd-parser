@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 937
+8.3.3.24
+  UFP Structured VDM State Diagrams
+The State Diagrams in this section Shall apply to all UFPs that support Structured VDMs.
+8.3.3.24.1
+  UFP Structured VDM Enter Mode State Diagram
+Figure 8.201, "UFP Structured VDM Enter Mode State Diagram" shows the state diagram for a UFP in response to an 
+Enter Mode Command.
+Figure 8.201 UFP Structured VDM Enter Mode State Diagram
+8.3.3.24.1.1
+  PE_UFP_VDM_Evaluate_Mode_Entry State
+The Policy Engine transitions to the PE_UFP_VDM_Evaluate_Mode_Entry state from either the PE_SRC_Ready or 
+PE_SNK_Ready state for a UFP when:
+
+A Structured VDM Enter Mode Command request is received from the DFP.
+On Entry to the PE_UFP_VDM_Evaluate_Mode_Entry state the Policy Engine Shall request the Device Policy 
+Manager to evaluate the Enter Mode Command request and enter the Mode indicated in the Command request if 
+the request is acceptable.
+The Policy Engine Shall transition to the PE_UFP_VDM_Mode_Entry_ACK state when:
+
+The Device Policy Manager indicates that the Mode has been entered.
+The Policy Engine Shall transition to the PE_UFP_VDM_Mode_Entry_NAK state when:
+
+The Device Policy Manager indicates that the response to the Mode request is NAK.
+PE_SRC_Ready or PE_SNK_Ready (UFP)
+Actions on entry:
+Power = Explicit Contract
+PD = Connected
+Enter Modes
+request1
+PE_UFP_VDM_Mode_Entry_ACK
+Actions on entry:
+Send Enter Mode ACK Command
+Cable = Awake
+PD = Connected
+Enter Mode ACK
+sent
+PE_UFP_VDM_Evaluate_Mode_Entry
+Actions on entry:
+Request DPM to evaluate request to enter a Mode
+Cable = Awake
+PD = Connected
+PE_UFP_VDM_Mode_Entry_NAK
+Actions on entry:
+Send Enter Mode NAK Command response 
+as requested
+Cable = Awake
+PD = Connected
+DPM says
+NAK
+DPM says 
+Mode entered
+Enter Mode NAK sent
+1)
+The UFP is required to be in USB operation or USB Safe State at this point.

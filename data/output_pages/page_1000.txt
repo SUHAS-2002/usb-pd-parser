@@ -1,0 +1,46 @@
+Page 1000
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+10.2.2.1
+  Fixed Supply PDOs
+Figure 10.1, "SPR Source Power Rule Illustration for Fixed Supply PDOs" illustrates the minimum current that an SPR 
+Source Shall support at each voltage for a given PDP Rating for Fixed Supply PDOs.
+Note:
+Not illustrated are that currents higher than 3A are allowed to be offered up to a limit of 5A given that a 
+5A cable is detected by the Source and the voltage times current remains within the Source PDP Rating.
+Figure 10.1 SPR Source Power Rule Illustration for Fixed Supply PDOs
+Figure 10.2, "SPR Source Power Rule Example For Fixed Supply PDOs" shows an example of an adapter with a rating 
+at 50W. The adapter is required to support 20V at 2.5A, 15V at 3A, 9V at 3A and 5V at 3A.
+0
+1
+2
+3
+4
+5
+6
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+5V
+9V
+15V
+5 + 9V
+5 + 9 + 15V
+20V
+7.5W
+15W
+27W
+45W
+Source PDP Rating (W)
+Current (A)
+RP1
+RP2
+20V
+5 + 9 + 15V

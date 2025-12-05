@@ -1,0 +1,83 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 431
+8.3.2.1.3.1
+  AMS: Power Negotiation (SPR)
+Table 8.5  AMS: Power Negotiation (SPR)
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine 
+Ref
+SPR Explicit Contract 
+Negotiation (Accept)
+1.
+Source_Capabilities 
+Message
+2.
+Request Message
+3.
+Accept Message
+4.
+PS_RDY Message
+Started by Source, 
+SPR Mode
+Section 8.3.2.2.1.1.1
+Section 8.3.3.2,
+Section 8.3.3.3
+SPR Explicit Contract 
+Negotiation (Reject)
+1.
+Source_Capabilities 
+Message
+2.
+Request Message
+3.
+Reject Message
+Section 8.3.2.2.1.1.2
+SPR Explicit Contract 
+Negotiation (Wait)
+1.
+Source_Capabilities 
+Message
+2.
+Request Message
+3.
+Wait Message
+Section 8.3.2.2.1.1.3
+SPR PPS Keep Alive
+1.
+Request Message
+2.
+Accept Message
+3.
+PS_RDY Message
+Started by Sink, 
+SPR Mode
+Section 8.3.2.2.1.2
+Section 8.3.3.3
+SPR Sink Makes Request 
+(Accept)
+1.
+Request Message
+2.
+Accept Message
+3.
+PS_RDY Message
+Section 8.3.2.2.1.3.1
+Section 8.3.3.2,
+Section 8.3.3.3
+SPR Sink Makes Request 
+(Reject)
+1.
+Request Message
+2.
+Reject Message
+Section 8.3.2.2.1.3.2
+SPR Sink Makes Request 
+(Wait)
+1.
+Request Message
+2.
+Wait Message
+Section 8.3.2.2.1.3.3

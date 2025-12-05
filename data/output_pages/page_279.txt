@@ -1,0 +1,61 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 279
+6.12.2.1.2.3
+  RCH_Processing_Extended_Message State
+On entry to the RCH_Processing_Extended_Message state the Chunked Rx state machine Shall:
+
+If this is the first chunk:
+
+Set Chunk_Number_Expected = 0.
+
+Set Num bytes received = 0.
+
+If chunk contains the expected Chunk Number:
+
+Append its data to the Extended_Message_Buffer.
+
+Increment Chunk_Number_Expected.
+
+Adjust Num bytes received.
+The Chunked Rx State Machine Shall transition to the RCH_Pass_Up_Message state when:
+
+The Message is complete (i.e., Num bytes received >= specified Data Size.
+Note:
+The inequality allows for padding bytes in the last chunk, which are not actually part of the Extended Mes-
+sage).
+The Chunked Rx State Machine Shall transition to the RCH_Requesting_Chunk state when:
+
+The Message is not yet complete.
+The Chunked Rx State Machine Shall transition to the RCH_Report_Error state when:
+
+An unexpected Chunk Number is received.
+The Chunked Rx State Machine Shall transition to the RCH_Wait_For_Message_From_Protocol_Layer state when:
+
+The Optional Abort Flag is set.
+6.12.2.1.2.4
+  RCH_Requesting_Chunk State
+On entry to the RCH_Requesting_Chunk state the Chunked Rx state machine Shall:
+
+Send notification SRT_Stop to SenderResponseTimer state machine (see Section 8.3.3.1.1, 
+"SenderResponseTimer State Diagram").
+
+Send Chunk Request to Protocol Layer with Chunk Number = Chunk_Number_Expected.
+The Chunked Rx State Machine Shall transition to the RCH_Waiting_Chunk state when:
+
+Message Transmitted is received from the Protocol Layer.
+The Chunked Rx State Machine Shall transition to the RCH_Report_Error state when:
+
+Transmission Error is received from the Protocol Layer, or
+
+A Message is received from the Protocol Layer.
+6.12.2.1.2.5
+  RCH_Waiting_Chunk State
+On entry to the RCH_Waiting_Chunk state the Chunked Rx state machine Shall:
+
+Start the ChunkSenderResponseTimer.
+
+Send notification SRT_Start to SenderResponseTimer state machine (see SSection 8.3.3.1.1, 
+"SenderResponseTimer State Diagram").
+The Chunked Rx State Machine Shall transition to the RCH_Processing_Extended_Message state when:
+
+A Chunk is received from the Protocol Layer.

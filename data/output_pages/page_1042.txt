@@ -1,0 +1,68 @@
+Page 1042
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+17
+If the laptop has detected that it is connected via 
+an Active Cable (or one that supports Alternate 
+Modes) and/or that it can support an FRS, it 
+initiates a VCONN Swap to make itself the VCONN 
+Source. This removes a requirement that the Hub 
+to hold up VCONN during the FRS. 
+18
+Normal PD Power traffic flow
+19
+The Hub and laptop are now ready to do a Fast Role Swap in case the power adapter gets removed.
+Table E.2  Sequence for setup of a Fast Role Swap (Hub connected to laptop before Power Adapter)
+Step #
+Hub
+Laptop
+0
+Hub is connected to laptop.
+1
+Laptop sources 5 V to VBUS (vSafe5V).
+Laptop sources 5 V to VCONN
+2
+Laptop reads the cable to check its current carrying 
+capability and/or if it is an Active Cable requiring 
+VCONN.
+3
+Laptop sends Source_Capabilities Message
+4
+Hub sends Request Message
+5
+Hub and laptop establish an Explicit Contract with Hub as Sink.
+6
+Laptop sends a Get_Source_Cap Message to 
+determine how much power the Hub can provide
+7
+Hub sends a Source_Capabilities Message with the 
+Dual-Role Power bit set, and Unconstrained Power 
+bit cleared, and Maximum Current = 0.
+8
+Since the Hub cannot supply power, the laptop does 
+not send a PR_Swap Message
+9
+The power adapter is connected to the Hub
+10
+If the Hub can source more than 3A, it initiates a VCONN 
+Swap to become the VCONN Source. 
+11
+Hub reads the e-marker to determine the cable’s 
+current carrying capability.
+12
+Hub initiates a Power Role Swap to become the Source
+13
+Hub sends a Source_Capabilities Message with the 
+Unconstrained Power bit set and Maximum Current > 
+0.
+14
+Hub and laptop establish an Explicit Contract with Hub as source.
+15
+Laptop sends a Get_Sink_Cap Message to determine 
+the current required by the Hub to support an FRS. If 
+the Hub does not support FRS or the laptop cannot 
+supply the required current, the laptop Ignores any 
+Fast Role Swap Requests it might see.
+Table E.1  Sequence for setup of a Fast Role Swap (Hub connected to Power Adapter first)
+Step #
+Hub
+Laptop

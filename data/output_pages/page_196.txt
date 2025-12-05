@@ -1,0 +1,60 @@
+Page 196
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The use of Structured VDMs by an Initiator Shall Not interfere with the normal PD Message timing requirements 
+nor Shall either the Initiator or Responder interrupt a PD AMS (e.g., Negotiation, Power Role Swap, Data Role Swap 
+etc.). The use of Unstructured VDMs Shall Not interfere with normal PD Message timing.
+6.4.5
+  Battery_Status Message
+The Battery_Status Message Shall be sent in response to a Get_Battery_Status Message. The Battery_Status 
+Message contains one Battery Status Data Object (BSDO) for one of the Batteries it supports as reported by Number 
+of Batteries/Battery Slots field in the Source_Capabilities_Extended Message. The returned BSDO Shall 
+correspond to the Battery requested in the Battery Status Ref field contained in the Get_Battery_Status Message.
+The Battery_Status Message returns a BSDO whose format Shall be as shown in Figure 6.28, "Battery_Status 
+Message" and Table 6.46, "Battery Status Data Object (BSDO)". The Number of Data Objects field in the 
+Battery_Status Message Shall be set to 1.
+Figure 6.28 Battery_Status Message
+6.4.5.1
+  Battery Present Capacity
+The Battery Present Capacity field Shall return either the Battery's State of Charge (SoC) in tenths of WH or 
+indicate that the Battery's present State of Charge (SOC) is unknown.
+Table 6.46  Battery Status Data Object (BSDO)
+Bit(s)
+Field
+Description
+B31…16
+Battery Present 
+Capacity
+Battery’s State of Charge (SoC) in 0.1 WH increments
+Note: 0xFFFF = Battery’s SOC unknown
+B15…8
+Battery Info
+Bit
+Description
+0
+Invalid Battery Reference
+ Invalid Battery reference
+1
+Battery Present
+Battery is present when set
+3…2
+Battery Charging Status
+When Battery Present is ‘1’ Shall contain the Battery charging status:
+
+00b: Battery is Charging.
+
+01b: Battery is Discharging.
+
+10b: Battery is Idle.
+
+11b: Reserved, Shall Not be used.
+When Battery Present is ‘0’:
+
+11b…00b: Reserved, Shall Not be used.
+7…4
+Reserved, Shall Not be used.
+B7…0
+Reserved
+Shall be set to zero
+Header
+No. of Data Objects = 1
+BSDO

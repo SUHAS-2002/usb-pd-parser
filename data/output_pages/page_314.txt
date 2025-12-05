@@ -1,0 +1,48 @@
+Page 314
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Section 7.1.14, "Non-application of VBUS Slew Rate Limits" lists transitions that are exempt from the vSrcSlewPos 
+limit.
+7.1.4.1.2
+  Fixed Supply Negative Voltage Transitions
+Negative voltage transitions are defined as shown in Figure 7.3, "Transition Envelope for Negative Voltage 
+Transitions" and are specified in a similar manner to positive voltage transitions. Figure 7.3, "Transition Envelope 
+for Negative Voltage Transitions" does not apply to vSafe0V transitions. The slew rate of the negative transition 
+Shall Not exceed vSrcSlewNeg. The negative voltage transition Shall remain below vSrcValid max of the previous 
+Explicit Contract and above vSrcValid min of the new Explicit Contract, as shown in FFigure 7.3, "Transition 
+Envelope for Negative Voltage Transitions". The transitioning Source output voltage Shall settle to vSrcNew within 
+tSrcSettle. The starting time, t0, in Figure 7.3, "Transition Envelope for Negative Voltage Transitions" starts 
+tSrcTransition after the last bit of the EOP of the GoodCRC Message has been received by the Source.
+Figure 7.3 Transition Envelope for Negative Voltage Transitions
+If the newly Negotiated voltage is vSafe5V, then the vSrcValid limits Shall determine the transition window and 
+the transitioning Source Shall settle within the vSafe5V limits by tSrcSettle.
+Section 7.1.14, "Non-application of VBUS Slew Rate Limits" lists transitions that are exempt from the vSrcSlewNeg 
+limit.
+7.1.4.2
+  SPR Programmable Power Supply (PPS)
+7.1.4.2.1
+  SPR Programmable Power Supply Voltage Transitions
+The Programmable Power Supply (PPS) Shall transition VBUS over the defined voltage range in a controlled 
+manner. The Output Voltage value in the Programmable RDO defines the nominal value of the PPS output voltage 
+after completing a voltage change and Shall settle within the limits defined by vPpsNew by tPpsSrcTransSmall for 
+steps smaller than or equal to vPpsSmallStep, or else, within the limits defined by vPpsNew by 
+tPpsSrcTransLarge, but only in case the Programmable Power Supply is not in CL mode. Any overshoot beyond 
+vPpsNew Shall Not exceed vPpsValid at any time. Any undershoot beyond vPpsNew Shall Not exceed vPpsValid 
+for currents not resulting in CL mode. The PPS output voltage May change in a step-wise or linear manner and the 
+slew rate of either type of change Shall Not exceed vPpsSlewPos for voltage increases or vPpsSlewNeg for voltage 
+decreases. The nominal requested voltage of all linear voltage changes Shall equate to an integer number of LSB 
+changes. An LSB change of the PPS output voltage is defined as vPpsStep. A PPS Shall be able to supply the 
+Negotiated current level as it changes its output voltage to the requested level. All PPS voltage increases Shall 
+Starting voltage
+Lower bound of valid Source range
+Upper bound of valid Source range
+t0
+tSrcSettle
+tSrcReady
+vSrcNew(typ)
+vSrcValid(min)
+vSrcNew(max)
+vSrcNew(min)
+�
+vSrcSlewNeg
+�
+vSrcValid(max)

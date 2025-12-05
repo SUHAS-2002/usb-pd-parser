@@ -1,0 +1,57 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 139
+6.4.1
+  Capabilities Message
+There are two distinct Capabilities Messages: one used while in SPR Mode and another while in EPR Mode. This 
+section defines the Capabilities Messages specific to the SPR Mode and Section 6.5.15, "EPR Capabilities Message" 
+defines the Capabilities Messages specific to the EPR Mode.
+6.4.1.1
+  Power Data Objects
+Sections Section 6.4.1.5, "SPR Source Capabilities Message" and Section 7.1.3, "Types of Sources" describes the Power 
+Data Objects (PDOs) used in the construction of a Capabilities Message for both SPR Mode and EPR Mode.
+There are three types of Power Data Objects. They contain additional information beyond that encoded in the 
+Message Header to identify each of the three types of Power Data Objects:
+
+Fixed Supply is used to expose well-regulated fixed voltage power supplies.
+
+Variable Supply is used to expose very poorly regulated power supplies. 
+
+Battery Supply is used to expose batteries that can be directly connected to VBUS.
+There are three types of Augmented Power Data Objects:
+
+SPR PPS is used to expose a power supply whose output voltage can be programmatically adjusted over 
+the Advertised voltage range and limited by the Source to a programmable current limit.
+
+SPR AVS and EPR AVS are used to expose a power supply whose output voltage can be adjusted over the 
+Advertised voltage range but otherwise is equivalent to a Fixed Supply (AVS does not support a 
+programmable current limit).
+Power Data Objects are also used to expose additional Capabilities that May be utilized, such as in the case of a 
+Power Role Swap.
+A list of one or more Power Data Objects Shall be sent by the Source to convey its Capabilities. The Sink May then 
+request one of these Capabilities by returning a Request Data Object that contains an index to a Power Data Object, 
+to Negotiate a mutually agreeable Explicit Contract.
+Where Maximum and Minimum voltage and current values are given in PDOs these Shall be taken to be absolute 
+values.
+The Source and Sink Shall Not Negotiate a power level that would allow the current to exceed the maximum current 
+supported by their receptacles or the Attached plug (see [USB Type-C 2.4]). The Source Shall limit its offered 
+Capabilities to the maximum current supported by its receptacle and Attached plug. A Sink Shall only make a 
+request from any of the Capabilities offered by the Source. For further details see Section 4.4, "Cable Type Detection".
+Sources expose their power Capabilities by sending a Source_Capabilities Message. Sinks expose their power 
+requirements by sending a Sink_Capabilities Message. Both are composed of several 32-bit Power Data Objects 
+(see Table 6.7, "Power Data Object").
+Table 6.7  Power Data Object
+Bit(s)
+Description
+Value
+Parameter
+B31…30
+00b
+Fixed Supply (Vmin = Vmax)
+01b
+Battery
+10b
+Variable Supply (non-Battery)
+11b
+Augmented Power Data Object (APDO)
+B29…0
+Specific Power Capabilities are described by the PDOs in the following sections.

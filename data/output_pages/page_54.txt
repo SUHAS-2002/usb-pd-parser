@@ -1,0 +1,59 @@
+Page 54
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+An Implicit Contract is the specified level of power allowed in particular states (i.e., during and after a Power Role 
+Swap or Fast Role Swap). Implicit Contracts are temporary; Port Pairs are required to immediately Negotiate an 
+Explicit Contract.
+Each Provider has a Local Policy, governing power allocation to its Ports. Consumers also have their own Local Policy 
+governing how they draw power. A System Policy can be enacted over USB that allows modification to this Local 
+Policy and hence management of overall power allocation in the system.
+When PD Capable devices are Attached to each other, the DFPs and UFPs initially default to standard USB Default 
+Operation. The DFP supplies vSafe5V and the UFP draws current in accordance with the rules defined by [USB 2.0], 
+[USB 3.2], [USB Type-C 2.4] or [USBBC 1.2] specifications. After Power Delivery Negotiation has taken place, 
+power can be supplied at higher, or lower, voltages and higher currents than defined in these specifications. It is 
+also possible to:
+
+Do a Power Role Swap or Fast Role Swap to exchange the Power Roles such that the DFP receives power 
+and the UFP supplies power. 
+
+Do a Data Role Swap such that the DFP becomes the UFP and vice-versa.
+
+Do a VCONN Swap to change the Port supplying VCONN to the cable.
+
+Enter into EPR Mode.
+
+Enter into USB4® Mode.
+
+Enter into Alternate Modes.
+
+Send Vendor Defined Messages.
+Prior to the First Explicit Contract only the Source Port, which is also the VCONN Source, can communicate with the 
+Attached cable assembly. This is important where 5A and EPR capability are marked as well as other details of the 
+cable assembly such as the supported speed. 
+Cable Discovery, determining whether the cable can communicate, can occur on initial Attachment of a Port Pair 
+before an Explicit Contract has been established. It is also possible to carry out Cable Discovery after a Power Role 
+Swap or Fast Role Swap prior to re-establishing an Explicit Contract, where the UFP is the Source, and an Implicit 
+Contract is in place. Cable Discovery can be carried out after an Explicit Contract has been established, if the cable 
+has not yet been discovered.
+2.1.3
+  Other Uses for Power Delivery
+Once an Explicit Contract is in place, PD can be used to manage the Ports and cables for non-power related 
+functionality. 
+PD is used to enter the USB4® Mode of operation. Ports and cables can support functionality beyond power. For 
+example, a cable can have active components that require VCONN power or a Port/cable can support a video display 
+Alternate Mode such as DisplayPort. PD defines an infrastructure to discover these additional Capabilities and 
+Modes that include:
+
+Discovering a Port or Cable Plug's Capabilities.
+
+Discovery of the SVIDs a Port or Cable Plug supports.
+
+Discovery of the Modes a Port or Cable Plug supports.
+
+Entry into a Mode supported by the Port and/or Cable Plug.
+
+Exiting Modes supported by the Port and/or Cable Plug.
+2.2
+  Compatibility with Revision 2.0
+Revision 3.x of the USB Power Delivery specification is designed to be fully inter-operable with [USBPD 2.0] 
+systems using BMC Signaling over the [USB Type-C 2.4] connector and to be compatible with Revision 2.0 
+hardware. 

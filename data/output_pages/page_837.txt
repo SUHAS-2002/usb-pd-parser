@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 837
+
+A Request from the offered Source Capabilities with an indication that another power level would be 
+preferred (Capability Mismatch bit set).
+When in SPR Mode a Request Message Shall be sent.
+When in EPR Mode an EPR_Request Message Shall be sent.
+The Policy Engine Shall initialize and run the SenderResponseTimer.
+The Policy Engine Shall transition to the PE_SNK_Transition_Sink state when:
+
+An Accept Message is received from the Source.
+The Policy Engine Shall transition to the PE_SNK_Wait_for_Capabilities state when:
+
+There is no Explicit Contract in place and
+
+A Reject Message is received from the Source or
+
+A Wait Message is received from the Source.
+The Policy Engine Shall transition to the PE_SNK_Ready state when:
+
+There is an Explicit Contract in place and
+
+A Reject Message is received from the Source or
+
+A Wait Message is received from the Source.
+The Policy Engine Shall transition to the PE_SNK_Hard_Reset state when:
+
+A SenderResponseTimer timeout occurs.
+8.3.3.3.6
+  PE_SNK_Transition_Sink State
+On entry to the PE_SNK_Transition_Sink state the Policy Engine Shall initialize and run the PSTransitionTimer 
+(timeout will lead to a Hard Reset see Section 8.3.3.3.8, "PE_SNK_Hard_Reset State" and Shall then request the Device 
+Policy Manager to transition the Sink's power supply to the new power level.
+Note:
+If there is no power level change the Device Policy Manager Should Not affect any change to the power 
+supply.
+On exit from the PE_SNK_Transition_Sink state the Policy Engine Shall request the Device Policy Manager to 
+transition the Sink's power supply to the new power level.
+The Policy Engine Shall transition to the PE_SNK_Ready state when:
+
+A PS_RDY Message is received from the Source.
+The Policy Engine Shall transition to the PE_SNK_Hard_Reset state when:
+
+A Protocol Error occurs.
+8.3.3.3.7
+  PE_SNK_Ready State
+In the PE_SNK_Ready state the PD Sink Shall be operating at a stable power level with no ongoing Negotiation. It 
+Shall respond to requests from the Source, events from the Device Policy Manager. 
+On entry to the PE_SNK_Ready state as the result of a wait the Policy Engine Should do the following:
+
+Initialize and run the SinkRequestTimer.
+On entry to the PE_SNK_Ready state if this is a VCONN Source which needs to establish communication with a Cable 
+Plug, then the Policy Engine Shall do the following: 
+
+Initialize and run the DiscoverIdentityTimer (no GoodCRC Message response yet received to Discover 
+Identity Message).

@@ -1,0 +1,30 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 797
+17
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+18
+PHY Layer receives the GoodCRC and checks the CRC to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+19
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+20
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the BIST 
+Message was successfully sent. 
+21
+Policy Engine tells Protocol Layer to exit BIST Shared 
+Capacity Test Mode. The Policy Engine exits to BIST 
+Shared Capacity Test Mode.
+22
+Protocol Layer tells PHY Layer to exit BIST Shared 
+Capacity Test Mode.
+UUT exits BIST Shared Capacity Test Mode.
+Table 8.145  Steps for BIST Shared Capacity Test Mode Test
+Step
+Tester
+UUT

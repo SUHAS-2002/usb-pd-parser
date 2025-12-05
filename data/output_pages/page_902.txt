@@ -1,0 +1,53 @@
+Page 902
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 8.178 Dual-Role Port in Source to Sink Fast Role Swap State Diagram
+PE_SRC_Ready
+PE_FRS_SRC_SNK_
+Evaluate_Swap
+Actions on entry:
+Ask Device Policy Manager if Fast 
+Role Swap signaled on CC wire
+Power = Implicit Contract
+PD = Connected
+PE_FRS_SRC_SNK_
+Transition_to_off
+Actions on entry:
+Wait for VBUS to reach vSafe5V
+Power = Implicit contract
+PD = Connected
+PE_FRS_SRC_SNK_
+Wait_Source_on
+Actions on entry:
+Send PS_RDY Message
+Initialize and run PSSourceOnTimer
+Power = Implicit contract
+PD = Connected
+PE_FRS_SRC_SNK_
+Accept_Swap
+Actions on entry:
+Send Accept Message
+Power = Implicit Contract
+PD = Connected
+Fast Role Swap signaled
+Accept Message
+sent
+PS_RDY Message
+received
+PE_SNK_Startup
+PE_FRS_SRC_SNK_
+Assert_Rd
+Actions on entry:
+Request DPM to assert Rd
+Power = Implicit contract
+PD = Connected
+VBUS at vSafe5V
+Rd asserted
+ErrorRecovery
+PSSourceOnTimer Timeout |
+PS_RDY Message not sent after 
+retries (no GoodCRC received)
+Accept Message not sent after 
+retries (no GoodCRC received)
+PE_SRC_Hard_Reset
+FR_Swap Message received
+Fast Role Swap not signaled

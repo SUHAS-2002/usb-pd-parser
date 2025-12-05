@@ -1,0 +1,33 @@
+Page 948
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Note:
+An EPR Source is required to discover the identity of the Cable Plug prior to entering the First Explicit 
+Contract (see Section 6.4.10.1, "Process to enter EPR Mode") 
+On entry to the PE_SRC_VDM_Identity_Request state the Policy Engine Shall send a Structured VDM Discover 
+Identity Command request, Shall increment the DiscoverIdentityCounter and Shall start the 
+VDMResponseTimer.
+The Policy Engine Shall transition to the PE_SRC_VDM_Identity_ACKed state when:
+
+A Structured VDM Discover Identity ACK Command response is received.
+The Policy Engine Shall transition to the PE_SRC_VDM_Identity_NAKed state when:
+
+A Structured VDM Discover Identity NAK or BUSY Command response is received or
+
+The VDMResponseTimer times out or
+
+The Structured VDM Discover Identity Command request Message sending fails (no GoodCRC Message 
+received after retries).
+8.3.3.25.3.2
+  PE_SRC_VDM_Identity_ACKed State
+On entry to the PE_SRC_VDM_Identity_ACKed state the Policy Engine Shall inform the Device Policy Manager of the 
+Identity information.
+The Policy Engine Shall transition back to either the PE_SRC_Send_Capabilities or PE_SRC_Discovery state when:
+
+The Device Policy Manager has been informed.
+8.3.3.25.3.3
+  PE_SRC_VDM_Identity_NAKed State
+On entry to the PE_SRC_VDM_Identity_NAKed state the Policy Engine Shall inform the Device Policy Manager of the 
+result (NAK, BUSY or timeout).
+The Policy Engine Shall transition back to either the PE_SRC_Send_Capabilities or PE_SRC_Discovery state when:
+
+The Device Policy Manager has been informed.

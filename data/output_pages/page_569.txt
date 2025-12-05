@@ -1,0 +1,20 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 569
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+17
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Reject Message was successfully sent. 
+Table 8.68  Steps for Rejected Data Role Swap, UFP operating as Sink initiates
+Step
+Initial UFP Sink Port
+Initial DFP Source Port

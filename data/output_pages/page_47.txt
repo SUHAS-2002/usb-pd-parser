@@ -1,0 +1,82 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 47
+PDUSB Hub
+A port expander USB Device with a UFP and one or more DFPs which is PD Capable on at least 
+one of its Ports. A PDUSB Hub is only addressed by SOP Packets.
+A self-powered PDUSB Hub is treated as a USB Type-C Multi-Port Charger.
+PDUSB Peripheral
+A USB Device with a PD Capable UFP which is not a PDUSB Hub. A PDUSB Peripheral is only 
+addressed by SOP Packets.
+PE
+See Policy Engine.
+Peripheral
+A physical entity that is Attached to a USB cable and is currently operating as a USB Device.
+PHY Layer
+The Physical Layer responsible for sending and receiving Messages across the USB Type-C CC 
+wire between a Port Pair.
+Policy
+Policy defines the behavior of PD Capable parts of the system and defines the Capabilities it 
+Advertises, requests made to (re)Negotiate power and the responses made to requests received.
+Policy Engine
+The Policy Engine interprets the Device Policy Manager’s input to implement Policy for a given 
+Port and directs the Protocol Layer to send appropriate Messages.
+Port
+An interface typically exposed through a receptacle, or via a plug on the end of a hard-wired 
+captive cable. USB Power Delivery defines the interaction between a Port Pair. 
+Port Pair
+Two Attached PD Capable Ports.
+Port Partner
+A Contract is Negotiated between a Port Pair connected by a USB cable. These ports are known 
+as Port Partners.
+Power Conductor
+The wire that delivers power from the Source to Sink. For example, USB’s VBUS.
+Power Consumer
+See Consumer.
+Power Data Object
+Data Object used to expose a Source Port’s or Sink Port’s power Capabilities as part of a 
+Source_Capabilities / EPR_Source_Capabilities or Sink_Capabilities / EPR_Sink_Capabilities 
+Message respectively. Fixed Supply, Variable Supply and Battery Supply Power Data Objects are 
+defined; SPR Mode uses all four while EPR Mode uses only Fixed Supply and AVS PDOs.
+Power Delivery Mode
+Operation after a Contract has initially been established between a Port Pair. This Mode persists 
+during normal Power Delivery operation, including after a Power Delivery Mode. Power Delivery 
+Mode can only be exited by Detaching the Ports, applying a Hard Reset or by the Source removing 
+power (except when the Initial Source removes power from VBUS during the Power Role Swap 
+procedure).
+Power Provider
+See Provider.
+Power Role
+A Port Partner will be in one of two Power Roles; either Source or Sink.
+Power Role Swap
+Process of exchanging the Source and Sink Power Roles between Port Partners.
+Power Rules
+Define voltages and current ranges that are offered by compliant USB Power Delivery Sources 
+and used by a USB Power Delivery Sink for a given value of PDP Rating. See Section 10, "Power 
+Rules".
+PPS
+See Programmable Power Supply.
+PPS Mode
+An SPR Source, currently operating as an PPS, is said to be operating in PPS Mode.
+Preamble
+Start of a transmission which is used to enable the receiver to lock onto the carrier. The 
+Preamble consists of a 64-bit sequence of alternating 0s and 1s starting with a "0" and ending 
+with a "1" which is not 4b5b encoded.
+Product Type
+Product categorization returned as part of the Discover Identity Command.
+Product Type VDO
+VDO identifying a certain Product Type in the ID Header VDO of a Discover Identity Command.
+Product VDO
+The Product VDO contains identity information relating to the product. 
+Programmable Power 
+Supply
+A power supply, operating in SPR Mode, whose output voltage can be programmatically adjusted 
+in small increments over its Advertised range and has a programmable output current fold back 
+(note that the SPR AVS and EPR AVS does not).The Capabilities are exposed by the SPR 
+Programmable Power Supply APDO (see Section 6.4.1.2.4, "Augmented Power Data Object 
+(APDO)").
+Protocol Error
+An unexpected Message during an Atomic Message Sequence. A Protocol Error during an AMS will 
+result in either a Soft Reset or a Hard Reset.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

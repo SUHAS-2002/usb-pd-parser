@@ -1,0 +1,73 @@
+Page 394
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 7.19  Sequence Description for a Source Requested Power Role Swap
+Step
+Initial Source Port New Sink Port
+Initial Sink Port  New Source Port
+1
+Policy Engine receives the Accept Message.
+Policy Engine sends the Accept Message to the Initial 
+Source.
+2
+Protocol Layer sends the GoodCRC Message to the 
+Sink. The Policy Engine tells the Device Policy 
+Manager to instruct the power supply to modify its 
+output power. 
+Protocol Layer receives the GoodCRC Message from 
+the Initial Source. Policy Engine starts the 
+PSSourceOffTimer.
+2a
+The Policy Engine tells the Device Policy Manager to 
+instruct the power supply to transition to Swap 
+Standby. The power supply Shall complete the 
+transition to Swap Standby within tSnkStdby (t1); t1 
+Shall complete before tSrcTransition. The Sink Shall 
+Not violate the transient load behavior defined in 
+Section 7.2.6, "Transient Load Behavior" while 
+transitioning to and operating at the new power level. 
+When in Sink Standby the Initial Sink Shall Not draw 
+more than iSnkSwapStdby (I1).
+3
+tSrcTransition after the GoodCRC Message was sent 
+the power supply starts to change its output power 
+capability to Swap Standby (see Section 7.1.10, "Swap 
+Standby for Sources"). The power supply Shall 
+complete the transition to Swap Standby within 
+tSrcSwapStdby (t2). The power supply informs the 
+Device Policy Manager that it is ready to operate as 
+the New Sink. The CC termination is changed from Rp 
+to Rd (see [USB Type-C 2.4]). The power supply 
+status is passed to the Policy Engine.
+4
+The Policy Engine sends the PS_RDY Message to the 
+device that will become the New Source, starting 
+within tSrcTransOff of the end of the GoodCRC 
+Message following the Accept Message.
+Policy Engine receives the PS_RDY. 
+5
+Protocol Layer receives the GoodCRC Message from 
+the soon to be New Source. Policy Engine starts the 
+PSSourceOnTimer. At this point the Initial Source is 
+ready to be the New Sink.
+Protocol Layer sends the GoodCRC Message to the 
+New Sink.
+Policy Engine then stops the PSSourceOffTimer and 
+tells the Device Policy Manager to instruct the power 
+supply to operate as the New Source.
+If the PS_RDY Message is not received before the 
+PSSourceOffTimer times out the Sink starts sending 
+Hard Reset Signaling.
+6
+The CC termination is changed from Rd to Rp (see 
+[USB Type-C 2.4]). The power supply as the New 
+Source transitions from Swap Standby to sourcing 
+default vSafe5V within tNewSrc (t3). The power 
+supply informs the Device Policy Manager that it is 
+operating as the New Source.
+7
+Policy Engine receives the PS_RDY Message.
+Device Policy Manager informs the Policy Engine the 
+power supply is ready, and the Policy Engine sends 
+the PS_RDY Message to the New Sink, starting within 
+tSrcTransOn of the end of the GoodCRC Message 
+following the Accept Message.

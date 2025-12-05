@@ -1,0 +1,62 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 167
+If Structured VDMs are supported, but the Structured VDM Command request is an Unrecognized Message, it Shall 
+be NAKed (see Table 6.32, "Commands and Responses").
+6.4.4.2.6.2
+  Attention Command
+The Command field contains the value for the VDM Command being sent (Attention). The Attention Command 
+May be used by the Initiator to notify the Responder that it requires service. 
+A Structured VDM Attention Command consists of a Command request but no Command response. A Structured 
+VDM Attention Command is deemed to be completed when the GoodCRC Message has been successfully received 
+by the Initiator in reply to its Attention Command request.
+If Structured VDMs are supported, but the Structured VDM Attention Command request is an Unrecognized Message 
+it Shall be Ignored (see Table 6.32, "Commands and Responses").
+6.4.4.3
+  Use of Commands
+The VDM Header for a Structured VDM Message defines Commands used to retrieve a list of SVIDs the device 
+supports, to discover the Modes associated with each SVID, and to enter/exit the Modes. The Commands include:
+
+Discover Identity
+
+Discover SVIDs
+
+Discover Modes
+
+Enter Mode
+
+Exit Mode
+
+Attention
+Additional Command space is also Reserved for Standard and Vendor use and for future extensions. 
+The Command AMSs use the terms Initiator and Responder to identify messaging roles the ports are taking on 
+relative to each other. This role is independent of the Port's power capability (Provider, Consumer etc.) or its 
+present Power Role (Source or Sink). The Initiator is the Port sending the initial Command request and the 
+Responder is the Port replying with the Command response. See Section 6.4.4.4, "Command Processes".
+All Ports that support Modes Shall support the Discover Identity, Discover SVIDs, the Discover Modes, the Enter 
+Mode and Exit Mode Commands.
+Table 6.32, "Commands and Responses" details the responses a Responder May issue to each Command request. 
+Responses not listed for a given Command Shall Not be sent by a Responder. A NAK response Should be taken as 
+an indication not to retry that particular Command.
+Examples of Command usage can be found in Appendix C, "VDM Command Examples".
+Table 6.32  Commands and Responses
+Command
+Allowed Response
+Reference
+Discover Identity
+ACK, NAK, BUSY
+Section 6.4.4.3.1
+Discover SVIDs
+ACK, NAK, BUSY
+Section 6.4.4.3.2
+Discover Modes
+ACK, NAK, BUSY
+Section 6.4.4.3.3
+Enter Mode
+ACK, NAK
+Section 6.4.4.3.4
+Exit Mode
+ACK, NAK
+Section 6.4.4.3.5
+Attention
+None
+Section 6.4.4.3.6

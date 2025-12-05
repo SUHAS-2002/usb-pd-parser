@@ -1,0 +1,52 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 259
+The ChunkSenderRequestTimer Shall be stopped when:
+
+The last bit of the EOP of the GoodCRC Message, corresponding to the Chunk Request Message, is trans-
+mitted by the PHY Layer. 
+
+A Message other than a Chunk Request is received from the Protocol Layer Rx.
+The receiver of a Chunk Response requiring a Chunk Request Shall respond with a Chunk Request within 
+tChunkReceiverRequest in order to ensure that the sender's ChunkSenderRequestTimer does not expire. 
+The tChunkReceiverRequest time Shall be measured from the time the last bit of the EOP of the GoodCRC Message, 
+corresponding to the Chunk Response Message, has been transmitted by the PHY Layer until the first bit of the 
+response Message Preamble has been transmitted by the PHY Layer.
+6.6.18.3
+  ChunkSenderResponseTimer
+The ChunkSenderResponseTimer is used during a Chunked Message transmission.
+The ChunkSenderResponseTimer Shall be used by the sender's Chunking state machine to ensure that a Chunk 
+Request is responded to within a bounded time of tChunkSenderResponse. Failure to receive the expected 
+response is detected when the ChunkSenderResponseTimer expires. 
+The ChunkSenderResponseTimer Shall be started when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the Chunk Request Message, is received by 
+the PHY Layer.
+The ChunkSenderResponseTimer Shall be stopped when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the Chunk Response Message, is transmitted 
+by the PHY Layer.
+
+A Message other than a Chunk is received from the Protocol Layer.
+The receiver of a Chunk Request requiring a Chunk Response Shall respond with a Chunk Response within 
+tChunkReceiverResponse in order to ensure that the sender's ChunkSenderResponseTimer does not expire. 
+The tChunkReceiverResponse time Shall be measured from the time the last bit of the EOP of the GoodCRC 
+Message, corresponding to the Chunk Request Message, has been transmitted by the PHY Layer until the first bit of 
+the response Message Preamble has been transmitted by the PHY Layer.
+6.6.19
+  Programmable Power Supply Timers
+6.6.19.1
+  SinkPPSPeriodicTimer
+The SinkPPSPeriodicTimer Shall be used by the Sink's Policy Engine to ensure that communication between the 
+Sink and Source occurs within a bounded time of tPPSRequest when in SPR PPS Mode. In the absence of any other 
+traffic, a Request Message requesting an SPR PPS APDO is sent periodically as a keep alive mechanism. 
+SinkPPSPeriodicTimer Shall be re-initialized and restarted on transmission, by the PHY Layer, of the last bit of the 
+GoodCRC Message EOP, corresponding to any received Message, that causes the Sink to enter the PE_SNK_Ready 
+state.
+The Sink Shall stop the SinkPPSPeriodicTimer on transmission, by the PHY Layer, of the last bit of the GoodCRC 
+Message EOP, corresponding to any Message, or the last bit of any Signaling is received, by the PHY Layer, from the 
+Source and by the Sink that causes the Sink to leave the PE_SNK_Ready state.
+6.6.19.2
+  SourcePPSCommTimer
+The SourcePPSCommTimer Shall be used by the Source's Policy Engine to ensure that communication between 
+the Sink and Source occurs within a bounded time of tPPSTimeout when in SPR PPS Mode. In the absence of any 
+other traffic, a Request Message requesting an SPR PPS APDO is received periodically as a keep alive mechanism.

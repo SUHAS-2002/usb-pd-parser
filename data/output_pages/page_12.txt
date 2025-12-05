@@ -1,0 +1,90 @@
+Page 12
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+John Perry
+Texas Instruments
+Kasthuri Annamalai
+Texas Instruments
+Martin Patoka
+Texas Instruments
+Mike Campbell
+Texas Instruments
+Scott Jackson
+Texas Instruments
+Shafiuddin Mohammed
+Texas Instruments
+Srinath Hosur
+Texas Instruments
+Steven Tom
+Texas Instruments
+Yoon Lee
+Texas Instruments
+Tim Wilhelm
+The Silanna Group Pty. Ltd.
+Tod Wolf
+The Silanna Group Pty. Ltd.
+Chris Yokum
+Total Phase
+Dylan Su
+UL LLC
+Eric Wall
+UL LLC
+Jason Smith
+UL LLC
+Terry Kao
+UL LLC
+Steven Chen
+Unigraf OY
+Topi Lampiranta
+Unigraf OY
+Brad Cox
+Ventev Mobile
+Colin Vose
+Ventev Mobile
+Dydron Lin
+VIA Technologies, Inc.
+Fong-Jim Wang
+VIA Technologies, Inc.
+Jay Tseng
+VIA Technologies, Inc.
+Rex Chang
+VIA Technologies, Inc.
+Terrance Shih
+VIA Technologies, Inc.
+Ho Wen Tsai
+Weltrend Semiconductor
+Hung Chiang
+Weltrend Semiconductor
+Jeng Cheng Liu
+Weltrend Semiconductor
+Priscilla Lee
+Weltrend Semiconductor
+Wayne Lo
+Weltrend Semiconductor
+Charles Neumann
+Western Digital Technologies, 
+Inc.
+Curtis Stevens
+Western Digital Technologies, 
+Inc.
+John Maroney
+Western Digital Technologies, 
+Inc.
+Joe O'Brien
+Wilder Technologies
+Will Miller
+Wilder Technologies
+Canfeng Chen
+Xiaomi Communications Co., Ltd.
+Juejia Zhou
+Xiaomi Communications Co., Ltd.
+Xiaoxing Yang
+Xiaomi Communications Co., Ltd.
+Liu Qiong
+Zhuhai Smartware Technology 
+Co., Ltd.
+Long Zhang
+Zhuhai Smartware Technology 
+Co., Ltd.
+Yuanchao Liang
+Zhuhai Smartware Technology 
+Co., Ltd.

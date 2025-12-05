@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 911
+8.3.3.19.9
+  Dual-Role (Sink Port) Get Sink Capabilities State Diagram
+Figure 8.182, "Dual-Role (Sink) Get Sink Capabilities State Diagram" shows the state diagram for a Dual-Role device, 
+presently operating as a Sink, on receiving a request from the Device Policy Manager to get the Port Partner's Sink 
+Capabilities. See also Section , "A Source Port Shall report its Capabilities in a series of 32-bit Power Data Objects (see 
+Table 6.7, "Power Data Object") as part of a Source_Capabilities Message (see Figure 6.13, "Example Capabilities 
+Message with 2 Power Data Objects"). Power Data Objects are used to convey a Source Port's Capabilities to provide 
+power including Dual-Role Power ports presently operating as a Sink.".
+Figure 8.182 Dual-Role (Sink) Get Sink Capabilities State Diagram
+8.3.3.19.9.1
+  PE_DR_SNK_Get_Sink_Cap State
+The Policy Engine Shall transition to the PE_DR_SNK_Get_Sink_Cap state, from the PE_SNK_Ready state, due to a 
+request to get the remote Source Capabilities from the Device Policy Manager. 
+
+On entry to the PE_DR_SNK_Get_Sink_Cap state the Policy Engine Shall request the Protocol Layer to 
+send a Get_Sink_Cap Message in order to retrieve the Sink Capabilities. The Policy Engine Shall send:
+
+A Get_Sink_Cap Message when the Device Policy Manager requests SPR capabilities or
+
+An EPR_Get_Sink_Cap Message when the Device Policy Manager requests EPR Capabilities.
+The Policy Engine Shall then start the SenderResponseTimer.
+On exit from the PE_SRC_Get_Sink_Cap state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (capabilities or response timeout). If Fast Role Swap is supported, request Device Policy Manager prepare 
+or disable 5V source and configure the Fast Role Swap receiver based on the Fast Role Swap required USB Type-
+C Current bits in the received Sink Capabilities.
+The Policy Engine Shall transition to the PE_SNK_Ready state (see Figure 8.133, "Sink Port State Diagram") when:
+
+SPR Sink Capabilities were requested and a Sink_Capabilities Message is received or
+
+EPR Sink Capabilities were requested and an EPR_Sink_Capabilities Message is received or
+
+The SenderResponseTimer times out.
+PE_SNK_Ready
+PE_DR_SNK_Get_Sink_Cap
+Actions on entry:
+If SPR Mode capabilities requested send Get_Sink_Cap Message
+If EPR Mode capabilities requested send EPR_Get_Sink_Cap Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+get sink capabilities request 
+from Device Policy Manager1
+(SPR Sink Capabilities requested 
+& Sink_Capabilities Message) |
+(EPR Sink Capabilities requested 
+& EPR_Sink_Capabilities Message) |
+SenderResponseTimer timeout
+Actions on exit:
+Pass sink capabilities/outcome to Device Policy Manager
+Request Device Policy Manager to configure Fast Role Swap if supported
+1)
+Either SPR or EPR Sink Capabilities May be requested, regardless of whether or not the Sink is currently operating in SPR or EPR Mode.

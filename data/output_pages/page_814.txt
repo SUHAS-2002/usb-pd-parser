@@ -1,0 +1,76 @@
+Page 814
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.151, "Steps for Cable Plug USB4 Mode Entry (Wait)" below provides a detailed explanation of what happens 
+at each labeled step in Figure 8.124, "Cable Plug Entering USB4 Mode (Wait)" above.
+Table 8.151  Steps for Cable Plug USB4 Mode Entry (Wait)
+Step
+DFP
+Cable Plug
+1
+The Policy Engine directs the Protocol Layer to 
+generate an Enter_USB Message to request entry to 
+[USB4] mode. 
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the Enter_USB 
+Message. Starts CRCReceiveTimer.
+PHY Layer receives the Enter_USB Message and 
+compares the CRC it calculated with the one sent to verify 
+the Message.
+4
+PHY Layer removes the CRC and forwards the 
+Enter_USB Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received Enter_USB 
+Message information to the Policy Engine that 
+consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC and checks the CRC 
+to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Enter_USB Message was successfully sent. Policy 
+Engine starts SenderResponseTimer. 
+10
+Policy Engine tells the Protocol Layer to form an Wait 
+Message.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the Message.
+PHY Layer appends a CRC and sends the Message. Starts 
+CRCReceiveTimer.
+13
+Protocol Layer stores the MessageID of the incoming 
+Message.
+14
+The Protocol Layer forwards the received Wait Message 
+information to the Policy Engine that consumes it.
+15
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares the 
+CRC it calculated with the one sent to verify the Message.
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 

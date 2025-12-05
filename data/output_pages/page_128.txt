@@ -1,0 +1,156 @@
+Page 128
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.3
+  Control Message
+A Message is defined as a Control Message when the Number of Data Objects field in the Message Header is set to 
+zero. The Control Message consists only of a Message Header and a CRC. The Protocol Layer originates the Control 
+Messages (i.e., Accept Message, Reject Message etc.).
+The Control Message types are specified in the Message Header's Message Type field (bits 4…0) and are 
+summarized in Table 6.5, "Control Message Types". The Sent by column indicates entities which May send the given 
+Message (Source, Sink or Cable Plug); entities not listed Shall Not issue the corresponding Message. The "Valid Start 
+of Packet" column indicates the Messages which Shall only be issued in SOP Packets and the Messages which May 
+be issued in SOP* Packets.
+Table 6.5  Control Message Types
+Bits 4…0
+Message Type
+Sent by
+Description
+Valid 
+Start of 
+Packet
+0_0000
+Reserved
+N/A
+All values not explicitly 
+defined are Reserved and 
+Shall Not be used.
+0_0001
+GoodCRC
+Source, Sink or Cable Plug
+See Section 6.3.1.
+SOP*
+0_0010
+GotoMin (Deprecated)
+Deprecated
+See Section 6.3.2.
+N/A
+0_0011
+Accept
+Source, Sink or Cable Plug
+See Section 6.3.3.
+SOP*
+0_0100
+Reject
+Source, Sink or Cable Plug
+See Section 6.3.4.
+SOP*
+0_0101
+Ping (Deprecated)
+Deprecated
+See Section 6.3.5.
+SOP only
+0_0110
+PS_RDY
+Source or Sink
+See Section 6.3.6.
+SOP only
+0_0111
+Get_Source_Cap
+Sink or DRP
+See Section 6.3.7.
+SOP only
+0_1000
+Get_Sink_Cap
+Source or DRP
+See Section 6.3.8.
+SOP only
+0_1001
+DR_Swap
+Source or Sink 
+See Section 6.3.9.
+SOP only
+0_1010
+PR_Swap
+Source or Sink
+See Section 6.3.10.
+SOP only
+0_1011
+VCONN_Swap
+Source or Sink
+See Section 6.3.11.
+SOP only
+0_1100
+Wait
+Source or Sink
+See Section 6.3.12.
+SOP only
+0_1101
+Soft_Reset
+Source or Sink
+See Section 6.3.13.
+SOP*
+0_1110
+Data_Reset
+Source or Sink
+See Section 6.3.14.
+SOP only
+0_1111
+Data_Reset_Complete
+Source or Sink
+See Section 6.3.15.
+SOP only
+1_0000
+Not_Supported
+Source, Sink or Cable Plug
+See Section 6.3.16.
+SOP*
+1_0001
+Get_Source_Cap_Extended
+Sink or DRP
+See Section 6.3.17.
+SOP only
+1_0010
+Get_Status
+Source or Sink
+See Section 6.3.18.
+SOP*
+1_0011
+FR_Swap
+Sink1
+See Section 6.3.19.
+SOP only
+1_0100
+Get_PPS_Status
+Sink
+See Section 6.3.20.
+SOP only
+1_0101
+Get_Country_Codes
+Source or Sink
+See Section 6.3.21.
+SOP only
+1_0110
+Get_Sink_Cap_Extended
+Source or DRP
+See Section 6.3.22.
+SOP only
+1_0111
+Get_Source_Info
+Sink or DRP
+See Section 6.3.23.
+SOP Only
+1_1000
+Get_Revision
+Source or Sink
+See Section 6.3.24.
+SOP*
+1_1001…
+1_1111
+Reserved
+N/A
+All values not explicitly 
+defined are Reserved and 
+Shall Not be used.
+1)
+In this case the Port is providing vSafe5V however it will have Rd asserted rather than Rp and sets the Port Power 
+Role field to Sink, until the Fast Role Swap AMS has completed.

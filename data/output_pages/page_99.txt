@@ -1,0 +1,30 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 99
+The received signal is composed of a waveform compliant to the Tx mask plus the maximum value of vNoiseActive 
+plus vIRDropGNDC where the vIRDropGNDC value transitions between the minimum and the maximum values as 
+allowed in this spec. 
+The vertical dimension of the Rx inner mask for sinking power is derived by reducing the vertical dimension of the 
+Tx inner mask by vNoiseActive max and vIRDropGNDC max for account for both cable noise coupling and signal 
+DC offset. The received signal is composed of a waveform compliant to the Tx mask plus the maximum value of 
+vNoiseActive plus vIRDropGNDC where the vIRDropGNDC value transitions between the minimum and the 
+maximum values as allowed in this spec. 
+The center line of the Rx inner mask, Y3Rx, is at half of the nominal vSwing for power neutral, and is shifted up by 
+half of vIRDropGNDC max for sourcing power and is shifted down by half of vIRDropGNDC max for sinking power.
+The receiver sensitivity Shall be set such that the receiver does not treat noise on an undriven signal path as an 
+incoming signal. Signal amplitudes below vNoiseIdle max Shall be treated as noise when BMC is Idle.
+Figure 5.17 BMC Rx 'ONE' Mask when Sourcing Power
+Y5
+Y4
+Y3
+Y2
+Y1
+X1
+X2
+X3
+X4
+X5
+X6
+X7
+X8
+0.5UI
+1UI

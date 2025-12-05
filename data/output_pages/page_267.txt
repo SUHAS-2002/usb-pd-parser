@@ -1,0 +1,50 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 267
+6.7.7
+  Counter Values and Counters
+Table 6.70, "Counter Parameters" lists the counters used in this section and Table 6.71, "Counters" shows the 
+corresponding parameters.
+Table 6.70  Counter Parameters
+Parameter
+Value
+Reference
+nBusyCount
+5
+Section 6.7.6
+nCapsCount
+50
+Section 6.7.4
+nDiscoverIdentityCount
+20
+Section 6.7.5
+nHardResetCount
+2
+Section 6.7.3
+nMessageIDCount
+7
+Section 6.7.1
+nRetryCount
+2
+Section 6.7.2
+Table 6.71  Counters
+Counter
+Max
+Reference
+CapsCounter
+nCapsCount
+Section 6.7.4
+DiscoverIdentityCounter
+nDiscoverIdentityCount
+Section 6.7.5
+HardResetCounter
+nHardResetCount
+Section 6.7.3
+MessageIDCounter
+nMessageIDCount
+Section 6.7.1
+RetryCounter
+nRetryCount
+Section 6.7.2
+VDMBusyCounter
+nBusyCount
+Section 6.7.6

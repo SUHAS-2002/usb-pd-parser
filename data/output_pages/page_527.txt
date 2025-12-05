@@ -1,0 +1,35 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 527
+32
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Data_Reset_Complete Message information to the 
+Policy Engine that consumes it.
+The Policy Engine informs the DPM that a 
+Data_Reset_Complete Message has been received.
+33
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+34
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+PHY Layer receives the GoodCRC and checks the CRC to 
+verify the Message.
+35
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+36
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Data_Reset_Complete Message was successfully sent.
+The Policy Engine informs the DPM that the 
+Data_Reset_Complete Message was successfully sent.
+The reset is complete as defined in Section 6.3.14, "Data_Reset Message" Step 5. Port Partners re-establish a USB data 
+connection.
+Table 8.56  Steps for a DFP Receiving a Data Reset where the UFP is the VCONN Source
+Step
+UFP/VCONN Source (Reset Initiator)
+DFP (Reset Responder)

@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 775
+8.3.2.14.4
+  Enter/Exit Mode
+8.3.2.14.4.1
+  DFP to UFP Enter Mode
+Figure 8.111, "DFP to UFP Enter Mode" shows an example sequence between a DFP and a UFP that occurs after the 
+DFP has discovered supported SVIDs and Modes at which point it selects and enters a Mode.
+Figure 8.111 DFP to UFP Enter Mode
+: DFP Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: UFP Policy Engine
+DFP
+UFP
+Supported SVIDS/Modes discovered
+Enter USB Safe State
+37: Send Enter Mode
+38: Enter Mode
+39: Enter Mode + CRC
+40: Enter Mode
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+41: Enter Mode received
+42: GoodCRC
+43: GoodCRC + CRC
+44: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+45: Enter Mode sent
+Start VDMModeEntryTimer
+46: Send Enter Mode ACK
+47: Enter Mode ACK
+48: Enter Mode ACK + CRC
+49: Enter Mode ACK
+Check MessageID against local copy
+Store copy of MessageID
+50: Enter Mode ACK received
+Stop VDMModeEntryTimer
+Enter New Mode
+51: GoodCRC
+52: GoodCRC + CRC
+53: GoodCRC
+54: Enter Mode ACK sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+USB Operation
+USB Operation
+Evaluate Enter Mode request
+Enter New Mode
+New Mode Entered

@@ -1,0 +1,39 @@
+Page 876
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.14.3
+  Get Country Information State Diagram
+Figure 8.162, "Get Country Information State Diagram" shows the state diagram for a Source or Sink on receiving a 
+request from the Device Policy Manager to get the Port Partner or Cable Plug's Country Information. See also Section 
+6.5.12, "Country_Info Message".
+Figure 8.162 Get Country Information State Diagram
+8.3.3.14.3.1
+  PE_Get_Country_Info State
+The Policy Engine Shall transition to the PE_Get_Country_Info state, from either the PE_SRC_Ready or 
+PE_SNK_Ready state, due to a request to get the remote Manufacturer Information from the Device Policy Manager. 
+On entry to the PE_Get_Country_Info state the Policy Engine Shall send a Get_Manufacturer_Info Message and 
+initialize and run the SenderResponseTimer.
+On exit from the PE_Get_Country_Info state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (country information or response timeout).
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready state as appropriate (see 
+Figure 8.132, "Source Port State Diagram" and Figure 8.133, "Sink Port State Diagram") when:
+
+A Country_Info Message is received
+
+Or SenderResponseTimer times out.
+get country information
+request 
+from Device Policy Manager
+Country_Info
+Message received |
+SenderResponseTimer
+Timeout
+PE_SRC_Ready or
+PE_SNK_Ready
+PE_Get_Country_Info
+Actions on entry:
+Send Get_Country_Info Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+Actions on exit:
+Pass Country Information/outcome to Device Policy Manager

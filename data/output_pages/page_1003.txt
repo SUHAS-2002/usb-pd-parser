@@ -1,0 +1,57 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1003
+10.2.2.2
+  SPR Adjustable Voltage Supply (AVS)
+For SPR AVS, Figure 10.3, "Valid SPR AVS Operating Region for a Source advertising in the range of 27W < PDP ≤ 45W", 
+Figure 10.4, "Valid SPR AVS Operating Region for a Source advertising in the range of 45W < PDP ≤ 60W" and Figure 
+10.5, "Valid SPR AVS Operating Region for a Source advertising in the range of 60W < PDP ≤ 100W" illustrate the valid 
+operating region for SPR AVS RDO requests in the ranges of 27W < PDP ≤ 45W, 45W < PDP ≤ 60W and 60W < PDP ≤ 
+100W, respectively.
+Figure 10.3 Valid SPR AVS Operating Region for a Source advertising in the range of 27W < PDP ≤ 45W
+Figure 10.4 Valid SPR AVS Operating Region for a Source advertising in the range of 45W < PDP ≤ 60W
+0
+1
+2
+3
+4
+5
+6
+0
+15
+30
+45
+60
+RDO Current (A)
+RDO Voltage (V)
+Invalid Requests
+(Crosshatched Area)
+Valid Operating Region
+for SPR AVS Sink Requests
+for 27W < PDP �����
+Valid RDO Requests
+20V  
+9V
+15V Fixed PDO Max Current
+15V  
+0
+1
+2
+3
+4
+5
+6
+30
+RDO Current (A)
+RDO Voltage (V)
+Invalid Requests
+(Crosshatched Area)
+Valid Operating Region
+for SPR AVS Sink Requests
+for 27W < PDP �����
+Valid RDO Requests
+20V  
+9V
+15V Fixed PDO Max Current  
+15V  
+20V Fixed PDO Max Current
+(Minimum of 3A)

@@ -1,0 +1,116 @@
+Page 278
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 6.60 Chunked Rx State Diagram
+6.12.2.1.2.1
+  RCH_Wait_For_Message_From_Protocol_Layer State
+The Chunked Rx State Machine Shall enter the RCH_Wait_For_Message_From_Protocol_Layer state:
+
+At startup.
+
+As a result of a Soft Reset occurring.
+
+On exit from a Hard Reset. 
+On entry to the RCH_Wait_For_Message_From_Protocol_Layer state the Chunked Rx state machine clears the 
+Extended Rx Buffer and clears the Optional Abort Flag.
+In the RCH_Wait_For_Message_From_Protocol_Layer state the Chunked Rx state machine waits until the Chunked 
+Message Router passes up a received Message.
+The Chunked Rx State Machine Shall transition to the RCH_Pass_Up_Message state when:
+
+A non-Extended Message is passed up from the Chunked Message Router.
+
+An Extended Message is passed up from the Chunked Message Router, and the Policy Engine has 
+determined that we are not doing Chunking, and the Message has its Chunked bit set to 0b.
+The Chunked Rx State Machine Shall transition to the RCH_Processing_Extended_Message state when:
+
+An Extended Message is passed up from the Chunked Message Router, and the Policy Engine has 
+determined that we are doing Chunking, and the Message has its Chunked bit set to 1b.
+6.12.2.1.2.2
+  RCH_Pass_Up_Message State
+On entry to the RCH_Pass_Up_Message state the Chunked Rx state machine Shall pass the received Message to the 
+Policy Engine.
+The Chunked Rx State Machine Shall transition to the RCH_Wait_For_Message_From_Protocol_Layer state when:
+
+The Message has been passed.
+Transmission Error 
+from Protocol Layer |
+ Message Received 
+from Protocol Layer
+Other Message Received
+ from Protocol Layer |
+ ChunkSenderResponseTimer timeout
+RCH_Pass_Up_Message
+Actions on entry:
+Pass Message to Policy Engine
+RCH_Wait_For_Message_From_Protocol_Layer
+Actions on entry:
+Clear Extended Rx Buffer
+Clear Abort Flag
+RCH_Report_Error
+Actions on entry:
+Report Error to Policy Engine.
+If a Message was received, pass it to 
+the Policy Engine.
+RCH_Processing_
+Extended_Message
+Actions on entry:
+If first chunk: set 
+Chunk_Number_Expected = 0 and 
+Num bytes received = 0
+If expected Chunk Number: Append 
+data to Extended_Message_Buffer; 
+Increment Chunk_Number_Expected 
+and adjust Num bytes received.
+RCH_Requesting_Chunk
+Actions on entry:
+Send notification SRT_Stop to 
+SenderResponseTimer State 
+Machine.
+Send Chunk Request to Protocol 
+Layer with Chunk Number = 
+Chunk_Number_Expected.
+RCH_Waiting_Chunk
+Actions on entry:
+Start ChunkSenderResponseTimer3
+Send notification SRT_Start to 
+SenderResponseTimer State 
+Machine.3
+Start
+Message 
+not 
+Complete
+Message 
+Transmitted 
+received from 
+Protocol Layer
+Unexpected 
+Chunk Number
+Reported
+Chunked != 
+Chunking1
+Received Non-Extended Message |
+(Received Extended Message &
+ (Chunking1 = 0 & Chunked = 0) )
+Message is Complete
+ (Num bytes received
+ >= specified Data Size)2
+Message Passed
+Chunk Response Received 
+from Protocol Layer
+Received
+Extended Message &
+ (Chunking1 = 1 &
+ Chunked = 1)
+Any Message Received and 
+not in state RCH_Waiting_Chunk
+or RCH_Wait_For_Message_From_
+Protocol_Layer
+Abort Flag Set
+Soft Reset occured |
+Exit from Hard Reset
+1)
+Chunking is an internal state that is set to 1 if the ‘Unchunked Extended Messages Supported’ bit in either Source Capabilities or Request is 0.  It defaults to 1 and is set after the 
+first exchange of Source Capabilities and Request.  It is also set to 1 for SOP’ or SOP’’ communication.
+2)
+Additional bytes received over specified Data Size will be because of padding in the last chunk.
+3)
+This state is responsible for starting two timers of similar length.  The implementor Should mitigate against more than one of these timers resulting in recovery action.

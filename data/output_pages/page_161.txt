@@ -1,0 +1,57 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 161
+6.4.3.3
+  BIST Shared Capacity Test Mode
+A Shared Capacity Group of Ports share a common power source that is not capable of simultaneously powering all 
+the ports to their full Source Capabilities (see [USB Type-C 2.4]). The BIST Shared Capacity Test Mode Shall only be 
+implemented by ports in a Shared Capacity Group.
+The UUT Shared Capacity Group of Ports Shall contain one or more Ports, designated as Master Ports, that 
+recognize both the BIST Shared Test Mode Entry BIST Data Object and the BIST Shared Test Mode Exit BIST Data 
+Object.
+6.4.3.3.1
+  BIST Shared Test Mode Entry
+When any master Port in a Shared Capacity Group receives a BIST Message with a BIST Shared Test Mode Entry 
+BIST Data Object, while in the PE_SRC_Ready State, the UUT Shall enter a compliance test mode where the 
+maximum Source Capabilities are always offered on every Port, regardless of the availability of shared power i.e., 
+all shared power management is disabled. 
+Ports in the Shared Capacity Group that are not Master Ports Shall Not enter compliance mode on receiving the 
+BIST Shared Test Mode Entry BIST Data Object.
+Upon receipt of a BIST Message, with a BIST Shared Test Mode Entry BIST Data Object, the UUT Shall return a 
+GoodCRC Message and Shall enter the BIST Shared Capacity Test Mode. 
+On entering this mode, the UUT Shall send a new Source_Capabilities Message from each Port in the Shared 
+Capacity Group within tBISTSharedTestMode. The Tester will not exceed the shared capacity during this mode.
+6.4.3.3.2
+  BIST Shared Test Mode Exit
+Upon receipt of a BIST Message, with a BIST Shared Test Mode Exit BIST Data Object, the UUT Shall return a 
+GoodCRC Message and Shall exit the BIST Shared Capacity Test Mode. If any other Message, aside from a BIST 
+Message, with a BIST Shared Test Mode Exit BIST Data Object, is received while in BIST Shared Capacity Test Mode 
+this Shall Not cause the UUT to exit the BIST Shared Capacity Test Mode
+On exiting the mode, the UUT May send a new Source_Capabilities Message to each Port in the Shared Capacity 
+Group or the UUT May perform ErrorRecovery on each Port. 
+Ports in the Shared Capacity Group that are not Master Ports Shall Not exit compliance mode on receiving the BIST 
+Shared Test Mode Entry BIST Data Object.
+Ports in the Shared Capacity Group that are not Master Ports Should Not exit compliance mode on receiving the 
+BIST Shared Test Mode Exit BIST Data Object.
+
+The UUT Shall exit BIST Shared Capacity Test Mode when It is powered off.
+
+The UUT Shall remain in BIST Shared Capacity Test Mode for any PD event (except when a BIST Shared 
+Test Mode Exit BIST Data Object, is received); specifically the UUT Shall remain in BIST Shared Capacity 
+Test Mode when any of the following PD events occurs: 
+
+Hard Reset
+
+Cable Reset
+
+Soft Reset
+
+Data Role Swap
+
+Power Role Swap
+
+Fast Role Swap
+
+VCONN Swap.
+
+The UUT May leave BIST Shared Capacity Test Mode if the Tester makes a request that exceeds the 
+Capabilities of the UUT.

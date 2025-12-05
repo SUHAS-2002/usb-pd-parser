@@ -1,0 +1,85 @@
+Page 408
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+tSrcTransient
+The maximum time for 
+the Source output 
+voltage to be between 
+vSrcNew and 
+vSrcValid in response 
+to a load transient 
+when target load is 
+greater or equal to 
+than 60mA.
+5
+ms
+Section 7.1.8
+The maximum time for 
+the Source output 
+voltage to be between 
+vSrcNew and 
+vSrcValid in response 
+to a load transient 
+when target load is less 
+than 60mA.
+150
+ms
+Section 7.1.8
+tSrcTransition
+The time the Source 
+Shall wait before 
+transitioning the 
+power supply to 
+ensure that the Sink 
+has sufficient time to 
+prepare (does not 
+apply to transitions 
+within the same PPS or 
+AVS APDO).
+25
+35
+ms
+Section 7.3
+tSrcTransOff
+SPR 
+Mode
+Time from the last bit 
+of the GoodCRC 
+Message 
+acknowledging the 
+Accept Message in 
+response to the 
+PR_Swap Message 
+until the PS_RDY 
+Message must be 
+started.
+Applies only to SPR 
+Mode voltage 
+transitions.
+690
+ms
+Section 7.3.2
+tSrcTransOn
+Time from the last bit 
+of the GoodCRC 
+Message 
+acknowledging the 
+PS_RDY Message sent 
+by the new Source, in 
+response to the 
+PR_Swap Message 
+until the PS_RDY 
+Message must be 
+started.
+280
+ms
+Section 7.3.2
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

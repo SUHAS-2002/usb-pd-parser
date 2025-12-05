@@ -1,0 +1,128 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 215
+6.5
+  Extended Message
+An Extended Message Shall contain an Extended Message Header (indicated by the Extended field in the Message 
+Header being set) and be followed by zero or more data bytes. Additional bytes that might be added to existing 
+Messages in future Revision of this specification Shall be Ignored.
+The format of the Extended Message is defined by the Message Header's Message Type field and is summarized in 
+Table 6.53, "Extended Message Types". The Sent by column indicates entities which May send the given Message 
+(Source, Sink or Cable Plug); entities not listed Shall Not issue the corresponding Message. The "Valid Start of 
+Packet" column indicates the Messages which Shall only be issued in SOP Packets and the Messages which May be 
+issued in SOP* Packets.
+Table 6.53  Extended Message Types
+Bits 
+4…0
+Type
+Sent by
+Description
+Valid 
+Start of 
+Packet
+0 0000
+Reserved
+All values not explicitly defined are 
+Reserved and Shall Not be used.
+0 0001
+Source_Capabilities_Extended
+Source or Dual-Role Power
+See Section 6.5.1
+SOP only
+0 0010
+Status
+Source, Sink or Cable Plug
+See Section 6.5.2
+SOP*
+0 0011
+Get_Battery_Cap
+Source or Sink
+See Section 6.5.3
+SOP only
+0 0100
+Get_Battery_Status
+Source or Sink
+See Section 6.5.4
+0 0101
+Battery_Capabilities
+Source or Sink
+See Section 6.5.5
+SOP only
+0 0110
+Get_Manufacturer_Info
+Source or Sink
+See Section 6.5.6
+SOP*
+0 0111
+Manufacturer_Info
+Source, Sink or Cable Plug
+See Section 6.5.7
+SOP*
+0 1000
+Security_Request
+Source or Sink
+See Section 6.5.8.1
+SOP*
+0 1001
+Security_Response
+Source, Sink or Cable Plug
+See Section 6.5.8.2
+SOP*
+0 1010
+Firmware_Update_Request
+Source or Sink
+See Section 6.5.9.1
+SOP*
+0 1011
+Firmware_Update_Response
+Source, Sink or Cable Plug
+See Section 6.5.9.2
+SOP*
+0 1100
+PPS_Status
+Source
+See Section 6.5.10
+SOP only
+0 1101
+Country_Info
+Source or Sink
+See Section 6.5.12
+SOP only
+0 1110
+Country_Codes
+Source or Sink
+See Section 6.5.11
+SOP only
+0 1111
+Sink_Capabilities_Extended
+Sink or Dual-Role Power
+See Section 6.5.13
+SOP only
+1 0000
+Extended_Control
+Source or Sink
+See Section 6.5.14
+SOP only
+1 0001
+EPR_Source_Capabilities
+Source or Dual-Role Power
+See Section 6.5.15.2
+SOP only
+1 0010
+EPR_Sink_Capabilities
+Sink or Dual-Role Power
+See Section 6.5.15.3
+SOP only
+1 0011...
+1 1101
+Reserved
+All values not explicitly defined are 
+Reserved and Shall Not be used.
+1 1110
+Vendor_Defined_Extended
+Source, Sink or Cable Plug
+See Section 6.5.16
+SOP*
+1 1111
+Reserved
+All values not explicitly defined are 
+Reserved and Shall Not be used.

@@ -1,0 +1,23 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 67
+Figure 2.3 USB Power Delivery Communications Stack
+Additionally, USB Power Delivery devices which can operate as USB devices can communicate over USB (see Figure 
+2.4, "USB Power Delivery Communication Over USB"). An Optional System Policy Manager (see Chapter 9 and [UCSI]) 
+that resides in the USB Host communicates with the PDUSB Device over USB, via the root Port and potentially 
+manages the individual Port to Port connections over a tree of USB Hubs. The Device Policy Manager interacts with 
+the USB interface in each device to provide and update PD related information in the USB domain. 
+Note:
+A PD device is not required to have a USB device interface.
+Protocol
+Policy Engine
+Device Policy 
+Manager
+CC
+Physical Layer
+Physical Layer
+Protocol
+Policy Engine
+Device Policy 
+Manager
+Provider
+Consumer

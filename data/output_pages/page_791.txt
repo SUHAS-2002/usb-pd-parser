@@ -1,0 +1,18 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 791
+8.3.2.15.2
+  BIST Test Data Mode
+The following is an example of a BIST Test Data Mode test between a Tester and a UUT. When the UUT is connected 
+to the Tester the sequence below is executed. 
+Figure 8.117, "BIST Test Data Test" shows the Messages as they flow across the bus and within the devices.
+1)
+Connection is established and stable.
+2)
+Tester sends a BIST Message with a BIST Test Data BIST Data Object.
+3)
+UUT answers with a GoodCRC Message.
+4)
+Steps 2and 3 are repeated any number of times.
+5)
+The test ends after Hard Reset Signaling is issued.
+See also Section 5.9.2, "BIST Test Data Mode" and Section 6.4.3.2, "BIST Test Data Mode".

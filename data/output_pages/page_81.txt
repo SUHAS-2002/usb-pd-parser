@@ -1,0 +1,47 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 81
+5.4
+  Ordered Sets
+Ordered sets Shall be interpreted according to Figure 5.1, "Interpretation of ordered sets".
+An ordered set consists of 4 K-codes sent as shown in Figure 5.1, "Interpretation of ordered sets".
+Figure 5.1 Interpretation of ordered sets
+A list of the ordered sets used by USB Power Delivery can be seen in Table 5.2, "Ordered Sets". SOP* is a generic term 
+used in place of SOP/SOP’/SOP’’.
+The receiver Shall search for all four K-codes. When the receiver finds all four K-codes in the correct place, it Shall 
+interpret this as a Valid ordered set. When the receiver finds three out of four K-codes in the correct place, it May 
+Table 5.2  Ordered Sets
+Ordered Set
+Reference
+Cable Reset
+Section 5.6.5, "Cable Reset" 
+Hard Reset
+Section 5.6.4, "Hard Reset" 
+SOP
+Section 5.6.1.2.1, "Start of Packet Sequence (SOP)"
+SOP’
+Section 5.6.1.2.2, "Start of Packet Sequence Prime (SOP')"
+SOP’_Debug
+Section 5.6.1.2.4, "Start of Packet Sequence Prime Debug (SOP'_Debug)"
+SOP’’
+Section 5.6.1.2.3, "Start of Packet Sequence Double Prime (SOP'')"
+SOP’’_Debug
+Section 5.6.1.2.5, "Start of Packet Sequence Double Prime Debug (SOP''_Debug)"
+K-code 4
+K-code 3
+K-code 2
+K-code 1
+Transmit last
+Transmit first
+Transmit last
+Transmit first
+b4     b0
+BIT
+4
+BIT
+3
+BIT
+2
+BIT
+1
+BIT
+0

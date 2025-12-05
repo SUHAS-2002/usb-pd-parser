@@ -1,0 +1,76 @@
+Page 970
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+UFP to DFP Data Role Swap
+PE_DRS_UFP_DFP_Evaluate_Swap
+Section 8.3.3.19.2.2
+PE_DRS_UFP_DFP_Accept_Swap
+Section 8.3.3.19.2.3
+PE_DRS_UFP_DFP_Change_to_DFP
+Section 8.3.3.19.2.4
+PE_DRS_UFP_DFP_Send_Swap
+Section 8.3.3.19.2.5
+PE_DRS_UFP_DFP_Reject_Swap
+Section 8.3.3.19.2.6
+Source to Sink Power Role Swap
+PE_PRS_SRC_SNK_Evaluate_Swap
+Section 8.3.3.19.3.2
+PE_PRS_SRC_SNK_Accept_Swap
+Section 8.3.3.19.3.3
+PE_PRS_SRC_SNK_Transition_to_off
+Section 8.3.3.19.3.4
+PE_PRS_SRC_SNK_Assert_Rd
+Section 8.3.3.19.3.5
+PE_PRS_SRC_SNK_Wait_Source_on
+Section 8.3.3.19.3.6
+PE_PRS_SRC_SNK_Send_Swap
+Section 8.3.3.19.3.7
+PE_PRS_SRC_SNK_Reject_Swap
+Section 8.3.3.19.3.8
+Sink to Source Power Role Swap
+PE_PRS_SNK_SRC_Evaluate_Swap
+Section 8.3.3.19.4.2
+PE_PRS_SNK_SRC_Accept_Swap
+Section 8.3.3.19.4.3
+PE_PRS_SNK_SRC_Transition_to_off
+Section 8.3.3.19.4.4
+PE_PRS_SNK_SRC_Assert_Rp
+Section 8.3.3.19.4.5
+PE_PRS_SNK_SRC_Source_on
+Section 8.3.3.19.4.6
+PE_PRS_SNK_SRC_Send_Swap
+Section 8.3.3.19.4.7
+PE_PRS_SNK_SRC_Reject_Swap
+Section 8.3.3.19.4.8
+Source to Sink Fast Role Swap
+PE_FRS_SRC_SNK_Evaluate_Swap
+Section 8.3.3.19.5.2
+PE_FRS_SRC_SNK_Accept_Swap
+Section 8.3.3.19.5.3
+PE_FRS_SRC_SNK_Transition_to_off
+Section 8.3.3.19.5.4
+PE_FRS_SRC_SNK_Assert_Rd
+Section 8.3.3.19.5.5
+PE_FRS_SRC_SNK_Wait_Source_on
+Section 8.3.3.19.5.6
+Sink to Source Fast Role Swap
+PE_FRS_SNK_SRC_Start_AMS
+Section 8.3.3.19.6.1
+PE_FRS_SNK_SRC_Send_Swap
+Section 8.3.3.19.6.2
+PE_FRS_SNK_SRC_Transition_to_off
+Section 8.3.3.19.6.3
+PE_FRS_SNK_SRC_VBUS_Applied
+Section 8.3.3.19.6.4
+PE_FRS_SNK_SRC_Assert_Rp
+Section 8.3.3.19.6.5
+PE_FRS_SNK_SRC_Source_on
+Section 8.3.3.19.6.6
+Dual-Role Source Port Get Source Capabilities
+PE_DR_SRC_Get_Source_Cap
+Section 8.3.3.19.7.1
+Dual-Role Source Port Give Sink Capabilities
+PE_DR_SRC_Give_Sink_Cap
+Section 8.3.3.19.8.1
+Table 8.154  Policy Engine States
+State name
+Reference

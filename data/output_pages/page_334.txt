@@ -1,0 +1,30 @@
+Page 334
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.1.15.2
+   DFP VCONN Power Cycle
+The Data Reset process requires the DFP to be the VCONN Source by the end of the process. In the case where the 
+DFP is the VCONN Source, the following steps Shall be followed:
+1)
+If the DFP sent the Data_Reset Message and is sourcing VCONN then it Shall turn off VCONN and ensure it 
+is below vRaReconnect (see [USB Type-C 2.4]) within tVCONNZero of the last bit of the GoodCRC 
+Message acknowledging the Accept Message in response to the Data_Reset Message.
+2)
+If the UFP sent the Data_Reset Message then the DFP Shall turn off VCONN and ensure it is below 
+vRaReconnect (see [USB Type-C 2.4]) within tVCONNZero following the last bit of the GoodCRC Message 
+acknowledging the Accept Message in response to the Data_Reset Message.
+3)
+When VCONN is below vRaReconnect, the DFP Shall wait tVCONNReapplied before sourcing VCONN.
+4)
+The DFP Shall ensure VCONN is within vVCONNValid (see [USB Type-C 2.4]) within tVCONNValid.
+Figure 7.20, "Data Reset DFP VCONN Power Cycle" below illustrates the DFP VCONN Power Cycle process.
+Figure 7.20 Data Reset DFP VCONN Power Cycle
+0V
+Accept
+(DFP/UFP) 
+vVCONNValid
+vRaReconnect
+tVCONNZero
+tVCONNValid
+tVCONNReapplied
+UFP
+DFP

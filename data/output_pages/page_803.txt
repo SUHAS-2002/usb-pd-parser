@@ -1,0 +1,12 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 803
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Reject Message was successfully sent.
+Port Partners do not enter [USB4] operation.
+Table 8.147  Steps for UFP USB4 Mode Entry (Reject)
+Step
+DFP
+UFP

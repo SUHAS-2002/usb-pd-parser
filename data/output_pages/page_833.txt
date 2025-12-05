@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 833
+
+The PSHardResetTimer times out.
+8.3.3.2.11
+  PE_SRC_Transition_to_default State
+On entry to the PE_SRC_Transition_to_default state the Policy Engine Shall:
+
+indicate to the Device Policy Manager that the power supply Shall Hard Reset (see Section 7.1.5, 
+"Response to Hard Resets").
+
+request a reset of the local hardware 
+
+request the Device Policy Manager to set the Port Data Role to DFP and turn off VCONN.
+On exit from the PE_SRC_Transition_to_default state the Policy Engine Shall:
+
+request the Device Policy Manager to turn on VCONN
+
+inform the Protocol Layer that the Hard Reset is complete.
+The Policy Engine Shall transition to the PE_SRC_Startup state when:
+
+The Device Policy Manager indicates that the power supply has reached the default level.
+8.3.3.2.12
+  PE_SRC_Get_Sink_Cap State
+In this state the Policy Engine, due to a request from the Device Policy Manager, Shall request the capabilities from 
+the Attached Sink.
+On entry to the PE_SRC_Get_Sink_Cap state the Policy Engine Shall request the Protocol Layer to send a 
+Get_Sink_Cap Message in order to retrieve the Sink Capabilities. The Policy Engine Shall send:
+
+A Get_Sink_Cap Message when the Device Policy Manager requests SPR capabilities or
+
+An EPR_Get_Sink_Cap Message when the Device Policy Manager requests EPR Capabilities.
+The Policy Engine Shall then start the SenderResponseTimer.
+On exit from the PE_SRC_Get_Sink_Cap state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (capabilities or response timeout).
+The Policy Engine Shall transition to the PE_SRC_Ready state when:
+
+SPR Sink Capabilities were requested and a Sink_Capabilities Message is received or
+
+EPR Sink Capabilities were requested and an EPR_Sink_Capabilities Message is received or
+
+The SenderResponseTimer times out.
+8.3.3.2.13
+  PE_SRC_Wait_New_Capabilities State
+In this state the Policy Engine has been unable to Negotiate an Explicit Contract and is waiting for new Capabilities 
+from the Device Policy Manager.
+The Policy Engine Shall transition to the PE_SRC_Send_Capabilities state when:
+
+The Device Policy Manager indicates that Source Capabilities have changed.
+8.3.3.2.14
+  PE_SRC_EPR_Keep_Alive State
+On entry to the PE_SRC_EPR_Keep_Alive State the Policy Engine Shall send a EPR_KeepAlive_Ack Message.
+The Policy Engine Shall transition to the PE_SRC_Ready state when:
+
+The EPR_KeepAlive_Ack Message has been sent.

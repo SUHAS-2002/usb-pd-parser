@@ -1,0 +1,39 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 319
+Figure 7.7 SPR PPS Constant Power
+Current
+Voltage
+Nominal limits as pr. the APDO
+Guaranteed operating capability as pr. the APDO
+Tolerance area for actual voltages (only static tolerances are shown)
+vPpsNew  
+PDP constant power 
+curve
+Max APDO Voltage
+Capabilities when the Power Limited bit is set
+The figure shows only the steady state after the transition
+vPpsNew  
+0A
+0V
+iPpsCLNew  
+(X = PPS APDO Max Current, Y =  Prog Voltage)
+Coordinate applies when PPS Power Limited is set
+Example:
+• PDP = 27 W
+• Prog Voltage = 9V
+• PPS APDO Max Current = 3 A
+Coordinate = (3, 9)  
+vPpsNew  
+Min APDO Voltage
+vPpsNew  
+iPpsCLMin(1A)
+Min Current Limit
+PPS APDO
+Max Current
+Valid Current Limit Range
+(X = PDP/PPS APDO Max Current, Y =  PPS APDO Max Voltage)
+Coordinate applies when PPS Power Limited is set
+Example:
+• PDP = 27 W
+• PPS APDO Max Voltage = 11 V
+Coordinate = (2.45, 11)

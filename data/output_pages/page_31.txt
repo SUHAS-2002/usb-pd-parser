@@ -1,0 +1,116 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 31
+Table 8.66
+Steps for a Successful Fast Role Swap Sequence ....................................................................................561
+Table 8.67
+Steps for Data Role Swap, UFP operating as Sink initiates.................................................................565
+Table 8.68
+Steps for Rejected Data Role Swap, UFP operating as Sink initiates..............................................568
+Table 8.69
+Steps for Data Role Swap with Wait, UFP operating as Sink initiates ...........................................571
+Table 8.70
+Steps for Data Role Swap, UFP operating as Source initiates............................................................574
+Table 8.71
+Steps for Rejected Data Role Swap, UFP operating as Source initiates.........................................577
+Table 8.72
+Steps for Data Role Swap with Wait, UFP operating as Source initiates......................................580
+Table 8.73
+Steps for Data Role Swap, DFP operating as Source initiates............................................................583
+Table 8.74
+Steps for Rejected Data Role Swap, DFP operating as Source initiates ........................................586
+Table 8.75
+Steps for Data Role Swap with Wait, DFP operating as Source initiates......................................589
+Table 8.76
+Steps for Data Role Swap, DFP operating as Sink initiates.................................................................592
+Table 8.77
+Steps for Rejected Data Role Swap, DFP operating as Sink initiates..............................................595
+Table 8.78
+Steps for Data Role Swap with Wait, DFP operating as Sink initiates ...........................................598
+Table 8.79
+Steps for Source to Sink VCONN Source Swap ...........................................................................................601
+Table 8.80
+Steps for Rejected VCONN Source Swap.......................................................................................................604
+Table 8.81
+Steps for VCONN Source Swap with Wait.....................................................................................................607
+Table 8.82
+Steps for VCONN Source Swap, Initiated by non-VCONN Source.........................................................610
+Table 8.83
+Steps for Rejected VCONN Source Swap, Initiated by non-VCONN Source......................................613
+Table 8.84
+Steps for VCONN Source Swap with Wait.....................................................................................................616
+Table 8.85
+Steps for Source Alert to Sink..........................................................................................................................619
+Table 8.86
+Steps for Sink Alert to Source..........................................................................................................................621
+Table 8.87
+Steps for a Sink getting Source Status Sequence.....................................................................................623
+Table 8.88
+Steps for a Source getting Sink Status Sequence.....................................................................................626
+Table 8.89
+Steps for a VCONN Source getting Cable Plug Status Sequence..........................................................629
+Table 8.90
+Steps for a Sink getting Source PPS status Sequence............................................................................632
+Table 8.91
+Steps for a Sink getting Source Capabilities Sequence.........................................................................635
+Table 8.92
+Steps for a Dual-Role Source getting Dual-Role Sink's capabilities as a Source Sequence...638
+Table 8.93
+Steps for a Source getting Sink Capabilities Sequence.........................................................................641
+Table 8.94
+Steps for a Dual-Role Sink getting Dual-Role Source capabilities as a Sink Sequence ...........644
+Table 8.95
+Steps for a Sink getting EPR Source Capabilities Sequence ...............................................................647
+Table 8.96
+Steps for a Dual-Role Source getting Dual-Role Sink's capabilities as an EPR Source Se-
+quence .......................................................................................................................................................................650
+Table 8.97
+Steps for a Source getting Sink EPR Capabilities Sequence ...............................................................653
+Table 8.98
+Steps for a Dual-Role Sink getting Dual-Role Source Capabilities as an EPR Sink Sequence
+656
+Table 8.99
+Steps for a Sink getting Source Extended Capabilities Sequence ....................................................659
+Table 8.100
+Steps for a Dual-Role Source getting Dual-Role Sink Extended Capabilities Sequence.........662
+Table 8.101
+Steps for a Source getting Sink Extended Capabilities Sequence ....................................................665
+Table 8.102
+Steps for a Dual-Role Sink getting Dual-Role Source Extended Capabilities Sequence.........668
+Table 8.103
+Steps for a Sink getting Source Battery capabilities Sequence.........................................................671
+Table 8.104
+Steps for a Source getting Sink Battery capabilities Sequence.........................................................674
+Table 8.105
+Steps for a Sink getting Source Battery status Sequence ....................................................................677
+Table 8.106
+Steps for a Source getting Sink Battery status Sequence ....................................................................680
+Table 8.107
+Steps for a Source getting Sink's Port Manufacturer Information Sequence .............................683
+Table 8.108
+Steps for a Source getting Sink's Port Manufacturer Information Sequence .............................686
+Table 8.109
+Steps for a Source getting Sink's Battery Manufacturer Information Sequence.......................689
+Table 8.110
+Steps for a Source getting Sink's Battery Manufacturer Information Sequence.......................692
+Table 8.111
+Steps for a VCONN Source getting Sink's Port Manufacturer Information Sequence ...............695
+Table 8.112
+Steps for a Source getting Country Codes Sequence.............................................................................698
+Table 8.113
+Steps for a Source getting Sink's Country Codes Sequence................................................................701
+Table 8.114
+Steps for a VCONN Source getting Sink's Country Codes Sequence..................................................704
+Table 8.115
+Steps for a Source getting Country Information Sequence ................................................................707
+Table 8.116
+Steps for a Source getting Sink's Country Information Sequence...................................................710
+Table 8.117
+Steps for a VCONN Source getting Sink's Country Information Sequence.....................................713
+Table 8.118
+Steps for a Source getting Revision Information Sequence ...............................................................716
+Table 8.119
+Steps for a Source getting Sink's Revision Information Sequence..................................................719
+Table 8.120
+Steps for a VCONN Source getting Sink's Revision Information Sequence....................................722
+Table 8.121
+Steps for a Sink getting Source Information Sequence ........................................................................725

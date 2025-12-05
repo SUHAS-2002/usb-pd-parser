@@ -1,0 +1,74 @@
+Page 452
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.1.1.2
+  SPR Explicit Contract Negotiation (Reject)
+Figure 8.6, "Rejected Fixed, Variable or Battery SPR Power Negotiation" illustrates an example of a Message flow 
+where the request is rejected while negotiating an Explicit Contract in SPR Mode. The Negotiation goes through the 
+following phases:
+
+The Source sends out its power Capabilities in a Source_Capabilities Message.
+
+The Sink evaluates these Capabilities, and, in the request, phase selects one power level by sending a 
+Request Message.
+
+The Source evaluates the request and rejects the request with a Reject Message.
+Figure 8.6 Rejected Fixed, Variable or Battery SPR Power Negotiation
+: Source Policy Engine
+: Protocol
+1: Send Capabilities
+: PHY
+: PHY
+: Protocol
+: Sink Policy Engine
+2: Capabilities
+3: Capabilities + CRC
+4: Capabilities
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Capabilities received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9: Capabilities sent
+Start SenderResponseTimer
+10: Send Request
+11: Request
+12: Request + CRC
+13: Request
+Check MessageID against local copy
+Store copy of MessageID
+14: Request received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Request sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Start SenderResponseTimer
+19: Send Reject
+20: Reject
+21: Reject + CRC
+22: Reject
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+23: Reject received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+27: Reject sent
+Stop SenderResponseTimer
+Evaluate Capabilities
+Detect plug type
+Evaluate Request
+Source
+Sink
+Cable Capabilities detected
+Plug type detected

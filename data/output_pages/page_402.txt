@@ -1,0 +1,71 @@
+Page 402
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 7.22  Sequence Description for Fast Role Swap
+Step
+Initial Source Port New Sink Port
+Initial Sink Port  New Source Port
+Fast Role Swap Request and Power Transition
+A
+The Source connected to the Hub UFP (see Figure 
+7.16, "VBUS Power during Fast Role Swap") stops 
+sourcing VBUS.
+B
+Policy Engine sends the Fast Role Swap Request to the 
+Initial Sink on the CC wire. When VBUS < vSafe5V 
+(min), it tells the Device Policy Manager not to draw 
+more than iSnkStdby until the tSnkFRSwap timer 
+has elapsed.
+C
+Policy Engine detects the Fast Role Swap Request on 
+the CC wire from the Initial Source and Shall send 
+the FR_Swap Message back to the Initial Source (that 
+is no longer powering VBUS) within time 
+tFRSwapInit.
+D1
+The Policy Engine monitors for VBUS ≤ vSafe5V so 
+that a PS_RDY Message can be sent to the New Source 
+at Step 5 of the messaging sequence.
+D2
+The Policy Engine monitors for VBUS ≤ vSafe5V so the 
+Initial Sink can assume the Power Role of New Source 
+and begin to source VBUS.
+E
+When VBUS = vSafe5V the New Source May provide 
+power to VBUS. When VBUS < vSafe5V the New Source 
+Shall provide power to VBUS within tSrcFRSwap.
+Once the New Source is providing power, the PS_RDY 
+Message can be sent to the New Sink at Step 7 of the 
+messaging sequence.
+F
+The CC termination is changed from Rp to Rd (see 
+[USB Type-C 2.4]) before the New Sink sends the 
+PS_RDY Message at Step 5 to the New Source.
+G
+The CC termination is changed from Rd to Rp (see 
+[USB Type-C 2.4]) before the New Source sends the 
+PS_RDY Message at Step 7 to the New Sink.
+Fast Role Swap Message Sequence
+ 1
+Policy Engine receives the FR_Swap Message from 
+the Initial Sink that is transitioning to be the New 
+Source.
+Policy Engine sends the FR_Swap Message to the 
+Initial Source (that is no longer powering VBUS) after 
+detecting the Fast Role Swap Request at Step C.
+2
+Protocol Layer sends the GoodCRC Message to the 
+Initial Sink. Policy Engine then evaluates the 
+FR_Swap Message.
+Protocol Layer receives the GoodCRC Message from 
+the Initial Source.
+3
+Policy Engine sends an Accept Message to the Initial 
+Sink that is transitioning to be the New Source.
+Policy Engine receives the Accept Message from the 
+Initial Source that is transitioning to be the New Sink.
+4
+Protocol Layer receives the GoodCRC Message from 
+the Initial Sink that is transitioning to be the New 
+Source.
+Protocol Layer sends the GoodCRC Message to the 
+Initial Source that is transitioning to be the New Sink.

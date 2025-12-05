@@ -1,0 +1,66 @@
+Page 150
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The voltage fields Shall be set to the output voltage range that the Sink requires to operate. The Operational Power 
+field Shall be set to the operational power that the Sink requires at the given voltage range. The absolute voltage, 
+including any voltage variation, Shall Not fall below the Minimum Voltage field value and Shall Not exceed the 
+Maximum Voltage field value. 
+Note:
+Only the Battery Supply PDO uses power instead of current. 
+Required operating power is defined as the amount of power a given device needs to be functional. This value could 
+be the maximum power the Sink will ever require or could be sufficient to operate the Sink in one of its modes of 
+operation.
+6.4.1.3.4
+  Augmented Power Data Objects
+See Section 7.1.3, "Types of Sources" for the electrical requirements of the power supply.
+The Maximum and Minimum voltage fields Shall be set to the output voltage range that the Sink requires to 
+operate.
+6.4.1.3.4.1
+  SPR Programmable Power Supply APDO
+Table 6.20, "SPR Programmable Power Supply APDO – Sink" below describes a SPR PPS APDO for a Sink operating in 
+SPR Mode and consuming 21V or less. The Maximum Current field Shall be set to the maximum current the Sink 
+requires over the voltage range. The maximum current is defined as the maximum amount of current the device 
+needs to fully support its function (e.g., Sink Directed Charge).
+Table 6.19  Battery Supply PDO – Sink
+Bit(s)
+Field
+Description
+B31…30
+Battery Supply
+10b - Battery Supply PDO
+B29…20
+Maximum Voltage
+Maximum voltage in 50mV units
+B19…10
+Minimum Voltage
+Minimum voltage in 50mV units
+B9…0
+Operational Power
+Operational Power in 250mW units
+Table 6.20  SPR Programmable Power Supply APDO – Sink
+Bit(s)
+Field
+Description
+B31…30
+APDO
+11b – Augmented Power Data Object (APDO)
+B29…28
+SPR PPS
+00b – SPR PPS
+B27…25
+Reserved
+Reserved – Shall be set to zero.
+B24…17
+Maximum Voltage
+Maximum voltage in 100mV increments 
+B16
+Reserved
+Reserved – Shall be set to zero.
+B15…8
+Minimum Voltage
+Minimum voltage in 100mV increments
+B7
+Reserved
+Reserved – Shall be set to zero.
+B6...0
+Maximum Current
+Maximum current in 50mA increments

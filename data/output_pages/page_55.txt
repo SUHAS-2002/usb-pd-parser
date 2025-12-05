@@ -1,0 +1,73 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 55
+This specification mandates that all Revision 3.x systems fully support Revision 2.0 operation. They must discover 
+the supported Revision used by their Port Partner and any connected Cable Plugs and revert to operation using the 
+lowest common Revision number (see Section 6.2.1.1.5, "Specification Revision"). 
+This specification defines Extended Messages containing data of up to 260 bytes (see Section 6.2.1.2, "Extended 
+Message Header"). These Messages can be larger than expected by existing PHY HW. To accommodate Revision 2.0 
+based systems a Chunking mechanism is mandated such that Messages are limited to Revision 2.0 sizes unless it is 
+discovered that both systems support the longer Message lengths.
+This specification includes changes to the Vendor Data Objects (VDO) used in the discovery of passive/active 
+marked cables and Alternate Mode Adapters (AMA) (see Section 6.4.4.2, "Structured VDM"). To enable systems to 
+determine which VDO format is being used the Structured Vendor Defined Message (SVDM) Version number has 
+been incremented to 2.x. Version numbers have also been incorporated into the VDOs themselves to facilitate 
+future changes if these become necessary.
+2.3
+  USB Power Delivery Capable Devices
+Some examples of USB Power Delivery capable devices can be seen in Figure 2.1, "Logical Structure of USB Power 
+Delivery Capable Devices" (a USB Host, a USB Device, a Hub, and a Charger). These are given for reference only and 
+are not intended to limit the possible configurations of products that can be built using this specification.
+Figure 2.1 Logical Structure of USB Power Delivery Capable Devices
+Each USB Power Delivery capable device is assumed to be made up of at least one Port. Providers are assumed to 
+have a Source and Consumers a Sink. Each device contains one, or more, of the following components:
+
+UFPs that:
+
+Sink Power.
+
+Communicate using SOP Packets.
+
+Optionally Communicate using SOP’ Packets/SOP’’ Packets.
+
+Optionally source power (a Dual-Role Power Device).
+
+Optionally communicate via USB.
+
+Optionally support Alternate Modes.
+
+DFPs that:
+USB Host  
+UFP
+USB Device
+Power 
+Storage
+External 
+power
+USB Hub
+DFP
+Power 
+Storage
+External 
+power
+USB Charger
+UFP
+Power 
+Storage
+External 
+power
+External 
+power
+Power 
+Storage
+DFP
+DFP
+Optional
+Power input
+Optional
+Feature
+Multiple Power 
+inputs/outputs
+Multiple Power 
+outputs
+Power input
+Legend

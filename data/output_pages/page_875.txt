@@ -1,0 +1,29 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 875
+8.3.3.14.2
+  Give Country Codes State Diagram
+Figure 8.161, "Give Country Codes State Diagram" shows the state diagram for a Source or Sink on receiving a 
+Get_Country_Codes Message. See also Section 6.5.11, "Country_Codes Message".
+Figure 8.161 Give Country Codes State Diagram
+8.3.3.14.2.1
+  PE_Give_Country_Codes State
+The Policy Engine Shall transition to the PE_Give_Country_Codes state, from either the PE_SRC_Ready or 
+PE_SNK_Ready State, when a Get_Country_Codes Message is received. 
+On entry to the PE_Give_Country_Codes state the Policy Engine Shall request the country codes from the Device 
+Policy Manager and then send a Country_Codes Message containing these codes.
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready State as appropriate (see 
+Figure 8.132, "Source Port State Diagram" and Figure 8.133, "Sink Port State Diagram") when:
+
+The Country_Codes Message has been successfully sent.
+Get_Country_Codes Message
+received
+Country_Codes
+Message sent
+PE_SRC_Ready or 
+PE_SNK_Ready
+PE_Give_Country_Codes
+Actions on entry:
+Get present Country Codes from Device Policy Manager
+Send Country_Codes Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

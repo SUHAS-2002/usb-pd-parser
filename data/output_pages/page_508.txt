@@ -1,0 +1,46 @@
+Page 508
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.3
+  Unsupported Message
+This is an example of the response to an Unsupported Message. Figure 8.24, "Unsupported message" shows the 
+Messages as they flow across the bus and within the devices.
+Figure 8.24 Unsupported message
+: Protocol
+1: Send Message
+: PHY
+: PHY
+: Protocol
+2: Message
+3: Message + CRC
+4: Message
+Start CRCReceiveTimer
+5: Message received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Message sent
+Start SenderResponseTimer
+10: Send Not_supported
+11: Not_supported
+12: Not_supported + CRC
+13: Not_supported
+14: Not_supported received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Not_supported sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+Reset MessageIDCounter, stored 
+MessageID and RetryCounter
+Reset MessageIDCounter, stored 
+MessageID and RetryCounter
+Message Initiator
+Message Responder
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer

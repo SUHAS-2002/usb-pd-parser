@@ -1,0 +1,37 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 195
+Figure 6.27 Enter/Exit Mode Process
+6.4.4.5
+  VDM Message Timing and Normal PD Messages
+The timing and interspersing of VDMs between regular PD Messages Shall be done without perturbing the PD 
+AMSs. This requirement Shall apply to both Unstructured VDMs and Structured VDMs.
+Initiator (DFP)
+Responder (UFP or Cable Plug)
+Discover SVIDs  
+List of SVIDs  
+For every DFP supported SVID  
+Modes Supported?
+N  
+Stay in USB mode
+Y  
+Enter Mode  
+ACK (Responder switched to Mode)      
+Initiator and Responder operate using Mode
+Return to USB mode
+Establish PD Contract
+Exit Mode or PD Hard Reset or cable 
+unplugged or power removed?
+Y  
+N  
+USB
+USB or USB Safe 
+State
+USB Safe State
+USB
+Alternate Mode
+USB or USB Safe 
+State
+Alternate Mode
+USB
+Discover Modes (SVID)  
+Modes for SVID    

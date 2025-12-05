@@ -1,0 +1,114 @@
+Page 180
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+B10…9
+Maximum VBUS Voltage 
+(Active Cable)
+Maximum Cable VBUS voltage2:
+
+00b – 20V
+
+01b – 30V1 (Deprecated)
+
+10b – 40V1 (Deprecated)
+
+11b – 50V
+B8…7
+Reserved
+Shall be set to zero.
+B8
+SBU Supported
+
+0 = SBU connections supported
+
+1 = SBU connections are not supported
+B7
+SBU Type
+When SBU Supported = 1 this bit Shall be Ignored 
+When SBU Supported = 0:
+
+0 = SBU is passive
+
+1 = SBU is active
+B6…5
+VBUS Current Handling 
+Capability (Active 
+Cable)
+When VBUS Through Cable is “No”, this field Shall be Ignored. 
+When VBUS Through Cable is “Yes”:
+
+00b = Reserved and Shall Not be used
+
+01b = 3A
+
+10b = 5A
+
+11b = Reserved and Shall Not be used
+B4
+VBUS Through Cable
+
+0 = No
+
+1 = Yes
+B3
+SOP’’ Controller Present
+
+0 = No SOP’’ controller present
+
+1 = SOP’’ controller present
+B2…0
+USB Highest Speed 
+(Active Cable)
+
+000b = [USB 2.0] only, no SuperSpeed support 
+
+001b = [USB 3.2] Gen1
+
+010b = [USB 3.2]/[USB4] Gen2
+
+011b = [USB4] Gen3
+
+100b = [USB4] Gen4
+
+101b…111b = Reserved and Shall Not be used
+Table 6.43  Active Cable VDO2
+Bit(s)
+Field
+Description
+B31…24
+Maximum Operating 
+Temperature
+The maximum internal operating temperature in °C. It might or might not reflect the 
+plug’s skin temperature.
+B23…16
+Shutdown Temperature
+The temperature, in °C, at which the cable will go into thermal shutdown so as not to 
+exceed the allowable plug skin temperature. 
+B15
+Reserved
+Shall be set to zero.
+B14…12
+U3/CLd Power
+
+000b: >10mW
+
+001b: 5-10mW
+
+010b: 1-5mW
+
+011b: 0.5-1mW
+
+100b: 0.2-0.5mW
+
+101b: 50-200µW
+
+110b: <50µW
+
+111b: Reserved and Shall Not be used
+Table 6.42  Active Cable VDO1 (Continued)
+Bit(s)
+Field
+Description
+1)
+Values no longer allowed. When present the field Shall be interpreted as if it was 00b.
+2)
+EPR Sinks with a captive cable Shall report 50V.

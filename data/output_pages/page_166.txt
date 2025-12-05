@@ -1,0 +1,57 @@
+Page 166
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.2.4
+  Object Position
+The Object Position field Shall be used by the Enter Mode and Exit Mode Commands. The Discover Modes 
+Command returns a list of zero to six VDOs, each of which describes an Alternate Mode. The value in Object Position 
+field is an index into that list that indicates which VDO (e.g., Alternate Mode) in the list the Enter Mode and Exit 
+Mode Command refers to. The Object Position Shall start with one for the first Alternate Mode in the list. If the SVID 
+is a VID, the content of the VDO for the Alternate Mode Shall be defined by the vendor. If the Standard or Vendor 
+ID (SVID) is a SID, the value Shall be assigned, by the USB-IF, to the given Standard. The VDO's content May be as 
+simple as a numeric value or as complex as bit mapped description of Capabilities of the Alternate Mode. In all cases, 
+the Responder is responsible for deciphering the contents to know whether or not it supports the Alternate Mode 
+at the Object Position.
+This field Shall be set to zero in the Request or Response (REQ, ACK, NAK or BUSY) when not required by the 
+specification of the individual Command.
+6.4.4.2.5
+  Command Type
+6.4.4.2.5.1
+  Commands other than Attention
+This Command Type field Shall be used to indicate the type of Command request/response being sent.
+An Initiator Shall set the Command Type field to REQ to indicate that this is a Command request from an Initiator.
+If Structured VDMs are supported, then the responses are as follows:
+
+"Responder ACK" is the normal return and Shall be sent to indicate that the Command request was 
+received and handled normally. 
+
+"Responder NAK" Shall be returned when the Command request:
+
+Has an Invalid parameter (e.g., Invalid SVID or Alternate Mode).
+
+Cannot be acted upon because the configuration is not correct (e.g., an Alternate Mode which has a 
+dependency on another Alternate Mode or a request to exit an Alternate Mode which is not anActive 
+Mode).
+
+Is an Unrecognized Message.
+
+The handling of "Responder NAK" is left up to the Initiator.
+
+"Responder BUSY" Shall be sent in the response to a VDM when the Responder is unable to respond to 
+the Command request immediately, but the Command request May be retried. The Initiator Shall wait 
+tVDMBusy after a "Responder BUSY" response is received before retrying the Command request.
+6.4.4.2.5.2
+  Attention Command
+This Command Type field Shall be used to indicate the type of Command request being sent. An Initiator Shall set 
+the field to REQ to indicate that this is a Command request from an Initiator. If Structured VDMs are supported, then 
+no response Shall be made to an Attention Command.
+6.4.4.2.6
+  Command
+6.4.4.2.6.1
+  Commands other than Attention
+The Command field contains the value for the VDM Command being sent. The Commands explicitly listed in the 
+Command field are used to identify devices and manage their operational Modes. There is a further range of 
+Command values left for the vendor to use to manage additional extensions.
+A Structured VDM Command consists of a Command request and a Command response (ACK, NAK or BUSY). A 
+Structured VDM Command is deemed to be completed (and if applicable, the transition to the requested 
+functionality is made) when the GoodCRC Message has been successfully received by the Responder in reply to its 
+Command response.

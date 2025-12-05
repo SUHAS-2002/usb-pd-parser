@@ -1,0 +1,29 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 871
+8.3.3.12.2
+  Give Battery Status State Diagram
+Figure 8.157, "Give Battery Status State Diagram" shows the state diagram for a Source or Sink on receiving a 
+Get_Battery_Status Message. See also Section 6.5.4, "Get_Battery_Status Message".
+Figure 8.157 Give Battery Status State Diagram
+8.3.3.12.2.1
+  PE_Give_Battery_Status State
+The Policy Engine Shall transition to the PE_Give_Battery_Status state, from either the PE_SRC_Ready or 
+PE_SNK_Ready state, when a Get_Battery_Status Message is received. 
+On entry to the PE_Give_Battery_Status state the Policy Engine Shall request the present Battery status, for the 
+requested Battery, from the Device Policy Manager and then send a Battery_Status Message based on this status.
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready state as appropriate (see 
+Figure 8.132, "Source Port State Diagram" and Figure 8.133, "Sink Port State Diagram") when:
+
+The Battery_Status Message has been successfully sent.
+Get_Battery_Status Message
+received
+Battery_Status
+Message sent
+PE_SRC_Ready or 
+PE_SNK_Ready
+PE_Give_Battery_Status
+Actions on entry:
+Get present Battery status from Device Policy Manager
+Send Battery_Status Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

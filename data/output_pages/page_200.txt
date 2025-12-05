@@ -1,0 +1,46 @@
+Page 200
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.6.1.6
+  Over-Voltage Protection Event
+The OVP Event bit Shall be set when the Sink detects its output voltage exceeds its limits triggering its protection 
+circuitry. 
+The OVP Event bit May be set when the Source detects its output voltage exceeds its limits triggering its protection 
+circuitry. 
+6.4.6.1.7
+  Extended Alert Event
+The Extended Alert Event bit Shall be set when the event is defined as an Extended Alert Type.
+6.4.6.2
+  Fixed Batteries
+The Fixed Batteries field indicates which Fixed Batteries have had a status change. B20 corresponds to Battery 0 
+and B23 corresponds to Battery 3.
+Once the Alert Message has been sent the Fixed Batteries field Shall be cleared.
+6.4.6.3
+  Hot Swappable Batteries
+The Hot Swappable Batteries field indicates which Hot Swappable Batteries have had a status change. B16 
+corresponds to Battery 0 and B19 corresponds to Battery 3.
+Once the Alert Message has been sent the Hot Swappable Batteries field Shall be cleared.
+6.4.6.4
+  Extended Alert Event Types
+The Extended Alert Event Type field provides extensions to the available types for the Alert Message. If the 
+Extended Alert Event Type bit is not set, then the Extended Alert Event Type is Reserved and Shall be set to zero.
+6.4.6.4.1
+  Power State Change
+The Power state change event value May be set when the DFP transitions into a new power state. The new power 
+state Shall be communicated via the Power state change byte in the Status Message. This Message Should be sent 
+by the host in response to any system power state change.
+6.4.6.4.2
+  Power Button Press
+The Power button press event value May be set when the power button on the UFP is pressed. The press and 
+release events are separated into two different events so that devices that respond differently to a long button 
+press will see a long button press. On the host-side, the power button press event typically initiates the same 
+behavior as a power button press of the host's power button.
+6.4.6.4.3
+  Power Button Release
+If a Power button press event was sent, then the Power button release event value Shall be sent by the UFP 
+following the Power button press event. If a physical power button press initiated the Power button press event, 
+then the Power button release event Should be sent when the physical button is released.
+6.4.6.4.4
+  Controller Initiated Wake
+The Controller initiated wake is used to communicate a wake event from the UFP to the DPF such as Wake on LAN 
+from a NIC or another controller. This event doesn't need the press/release form of the Power button press, 
+because it only needs to communicate the presence of the event, and not the timing.

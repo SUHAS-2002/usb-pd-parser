@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 935
+8.3.3.23.2
+  DFP Structured VDM Mode Exit State Diagram
+Figure 8.200, "DFP VDM Mode Exit State Diagram" shows the state diagram for a DFP when exiting a Mode.
+Figure 8.200 DFP VDM Mode Exit State Diagram
+8.3.3.23.2.1
+  PE_DFP_VDM_Mode_Exit_Request State
+The Policy Engine transitions to the PE_DFP_VDM_Mode_Exit_Request state from either the PE_SRC_Ready or 
+PE_SNK_Ready state for a DFP when:
+
+The Device Policy Manager requests that the Port Partner or a Cable Plug exit a Mode.
+On entry to the PE_DFP_VDM_Mode_Exit_Request state the Policy Engine Shall send a Structured VDM Exit Mode 
+Command request and Shall start the VDMModeExitTimer.
+The Policy Engine Shall transition to the PE_DFP_VDM_Mode_Entry_ACKed state when:
+
+A Structured VDM Exit Mode ACK or NAK Command response is received.
+The Policy Engine Shall transition to either the PE_SRC_Hard_Reset or PE_SNK_Hard_Reset state depending on the 
+present Power Role when:
+
+A Structured VDM Exit Mode BUSY Command response is received or
+
+The VDMModeExitTimer times out.
+8.3.3.23.2.2
+  PE_DFP_VDM_DFP_Mode_Exit_ACKed State
+On Exit to the PE_DFP_VDM_Mode_Entry_ACKed state the Policy Engine Shall inform the Device Policy Manager Of 
+the result: ACK or NAK.
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state for a DFP when:
+PE_SRC_Ready or PE_SNK_Ready
+(DFP)
+PE_DFP_VDM_Mode_Exit_Request
+Actions on entry:
+Send Exit Mode request
+Start VDMModeExitTimer
+Power = Explicit Contract
+PD = Connected
+DPM indicates
+Mode exit
+PE_DFP_VDM_Exit_Mode_ACKed
+Actions on entry:
+Inform DPM of ACK or NAK
+Power = Explicit Contract
+PD = Connected
+Exit Mode ACK/NAK
+received
+DPM informed1
+PE_SRC_Hard_Reset or
+PE_SNK_Hard_Reset 
+(DFP)
+Exit Mode BUSY Received |
+VDMModeExitTimer Timeout
+1)
+The Device Policy Manager is required to return the system to USB operation at this point when exiting Modal Operation.

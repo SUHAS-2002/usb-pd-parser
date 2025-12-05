@@ -1,0 +1,134 @@
+Page 80
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.3
+  Symbol Encoding
+Except for the Preamble, all communications on the line Shall be encoded with a line code to ensure a reasonable 
+level of DC-balance and a suitable number of transitions. This encoding makes receiver design less complicated and 
+allows for more variations in the receiver design.
+4b5b line code Shall be used. This encodes 4-bit data to 5-bit symbols for transmission and decodes 5-bit symbols 
+to 4-bit data for consumption by the receiver.
+The 4b5b code provides data encoding along with special symbols. Special symbols are used to signal Hard Reset, 
+and delineate Packet boundaries (see Table 5.1, "4b5b Symbol Encoding").
+Table 5.1  4b5b Symbol Encoding
+Name
+4b
+5b Symbol
+Description
+0
+0000
+11110
+hex data 0
+1
+0001
+01001
+hex data 1
+2
+0010
+10100
+hex data 2
+3
+0011
+10101
+hex data 3
+4
+0100
+01010
+hex data 4
+5
+0101
+01011
+hex data 5
+6
+0110
+01110
+hex data 6
+7
+0111
+01111
+hex data 7
+8
+1000
+10010
+hex data 8
+9
+1001
+10011
+hex data 9
+A
+1010
+10110
+hex data A
+B
+1011
+10111
+hex data B
+C
+1100
+11010
+hex data C
+D
+1101
+11011
+hex data D
+E
+1110
+11100
+hex data E
+F
+1111
+11101
+hex data F
+Sync-1
+K-code
+11000
+Startsynch #1
+Sync-2
+K-code
+10001
+Startsynch #2
+RST-1
+K-code
+00111
+Hard Reset #1
+RST-2
+K-code
+11001
+Hard Reset #2
+EOP
+K-code
+01101
+EOP End of Packet
+Error
+00000
+Shall Not be used
+Error
+00001
+Shall Not be used
+Error
+00010
+Shall Not be used
+Error
+00011
+Shall Not be used
+Error
+00100
+Shall Not be used
+Error
+00101
+Shall Not be used
+Sync-3
+K-code
+00110
+Startsynch #3
+Error
+01000
+Shall Not be used
+Error
+01100
+Shall Not be used
+Error
+10000
+Shall Not be used
+Error
+11111
+Shall Not be used

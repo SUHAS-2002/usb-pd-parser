@@ -1,0 +1,28 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 993
+9.4.2.1
+  BATTERY_WAKE_MASK Feature Selector
+When the feature selector is set to BATTERY_WAKE_MASK, then the wIndex field is structured as shown in 
+Table 9.12, "Battery Wake Mask".
+The SPM May Enable or Disable the wake events associated with one or more of the above events by using this 
+feature.
+If the PDUSB Hub is not configured, the PDUSB Hub's response to this request is undefined.
+Table 9.12  Battery Wake Mask
+Bit
+Description
+0
+Battery Present: When this bit is set then 
+the PDUSB Device Shall generate a wake 
+event if it detects that a Battery has been 
+inserted.
+1
+Charging Flow: When this bit is set then the 
+PDUSB Device Shall generate a wake event if 
+it detects that a Battery switched from 
+charging to discharging or vice versa.
+2
+Battery Error: When this bit is set then the 
+PDUSB Device Shall generate a wake event if 
+the Battery has detected an error condition.
+15:3
+ Reserved and Shall Not be used

@@ -1,0 +1,43 @@
+Page 82
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+interpret this as a Valid ordered set. The receiver Should ensure that all four K-codes are Valid to avoid ambiguity 
+in detection (see Table 5.3, "Validation of Ordered Sets").
+Table 5.3  Validation of Ordered Sets
+1st code
+2nd code
+3rd code
+4th code
+Valid1
+Corrupt
+K-code
+K-code
+K-code
+Valid1
+K-code
+Corrupt
+K-code
+K-code
+Valid1
+K-code
+K-code
+Corrupt
+K-code
+Valid1
+K-code
+K-code
+K-code
+Corrupt
+Valid2 (perfect)
+K-code
+K-code
+K-code
+K-code
+Invalid (example)
+K-code
+Corrupt
+K-code
+Corrupt
+1)
+May be interpreted as a Valid ordered set.
+2)
+Shall be interpreted as a Validordered set.

@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 59
+2.5
+  Operational Overview
+A USB Power Delivery Port supplying power is known as a Source and a Port consuming power is known as a Sink. 
+There is only one Source Port and one Sink Port in each PD Connection between the Port Partners. At Attach the 
+Source Port (the Port with Rp asserted see [USB Type-C 2.4]) is also the DFP and VCONN Source. At Attach the Sink 
+Port (the Port with Rd asserted) is also the UFP and is not the VCONN Source.
+The original USB PD specification allowed Sources to deliver up to 100W. This classic Mode of operation is referred 
+to as the Standard Power Range (SPR). The First Explicit Contract, the first Contract after a Default Contract or 
+Implicit Contract, is always an SPR Contract. There is an Optional higher power Mode referred to as the Extended 
+Power Range (EPR) where the Source is allowed to deliver up to 240W. The EPR Mode can only be entered from the 
+SPR Mode. The entry process is designed to prevent accidental entry into this higher power Mode. It can be entered 
+only when an SPR Explicit Contract is in place and both the Source Port and Sink Port as well as the cable support 
+EPR.
+The Source/Sink Power Roles, DFP/UFP Data Roles and VCONN Source role can all subsequently be swapped 
+orthogonally to each other. A Port that supports both Source and Sink Power Roles is called a Dual-Role Power Port 
+(DRP). A Port that supports both DFP and UFP Data Roles is called a Dual-Role Data Port (DRD).
+When USB Communications capability is supported in the DFP Data Role then the Port will also be able to act as a 
+USB Host. Similarly, when USB Communications capability is supported in the UFP Data Role then the Port will also 
+be able to act as a USB Device.
+The following sections describe the high-level operation of ports taking on the roles of DFP, UFP, Source and Sink.
+For details of how PD maps to USB states in a PDUSB Device see Section 9.1.2, "Mapping to USB Device States".
+2.5.1
+  Source Operation
+The Source operates differently depending on its Attachment status:
+
+At Attach (no PD Connection or Contract):
+
+For a Source-only Port the Source detects Sink Attachment.
+
+For a DRP that toggles between Source and Sink operation, the Port becomes a Source Port on 
+Attachment of a Sink
+
+The Source then supplies vSafe5V.
+
+Before PD Connection (no PD Connection or Contract):
+
+Prior to sending Source_Capabilities Messages the Source can detect the Cable Capabilities and 
+Advertises its Capabilities depending on the Cable Capabilities detected:
+
+The default current carrying capability of a USB Type-C cable is 3A.
+
+The Source can attempt to communicate with one of the Cable Plugs using SOP’ Packets. If the 
+Cable Plug responds, then communication takes place to discover the cable's Capabilities (e.g., 5A 
+capable).
+
+The Source periodically Advertises its Capabilities by sending Source_Capabilities Messages every 
+tTypeCSendSourceCap.
+
+Establishing PD Connection (no PD Connection or Contract):
+
+Presence of a PD Capable Port Partner is detected either:
+
+By receiving a GoodCRC Message in response to a Source_Capabilities Message.
+
+By receiving Hard Reset Signaling.
+
+Establishing the First Explicit Contract after an Attach, Hard Reset, USB Type-C Error Recovery or Implicit 
+Contract as a result of a Power Role Swap or Fast Role Swap:

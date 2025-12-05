@@ -1,0 +1,153 @@
+Page 444
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.1.3.23
+  AMS: Structured VDM
+Table 8.27  AMS: Structured VDM
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+Initiator to 
+Responder Discover 
+Identity (ACK)
+1.
+Discover Identity REQ 
+Command
+2.
+Discover Identity ACK 
+Command
+Started by 
+Initiator
+Section 8.3.2.14.1.1
+Section 8.3.3.21.1,
+Section 8.3.3.22.1
+Initiator to 
+Responder Discover 
+Identity (NAK)
+1.
+Discover Identity REQ 
+Command
+2.
+Discover Identity NAK 
+Command
+Section 8.3.2.14.1.2
+Initiator to 
+Responder Discover 
+Identity (BUSY)
+1.
+Discover Identity REQ 
+Command
+2.
+Discover Identity BUSY 
+Command
+Section 8.3.2.14.1.3
+Initiator to 
+Responder Discover 
+SVIDs (ACK)
+1.
+Discover SVIDs REQ 
+Command
+2.
+Discover SVIDs ACK Command
+Section 8.3.2.14.2.1
+Section 8.3.3.21.2,
+Section 8.3.3.22.2
+Initiator to 
+Responder Discover 
+SVIDs (NAK)
+1.
+Discover SVIDs REQ 
+Command
+2.
+Discover SVIDs NAK 
+Command
+Section 8.3.2.14.2.2
+Initiator to 
+Responder Discover 
+SVIDs (BUSY)
+1.
+Discover SVIDs REQ 
+Command
+2.
+Discover SVIDs BUSY 
+Command
+Section 8.3.2.14.2.3
+Initiator to 
+Responder Discover 
+Modes (ACK)
+1.
+Discover Modes REQ 
+Command
+2.
+Discover Modes ACK 
+Command
+Section 8.3.2.14.3.1
+Section 8.3.3.21.3,
+Section 8.3.3.22.3
+Initiator to 
+Responder Discover 
+Modes (NAK)
+1.
+Discover Modes REQ 
+Command
+2.
+Discover Modes NAK 
+Command
+Section 8.3.2.14.3.2
+Initiator to 
+Responder Discover 
+Modes (BUSY)
+1.
+Discover Modes REQ 
+Command
+2.
+Discover Modes BUSY 
+Command
+Section 8.3.2.14.3.3
+DFP to UFP Enter 
+Mode
+1.
+Enter Mode REQ Command
+2.
+Enter Mode ACK Command
+Started by DFP
+Section 8.3.2.14.4.1
+Section 8.3.3.23.1,
+Section 8.3.3.24.1
+DFP to UFP Exit 
+Mode
+1.
+Exit Mode REQ Command
+2.
+Exit Mode ACK Command
+Section 8.3.2.14.4.2
+Section 8.3.3.23.2,
+Section 8.3.3.24.2
+DFP to Cable Plug 
+Enter Mode
+1.
+Enter Mode REQ Command
+2.
+Enter Mode ACK Command
+Section 8.3.2.14.4.3
+Section 8.3.3.23.1,
+Section 8.3.3.25.4.1
+DFP to Cable Plug 
+Exit Mode
+1.
+Exit Mode REQ Command
+2.
+Exit Mode ACK Command
+Section 8.3.2.14.4.4
+Section 8.3.3.23.2,
+Section 8.3.3.25.4.2
+Initiator to 
+Responder Attention
+1.
+Attention REQ Command
+Started by 
+Initiator
+Section 8.3.2.14.4.5
+Section 8.3.3.21.4,
+Section 8.3.3.22.4

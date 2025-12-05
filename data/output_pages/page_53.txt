@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 53
+2
+ Overview
+This section contains no Normative requirements. 
+2.1
+  Introduction
+USB Power Delivery (PD) defines the mechanisms for pairs of directly Attached Ports (also referred to as Port 
+Partners or Port Pairs) to Negotiate voltage, current and/or direction of power flow over the USB cable. It uses the 
+USB Type-C® connector's CC wire as the communications channel. The PD mechanisms operate independently of 
+and supersede other USB methods defined in [USB 2.0], [USB 3.2], [USBBC 1.2] and [USB Type-C 2.4].
+USB Power Delivery also defines sideband mechanisms used for configuration management of USB Type-C devices 
+and cables. Using Structured Vendor Defined Messages (Structured VDMs), PD facilitates discovery of device and 
+cables features and performance. Structured VDMs are also used to enter/exit some Active Modes, either USB-based 
+(e.g., USB4® Mode) or USB Type-C Alternate Modes. Alternate Modes are associated with Standard or Vendor IDs 
+(SVIDs) and can be either standard (e.g., DisplayPort Alternate Mode) or proprietary (e.g., Intel Thunderbolt™ 3).
+2.1.1
+  Power Delivery Source Operational Contracts
+A PD Source will be in one of three Contracts:
+
+Default Contract which it enters immediately following a Connect where the Source provides 5V and 
+Advertises the amount of current it can deliver using the Rp value as defined in [USB Type-C 2.4]. A 
+Source in a Default Contract will remain in this Contract until the Sink is Detached or the Source and Sink 
+Negotiate and enter an Explicit Contract.
+
+Implicit Contract which immediately follows a Power Role Swap or Fast Role Swap and is transitory. The 
+PD Source provides 5V and Advertises the amount of current it can deliver using the Rp value as defined 
+in [USB Type-C 2.4]. A Source in an Implicit Contract will immediately Negotiate with the Sink and enter 
+an Explicit Contract.
+
+Explicit Contract is the state of the Source after any PD power Negotiation consisting of the Source 
+sending a Source_Capabilities Message, the Sink responding with a Request Message, the Source 
+acknowledging the request with an Accept Message and finally the Source sends a PS_RDY Message 
+when the Source is ready to deliver the requested power. This is the normal operational state for PD. A 
+Source in an Explicit Contract will remain in an Explicit Contract during and after a Re-negotiation of its 
+Contract and will exit the Explicit Contract when:
+
+Disconnected from the Sink where it will restart in a Default Contract when reconnected to the Sink.
+
+Following a Hard Reset where it will restart as if it were Detached then Attached to the Sink.
+
+Following a Power Role Swap or Fast Role Swap where it will enter an Implicit Contract.
+
+Following USB Type-C Error Recovery which is an electrical Detach/Re-attach (remove and assert 
+Rp).
+2.1.2
+  Power Delivery Contract Negotiation
+Contracts Negotiated using the USB Power Delivery Specification supersede any and all previous power contracts 
+established whether from standard [USB 2.0], [USB 3.2], [USBBC 1.2] or [USB Type-C 2.4] mechanisms. While 
+operating in Power Delivery Mode there will be a Contract in place (either Explicit Contract or Implicit Contract) that 
+determines the power level available and the direction of that power. The Port Pair will remain in Power Delivery 
+Mode until the Port Pair is Detached, there is a Hard Reset, or USB Type-C Error Recovery, or the Source removes 
+power except as part of the Power Role Swap or Fast Role Swap processes.
+Note:
+[USB4] does not define a default power, rather relies on a PD power Contract. When first Attached the 
+[USB4] device operates in [USB 3.2] Mode which is its USB Default Operation.
+An Explicit Contract is Negotiated by the process of the Source sending a set of Capabilities, from which the Sink is 
+required to request a particular capability and then the Source accepting this request. 

@@ -1,0 +1,33 @@
+Page 74
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 2.6 Example of a Normal EPR Mode Operational Flow
+Not illustrated in Figure 2.6, "Example of a Normal EPR Mode Operational Flow", while in EPR Mode operation, the 
+Sink might decide it wants to exit EPR Mode. In this case, the Sink must initiate the exit process by revising its 
+Explicit Contract with the Source at 20V or less followed with an EPR_Mode exit Message. Once EPR Mode is exited, 
+a new SPR Contract is Negotiated to formalize the return to SPR Mode operation. Failure to revise the Explicit 
+Contract to one at 20V or less before attempting to exit EPR Mode will result in a Hard Reset.
+EPR Source
+EPR Cable
+EPR Sink
+Enter EPR 
+Mode?
+Cable is EPR?
+Exit EPR 
+Mode?
+Establish SPR Contract
+(Source/Sink EPR Status)
+Request EPR Mode
+Accept EPR Mode
+Establish EPR Contract
+Maintain PD Repetitive Communications
+Establish EPR Contract (20V or less)
+Exit EPR Mode
+Establish SPR Contract
+(Source/Sink EPR Status)
+EPR Mode
+Entry 
+Phase
+EPR Mode
+Operation
+EPR Mode
+Exit Phase

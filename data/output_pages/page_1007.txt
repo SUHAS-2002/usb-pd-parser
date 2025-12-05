@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1007
+
+SPR AVS with 9V - 15V @ 3A & 15V - 20V @ 2.5A,
+
+15V Prog @ 3A, and
+
+20V Prog @ 2.5A.
+5)
+PDP 80W implementation includes:
+
+5V @ 3A, 
+
+9V @ 3A, 
+
+15 @ 3A, 
+
+20V @ 4A, 
+
+SPR AVS with 9V - 15V @ 3A & 15V - 20V @ 4A, 
+
+15V Prog @ 3A, and 
+
+20V Prog @ 4A.
+The first example illustrates a basic example of a supply that can only support 5V and 9V.
+The second and third examples illustrates as the PDP Rating goes higher there are more possible combinations that 
+meet the Power Rules. These examples also add SPR AVS. Although there are multiple ways to meet the Power Rules, 
+while operating in SPR Mode no more than a combination of seven SPR (A)PDOs and APDOs can be offered.
+The fourth and fifth example show that the 15V Prog @ 3A fully covers the 9V Prog @3A range so it is not necessary 
+to Advertise both. These examples also illustrate SPR AVS being extended up to 20V with separate current limits for 
+the 9V - 15V and 15V - 20V ranges - a single SPR AVS APDO covers advertising both ranges.

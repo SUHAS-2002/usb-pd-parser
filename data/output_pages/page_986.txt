@@ -1,0 +1,93 @@
+Page 986
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+9.2.1
+  USB Power Delivery Capability Descriptor
+Table 9.2, "USB Power Delivery Capability Descriptor" details the fields in the USB POWER_DELIVERY_CAPABILITY 
+Descriptor.
+Table 9.2  USB Power Delivery Capability Descriptor
+Offset
+Field
+Size
+Value
+Description
+0
+bLength
+1
+Number
+Size of descriptor
+1
+bDescriptorType
+1
+Constant
+DEVICE CAPABILITY Descriptor type
+2
+bDevCapabilityType
+1
+Constant
+Capability type: POWER_DELIVERY_CAPABILITY
+3
+bReserved
+1
+Reserved
+Shall be set to zero.
+4
+bmAttributes
+4
+Bitmap
+Bitmap encoding of supported device level features. A value of one in 
+a bit location indicates a feature is supported; a value of zero 
+indicates it is not supported. Encodings are:
+Bit 
+Description
+0
+Reserved. Shall be set to zero.
+1
+Battery Charging. This bit Shall be set to one to indicate this 
+device supports [USBBC 1.2] as per the value reported in 
+the bcdBCVersion field.
+2
+USB Power Delivery. This bit Shall be set to one to indicate 
+this device supports the USB Power Delivery Specification 
+as per the value reported in the bcdPDVersion field.
+3
+Provider. This bit Shall be set to one to indicate this device 
+is capable of providing power. This field is only Valid if Bit 
+2 is set to one.
+4
+Consumer. This bit Shall be set to one to indicate that this 
+device is a consumer of power. This field is only Valid if Bit 
+2 is set to one.
+5
+This bit Shall be set to 1 to indicate that this device supports 
+the feature CHARGING_POLICY.
+Note: Supporting the CHARGING_POLICY feature does not 
+require a BC or PD mechanism to be implemented.
+6
+USB Type-C Current. This bit Shall be set to one to indicate 
+this device supports power capabilities defined in[USB 
+Type-C 2.4] as per the value reported in the 
+bcdUSBTypeCVersion field
+7
+Reserved. Shall be set to zero.
+15:8
+bmPowerSource. At least one of the following bits 8, 9 and 
+14 Shall be set to indicate which power sources are 
+supported.
+Bit
+Description
+8
+AC Supply
+9
+Battery
+10
+Other
+13:11
+NumBatteries. This field Shall only be Valid when 
+the Battery field is set to one and Shall be used to 
+report the number of batteries in the device.
+14
+Uses VBUS
+15
+Reserved and Shall be set to zero.
+13:16
+Reserved. Shall be set to zero.

@@ -1,0 +1,42 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 325
+7.1.8
+  Output Voltage Tolerance and Range
+After a voltage transition is complete (i.e., after tSrcReady) and during static load conditions the Source output 
+voltage Shall remain within the vSrcNew or vSafe5V limits as applicable. The ranges defined by vSrcNew and 
+vSafe5V account for DC regulation accuracy, line regulation, load regulation and output ripple. After a voltage 
+transition is complete (i.e., after tSrcReady) and during transient load conditions the Source output voltage Shall 
+Not go beyond the range specified by vSrcValid. The amount of time the Source output voltage can be in the band 
+between either vSrcNew or vSafe5V and vSrcValid Shall Not exceed tSrcTransient. Refer to Table 7.23, "Source 
+Electrical Parameters" for the output voltage tolerance specifications. Figure 7.11, "Application of vSrcNew and 
+vSrcValid limits after tSrcReady" illustrates the application of vSrcNew and vSrcValid after the voltage transition is 
+complete.
+The vSrcNew and vSrcValid limits Shall Not apply to VBUS during the VBUS discharge and switchover that occurs 
+during a Fast Role Swap as described in Section 7.1.13, "Fast Role Swap".
+Figure 7.11 Application of vSrcNew and vSrcValid limits after tSrcReady
+ The Source output voltage Shall be measured at the connector receptacle. The stability of the Source Shall be 
+tested in 25% load step increments from minimum load to maximum load and also from maximum load to 
+minimum load. The transient behavior of the load current is defined in Section 7.2.6, "Transient Load Behavior". The 
+time between each step Shall be sufficient to allow for the output voltage to settle between load steps. In some 
+systems it might be necessary to design the Source to compensate for the voltage drop between the output stage of 
+the power supply electronics and the receptacle contact. The determination of whether compensation is necessary 
+is left to the discretion of the Source implementation.
+7.1.8.1
+  AVS/PPS Output Voltage Ripple
+The AVS/PPS output voltage ripple is expected to exceed the magnitude of one or more LSB as show in the Figure 
+7.12, "Expected AVS/PPS Ripple Relative to an LSB".
+Sink Load I1
+vSrcNew(typ)
+tSrcReady
+iLoadStepRate
+vSrcValid(max)
+vSrcValid(min)
+vSrcNew(max)
+vSrcNew(min)
+tSrcTransient window
+���
+tSrcTransient windows
+���
+���
+iLoadReleaseRate
+Sink Load I2

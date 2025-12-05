@@ -1,0 +1,30 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 869
+8.3.3.11.2
+  Give Battery Capabilities State Diagram
+Figure 8.155, "Give Battery Capabilities State Diagram" shows the state diagram for a Source or Sink on receiving a 
+Get_Battery_Cap Message. See also Section 6.5.5, "Battery_Capabilities Message".
+Figure 8.155 Give Battery Capabilities State Diagram
+8.3.3.11.2.1
+  PE_Give_Battery_Cap State
+The Policy Engine Shall transition to the PE_Give_Battery_Cap state, from either the PE_SRC_Ready or 
+PE_SNK_Ready state, when a Get_Battery_Cap Message is received. 
+On entry to the PE_Give_Battery_Cap state the Policy Engine Shall request the present Battery capabilities, for the 
+requested Battery, from the Device Policy Manager and then send a Battery_Capabilities Message based on these 
+capabilities.
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready state as appropriate (see 
+Figure 8.132, "Source Port State Diagram" and Figure 8.133, "Sink Port State Diagram") when:
+
+The Battery_Capabilities Message has been successfully sent.
+Get_Battery_Cap Message
+received
+Battery_Capabilities
+Message sent
+PE_SRC_Ready or 
+PE_SNK_Ready
+PE_Give_Battery_Cap
+Actions on entry:
+Get present Battery capabilities from Device Policy Manager
+Send Battery_Capabilities Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

@@ -1,0 +1,30 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 289
+6.12.2.2.2
+  Source Protocol Layer Message Transmission State Diagram
+Figure 6.64, "Source Protocol Layer Message Transmission State Diagram" shows the state behavior for the Protocol 
+Layer in a Source when transmitting a Message.
+Figure 6.64 Source Protocol Layer Message Transmission State Diagram
+PRL_Tx_Wait_for_Message_Request
+PRL_Tx_Src_Sink_Tx
+Actions on entry:
+Set Rp = SinkTxOk
+End of AMS notification received 
+from Policy Engine
+Start of AMS notification
+received from Policy Engine
+PRL_Tx_Src_Pending
+Actions on entry:
+Start SinkTxTimer
+PRL_Tx_Layer_Reset_for_Transmit
+PRL_Tx_Construct_Message
+Soft Reset Message pending &
+SinkTxTimer timeout
+Message pending (except Soft Reset) &
+SinkTxTimer timeout
+Rp set
+PRL_Tx_Src_Source_Tx
+Actions on entry:
+Set Rp = SinkTxNG
+Message request 
+from Policy Engine

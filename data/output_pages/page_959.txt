@@ -1,0 +1,52 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 959
+8.3.3.26.4
+  Sink EPR Mode Exit State Diagram
+Figure 8.214, "Sink EPR Mode Exit State Diagram" shows the state diagram for an EPR Sink initiating the EPR Mode 
+exit process.
+Figure 8.214 Sink EPR Mode Exit State Diagram
+8.3.3.26.4.1
+  PE_SNK_Send_EPR_Mode_Exit State
+The Policy Engine transitions to the PE_SNK_Send_EPR_Mode_Exit state from the PE_SNK_Ready state when:
+
+The DPM requests exit from EPR Mode.
+On Entry to the PE_SNK_Send_EPR_Mode_Exit state the Policy Engine Shall send an EPR_Mode (Exit) Message.
+On Exit from the PE_SNK_Send_EPR_Mode_Exit state the Policy Engine Shall exit EPR Mode.
+The Policy Engine Shall transition to the PE_SNK_Wait_for_Capabilities state when:
+
+The EPR_Mode (Exit) Message has been sent.
+8.3.3.26.4.2
+  PE_SNK_EPR_Mode_Exit_Received State
+The Policy Engine transitions to the PE_SNK_EPR_Mode_Exit_Received state from the PE_SNK_Ready state when:
+
+An EPR_Mode (Exit) Message is received.
+On Entry to the PE_SNK_EPR_Mode_Exit_Received state the Policy Engine Shall exit EPR Mode.
+The Policy Engine Shall transition to the PE_SNK_Wait_for_Capabilities state when:
+
+In an Explicit Contract with an SPR (A)PDO and
+
+EPR Mode has been exited.
+The Policy Engine Shall transition to the PE_SNK_Hard_Reset state when:
+
+Not in an Explicit Contract with an SPR (A)PDO.
+DPM Requests EPR Mode Exit
+PE_SNK_Send_EPR Mode_Exit
+Actions on entry:
+Send EPR Mode Exit Message
+Power = Explicit Contract
+PD = Connected
+EPR Mode Exit Message sent
+PE_SNK_Ready
+Actions on exit:
+Exit EPR Mode
+PE_SNK_Wait_for_Capabilities
+PE_SNK_EPR Mode_Exit_Received
+Actions on entry:
+Exit EPR Mode
+Power = Explicit Contract
+PD = Connected
+EPR Mode Exit Message Received
+In Explicit Contract with SPR PDO &
+EPR Mode Exited
+PE_SNK_Hard_Reset
+Not in an Explicit Contract with an SPR PDO

@@ -1,0 +1,18 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 185
+Explicit Contract where the absolute maximum voltage that can be applied to the cable is 21.55V. 
+Maximum VBUS Voltage field values of 01b and 10b (formerly 30V and 40V) Shall be treated if they were 
+00b (20V).
+6.4.4.3.1.9.5
+  VBUS Impedance Field
+The VBUS Impedance field (B12…7) Shall contain the impedance the VPD adds in series between the Source and the 
+Sink. The Sink Shall take this value into account when requesting current so as to not to exceed the VBUS IR Drop 
+limit of 0.5V between the Source and itself. If the Sink can tolerate a larger IR Drop on VBUS it May do so. 
+6.4.4.3.1.9.6
+  Ground Impedance Field
+The Ground Impedance field (B6…1) Shall contain the impedance the VPD adds in series between the Source and 
+the Sink. The Sink Shall take this value into account when requesting current so as to not to exceed the Ground IR 
+Drop limit of 0.25V between the Source and itself.
+6.4.4.3.1.9.7
+  Charge Through Field
+The Firmware Version field (B0) Shall be set to 1b when the VPD supports Charge Through and 0b otherwise.

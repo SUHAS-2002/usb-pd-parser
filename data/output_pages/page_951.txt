@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 951
+8.3.3.25.4.2
+  Cable Plug Structured VDM Exit Mode State Diagram
+Figure 8.210, "Cable Plug Structured VDM Exit Mode State Diagram" shows the state diagram for a Cable Plug in 
+response to an Exit Mode Command.
+Figure 8.210 Cable Plug Structured VDM Exit Mode State Diagram
+8.3.3.25.4.2.1
+  PE_CBL_Mode_Exit State
+The Policy Engine transitions to the PE_CBL_Mode_Exit state from the PE_CBL_Ready state when:
+
+A Structured VDM Exit Mode Command request is received from the DFP.
+On entry to the PE_CBL_Mode_Exit state the Policy Engine Shall request the Device Policy Manager to exit the Mode 
+indicated in the Command.
+The Policy Engine Shall transition to the PE_CBL_Mode_Exit_ACK state when:
+
+The Device Policy Manager indicates that the Mode has been exited.
+The Policy Engine Shall transition to the PE_CBL_Mode_Exit_NAK state when:
+
+The Device Policy Manager indicates that the Command response to the Exit Mode Command request is 
+NAK.
+8.3.3.25.4.2.2
+  PE_CBL_Mode_Exit_ACK State
+On entry to the PE_CBL_Mode_Exit_ACK state the Policy Engine Shall send a Structured VDM Exit Mode ACK 
+Command response.
+PE_CBL_Mode_Exit
+Actions on entry:
+Request DPM to evaluate request to exit 
+the requested Mode
+Cable = Awake
+PD = Connected
+Exit Mode request
+received
+Exit Mode ACK
+sent1
+PE_CBL_Mode_Exit_ACK
+Actions on entry:
+Send Exit Mode ACK Command
+Cable = Awake
+PD = Connected
+Mode exited
+PE_CBL_Ready
+Actions on entry:
+Cable = Awake/Asleep
+PD = Not Connected/Connected
+PE_CBL_Mode_Exit_NAK
+Actions on entry:
+Send Exit Mode NAK Command
+Cable = Awake
+PD = Connected
+DPM says NAK
+Exit Mode 
+NAK sent
+1)
+The Cable is required to be in USB operation or USB Safe State at this point.

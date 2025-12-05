@@ -1,0 +1,50 @@
+Page 226
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.2.2
+  SOP'/SOP'' Status Message
+A Status Message, sent in response to a Get_Status Message to SOP’ or SOP’’, enables a Source or Sink to get the 
+present status of the Cable's Cable Plug(s). Typically, a Get_Status Message will be used by the USB Host and/or USB 
+Device to manage the Cable's Cable Plug(s) temperature. The Status Message returns a 2-byte Status Data Block 
+(SDB) whose format Shall be as shown in Figure 6.39, "SOP'/SOP'' Status Message" and Table 6.56, "“SOP’/SOP’’ 
+Status Data Block (SPDB)”".
+Passive Cable Plugs Shall Not indicate Thermal Shutdown.
+Figure 6.39 SOP'/SOP'' Status Message
+6.5.2.2.1
+  Internal Temp Field
+The Internal Temp field reports the instantaneous temperature of the plug in °C. The internal temperature Shall 
+be monotonic. The Cable Plug Shall report its internal temperature every tACTempUpdate.
+6.5.2.2.2
+  Thermal Shutdown Field
+The Flags flag Shall also be set when the plug's internal temperature exceeds the Internal Maximum Temperature 
+reported in the Active Cable VDO. Once this bit has been set, it Shall remain set and the plug Shall remain in 
+Thermal Shutdown until there is a Hard Reset or the Active Cable's power is removed. The Thermal Shutdown flag 
+Shall Not be cleared by a Cable Reset.
+Table 6.56   “SOP’/SOP’’ Status Data Block (SPDB)”
+Offset (Byte)
+Field
+ Value
+Description
+0
+Internal 
+Temp
+Unsigned Int
+Cable Plug’s internal temperature in °C.
+
+0 = feature not supported
+
+1 = temperature is less than 2°C.
+
+2…255 = temperature in °C.
+1
+Flags
+Bit Field
+Bit
+Description
+0
+Thermal Shutdown
+1...7
+Reserved and Shall be set to zero
+Extended Header
+Data Size = 2
+SPDB
+(2-byte block)

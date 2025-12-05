@@ -1,0 +1,82 @@
+Page 46
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Mode Entry
+Process to start operation in a particular Mode.
+Mode Exit
+Process to end operation in a particular Mode.
+Multi-Drop
+PD is a Multi-Drop system sharing the Power Delivery communication channel between the Port 
+Partners and the cable.
+Negotiate
+See Negotiation.
+Negotiated
+See Negotiation.
+Negotiation
+This is the PD process whereby:
+1)
+The Source Advertises its Capabilities.
+2)
+The Sink requests one of the Advertised Capabilities.
+3)
+The Source acknowledges the request, alters its output to satisfy the request and informs 
+the Sink.
+The result of the Negotiation is a Contract for power delivery/consumption between the Port 
+Pair. 
+New Sink
+Sink at the end of a Power Role Swap or Fast Role Swap which has transition from being the Initial 
+Source.
+New Source
+Source at the end of a Power Role Swap or Fast Role Swap which has transition from being the 
+Initial Sink.
+Non-interruptible
+There cannot be any unexpected Messages during an AMS; it is therefore Non-interruptible. An 
+AMS starts when the first Message in the AMS has been sent (i.e., a GoodCRC Message has been 
+received acknowledging the Message). See Section 8.3.2.1.3, "Atomic Message Sequences".
+OCP
+Over-Current Protection.
+OTP
+Over-Temperature Protection.
+OVP
+Over-Voltage Protection.
+Packet
+One entire unit of PD communication including a Preamble, SOP*, Payload, CRC and EOP as 
+defined in Section 5.6, "Packet Format".
+Passive Cable
+Cable with a USB plug on each end at least one of which is a Cable Plug supporting SOP’ that does 
+not incorporate data bus signal conditioning circuits. Supports the Structured VDM Discover 
+Identity to determine its characteristics (Electronically Marked Cable see [USB Type-C 2.4]).
+Note: This specification does not discuss Passive Cables that are not Electronically Marked.
+Passive Cable VDO
+VDO defining the Capabilities of a Passive Cable.
+Payload
+Data content of a Packet, provided to/from the Protocol Layer.
+PD
+USB Power Delivery
+PD Capable
+A Port that supports USB Power Delivery.
+PD Connection
+See Connected.
+PD Power
+The output power, in Watts, of a Source, as specified by the manufacturer and expressed in Fixed 
+Supply PDOs as defined in Section 10, "Power Rules".
+PD SID
+See USB-IF PD SID.
+PDO
+See Power Data Object.
+PDP
+See PD Power.
+PDP Rating
+The PDP Rating is the same as the Manufacturer declared PDP for a Source Port except where 
+there is a fractional value, in which case the PDP Rating corresponds to the integer part of the 
+Manufacturer declared PDP Rating (see Section 6.4.11.2, "Port Maximum PDP Field").
+PDUSB
+USB Device Port or USB Host Port that is both PD Capable and capable of USB Communication. See 
+also PDUSB Host, PDUSB Device and PDUSB Hub.
+PDUSB Device
+A USB Device with a PD Capable UFP. A PDUSB Device is only addressed by SOP Packets.
+PDUSB Host
+A USB Host which is PD Capable on at least one of its DFPs. A PDUSB Host is only addressed by 
+SOP Packets.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

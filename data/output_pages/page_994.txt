@@ -1,0 +1,34 @@
+Page 994
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+9.4.2.2
+  CHARGING_POLICY Feature Selector
+When the feature selector is set to CHARGING_POLICY, the wIndex field Shall be set to one of the values defined in 
+Table 9.13, "Charging Policy Encoding". If the device is using USB Type-C Current above the default value or is using 
+PD then this feature setting has no effect and the rules for power levels specified in the [USB Type-C 2.4] or USB 
+PD specifications Shall apply.
+This is a Valid Command for the PDUSB Hub/Peripheral in the Address or Configured USB states. Further, it is only 
+Valid if the device reports a USB PD capability descriptor in its BOS descriptor and Bit 5 of the bmAttributes in that 
+descriptor is set to 1. The device will go back to the wIndex default value of 0 whenever it is reset.
+Table 9.13  Charging Policy Encoding
+Value
+Description
+00H
+The device Shall follow the default current limits as defined in the USB 2.0 or USB 3.1 specification, or 
+as negotiated through other USB mechanisms such as BC. 
+This is the default value.
+01H
+The Device May draw additional power during the unconfigured and suspend states for the purposes 
+of charging.
+For charging the device itself, the device Shall limit its current draw to the higher of these two values:
+ICCHPF as defined in the USB 2.0 or USB 3.1 specification, regardless of its USB state.
+Current limit as negotiated through other USB mechanisms such as BC.
+02H
+The Device May draw additional power during the unconfigured and suspend states for the purposes 
+of charging.
+For charging the device itself, the device Shall limit its current draw to the higher of these two values:
+ICCLPF as defined in the USB 2.0 or USB 3.1 specification, regardless of its USB state.
+Current limit as negotiated through other USB mechanisms such as BC.
+03H
+The device Shall Not consume any current for charging the device itself regardless of its USB state.
+04H-FFFFH
+Reserved and Shall Not be used

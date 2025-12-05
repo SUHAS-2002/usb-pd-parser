@@ -1,0 +1,76 @@
+Page 1022
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+C.2.2
+  Discover SVIDs Command response
+Table C.5, "Discover SVIDs Command response from Responder Example" shows the contents of the key fields in the 
+Message Header and VDM Header for a Responder returning VDOs in response to a Discover SVIDs Command 
+request. In this illustration, the value 3 in the Message Header Number of Data Objects field indicates that one VDO 
+containing the supported SVIDs would be returned followed by a terminating VDO. 
+Note:
+The last VDO returned (the terminator of the transmission) contains zero value SVIDs. If a SVID value is 
+zero, it is not used.
+Table C.5  Discover SVIDs Command response from Responder Example
+Bit(s)
+Field
+Value
+Message Header
+15
+Reserved
+0
+14…12
+Number of Data Objects
+3 (VDM Header + 2*VDO)
+11…9
+MessageID
+0…7
+8
+Port Power Role
+0 or 1
+7…6
+Specification Revision
+10b (Revision 3.x)
+5…4
+Reserved
+0
+3…0
+Message Type
+1111b (Vendor Defined Message)
+VDM Header
+B31…16
+Standard or Vendor ID (SVID)
+0xFF00 (PD SID)
+B15
+VDM Type
+1 (Structured VDM)
+B14…13
+Structured VDM Version (Major)
+01b (Version 2.0)
+B12…11
+Structured VDM Version (Minor)
+01b (Version 2.1)
+B10…8
+Object Position
+000b
+B7…6
+Command Type
+01b (Responder ACK)
+B5
+Reserved
+0
+B4…0
+Command
+2 (Discover SVIDs)
+VDO 1
+B31…16
+SVID 0
+SVID value
+B15…0
+SVID 1
+SVID value
+VDO 2
+B31…16
+SVID 2
+0x0000
+B15…0
+SVID 3
+0x0000

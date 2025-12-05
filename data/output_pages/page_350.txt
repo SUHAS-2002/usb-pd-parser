@@ -1,0 +1,13 @@
+Page 350
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.3.1.1.1.4
+  Decreasing the Voltage and Increasing the Current
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed when changing from 
+one (A)PDO to another while decreasing the voltage and increasing the current is shown in Figure 7.25, "Transition 
+Diagram for Decreasing the Voltage and Increasing the Current". The sequence that Shall be followed is described 
+in Table 7.4, "Sequence Description for Decreasing the Voltage and Increasing the Current". The timing parameters 
+that Shall be followed are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink Electrical 
+Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In Figure 7.25, "Transition Diagram for Decreasing the Voltage and Increasing the Current", the Sink has 
+previously sent a Request Message to the Source.

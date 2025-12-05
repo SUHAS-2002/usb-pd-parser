@@ -1,0 +1,67 @@
+Page 120
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Port Data Role field Shall only be defined for SOP Packets. For all other SOP* Packets the Port Data Role field 
+is Reserved and Shall be set to zero.
+If a USB Type-C Port receives a Message with the Port Data Role field set to the same Data Role as its current Data 
+Role, except for the GoodCRC Message, USB Type-C Error Recovery actions as defined in [USB Type-C 2.4] Shall be 
+performed.
+For a USB Type-C Port the Port Data Role field Shall be set to the default value at Attachment after a Hard Reset: 0b 
+for a Port with Rd asserted and 1b for a Port with Rp asserted.
+In the case that a Port is not USB Communications capable, at Attachment a Source Port Shall default to DFP and a 
+Sink Port Shall default to UFP.
+6.2.1.1.7
+  Cable Plug
+The 1-bit Cable Plug field Shall indicate whether this Message originated from a Cable Plug or VPD:
+
+0b Message originated from a DFP or UFP.
+
+1b Message originated from a Cable Plug or VPD
+The Cable Plug field Shall only apply to SOP’ Packet and SOP’’ Packet types.
+6.2.1.1.8
+  Message Type
+The 5-bit Message Type field Shall indicate the type of Message being sent. To fully decode the Message Type, the 
+Number of Data Objects field is first examined to determine whether the Message is a Control Message or a Data 
+Message. Then the specific Message Type can be found in Table 6.5, "Control Message Types" or Table 6.6, "Data 
+Message Types".
+The Message Type field Shall apply to all SOP* Packet types.
+6.2.1.2
+  Extended Message Header
+Extended Messages (indicated by the Extended field being set in the Message Header) Shall contain an Extended 
+Message Header following the Message Header as shown in Figure 6.3, "USB Power Delivery Packet Format including 
+an Extended Message Header and Payload" and defined in “Table 6.3, "Extended Message Header". 
+Extended Messages contain Data Blocks of Data Size, defined in the Extended Message, that are either sent in a 
+single Message or as a series of Chunks. When the Data Block is sent as a series of Chunks, each Chunk in the series, 
+except for the last Chunk, Shall contain MaxExtendedMsgChunkLen bytes. The last Chunk in the series Shall 
+contain the remainder of the Data Block and so could be less than MaxExtendedMsgChunkLen bytes and Shall be 
+padded to the next 4-byte Data Object boundary.
+6.2.1.2.1
+  Chunked
+The Port Partners Shall use the Unchunked Extended Messages Supported field in the Source_Capabilities 
+Message and Unchunked Extended Messages Supported field in the Request Message to determine whether to 
+send Messages of Data Size > MaxExtendedMsgLegacyLen bytes in a single Unchunked Extended Message (see 
+Section 6.4.1.2.1.6, "Unchunked Extended Messages Supported" and Section 6.4.2.6, "Unchunked Extended Messages 
+Supported").
+Table 6.3  Extended Message Header
+Bit(s)
+Start of Packet
+Field Name
+Reference
+15
+SOP*
+Chunked
+Section 6.2.1.2.1
+14…11
+SOP*
+Chunk Number
+Section 6.2.1.2.2
+10
+SOP*
+Request Chunk
+Section 6.2.1.2.3
+9
+SOP*
+Reserved
+8…0
+SOP*
+Data Size
+Section 6.2.1.2.4

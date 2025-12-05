@@ -1,0 +1,79 @@
+Page 604
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.80, "Steps for Rejected VCONN Source Swap" below provides a detailed explanation of what happens at each 
+labeled step in Figure 8.53, "Rejected VCONN Source Swap, initiated by VCONN Source" above.
+Table 8.80  Steps for Rejected VCONN Source Swap
+Step
+Initially VCONN Source
+Initially VCONN off
+1
+The VCONN Source’s Policy Engine directs the Protocol 
+Layer to send a VCONN_Swap Message.
+VCONN is off.
+2
+Protocol Layer creates the VCONN_Swap Message and 
+passes to PHY Layer.
+3
+PHY Layer appends CRC and sends the VCONN_Swap 
+Message. Starts CRCReceiveTimer.
+PHY Layer receives the VCONN_Swap Message and checks 
+the CRC to verify the Message.
+4
+PHY Layer removes the CRC and forwards the 
+VCONN_Swap Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received VCONN_Swap 
+Message information to the Policy Engine that 
+consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+VCONN_Swap Message was successfully sent.
+Policy Engine starts SenderResponseTimer.
+10
+Policy Engine evaluates the VCONN_Swap Message sent 
+by the Source and decides that it is unable and unwilling 
+to do the VCONN Swap. It tells the Protocol Layer to form 
+an Reject Message.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer receives the Reject Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+PHY Layer appends a CRC and sends the Reject Message. 
+Starts CRCReceiveTimer.
+13
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received Reject 
+Message information to the Policy Engine that 
+consumes it.
+14
+The Policy Engine stops the SenderResponseTimer 
+and starts the VCONNOnTimer.
+15
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares the 
+CRC it calculated with the one sent to verify the Message.

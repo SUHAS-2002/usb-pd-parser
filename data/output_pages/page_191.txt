@@ -1,0 +1,35 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 191
+Alternate Mode as it is the first object following the VDM Header. The value 2 refers to the next Alternate Mode and 
+so forth. A value of 111b in the Object Position field Shall indicate that all Active Modes Shall be exited.
+The Number of Data Objects field in both the Command request and Command response (ACK, NAK) Shall be set 
+to 1 since an Exit Mode Command Shall Not contain any VDOs.
+The Responder Shall exit its Active Mode before sending the response Message. The Initiator Shall exit its Active 
+Mode when it receives the ACK. The Responder Shall Not return a BUSY acknowledgment and Shall only return a 
+NAK acknowledgment to a request not containing an Active Mode (i.e., Invalid object position). An Initiator which 
+fails to receive an ACK within tVDMWaitModeExit or receives a NAK or BUSY response Shall exit its Active Mode.
+See Figure 8.112, "DFP to UFP Exit Mode" for more details.
+Figure 6.24, "Exit Mode sequence" shows the sequence of events during the transition between exiting an Active 
+Mode and USB operation. It illustrates when the Responder's Alternate Mode changes and when the Initiator's 
+Alternate Mode changes.
+Figure 6.24 Exit Mode sequence
+6.4.4.3.6
+  Attention
+The Attention Command May be used by the Initiator to notify the Responder that it requires service.
+The value in the Object Position field Shall indicate to which Alternate Mode in the Discover Modes Command the 
+VDO refers (see Figure 6.21, "Example Discover Modes response for a given SVID with 3 Modes") and Shall have been 
+used previously in an Enter Mode Command request for an Active Mode. The value 1 always indicates the first 
+Alternate Mode as it is the first object following the VDM Header. The value 2 refers to the next Alternate Mode and 
+so forth. A value of 000b or 111b in the Object Position field Shall Not be used by the Attention Command.
+DFP (Initiator)
+UFP (Responder)
+Exit Mode
+GoodCRC
+GoodCRC
+ACK
+USB Safe State
+USB or USB Safe
+State
+Mode
+Mode
+USB

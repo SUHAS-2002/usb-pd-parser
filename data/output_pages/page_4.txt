@@ -1,0 +1,64 @@
+Page 4
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+3.2
+1.0
+This version incorporates the following ECNs:
+
+VDM-use Conditions.
+
+tTypeCSinkWaitCap.
+
+tFirstSourceCap Clarification
+
+Hard Reset Clarification.
+
+Unrecognized Country Code
+
+EPR Entry Process-1
+
+SPR AVS Definition
+
+EPR Power Rules Clarifications
+October 2023
+3.2
+1.1
+This version incorporates the following ECNs:
+
+Power Transition time from EPR to PR_Swap
+
+Capabilities Mismatch Update
+
+Deprecate GotoMin and GiveBack Features and Update 
+Power Reserve
+
+EPR Entry requirements Clarification
+
+EPRMDO and Entry Clarification.
+
+Remove 10.2.4 power sharing between ports
+
+Source PDP rating field clarifications
+
+Source Power Rules update.
+
+Source_Info Message Clarifications.
+
+Correction to BMC description.
+
+EPR Source cap clarification.
+
+Delaying of VCONN Swap.
+
+EPR_Request in SPR Mode.
+
+Generic transition diagram.
+
+Removing the usage of Ping message
+
+Sink Standby
+
+Source Info Support
+October 2024
+Revision Version
+Comments
+Issue Date

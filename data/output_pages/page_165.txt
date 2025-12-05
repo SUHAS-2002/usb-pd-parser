@@ -1,0 +1,65 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 165
+Section Table 6.30, "Structured VDM Commands" shows the Commands, which SVID to use with each Command and 
+the SOP* values which Shall be used.
+6.4.4.2.1
+  SVID
+The Standard or Vendor ID (SVID) field Shall contain either a 16-bit USB Standard ID value (SID) or the 16-bit 
+assigned to the vendor by the USB-IF (VID). No other value Shall be present in this field.
+Section Table 6.31, "SVID Values" lists specific SVID values referenced by this specification.
+6.4.4.2.2
+  VDM Type
+The VDM Type field Shall be set to one indicating that this is a Structured VDM.
+6.4.4.2.3
+  Structured VDM Version
+The Structured VDM Version (Major)/Structured VDM Version (Minor) fields indicate the level of functionality 
+supported in the Structured VDM part of the specification. This is not the same Version as the Version of this 
+specification. The Structured VDM Version (Major) Shall be set to 01b to indicate Version 2.x with the Structured 
+VDM Version (Minor) field set as appropriate based on whether the Port is implemented to USB PD Revision 3.1, 
+Version 1.6 (or newer) or a prior Version.
+To ensure interoperability with existing PDUSB products, PDUSB products Shall support every Structured VDM 
+Version number starting from Version 1.0.
+On receipt of a VDM Header with a higher Version number than it supports, a Port or Cable Plug Shall respond using 
+the highest Version number it supports. On receipt of a VDM Header with a lower Version number than it supports, 
+a Port or Cable Plug Shall respond using the same Version number it received.
+The Structured VDM Version (Major)/Structured VDM Version (Minor) fields of the Discover Identity Command 
+sent and received during the Discovery Process Shall be used to determine the lowest common Structured VDM 
+Version supported by the Port Partners or Cable Plug and Shall continue to operate using this Specification Revision 
+until they are Detached. After discovering the Structured VDM Version, the Structured VDM Version (Major)/
+Structured VDM Version (Minor) fields Shall match the agreed common Structured VDM Version.
+Table 6.30  Structured VDM Commands
+Command
+VDM Header SVID 
+Field
+SOP* used
+Discover Identity
+Shall only use the PD SID.
+ Shall only use SOP/SOP’.
+Discover SVIDs
+Shall only use the PD SID.
+ Shall only use SOP/SOP’.
+Discover Modes
+Valid with any SVID.
+Shall only use SOP/SOP’.
+Enter Mode
+Valid with any SVID.
+Valid with SOP*.
+Exit Mode
+Valid with any SVID.
+Valid with SOP*.
+Attention
+Valid with any SVID.
+Valid with SOP*.
+SVID Specific Commands
+Valid with any SVID.
+Valid with SOP* (defined by SVID).
+Table 6.31  SVID Values
+Parameter
+Value
+Description
+PD SID
+0xFF00
+Standard ID allocated to this specification by USB-IF.
+DPTC SID
+0xFF01
+Standard ID allocated to [DPTC2.1] by USB-IF.

@@ -1,0 +1,62 @@
+Page 368
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 7.31 Transition Diagram for Increasing the Programmable Power Supply Voltage
+Pps Transition Interval
+Source VOLD
+Source VNEW
+Sink draws current continuously (not to exceed negotiated current)
+Source
+� V
+3
+Source Port
+Policy Engine
+Sink Port
+Policy Engine
+Source Port
+Device Policy Mgr
+Source Port
+Power Supply
+Sink Port
+Device Policy Mgr
+Sink Port
+Power Supply
+Port to Port 
+Messaging
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Send
+Accept
+Evaluate
+Accept
+Send
+PS_RDY
+Evaluate
+PS_RDY
+1
+2
+4
+5
+PSTransitionTimer
+tPpsSrcTransSmall, tPpsSrcTransLarge
+Good 
+CRC
+Good 
+CRC
+Source Port
+Current
+CL doesn’t change
+Current may change (not to exceed negotiated current)
+Source 
+CL Current
+Sink 
+VBUS Current
+Sink Port
+Current
+VOLD
+Source Port
+Voltage
+VNEW
+Source 
+VBUS Voltage

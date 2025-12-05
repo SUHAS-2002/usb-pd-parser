@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 175
+6.4.4.3.1.5
+  DFP VDO
+The DFP VDO Shall be returned by Ports capable of operating as a DFP; including those implemented by Hosts, Hubs 
+and Power Bricks. The DFP VDO Shall be returned when the Product Type (DFP) field in the ID Header VDO is given 
+as Power Brick, PDUSB Host or PDUSB Hub. Table 6.40, "DFP VDO" defines the DFP VDO that Shall be sent.
+6.4.4.3.1.5.1
+  VDO Version Field
+The DFP VDO Version field Shall contain a VDO Version for this VDM Version number. This field indicates the 
+expected content for the DFP VDO.
+6.4.4.3.1.5.2
+  Host Capability Field
+The Host Capability bit-field Shall describe whether the DFP can operate as a PDUSB Host and the DFP's 
+Capabilities when operating as a PDUSB Host.
+Power Bricks and PDUSB Hubs Shall set the Host Capability bits to zero.
+6.4.4.3.1.5.3
+  Connector Type Field
+The Connector Type (Legacy) field was previously used for the UFP VDO's Connector Type. Shall be set to 00b by 
+the Cable Plug and Shall be Ignored by the receiver. The receiver can find this information in the Connector Type 
+field in the ID Header VDO (Section 6.4.4.3.1.1.7, "Connector Type Field").
+6.4.4.3.1.5.4
+  Port Number Field
+The Port Number field Shall be a Static unique number that unambiguously identifies each [USB Type-C 2.4] DFP, 
+including DRPs, on the device.
+Note:
+This number is independent of the USB Port number.
+Table 6.40  DFP VDO
+Bit(s)
+Field
+Description
+B31…29
+DFP VDO Version
+Version Number of the VDO (not this specification Version):
+
+Version 1.2 = 010b
+Values 011b…111b are Reserved and Shall Not be used
+B28…27
+Reserved
+Shall be set to zero.
+B26…24
+Host Capability
+Bit
+Description
+0
+[USB 2.0] Host Capable
+1
+[USB 3.2] Host Capable
+2
+[USB4] Host Capable
+B23…22
+Connector Type 
+(Legacy)
+Shall be set to 00b.
+B21…5
+Reserved
+Shall be set to zero.
+B4…0
+Port Number
+Unique Port number to identify a specific Port on a multi-Port device.

@@ -1,0 +1,38 @@
+Page 910
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.19.8
+  Dual-Role (Source Port) Give Sink Capabilities State Diagram
+Figure 8.181, "Dual-Role (Source) Give Sink Capabilities diagram" shows the state diagram for a Dual-Role device, 
+presently operating as a Source, on receiving a Get_Sink_Cap Message. See also Section , "A Source Port Shall report 
+its Capabilities in a series of 32-bit Power Data Objects (see Table 6.7, "Power Data Object") as part of a 
+Source_Capabilities Message (see Figure 6.13, "Example Capabilities Message with 2 Power Data Objects"). Power 
+Data Objects are used to convey a Source Port's Capabilities to provide power including Dual-Role Power ports 
+presently operating as a Sink.".
+Figure 8.181 Dual-Role (Source) Give Sink Capabilities diagram
+8.3.3.19.8.1
+  PE_DR_SRC_Give_Sink_Cap State
+The Policy Engine Shall transition to the PE_DR_SRC_Give_Sink_Cap state, from the PE_SRC_Ready state, when a 
+Get_Sink_Cap Message or EPR_Get_Sink_Cap Message is received. 
+
+On entry to the PE_DR_SRC_Give_Sink_Cap state the Policy Engine Shall request the Device Policy 
+Manager for the current system capabilities. The Policy Engine Shall then request the Protocol Layer to 
+send a Sink_Capabilities Message containing these capabilities. The Policy Engine Shall send:
+
+A Sink_Capabilities Message when a Get_Sink_Cap Message is received or
+
+An EPR_Sink_Capabilities Message when a EPR_Get_Sink_Cap Message is received.
+The Policy Engine Shall transition back to the PE_SRC_Ready state (see Figure 8.132, "Source Port State Diagram") 
+when:
+
+The Sink_Capabilities Message has been successfully sent.
+Get_Sink_Cap_Extended Message
+received
+Sink_Capabilities_Extended
+Message sent
+PE_SRC_Ready
+PE_DR_SRC_Give_Sink_Cap_Ext
+Actions on entry:
+Get present extended sink capabilities from Device Policy Manager
+Send Sink_Capabilities_Extended Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

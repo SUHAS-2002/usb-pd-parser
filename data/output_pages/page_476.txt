@@ -1,0 +1,60 @@
+Page 476
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.2.1.3
+  Entering EPR Mode (Failure of VCONN Swap)
+This is an example of an Enter EPR Mode operation where the Sink requests EPR Mode when this process fails due 
+to a failure of the VCONN Swap process. Figure 8.14, "Entering EPR Mode (Failure of VCONN Swap)" shows the 
+Messages as they flow across the bus and within the devices to accomplish the Enter EPR process.
+Figure 8.14 Entering EPR Mode (Failure of VCONN Swap)
+: Protocol
+1: Send EPR_Mode (Enter)
+: PHY
+: PHY
+: Protocol
+2: EPR_Mode (Enter)
+3: EPR_Mode (Enter) + CRC
+4: EPR_Mode (Enter)
+Start CRCReceiveTimer
+5: EPR_Mode (Enter) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: EPR_Mode (Enter) sent
+Start SinkEPREnterTimer
+Start SenderResponseTimer
+10: Send EPR_Mode (Enter Acknowledged)
+11: EPR_Mode (Enter Acknowledged)
+12: EPR_Mode (Enter Acknowledged) + CRC
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: EPR_Mode (Enter Acknowledged) sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+EPR Mode is not entered.  Sink Initiates Soft Reset.
+Sink
+Source
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+13: EPR_Mode (Enter Acknowledged)
+14: EPR_Mode (Enter Acknowledged) received
+19: Optional VCONN Swap Process – Source fails to become VCONN Source
+20: Send EPR_Mode (Enter Failed)
+21: EPR_Mode (Enter Failed)
+22: EPR_Mode (Enter Failed) + CRC
+Stop SinkEPREnterTimer
+25: GoodCRC
+26: GoodCRC + CRC
+27: GoodCRC
+28: EPR_Mode (Enter Failed) sent
+Start CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+23: EPR_Mode (Enter Failed)
+24: EPR_Mode (Enter Failed) received

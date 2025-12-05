@@ -1,0 +1,67 @@
+Page 516
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Accept Message was successfully sent.
+19
+The DPM indicates that the Data Reset process is 
+complete.
+The Policy Engine directs the Protocol Layer to 
+generate a Data_Reset_Complete Message. 
+20
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+21
+PHY Layer appends CRC and sends the 
+Data_Reset_Complete Message. Starts 
+CRCReceiveTimer.
+PHY Layer receives the Data_Reset_Complete Message 
+and compares the CRC it calculated with the one sent to 
+verify the Message.
+22
+PHY Layer removes the CRC and forwards the 
+Data_Reset_Complete Message to the Protocol Layer.
+23
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Data_Reset_Complete Message information to the 
+Policy Engine that consumes it.
+The Policy Engine informs the DPM that a 
+Data_Reset_Complete Message has been received.
+24
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+25
+PHY Layer receives the GoodCRC and checks the CRC to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+26
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+27
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Data_Reset_Complete Message was successfully sent.
+The Policy Engine informs the DPM that the 
+Data_Reset_Complete Message was successfully sent.
+The Data Reset is complete as defined in Section 6.3.14, "Data_Reset Message" Step 5. Port Partners re-establish a USB data 
+connection.
+Table 8.53  Steps for a DFP Initiated Data Reset where the DFP is the VCONN Source
+Step
+DFP/VCONN Source (Reset Initiator)
+UFP (Reset Responder)

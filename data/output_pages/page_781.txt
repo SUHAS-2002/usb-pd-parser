@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 781
+8.3.2.14.4.3
+  DFP to Cable Plug Enter Mode
+Figure 8.113, "DFP to Cable Plug Enter Mode" shows an example sequence between a DFP and a Cable Plug that 
+occurs after the DFP has discovered supported SVIDs and Modes at which point it selects and enters a Mode.
+Figure 8.113 DFP to Cable Plug Enter Mode
+: DFP Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Cable Plug Policy Engine
+DFP
+Cable Plug
+Supported SVIDs/Modes Discovered
+Enter USB Safe Mode
+Wait tCableMessage before 
+transmission
+19: Send Enter Mode
+20: Enter Mode
+21: Enter Mode + CRC
+22: Enter Mode
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+23: Enter Mode received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+27: Enter Mode sent
+Start VDMModeEntryTimer
+10: Send Enter Mode ACK
+11: Enter Mode ACK
+12: Enter Mode ACK + CRC
+13: Enter Mode ACK
+Check MessageID against local copy
+Store copy of MessageID
+14: Enter Mode ACK received
+Stop VDMModeEntryTimer
+Enter New Mode
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Enter Mode ACK sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+USB Mode
+USB Mode
+Evaluate Enter Mode request
+Enter New Mode
+Wait tCableMessage before transmission
+New Mode Entered

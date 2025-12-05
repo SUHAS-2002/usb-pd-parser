@@ -1,0 +1,40 @@
+Page 912
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.19.10
+  Dual-Role (Sink Port) Give Source Capabilities State Diagram
+Figure 8.182, "Dual-Role (Sink) Get Sink Capabilities State Diagram" shows the state diagram for a Dual-Role device, 
+presently operating as a Sink, on receiving a Get_Source_Cap Message. See also Section , "A Source Port Shall report 
+its Capabilities in a series of 32-bit Power Data Objects (see Table 6.7, "Power Data Object") as part of a 
+Source_Capabilities Message (see Figure 6.13, "Example Capabilities Message with 2 Power Data Objects"). Power 
+Data Objects are used to convey a Source Port's Capabilities to provide power including Dual-Role Power ports 
+presently operating as a Sink.".
+Figure 8.183 Dual-Role (Sink) Give Source Capabilities State Diagram
+8.3.3.19.10.1
+  PE_DR_SNK_Give_Source_Cap State
+The Policy Engine Shall transition to the PE_DR_SNK_Give_Source_Cap state, from the PE_SNK_Ready state, when 
+a Get_Source_Cap Message is received. 
+
+On entry to the PE_DR_SNK_Give_Source_Cap State the Policy Engine Shall request the Device Policy 
+Manager for the current system capabilities. The Policy Engine Shall then request the Protocol Layer to 
+send a Source Capabilities Message containing these capabilities. 
+
+The Policy Engine Shall send:
+
+A Source_Capabilities Message when a Get_Source_Cap Message is received or
+
+An EPR_Source_Capabilities Message when a EPR_Get_Source_Cap Message is received.
+The Policy Engine Shall transition to the PE_SNK_Ready state (see Figure 8.133, "Sink Port State Diagram") when:
+
+The Source Capabilities Message has been successfully sent.
+(In EPR Mode & Get_Source_Cap Message) |
+(In SPR Mode & EPR_Get_Source_Cap Message)
+Source capabilities Message sent
+PE_SNK_Ready
+PE_DR_SNK_Give_Source_Cap
+Actions on entry:
+Get present Source capabilities from Device Policy Manager
+Send Capabilities Message (based on Device Policy Manager response):
+• If Get_Source_Cap Message received send Source_Capabilities Message.
+• In EPR_Get_Source_Cap Message received send EPR_Source_Capabilities Message
+Power = Explicit Contract
+PD = Connected

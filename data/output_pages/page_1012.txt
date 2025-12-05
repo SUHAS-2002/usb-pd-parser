@@ -1,0 +1,68 @@
+Page 1012
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 10.7 EPR Source Power Rule Illustration for Fixed PDOs
+10.2.3.3.1
+  EPR Adjustable Voltage Supply (AVS) Voltage Ranges
+Table 10.15, "EPR Adjustable Voltage Supply (AVS) Voltage Ranges" shows the Minimum and Maximum Voltage for 
+the EPR AVS ranges.
+The voltage output at the Source's connector Shall be +/-5% for both the Maximum Voltage and the Minimum 
+Voltage.
+Table 10.15  EPR Adjustable Voltage Supply (AVS) Voltage Ranges
+AVS Voltage Ranges
+28V AVS
+36V AVS
+48V AVS
+Maximum Voltage
+28V
+36V
+48V
+Minimum Voltage
+15V
+15V
+15V
+0
+1
+2
+3
+4
+5
+6
+0
+20
+40
+60
+80
+100
+Source PDP Rating (W)
+Current (A)
+120
+140
+160
+180
+200
+220
+240
+RP1 RP2
+5V
+15V
+5 + 9V 5 + 9 + 15V
+20V
+7.5W
+27W
+45W
+15W
+100W
+140W
+180W
+20V
+9V
+5 + 9 + 15V
+5 + 9 + 15V
+28V
+36V
+48V
+5 + 9 + 15V
+5 + 9 + 15V
+20V
+20+28V
+20+28+36V

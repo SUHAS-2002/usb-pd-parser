@@ -1,0 +1,56 @@
+Page 270
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+Policy Engine: Reset state dependent behavior by performing an Explicit Contract Negotiation. 
+
+Power supply: Shall Not change.
+Note:
+When in SPR Mode the Source sends a Source_Capabilities Message and when in EPR Mode the Source 
+sends an EPR_Source_Capabilities Message.
+A Soft Reset is performed using an AMS (see Table 8.8, "AMS: Soft Reset"). Message numbers Shall be set to zero 
+prior to sending the Soft_Reset/Accept Message since the issue might be with the counters. The sender of a 
+Soft_Reset Message Shall reset its MessageIDCounter and RetryCounter, the receiver of the Message Shall reset 
+its MessageIDCounter and RetryCounter before sending the Accept Message response. Any failure in the Soft 
+Reset process will trigger a Hard Reset when SOP Packets are being used or Cable Reset, sent by the DFP only, for 
+any other SOP* Packets; for example a GoodCRC Message is not received during the Soft Reset process (see Section 
+6.8.3, "Hard Reset" and Section 6.8.4, "Cable Reset").
+6.8.2
+  Data Reset
+A Data_Reset Message is used by a Port to reset its USB data connection and to exit all Alternate Modes both with its 
+Port Partner and in the Cable Plug(s).
+
+The Data Reset process May be initiated by either Port Partner sending a Data_Reset Message.
+A Data Reset impacts USB Power Delivery in the following ways:
+
+Shall Not change the Port Power Roles (Source/Sink) or Port Data Roles (DFP/UFP).
+
+Shall Not change the existing Explicit Contract.
+
+Shall cause all Active Modes to be exited.
+
+Shall reset the cable by Power cycling VCONN.
+
+The DFP Shall become the VCONN Source.
+
+If the Data Reset process fails, then the Port Shall enter the ErrorRecovery State as defined in [USB 
+Type-C 2.4].
+See Section 6.3.14, "Data_Reset Message" for details of Data Reset operation.
+6.8.3
+  Hard Reset
+Hard Resets are signaled by an ordered set as defined in Section 5.6.4, "Hard Reset". Both the sender and recipient 
+Shall cause their power supplies to return to their default states (see Section 7.3.3.1, "Source Initiated Hard Reset" 
+and Section 7.3.3.2, "Sink Initiated Hard Reset" for details of voltage transitions). In addition, their respective 
+Protocol Layers Shall be reset as for the Soft Reset. This allows the Attached devices to be in a state where they can 
+re-establish USB PD communication. Hard Reset is retried up to nHardResetCount times (see also Section 6.6.6, 
+"NoResponseTimer" and Section 6.7.3, "Hard Reset Counter"). 
+Note:
+Even though VBUS drops to vSafe0V during a Hard Reset a Sink will not see this as a disconnect since this 
+is expected behavior.
+A Hard Reset Shall Not cause any change to either the Rp/Rd resistor being asserted. 
+If there has been a Data Role Swap the Hard Reset Shall cause the Port Data Role to be changed back to DFP for a 
+Port with the Rp resistor asserted and UFP for a Port with the Rd resistor asserted. 
+When VCONN is supported (see [USB Type-C 2.4]) the Hard Reset Shall cause the Port with the Rp resistor asserted 
+to supply VCONN and the Port with the Rd resistor asserted to turn off VCONN. 
+In effect the Hard Reset will revert the Ports to their default state based on their CC line resistors. Removing and 
+reapplying VCONN from the Cable Plugs also ensures that they re-establish their configuration as either SOP’ or SOP’’ 
+based on the location of VCONN (see [USB Type-C 2.4]).

@@ -1,0 +1,24 @@
+Page 566
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+17
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+18
+The Policy Engine requests that Data Role is changed 
+from UFP (Device) to DFP (Host).
+The Power Delivery Data Role is now a DFP (Host), 
+with Port Data Role set to DFP, still operating as a Sink 
+(Rd asserted).
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Accept Message was successfully sent. 
+The Policy Engine requests that the Data Role is 
+changed to UFP (Device), with Port Data Role set to 
+UFP and continues supplying power as a Source (Rp 
+asserted).
+The Data Role Swap is complete; the Data Roles have been reversed while maintaining the direction of power flow.
+Table 8.67  Steps for Data Role Swap, UFP operating as Sink initiates
+Step
+Initial UFP Sink Port
+Initial DFP Source Port

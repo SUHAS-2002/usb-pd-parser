@@ -1,0 +1,104 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 409
+tSrcTransReq
+SPR 
+Mode
+Time from the last bit 
+of the GoodCRC 
+Message 
+acknowledging the 
+Accept Message in 
+response to the 
+Request Message until 
+the PS_RDY Message 
+must be started.
+Applies only to SPR 
+Mode voltage 
+transitions.
+325
+ms
+Section 7.3
+EPR 
+Mode
+Time from the last bit 
+of the GoodCRC 
+Message 
+acknowledging the 
+Accept Message in 
+response to the 
+Request Message until 
+the PS_RDY Message 
+must be started.
+Applies to EPR Mode 
+voltage transitions and 
+any voltage transition 
+that either begins or 
+ends in EPR Mode.
+760
+ms
+Section 7.3
+tSrcTurnOn
+Transition time from 
+vSafe0V to vSafe5V.
+275
+ms
+Figure 7.10
+Table 7.20
+Table 7.21
+vAvsMaxVoltage
+Maximum Voltage 
+Field in the AVS APDO.
+APDO Max
+Voltage 
+*0.95
+APDO Max
+Voltage * 
+1.05
+V
+Section 7.1.4.3.1
+vAvsMinVoltage
+Minimum Voltage 
+Field in the AVS APDO.
+APDO Min
+Voltage 
+*0.95
+APDO
+Min
+Voltage * 
+1.05
+V
+Section 7.1.4.3.1
+vAvsNew
+Adjustable RDO Output 
+Voltage measured at 
+the Source receptacle.
+RDO 
+Output 
+Voltage 
+*0.95
+RDO 
+Output 
+Voltage
+RDO 
+Output 
+Voltage 
+*1.05
+V
+Section 7.1.8.4
+vAvsSlewNeg
+AVS maximum slew 
+rate for negative 
+voltage changes.
+-30
+mV/µs
+Section 7.1.8.4
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

@@ -1,0 +1,31 @@
+Page 1040
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure E.3 Fast VBUS Discharge
+Cable IR 
+drop
+Cable IR drop
+H2
+Old Voltage
+0V
+vSafe5V(min)
+tSrcFRSwap
+Old Source sends Fast 
+Role Swap signal
+tFRSwapRx
+VBUS at
+Notebook
+CC
+VBUS voltage when it discharges quickly
+N4
+vSafe5V(max)
+VBUS at Hub
+N2
+0A
+-5A
++3A
+In this example the Notebook is drawing 5A prior to the FRS 
+signaling. In other cases it may be drawing less current.
+Current from Notebook to Hub
+N1
+tSnkFRSwap
+<iSnkStdby

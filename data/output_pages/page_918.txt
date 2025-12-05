@@ -1,0 +1,28 @@
+Page 918
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.19.16
+  Dual-Role (Sink Port) Give Source Information State Diagram
+Figure 8.189, "Dual-Role (Source) Give Source Information diagram" shows the state diagram for a Dual-Role device, 
+presently operating as a Sink, on receiving a Get_Source_Info Message. See also Section 6.3.23, "Get_Source_Info 
+Message" and Section 6.4.11, "Source_Info Message".
+Figure 8.189 Dual-Role (Source) Give Source Information diagram
+8.3.3.19.16.1
+  PE_DR_SNK_Give_Source_Info State
+The Policy Engine Shall transition to the PE_DR_SNK_Give_Source_Info state, from the PE_SNK_Ready state, when 
+a Get_Source_Info Message is received.
+On entry to the PE_DR_SNK_Give_Source_Info state the Policy Engine Shall request the present Source information 
+from the Device Policy Manager and then send a Source_Info Message based on this information.
+The Policy Engine Shall transition back to the PE_SNK_Ready state (see Figure 8.133, "Sink Port State Diagram") 
+when:
+
+The Source_Info Message has been successfully sent.
+Get_Source_Info Message
+received
+Source_Info Message sent
+PE_SNK_Ready
+PE_DR_SNK_Give_Source_Info
+Actions on entry:
+Get present source information from Device Policy Manager
+Send Source_Info Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

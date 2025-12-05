@@ -1,0 +1,44 @@
+Page 880
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.16
+  Enter_USB Message State Diagrams
+8.3.3.16.1
+  DFP Enter_USB Message State Diagrams
+Figure 8.166, "DFP Enter_USB Message State Diagram" shows the state diagram for an Enter_USB Message sent by 
+a DFP.
+Figure 8.166 DFP Enter_USB Message State Diagram
+8.3.3.16.1.1
+  PE_DEU_Send_Enter_USB State
+The PE_DEU_Send_Enter_USB State Shall be entered from the PE_SRC_Ready or PE_SNK_Ready State when 
+requested by the Device Policy Manager and the Port is operating as a DFP.
+On entry to the PE_DEU_Send_Enter_USB State the Policy Engine Shall request the Protocol Layer to send an 
+Enter_USB Message and then initialize and run the SenderResponseTimer.
+On exit from the PE_DEU_Send_Enter_USB state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome: Accept Message received, Reject Message received, SenderResponseTimer timeout.
+The Policy Engine Shall transition back to the PE_SRC_Ready or PE_SNK_Ready State depending on the Ports Power 
+Role when:
+
+An Accept Message has been received or
+
+A Wait Message has been received or
+
+A Reject Message has been received
+
+There is a SenderResponseTimer timeout.
+PE_DEU_Send_Enter_USB
+Actions on entry:
+Send Enter_USB Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = connected
+Enter USB (USB Mode)
+request from DPM
+Accept Message Received |
+Reject Message Received |
+Wait Message Received |
+SenderResponseTimer timeout
+PE_SRC_Ready or 
+PE_SNK_Ready (DFP)
+Actions on exit:
+Inform Device Policy Manager of Accept,  
+Wait, Reject or timeout.

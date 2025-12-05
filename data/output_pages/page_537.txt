@@ -1,0 +1,25 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 537
+8.3.2.7
+  Power Role Swap
+8.3.2.7.1
+  Source Initiated Power Role Swap
+8.3.2.7.1.1
+  Source Initiated Power Role Swap (Accept)
+This is an example of a successful Power Role Swap operation initiated by a Port which initially, at the start of this 
+Message sequence, is acting as a Source and therefore has Rp pulled up on its CC wire. It does not include any 
+subsequent Power Negotiation which is required in order to establish an Explicit Contract (see Section 8.3.2.2, 
+"Power Negotiation").
+There are four distinct phases to the Power Role Swap:
+
+A PR_Swap Message is sent.
+
+An Accept Message in response to the PR_Swap Message.
+
+The New Sink sets its power output to vSafe0V, then asserts Rd and sends a PS_RDY Message when this 
+process is complete.
+
+The New Source asserts Rp, then sets its power output to vSafe5V and sends a PS_RDY Message when it 
+is ready to supply power.
+Figure 8.33, "Successful Power Role Swap Sequence Initiated by the Source" shows the Messages as they flow across 
+the bus and within the devices to accomplish the Power Role Swap sequence.

@@ -1,0 +1,97 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 401
+Figure 7.43 Transition Diagram for Fast Role Swap
+Rp Changed 
+to Rd
+Signal Fast 
+Swap
+Detect
+Fast Swap
+Old Sink
+New Sink
+Old Source
+A
+B
+2
+C
+Source Port
+Policy Engine
+Sink Port
+Policy Engine
+Source Port
+Device Policy Mgr
+Source Port
+Power Path
+Sink Port
+Device Policy Mgr
+Sink Port
+Power Path
+Source Port
+Voltage
+Sink Port
+Current
+Port to Port 
+Signaling & 
+Messaging
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+Source 
+Stops
+Send
+FR_Swap
+1
+Send
+Accept
+Evaluate 
+FR_Swap
+New Source = vSafe5V    
+Evaluate
+Accept
+3
+4
+Send
+PS_RDY
+Evaluate
+PS_RDY
+D1
+Sink
+5
+6
+Source
+VBUS< 
+vSafe5V
+Send
+PS_RDY
+7
+VBUS< 
+vSafe5V
+Source 
+VBUS
+Source vSafe5V
+D2
+E
+Ready & Able to Source 
+vSafe5V
+Evaluate
+PS_RDY
+8
+tFRSwapInit
+Rd Changed 
+to Rp
+F
+G
+0 A
+< tSrcFRSwap
+discharging
+Sink
+0 V
+Any voltage 
+> vSafe5V
+No current may be drawn while 
+VBUS is below vSafe5V

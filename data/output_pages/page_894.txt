@@ -1,0 +1,84 @@
+Page 894
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.19.3
+  Policy Engine in Source to Sink Power Role Swap State Diagram
+Dual-Role Ports that combine Source and Sink functionality Shall comprise Source and Sink Policy Engine state 
+machines. In addition, they Shall have the capability to do a Power Role Swap from the PE_SRC_Ready state and 
+Shall return to USB Default Operation on a Hard Reset.
+Figure 8.176, "Dual-Role Port in Source to Sink Power Role Swap State Diagram" shows the additional state diagram 
+required to perform a Power Role Swap from Source to Sink Power Roles and the changes that Shall be followed for 
+error handling.
+Figure 8.176 Dual-Role Port in Source to Sink Power Role Swap State Diagram
+PE_SRC_Ready
+PE_PRS_SRC_SNK_
+Evaluate_Swap
+Actions on entry:
+Get evaluation of swap request 
+from Device Policy Manager
+Power = Explicit Contract
+PD = Connected
+PE_PRS_SRC_SNK_
+Transition_to_off
+Actions on entry:
+Tell Device Policy Manager to turn off 
+power supply
+Power = Transition to stop sourcing
+PD = Connected
+PE_PRS_SRC_SNK_
+Wait_Source_on
+Actions on entry:
+Send PS_RDY Message
+Initialize and run PSSourceOnTimer
+Power = Source off
+PD = Connected
+Power Role Swap required 
+(indication from 
+Device Policy Manager)
+PE_PRS_SRC_SNK_
+Send_Swap
+Actions on entry:
+Send PR_Swap Message
+Initialize and run 
+SenderResponseTimer
+Power = Explicit Contract
+PD = Connected
+Reject Message received |
+Wait Message received |
+SenderResponseTimer 
+timeout
+PE_PRS_SRC_SNK_
+Accept_Swap
+Actions on entry:
+Send Accept Message
+Power = Explicit Contract
+PD = Connected
+Accept received
+PE_PRS_SRC_SNK_
+Reject_PR_Swap
+Actions on entry:
+Send Reject or Wait Message as 
+appropriate
+Power = Explicit Contract
+PD = Connected
+Message sent
+PR_Swap Message received
+Power Role Swap ok
+Power Role Swap not ok |
+Further evaluation 
+required
+Accept Message
+sent
+PS_RDY Message
+received
+PE_SNK_Startup
+PE_PRS_SRC_SNK_
+Assert_Rd
+Actions on entry:
+Request DPM to assert Rd
+Power = Source off
+PD = Connected
+Source turned off
+Rd asserted
+ErrorRecovery
+PSSourceOnTimer Timeout |
+PS_RDY Message not sent after retries (no GoodCRC received)

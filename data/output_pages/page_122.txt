@@ -1,0 +1,54 @@
+Page 122
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.2.1.2.4
+  Data Size
+The Data Size field Shall indicate how many bytes of data in total are in Data Block being returned. The total 
+number of data bytes in the Message Shall Not exceed MaxExtendedMsgLen.
+If the Data Size field is less than MaxExtendedMsgLegacyLen and the Chunked bit is set then the Packet Payload 
+Shall be padded to the next 4-byte Data Object boundary with zeros (0x00). 
+If the Data Size field is greater than expected for a given Extended Message but less than or equal to 
+MaxExtendedMsgLen then the expected fields in the Message Shall be processed appropriately and the additional 
+fields Shall be Ignored.
+6.2.1.2.5
+  Extended Message Examples
+The following examples illustrate the transmission of Extended Messages both Chunked (Chunked bit is one) and 
+Unchunked (Chunked bit is zero). The examples use a Security_Request Message of Data Size 7 bytes which is 
+responded to by a Security_Response Message of Data Size 30 bytes. The sizes of these Messages are arbitrary and 
+are used to illustrate Message transmission; they are not intended to correspond to genuine security related 
+Messages.
+During Negotiation of the Explicit Contract after connection, the Port Partners use the Unchunked Extended 
+Messages Supported field in the Source_Capabilities Message and Unchunked Extended Messages Supported 
+field in the Request Message to determine the value of the Chunked bit (see Table 6.4, "Use of Unchunked Message 
+Supported bit"). When both Port Partners support Unchunked Extended Messages then the Chunked bit is zero 
+otherwise the Chunked bit is one.
+The Chunked bit is used to determine whether:
+
+The Chunk request/response mechanism is used.
+
+Extended Messages are Chunked.
+
+Padding is applied.
+
+The Number of Data Objects field is used.
+The following examples illustrate the expected usage in each case.
+6.2.1.2.5.1
+  Security_Request/Security_Response Unchunked Example
+Figure 6.4, "Example Security_Request sequence Unchunked (Chunked bit = 0)" illustrates a typical sequence for a 
+Security_Request Message responded to by a Security_Response Message using Unchunked Extended Messages 
+(Chunked bit is zero) between a USB Host and a Charger. The entire Data Block is returned in one Message. The 
+Chunk request/response mechanism is not used.
+Table 6.4  Use of Unchunked Message Supported bit
+Source: Source_Capabilities Message
+ Unchunked Message 
+Supported bit = 0
+Unchunked Message 
+Supported bit = 1
+Sink: Request Message
+Unchunked Message 
+Supported bit = 0
+Chunked bit = 1
+Chunked bit = 1
+Unchunked Message 
+Supported bit = 1
+Chunked bit = 1
+Chunked bit = 0

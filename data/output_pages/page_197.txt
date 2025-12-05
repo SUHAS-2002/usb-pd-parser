@@ -1,0 +1,20 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 197
+6.4.5.2
+  Battery Info
+The Battery Info field Shall be used to report additional information about the Battery's present status. The 
+Battery Info field's bits Shall reflect the present conditions under which the Battery is operating in the systems. 
+6.4.5.2.1
+  Invalid Battery Reference
+The Invalid Battery Reference bit Shall be set when the Get_Battery_Status Message contains a reference to a 
+Battery or Battery Slot (see Section 6.5.1.13, "Number of Batteries/Battery Slots Field") that does not exist.
+6.4.5.2.2
+  Battery Present
+The Battery Present bit Shall be set whenever the Battery is present. It Shall always be set for Batteries that are 
+not Hot Swappable Batteries. For Hot Swappable Batteries, the Battery Present bit Shall indicate whether the 
+Battery is Attached or Detached.
+6.4.5.2.3
+  Battery Charging Status
+The Battery Charging Status bits indicate whether the Battery is being charged, discharged or is idle (neither 
+charging nor discharging). These bits Shall be set when the Battery Present bit is set. Otherwise, when the Battery 
+Present bit is zero the Battery Charging Status bits Shall also be zero.

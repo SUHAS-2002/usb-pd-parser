@@ -1,0 +1,58 @@
+Page 602
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Accept Message was successfully sent. The Policy 
+Engine asks the DPM to turn on VCONN.
+19
+The DPM informs the Policy Engine that its power 
+supply is supplying VCONN. The Policy Engine directs 
+the Protocol Layer to generate a PS_RDY Message to tell 
+the Source it can turn off VCONN.
+20
+Protocol Layer creates the PS_RDY Message and passes 
+to PHY Layer.
+21
+PHY Layer receives the PS_RDY Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+PHY Layer appends a CRC and sends the PS_RDY 
+Message. Starts CRCReceiveTimer.
+22
+PHY Layer removes the CRC and forwards the PS_RDY 
+Message to the Protocol Layer. 
+23
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received PS_RDY 
+Message information to the Policy Engine that 
+consumes it.
+24
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+25
+PHY Layer appends a CRC and sends the GoodCRC 
+Message. The Policy Engine stops the VCONNOnTimer, 
+and tells the power supply to stop sourcing VCONN.
+PHY Layer receives GoodCRC Message and compares the 
+CRC it calculated with the one sent to verify the Message.
+26
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+27
+VCONN is off.
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+PS_RDY Message was successfully sent.
+The Port Partners have swapped VCONN Source role.
+Table 8.79  Steps for Source to Sink VCONN Source Swap
+Step
+Initially VCONN Source
+Initially VCONN off

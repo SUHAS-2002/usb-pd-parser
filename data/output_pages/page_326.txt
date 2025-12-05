@@ -1,0 +1,25 @@
+Page 326
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 7.12 Expected AVS/PPS Ripple Relative to an LSB
+7.1.8.2
+  AVS/PPS DNL Errors and Output Voltage/Current Tolerance
+The PPS voltage and current discrete LSB steps have a DNL tolerance as shown in Figure 7.13, "Allowed DNL errors 
+and tolerance of Voltage and Current in AVS/PPS mode" below. In absolute terms the step size of the LSB for both 
+voltage and current is defined by vPpsStep/vAvsStep for voltage and iPpsCLStep for current. Several examples of 
+Valid LSB steps are shown in Figure 7.13, "Allowed DNL errors and tolerance of Voltage and Current in AVS/PPS 
+mode":
+
+The upper end of the DNL error (+1 LSB) shows the case where one step is effectively skipped.
+
+The lower end of the DNL error (-1 LSB) shows the case where the voltage or current set-point 
+remained the same.
+The ideal scenario for the DNL error (=0) matches the typical step size for the voltage or current.
+The intent of DNL is to guarantee that changes to the voltage/current have the correct directionality, and that the 
+maximum step size is clearly defined. 
+Note:
+The Source Should avoid scenarios where multiple consecutive steps have errors close to the Maximum 
+and Minimum DNL.
+time
+voltage
++1 LSB
++1 LSB

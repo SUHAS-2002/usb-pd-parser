@@ -1,0 +1,51 @@
+Page 652
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.11.3.2.3
+  Source Gets Sink EPR Capabilities
+Figure 8.70, "Source Gets Sink's EPR Capabilities" shows an example sequence between a Source and a Sink when 
+the Source gets the Sink's EPR Capabilities. 
+Figure 8.70 Source Gets Sink's EPR Capabilities
+: Protocol
+1: Send EPR_Get_EPR_Sink_Cap
+: PHY
+: PHY
+: Protocol
+2:EPR_Get_EPR_Sink_Cap
+3: EPR_Get_EPR_Sink_Cap + CRC
+4: EPR_Get_EPR_Sink_Cap
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: EPR_Get_EPR_Sink_Cap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:EPR_Get_EPR_Sink_Cap sent
+Start SenderResponseTimer
+10: Send EPR_Sink_Capabilities
+11: EPR_Sink_Capabilities
+12: EPR_Sink_Capabilities + CRC
+13: EPR_Sink_Capabilities
+Check MessageID against local copy
+Store copy of MessageID
+14: EPR_Sink_Capabilities received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get EPR Sink capability 
+Information from DPM
+: Policy Engine
+: Policy Engine
+Source Port
+Sink Port
+Stop SenderResponseTimer
+18: EPR_Sink_Capabilities sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

@@ -1,0 +1,52 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 939
+8.3.3.24.2
+  UFP Structured VDM Exit Mode State Diagram
+Figure 8.202, "UFP Structured VDM Exit Mode State Diagram" shows the state diagram for a UFP in response to an 
+Exit Mode Command.
+Figure 8.202 UFP Structured VDM Exit Mode State Diagram
+8.3.3.24.2.1
+  PE_UFP_VDM_Mode_Exit State
+The Policy Engine transitions to the PE_UFP_VDM_Mode_Exit state from either the PE_SRC_Ready or 
+PE_SNK_Ready state for a UFP when:
+
+A Structured VDM Exit Mode Command request is received from the DFP.
+On entry to the PE_UFP_VDM_Mode_Exit state the Policy Engine Shall request the Device Policy Manager to exit the 
+Mode indicated in the Command.
+The Policy Engine Shall transition to the PE_UFP_VDM_Mode_Exit_ACK state when:
+
+The Device Policy Manager indicates that the Mode has been exited.
+The Policy Engine Shall transition to the PE_UFP_VDM_Mode_Exit_NAK state when:
+
+The Device Policy Manager indicates that the Command response to the Exit Mode Command request is 
+NAK.
+PE_UFP_VDM_Mode_Exit
+Actions on entry:
+Request DPM to evaluate request to exit 
+the requested Mode
+Power = Explicit Contract
+PD = Connected
+Exit Mode request
+received
+Exit Mode ACK
+sent1
+PE_UFP_VDM_Mode_Exit_ACK
+Actions on entry:
+Send Exit Mode ACK Command
+Power = Explicit Contract
+PD = Connected
+Mode exited
+PE_SRC_Ready or PE_SNK_Ready (UFP)
+Actions on entry:
+Power = Explicit Contract
+PD = Connected
+PE_UFP_VDM_Mode_Exit_NAK
+Actions on entry:
+Send Exit Mode NAK Command
+Power = Explicit Contract
+PD = Connected
+DPM says NAK
+Exit Mode 
+NAK sent
+1)
+The UFP is required to be in USB operation or USB Safe State at this point.

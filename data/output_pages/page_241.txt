@@ -1,0 +1,44 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 241
+6.5.13.3
+  XID Field
+The XID field Shall contain the 32-bit XID provided by the USB-IF to the vendor who in turns assigns it to a product. 
+If the vendor does not have an XID, then it Shall return zero in this field (see [USB 2.0] and [USB 3.2]).
+6.5.13.4
+  Firmware Version Field
+The FW Version field Shall contain an 8-bit firmware version number assigned to the device by the vendor. 
+6.5.13.5
+  Hardware Version Field
+The HW Version field Shall contain an 8-bit hardware version number assigned to the device by the vendor. 
+6.5.13.6
+  SKEDB Version Field
+The SKEDB Version field contains the version level of the SKEDB. Currently only Version 1 is defined.
+6.5.13.7
+  Load Step Field
+The Load Step field contains bits indicating the Load Step Slew Rate and Magnitude that this Sink prefers. See 
+Section 7.1.12.1, "Voltage Regulation Field" for further details.
+6.5.13.8
+  Sink Load Characteristics Field
+The Sink Shall report its preferred load characteristics in the Sink Load Characteristics field. Regardless of this 
+value, in operation its load Shall Not exceed the Capabilities reported in the Source_Capabilities_Extended Message.
+6.5.13.9
+  Compliance Field
+The Compliance field Shall contain the types of Sources the Sink has been tested and certified with (see Section 
+7.1.12.3, "Compliance Field").
+6.5.13.10
+  Touch Temp
+The Touch Temp field Shall report the IEC standard used to determine the surface temperature of the Sink's 
+enclosure. Safety limits for the Sink's touch temperature are set in applicable product safety standards (e.g., [IEC 
+60950-1] or [IEC 62368-1]). The Sink May report when its touch temperature performance conforms to the TS1 
+or TS2 limits described in [IEC 62368-1].
+6.5.13.11
+  Battery Info
+The Battery Info field Shall report the number of Fixed Batteries and Hot Swappable Battery slots the Sink 
+supports. This field Shall independently report the number of Battery Slots and the number of Fixed Batteries. The 
+information reported in the Battery Info field Shall match that reported in the Number of Batteries/Battery Slots 
+field of the Source_Capabilities_Extended Message. 
+A Sink Shall have no more than 4 Fixed Batteries and no more than 4 Battery Slots. 
+Fixed Batteries Shall be numbered consecutively from 0 to 3. The number assigned to a given Fixed Battery Shall 
+Not change between Attach and Detach. 
+Battery Slots Shall be numbered consecutively from 4 to 7. The number assigned to a given Battery Slot Shall Not 
+change between Attach and Detach.

@@ -1,0 +1,94 @@
+Page 1046
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure E.5 VBUS discharges quickly before FR_Swap message is sent after adapter disconnected
+Table E.4  VBUS discharges quickly after adapter disconnected
+Step #
+Hub
+Laptop
+1
+The power adapter is Detached from the Hub.
+2
+Hub detects power adapter disconnect (H1) causing 
+VHubVB to drop below 5.5V very rapidly.
+3
+Hub sends Fast Role Swap Request on CC (H2) and starts 
+monitoring VHubVB (H3). Hub opens sourcing switch 
+(H4). Hub also starts a tSnkFRSwap timer.
+4
+Hub closes the switch (H5) to use the hold-up 
+capacitor to supply VBUS to the peripheral(s). 
+Systems with a holding cap permanently in place do 
+not need the switch (H5). Hub does not draw more 
+than iSnkStdby from VBUS, until the tSnkFRSwap 
+timer expires.
+5
+Laptop detects Fast Role Swap Request on CC (N1) 
+that triggers sending of the FR_Swap Message. This 
+can happen at any point in the following steps so 
+long as it is within 15 ms (tFRSwapInit).
+6
+Laptop opens the sinking switch (N2), as quickly as 
+possible to minimize power drained from Hub after 
+the Fast Role Swap Request.
+7
+Laptop begin monitoring VBUS (N3) to know when 
+to turn the laptop into a Source
+. 
+Hub:
+Start Fast 
+Swap Signal
+Notebook: 
+FRS signal 
+detected
+Old Sink
+New Sink (0.5A, 0.9A, 1.5A, or 3.0A)
+Adapter
+Sink Port
+Device Policy Mgr
+Sink Port
+Power Path
+Source Port
+Voltage
+Sink Port
+Current
+Signals to/
+from DPM & 
+policy 
+engine
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+Hub:
+Adapter 
+Detached
+Detected
+New Source = vSafe5V    
+Sink
+Source
+Hub:
+VBUS <
+vSafe5V 
+(max)
+Source vSafe5V
+Turning On 
+Source
+Sink
+H1
+H2
+N1
+H4
+Waiting to Sink
+vSafe5V (max)
+Hub: 
+VBUS > vSafe5V 
+and sinking
+Notebook: 
+Sourcing 5V
+N4
+N3
+N2

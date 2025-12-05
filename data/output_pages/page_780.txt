@@ -1,0 +1,15 @@
+Page 780
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the Exit 
+Mode Command ACK response was successfully sent.
+Both DFP and UFP are in USB Operation
+Table 8.139  Steps for DFP to UFP Exit Mode
+Step
+DFP
+UFP

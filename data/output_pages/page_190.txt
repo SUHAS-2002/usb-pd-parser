@@ -1,0 +1,39 @@
+Page 190
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 6.23 Unsuccessful Enter Mode sequence due to NAK
+Once the Alternate Mode is entered, the device Shall remain in that Active Mode until the Exit Mode Command is 
+successful (see Section 6.4.4.3.5, "Exit Mode Command").
+The following events Shall also cause the Port Partners and Cable Plug(s) to exit all Active Modes:
+
+A PD Hard Reset.
+
+Error Recovery.
+
+The Port Partners or Cable Plug(s) are Detached.
+
+A Cable Reset (only exits the Cable Plug's Active Modes).
+
+A Data Reset (removing power briefly resets all the Active Modes in the Cable Plug).
+The Initiator Shall return to USB Operation within tVDMExitMode of a disconnect, of Hard Reset Signaling being 
+detected or Error Recovery.
+The Responder Shall return to either USB operation or USB Safe State within tVDMExitMode of a disconnect, of 
+Hard Reset Signaling being detected or Error Recovery.
+A DR_Swap Message Shall Not be sent during Modal Operation between the Port Partners (see Section 6.3.9, 
+"DR_Swap Message").
+6.4.4.3.5
+  Exit Mode Command
+The Exit Mode Command is used by an Initiator (DFP) to command a Responder (UFP or Cable Plug) to exit its Active 
+Mode and return to normal USB operation. Only the DFP Shall initiate the Exit Mode Process.
+The value in the Object Position field Shall indicate to which Alternate Mode in the Discover Modes Command the 
+VDO refers (see Figure 6.21, "Example Discover Modes response for a given SVID with 3 Modes") and Shall have been 
+used previously in an Enter Mode Command request for an Active Mode. The value 1 always indicates the first 
+DFP (Initiator)
+UFP (Responder)
+Enter Mode
+GoodCRC
+GoodCRC
+NAK
+USB Safe State
+USB
+USB or USB Safe State
+USB

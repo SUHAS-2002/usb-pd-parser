@@ -1,0 +1,30 @@
+Page 1036
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+D.2
+  Subtraction Scheme
+D.2.1
+  Sample Circuitry
+The sample Subtraction BMC receiver shown in Figure D.8, "Circuit Block of BMC Subtraction Receiver" consists of 
+the two Low Pass Filters (LPF1 and LPF2), a Subtractor, an Edge Detector and a logic block for bit recognition. The 
+time constant of the first and second LPF are 200ns and 300ns, respectively. The Subtractor subtracts the LPF1 
+output from the LPF2 output. The Edge Detector controlled by two voltage thresholds, Vth, H and Vth, L to recover 
+the data.
+Figure D.8 Circuit Block of BMC Subtraction Receiver
+D.2.2
+  Output of Each Circuit Block
+Figure D.9, "(a) Output of LPF1 and LPF2 (b) Subtraction of LPF1 and LPF2 Output" (a) shows the output of LPF1 as 
+the red solid line and LPF2 as the blue dash line as well as the [USB 2.0] noise in green solid line. Figure D.9, "(a) 
+Output of LPF1 and LPF2 (b) Subtraction of LPF1 and LPF2 Output" (b) shows the voltage difference between the 
+two output filters, Vdiff = Vcc_afterLPF1 - Vcc_afterLPF2. The Vdiff waveform looks very similar to the Finite 
+Difference output waveform shown in Figure D.6, "Output of Finite Difference in dash line and Edge Detector in solid 
+line" so that the data recovery method through the edge detector is the same as described in Section D.1.3, "Data 
+Recovery".
+Figure D.9 (a) Output of LPF1 and LPF2 (b) Subtraction of LPF1 and LPF2 Output
+D.2.3
+  Subtractor Output at Power Source and Power Sink
+The following figures shows the example when the VBUS current increases from 0A to 5A and then decreases to 0A 
+with high load step rate. The output of the LPF1 and the Subtractor at Power Source and Power Sink are shown in 
+Figure D.10, "Output of the BMC LPF1 in blue dash curve and the Subtractor in red solid curve (a) at Power Source (b) 
+at Power Sink" (a) and (b), respectively. Although the BMC signals at Power Source and Power Sink shift toward the 
+opposite direction, the Subtractor outputs at Power Source and Power Sink are almost identical disregard of the 
+opposite direction of the DC offset. 

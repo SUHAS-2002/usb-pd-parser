@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 129
+6.3.1
+  GoodCRC Message
+The GoodCRC Message Shall be sent by the receiver to acknowledge that the previous Message was correctly 
+received (i.e., had a GoodCRC Message). The GoodCRC Message Shall return the Message's MessageID so the sender 
+can determine that the correct Message is being acknowledged. The first bit of the GoodCRC Message Shall be 
+returned within tTransmit after receipt of the last bit of the previous Message.
+BIST does not send the GoodCRC Message while in a Continuous BIST Mode (see Section 6.4.3, "BIST Message").
+The retry mechanism is triggered when the Message sender fails to receive a GoodCRC Message before the 
+CRCReceiveTimer expires. It is used by the Message sender to detect that the Message was not correctly received 
+by the Message recipient due to noise or other disturbance on the Configuration Channel (CC). The retry mechanism 
+Shall Not be used for any other purpose such as a means of gaining time for processing the required response to 
+the received Message.
+6.3.2
+  GotoMin Message (Deprecated)
+The GotoMin (Deprecated) Message has been Deprecated. The 0_0010 Message Type is no longer Valid and Shall 
+be responded to by a Not_Supported Message.
+6.3.3
+  Accept Message
+The Accept Message is a Valid response in the following cases:
+
+It Shall be sent by the Source, in SPR Mode, to signal the Sink that the Source is willing to meet the 
+Request Message.
+
+It Shall be sent by the Source, in EPR Mode, to signal the Sink that the Source is willing to meet the 
+EPR_Request Message.
+
+It Shall be sent by the recipient of the PR_Swap Message to signal that it is willing to do a Power Role 
+Swap and has begun the Power Role Swap AMS.
+
+It Shall be sent by the recipient of the DR_Swap Message to signal that it is willing to do a Data Role Swap 
+and has begun the Data Role Swap AMS.
+
+It Shall be sent by the recipient of the VCONN_Swap Message to signal that it is willing to do a VCONN Swap 
+and has begun the VCONN Swap AMS.
+
+It Shall be sent by the recipient of the FR_Swap Message to indicate that it has begun the Fast Role Swap 
+AMS.
+
+It Shall be sent by the recipient of the Soft_Reset Message to indicate that it has completed its Soft Reset.
+
+It Shall be sent by the recipient of the Enter_USB Message to indicate that it has begun the Enter USB 
+AMS.
+
+It Shall be sent by the recipient of the Data_Reset Message to indicate that it has begun the Data Reset 
+AMS.
+The Accept Message Shall be sent within tReceiverResponse of the receipt of the last bit of the Message (see Section 
+6.6.2, "SenderResponseTimer").
+6.3.4
+  Reject Message
+The Reject Message is a Valid response in the following cases:
+
+It Shall be sent to signal the Sink, in SPR Mode, that the Source is unable to meet the Request Message. 
+This May be due an Invalid request or because the Source can no longer provide what it previously 
+Advertised.

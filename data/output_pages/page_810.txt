@@ -1,0 +1,44 @@
+Page 810
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.16.2.2
+  Cable Plug Entering USB4 Mode (Reject)
+This is an example of an Enter USB operation where the DFP requests [USB4] mode when this is an Invalid mode 
+of operation for the Cable Plug. Figure 8.123, "Cable Plug Entering USB4 Mode (Reject)" shows the Messages as they 
+flow across the bus and within the devices to accomplish the Enter USB process.
+Figure 8.123 Cable Plug Entering USB4 Mode (Reject)
+: Protocol
+1: Send Enter_USB (USB4)
+: PHY
+: PHY
+: Protocol
+2: Enter_USB (USB4)
+3: Enter_USB (USB4) + CRC
+4: Enter_USB (USB4)
+Start CRCReceiveTimer
+5: Enter_USB (USB4) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Enter_USB (USB4) sent
+Start SenderResponseTimer
+10: Send Reject
+11: Reject
+12: Reject + CRC
+13: Reject
+14: Reject received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Reject sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+USB4 Mode not entered; USB link is negotiated via legacy mechanisms
+DFP
+Cable Plug
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer

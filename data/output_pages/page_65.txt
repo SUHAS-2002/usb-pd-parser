@@ -1,0 +1,30 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 65
+2.5.3
+  Cable Plugs
+
+Cable Plugs are powered when VCONN is present but are not aware of the status of the Contract between 
+the ports the cable assembly is connecting.
+
+Cable Plugs do not initiate AMSs and only respond to Messages sent to them.
+
+Detach or Communications Failure:
+
+Communications can be interrupted at any time.
+
+There is no communication timeout scheme between the DFP/UFP and Cable Plug. 
+
+The Cable Plug is ready to respond to potentially repeated requests.
+
+Error handling:
+
+The Cable Plug detects Hard Reset Signaling to determine that the Source and Sink have been reset 
+and will need to reset itself (equivalent to a power cycle).
+
+The Cable Plug cannot generate Hard Reset Signaling itself.
+
+The Hard Reset process power cycles both VBUS and VCONN so this is expected to reset the Cable 
+Plugs by itself.
+
+A Cable Plug detects Cable Reset Signaling to determine that it will need to reset itself (equivalent to a 
+power cycle).

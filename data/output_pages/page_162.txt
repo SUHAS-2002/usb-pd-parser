@@ -1,0 +1,49 @@
+Page 162
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4
+  Vendor Defined Message
+The Vendor_Defined Message (VDM) is provided to allow vendors to exchange information outside of that defined 
+by this specification.
+A Vendor_Defined Message Shall consist of at least one Vendor Data Object (VDO), the VDM Header, and May 
+contain up to a maximum of six additional VDOs.
+To ensure vendor uniqueness of Vendor_Defined Messages, all Vendor_Defined Messages Shall contain a Valid 
+USB Standard or Vendor ID (SVID) allocated by USB-IF in the VDM Header.
+Two types of Vendor_Defined Messages are defined: Structured VDMs and Unstructured VDMs. A Structured VDM 
+defines an extensible structure designed to support Modal Operation. An Unstructured VDM does not define any 
+structure and Messages May be created in any manner that the vendor chooses.
+Vendor_Defined Messages Shall Not be used for direct power Negotiation. They May however be used to alter 
+Local Policy, affecting what is offered or consumed via the normal PD Messages.
+The Message format Shall be as shown in Figure 6.15, "Vendor Defined Message".
+Figure 6.15 Vendor Defined Message
+The VDM Header Shall be the first 4-byte object in a Vendor Defined Message. The VDM Header provides Command 
+space to allow vendors to customize Messages for their own purposes. Additionally, vendors May make use of the 
+Commands in a Structured VDM.
+The fields in the VDM Header for an Unstructured VDM, when the VDM Type Bit is set to zero, Shall be as defined 
+in Table 6.28, "Unstructured VDM Header". The fields in the VDM Header for a Structured VDM, when the VDM Type 
+Bit is set to one Shall be as defined in Table 6.29, "Structured VDM Header".
+Both Unstructured VDMs and Structured VDMs Shall only be sent and received after an Explicit Contract has been 
+established. The only exception to this is the Discover Identity Command which May be sent by Source when a 
+Default Contract or an Implicit Contract (in place after Attach, a Power Role Swap or Fast Role Swap) is in place in 
+order to discover Cable Capabilities (see SSection 8.3.3.25.3, "Source Startup Structured VDM Discover Identity of a 
+Cable Plug State Diagram").
+6.4.4.1
+  Unstructured VDM
+The Unstructured VDM does not define the contents of bits B14…0 in the VDM Header. Their definition and use are 
+the sole responsibility of the vendor indicated by the VID. The Port Partners and Cable Plugs Shall exit any states 
+entered using an Unstructured VDM when a Hard Reset appears on PD.
+The following rules apply to the use of Unstructured VDM Messages:
+
+Unstructured VDMs Shall only be used when an Explicit Contract is in place.
+
+Prior to establishing an Explicit Contract Unstructured VDMs Shall Not be sent and Shall be Ignored if 
+received.
+
+Only the DFP Shall be an Initiator of Unstructured VDMs.
+
+Only the UFP or a Cable Plug Shall be a Responder to Unstructured VDM.
+
+Unstructured VDMs Shall Not be initiated or responded to under any other circumstances.
+Header
+No. of Data Objects = 1-7
+VDM Header
+0-6 VDOs

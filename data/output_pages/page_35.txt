@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 35
+
+Compatible with existing spec-compliant USB cables.
+
+Minimizes potential damage from non-compliant cables (e.g., ‘Y’ cables etc.).
+
+Optimized for low-cost implementations.
+This specification defines mechanisms to discover, enter and exit Alternate Modes defined either by a standard or 
+by a particular vendor. These Alternate Modes can be supported either by the Port Partner or by a cable connecting 
+the two Port Partners.
+The specification defines mechanisms to discover the Capabilities of cables which can communicate using Power 
+Delivery.
+To facilitate optimum charging, the specification defines two mechanisms a USB Charger can Advertise for the 
+device to use:
+1)
+A list of Fixed Supply voltages each with a maximum current. The device selects a voltage and current 
+from the list. This is the traditional model used by devices that use internal electronics to manage the 
+charging of their Battery including modifying the voltage and current actually supplied to the Battery. 
+The side-effect of this model is that the charging circuitry generates heat that can be problematic for 
+small form factor devices.
+2)
+A list of programmable voltage ranges, in SPR PPS Mode, each with a maximum current. The device re-
+quests a voltage (in 20mV increments) that is within the Advertised range and a maximum current. The 
+USB PPS Charger delivers the requested voltage until the maximum current is reached at which time 
+the USB PPS Charger reduces its output voltage so as not to supply more than the requested maximum 
+current. During the high current portion of the charge cycle, the USB PPS Charger can be directly con-
+nected (through an appropriate safety device) to the Battery. This model is used by devices that want 
+to minimize the thermal impact of their internal charging circuitry.
+3)
+A list of adjustable voltage ranges, in SPR AVS Mode or EPR AVS Mode, each with a maximum current. 
+The device requests a voltage (in 100mV increments) that is within the Advertised range and a maxi-
+mum current. The USB AVS Charger delivers the requested voltage.
+1.2
+  Purpose
+The USB Power Delivery specification defines a power delivery system covering all elements of a USB system 
+including USB Hosts, USB Devices, Hubs, Chargers and cable assemblies. This specification describes the 
+architecture, protocols, power supply behavior, connectors and cabling necessary for managing power delivery 
+over USB at up to 100W in SPR Mode and 240W in EPR Mode. This specification is intended to be fully compatible 
+with and extend the existing USB infrastructure. It is intended that this specification will allow system OEMs, 
+power supply and Peripheral developers adequate flexibility for product versatility and market differentiation 
+without losing backwards compatibility.
+USB Power Delivery is designed to operate independently of the existing USB bus defined mechanisms used to 
+Negotiate power which are:
+
+[USB 2.0], [USB 3.2] in band requests for high power interfaces.
+
+[USBBC 1.2] mechanisms for supplying higher power (not mandated by this specification).
+
+[USB Type-C 2.4] mechanisms for supplying higher power.
+Initial operating conditions remain the USB Default Operation as defined in [USB 2.0], [USB 3.2], [USB Type-C 2.4] 
+or [USBBC 1.2].
+
+The DFP sources vSafe5V over VBUS.
+
+The UFP consumes power from VBUS.

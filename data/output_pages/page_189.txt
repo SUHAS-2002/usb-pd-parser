@@ -1,0 +1,33 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 189
+On receiving an Enter Mode Command requests the Responder Shall respond with either an ACK or a NAK 
+response. The Responder is not allowed to return a BUSY response. The value in the Object Position field of the 
+Enter Mode Command response Shall contain the same value as the received Enter Mode Command request.
+If the Responder responds to the Enter Mode Command request with an ACK, the Responder Shall enter the 
+Alternate Mode before sending the ACK. The Initiator Shall enter the Alternate Mode on reception of the ACK. 
+Successful transmission of the Message confirms to the Responder that the Initiator will enter an Active Mode.
+See Figure 8.111, "DFP to UFP Enter Mode" for more details.
+If the Responder responds to the Enter Mode Command request with a NAK, the Alternate Mode is not entered. If 
+not presently in Modal Operation the Initiator Shall return to USB operation. If not presently in Modal Operation 
+the Responder Shall remain in either USB operation or the USB Safe State.
+If the Initiator fails to receive a response within tVDMWaitModeEntry it Shall Not enter the Alternate Mode but 
+return to USB operation.
+Figure 6.22, "Successful Enter Mode sequence" shows the sequence of events during the transition between USB 
+operation and entering an Alternate Mode. It illustrates when the Responder's Alternate Mode changes and when 
+the Initiator's Alternate Mode changes. Figure 6.23, "Unsuccessful Enter Mode sequence due to NAK" illustrates that 
+when the Responder returns a NAK the transition to an Alternate Mode do not take place and the Responder and 
+Initiator remain in their default USB roles.
+Figure 6.22 Successful Enter Mode sequence
+DFP (Initiator)
+UFP (Responder)
+Enter Mode
+GoodCRC
+GoodCRC
+ACK
+USB Safe State
+USB
+USB or USB Safe State
+New 
+Mode
+New 
+Mode

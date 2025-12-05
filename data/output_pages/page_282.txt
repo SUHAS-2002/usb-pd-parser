@@ -1,0 +1,56 @@
+Page 282
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Chunked Tx State Machine Shall transition to the TCH_Prepare_To_Send_Chunked_Message state when: 
+
+An Extended Message Request is received from the Policy Engine, and the link is Chunking.
+The Chunked Tx State Machine Shall Discard the Message Request and remain in the 
+TCH_Wait_For_Message_Request_From_Policy_Engine state when: 
+
+The Chunked Rx state is any other than RCH_Wait_For_Message_From_Protocol_Layer, and the 
+Optional Abort Flag has not been implemented.
+The Chunked Tx State Machine Shall Discard the Message Request and enter the TCH_Report_Error state when: 
+
+The Chunked Rx state is any other than RCH_Wait_For_Message_From_Protocol_Layer and the 
+Optional Abort Flag has been implemented.
+6.12.2.1.3.2
+  TCH_Pass_Down_Message State
+On entry to the TCH_Pass_Down_Message state the Chunked Tx State Machine Shall pass the Message to the 
+Protocol Layer.
+The Chunked Tx State Machine Shall transition to the TCH_Wait_For_Transmision_Complete state when: 
+
+The Message has been passed to the Protocol Layer.
+6.12.2.1.3.3
+  TCH_Wait_For_Transmision_Complete State
+The Chunked Tx State Machine Shall transition to the TCH_Message_Sent state when: 
+
+Message Transmitted has been received from the Protocol Layer.
+The Chunked Tx State Machine Shall transition to the TCH_Report_Error state when: 
+
+Transmission Error has been received from the Protocol Layer.
+6.12.2.1.3.4
+  TCH_Message_Sent State
+On entry to the TCH_Message_Sent state the Chunked Tx State Machine Shall:
+
+Inform the Policy Engine that the Message has been sent.
+The Chunked Tx State Machine Shall transition to the TCH_Wait_For_Message_Request_From_Policy_Engine state 
+when: 
+
+The Policy Engine has been informed.
+6.12.2.1.3.5
+  TCH_Prepare_To_Send_Chunked_Message State
+On entry to the TCH_Prepare_To_Send_Chunked_Message state the Chunked Tx State Machine Shall:
+
+Set 'Chunk Number To Send' to zero.
+The Chunked Tx State Machine Shall transition to the TCH_Construct_Chunked_Message state when: 
+
+‘Chunk Number To Send' has been set to zero.
+6.12.2.1.3.6
+  TCH_Construct_Chunked_Message State
+On entry to the TCH_Construct_Chunked_Message state the Chunked Tx State Machine Shall:
+
+Construct a Message Chunk and pass it to the Protocol Layer.
+The Chunked Tx State Machine Shall transition to the TCH_Sending_Chunked_Message state when: 
+
+The Message Chunk has been passed to the Protocol Layer.
+The Chunked Tx State Machine Shall transition to the TCH_Wait_For_Message_Request_From_Policy_Engine state 
+when: 

@@ -1,0 +1,49 @@
+Page 854
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.7
+  Alert State Diagrams
+8.3.3.7.1
+  Source Port Source Alert State Diagram
+Figure 8.140, "Source Port Source Alert State Diagram" shows the state diagram for an Alert Message sent by a 
+Source Port.
+Figure 8.140 Source Port Source Alert State Diagram
+8.3.3.7.1.1
+  PE_SRC_Send_Source_Alert State
+The PE_SRC_Send_Source_Alert state Shall be entered from the PE_SRC_Ready state when the Device Policy 
+Manager indicates that there is a Source alert condition to be reported.
+On entry to the PE_SRC_Send_Source_Alert state the Policy Engine Shall request the Protocol Layer to send an Alert 
+Message.
+The Policy Engine Shall transition to the PE_SRC_Wait_for_Get_Status State when:
+
+The Alert Message has been successfully sent.
+8.3.3.7.1.2
+  PE_SRC_Wait_for_Get_Status State
+On entry to the PE_SRC_Wait_for_Get_Status State the Policy Engine Shall initialize and run the 
+SenderResponseTimer.
+The Policy Engine Shall transition back to the PE_Give_Status State (see Figure 8.151, "Give Status State Diagram") 
+when:
+
+A Get_Status Message is received.
+The Policy Engine Shall transition back to PE_SRC_Ready (see Figure 8.132, "Source Port State Diagram") when:
+
+The SenderResponseTimer times out.
+PE_SRC_Send_Source_Alert
+Actions on entry:
+Send Alert Message
+Power = Explicit Contract 
+PD = connected
+DPM indicates Source 
+alert condition
+Alert 
+Message sent 
+PE_SRC_Ready
+SenderResponseTimer
+Timeout
+PE_SRC_Wait_for_Get_Status
+Actions on entry:
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+PE_Give_Status
+Get_Status
+Message received

@@ -1,0 +1,32 @@
+Page 942
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.25.2
+  Soft/Hard/Cable Reset
+8.3.3.25.2.1
+  Cable Plug Soft Reset State Diagram
+Figure 8.204, "Cable Plug Soft Reset State Diagram" shows the Cable Plug state diagram on reception of a Soft_Reset 
+Message.
+Figure 8.204 Cable Plug Soft Reset State Diagram
+8.3.3.25.2.1.1
+  PE_CBL_Soft_Reset State
+The PE_CBL_Soft_Reset state Shall be entered from any state when a Soft_Reset Message is received from the 
+Protocol Layer.
+On entry to the PE_CBL_Soft_Reset state the Policy Engine Shall reset the Protocol Layer in the Cable Plug and Shall 
+then request the Protocol Layer to send an Accept Message.
+The Policy Engine Shall transition to the PE_CBL_Ready state when:
+
+The Accept Message has been sent or
+
+The Protocol Layer indicates that a transmission error has occurred.
+Accept Message sent |
+Transmission Error indication 
+from Protocol Layer
+Soft Reset Message 
+received
+PE_CBL_Soft_Reset
+Actions on entry:
+Reset Protocol Layer
+Send Accept Message
+Cable = Awake 
+PD = Connected
+PE_CBL_Ready

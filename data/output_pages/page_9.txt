@@ -1,0 +1,204 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 9
+Steve McGowan
+Intel Corporation
+Eric Wen
+Luxshare-ICT
+Tim McKee
+Intel Corporation
+James Kirk
+Luxshare-ICT
+Toby Opferman
+Intel Corporation
+James Stevens
+Luxshare-ICT
+Uma Medepalli
+Intel Corporation
+Josue Castillo
+Luxshare-ICT
+Venkataramani 
+Gopalakrishnan
+Intel Corporation
+Pat Young
+Luxshare-ICT
+Ziv Kabiry
+Intel Corporation
+Scott Shuey
+Luxshare-ICT
+Jia Wei
+Intersil Corporation
+Stone Lin
+Luxshare-ICT
+Weijie Huang 
+iST - Integrated Service 
+Technology Inc.
+Chikara Kakizawa
+Maxim Integrated Products
+Al Hsiao
+ITE Tech. Inc.
+Jacob Scott
+Maxim Integrated Products
+Greg Song
+ITE Tech. Inc.
+Ken Helfrich
+Maxim Integrated Products
+Richard Guo
+ITE Tech. Inc.
+Michael Miskho
+Maxim Integrated Products
+Victor Lin
+ITE Tech. Inc.
+Chris Yokum
+MCCI Corporation
+Y.C. Chou
+ITE Tech. Inc.
+Geert Knapen
+MCCI Corporation
+Kenta Minejima
+Japan Aviation Electronics 
+Industry Ltd. (JAE)
+Terry Moore
+MCCI Corporation
+Mark Saubert
+Japan Aviation Electronics 
+Industry Ltd. (JAE)
+Velmurugan Selvaraj
+MCCI Corporation
+Toshio Shimoyama
+Japan Aviation Electronics 
+Industry Ltd. (JAE)
+Tung-Sheng Lin
+MediaTek Inc.
+Brian Fetz
+Keysight Technologies Inc.
+Satoru Kumashiro
+MegaChips Corporation
+Jit Lim
+Keysight Technologies Inc.
+Brian Marley
+Microchip Technology Inc.
+Koji Asakawa
+Kinetic Technologies Inc.
+Dave Perchlik
+Microchip Technology Inc.
+Babu Mailachalam
+Lattice Semiconductor Corp
+Don Perkins
+Microchip Technology Inc.
+Gianluca Mariani
+Lattice Semiconductor Corp
+Fernando Gonzalez
+Microchip Technology Inc.
+Joel Coplen
+Lattice Semiconductor Corp
+John Sisto
+Microchip Technology Inc.
+Thomas Watza
+Lattice Semiconductor Corp
+Josh Averyt
+Microchip Technology Inc.
+Vesa Lauri
+Lattice Semiconductor Corp
+Kiet Tran
+Microchip Technology Inc.
+Bruce Chuang
+Leadtrend
+Mark Bohm
+Microchip Technology Inc.
+Eilian Liu
+Leadtrend
+Matthew Kalibat
+Microchip Technology Inc.
+Chetan Kopalle
+LeCroy Corporation
+Mick Davis
+Microchip Technology Inc.
+Daniel H Jacobs
+LeCroy Corporation
+Prasanna Vengateshan
+Microchip Technology Inc.
+Jake Jacobs
+LeCroy Corporation
+Rich Wahler
+Microchip Technology Inc.
+Kimberley McKay
+LeCroy Corporation
+Richard Petrie
+Microchip Technology Inc.
+Mike Engbretson
+LeCroy Corporation
+Ronald Kunin
+Microchip Technology Inc.
+Mike Micheletti
+LeCroy Corporation
+Shannon Cash
+Microchip Technology Inc.
+Roy Chestnut
+LeCroy Corporation
+Thomas Farkas
+Microchip Technology Inc.
+Tyler Joe
+LeCroy Corporation
+Venkataraman 
+Krishnamoorthy
+Microchip Technology Inc.
+Phil Jakes
+Lenovo
+Andrew Yang
+Microsoft Corporation
+Do Kyun Kim
+LG electronics
+Anthony Chen
+Microsoft Corporation
+Won-Jong Choi
+LG electronics
+Arvind Murching
+Microsoft Corporation
+Won-Jong Choi
+LG Electronics Ltd.
+Dave Perchlik
+Microsoft Corporation
+Aaron Melgar
+Lion Semiconductor
+David Voth
+Microsoft Corporation
+Chris Zhou
+Lion Semiconductor
+Geoff Shew
+Microsoft Corporation
+Sehyung Jeon
+Lion Semiconductor
+Jayson Kastens
+Microsoft Corporation
+Wonyoung Kim
+Lion Semiconductor
+Kai Inha
+Microsoft Corporation
+Yongho Kim
+Lion Semiconductor
+Marwan Kadado
+Microsoft Corporation
+Dave Thompson
+LSI Corporation
+Michelle Bergeron
+Microsoft Corporation
+Alan Kinningham
+Luxshare-ICT
+Nathan Sherman
+Microsoft Corporation
+Alan Liu
+Luxshare-ICT
+Rahul Ramadas
+Microsoft Corporation
+Scott Brenden
+Intel Corporation
+Randy Aull
+Microsoft Corporation
+Sridharan Ranganathan
+Intel Corporation
+Shiu Ng
+Microsoft Corporation
+Daniel Chen
+Luxshare-ICT
+Tieyong Yin
+Microsoft Corporation

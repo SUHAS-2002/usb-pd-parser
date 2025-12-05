@@ -1,0 +1,47 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 981
+Figure 9.5 Any USB State to USB Attached State Transition (When operating as a Consumer)
+Figure 9.6, "Any USB State to USB Attached State Transition (When operating as a Provider)" shows how a PDUSB 
+Device determines when to transition from the USB Powered State to the USB Attached State when the device is a 
+Provider.
+Figure 9.6 Any USB State to USB Attached State Transition (When operating as a Provider)
+Figure 9.7, "Any USB State to USB Attached State Transition (After a USB Type-C Data Role Swap)" shows how a 
+PDUSB Device using the USB Type-C connector determines when to transition from the USB Powered State to the 
+USB Attached State after a Data Role Swap has been performed i.e., it has just changed from operation as a PDUSB 
+Host to operation as a PDUSB Device. The Data Role Swap is described in Section 6.3.9, "DR_Swap Message". A Hard 
+Reset will also return a Sink acting as a PDUSB Host to PDUSB Device operation as described in Section 6.8.3, "Hard 
+Reset". See Section 7.1.5, "Response to Hard Resets" for additional information on device behavior during Hard 
+Resets.
+VBUS
+Present
+Yes
+No
+Swapping 
+Power
+Roles?
+Any USB 
+State
+USB
+Attached
+Yes
+No
+Hard Reset
+and
+Can Operate
+Hard Reset
+and
+Can’t Operate
+Hard Reset
+and
+Bus Powered
+Lack of PD 
+comms?
+No
+Yes
+Any USB 
+State
+USB
+Attached
+Local Power Source Lost
+Hard 
+Reset

@@ -1,0 +1,72 @@
+Page 1006
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+10.2.3.2.1
+  SPR Programmable Power Supply Voltage Ranges
+The SPR PPS Voltage ranges map to the Fixed Supply Voltages. For each fixed voltage there is a defined voltage range 
+for the matching SPR PPS APDO. Table 10.11, "SPR Programmable Power Supply Voltage Ranges" shows the 
+Minimum and Maximum Voltage for the Programmable Power Supply that corresponds to the Fixed nominal 
+voltage.
+The voltage output at the Source's connector Shall be +/-5% for both the Maximum Voltage and the Minimum 
+Voltage.
+10.2.3.2.2
+  Examples of the use of SPR Programmable Power Supplies
+The following examples illustrate what a power adapter that Advertises a particular PDP Rating May offer:
+1)
+PDP 27W implementation includes:
+
+5V @ 3A,
+
+9V @ 3A, and
+
+9V Prog @ 3A.
+2)
+PDP 36W implementation includes:
+
+5V @ 3A,
+
+9V @ 3A,
+
+15 @ 2.4A,
+
+SPR AVS with 9V - 15V @ 2.4A,
+
+9V Prog @ 3 A, and
+
+15V Prog @ 2.4A.
+3)
+PDP 36W implementation that Optionally includes higher current in the 9V Prog PPS:
+
+5V @ 3A,
+
+9V @ 3A,
+
+15 @ 2.4A,
+
+SPR AVS with 9V - 15V @ 2.4A,
+
+9V Prog @ >3A up to 4A (with a 5A cable) and 15V
+
+Prog @ 2.4A.
+4)
+PDP 50W implementation includes:
+
+5V @ 3A,
+
+9V @ 3A,
+
+15 @ 3A,
+
+20V @ 2.5A,
+Table 10.11  SPR Programmable Power Supply Voltage Ranges
+Fixed Nominal Voltage
+9V Prog
+15V Prog
+20V Prog
+Maximum Voltage
+11V
+16V
+21V
+Minimum Voltage
+5V
+5V
+5V

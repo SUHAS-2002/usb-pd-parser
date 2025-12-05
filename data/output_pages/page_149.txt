@@ -1,0 +1,63 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 149
+To set the Unconstrained Power bit because of an external source, the external source of power Should be either:
+
+An AC Supply, e.g., a Charger, directly connected to the Sink.
+
+Or, in the case of a PDUSB Hub:
+
+A PD Source with its Unconstrained Power bit set.
+
+Multiple PD Sources all with their Unconstrained Power bits set.
+6.4.1.3.1.4
+  USB Communications Capable
+The USB Communications Capable bit Shall only be set for Sinks capable of communication over the USB data 
+lines (e.g., D+/- or SS Tx/Rx).
+6.4.1.3.1.5
+  Dual-Role Data
+The Dual-Role Data bit Shall be set when the Port is Dual-Role Data capable i.e., it supports the DR_Swap Message. 
+This is a Static capability which Shall remain fixed for a given device regardless of the device's present Power Role 
+or Data Role. If the Dual-Role Data bit is set to one in the Source_Capabilities Message the Dual-Role Data bit in 
+the Sink_Capabilities Message Shall also be set to one. If the Dual-Role Dataa bit is set to zero in the 
+Source_Capabilities Message the Dual-Role Data bit in the Sink_Capabilities Message Shall also be set to zero.
+6.4.1.3.1.6
+  Fast Role Swap USB Type-C Current
+The Fast Role Swap required USB Type-C Current field Shall indicate the current level the Sink will require after 
+a Fast Role Swap has been performed.
+The Initial Source Shall Not transmit a Fast Role Swap Request if the Fast Role Swap required USB Type-C Current 
+field is set to zero.
+Initially when the New Source applies vSafe5V it will have Rd asserted but Shall provide the USB Type-C current 
+indicated by the New Sink in this field. If the New Source is not able to supply this level of current, it Shall Not 
+perform a Fast Role Swap. When Rp is asserted by the New Source during the Fast Role Swap AMS (see Section 6.3.19, 
+"FR_Swap Message"), the value of USB Type-C current indicated by Rp Shall be the same or greater than that 
+indicated in the Fast Role Swap required USB Type-C Current field.
+6.4.1.3.2
+  Variable Supply (non-Battery) Power Data Object
+Table 6.18, "Variable Supply (non-Battery) PDO – Sink" describes a Variable Supply (non-Battery) (10b) PDO used 
+by a Sink. See Section 7.1.3, "Types of Sources" for the electrical requirements of the power supply.
+The voltage fields Shall be set to the output voltage range that the Sink requires to operate. The Operational 
+Current field Shall be set to the operational current that the Sink requires at the given voltage range. The absolute 
+voltage, including any voltage variation, Shall Not fall below the Minimum Voltage field value and Shall Not 
+exceed the Maximum Voltage field value. Required operating current is defined as the amount of current a given 
+device needs to be functional. This value could be the maximum current the Sink will ever require or could be 
+sufficient to operate the Sink in one of its modes of operation.
+6.4.1.3.3
+  Battery Supply Power Data Object 
+Table 6.19, "Battery Supply PDO – Sink" describes a Battery Supply (01b) PDO used by a Sink. See Section 7.1.3, 
+"Types of Sources" for the electrical requirements of the power supply.
+Table 6.18  Variable Supply (non-Battery) PDO – Sink
+Bit(s)
+Field
+Description
+B31…30
+Variable Supply
+01b - Variable Supply (non-Battery) PDO
+B29…20
+Maximum Voltage
+Maximum voltage in 50mV units 
+B19…10
+Minimum Voltage
+Minimum voltage in 50mV units
+B9…0
+Operational Current
+Operational current in 10mA units

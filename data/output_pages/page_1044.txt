@@ -1,0 +1,67 @@
+Page 1044
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+E.3
+  FRS Process
+After the initial setup is completed and the laptop has determined both that the Hub can request FRS and that the 
+laptop is able and willing to supply the requested current, the system is ready to support FRS. This section 
+describes the sequence of events that take place during a Fast Role Swap. The following figures and tables do not 
+cover the actions of the Device Policy Manager or the Policy Engine. Those actions occur orthogonally to the 
+electrical events shown in this appendix. However, the diagrams do indicate the inputs/outputs where the DPM 
+and Policy Engine interact with the electrical events:
+
+The laptop sends the FR_Swap Message to initiate the FRS AMS (see Figure 7.43, "Transition Diagram for 
+Fast Role Swap") within 15ms after the laptop detects the Fast Role Swap Request on CC.
+
+The laptop sends the final PS_RDY Message in the FRS AMS only after it is sourcing VBUS. 
+Figure E.4 Slow VBUS discharge after FR_Swap message is sent
+discharging to vSafe5V(max)
+Notebook:
+FRS signal 
+detected
+Old Sink (old current)
+New Sink (0.5A, 0.9A, 1.5A, or 3.0A)
+Adapter
+Hub
+Power Path
+Notebook
+Power Path
+VBUS Voltage
+VBUS Current
+Power Path 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+Hub: 
+Adapter
+Mains Loss 
+Detected
+New Source = vSafe5V    
+Sink
+Source
+Hub: 
+VBUS > vSafe5V  (min) 
+and sinking
+Notebook: 
+Sourcing 5V
+Source vSafe5V
+Wait to Source
+Sink
+Waiting to Sink
+Turning on Source
+Signals to/
+from DPM & 
+Policy 
+Engine
+Hub: 
+Send FRS 
+signal
+H1
+H2
+N1
+N4
+N3
+Notebook:
+Initiates FRS 
+message sequence

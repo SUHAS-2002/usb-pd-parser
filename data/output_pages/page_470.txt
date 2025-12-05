@@ -1,0 +1,65 @@
+Page 470
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.2
+  EPR
+8.3.2.2.2.1
+  Entering EPR Mode
+8.3.2.2.2.1.1
+  Entering EPR Mode (Success)
+This is an example of an Enter EPR Mode operation where the Sink requests EPR Mode when this process succeeds. 
+Figure 8.12, "Entering EPR Mode (Success)" shows the Messages as they flow across the bus and within the devices 
+to accomplish the Enter EPR process.
+Figure 8.12 Entering EPR Mode (Success)
+: Protocol
+1: Send EPR_Mode (Enter)
+: PHY
+: PHY
+: Protocol
+2: EPR_Mode (Enter)
+3: EPR_Mode (Enter) + CRC
+4: EPR_Mode (Enter)
+Start CRCReceiveTimer
+5: EPR_Mode (Enter) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: EPR_Mode (Enter) sent
+Start SinkEPREnterTimer
+Start SenderResponseTimer
+10: Send EPR_Mode (Enter Acknowledged)
+11: EPR_Mode (Enter Acknowledged)
+12: EPR_Mode (Enter Acknowledged) + CRC
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: EPR_Mode (Enter Acknowledged) sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+EPR Mode entered
+Sink
+Source
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+13: EPR_Mode (Enter Acknowledged)
+14: EPR_Mode (Enter Acknowledged) received
+19: Optional VCONN Swap Process – Source becomes VCONN Source
+20: Source reads Cable E-Marker to determine EPR capability – Cable is EPR Capable
+21: Send EPR_Mode (Enter Succeeded)
+22: EPR_Mode (Enter Succeeded)
+23: EPR_Mode (Enter Succeeded) + CRC
+Stop SinkEPREnterTimer
+26: GoodCRC
+27: GoodCRC + CRC
+28: GoodCRC
+29: EPR_Mode (Enter Succeeded) sent
+Start CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+24: EPR_Mode (Enter Succeeded)
+25: EPR_Mode (Enter Succeeded) received

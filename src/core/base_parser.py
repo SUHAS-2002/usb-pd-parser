@@ -1,8 +1,14 @@
+# src/core/base_parser.py
+
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, List, Dict
+
 
 class BaseParser(ABC):
-    """Abstract base parser defining the public interface and common helpers."""
+    """
+    Abstract base parser defining the public interface and common helpers.
+    All concrete PDF parsers (like FullPDFParser) must inherit from this.
+    """
 
     def __init__(self, pdf_strategy: Any):
         self._strategy = pdf_strategy
@@ -23,6 +29,12 @@ class BaseParser(ABC):
         self._pdf_path = value
 
     @abstractmethod
-    def parse(self) -> dict:
-        """Parse the PDF and return structured data."""
+    def parse(self) -> List[Dict]:
+        """
+        Parse the PDF and return structured pages:
+        [
+            {"page_number": int, "text": str},
+            ...
+        ]
+        """
         raise NotImplementedError

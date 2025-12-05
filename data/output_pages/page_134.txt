@@ -1,0 +1,51 @@
+Page 134
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+A Port that receives a Wait Message in response to a PR_Swap Message Shall wait tPRSwapWait after receiving 
+the Wait Message before sending another PR_Swap Message.
+6.3.12.3
+  Wait in response to a DR_Swap Message
+The Wait Message is used when responding to a DR_Swap Message to indicate that a Data Role Swap might be 
+possible in the future. This can occur in any case where the device receiving the DR_Swap Message needs to 
+evaluate the request further. Once it has completed this evaluation one of the Port Partners Should initiate the Data 
+Role Swap process again by sending a DR_Swap Message.
+A Port that receives a Wait Message in response to a DR_Swap Message Shall wait tDRSwapWait after receiving 
+the Wait Message before sending another DR_Swap Message.
+6.3.12.4
+  Wait in response to a VCONN_Swap Message
+The Wait Message is used when responding to a VCONN_Swap Message to indicate that a VCONN_Swap might be 
+possible in the future. This can occur in any case where the device receiving the VCONN_Swap Message needs to 
+evaluate the request further. Once it has completed this evaluation one of the Port Partners Should initiate the 
+VCONN Swap process again by sending a VCONN_Swap Message.
+A Port that receives a Wait Message in response to a VCONN_Swap Message Shall wait tVCONNSwapWait after 
+receiving the Wait Message before sending another VCONN_Swap Message.
+A Port that is currently the VCONN Source Shall respond with an Accept Message (rather than a Wait Message) if the 
+Port Partner's Revision and Version, as reported in the Revision Message, is earlier than R3.2 V1.1. A Port Partner 
+supporting an earlier Revision and Version will not expect a Wait Message and will generate a Soft Reset in response.
+6.3.12.5
+  Wait in response to an Enter_USB Message
+The Wait Message is used, by the UFP, when responding to an Enter_USB Message to indicate that entering the 
+requested USB Mode might be possible in the future. This can occur, for example, in any case where the UFP needs 
+to Negotiate more power to enter the mode. Once the UFP has completed this the DFP Should initiate the Enter USB 
+process again by sending an Enter_USB Message.
+A DFP that receives a Wait Message in response to an Enter_USB Message Shall wait tEnterUSBWait after receiving 
+the Wait Message before sending another Enter_USB Message.
+6.3.13
+  Soft Reset Message
+A Soft_Reset Message May be initiated by either the Source or Sink to its Port Partner requesting a Soft Reset. The 
+Soft_Reset Message Shall cause a Soft Reset of the connected Port Pair (see Section 6.8.1, "Soft Reset and Protocol 
+Error"). If the Soft_Reset Message fails a Hard Reset Shall be initiated within tHardReset of the last 
+CRCReceiveTimer expiring after nRetryCount retries have been completed.
+A Soft_Reset Message is used to recover from Protocol Layer errors; putting the Message counters to a known state 
+to regain Message synchronization. The Soft_Reset Message has no effect on the Source or Sink; that is the 
+previously Negotiated direction. Voltage and current remain unchanged. Modal Operation is unaffected by Soft 
+Reset. However after a Soft Reset has completed, an Explicit Contract Negotiation occurs, in order to re-establish PD 
+Communication and to bring state operation for both Port Partners back to either the PE_SNK_Ready or 
+PE_SRC_Ready states as appropriate (see Section 8.3.3.4, "SOP Soft Reset and Protocol Error State Diagrams").
+A Soft_Reset Message May be sent by either the Source or Sink when there is a Message synchronization error. If 
+the error is not corrected by the Soft Reset, Hard Reset Signaling Shall be issued (see Section 6.8.3, "Hard Reset").
+A Soft_Reset Message Shall be targeted at a specific entity depending on the type of SOP* Packet used. Soft_Reset 
+Messages sent using SOP Packets Shall Soft Reset the Port Partner only. Soft_Reset Messages sent using SOP’ Packet/
+SOP’’ Packets Shall Soft Reset the corresponding Cable Plug only.
+After a VCONN Swap the VCONN Source needs to reset the Cable Plug's Protocol Layer to ensure MessageID 
+synchronization. If after a VCONN Swap the VCONN Source wants to communicate with a Cable Plug using SOP’ 
+Packets, it Shall issue a Soft_Reset Message using a SOP’ Packet in order to reset the Cable Plug's Protocol Layer. If 

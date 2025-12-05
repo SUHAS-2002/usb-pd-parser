@@ -1,0 +1,52 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 71
+The Protocol Layer in the Sink, when the Policy Engine indicates that an AMS is being initiated, will wait for the Rp 
+value to be set to SinkTxOK before initiating the AMS by sending the first Message in the sequence.
+2.6.3.3
+  PHY Layer
+The PHY Layer in the Source will set the Rp value to either SinkTxOK or SinkTxNG as directed by the Protocol Layer. 
+The PHY Layer in the Sink will detect the present Rp value and inform the Protocol Layer.
+2.6.4
+  Power supply
+2.6.4.1
+  Source
+Each Provider will contain one or more power sources that are shared between one or more Ports. These power 
+sources are controlled by the Local Policy. Source Ports start up in USB Type-C Operation where the Port applies 
+vSafe0V on VBUS and returns to this state on Detach or after a Hard Reset. When the Source detects Attach events it 
+transitions its output to vSafe5V.
+2.6.4.2
+  Sink
+Consumers are assumed to have one Sink connected to a Port. This Sink is controlled by Local Policy. Sinks start up 
+in USB Default Operation where the Port can operate at vSafe5V with USB default specified current levels and 
+return to this state on Detach or after a Hard Reset.
+2.6.4.3
+  Dual-Role Power Ports
+Dual-Role Power Ports have the ability to operate as either a Source or a Sink and to swap between the two Power 
+Roles using Power Role Swap or Fast Role Swap.
+2.6.4.4
+  Dead Battery or Lost Power Detection
+[USB Type-C 2.4] defines mechanisms intended to communicate with and to charge a Sink or DRP with a Dead 
+Battery. 
+2.6.4.5
+  VCONN Source
+The Source Port at Attach, is also the VCONN Source. The responsibility for sourcing VCONN can be swapped between 
+the Source Ports and Sink Ports in a make before break fashion to ensure that the Cable Plugs are continuously 
+powered. To ensure reliable communication with the Cable Plugs only the Port that is the VCONN Source is permitted 
+to communicate with the Cable Plugs.
+Note:
+Prior to a Power Role Swap, Data Role Swap or Fast Role Swap each new Source Port needs to ensure that 
+it is the VCONN Source if it needs to communicate with the Cable Plugs after the swap.
+2.6.5
+  DFP/UFP
+2.6.5.1
+  Downstream Facing Port (DFP)
+The Downstream Facing Port or DFP is equivalent in the USB topology to the Port a USB Device is Attached to. The 
+DFP will also correspond to the USB Host but only if USB Communication is supported while acting as a DFP. 
+Products such as Chargers can be a DFP while not having USB Communication capability. Only the DFP is allowed 
+to control Alternate Mode operation.
+2.6.5.2
+  Upstream Facing Port (UFP)
+The Upstream Facing Port or UFP is equivalent in the USB topology to the Port on a USB Device that is connected to 
+the USB Host or USB Hub's DFP. The UFP will also correspond to the USB Device but only if USB Communication is 
+supported while acting as a UFP. Products which charge can be a UFP while not having USB Communication 
+capability.

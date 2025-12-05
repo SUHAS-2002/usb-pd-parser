@@ -1,0 +1,8 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 979
+trigger a Re-negotiation of the Explicit Contract, using USB Power Delivery protocols, between a directly connected 
+Provider and Consumer. A change in how much power is available can, for example, cause a Re-negotiation.
+9.1.1
+  PDUSB Device and Hub Requirements
+All PDUSB Devices Shall return all relevant descriptors mentioned in this chapter. PDUSB Hubs Shall also support 
+a PD bridge as defined in [UCSI].

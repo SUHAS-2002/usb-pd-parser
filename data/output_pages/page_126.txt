@@ -1,0 +1,96 @@
+Page 126
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 6.8 Example Security_Request Message of Data Size 7 (Chunked bit set to 1)
+Figure 6.9, "Example Chunk 0 of Security_Response Message of Data Size 30 (Chunked bit set to 1)" shows Chunk 
+Number zero of the Security_Response Message shown in Figure 6.7, "Example Security_Request sequence Chunked 
+(Chunked bit = 1)" in more detail including the byte ordering on the bus and padding. No padding is need for this 
+Chunk since the full 26-byte Payload plus 2-byte Extended Message Header is a multiple of 32-bits, corresponding 
+to 7 Data Objects. The Number of Data Objects field is set to 7 to indicate the length of this Chunk and the Data 
+Size field is set to 30 to indicate the length of the whole Extended Message.
+Figure 6.9 Example Chunk 0 of Security_Response Message of Data Size 30 (Chunked bit set to 1)
+Figure 6.7, "Example Security_Request sequence Chunked (Chunked bit = 1)" shows an example of the Message 
+format, byte ordering and padding for the Security_Response Message Chunk request for Chunk Number one 
+shown in Figure 6.7, "Example Security_Request sequence Chunked (Chunked bit = 1)". In the Chunk request the 
+Number of Data Objects field in the Message is set to 1 to indicate that the Payload is 32 bits equivalent to 1 data 
+object (see Figure 6.10, "Example byte transmission for a Security_Response Message Chunk request (Chunked bit is 
+set to 1)"). Since the Chunked bit is set to 1 the Chunk request/Chunk response mechanism is used. The Message is 
+a Chunk request so the Request Chunk bit is set to one, and in this case Chunk one is being requested so Chunk 
+Number is set to one. Data Size is set to zero indicating the length of the Data Block being transferred. Two bytes 
+of padding are added to ensure that the Payload is a multiple of 32 bits.
+Message Header
+(16 bit)
+Message Type = 
+Security_Request
+Number of Data 
+Objects = 3
+Data (7 bytes)
+Extended Message 
+Header
+(16 bit)
+Chunked = 1
+Chunk Number = 0
+Request Chunk = 0
+Data Size = 7
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+B0
+B1
+B2
+B3
+B4
+B5
+B6
+P0
+(0x00)
+P1
+(0x00)
+P2
+(0x00)
+Padding (3 bytes)
+Data Object 0
+Data Object 1
+Data Object 2
+Message Header
+(16 bit)
+Message Type = 
+Security_Response
+Number of Data 
+Objects = 7
+Data (26 bytes)
+Extended Message 
+Header
+(16 bit)
+Chunked = 1
+Chunk Number = 0
+Request Chunk = 0
+Data Size = 30
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+B0
+B1
+B22
+B23
+Data Object 0
+B24
+B25
+Data Object 6

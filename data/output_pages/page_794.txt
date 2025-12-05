@@ -1,0 +1,34 @@
+Page 794
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+14
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received BIST Message 
+information to the Policy Engine that consumes it.
+The Policy Engine goes into BIST Test Data Mode Mode 
+where it sends no further Messages except for GoodCRC 
+Messages in response to received Messages (see Section 
+6.4.3.2, "BIST Test Data Mode").
+15
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+16
+PHY Layer receives the GoodCRC and checks the CRC to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+17
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the BIST 
+Message was successfully sent. 
+Repeat steps 10-18 any number of times
+The UUT exits BIST Test Data Mode after a Hard Reset
+Table 8.144  Steps for BIST Test Data Test
+Step
+Tester
+UUT

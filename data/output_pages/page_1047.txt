@@ -1,0 +1,21 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1047
+8
+Laptop detects VBUS < VNbVB (N3).
+9
+Laptop closes sourcing switch (N4). When this 
+occurs the Hub’s input capacitance on VBUS will be 
+less than 10 F (cSnkBulk).
+10
+Hub’s tSnkFRSwap timer expires (H6).
+11
+Hub draws up to the current it Advertised in the Fast 
+Role Swap required USB Type-C Current field of its 
+Sink_Capabilities Message.
+12
+Hubs with (H5) will open (H5) and remove the Hold-
+Up capacitor.
+Table E.4  VBUS discharges quickly after adapter disconnected
+Step #
+Hub
+Laptop

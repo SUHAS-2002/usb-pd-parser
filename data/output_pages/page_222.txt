@@ -1,0 +1,66 @@
+Page 222
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+3
+Event Flags
+Bit
+Flag
+Description
+0
+Reserved and Shall be set to zero
+1
+OCP Event
+OCP event when set
+2
+OTP Event
+OTP event when set
+3
+OVP Event
+OVP event when set
+4
+CL/CV Mode
+In PPS Mode only: CL mode when set, CV 
+mode when cleared
+5...7
+Reserved and Shall be set to zero
+4
+Temperature 
+Status
+Bit
+Description
+0
+Reserved and Shall be set to zero
+1...2
+
+00 – Not Supported. 
+
+01 – Normal 
+
+10 – Warning 
+
+11 – Over temperature
+3...7
+Reserved and Shall be set to zero
+5
+Power Status
+Bit
+Description
+0
+Reserved and Shall be set to zero
+1
+Source power limited due to cable supported current
+2
+Source power limited due to insufficient power available 
+while sourcing other ports
+3
+Source power limited due to insufficient external power
+4
+Source power limited due to Event Flags in place (Event 
+Flags must also be set)
+5
+Source power limited due to temperature
+6...7
+Reserved and Shall be set to zero
+Table 6.55  SOP Status Data Block (SDB) (Continued)
+Offset (Byte)
+Field
+Description

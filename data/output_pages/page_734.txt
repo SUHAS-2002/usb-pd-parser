@@ -1,0 +1,75 @@
+Page 734
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.124, "Steps for a Sink requesting a security exchange with a Source Sequence" below provides a detailed 
+explanation of what happens at each labeled step in Figure 8.97, "Sink requests security exchange with Source" 
+above.
+Table 8.124  Steps for a Sink requesting a security exchange with a Source Sequence
+Step
+Sink Port
+Source Port
+1
+The Port has Port Power Role set to Sink with the Rd 
+pull down on its CC wire.
+Policy Engine directs the Protocol Layer to send a 
+Security_Request Message using a Payload supplied by 
+the DPM.
+The Port has Port Power Role set to Source and the Rp 
+pull up on its CC wire.
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the 
+Security_Request Message. Starts CRCReceiveTimer.
+PHY Layer receives the Security_Request Message and 
+checks the CRC to verify the Message.
+4
+PHY Layer removes the CRC and forwards the 
+Security_Request Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Security_Request Message information to the Policy 
+Engine that consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Security_Request Message was successfully sent. 
+10
+Policy Engine requests the DPM for the response to the 
+security request which is provided. 
+The Policy Engine tells the Protocol Layer to form a 
+Security_Response Message.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the 
+Security_Response Message.
+PHY Layer appends a CRC and sends the 
+Security_Response Message. Starts CRCReceiveTimer.
+13
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Security_Response Message information to the Policy 
+Engine that consumes it.
+14
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.

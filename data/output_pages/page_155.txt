@@ -1,0 +1,63 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 155
+6.4.2
+  Request Message
+A Request Message Shall be sent by a Sink to request power during the request phase of an SPR power Negotiation. 
+The Request Data Object Shall be returned by the Sink making a request for power. It Shall be sent in response to 
+the most recent Source_Capabilities Message (see Section 8.3.2.2, "Power Negotiation") when in SPR Mode. A 
+Request Message Shall return one and only one Sink Request Data Object that Shall identify the Power Data Object 
+being requested.
+The Source Shall respond to a Request Message with an Accept Message, a Wait Message or a Reject Message (see 
+Section 6.9, "Accept, Reject and Wait").
+The Request Message includes the requested power level. For example, if the Source_Capabilities Message 
+includes a Fixed Supply PDO that offers 9V @ 1.5A and if the Sink only wants 9V @ 0.5A, it will set the Operating 
+Current field to 50 (i.e., 10mA * 50 = 0.5A).
+The request uses a different format depending on the kind of power requested.
+
+The Fixed Supply Power Data Object and Variable Supply Power Data Object share a common format 
+shown in Table 6.23, "Fixed and Variable Request Data Object".
+
+The Battery Supply Power Data Object uses the format shown in Table 6.24, "Battery Request Data 
+Object".
+
+The PPS Request Data Object's format is shown in Table 6.25, "PPS Request Data Object".
+
+The AVS Request Data Object's format is shown in Table 6.26, "AVS Request Data Object".
+The Request Data Objects are also used by the EPR_Request Message when operating in EPR Mode. See Section 6.4.9, 
+"EPR_Request Message" for information about the use of the EPR_Request Message.
+A Source operating in EPR Mode that receives a Request Message Shall initiate a Hard Reset.
+Table 6.23  Fixed and Variable Request Data Object
+Bit(s)
+Field
+Description
+B31…28
+Object Position
+Object position (0000b and 1110b…1111b are 
+Reserved and Shall Not be used)
+B27
+Giveback
+GiveBack flag = 0 - Deprecated and Shall be set to zero.
+B26
+Capability Mismatch
+Set to ‘1’ for a Capabilities Mismatch
+B25
+USB Communications Capable
+Set to ‘1’ if USB Communications Capable
+B24
+No USB Suspend
+Set to ‘1’ if requesting No USB Suspend
+B23
+Unchunked Extended Messages Supported
+Set to ‘1’ if Unchunked Extended Messages Supported
+B22
+EPR Capable
+Set to ‘1’ if EPR Capable
+B21…20
+Reserved
+Reserved – Shall be set to zero.
+B19…10
+Operating Current
+Operating current in 10mA units
+B9…0
+Maximum Operating Current
+Maximum Operating current 10mA units

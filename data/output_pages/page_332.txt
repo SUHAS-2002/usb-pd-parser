@@ -1,0 +1,57 @@
+Page 332
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 7.17, "VBUS detection and timing during Fast Role Swap, initial VBUS (at new source) > vSafe5V(min)" and 
+Figure 7.18, "VBUS detection and timing during Fast Role Swap, initial VBUS (at new source) < vSafe5V(min)" show the 
+VBUS detection and timing for the New Source during a Fast Role Swap after the Fast Role Swap Request has been 
+received. The New Source May turn on the VBUS output switch once VBUS is below vSafe5V (max). In this case, the 
+New Source prevents VBUS from falling below vSafe5V (min). The new source Shall turn on the VBUS output switch 
+within tSrcFRSwap of falling below vSafe5V (min).
+VBUS might have started at vSafe5V or at higher voltage. When the Fast Role Swap Request is detected, VBUS could 
+therefore be either above vSafe5V (max), within the vSafe5V range, or below vSafe5V (min). If the Fast Role Swap 
+Request is detected when VBUS is below vSafe5V (min), then the new source Shall turn on the VBUS output switch 
+within tSrcFRSwap of detecting the Fast Role Swap Request. In this case, the maximum time from the beginning of 
+the Fast Role Swap Request to VBUS being sourced May be tSrcFRSwap (max) + tFRSwapRx (max).
+Figure 7.17 VBUS detection and timing during Fast Role Swap, initial VBUS (at new source) > vSafe5V(min)
+Figure 7.18  VBUS detection and timing during Fast Role Swap, initial VBUS (at new source) < vSafe5V(min)
+7.1.14
+  Non-application of VBUS Slew Rate Limits
+Scenarios where vSrcSlewPos and vPpsSlewPos VBUS slew rate limits do not apply and VBUS May transition faster 
+than specified are as follows:
+
+When first applying VBUS after an Attach.
+
+When applying VBUS as part of a Power Role Swap to Source Power Role.
+
+When increasing VBUS from vSafe0V to vSafe5V during a Hard Reset.
+
+During a Fast Role Swap when the Initial Sink applies VBUS.
+Old Voltage
+0V
+vSafe5V(min)
+tSrcFRSwap
+vSafe5V(max)
+�
+New Source may 
+turn on at any time 
+after VBUS falls below 
+vSafe5V(max)
+VBUS
+Old Source 
+detects power loss 
+and signals Fast 
+Role Swap
+Old Voltage
+0V
+vSafe5V(min)
+tSrcFRSwap
+VBUS is below vSafe5V(min) 
+before FRS signal is finished
+Old Source detects power 
+loss and signals Fast Role 
+Swap
+tFRSwapRx (max)
+VBUS at new 
+Source
+CC
+New Source may turn on after 
+detecting Fast Role Swap signal

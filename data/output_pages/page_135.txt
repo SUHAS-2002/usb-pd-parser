@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 135
+the VCONN Source wants to communicate with a Cable Plug using SOP’’ Packets, it Shall issue a Soft_Reset Message 
+using a SOP’’ Packet in order to reset the Cable Plug's Protocol Layer.
+6.3.14
+  Data_Reset Message
+The Data_Reset Message May be sent by either the DFP or UFP and Shall reset the USB data connection and exit all 
+Alternate Modes with its Port Partner while preserving the power on VBUS. USB4® Mode capable ports Shall support 
+the Data_Reset Message and other ports May support the Data_Reset Message.
+The Data_Reset Message Shall Not change the existing:
+
+Power Contract
+
+Data Roles (i.e., which Port is the DFP or UFP)
+The receiver of the Data_Reset Message Shall respond by sending an Accept Message and then follow the process 
+outlined in the following steps. Neither the sender nor receiver Shall initiate a VCONN Swap until the Data Reset 
+process is complete, and the Data_Reset_Complete Message has been sent. Following receipt of the Accept 
+Message, or GoodCRC following the Accept, depending which Port sends the Data_Reset Message: 
+1)
+The DFP Shall:
+
+Disconnect the Port's [USB 2.0] D+/D- signals.
+
+If operating in [USB 3.2] remove the Port's Rx Terminations (see [USB 3.2]).
+
+If operating in [USB4] drive the Port's SBTX to a logic low (see [USB4]).
+2)
+Both the DFP and UFP Shall exit all Alternate Modes if any.
+3)
+Reset the cable:
+
+If the VCONN Source Port is also the UFP, then it Shall run the UFP VCONN Power Cycle process de-
+scribed in Section 7.1.15.1, "UFP VCONN Power Cycle".
+
+If the VCONN Source Port is also the DFP, then it Shall run the DFP VCONN Power Cycle process de-
+scribed in Section 7.1.15.2, "DFP VCONN Power Cycle".
+
+The DFP Shall exit the VCONN Power Cycle process as the VCONN Source and be sourcing VCONN.
+4)
+After tDataReset the DFP Shall:
+
+Reconnect the [USB 2.0] D+/D- signals.
+
+If the Port was operating in [USB 3.2] or [USB4] reapply the Port's Rx Terminations (see [USB 3.2]).
+5)
+The Data Reset process is complete; the DFP Shall send a Data_Reset_Complete Message and enter the 
+USB4® Discovery and Entry Flow (See [USB Type-C 2.4]).
+If the Initiator of the Data_Reset Message does not receive a Valid response within tSenderResponse it Shall enter 
+the ErrorRecovery State.
+6.3.15
+  Data_Reset_Complete Message
+The Data_Reset_Complete Message Shall be sent by the DFP to the UFP to indicate the completion of the Data Reset 
+process (see Section 6.3.14, "Data_Reset Message").
+6.3.16
+  Not_Supported Message
+The Not_Supported Message Shall be sent by a Port or Cable Plug in response to any Message it does not support. 
+Returning a Not_Supported Message is assumed in this specification and has not been called out explicitly except 
+in Section 6.13, "Message Applicability" which defines cases where the Not_Supported Message is returned.

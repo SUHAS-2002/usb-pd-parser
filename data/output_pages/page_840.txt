@@ -1,0 +1,20 @@
+Page 840
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+On exit from the PE_SNK_Get_Source_Cap State the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (capabilities or response timeout).
+The Policy Engine Shall transition to the PE_SNK_Ready state when:
+
+In EPR Mode and SPR Source Capabilities were requested and a Source_Capabilities Message is received 
+or
+
+In SPR Mode and EPR Source Capabilities were requested and an EPR_Source_Capabilities Message is 
+received or
+
+The SenderResponseTimer times out.
+The Policy Engine Shall transition to the PE_SNK_Evaluate_Capability State when:
+
+In SPR Mode and SPR Source Capabilities were requested and a Source_Capabilities Message is received 
+or
+
+In EPR Mode and EPR Source Capabilities were requested and an EPR_Source_Capabilities Message is 
+received.

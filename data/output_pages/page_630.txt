@@ -1,0 +1,12 @@
+Page 630
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Status Message was successfully sent.
+The Cable Plug has informed the VCONN Source of its present status.
+Table 8.89  Steps for a VCONN Source getting Cable Plug Status Sequence
+Step
+VCONN Source Port
+Cable Plug

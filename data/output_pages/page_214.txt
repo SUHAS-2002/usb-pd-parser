@@ -1,0 +1,36 @@
+Page 214
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.12
+  Revision Message
+The Revision Message Shall be sent in response to the Get_Revision Message sent by the Port Partner. This Message 
+is used to identify the highest Revision the Port is capable of operating at. The Revision Message contains one 
+Revision Message Data Object (RMDO).
+The Revision Message returns an RMDO whose format Shall be as shown in Figure 6.36, "Revision Message Data 
+Object"and Table 6.52, "Revision Message Data Object (RMDO)". The Number of Data Objects field in the Revision 
+Message Shall be set to 1.
+Figure 6.36 Revision Message Data Object
+E.g., for Revision 3.2, Version 1.1 the fields would be the following:
+
+Revision.major = 0011b
+
+Revision.minor = 0010b
+
+Version.major = 0001b
+
+Version.minor = 0001b
+Table 6.52  Revision Message Data Object (RMDO)
+Bit(s)
+Description
+B31…28
+Revision.major
+B27…24
+Revision.minor
+B23...20
+Version.major
+B19...16
+Version.minor
+B15...0
+Reserved, Shall be set to zero.
+Header
+No. of Data Objects = 1
+RMDO

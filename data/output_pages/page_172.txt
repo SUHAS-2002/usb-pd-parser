@@ -1,0 +1,72 @@
+Page 172
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.1.1.8
+  Vendor ID
+Manufacturers Shall set the USB Vendor ID field to the value of the Vendor ID assigned to them by USB-IF. For USB 
+Devices or Hubs which support USB Communications the USB Vendor ID field Shall be identical to the Vendor ID 
+field defined in the product's USB Device Descriptor (see [USB 2.0] and [USB 3.2]).
+6.4.4.3.1.2
+  Cert Stat VDO
+The Cert Stat VDO Shall contain the XID assigned by USB-IF to the product before certification in binary format. 
+The fields in the Cert Stat VDO Shall be as defined in Table 6.37, "Cert Stat VDO".
+6.4.4.3.1.3
+  Product VDO
+The Product VDO contains identity information relating to the product. The fields in the Product VDO Shall be as 
+defined in Table 6.38, "Product VDO".
+Manufacturers Should set the USB Product ID field to a unique value identifying the product and Should set the 
+bcdDevice field to a version number relevant to the release version of the product.
+6.4.4.3.1.4
+  UFP VDO
+The UFP VDO defined in this section Shall be returned by Ports capable of operating as a UFP including traditional 
+USB peripherals, USB Hub's upstream Port and DRD capable host Ports. The UFP VDO defined in this section Shall 
+be sent when the Product Type (UFP) field in the ID Header VDO is given as a PDUSB Peripheral or PDUSB Hub. 
+Table 6.39, "UFP VDO" defines the UFP VDO that Shall be sent based on the Product Type.
+A [USB4] UFP Shall support the Structured VDM Discover Identity Command.
+Table 6.37  Cert Stat VDO
+Bit(s)
+Description
+Reference
+B31...0
+32-bit unsigned integer, XID
+Assigned by USB-IF
+Table 6.38  Product VDO
+Bit(s)
+Description
+Reference
+B31...16
+16-bit unsigned integer, USB Product ID
+[USB 2.0]/[USB 3.2]
+B15...0
+16-bit unsigned integer, bcdDevice
+[USB 2.0]/[USB 3.2]
+Table 6.39  UFP VDO
+Bit(s)
+Description
+Reference
+B31…29
+UFP VDO Version
+Version Number of the VDO (not this specification Version):
+
+Version 1.3 = 011b
+Values 100b…111b are Reserved, Shall Not be used.
+B28
+Reserved
+Shall be set to zero.
+B27…24
+Device Capability
+Bit
+Description
+0
+[USB 2.0] Device Capable
+1
+[USB 2.0] Device Capable (Billboard only)
+2
+[USB 3.2] Device Capable
+3
+[USB4] Device Capable
+B23…22
+Connector Type (Legacy)
+Deprecated, Shall be set to 00b.
+B21…11
+Reserved
+Shall be set to zero.

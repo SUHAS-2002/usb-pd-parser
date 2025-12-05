@@ -1,0 +1,8 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 87
+This inversion of the CRC-32 remainder adds an offset of FFFF_FFFFh that will create a constant CRC-32 residual of 
+C704_DD7Bh at the receiver side. 
+Note:
+The CRC implementation is identical to the one used in [USB 3.2].
+Figure 5.4, "CRC-32 Generation" is an illustration of CRC-32 generation. The output bit ordering Shall be as detailed 
+in Table 5.10, "CRC-32 Mapping".

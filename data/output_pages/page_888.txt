@@ -1,0 +1,83 @@
+Page 888
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.19
+  Dual-Role Port State Diagrams
+Dual-Role Ports that combine Source and Sink functionality Shall comprise Source and Sink Policy Engine state 
+machines. In addition they Shall have the capability to perform a Power Role Swap from the PE_SRC_Ready or 
+PE_SNK_Ready states and Shall return to USB Default Operation on a Hard Reset. 
+The State Diagrams in this section Shall apply to every [USB Type-C 2.4] DRP.
+8.3.3.19.1
+  DFP to UFP Data Role Swap State Diagram
+Figure 8.174, "DFP to UFP Data Role Swap State Diagram" shows the additional state diagram required to perform 
+a Data Role Swap from DFP to UFP operation and the changes that Shall be followed for error and Hard Reset 
+handling.
+Figure 8.174 DFP to UFP Data Role Swap State Diagram
+8.3.3.19.1.1
+  PE_SRC_Ready or PE_SNK_Ready State
+The Data Role Swap process Shall start only from either the PE_SRC_Ready or PE_SNK_Ready state where power 
+is stable.
+The Policy Engine Shall transition to the PE_DRS_DFP_UFP_Evaluate_Swap state when:
+
+A DR_Swap Message is received and
+PE_SRC_Ready  or 
+PE_SNK_Ready
+(DFP)
+PE_DRS_DFP_UFP_Evaluate_Swap
+Actions on entry:
+Get evaluation of Data Role Swap 
+request from Device Policy Manager
+PE_DRS_DFP_UFP_
+Change_to_UFP
+Actions on entry:
+Request Device Policy Manager to 
+change port to UFP
+Data Role Swap required 
+(indication from 
+Device Policy Manager)
+PE_DRS_DFP_UFP_
+Send_Swap
+Actions on entry:
+Send Swap DR message
+Initialize and run 
+SenderResponseTimer
+Reject message received |
+Wait message received |
+SenderResponseTimer 
+timeout
+PE_DRS_DFP_UFP_
+Accept_Swap
+Actions on entry:
+Send Accept Message
+Accept received
+PE_DRS_DFP_UFP_
+Reject_Swap
+Actions on entry:
+Send Reject or Wait 
+Message as appropriate
+Power = Explicit Contract
+PD = Connected
+Message sent
+DR_Swap message received &
+not in Modal Operation
+Data Role Swap ok
+Data Role Swap not ok |
+Further evaluation 
+required
+Accept message
+sent
+Port changed to UFP
+PE_SRC_Ready  or 
+PE_SNK_Ready
+(UFP)
+Power = Explicit Contract
+PD = Connected
+Power = Explicit Contract
+PD = Connected
+Power = Explicit Contract
+PD = Connected
+Power = Explicit Contract
+PD = Connected
+PE_SRC_Hard_Reset  or 
+PE_SNK_Hard_Reset
+DR_Swap message received &
+in Modal Operation

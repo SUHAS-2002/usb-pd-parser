@@ -1,0 +1,64 @@
+Page 828
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+4)
+After a Power Swap the New Source is required to wait an additional tSwapSourceStart before sending a 
+Source_Capabilities Message. This delay is not required when first starting up a system.
+5)
+PD Connected is defined as a situation when the Port Partners are actively communicating. The Port Partners remain PD 
+Connected after a Swap until there is a transition to Disabled or the connector is able to identify a Detach. 
+6)
+Port Partners are no longer PD Connected after a Hard Reset, but consideration needs to be given as to whether there has 
+been a PD Connection while the Ports have been Attached to prevent unnecessary USB Type-C Error Recovery.
+7)
+The DiscoverIdentityTimer is run when this is a VCONN Source and a PD Connection with a Cable Plug needs to be es-
+tablished i.e. no GoodCRC Message has yet been received in response to a Discover Identity Command.
+8)
+See Section 5.7, "Collision Avoidance", Section 6.6.16, "Collision Avoidance Timers" and Section 6.10, "Collision Avoidance".
+9)
+In the PE_SRC_Wait_New_Capabilities State the Device Policy Manager Should either decide to send no further Source 
+Capabilities or Should send a different set of Source Capabilities. Continuing to send the same set of Source Capabilities 
+could result in a live lock situation.
+10)
+The SourcePPSCommTimer is only initialized and run when the present Explicit Contract is for an SPR PPS APDO. Sourc-
+es that do not support SPR PPS do not need to implement the SourcePPSCommTimer.
+11)
+The SourceEPRKeepAliveTimer is only initialized and run when the Source is in EPR Mode; Sources that do not support 
+EPR Mode do not need to implement the SourceEPRKeepAliveTimer.
+12)
+Either SPR or EPR Sink Capabilities May be requested, regardless of whether or not the Source is currently operating in 
+SPR or EPR Mode.
+8.3.3.2.1
+  PE_SRC_Startup State
+PE_SRC_Startup Shall be the starting state for a Source Policy Engine either on power up or after a Hard Reset. On 
+entry to this state the Policy Engine Shall reset the CapsCounter and reset the Protocol Layer.
+Note:
+Resetting the Protocol Layer will also reset the MessageIDCounter and stored MessageID (see Section 
+6.12.2.3, "Protocol Layer Message Reception").
+The Policy Engine Shall transition to the PE_SRC_Send_Capabilities state:
+
+When the Protocol Layer reset has completed if the PE_SRC_Startup state was entered due to the 
+system first starting up.
+
+When the SwapSourceStartTimer times out if the PE_SRC_Startup state was entered as the result of a 
+Power Role Swap.
+Note:
+Sources Shall remain in the PE_SRC_Startup state, without sending any Source_Capabilities Messages 
+until a plug is Attached.
+8.3.3.2.2
+  PE_SRC_Discovery State
+On entry to the PE_SRC_Discovery state the Policy Engine Shall initialize and run the SourceCapabilityTimer in 
+order to trigger sending a Source_Capabilities Message.
+The Policy Engine Shall transition to the PE_SRC_Send_Capabilities state when:
+
+The SourceCapabilityTimer times out and CapsCounter ≤ nCapsCount.
+The Policy Engine May Optionally go to the PE_SRC_Disabled state when:
+
+The Port Partners are not presently PD Connected
+
+And the SourceCapabilityTimer times out 
+
+And CapsCounter > nCapsCount.
+The Policy Engine Shall go to the PE_SRC_Disabled state when:
+
+The Port Partners have not been PD Connected (the Source Port remains Attached to a Port it has not 
+had a PD Connection with during this Attachment)

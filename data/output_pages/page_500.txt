@@ -1,0 +1,74 @@
+Page 500
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.48, "Steps for EPR Sink Makes Request (Accept)" below provides a detailed explanation of what happens at 
+each labeled step in Figure 8.21, "EPR Sink Makes Request (Accept)" above.
+Table 8.48  Steps for EPR Sink Makes Request (Accept)
+Step
+Source
+Sink
+1
+DPM tells the Policy Engine to request a different 
+power level. The Policy Engine tells the Protocol Layer 
+to form an EPR_Request Message.
+The Protocol Layer creates the EPR_Request Message 
+and passes it to PHY Layer.
+2
+PHY Layer receives the EPR_Request Message and 
+compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends a CRC and sends the EPR_Request 
+Message. Starts CRCReceiveTimer.
+3
+PHY Layer removes the CRC and forwards the 
+EPR_Request Message to the Protocol Layer. 
+4
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer passes the Request information to 
+the Policy Engine.
+5
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+6
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+PHY Layer receives the GoodCRC Message and 
+compares the CRC it calculated with the one sent to verify 
+the Message.
+7
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. 
+8
+The Protocol Layer verifies and increments the 
+MessageIDCounter. It informs the Policy Engine that 
+the EPR_Request Message was successfully sent. The 
+Protocol Layer stops the CRCReceiveTimer.
+The Policy Engine starts SenderResponseTimer.
+9
+Policy Engine requests the DPM to evaluate the 
+EPR_Request Message sent by the Sink and decides if 
+the Source can meet the request. The Policy Engine 
+tells the Protocol Layer to form an Accept Message. 
+10
+The Protocol Layer forms the Accept Message that is 
+passed to the PHY Layer.
+11
+PHY Layer appends CRC and sends the Accept Message. 
+Starts CRCReceiveTimer.
+PHY Layer receives the Accept Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+12
+PHY Layer forwards the Accept Message to the Protocol 
+Layer.
+13
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+Protocol Layer informs the Policy Engine that an Accept 
+Message has been received. The Policy Engine stops 
+SenderResponseTimer, starts the PSTransitionTimer 
+and reduces its current draw.
+The DPM prepares the Power supply for transition to 
+the new power level.

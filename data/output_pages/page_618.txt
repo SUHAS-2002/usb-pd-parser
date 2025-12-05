@@ -1,0 +1,34 @@
+Page 618
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.11
+  Additional Capabilities, Status and Information
+8.3.2.11.1
+  Alert
+8.3.2.11.1.1
+  Source sends Alert to a Sink
+Figure 8.58, "Source Alert to Sink" shows an example sequence between a Source and a Sink where the Source alerts 
+the Sink that there has been a status change. This AMS will be followed by getting the Source status to determine 
+further details of the alert (see Section 8.3.2.11.2, "Status").
+Figure 8.58 Source Alert to Sink
+: Sink Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Source Policy Engine
+Sink Port
+Source Port
+1: Send Alert
+2: Alert
+3: Alert + CRC
+4: Alert
+Check MessageID against local copy
+Store copy of MessageID
+5: Alert received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Alert sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer

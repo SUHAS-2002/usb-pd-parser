@@ -1,0 +1,33 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 881
+8.3.3.16.2
+  UFP or Cable Plug Enter_USB Message State Diagrams
+Figure 8.167, "UFP Enter_USB Message State Diagram" shows the state diagram for an Enter_USB Message received 
+by a UFP or Cable Plug.
+Figure 8.167 UFP Enter_USB Message State Diagram
+8.3.3.16.2.1
+  PE_UEU_Enter_USB_Received State
+The PE_UEU_Enter_USB_Received state Shall be entered from the PE_SRC_Ready, PE_SNK_Ready or 
+PE_CBL_Ready state as appropriate (see Figure 8.132, "Source Port State Diagram", Figure 8.133, "Sink Port State 
+Diagram" and Figure 8.203, "Cable Ready State Diagram") when an Enter_USB Message is received and the Port is 
+operating as a UFP or is a Cable Plug.
+On entry to the PE_UEU_Enter_USB_Received state the Policy Engine Shall inform the Device Policy Manager. The 
+Device Policy Manager responds with an indication of whether the Enter_USB Message is to be accepted or rejected. 
+The Policy Engine Shall send either an Accept Message, a Wait Message or a Reject Message as appropriate.
+The Policy Engine Shall transition back to the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state as 
+appropriate when:
+
+Either an Accept Message, a Wait Message or a Reject Message has been sent.
+PE_SRC_Ready (UFP), 
+PE_SNK_Ready (UFP) or
+PE_CBL_Ready
+PE_UEU_Enter_USB_Received
+Actions on entry:
+Inform Device Policy Manager of Enter_USB Message
+Send Accept/Wait/Reject Message based on DPM response
+Power = Explicit Contract 
+PD = connected
+Enter_USB Message 
+Received
+Accept/Wait/Reject
+Message sent

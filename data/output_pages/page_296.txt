@@ -1,0 +1,57 @@
+Page 296
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+A Cable Reset Request is received from the Policy Engine or
+
+Cable Reset Signaling is received from the PHY Layer.
+On entry to the PRL_HR_Reset_Layer state the Protocol Layer Shall reset the MessageIDCounter. It Shall also reset 
+the states of the Protocol Layer transmission and reception state machines to their starting points. The Protocol 
+Layer transmission state machine Shall transition to the PRL_Tx_Wait_for_Message_Request state. The Protocol 
+Layer reception state machine Shall transition to the PRL_Rx_Wait_for_PHY_Message state.
+The Protocol Layer Shall transition to the PRL_HR_Request_Hard_Reset state when:
+
+The Protocol Layer's reset is complete and
+
+The Hard Reset request has originated from the Policy Engine or
+
+The Cable Reset request has originated from the Policy Engine.
+The Protocol Layer Shall transition to the PRL_HR_Indicate_Hard_Reset state when:
+
+The Protocol Layer's reset is complete and
+
+The Hard Reset request has been passed up from the PHY Layer or
+
+A Cable Reset request has been passed up from the PHY Layer (Cable Plug only).
+6.12.2.4.2
+  PRL_HR_Indicate_Hard_Reset state
+On entry to the PRL_HR_Indicate_Hard_Reset state the Protocol Layer Shall indicate to the Policy Engine that 
+either Hard Reset Signaling or Cable Reset Signaling has been received.
+The Protocol Layer Shall transition to the PRL_HR_Wait_for_PE_Hard_Reset_Complete state when:
+
+The indication to the Policy Engine has been sent.
+6.12.2.4.3
+  PRL_HR_Request_Hard_Reset state
+On entry to the PRL_HR_Request_Hard_Reset state the Protocol Layer Shall request the PHY Layer to send either 
+Hard Reset Signaling or Cable Reset Signaling.
+The Protocol Layer Shall transition to the PRL_HR_Wait_for_PHY_Hard_Reset_Complete state when:
+
+The PHY Layer Hard Reset Signaling request has been sent or
+
+The PHY Layer Cable Reset Signaling request has been sent.
+6.12.2.4.4
+  PRL_HR_Wait_for_PHY_Hard_Reset_Complete state
+In the PRL_HR_Wait_for_PHY_Hard_Reset_Complete state the Protocol Layer Shall start the 
+HardResetCompleteTimer and wait for the PHY Layer to indicate that the Hard Reset or Cable Reset has been 
+completed.
+The Protocol Layer Shall transition to the PRL_HR_PHY_Hard_Reset_Requested state when:
+
+A Hard Reset complete indication is received from the PHY Layer or
+
+A Cable Reset complete indication is received from the PHY Layer or
+
+The HardResetCompleteTimer times out.
+6.12.2.4.5
+  PRL_HR_PHY_Hard_Reset_Requested state
+On entry to the PRL_HR_PHY_Hard_Reset_Requested state the Protocol Layer Shall inform the Policy Engine that 
+the PHY Layer has been requested to perform a Hard Reset or Cable Reset.
+The Protocol Layer Shall transition to the PRL_HR_Wait_for_PE_Hard_Reset_Complete state when:

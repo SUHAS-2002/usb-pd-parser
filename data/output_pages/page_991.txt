@@ -1,0 +1,77 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 991
+9.4
+  PDUSB Hub and PDUSB Peripheral Device Requests
+9.4.1
+  GetBatteryStatus
+The request shown in Table 9.9, "Get Battery Status Request" returns the current status of the Battery in a PDUSB 
+Hub/Peripheral, with Battery Status information as shown in Table 9.10, "Battery Status Structure".
+Table 9.9  Get Battery Status Request
+bmRequestType
+bRequest
+wValue
+wIndex
+wLength
+Data
+10000000B
+GET_BATTERY_STATUS
+Zero
+Battery ID
+Eight
+Battery Status
+Table 9.10  Battery Status Structure
+Offset
+Field
+Size
+Value
+Description
+0
+bBatteryAttributes
+1
+Number
+Shall indicate whether a Battery is installed and 
+whether this is charging or discharging.
+Value
+Description
+0
+There is no Battery
+1
+The Battery is charging
+2
+The Battery is discharging
+3
+The Battery is neither discharging nor charging
+255...4
+Reserved and Shall Not be used
+1
+bBatterySOC
+1
+Number
+Shall indicate the Battery State of Charge given as 
+percentage value from Battery Remaining Capacity.
+2
+bBatteryStatus
+1
+Number
+If a Battery is present Shall indicate the present status 
+of the Battery.
+Value
+Description
+0
+No error
+1
+Battery required and not present
+2
+Battery non-chargeable/wrong chemistry
+3
+Over-temp shutdown
+4
+Over-voltage shutdown
+5
+Over-current shutdown
+6
+Fatigued Battery
+7
+Unspecified error
+255...8
+Reserved and Shall Not be used

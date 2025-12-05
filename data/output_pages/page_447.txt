@@ -1,0 +1,29 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 447
+8.3.2.2
+  Power Negotiation
+8.3.2.2.1
+  SPR
+8.3.2.2.1.1
+  SPR Explicit Contract Negotiation
+8.3.2.2.1.1.1
+  SPR Explicit Contract Negotiation (Accept)
+Figure 8.5, "Successful Fixed, Variable or Battery SPR Power Negotiation" illustrates an example of a successful 
+Message flow while negotiating an Explicit Contract in SPR Mode. The Negotiation goes through 5 distinct phases:
+
+The Source sends out its power Capabilities in a Source_Capabilities Message.
+
+The Sink evaluates these Capabilities, and, in the request, phase selects one power level by sending a 
+Request Message.
+
+The Source evaluates the request and accepts the request with an Accept Message.
+
+The Source transitions to the new power level and then informs the Sink by sending a PS_RDY Message.
+
+The Sink starts using the new power level.
+
+For SPR PPS operation:
+
+the Source starts its keep alive timer.
+
+the Sink starts its request timer to send periodic Request Messages.

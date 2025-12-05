@@ -1,0 +1,90 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 407
+tSrcReady
+SPR Mode
+Time from positive/
+negative transition 
+start (t0) to when the 
+Source is ready to 
+provide the newly 
+Negotiated power 
+level.
+Applies only to SPR 
+Mode voltage 
+transitions.
+285
+ms
+Figure 7.2
+Figure 7.3
+EPR Mode
+Time from positive/
+negative transition 
+start (t0) to when the 
+Source is ready to 
+provide the newly 
+Negotiated power 
+level.
+Applies to EPR Mode 
+voltage transitions and 
+any voltage transition 
+that either begins or 
+ends in EPR Mode.
+720
+tSrcRecover
+SPR Mode
+Time allotted for the 
+Source to recover.
+0.66
+1.0
+s
+Section 7.1.5
+EPR Mode
+1.085
+1.425
+tSrcSettle
+SPR Mode
+Time from positive/
+negative transition 
+start (t0) to when the 
+transitioning voltage is 
+within the range 
+vSrcNew.
+Applies only to SPR 
+Mode voltage 
+transitions.
+275
+ms
+Figure 7.2
+EPR Mode
+Time from positive/
+negative transition 
+start (t0) to when the 
+transitioning voltage is 
+within the range 
+vAvsNew.
+Applies to EPR Mode 
+voltage transitions and 
+any voltage transition 
+that either begins or 
+ends in EPR Mode.
+700
+tSrcSwapStdby
+The maximum time for 
+the Source to 
+transition to Swap 
+Standby.
+650
+ms
+Section 7.1.10
+Figure 7.17
+Figure 7.18
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

@@ -1,0 +1,38 @@
+Page 68
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 2.4 USB Power Delivery Communication Over USB
+Figure 2.5, "High Level Architecture View" shows the logical blocks between two Attached PD Ports (Port Pair). In 
+addition to the communication stack described above there are also:
+
+For a Provider or Dual-Role Power Device: one or more Sources providing power to one or more Ports.
+
+For a Consumer or Dual-Role Power Device: A Sink consuming power.
+
+A USB-C® Port Control module (see Section4.4 "Cable Type Detection") that detects cable Attach/Detach 
+as defined in [USB Type-C 2.4].
+
+USB Power Delivery uses standard cabling as defined in [USB Type-C 2.4].
+System Policy
+Manager
+Physical Layer
+Protocol
+Policy Engine
+Device Policy 
+Manager
+CC
+PD USB 
+Device
+USB Host
+USB Root Hub
+USB Interface  
+USB Hub
+USB Hub
+Physical Layer
+Protocol
+Policy Engine
+Device Policy 
+Manager
+CC
+PD USB 
+Device
+USB Interface  

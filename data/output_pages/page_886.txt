@@ -1,0 +1,32 @@
+Page 886
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.18.2
+  Send Firmware Update Response State Diagram
+Figure 8.172, "Send firmware update response State Diagram" shows the state diagram for a Source, Sink or Cable 
+Plug on receiving a Firmware_Update_Request Message. See also Section 6.5.9, "Firmware Update Messages".
+Figure 8.172 Send firmware update response State Diagram
+8.3.3.18.2.1
+  PE_Send_Firmware_Update_Response State
+The Policy Engine Shall transition to the PE_Send_Firmware_Update_Response state, from either the 
+PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state, when a Firmware_Update_Request Message is received. 
+On entry to the PE_Send_Firmware_Update_Response state the Policy Engine Shall request the appropriate 
+response from the Device Policy Manager and then send a Firmware_Update_Response Message based on this 
+status.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state as 
+appropriate (see Figure 8.132, "Source Port State Diagram", Figure 8.133, "Sink Port State Diagram" and Figure 
+8.203, "Cable Ready State Diagram") when:
+
+The Firmware_Update_Response Message has been successfully sent.
+Firmware_Update_Request 
+Message received
+Firmware_Update_Response
+Message sent
+PE_SRC_Ready,
+PE_SNK_Ready or 
+PE_CBL_Ready
+PE_Send_Firmware_Update_Response
+Actions on entry:
+Get present firmware update response from Device Policy Manager
+Send Firmware_Update_Response Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 883
+8.3.3.17.2
+  Send Security Response State Diagram
+Figure 8.169, "Send security response State Diagram" shows the state diagram for a Source, Sink or Cable Plug on 
+receiving a Security_Request Message. See also Section 6.5.8, "Security Messages".
+Figure 8.169 Send security response State Diagram
+8.3.3.17.2.1
+  PE_Send_Security_Response State
+The Policy Engine Shall transition to the PE_Send_Security_Response state, from either the PE_SRC_Ready, 
+PE_SNK_Ready or PE_CBL_Ready state, when a Security_Request Message is received. 
+On entry to the PE_Send_Security_Response state the Policy Engine Shall request the appropriate response from 
+the Device Policy Manager and then send a Security_Response Message based on this status.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state as 
+appropriate (see Figure 8.132, "Source Port State Diagram", Figure 8.133, "Sink Port State Diagram" and Figure 
+8.203, "Cable Ready State Diagram") when:
+
+The Security_Response Message has been successfully sent.
+Security_Request Message
+received
+Security_Response
+Message sent
+PE_SRC_Ready,
+PE_SNK_Ready or 
+PE_CBL_Ready
+PE_Send_Security_Response
+Actions on entry:
+Get present Security response from Device Policy Manager
+Send Security_Response Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

@@ -1,0 +1,50 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 721
+8.3.2.11.9.3
+  VCONN Source Gets Revision Information from a Cable Plug
+Figure 8.93, "VCONN Source Gets Cable Plug's Revision Information" shows an example sequence between a VCONN 
+Source (Source or Sink) and a Cable Plug when the VCONN Source gets the Cable Plug's Revision information. 
+Figure 8.93 VCONN Source Gets Cable Plug's Revision Information
+: Protocol
+1: Send Get_Country_Info
+: PHY
+: PHY
+: Protocol
+2:Get_Country_Info
+3: Get_Country_Info + CRC
+4: Get_Country_Info
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Country_Info 
+received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Country_Info sent
+Start SenderResponseTimer
+10: Send Country_Info
+11: Country_Info
+12: Country_Info
++ CRC
+13: Country_Info
+Check MessageID against local copy
+Store copy of MessageID
+14: Country_Info
+received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Country Information 
+from DPM
+: Policy Engine
+: Policy Engine
+Cable Plug
+VCONN Source Port
+Stop SenderResponseTimer
+18: Country_Info sent

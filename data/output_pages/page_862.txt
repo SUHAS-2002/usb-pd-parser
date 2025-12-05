@@ -1,0 +1,39 @@
+Page 862
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.9
+  Source Information State Diagrams
+8.3.3.9.1
+  Sink Port Get Source Information State Diagram
+Figure 8.148, "Sink Port Get Source Information State Diagram" shows the state diagram for a Sink on receiving a 
+request from the Device Policy Manager to get the Port Partner's Source information. See also Section 6.3.23, 
+"Get_Source_Info Message" and Section 6.4.11, "Source_Info Message".
+Figure 8.148 Sink Port Get Source Information State Diagram
+8.3.3.9.1.1
+  PE_SNK_Get_Source_Info State
+The Policy Engine Shall transition to the PE_SNK_Get_Source_Info state, from the PE_SNK_Ready state, due to a 
+request to get the remote Source information from the Device Policy Manager. 
+On entry to the PE_SNK_Get_Source_Info state the Policy Engine Shall send a Get_Source_Info Message and 
+initialize and run the SenderResponseTimer.
+On exit from the PE_SNK_Get_Source_Info state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (information or response timeout).
+The Policy Engine Shall transition back to the PE_SNK_Ready state (see Figure 8.133, "Sink Port State Diagram") 
+when:
+
+A Source_Info Message is received
+
+Or SenderResponseTimer times out.
+get source information request 
+from Device Policy Manager
+Source_Info
+Message received |
+SenderResponseTimer
+Timeout
+PE_SNK_Ready
+PE_SNK_Get_Source_Info
+Actions on entry:
+Send Get_Source_Info Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+Actions on exit:
+Pass source information/outcome to Device Policy Manager

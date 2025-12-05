@@ -1,0 +1,53 @@
+Page 300
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+6.13
+  Message Applicability
+The following tables outline the Messages supported by a given Port, depending on its capability. 
+When a Message is supported the feature and the AMS implied by the Message Shall also be supported. The 
+abbreviations in Table 6.76, "Message Applicability Abbreviations" are used in this section to denote the level of 
+support required.
+For the case of Conditional Normative a note has been added to indicate the condition. "CN/" notation is used to 
+indicate the level of support when the condition is not present.
+"R/" and "O/" notation is used to indicate the response when the Recommended or Optional Message is not 
+supported.
+Note:
+Where NS/R/NK is indicated for Received Messages this Shall apply to the PE_CBL_Ready, 
+PE_SNK_Ready or PE_SRC_Ready states only since unexpected Messages received during an AMS are Pro-
+tocol Errors (see Section 6.8.1, "Soft Reset and Protocol Error").
+This section covers Control Message and Data Message support for Sources, Sink and Cable Plugs. It also covers VDM 
+Command support for DFPs, UFPs and Cable Plugs.
+Table 6.76  Message Applicability Abbreviations
+Abbreviation
+Meaning
+Description
+N
+Normative
+Shall be supported by this Port/Cable Plug.
+CN
+Conditional Normative
+Shall supported by a given Port/Cable Plug based on 
+features.
+R
+Recommended
+Should be supported by this Port/Cable Plug.
+O
+Optional
+May be supported by this Port/Cable Plug.
+NS
+Not Supported
+Shall result in a Not_Supported Message response by this 
+Port/Cable Plug when received.
+I
+Ignore
+Shall be Ignored by this Port/Cable Plug when received.
+NK
+NAK
+This Port/Cable Plug Shall return Responder NAK to this 
+Command when received.
+NA
+Not allowed
+Shall Not be transmitted by this Port/Cable Plug.
+DR
+Don’t Recognize
+There Shall be no response at all (i.e., not even a GoodCRC 
+Message) from this Port/Cable Plug when received.

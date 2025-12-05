@@ -1,0 +1,50 @@
+Page 168
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.1
+  Discover Identity
+The Discover Identity Command is provided to enable an Initiator to identify its Port Partner and for an Initiator 
+(VCONN Source) to identify the Responder (Cable Plug or VPD). The Discover Identity Command is also used to 
+determine whether a Cable Plug or VPD is PD-Capable by looking for a GoodCRC Message Response.
+The Discover Identity Command Shall only be sent to SOP when there is an Explicit Contract.
+The Discover Identity Command Shall be used to determine whether a given Cable Plug or VPD is PD Capable (see 
+Section 8.3.3.21.1, "Initiator Structured VDM Discover Identity State Diagram" and Section 8.3.3.25.3, "Source Startup 
+Structured VDM Discover Identity of a Cable Plug State Diagram"). In this case a Discover Identity Command request 
+sent to SOP’ Shall Not cause a Soft Reset if a GoodCRC Message response is not returned since this can indicate a 
+non-PD Capable cable or VPD.
+Note:
+A Cable Plug or VPD will not be ready for PD Communication until tVCONNStable after VCONN has been 
+applied (see [USB Type-C 2.4]). 
+During Cable Plug or VPD discovery, when there is an Explicit Contract, Discover Identity Commands are sent at a 
+rate defined by the DiscoverIdentityTimer (see Section 6.6.15, "DiscoverIdentityTimer") up to a maximum of 
+nDiscoverIdentityCount times (see Section 6.7.5, "Discover Identity Counter").
+A PD-Capable Cable Plug or VPD Shall return a Discover Identity Command ACK in response to a Discover Identity 
+Command request sent to SOP’.
+The Discover Identity Command Shall be used to determine the identity and/or Capabilities of the Port Partner. 
+The following products Shall return a Discover Identity Command ACK in response to a Discover Identity 
+Command request sent to SOP:
+
+A PD-Capable UFP that supports Modal Operation.
+
+A PD-Capable product that has multiple DFPs.
+
+A PD-Capable [USB4] product.
+The SVID in the Discover Identity Command request Shall be set to the PD SID (see Section Table 6.31, "SVID 
+Values").
+The Number of Data Objects field in the Message Header in the Discover Identity Command request Shall be set 
+to 1 since the Discover Identity Command request Shall Not contain any VDOs. 
+The Discover Identity Command ACK sent back by the Responder Shall contain an ID Header VDO, a Cert Stat VDO, 
+a Product VDO and the Product Type VDOs defined by the Product Type as shown in Figure 6.16, "Discover Identity 
+Command response". This specification defines the following Product Type VDOs:
+
+Passive Cable VDO (see Section 6.4.4.3.1.6, "Passive Cable VDO")
+
+Active Cable VDOs (see Section 6.4.4.3.1.7, "Active Cable VDOs")
+
+VCONN Powered USB Device (VPD) VDO (see Section 6.4.4.3.1.9, "VCONN Powered USB Device VDO")
+
+UFP VDO (see Section 6.4.4.3.1.4, "UFP VDO")
+
+DFP VDO (see Section 6.4.4.3.1.5, "DFP VDO")
+No VDOs other than those defined in this specification Shall be sent as part of the Discover Identity Command 
+response. Where there is no Product Type VDO defined for a specific Product Type, no VDOs Shall be sent as part of 
+the Discover Identity Command response. Any additional VDOs received by the Initiator Shall be Ignored.

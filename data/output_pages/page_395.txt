@@ -1,0 +1,28 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 395
+8
+Protocol Layer sends the GoodCRC Message to the 
+New Source and then stops the PSSourceOnTimer.
+Policy Engine evaluates the PS_RDY Message from 
+the New Source and tells the Device Policy Manager to 
+instruct the power supply to draw current as the New 
+Sink.
+Protocol Layer receives the GoodCRC Message from 
+the New Sink.
+9
+The power supply as the New Sink transitions from 
+Swap Standby to drawing the power allowed by the 
+Implicit Contract. The power supply informs the 
+Device Policy Manager that it is operating as the New 
+Sink. At this point subsequent Negotiations 
+between the New Source and the New Sink May 
+proceed as normal. The New Sink Shall Not violate 
+the transient load behavior defined in Section 7.2.6, 
+"Transient Load Behavior" while transitioning to and 
+operating at the new power level. The time duration 
+(t4) depends on the magnitude of the load change 
+(iLoadStepRate).
+Table 7.19  Sequence Description for a Source Requested Power Role Swap (Continued)
+Step
+Initial Source Port New Sink Port
+Initial Sink Port  New Source Port

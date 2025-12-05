@@ -1,0 +1,146 @@
+Page 438
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.1.3.11
+  AMS: Status
+8.3.2.1.3.12
+  AMS: Source/Sink Capabilities (SPR)
+Table 8.15  AMS: Status
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine 
+Ref
+Sink Gets Source 
+Status
+1.
+Get_Status Message
+2.
+Status Message
+Started by Sink
+Started by Source
+Section 
+8.3.2.11.2.1,
+Section 
+8.3.2.11.2.2
+Section 8.3.3.10.1,
+Section 8.3.3.10.2
+Source Gets Sink 
+Status
+1.
+Get_Status Message
+2.
+Status Message
+VCONN Source Gets 
+Cable Plug Status
+1.
+Get_Status Message
+2.
+Status Message
+Started by VCONN Source
+Started by Sink
+Section 
+8.3.2.11.2.3,
+Section 
+8.3.2.11.2.4
+Sink Gets Source PPS 
+Status
+1.
+Get_PPS_Status Message
+2.
+PPS_Status Message
+Section 8.3.3.10.3,
+Section 8.3.3.10.4
+Table 8.16  AMS: Source/Sink Capabilities (SPR)
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine 
+Ref
+Sink Gets Source 
+Capabilities (EPR 
+Mode)
+1.
+Get_Source_Cap Message
+2.
+Source_Capabilities 
+Message
+Started by Sink
+Section 8.3.2.11.3.1.1,
+Section 8.3.2.2.1.3.1,
+Section 8.3.2.2.1.3.2,
+Section 8.3.2.2.1.3.3
+Section 8.3.3.2,
+Section 8.3.3.3,
+Sink Gets Source 
+Capabilities 
+(Accept in SPR 
+Mode)
+1.
+Get_Source_Cap Message
+2.
+Source_Capabilities 
+Message
+3.
+In SPR Mode only: SPR Sink 
+Makes Request (Accept) AMS
+Sink Gets Source 
+Capabilities (Reject 
+in SPR Mode)
+1.
+Get_Source_Cap Message
+2.
+Source_Capabilities 
+Message
+3.
+In SPR Mode only: SPR Sink 
+Makes Request (Reject) AMS
+Sink Gets Source 
+Capabilities (Wait 
+in SPR Mode)
+1.
+Get_Source_Cap Message
+2.
+Source_Capabilities 
+Message
+3.
+In SPR Mode only: SPR Sink 
+Makes Request (Wait) AMS
+Dual-Role Power 
+Source Gets Source 
+Capabilities from a 
+Dual-Role Power 
+Sink
+1.
+Get_Source_Cap Message
+2.
+Source_Capabilities 
+Message
+Started by Source
+Section 8.3.2.11.3.1.2
+Section 8.3.3.19.7,
+Section 8.3.3.19.10
+Source Gets Sink 
+Capabilities
+1.
+Get_Sink_Cap Message
+2.
+Sink_Capabilities Message
+Started by Source
+Section 8.3.2.11.3.1.3
+Section 8.3.3.2,
+Section 8.3.3.3,
+Dual-Role Power 
+Sink Get Sink 
+Capabilities from a 
+Dual-Role Power 
+Source
+1.
+Get_Sink_Cap Message
+2.
+Sink_Capabilities Message
+Started by Sink
+Section 8.3.2.11.3.1.4
+Section 8.3.3.19.9,
+Section 8.3.3.19.8

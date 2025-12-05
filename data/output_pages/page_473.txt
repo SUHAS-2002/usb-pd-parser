@@ -1,0 +1,61 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 473
+8.3.2.2.2.1.2
+  Entering EPR Mode (Failure due to non-EPR cable)
+This is an example of an Enter EPR Mode operation where the Sink requests EPR Mode when this process fails due 
+to the cable not being capable of EPR. Figure 8.13, "Entering EPR Mode (Failure due to non-EPR cable)" shows the 
+Messages as they flow across the bus and within the devices to accomplish the Enter EPR process.
+Figure 8.13 Entering EPR Mode (Failure due to non-EPR cable)
+: Protocol
+1: Send EPR_Mode (Enter)
+: PHY
+: PHY
+: Protocol
+2: EPR_Mode (Enter)
+3: EPR_Mode (Enter) + CRC
+4: EPR_Mode (Enter)
+Start CRCReceiveTimer
+5: EPR_Mode (Enter) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: EPR_Mode (Enter) sent
+Start SinkEPREnterTimer
+Start SenderResponseTimer
+10: Send EPR_Mode (Enter Acknowledged)
+11: EPR_Mode (Enter Acknowledged)
+12: EPR_Mode (Enter Acknowledged) + CRC
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: EPR_Mode (Enter Acknowledged) sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+EPR Mode is not entered.  Sink Initiates Soft Reset.
+Sink
+Source
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+13: EPR_Mode (Enter Acknowledged)
+14: EPR_Mode (Enter Acknowledged) received
+19: Optional VCONN Swap Process – Source becomes VCONN Source
+20: Source reads Cable E-Marker to determine EPR capability – Cable is not EPR Capable
+21: Send EPR_Mode (Enter Failed)
+22: EPR_Mode (Enter Failed)
+23: EPR_Mode (Enter Failed) + CRC
+Stop SinkEPREnterTimer
+26: GoodCRC
+27: GoodCRC + CRC
+28: GoodCRC
+29: EPR_Mode (Enter Failed) sent
+Start CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+24: EPR_Mode (Enter Failed)
+25: EPR_Mode (Enter Failed) received

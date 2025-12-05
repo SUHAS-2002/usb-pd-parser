@@ -1,0 +1,84 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 41
+Battery Slot
+A physical location where a Hot Swappable Battery can be installed. A Battery Slot might or 
+might not have a Hot Swappable Battery present in a Battery Slot at any given time.
+Battery Supply
+A power supply that directly applies the output of a Battery to VBUS. This is exposed by the 
+Battery Supply PDO (see Section 6.4.1.2.3, "Battery Supply Power Data Object").
+BDO
+See BIST Data Object.
+BFSK
+See Binary Frequency Shift Keying.
+Bi-phase Mark Coding
+Modification of Manchester coding where each zero has one transition and a one has two 
+transitions (see [IEC 60958-1]).
+Binary Frequency Shift 
+Keying
+A Signaling Scheme now Deprecated in this specification. BFSK used a pair of discrete 
+frequencies to transmit binary (0s and 1s) information over VBUS. See [USBPD 2.0] for further 
+details.
+BIST
+Built-In Self-Test - Power Delivery testing mechanism for the PHY Layer.
+BIST Data Object
+Data Object used by BIST Messages.
+BIST Mode
+A BIST receiver or transmitter test mode enabled by a BIST Message.
+BIST Carrier Mode
+A BIST Mode in which the PHY Layer sends out a BMC encoded continuous string of 
+alternating "1"s and "0"s.
+BIST Test Data Mode
+A BIST Mode in which the PHY Layer sends out a GoodCRC Message and then enters a test mode 
+where it sends no further Messages, except  GoodCRC Messages, in response to received 
+Messages.
+BIST Shared Capacity Test 
+Mode
+A BIST Mode applicable only to a Shared Capacity Group of Ports where the maximum Source 
+Capabilities are always offered on every Port, regardless of the availability of shared power i.e., 
+all shared power management is disabled.
+BMC
+See Bi-phase Mark Coding.
+Cable Capabilities
+Capabilities offered by a Cable Plug.
+Cable Discovered
+USB Power Delivery Ports that have exchanged a Message and a GoodCRC Message response 
+with a Cable Plug or a VPD using the USB Power Delivery protocol so that both the Port and the 
+Cable Plug know that each is PD Capable and which Revision they each support.
+Cable Discovery
+See Cable Discovered.
+Cable Plug
+Term used to describe a PD Capable element in a Multi-Drop system addressed by SOP’ Packets/
+SOP’’ Packets. Logically the Cable Plug is associated with a USB Type-C plug at one end of the 
+cable. In a practical implementation, the electronics might reside anywhere in the cable.
+Cable Reset
+This is initiated by Cable Reset Signaling from the DFP. It restores the Cable Plugs to their 
+default, power up condition and resets the PD communications engine in the cable to its default 
+state. It does not reset the Port Partners but does restore VCONN to its Attachment state.
+Cable VDO
+VDO returned by the Cable Plug containing Cable Capabilities.
+Capabilities
+Features supported by a product. These can include, for example, power levels supplied/
+needed, cable type, Battery support or [USB4] support.
+Capabilities Mismatch
+Indication from the Sink that the Source’s Advertised Capabilities don’t match the Sink’s needs.
+CC
+See Configuration Channel.
+Cert Stat VDO
+The Cert Stat VDO contains the XID assigned by USB-IF to the product before certification in 
+binary format.
+Charge Through
+A mechanism for a VCONN Powered USB Device (VPD) to pass power and CC communication from 
+one Port to the other without any interference or re-regulation.
+Charge Through Port
+The USB Type-C receptacle on a USB Device that is designed to allow a Source to be connected 
+through the USB Device to charge a system to which it is Attached. Most common use is to allow 
+a single Port USB Host to support a USB Device while being charged.
+Charger
+Provider whose primary purpose is to supply power to a Consumer or Consumers in order to 
+charge their Battery.
+Chunk
+A MaxExtendedMsgChunkLen (26 byte) or less portion of a Data Block. Data Blocks can be sent 
+either as a single Message or as a series of Chunks.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

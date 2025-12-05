@@ -1,0 +1,104 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 439
+8.3.2.1.3.13
+  AMS: Source/Sink Capabilities (EPR)
+Table 8.17  AMS: Source/Sink Capabilities (EPR)
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+Sink Gets EPR 
+Source Capabilities 
+(SPR Mode)
+1.
+EPR_Get_Source_Cap 
+Message
+2.
+EPR_Source_Capabilities 
+Message
+Started by Sink
+Section 8.3.2.11.3.2.1,
+Section 8.3.2.2.2.5.1,
+Section 8.3.2.2.2.5.2,
+Section 8.3.2.2.2.5.3
+Section 8.3.3.2,
+Section 8.3.3.3,
+Sink Gets EPR 
+Source Capabilities 
+(Accept in EPR 
+Mode)
+1.
+EPR_Get_Source_Cap 
+Message
+2.
+EPR_Source_Capabilities 
+Message
+3.
+In EPR Mode only: EPR Sink 
+Makes Request (Accept) AMS
+Sink Gets EPR 
+Source Capabilities 
+(Reject in EPR Mode)
+1.
+EPR_Get_Source_Cap 
+Message
+2.
+EPR_Source_Capabilities 
+Message
+3.
+In EPR Mode only: EPR Sink 
+Makes Request (Reject) AMS
+Sink Gets EPR 
+Source Capabilities 
+(Wait in EPR Mode)
+1.
+EPR_Get_Source_Cap 
+Message
+2.
+EPR_Source_Capabilities 
+Message
+3.
+In EPR Mode only: EPR Sink 
+Makes Request (Wait) AMS
+Dual-Role Power 
+Source Gets Source 
+Capabilities from a 
+Dual-Role Power 
+EPR Sink
+1.
+EPR_Get_Source_Cap 
+Message
+2.
+EPR_Source_Capabilities 
+Message
+Started by 
+Source
+Section 8.3.2.11.3.2.2
+Section 8.3.3.19.7,
+Section 8.3.3.19.10
+Source Gets Sink EPR 
+Capabilities
+1.
+EPR_Get_Sink_Cap Message
+2.
+EPR_Sink_Capabilities 
+Message
+Started by 
+Source
+Section 8.3.2.11.3.2.3
+Section 8.3.3.2,
+Section 8.3.3.3,
+Dual-Role Power 
+Sink Get Sink EPR 
+Capabilities from a 
+Dual-Role Power 
+Source
+1.
+EPR_Get_Sink_Cap Message
+2.
+EPR_Sink_Capabilities 
+Message
+Started by Sink Section 8.3.2.11.3.2.4
+Section 8.3.3.19.8,
+Section 8.3.3.19.9

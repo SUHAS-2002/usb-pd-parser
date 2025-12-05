@@ -1,0 +1,63 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 931
+8.3.3.22.3
+  Responder Structured VDM Discover Modes State Diagram
+Figure 8.197, "Responder Structured VDM Discover Modes State Diagram" shows the state diagram for a Responder 
+on receiving a Discover Modes Command.
+Figure 8.197 Responder Structured VDM Discover Modes State Diagram
+8.3.3.22.3.1
+  PE_RESP_VDM_Get_Modes State
+The Policy Engine transitions to the PE_RESP_VDM_Get_Modes state from either the PE_SRC_Ready, 
+PE_SNK_Ready or PE_CBL_Ready state when:
+
+A Structured VDM Discover Modes Command request is received.
+On entry to the PE_RESP_VDM_Get_Modes state the Responder Shall request Modes information from the Device 
+Policy Manager.
+The Policy Engine Shall transition to the PE_RESP_VDM_Send_Modes state when:
+
+Modes information is received from the Device Policy Manager.
+The Policy Engine Shall transition to the PE_RESP_VDM_Get_Modes_NAK state when:
+
+The Device Policy Manager indicates that the response to the Discover Modes Command request is NAK 
+or BUSY.
+8.3.3.22.3.2
+  PE_RESP_VDM_Send_Modes State
+On entry to the PE_RESP_VDM_Send_Modes state the Responder Shall send the Structured VDM Discover Modes 
+ACK Command response.
+The Policy Engine Shall transition to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state when:
+
+The Structured VDM Discover Modes ACK Command response has been sent.
+8.3.3.22.3.3
+  PE_RESP_VDM_Get_Modes_NAK State
+On entry to the PE_RESP_VDM_Get_Modes_NAK state the Policy Engine Shall send a Structured VDM Discover 
+Modes NAK or BUSY Command response as indicated by the Device Policy Manager.
+The Policy Engine Shall transition to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state when:
+
+The Structured VDM Discover Modes NAK or BUSY Command response has been sent.
+PE_RESP_VDM_Send_Modes
+Actions on entry:
+Send Discover Modes ACK
+Power = Explicit Contract
+PD = Connected
+Discover Modes
+request
+Discover Modes ACK
+sent
+PE_RESP_VDM_Get_Modes
+Actions on entry:
+Request Modes information from DPM
+Power = Explicit Contract
+PD = Connected
+Modes information 
+from DPM
+PE_RESP_VDM_Get_Modes_
+Actions on entry: NAK
+Send Discover Modes NAK/BUSY 
+Command response as requested
+Power = Explicit Contract
+PD = Connected
+DPM says
+NAK/BUSY
+Discover Modes NAK/BUSY 
+sent
+PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready

@@ -1,0 +1,53 @@
+Page 70
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+themselves, independently of USB power rules, but are more limited in terms of the options available for managing 
+power.
+2.6.1.2
+  Device Policy Manager
+The Device Policy Manager provides mechanisms to monitor and control the USB Power Delivery system within a 
+particular Consumer or Provider. The Device Policy Manager enables Local Policy to be enforced across the system 
+by communication with the System Policy Manager. Local Policy is enacted on a per Port basis by the Device Policy 
+Manager's control of the Source Ports/Sink Ports and by communication with the Policy Engine and USB-C® Port 
+Control for that Port. The Device Policy Manager is responsible for the sharing algorithm used in Shared Capacity 
+Chargers (see [USB Type-C 2.4])
+2.6.1.3
+  Policy Engine
+Providers and Consumers are free to implement their own Local Policy on their directly connected Source Ports or 
+Sink Ports. These will be supported by Negotiation and status mechanisms implemented by the Policy Engine for 
+that Port. The Policy Engine interacts directly with the Device Policy Manager to determine the present Local Policy 
+to be enforced. The Device Policy Manager will also inform the Policy Engine whenever there is a change in Local 
+Policy (e.g., Capabilities change).
+2.6.2
+  Message Formation and Transmission
+2.6.2.1
+  Protocol Layer
+The Protocol Layer forms the Messages used to communicate information between a Port Pair. It is responsible for 
+forming Capabilities Messages, requests and acknowledgments. Additionally, it forms Messages used to swap roles 
+and maintain presence. It receives inputs from the Policy Engine indicating which Messages to send and indicates 
+the responses back to the Policy Engine.
+The basic protocol uses a push model where the Provider pushes its Capabilities to the Consumer that in turn 
+responds with a request based on the offering. However, the Consumer can asynchronously request the Provider's 
+present Capabilities and can select another voltage/current.
+Extended Messages of up to a Data Size of MaxExtendedMsgLen can be sent and received provided the Protocol 
+Layer determines that both Port Partners support this capability. When one of both Port Partners do not support 
+Extended Messages of Data Size greater than MaxExtendedMsgLegacyLen then the Protocol Layer supports a 
+Chunking mechanism to break larger Messages into smaller Chunks of size MaxExtendedMsgChunkLen. All Ports 
+that support Extended Messages longer than MaxExtendedMsgLegacyLen are required to support Chunking.
+2.6.2.2
+  PHY Layer
+The PHY Layer is responsible for sending and receiving Messages across the USB Type-C CC wire and for managing 
+data. PD is a Multi-Drop system, sharing CC between the Port Partners and the Cable Plug(s) that implements 
+Collision Avoidance and recovery mechanisms. The PHY Layer detects errors in the Messages using a CRC.
+2.6.3
+  Collision Avoidance
+2.6.3.1
+  Policy Engine
+The Policy Engine in a Source will indicate to the Protocol Layer the start and end of each Atomic Message Sequence 
+(AMS) that the Source initiates. The Policy Engine in a Sink will indicate to the Protocol Layer the start of each AMS 
+the Sink initiates. This enables co-ordination of AMS initiation between the Port Partners.
+2.6.3.2
+  Protocol Layer
+The Protocol Layer in the Source will request the PHY to set the Rp value to SinkTxOK when it is not actively sending 
+Messages. This indicates to the Sink that it can initiate an AMS by sending the first Message in the sequence. The 
+Protocol Layer in the Source will request the PHY Layer to set the Rp value to SinkTxNG to indicate that the Sink 
+cannot initiate an AMS since the Source is about to initiate an AMS.

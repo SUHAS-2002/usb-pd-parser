@@ -1,0 +1,73 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 143
+Every Fixed Supply PDO Shall contain a Peak Current field. Supplies that want to offer a set of overload Capabilities 
+Shall Advertise this through the Peak Current field in the corresponding Fixed Supply PDO (see Table 6.10, "Fixed 
+Power Source Peak Current Capability"). Supplies that do not support an overload capability Shall set these bits to 
+00b in the corresponding Fixed Supply PDO. Supplies that support an extended overload capability specified in the 
+PeakCurrent1…3 fields of the Source_Capabilities_Extended Message (see Section 6.5.1, 
+"Source_Capabilities_Extended Message") Shall also set these bits to 00b. Sinks wishing to utilize these Extended 
+Capabilities Shall first send the Get_Source_Cap_Extended Message to determine what Capabilities, if any are 
+supported by the Source.
+6.4.1.2.2
+  Variable Supply (non-Battery) Power Data Object
+Table 6.11, "Variable Supply (non-Battery) PDO – Source" describes a Variable Supply (non-Battery) (10b) PDO for 
+a Source. See Section 7.1.3, "Types of Sources" for the electrical requirements of the power supply.
+The voltage fields Shall define the range that output voltage Shall fall within. This does not indicate the voltage that 
+will be supplied, except it Shall fall within that range. The absolute voltage, including any voltage variation, Shall 
+Not fall below the Minimum Voltage field value and Shall Not exceed the Maximum Voltage field value. The 
+Minimum Voltage field value Shall Not be less than 80% of the Maximum Voltage field value.
+6.4.1.2.3
+  Battery Supply Power Data Object 
+Table 6.12, "Battery Supply PDO – Source" describes a Battery Supply (01b) PDO for a Source. See Section 7.1.3, 
+"Types of Sources" for the electrical requirements of the power supply.
+The voltage fields Shall represent the Battery's voltage range. The Battery Shall be capable of supplying the Power 
+value over the entire voltage range. The absolute voltage, including any voltage variation, Shall Not fall below the 
+Minimum Voltage field value and Shall Not exceed the Maximum Voltage field value.
+Note:
+The Battery Supply PDO uses power instead of current.
+Table 6.10  Fixed Power Source Peak Current Capability
+Bits 21…20
+Description
+00
+Peak current equals IoC (default) or look at the Source_Capabilities_Extended Message (send 
+Get_Source_Cap_Extended Message)
+01
+Overload Capabilities:
+1.
+Peak current equals 150% IoC for 1ms @ 5% duty cycle (low current equals 97% IoC for 19ms)
+2.
+Peak current equals 125% IoC for 2ms @ 10% duty cycle (low current equals 97% IoC for 18ms)
+3.
+Peak current equals 110% IoC for 10ms @ 50% duty cycle (low current equals 90% IoC for 10ms)
+10
+Overload Capabilities:
+1.
+Peak current equals 200% IoC for 1ms @ 5% duty cycle (low current equals 95% IoC for 19ms)
+2.
+Peak current equals 150% IoC for 2ms @ 10% duty cycle (low current equals 94% IoC for 18ms)
+3.
+Peak current equals 125% IoC for 10ms @ 50% duty cycle (low current equals 75% IoC for 10ms)
+11
+Overload Capabilities:
+1.
+Peak current equals 200% IoC for 1ms @ 5% duty cycle (low current equals 95% IoC for 19ms)
+2.
+Peak current equals 175% IoC for 2ms @ 10% duty cycle (low current equals 92% IoC for 18ms)
+3.
+Peak current equals 150% IoC for 10ms @ 50% duty cycle (low current equals 50% IoC for 10ms)
+Table 6.11  Variable Supply (non-Battery) PDO – Source
+Bit(s)
+Field
+Description
+B31…30
+Variable Supply
+01b - Variable Supply (non-Battery) PDO
+B29…20
+Maximum Voltage
+Maximum voltage in 50mV units 
+B19…10
+Minimum Voltage
+Minimum voltage in 50mV units
+B9…0
+Maximum Current
+Maximum current in 10mA units

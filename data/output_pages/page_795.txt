@@ -1,0 +1,76 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 795
+8.3.2.15.3
+  BIST Shared Capacity Test Mode
+The following is an example of a BIST Shared Capacity Test Mode test between a Tester and a UUT. When the UUT 
+is connected to the Tester the sequence below is executed. 
+Figure 8.118, "BIST Share Capacity Mode Test" shows the Messages as they flow across the bus and within the 
+devices. This test places the UUT in a compliance test mode where the maximum Source capability is always offered 
+on every Port, regardless of the availability of shared power i.e., all shared power management is disabled.
+1)
+Connection is established and stable.
+2)
+Tester sends a BIST Message with a BIST Shared Test Mode Entry BIST Data Object.
+3)
+UUT answers with a GoodCRC Message.
+4)
+UUT enters BIST Shared Capacity Test Mode.
+5)
+Operator does the measurements.
+6)
+Tester sends a BIST Message with a BIST Shared Test Mode Exit BIST Data Object.
+7)
+UUT answers with a GoodCRC Message.
+8)
+UUT exits BIST Shared Capacity Test Mode.
+See also Section 5.9.1, "BIST Carrier Mode" and Section 6.4.3.3, "BIST Shared Capacity Test Mode".
+Figure 8.118 BIST Share Capacity Mode Test
+12: Send BIST(Shared Capacity Test Mode Exit)
+13: BIST(Shared Capacity Test Mode Exit)
+14: BIST(Shared Capacity Test Mode Exit) + CRC
+15: BIST(Shared Capacity Test Mode Exit)
+Start CRCReceiveTimer
+16: BIST(Shared Capacity Test Mode Exit) received
+17: GoodCRC
+18: GoodCRC + CRC
+19: GoodCRC
+20: BIST(Shared Capacity Test Mode) sent
+Go to BIST Shared Capacity 
+Test Mode
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Check MessageID against 
+local copy
+Store copy of MessageID
+EXit BIST Shared Capacity Test Mode mode
+21: Exit BIST Shared Capacity Test Mode
+22: Exit BIST Shared Capacity Test Mode
+: Protocol
+1: Send BIST(Shared Capacity Test Mode Entry)
+: PHY
+: PHY
+: Protocol
+2: BIST(Shared Capacity Test Mode Entry)
+3: BIST(Shared Capacity Test Mode Entry) + CRC
+4: BIST(Shared Capacity Test Mode Entry)
+Start CRCReceiveTimer
+5: BIST(Shared Capacity Test Mode Entry) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: BIST(Shared Capacity Test Mode) sent
+: Policy Engine
+: Policy Engine
+Go to BIST Shared Capacity 
+Test Mode
+Tester
+UUT
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Check MessageID against 
+local copy
+Store copy of MessageID
+Enter BIST Shared Capacity Test Mode mode
+10: Go to BIST Shared Capacity Test Mode
+11: Go to BIST Shared Capacity Test Mode
+Tester Performs Tests

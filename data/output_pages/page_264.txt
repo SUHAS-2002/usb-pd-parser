@@ -1,0 +1,127 @@
+Page 264
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 6.69  Timers
+Timer
+Parameter
+Used By
+Reference
+BISTContModeTimer
+tBISTContMode
+Policy Engine
+Section 6.6.7.2
+ChunkingNotSupportedTimer
+tChunkingNotSupported
+Policy Engine
+Section 6.6.18.1
+ChunkSenderRequestTimer
+tChunkSenderRequest
+Protocol Layer
+Section 6.6.18.2
+ChunkSenderResponseTimer
+tChunkSenderResponse
+Protocol Layer
+Section 6.6.18.3
+CRCReceiveTimer
+tReceive
+Protocol Layer
+Section 6.6.1
+DataResetFailTimer
+tDataResetFail
+Policy Engine
+Section 6.6.10.3
+DataResetFailUFPTimer
+tDataResetFailUFP
+Policy Engine
+Section 6.6.10.4
+DiscoverIdentityTimer
+tDiscoverIdentity
+Policy Engine
+Section 6.6.15
+HardResetCompleteTimer
+tHardResetComplete
+Protocol Layer
+Section 6.6.9
+NoResponseTimer
+tNoResponse
+Policy Engine
+Section 6.6.6
+PSHardResetTimer
+tPSHardReset
+Policy Engine
+Section 6.6.11.2
+PSSourceOffTimer
+tPSSourceOff
+Policy Engine
+Section 6.6.5.2
+PSSourceOnTimer
+tPSSourceOn
+Policy Engine
+Section 6.6.5.3
+PSTransitionTimer
+tPSTransition
+Policy Engine
+Section 6.6.5.1
+SenderResponseTimer
+tSenderResponse
+Policy Engine
+Section 6.6.2
+SinkEPREnterTimer
+tEnterEPR
+Policy Engine
+Section 6.6.21.1
+SinkEPRKeepAliveTimer
+tSinkEPRKeepAlive
+Policy Engine
+Section 6.6.21.2
+SinkPPSPeriodicTimer
+tPPSRequest
+Policy Engine
+Section 6.6.19.1
+SinkRequestTimer
+tSinkRequest
+Policy Engine
+Section 6.6.4
+SinkWaitCapTimer
+tTypeCSinkWaitCap
+Policy Engine
+Section 6.6.3.2
+SourceCapabilityTimer
+tTypeCSendSourceCap
+Policy Engine
+Section 6.6.3.1
+SourceEPRKeepAliveTimer
+tSourceEPRKeepAlive
+Policy Engine
+Section 6.6.21.3
+SourcePPSCommTimer
+tPPSTimeout
+Policy Engine
+Section 6.6.19.2
+SinkTxTimer
+tSinkTx
+Protocol Layer
+Section 6.6.16
+SwapSourceStartTimer
+tSwapSourceStart
+Policy Engine
+Section 6.6.8.1
+VCONNDischargeTimer
+tVCONNSourceDischarge
+Policy Engine
+Section 6.6.10.1
+VCONNOnTimer
+tVCONNSourceTimeout
+Policy Engine
+Section 6.6.13.1
+VDMModeEntryTimer
+tVDMWaitModeEntry
+Policy Engine
+Section 6.6.12.2
+VDMModeExitTimer
+tVDMWaitModeExit
+Policy Engine
+Section 6.6.12.3
+VDMResponseTimer
+tVDMSenderResponse
+Policy Engine
+Section 6.6.12.1

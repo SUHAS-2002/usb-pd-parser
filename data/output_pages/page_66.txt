@@ -1,0 +1,32 @@
+Page 66
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+2.6
+  Architectural Overview
+This logical architecture is not intended to be taken as an implementation architecture. An implementation 
+architecture is, by definition, a part of product definition and is therefore outside of the scope of this specification.
+This section outlines the high-level logical architecture of USB Power Delivery referenced throughout this 
+specification. In practice various implementation options are possible based on many different possible types of 
+PD devices. PD devices can have many different configurations e.g., USB Communication or non-USB 
+Communication, single versus multiple Ports, dedicated power supplies versus supplies shared on multiple ports, 
+hardware versus software-based implementations etc. The architecture outlined in this section is therefore 
+provided only for reference to indicate the high-level logical model used by the PD specification. This architecture 
+is used to identify the key concepts and to indicate logical blocks and possible links between them.
+The USB Power Delivery is a Port to Port architecture in which each PD Capable device is made up of several major 
+components.
+
+Figure 2.3, "USB Power Delivery Communications Stack" illustrates the relationship of the layers of the 
+communications stack between a Port Pair.
+The communications stack consists of:
+
+A Device Policy Manager (see Section 8.2, "Device Policy Manager") that exists in all devices and manages 
+USB Power Delivery resources within the device across one or more Ports based on the device's Local 
+Policy.
+
+A Policy Engine (see Section 8.3, "Policy Engine") that exists in each USB Power Delivery Port 
+implements the Local Policy for that Port.
+
+A Protocol Layer (see Section 6, "Protocol Layer") that enables Messages to be exchanged between a Source 
+Port and a Sink Port.
+
+A PHY Layer (see Section 5, "Physical Layer") that handles transmission and reception of bits on the wire 
+and handles data transmission

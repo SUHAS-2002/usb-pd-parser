@@ -1,0 +1,56 @@
+Page 418
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+could mean that a Port which is initially consuming power as a Sink is able to become a power resource as a Source. 
+Conversely, Attached Sources might request that power be provided to them.
+The functionality within the Device Policy Manager (and to a certain extent the Policy Engine) is scalable depending 
+on the complexity of the device, including the number of different power supply Capabilities and the number of 
+different features supported for example System Policy Manager interface or Capabilities Mismatch, and the 
+number of ports being managed. Within these parameters it is possible to implement devices from very simple 
+power supplies to more complex power supplies or devices such as USB Hubs or Hard Drives. Within multi-Port 
+devices it is also permitted to have a combination of USB Power Delivery and non-USB Power Delivery ports which 
+Should all be managed by the Device Policy Manager.
+As noted in Section 2.6, "Architectural Overview" the logical architecture used in the PD specification will vary 
+depending on the implementation. This means that different implementations of the Device Policy Manager might 
+be relatively small or large depending on the complexity of the device, as indicated above. It is also possible to 
+allocate different responsibilities between the Policy Engine and the Device Policy Manager, which will lead to 
+different types of architectures and interfaces.
+The Device Policy Manager is responsible for the following:
+
+Maintaining the Local Policy for the device. 
+
+For a Source, monitoring the present Capabilities and triggering notifications of the change.
+
+For a Sink, evaluating and responding to Capabilities related requests from the Policy Engine for a given 
+Port.
+
+Control of the Source/Sink in the device.
+
+Control of the USB-C® Port Control module for each Port.
+
+Interface to the Policy Engine for a given Port.
+The Device Policy Manager is responsible for the following Optional features when implemented:
+
+Communications with the System Policy over USB.
+
+For Sources with multiple ports monitoring and balancing power requirements across these ports.
+
+Monitoring of batteries and AC power supplies.
+
+Managing Modes in its Port Partner and Cable Plug(s).
+8.2.1
+  Capabilities
+The Device Policy Manager in a Provider Shall know the power supplies available in the device and their 
+Capabilities. In addition, it Shall be aware of any other PD sources of power such as batteries and AC inputs. The 
+available power sources and existing demands on the device Shall be taken into account when presenting 
+Capabilities to a Sink.
+The Device Policy Manager in a Consumer Shall know the requirements of the Sink and use this to evaluate the 
+Capabilities offered by a Source. It Shall be aware of its own power sources e.g., Batteries or AC supplies where 
+these have a bearing on its operation as a Sink.
+The Device Policy Manager in a Dual-Role Power Device Shall combine the above Capabilities and Shall also be able 
+to present the dual-role nature of the device to an Attached PD Capable device.
+8.2.2
+  System Policy
+A given PD Capable device might have no USB capability, or PD might have been added to a USB device in such a 
+way that PD is not integrated with USB. In these two cases there Shall be no requirement for the Device Policy 
+Manager to interact with the USB interface of the device. The following requirements Shall only apply to PD 
+devices that expose PD functionality over USB.

@@ -1,0 +1,20 @@
+Page 114
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6
+ Protocol Layer
+6.1
+  Overview
+This chapter describes the requirements of the USB Power Delivery Specification's Protocol Layer including:
+
+Details of how Messages are constructed and used.
+
+Use of timers and timeout values.
+
+Use of Message and retry counters.
+
+Reset operation.
+
+Error handling.
+
+State behavior.
+Refer to Section 2.6, "Architectural Overview" for an overview of the theory of operation of USB Power Delivery.

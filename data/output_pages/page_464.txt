@@ -1,0 +1,48 @@
+Page 464
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.1.3.2
+  SPR Sink Makes Request (Reject)
+This is an example of SPR when a Sink makes a Request which is Rejected during an Explicit Contract. Figure 8.10, 
+"SPR Sink Makes Request (Reject)" shows the Messages as they flow across the bus and within the devices to 
+accomplish the keep alive.
+Figure 8.10 SPR Sink Makes Request (Reject)
+: Source Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Sink Policy Engine
+1: Send Request
+2: Request
+3: Request + CRC
+4: Request
+Check MessageID against local copy
+Store copy of MessageID
+5: Request received
+Stop SenderResponseTimer
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Request sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Start SenderResponseTimer
+10: Send Reject
+11: Reject
+12: Reject + CRC
+13: Reject
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+14: Reject received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+18: Reject sent
+Stop SenderResponseTimer
+Evaluate Request
+Source
+Sink

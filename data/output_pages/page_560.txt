@@ -1,0 +1,99 @@
+Page 560
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 8.39 Successful Fast Role Swap Sequence
+: Protocol
+1: Send FR_Swap
+: PHY
+: PHY
+: Protocol
+2:FR_Swap
+3: FR_Swap + CRC
+4: FR_Swap
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: FR_Swap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:FR_Swap sent
+Start SenderResponseTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+Check MessageID against local copy
+Store copy of MessageID
+14: Accept received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Accept sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+28: Send PS_RDY
+29: PS_RDY
+30: PS_RDY + CRC
+31: PS_RDY
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+32: PS_RDY received
+33: GoodCRC
+34: GoodCRC + CRC
+35: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+36: PS_RDY sent
+Evaluate FR_Swap request
+: Policy Engine
+: Policy Engine
+Initial Sink Port
+Initial Source Port
+19: Send PS_RDY
+20: PS_RDY
+21: PS_RDY + CRC
+22: PS_RDY
+Check MessageID against local copy
+Store copy of MessageID
+23: PS_RDY received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+27: PS_RDY sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Reset CapsCounter
+Reset Protocol Layer
+Start SwapSourceStartTimer
+Start PSSourceOnTimer
+Port Power Role -> Source
+Port Power Role -> Sink
+Stop SenderResponseTimer
+Start PSSourceOffTimer
+Stop PSSourceOnTimer
+Reset Protocol Layer
+Power Supply acting as a Sink and 
+VBUS at or below vSafe5V
+CC -> Rd
+vSafe5V is being sourced by the new Source
+Stop PSSourceOffTimer
+CC -> Rp
+New Power Roles
+Port Power Role = Sink
+CC = Rd
+Port Power Role = Source
+CC = Rp
+Tell Power Supply to Stop sourcing power and
+switch to Sink operation
+Signal Fast Swap on the CC Wire
+Fast Role Swap signal detected on CC Wire
+Tell Power Supply to stop sinking current.
+Fast Swap signal 
+(CC driven to Gnd through 
+rFRSwapTx or 
+rFRSwapCableTx)

@@ -1,0 +1,40 @@
+Page 238
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.12
+  Country_Info Message
+The Country_Info Message Shall be sent in response to a Get_Country_Info Message. The Country_Info Message 
+enables a Port to get additional country specific information from its Port Partner. 
+The Country_Info Message Shall contain a 4…26-byte Country Info Data Block (CIDB) whose format Shall be as 
+shown in Figure 6.51, "Country_Info Message" and Table 6.64, "Country Info Data Block (CIDB)".
+Figure 6.51 Country_Info Message
+6.5.12.1
+  Country Code Field
+The Country Code field Shall contain the Alpha-2 Country Code received in the corresponding Get_Country_Info 
+Message.
+6.5.12.2
+  Country Specific Data Field
+The Country Specific Data field Shall contain content defined by and formatted in a manner determined by an 
+official agency of the country indicated in the Country Code field.
+If the Country Code field in the Get_Country_Info Message is unrecognized then Country Specific Data field Shall 
+return the null terminated ASCII text string "Unsupported Code".
+Table 6.64  Country Info Data Block (CIDB)
+Offset
+Field
+Size
+0
+Country Code
+First character of the Alpha-2 Country Code received in the corresponding 
+Get_Country_Info Message.
+1
+Second character of the Alpha-2 Country Code received in the corresponding 
+Get_Country_Info Message
+2…3
+Reserved
+Shall be set to zero.
+4
+Country Specific Data
+1…22 bytes of content defined by the country’s authority.
+Extended Header
+Data Size = 4-26
+CIDB
+(4-26 byte Data Block)

@@ -1,0 +1,87 @@
+Page 414
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+pHubSusp
+Suspend power consumption for a 
+Hub. 25mW + 25mW per 
+downstream Port for up to 4 
+ports.
+125
+mW
+Section 7.2.3
+pSnkSusp
+Suspend power consumption for a 
+peripheral device.
+25
+mW
+Section 7.2.3
+tNewSrc
+Maximum time allowed for an 
+Initial Sink in Swap Standby to 
+transition to New Source 
+operation.
+275
+ms
+Section 7.2.7
+Table 7.18
+Table 7.19
+tSnkFRSwap
+Time during a Fast Role Swap 
+when the New Sink can draw no 
+more than iSnkStdby.
+200
+µs
+Section 7.1.13
+tSnkHardResetPrepare
+Time allotted for the Sink power 
+electronics to prepare for a Hard 
+Reset.
+15
+ms
+Table 7.12
+tSnkNewPower
+Maximum transition time 
+between power levels.
+15
+ms
+Section 7.2.3
+tSnkRecover
+Time for the Sink to resume USB 
+Default Operation.
+150
+ms
+Table 7.20
+tSnkStdby
+Time to transition to Sink Standby 
+from Sink.
+15
+ms
+Section 7.2.3
+tSnkSwapStdby
+Maximum time for the Sink to 
+transition to Swap Standby.
+15
+ms
+Section 7.2.7
+vEprMax
+Highest voltage an EPR Sink is 
+expected to tolerate 
+55
+V
+Section 7.2.9.2
+vSprMax
+Highest voltage an SPR Sink is 
+expected to tolerate
+24
+V
+Section 7.2.9.2
+Table 7.24  Sink Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+If more bypass capacitance than cSnkBulk max or cSnkBulkPd max is required in the device, then the device Shall 
+incorporate some form of VBUS surge current limiting as described in [USB 3.2] Section 11.4.4.1.

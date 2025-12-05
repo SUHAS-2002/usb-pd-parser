@@ -1,0 +1,46 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 807
+8.3.2.16.2
+  Cable Plug Entering USB4 Mode
+8.3.2.16.2.1
+  Cable Plug Entering USB4 Mode (Accept)
+This is an example of an Enter USB operation where the DFP requests [USB4] mode when this is a Valid mode of 
+operation for the Cable Plug. Figure 8.122, "Cable Plug Entering USB4 Mode (Accept)" shows the Messages as they 
+flow across the bus and within the devices to accomplish the Enter USB process.
+Figure 8.122 Cable Plug Entering USB4 Mode (Accept)
+: Protocol
+1: Send Enter_USB (USB4)
+: PHY
+: PHY
+: Protocol
+2: Enter_USB (USB4)
+3: Enter_USB (USB4) + CRC
+4: Enter_USB (USB4)
+Start CRCReceiveTimer
+5: Enter_USB (USB4) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Enter_USB (USB4) sent
+Start SenderResponseTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+14: Accept received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Accept sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+USB4 Mode entered
+DFP
+Cable Plug
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer

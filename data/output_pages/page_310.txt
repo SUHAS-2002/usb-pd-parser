@@ -1,0 +1,78 @@
+Page 310
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+6.13.6
+  Applicability of Reset Signaling
+Table 6.82, "Applicability of Reset Signaling" details the Reset that Shall/Should/ Shall Not be transmitted and 
+received by a DFP/UFP or Cable Plug.
+6.13.7
+  Applicability of Fast Role Swap Request
+Table 6.83, "Applicability of Fast Role Swap Request" details the Fast Role Swap Request that Shall/Should/ Shall 
+Not be transmitted and received by a Source or Sink.
+Table 6.82  Applicability of Reset Signaling
+Reset Type
+DFP
+UFP
+Cable Plug
+SOP’
+Cable Plug
+SOP’’
+VPD2
+Transmitted Message/Signaling
+Soft_Reset
+N
+N
+NA
+NA
+NA
+Hard Reset
+N
+N
+NA
+NA
+NA
+Cable Reset
+CN1
+NA
+NA
+NA
+NA
+Received Message/Signaling
+Soft_Reset
+N
+N
+N
+N
+N
+Hard Reset
+N
+N
+N
+N
+N
+Cable Reset
+DR
+DR
+N
+N
+N
+1)
+Shall be supported when transmission of SOP’ Packets are supported, and the Port 
+can supply VCONN.
+2)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a 
+CT-VPD Shall only take place when not Connected to a Charger.
+Table 6.83  Applicability of Fast Role Swap Request
+Command Type
+Source
+Sink
+Dual-Role Power
+Transmitted Message/Signaling
+Fast Role Swap
+NA
+NA
+R
+Received Message/Signaling
+Fast Role Swap
+NA
+NA
+R

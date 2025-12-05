@@ -1,0 +1,52 @@
+Page 446
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.1.3.27
+  AMS: Hard Reset
+Table 8.31  AMS: Hard Reset
+AMS
+Interruptibl
+e
+Message Sequence
+Conditions
+AMS Ref
+State 
+Machine Ref
+Source Initiated 
+Hard Reset
+No
+1.
+Hard Reset Signaling
+2.
+SPR Explicit Contract 
+Negotiation AMS
+Started by 
+Source
+Section 8.3.2.6.1,
+Section 8.3.2.2.1.1
+Section 8.3.3.2,
+Section 8.3.3.3
+Sink Initiated Hard 
+Reset
+No
+1.
+Hard Reset Signaling
+2.
+SPR Explicit Contract 
+Negotiation AMS
+Started by 
+Sink
+Section 8.3.2.6.2,
+Section 8.3.2.2.1.1
+Source Initiated 
+Hard Reset – Sink 
+Long Reset
+No
+1.
+Hard Reset Signaling
+2.
+SPR Explicit Contract 
+Negotiation AMS
+Started by 
+Source
+Section 8.3.2.6.3,
+Section 8.3.2.2.1.1

@@ -1,0 +1,61 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 199
+6.4.6.1
+  Type of Alert
+The Type of Alert field Shall be used to report Source or Sink status changes. Only one Alert Message Shall be 
+generated for each Event or Change; however multiple Type of Alert bits May be set in one Alert Message. Once the 
+Alert Message has been sent the Type of Alert field Shall be cleared.
+A Get_Battery_Status Message Should be sent in response to a Battery status change in an Alert Message to get the 
+details of the change.
+A Get_Status Message Should be sent in response to a non-Battery status change in an Alert Message from to get 
+the details of the change.
+6.4.6.1.1
+  Battery Status Change
+The Battery Status Change Event bit Shall be set when any Battery's power state changes between charging, 
+discharging, neither. For Hot Swappable Batteries, it Shall also be set when a Battery is Attached or Detached.
+6.4.6.1.2
+  Over-Current Protection Event
+The OCP Event bit Shall be set when a Source detects its output current exceeds its limits triggering its protection 
+circuitry. This bit is Reserved for a Sink.
+6.4.6.1.3
+  Over-Temperature Protection Event
+The OTP Event bit Shall be set when a Source or Sink shuts down due to over-temperature triggering its protection 
+circuitry.
+6.4.6.1.4
+  Operating Condition Change
+The Operating Condition Change bit Shall be set when a Source or Sink detects its Operating Condition enters or 
+exits either the 'warning' or 'over temperature' temperature states.
+The Operating Condition Change bit Shall be set when the Source operating in the Programmable Power Supply 
+mode detects it has changed its operating condition between Constant Voltage (CV) and Current Limit (CL).
+6.4.6.1.5
+  Source Input Change Event
+The Source Input Change Event bit Shall be set when the Source/Sink's input changes. For example, when the AC 
+input is removed, and the Source/Sink continues to be powered from one or more of its batteries or when AC 
+returns and the Source/Sink transitions from Battery to AC operation or when the Source/Sink changes operation 
+from one (or more) Battery to another (or more) Battery. 
+B15…4
+Reserved
+Shall be set to zero
+B3…0
+Extended Alert Event 
+Type
+When the Extended Alert Event bit in the Type of Alert field equals ‘1’, then the 
+Extended Alert Event Type field indicates the event which has occurred:
+
+0 = Reserved.
+
+1 = Power state change (DFP only)
+
+2 = Power button press (UFP only)
+
+3 = Power button release (UFP only)
+
+4 = Controller initiated wake e.g., Wake on LAN (UFP only)
+
+5-15 = Reserved
+When the Extended Alert Event bit in the Type of Alert field equals ‘0’, then the 
+Extended Alert Event Type field is Reserved and Shall be set to zero.
+Table 6.47  Alert Data Object (ADO) (Continued)
+Bit(s)
+Field
+Description

@@ -1,0 +1,84 @@
+Page 216
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.1
+  Source_Capabilities_Extended Message
+The Source_Capabilities_Extended Message Should be sent in response to a Get_Source_Cap_Extended Message. 
+The Source_Capabilities_Extended Message enables a Source or a DRP to inform the Sink about its Capabilities as a 
+Source.
+The Source_Capabilities_Extended Message Shall return a 25-byte Source Capabilities Extended Data Block 
+(SCEDB) whose format Shall be as shown in Figure 6.37, "Source_Capabilities_Extended Message" andTable 6.54, 
+"Source Capabilities Extended Data Block (SCEDB)".
+Figure 6.37 Source_Capabilities_Extended Message
+Table 6.54  Source Capabilities Extended Data Block (SCEDB)
+Offset
+Field
+Description
+0
+VID
+Vendor ID (assigned by the USB-IF)
+2
+PID
+Product ID (assigned by the manufacturer)
+4
+XID
+Value provided by the USB-IF assigned to the product
+8
+FW Version
+Firmware version number 
+9
+HW Version
+Hardware version number 
+10
+Voltage Regulation
+Bit
+Description
+1…0
+
+00b: 150mA/µs Load Step (default)
+
+01b: 500mA/µs Load Step
+
+11b…10b: Reserved and Shall Not be used.
+2
+
+0b: 25% IoC (default)
+
+1b: 90% IoC
+3…7
+Reserved and Shall Not be used
+11
+Holdup Time
+Output will stay with regulated limits for this number of milliseconds after removal of 
+the AC from the input.
+
+0x00 = feature not supported
+Note: A value of at least 3ms Should be used (see Section 7.1.12.2, "Holdup Time Field").
+12
+Compliance
+Compliance in SPR Mode:
+Bit
+Description
+0
+LPS compliant when set
+1
+PS1 compliant when set
+2
+PS2 compliant when set
+3…7
+Reserved and Shall Not be used
+13
+Touch Current
+Bit
+Description
+0
+Low touch current EPS when set
+1
+Ground pin supported when set
+2
+Ground pin intended for protective earth when set
+3...7
+Reserved and Shall Not be used
+Extended Header
+Data Size = 25
+SCEDB
+(25-byte Data Block)

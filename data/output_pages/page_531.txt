@@ -1,0 +1,61 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 531
+8.3.2.6.2
+  Sink Initiated Hard Reset
+This is an example of a Hard Reset operation when initiated by a Sink. Figure 8.31, "Sink Initiated Hard Reset" shows 
+the Messages as they flow across the bus and within the devices to accomplish the Hard Reset.
+Figure 8.31 Sink Initiated Hard Reset
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+: Policy Engine
+Source
+Sink
+1: Send Hard Reset
+3: Hard Reset
+4: Hard Reset received
+Hard Reset Complete
+Start NoResponseTimer
+Reset Power Supply
+Reset Port Data Role to DFP
+Turn off VCONN
+Reset MessageIDCounter, stored 
+copy of MessageID and 
+RetryCounter
+Reset MessageIDCounter, 
+stored copy of MessageID and 
+RetryCounter
+Reset Power Sink
+Reset Port Data Role to UFP
+Turn off VCONN
+8: Power Supply Reset
+6: Power Sink Reset
+10: Send Capabilities
+11: Capabilities
+12: Capabilities + CRC
+13: Capabilities
+Start CRCReceiveTimer
+Store copy of MessageID
+14: Capabilities received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+18: Capabilities sent
+Stop NoResponseTimer
+Start SenderResponseTimer
+Evaluate Capabilities
+7: Hard Reset Complete
+Power Sink Reset
+Power Supply Reset
+Turn on VCONN
+Channel disabled
+Channel disabled
+9: Hard Reset Complete
+Channel enabled
+2: Send Hard Reset
+5: Hard Reset received
+Channel enabled

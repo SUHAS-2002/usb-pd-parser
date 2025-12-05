@@ -1,0 +1,109 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 245
+6.5.14.3
+  EPR_KeepAlive Message
+The EPR_KeepAlive Message May be sent by a Sink operating in EPR Mode to meet the requirement for periodic 
+traffic. The Source operating on EPR Mode responds by returning an EPR_KeepAlive_Ack Message to the Sink. See 
+Section 6.4.9, "EPR_Request Message" for additional information.
+6.5.14.4
+  EPR_KeepAlive_Ack Message
+The EPR_KeepAlive_Ack Message Shall be sent by a Source operating in EPR Mode in response to an EPR_KeepAlive 
+Message. See Section 6.4.9, "EPR_Request Message" for additional information.
+6.5.15
+  EPR Capabilities Message
+The EPR Capabilities Message is an Extended Capabilities Message made of Power Data Objects (PDO) defined in 
+Section 6.4.1, "Capabilities Message". It is used to form EPR_Source_Capabilities Messages and 
+EPR_Sink_Capabilities Messages. Sources expose their EPR power Capabilities by sending an 
+EPR_Source_Capabilities Message. Sinks expose their EPR power requirements by returning an 
+EPR_Sink_Capabilities Message when requested. Both are composed of a number of 32-bit Power Data Objects (see 
+Table 6.7, "Power Data Object").
+An EPR Capabilities Message Shall have a 5V Fixed Supply PDO containing the sending Port's information in the first 
+object position followed by up to 10 additional PDOs.
+6.5.15.1
+  EPR Capabilities Message Construction
+The EPR Capabilities Messages (EPR_Source_Capabilities and EPR_Sink_Capabilities) are Extended Messages with 
+the first seven positions filled with the same SPR (A)PDOs returned by the SPR Capabilities Messages 
+(Source_Capabilities and Sink_Capabilities) followed by the EPR (A)PDOs starting in the eighth position. See 
+Figure 6.54, "Mapping SPR Capabilities to EPR Capabilities".
+Figure 6.54 Mapping SPR Capabilities to EPR Capabilities
+Power Data Objects in the EPR Capabilities Messages Shall be sent in the following order:
+1)
+The SPR (A)PDOs as reported in the SPR Capabilities Message. The Number of Data Objects field in the 
+Message Header of the EPR Capabilities Message is the same as the Number of Data Objects field in the 
+Message Header of the SPR Capabilities Message.
+2)
+If the SPR Capabilities Message contains fewer than 7 PDOs, the unused Data Objects Shall be zero filled.
+3)
+The EPR (A)PDOs as defined in Section 6.4.1, "Capabilities Message" Shall start at Data Object position 8 
+and Shall be sent in the following order:
+a)
+Fixed Supply PDOs that offer 28V, 36V or 48V, if present, Shall be sent in voltage order; lowest to 
+highest.
+b)
+One EPR AVS APDO Shall be sent.
+Header
+2 bytes
+Extended Header
+4 bytes
+SPR PDO
+1
+SPR PDO
+2
+SPR PDO
+3
+SPR PDO
+4
+SPR PDO
+5
+SPR PDO
+6
+SPR PDO
+7
+EPR PDO
+8
+EPR PDO
+9
+SPR PDO
+1
+SPR PDO
+2
+SPR PDO
+3
+SPR PDO
+4
+SPR PDO
+5
+SPR PDO
+6
+SPR PDO
+7
+PDOs > 20V2
+001b
+010b
+011b
+100b
+101b
+110b
+111b
+1000b
+1001b
+Capabilities
+EPR Capabilities
+001b
+010b
+011b
+100b
+101b
+110b
+111b
+EPR PDO
+10
+EPR PDO
+11
+1010b
+1011b
+PDOs 20V1
+1)
+See Section 10 “Power Rules” for rules, on which SPR (A)PDOs are allowed to be used for a given PDP.
+2)
+See Section 10 “Power Rules” for rules, on which EPR (A)PDOs are allowed be used for a given PDP.

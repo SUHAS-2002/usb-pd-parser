@@ -1,0 +1,74 @@
+Page 782
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.140, "Steps for DFP to Cable Plug Enter Mode" below provides a detailed explanation of what happens at 
+each labeled step in Figure 8.113, "DFP to Cable Plug Enter Mode" above.
+Table 8.140  Steps for DFP to Cable Plug Enter Mode
+Step
+DFP
+Cable Plug
+1
+The DFP has an Explicit Contract 
+The DFP has discovered the supported SVIDS using the 
+Discover SVIDs Command request and the supported 
+Modes using the Discover Modes Command request
+The DFP goes to USB Safe State. The DPM requests the 
+Policy Engine to enter a Mode.
+tCableMessage after the last GoodCRC Message was 
+sent the Policy Engine directs the Protocol Layer to 
+send an Enter Mode Command request.
+2
+Protocol Layer creates the Enter Mode Command 
+request and passes to PHY Layer.
+3
+PHY Layer appends CRC and sends the Enter Mode 
+Command request. Starts CRCReceiveTimer.
+PHY Layer receives the Enter Mode Command request 
+and checks the CRC to verify the Message.
+4
+PHY Layer removes the CRC and forwards the Enter 
+Mode Command request to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received Enter Mode 
+Command request information to the Policy Engine that 
+consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Enter Mode Command request was successfully sent.
+Policy Engine starts the VDMModeEntryTimer.
+10
+Policy Engine requests the DPM to enter the new 
+Mode. tCableMessage after the GoodCRC Message was 
+sent the Policy Engine tells the Protocol Layer to form 
+an Enter Mode Command ACK response.
+11
+Protocol Layer creates the Enter Mode Command ACK 
+response and passes to PHY Layer.
+12
+PHY Layer receives the Enter Mode Command ACK 
+response and compares the CRC it calculated with the 
+one sent to verify the Message.
+PHY Layer appends a CRC and sends the Enter Mode 
+Command ACK response. Starts CRCReceiveTimer.
+13
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received Enter Mode 
+Command ACK response information to the Policy 
+Engine that consumes it.

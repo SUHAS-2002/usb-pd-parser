@@ -1,0 +1,116 @@
+Page 240
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.13.1
+  Vendor ID (VID) Field
+The VID field Shall contain the 16-bit Vendor ID (VID) assigned to the Sink's vendor by the USB-IF. If the vendor 
+does not have a VID, the VID field Shall be set to 0xFFFF. Devices that have a USB data interface Shall report the 
+same VID as the idVendor in the Standard Device Descriptor (see [USB 2.0] and [USB 3.2]).
+6.5.13.2
+  Product ID (PID) Field
+The PID field Shall contain the 16-bit Product ID (PID) assigned by the Sink's vendor. Devices that have a USB data 
+interface Shall report the same PID as the idProduct in the Standard Device Descriptor (see [USB 2.0] and [USB 
+3.2]).
+15
+Touch Temp
+1
+Value
+Temperature conforms to:
+
+0 = Not applicable
+
+1 = [IEC 60950-1] (default)
+
+2 = [IEC 62368-1] TS1
+
+3 = [IEC 62368-1] TS2
+Note: All other values Reserved
+16
+Battery Info
+1
+Byte
+Upper Nibble = Number of Hot Swappable Battery Slots (0…4)
+Lower Nibble = Number of Fixed Batteries (0…4)
+17
+Sink Modes
+1
+Bit Field
+Bit
+Description
+0
+PPS charging supported
+1
+VBUS powered
+2
+AC Supply powered
+3
+Battery powered
+4
+Battery essentially unlimited
+5
+AVS Support
+6...7
+Reserved and Shall be set to zero
+18
+SPR Sink Minimum 
+PDP
+1
+Byte
+Bit
+Description
+0...6
+The PDP of the Source that the Sink requires to 
+operate at its lowest functionality without 
+consuming power from its Battery if it has one.
+7
+Reserved and Shall be set to zero
+19
+SPR Sink 
+Operational PDP
+1
+Byte
+Bit
+Description
+0...6
+The PDP of the Source that the Sink requires to 
+operate at its normal functionality.
+7
+Reserved and Shall be set to zero
+20
+SPR Sink Maximum 
+PDP
+1
+Byte
+Bit
+Description
+0...6
+The maximum PDP the Sink will ever request.
+7
+Reserved and Shall be set to zero
+21
+EPR Sink Minimum 
+PDP
+1
+Byte
+The PDP of the Source that the EPR Sink requires to operate at 
+its lowest functionality without consuming power from its 
+Battery if it has one.
+22
+EPR Sink 
+Operational PDP
+1
+Byte
+The PDP of the Source that the EPR Sink requires to operate at 
+its normal functionality.
+23
+EPR Sink Maximum 
+PDP
+1
+Byte
+The maximum PDP that the EPR Sink will ever request.
+Table 6.65   Sink Capabilities Extended Data Block (SKEDB) (Continued)
+Offset (Byte)
+Field
+Size 
+(Bytes)
+Type
+Description

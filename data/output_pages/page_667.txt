@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 667
+8.3.2.11.4.4
+  Dual-Role Sink Gets Sink Capabilities Extended from a Dual-Role 
+Source
+Figure 8.75, "Dual-Role Sink Gets Dual-Role Source's Extended Capabilities" shows an example sequence between a 
+Source and a Sink when the Dual-Role Power Sink gets the Dual-Role Power Source's Extended Capabilities as a Sink. 
+Figure 8.75 Dual-Role Sink Gets Dual-Role Source's Extended Capabilities
+: Protocol
+1: Send Get_Sink_Cap_Extended
+: PHY
+: PHY
+: Protocol
+2:Get_Sink_Cap_Extended
+3: Get_Sink_Cap_Extended + CRC
+4: Get_Sink_Cap_Extended
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Sink_Cap_Extended 
+received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Sink_Cap_Extended sent
+Start SenderResponseTimer
+10: Send Sink_Capabilities_Extended
+11: Sink_Capabilities_Extended
+12: Sink_Capabilities_Extended
++ CRC
+13: Sink_Capabilities_Extended
+Check MessageID against local copy
+Store copy of MessageID
+14: Sink_Capabilities_Extended
+received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get extended Sink 
+capability Information 
+from DPM
+: Policy Engine
+: Policy Engine
+Dual-Role Sink Port
+Dual-Role Source Port
+Stop SenderResponseTimer
+18: Sink_Capabilities_Extended sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

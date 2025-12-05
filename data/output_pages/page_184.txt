@@ -1,0 +1,87 @@
+Page 184
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.1.9
+  VCONN Powered USB Device VDO
+The VCONN Powered USB Device (VPD) VDO defined in this section Shall be sent when the Product Type is given as 
+VCONN Powered USB Device. Table 6.44, "VPD VDO" defines the VPD VDO which Shall be sent.
+6.4.4.3.1.9.1
+  HW Version Field
+The HW Version field (B31…28) contains a HW version assigned by the VID owner.
+6.4.4.3.1.9.2
+  FW Version Field
+The Firmware Version field (B27…24) contains a FW version assigned by the VID owner.
+6.4.4.3.1.9.3
+  VDO Version Field
+The VDO Version field (B23…20) contains a VDO Version for this VDM Version number. This field indicates the 
+expected content for this VDO.
+6.4.4.3.1.9.4
+  Maximum VBUS Voltage Field
+The Maximum VBUS Voltage field (B16…15) Shall contain the maximum voltage that a Sink Shall Negotiate 
+through the VPD Charge Through Port as part of an Explicit Contract.
+Note:
+The maximum voltage that will be applied to the cable is vSrcNew max + vSrcValid max. For example, 
+when the Maximum VBUS Voltage field is 20V, a Fixed Supply of 20V can be Negotiated as part of an 
+Table 6.44  VPD VDO
+Bit(s)
+Field
+Description
+B31…28
+HW Version
+0000b…1111b assigned by the VID owner
+B27…24
+Firmware Version
+0000b…1111b assigned by the VID owner
+B23…21
+VDO Version
+Version Number of the VDO (not this specification Version):
+
+Version 1.0 = 000b
+
+Values 001b…111b are Reserved and Shall Not be used.
+B20...17
+Reserved
+Shall be set to zero.
+B16…15
+Maximum VBUS Voltage
+Maximum VPD VBUS Voltage:
+
+00b – 20V
+
+01b – 30V1 (Deprecated)
+
+10b – 40V1 (Deprecated)
+
+11b – 50V1 (Deprecated)
+B14
+Charge Through 
+Current Support
+Charge Through Current Support bit=1b:
+
+0b - 3A capable. 
+
+1b - 5A capable
+Charge Through Current Support bit = 0b:
+
+Reserved and Shall be set to zero.
+B13
+Reserved
+Shall be set to zero.
+B12…7
+VBUS Impedance
+Charge Through Current Support bit = 1b: VBUS impedance through the VPD in 2 
+mΩ increments. Values less than 10 mΩ are Reserved and Shall Not be used.
+Charge Through Current Support bit = 0b: Reserved and Shall be set to zero.
+B6…1
+Ground Impedance
+Charge Through Current Support bit = 1b: Ground impedance through the VPD in 
+1 mΩ increments. Values less than 10 mΩ are Reserved and Shall Not be used.
+Charge Through Current Support bit = 0b: Shall be set to zero.
+B0
+Charge Through 
+Support
+
+1b – the VPD supports Charge Through
+
+0b – the VPD does not support Charge Through
+1)
+Values no longer allowed. When present the field Shall be interpreted as if it was 00b.

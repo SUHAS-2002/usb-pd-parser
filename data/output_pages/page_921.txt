@@ -1,0 +1,43 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 921
+8.3.3.20.5
+  PE_VCS_Wait_for_VCONN State
+On entry to the PE_VCS_Wait_For_VCONN state the Policy Engine Shall start the VCONNOnTimer.
+The Policy Engine Shall transition to the PE_VCS_Turn_Off_VCONN state when:
+
+A PS_RDY Message is received.
+The Policy Engine Shall transition to either the PE_SRC_Hard_Reset or PE_SNK_Hard_Reset state when:
+
+The VCONNOnTimer times out.
+8.3.3.20.6
+  PE_VCS_Turn_Off_VCONN State
+On entry to the PE_VCS_Turn_Off_VCONN state the Policy Engine Shall tell the Device Policy Manager to turn off 
+VCONN.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or 
+PE_SRC_EPR_Mode_Discover_Cable state when:
+
+The Device Policy Manager has been informed.
+8.3.3.20.7
+  PE_VCS_Turn_On_VCONN State
+On entry to the PE_VCS_Turn_On_VCONN state the Policy Engine Shall tell the Device Policy Manager to turn on 
+VCONN.
+The Policy Engine Shall transition to the PE_VCS_Send_Ps_Rdy state when:
+
+The Port's VCONN is on.
+8.3.3.20.8
+  PE_VCS_Send_PS_Rdy State
+On entry to the PE_VCS_Send_Ps_Rdy state the Policy Engine Shall send a PS_RDY Message.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or 
+PE_SRC_EPR_Mode_Discover_Cable state when:
+
+The PS_RDY Message has been sent.
+8.3.3.20.9
+  PE_VCS_Force_VCONN State
+On entry to the PE_VCS_Force_VCONN state the Policy Engine Shall tell the Device Policy Manager to turn on VCONN.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or 
+PE_SRC_EPR_Mode_Discover_Cable state when:
+
+The Port's VCONN is on.
+8.3.3.21
+  Initiator Structured VDM State Diagrams
+The State Diagrams in this section Shall apply to all Initiators.

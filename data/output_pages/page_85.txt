@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 85
+Note:
+PDUSB Devices, even if they have the physical form of a cable (e.g., AMAs), are still required to respond to 
+SOP Packets.
+5.6.1.2.2
+  Start of Packet Sequence Prime (SOP')
+The SOP’ ordered set is defined as: two Sync-1 K-codes followed by two Sync-3 K-codes (see Table 5.6, "SOP’ 
+Ordered Set").
+A VPD Shall have SOP’ Communication capability. A VPD and a Cable Plug capable of SOP’ Communications Shall 
+only detect and communicate with Packets starting with SOP’.
+A Port needing to communicate with a Cable Plug capable of SOP’ Communications, Attached between a Port Pair 
+will be able to communicate using both Packets starting with SOP’ to communicate with the Cable Plug and starting 
+with SOP to communicate with its Port Partner.
+For a VPD or a Cable Plug supporting SOP’ Communications, if a Valid SOP’ is not detected (see Table 5.3, "Validation 
+of Ordered Sets") then the whole transmission Shall be Discarded. For a Port supporting SOP’ Communications if a 
+Valid SOP or SOP’ is not detected (see Table 5.3, "Validation of Ordered Sets") then the whole transmission Shall be 
+Discarded. When there is no Explicit Contract or an Implicit Contract in place a Sink Shall Not send SOP’ Packets 
+and Shall Discard all Packets starting with SOP’.
+5.6.1.2.3
+  Start of Packet Sequence Double Prime (SOP'')
+The SOP’’ ordered set is defined as the following sequence of K-codes: Sync-1, Sync-3, Sync-1, Sync-3 (see Table 5.7, 
+"SOP’’ Ordered Set").
+A VPD Shall Not have SOP’’ Communication capability. A Cable Plug capable of SOP’’ Communication, Shall have a 
+SOP’ Communication capability in the other Cable Plug. No cable Shall only support SOP’’ Communication. A Cable 
+Plug to which SOP’’ Communication is assigned Shall only detect and communicate with Packets starting with SOP’’ 
+and Shall Discard any other Packets.
+A Port needing to communicate with such a Cable Plug, Attached between a Port Pair will be able to communicate 
+using Packets starting with SOP’ and SOP’’ to communicate with the Cable Plugs and Packets starting with SOP to 
+communicate with its Port Partner. A Port which supports SOP’’ Communication Shall also support SOP’ 
+Communication and Shall co-ordinate SOP* Communication so as to avoid collisions. 
+For the Cable Plug supporting SOP’’ Communication, if a Valid SOP’’ is not detected (see Table 5.3, "Validation of 
+Ordered Sets") then the whole transmission Shall be Discarded. For the Port if a Valid SOP* is not detected (see 
+Table 5.3, "Validation of Ordered Sets") then the whole transmission Shall be Discarded.
+Table 5.6  SOP’ Ordered Set
+K-Code Number
+K-Code in Code 
+Table
+1
+Sync-1
+2
+Sync-1
+3
+Sync-3
+4
+Sync-3
+Table 5.7  SOP’’ Ordered Set
+K-Code Number
+K-Code in Code 
+Table
+1
+Sync-1
+2
+Sync-3
+3
+Sync-1
+4
+Sync-3

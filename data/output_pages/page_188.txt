@@ -1,0 +1,49 @@
+Page 188
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.3
+  Discover Modes
+The Discover Modes Command is used by an Initiator to determine the Modes a Responder supports for a given 
+SVID. 
+The SVID in the Discover Modes Command Shall be set to the SVID for which Modes are being requested by both 
+the Initiator and the Responder for this Command. 
+The Number of Data Objects field in the Message Header in the Discover Modes Command request Shall be set to 
+1 since the Discover Modes Command request Shall Not contain any VDOs. 
+The Discover Modes Command ACK sent back by the Responder Shall contain one or more Modes. The Discover 
+Modes Command ACK Shall contain a Message Header with the Number of Data Objects field set to a value of 2 to 
+7 (the actual value is the number of Alternate Mode objects plus one). If the ID is a VID, the structure and content 
+of the VDO is left to the Vendor. If the ID is a SID, the structure and content of the VDO is defined by the relevant 
+standard’s body. 
+A Responder that does not support any Modes Shall return a NAK. 
+The Number of Data Objects field in the Message Header in the Discover Modes Command NAK and BUSY 
+responses Shall be set to 1 since they Shall Not contain any VDOs.
+Figure 6.21, "Example Discover Modes response for a given SVID with 3 Modes" shows an example of a Discover 
+Modes Command response from a Responder which supports three Modes for a given SVID.
+Figure 6.21 Example Discover Modes response for a given SVID with 3 Modes
+6.4.4.3.4
+  Enter Mode Command
+The Enter Mode Command is used by an Initiator (DFP) to command a Responder (UFP or Cable Plug) to enter a 
+specified Alternate Mode of operation. Only a DFP Shall initiate the Enter Mode Process which it starts after it has 
+successfully completed the Discovery Process.
+The value in the Object Position field in the VDM Header Shall indicate to which Alternate Mode in the Discover 
+Modes Command the VDO refers (see Figure 6.21, "Example Discover Modes response for a given SVID with 3 
+Modes"). The value 1 always indicates the first Alternate Mode as it is the first object following the VDM Header. The 
+value 2 refers to the next Alternate Mode and so forth.
+The Number of Data Objects field in the Message Header in the Command request Shall be set to either 1 or 2 since 
+the Enter Mode Command request Shall Not contain more than 1 VDO. When a VDO is included in an Enter Mode 
+Command request the contents of the 32-bit VDO is defined by the Alternate Mode.
+The Number of Data Objects field in the Command response Shall be set to 1 since an Enter Mode Command 
+response (ACK, NAK) Shall Not contain any VDOs.
+Before entering a Alternate Mode, by sending the Enter Mode Command request that requires the reconfiguring of 
+any pins on entry to that Alternate Mode, the Initiator Shall ensure that those pins being reconfigured are placed 
+into the USB Safe State. Before entering an Alternate Mode that requires the reconfiguring of any pins, the 
+Responder Shall ensure that those pins being reconfigured are placed into either USB operation or the USB Safe 
+State.
+A device May support multiple Modes with one or more active at any point in time. Any interactions between them 
+are the responsibility of the Standard or Vendor. Where there are multiple Active Modes at the same time Modal 
+Operation Shall start on entry to the first Alternate Mode.
+Header
+No. of Data Objects = 4
+VDM Header
+Mode 1
+Mode 2
+Mode 3

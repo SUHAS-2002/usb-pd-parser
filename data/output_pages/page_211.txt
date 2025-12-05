@@ -1,0 +1,21 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 211
+negotiating an SPR Explicit Contract. Once an SPR Explicit Contract is entered, the Source and Sink can then enter 
+EPR Mode if needed.
+6.4.10.3.3
+  Exits due to errors
+Other critical errors can occur while in EPR Mode; these errors Shall result in Hard Reset being initiated by the Port 
+that detects the error. Some of these errors include:
+
+An EPR_Mode Message with the Action field set to 5 (Exit) to exit EPR Mode is received by a Port in an 
+Explicit Contract with an EPR (A)PDO.
+
+The Sink receives an EPR_Source_Capabilities Message with an EPR (A)PDO in any of the first seven 
+object positions.
+
+The (A)PDO in the EPR_Request Message does not match the (A)PDO in the latest 
+EPR_Source_Capabilities Message pointed to by the Object Position field in the RDO.
+
+The Source receives a Request Message.
+
+The Sink receives a Source_Capabilities Message not in response to a Get_Source_Cap Message.

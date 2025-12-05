@@ -1,0 +1,71 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 529
+Table 8.57, "Steps for Source initiated Hard Reset" below provides a detailed explanation of what happens at each 
+labeled step in Figure 8.30, "Source initiated Hard Reset" above.
+Table 8.57  Steps for Source initiated Hard Reset
+Step
+Source
+Sink
+1
+The Policy Engine directs the Protocol Layer to 
+generate Hard Reset Signaling.
+The Policy Engine starts the NoResponseTimer and 
+requests the DPM to reset the power supply to USB 
+Default Operation. The Policy Engine requests the 
+DPM to reset the Port Data Role to DFP and to turn off 
+VCONN if this is on.
+2
+Protocol Layer resets MessageIDCounter and 
+RetryCounter.
+Protocol Layer requests the PHY Layer send Hard Reset 
+Signaling.
+3
+PHY Layer sends Hard Reset Signaling and then 
+disables the PHY Layer communications channel for 
+transmission and reception.
+PHY Layer receives the Hard Reset Signaling and 
+disables the PHY Layer communications channel for 
+transmission and reception.
+4
+PHY Layer informs the Protocol Layer of the Hard Reset.
+Protocol Layer resets MessageIDCounter and 
+RetryCounter.
+5
+The Protocol Layer informs the Policy Engine of the 
+Hard Reset.
+The Policy Engine requests the DPM to reset the Power 
+Sink to USB Default Operation. The Policy Engine 
+requests the DPM to reset the Port Data Role to UFP 
+and to turn off VCONN if this is on.
+6
+The Power Sink returns to USB Default Operation.
+The Policy Engine informs the Protocol Layer that the 
+Power Sink has been reset.
+7
+The Protocol Layer informs the PHY Layer that the Hard 
+Reset is complete.
+The PHY Layer enables the PHY Layer communications 
+channel for transmission and reception.
+8
+The power supply is reset to USB Default Operation. and 
+VCONN is turned on.
+The Policy Engine informs the Protocol Layer that the 
+power supply has been reset.
+9
+The Protocol Layer informs the PHY Layer that the Hard 
+Reset is complete. The PHY Layer enables the PHY Layer 
+communications channel for transmission and 
+reception.
+The reset is complete and protocol communication can restart.
+10
+Policy Engine directs the Protocol Layer to send a 
+Source_Capabilities Message that represents the 
+power supply’s present capabilities.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer appends CRC and sends the 
+Source_Capabilities Message. Starts CRCReceiveTimer.
+PHY Layer receives the Source_Capabilities Message 
+and checks the CRC to verify the Message.

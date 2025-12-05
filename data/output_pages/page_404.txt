@@ -1,0 +1,105 @@
+Page 404
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.4
+  Electrical Parameters
+7.4.1
+  Source Electrical Parameters
+The Source Electrical Parameters that Shall be followed are specified in Table 7.23, "Source Electrical Parameters".
+Table 7.23  Source Electrical Parameters
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+cSrcBulk
+Source bulk 
+capacitance when a 
+Port is powered from a 
+dedicated supply.1
+10
+µF
+Section 7.1.2
+cSrcBulkShared
+Source bulk 
+capacitance when a 
+Port is powered from a 
+shared supply.1
+120
+µF
+Section 7.1.2
+DNL
+(Differential Non-
+Linearity)
+Deviation between 
+ideal analog values 
+corresponding to 
+adjacent input digital 
+values
+-1
+0
++1
+LSB
+Section 7.1.4.2.1
+iPpsCLMin
+SPR PPS Minimum 
+Current Limit setting.
+1
+A
+Section 7.1.4.2.2
+iPpsCLNew
+Current Limit accuracy
+Section 7.1.4.2.2
+1A ≤ Operating 
+Current ≤ 3A
+-150
+150
+mA
+Operating current > 3A
+-5
+5
+%
+iPpsCLStep
+SPR PPS Current Limit 
+programming step size 
+(1 LSB).
+50
+mA
+Section 7.1.4.2.2
+iPpsCLLoadReleaseRate
+Maximum load 
+decrease slew rate 
+during Current Limit 
+set-point changes.
+-150
+mA/µs
+Section 7.1.4.2.2
+iPpsCLLoadStepRate
+Maximum load 
+increase slew rate 
+during Current Limit 
+set-point changes.
+150
+mA/µs
+Section 7.1.4.2.2
+iPpsCLTransient
+Allowed output 
+current overshoot 
+when a load increase 
+occurs while in CL 
+mode.
+New load + 
+100
+mA
+Section 7.1.4.2.2
+Allowed output 
+current undershoot 
+when a load decrease 
+occurs while in CL 
+mode.
+New load – 
+100
+mA
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

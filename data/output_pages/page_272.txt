@@ -1,0 +1,15 @@
+Page 272
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.9
+  Accept, Reject and Wait
+The recipient of a Request, EPR_Request, PR_Swap, DR_Swap, VCONN_Swap, or Enter_USB Message Shall respond 
+by sending one of the following responses:
+
+An Accept Message in response to a Valid request which can be serviced immediately (see Section 6.3.3, 
+"Accept Message").
+
+A Wait Message in response to a Valid request which cannot be serviced immediately but could be ser-
+viced at a later time (see Section 6.3.12, "Wait Message").
+
+A Reject Message in response to an Invalid request or a request which is outside of the device's design 
+Capabilities (see Section 6.3.4, "Reject Message").

@@ -1,0 +1,51 @@
+Page 92
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.8
+  Bi-phase Mark Coding (BMC) Signaling Scheme
+Bi-phase Mark Coding (BMC) is the PHY Layer Signaling Scheme for carrying USB Power Delivery Messages. This 
+encoding assumes a dedicated DC connection, over the CC wire, which is used for sending PD Messages.
+Bi-phase Mark Coding is a version of Manchester coding (see [IEC 60958-1]). In BMC, there is a transition at the 
+start of every bit time (UI) and there is a second transition in the middle of the UI when a 1 is transmitted. BMC is 
+effectively DC balanced, (each 1 is DC balanced and two successive zeros are DC balanced, regardless of the number 
+of intervening 1's). It has bounded disparity (limited to 1 bit over an arbitrary Packet, so a very low DC level). 
+Figure 5.7, "BMC Example" illustrates Bi-phase Mark Coding. This example shows the transition from a Preamble to 
+the Sync-1 K-codes of the SOP Ordered Set at the start of a Message. 
+Note:
+Other K-codes can occur after the Preamble for Signaling such as Hard Reset and Cable Reset.
+Figure 5.7 BMC Example
+5.8.1
+  Encoding and signaling
+BMC uses DC coupled baseband Signaling on CC. Figure 5.8, "BMC Transmitter Block Diagram" shows a block 
+diagram for a Transmitter and Figure 5.9, "BMC Receiver Block Diagram" shows a block diagram for the 
+corresponding Receiver.
+Figure 5.8 BMC Transmitter Block Diagram
+Preamble
+Sync-1
+Sync-1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+0
+0
+0
+1
+1
+Data In
+BMC
+to CC
+Data
+4b5b
+Encoder
+CRC
+BMC 
+Encoder

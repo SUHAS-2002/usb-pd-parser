@@ -1,0 +1,69 @@
+Page 1002
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+More current May be offered in the PDOs when Optional voltages/currents are supported and a 5A cable is being 
+used (see Section 10.2.3, "Optional Voltages/Currents").
+Table 10.6  Fixed Supply PDO - Source 9V
+Bit(s)
+Description
+B31…30
+Fixed Supply 
+B29...22
+Reserved – Shall be set to zero.
+B21…20
+Peak Current
+B19…10
+9V
+B9...0
+Current based on PDP
+PDP Rating (x)
+Current (A)
+0.5 ≤ x ≤ 15
+PDO not required
+15 < x ≤ 27
+x ÷ 9
+27 < x ≤ 45
+3 ≤ A ≤ x ÷ 9
+45 < x ≤ 100
+3 ≤ A ≤ 5 
+Table 10.7  Fixed Supply PDO - Source 15V
+Bit(s)
+Description
+B31…30
+Fixed Supply 
+B29...22
+Reserved – Shall be set to zero.
+B21…20
+Peak Current
+B19…10
+15V
+B9...0
+Current based on PDP
+PDP Rating (x)
+Current (A)
+0.5 ≤ x ≤ 27
+PDO not required
+27 < x ≤ 45
+x ÷ 15
+45 < x ≤ 75
+3 ≤ A ≤ x ÷ 15
+75 < x ≤ 100
+3 ≤ A ≤ 5 
+Table 10.8  Fixed Supply PDO - Source 20V
+Bit(s)
+Description
+B31…30
+Fixed Supply
+B29...22
+Reserved – Shall be set to zero.
+B21…20
+Peak Current
+B19…10
+20V
+B9...0
+Current based on PDP
+PDP Rating (x)
+Current (A)
+0.5 ≤ x ≤ 45
+PDO not required
+45 < x ≤ 100
+x ÷ 20

@@ -1,0 +1,14 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 605
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Reject Message was successfully sent
+Table 8.80  Steps for Rejected VCONN Source Swap
+Step
+Initially VCONN Source
+Initially VCONN off

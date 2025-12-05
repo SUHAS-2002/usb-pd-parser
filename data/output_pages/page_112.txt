@@ -1,0 +1,37 @@
+Page 112
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.8.6.3
+  Fast Role Swap Detection
+An Initial Sink prepares for a Fast Role Swap by ensuring that once it has detected the Fast Role Swap Request its 
+power supply is ready to respond by applying vSafe5V according to the timing detailed in Section 7.1.13, "Fast Role 
+Swap". The Initial Sink Shall only respond to the Fast Role Swap Request when all the following conditions have 
+been met:
+
+An Explicit Contract has been established and the Sink Capabilities of the Initial Source have been 
+received by, and at the request of, the Initial Sink.
+
+The Sink_Capabilities Message received from the Initial Source has at least one of the Fast Role Swap 
+bits set in its 5V Fixed Supply PDO.
+
+The Initial Sink is able and willing to source the current requested by the Initial Source in the Fast Role 
+Swap bits of its Sink_Capabilities Message.
+On detection of the Fast Role Swap Request any pending Messages Shall be Discarded (see Section 6.12.2.2.1, 
+"Common Protocol Layer Message Transmission State Diagram").
+When the Initial Sink is prepared for a Fast Role Swap and the bus is idle the CC voltage averaged over tFRSwapRx 
+min remains above 0.7V (see [USB Type-C 2.4]) since the Source Rp is either 1.5A or 3.0A. However, vNoiseIdle 
+noise May cause the CC line voltage to reach 0.7V-vNoiseIdle/2 for short durations. When the Initial Sink is 
+prepared for a Fast Role Swap while it is transmitting and the Initial Source is sending a Fast Role Swap Request, the 
+transmission will be attenuated such that the peak CC voltage will not exceed vFRSwapCableTx min. Therefore, 
+when the Initial Sink is prepared for a Fast Role Swap, it Shall Not detect a Fast Role Swap Request when the CC 
+voltage, averaged over tFRSwapRx min, is above 0.7V. When the Initial Sink is prepared for a Fast Role Swap, it 
+Shall detect a CC voltage lower than vFRSwapCableTx min for tFRSwapRx as a Fast Role Swap Request.
+Note:
+The Initial Sink is not required to average the CC voltage to meet these requirements.
+The Initial Sink Shall initiate the Fast Role Swap AMS within tFRSwapInit of detecting the Fast Role Swap Request 
+in order to assign the Rp/Rd resistors to the correct Ports and to re-synchronize the state machines (see Section 
+6.3.19, "FR_Swap Message").
+The Initial Sink Shall become the New Source and Shall start supplying vSafe5V at USB Type-C current (see [USB 
+Type-C 2.4]) no later than tSrcFRSwap after VBUS has dropped below vSafe5V. An Initial Sink Shall disable its VBUS 
+Disconnect Threshold detection circuitry while Fast Role Swap detection is active.
+Note:
+While power is transitioning the VCONN Source to the Cable Plug(s) cannot be guaranteed.

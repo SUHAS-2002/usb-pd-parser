@@ -1,0 +1,50 @@
+Page 990
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+9.3
+  PD Specific Requests and Events
+A PDUSB Device that is compliant to this specification Shall support the Battery related requests if it has a Battery.
+A PDUSB Hub that is compliant to this specification Shall support a USB PD Bridge as described in [UCSI] 
+irrespective of whether the PDUSB Hub is a Provider, a Consumer, or both.
+9.3.1
+  PD Specific Requests
+PD defines requests to which PDUSB Devices Shall respond as outlined in Table 9.6, "PD Requests". All Valid 
+requests in Table 9.6, "PD Requests" Shall be implemented by PDUSB Devices.
+Table 9.7, "PD Request Codes" gives the bRequest values for Commands that are not listed in the hub/device 
+framework chapters of [USB 2.0], [USB 3.2].
+Table 9.8, "PD Feature Selectors" gives the Valid feature selectors for the PD class. Refer to Section 9.4.2.1, 
+"BATTERY_WAKE_MASK Feature Selector", and Section 9.4.2.2, "CHARGING_POLICY Feature Selector" for a description of the 
+features.
+Table 9.6  PD Requests
+Request
+bmRequestType
+bRequest
+wValue
+wIndex
+wLength
+Data
+GetBatteryStatus 10000000B GET_BATTERY_STATUS
+Zero
+Battery ID
+Eight
+Battery Status
+SetPDFeature
+00000000B
+set_feature
+Feature Selector Feature Specific
+Zero
+None
+Table 9.7  PD Request Codes
+bRequest
+Value
+GET_BATTERY_STATUS
+21
+Table 9.8  PD Feature Selectors
+Feature Selector
+Recipient
+Value
+BATTERY_WAKE_MASK
+Device
+40
+CHARGING_POLICY
+Device
+54

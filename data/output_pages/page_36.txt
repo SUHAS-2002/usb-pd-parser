@@ -1,0 +1,56 @@
+Page 36
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+1.2.1
+  Scope
+This specification is intended as an extension to the existing [USB 2.0], [USB 3.2], [USB Type-C 2.4] and [USBBC 
+1.2] specifications. It addresses only the elements required to implement USB Power Delivery. It is targeted at 
+power supply vendors, manufacturers of [USB 2.0], [USB 3.2], [USB Type-C 2.4] and [USBBC 1.2] platforms, 
+devices and cable assemblies.
+Normative information is provided to allow interoperability of components designed to this specification. 
+Informative information, when provided, illustrates possible design implementation.
+1.3
+  Section Overview
+This specification contains the following sections:
+Table 1.1  Section Overview
+Section
+Description
+Section 1, "Introduction"
+Introduction, conventions used in the document, list of terms and abbreviations, 
+references, and details of parameter usage.
+Section 2, "Overview"
+Overview of the document including a description of the operation of PD and the 
+architecture.
+Section 3, "USB Type-A and USB Type-
+B Cable Assemblies and Connectors"
+Mechanical and electrical characteristics of the cables and connectors used by PD. 
+Section Deprecated. See [USBPD 2.0] for legacy PD connector specification.
+Section 4, "Electrical Requirements"
+Electrical requirements for Dead Battery operation and cable detection.
+Section 5, "Physical Layer"
+Details of the PD PHY Layer requirements
+Section 6, "Protocol Layer"
+Protocol Layer requirements including the Messages, timers, counters, and state 
+operation.
+Section 7, "Power Supply"
+Power supply requirements for both Providers and Consumers.
+Section 8, "Device Policy"
+Device Policy Manager requirements.
+Policy Engine Atomic Message Sequence (AMS) diagrams and state diagrams
+Section 9, "States and Status 
+Reporting"
+PDUSB Device requirements including mapping of VBUS to USB states.
+System Policy Manager requirements including descriptors, events, and requests.
+Section 10, "Power Rules"
+PDP Rating definitions for PD.
+Section A, "CRC calculation"
+Example CRC calculations.
+Section B, "Message Sequence 
+Examples (Deprecated)"
+Scenarios illustrating Device Policy Manager operation. Deprecated
+Section C, "VDM Command Examples"
+Examples of Structured VDM usage.Section Deprecated.
+Section D, "BMC Receiver Design 
+Examples"
+BMC Receiver Design Examples.
+Section E, "FRS System Level Example"
+FRS System Level Example.

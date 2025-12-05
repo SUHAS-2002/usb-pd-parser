@@ -1,0 +1,47 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 183
+6.4.4.3.1.7.19
+  Physical Connection Field
+The Physical connection field (B10) Shall indicate the cable's construction, whether the connection between the 
+active elements is copper or optical.
+6.4.4.3.1.7.20
+  Active element Field
+The Active element field (B9) Shall indicate the cable's active element, whether the active element is a re-timer or 
+a re-driver.
+6.4.4.3.1.7.21
+  USB4 Supported Field
+The USB4 Supported field (B8) Shall indicate whether or not the cable supports [USB4] operation.
+6.4.4.3.1.7.22
+  USB 2.0 Hub Hops Consumed field
+The USB 2.0 Hub Hops Consumed field (B7…6) Shall indicate the number of USB 2.0 'hub hops' that are lost due 
+to the transmission time of the cable. 
+6.4.4.3.1.7.23
+  USB 2.0 Supported Field
+The USB 2.0 Supported field (B5) Shall indicate whether or not the cable supports [USB 2.0] only signaling. 
+6.4.4.3.1.7.24
+  USB 3.2 Supported Field
+The USB 3.2 Supported field (B4) Shall, indicate whether or not the cable supports [USB 3.2] SuperSpeed 
+signaling. 
+6.4.4.3.1.7.25
+  USB Lanes Supported Field
+The USB Lanes Supported field (B3) Shall indicate whether the cable supports one or two lanes of [USB 3.2] 
+SuperSpeed signaling. 
+6.4.4.3.1.7.26
+  Optically Isolated Active Cable Field
+The Optically Isolated Active Cable field (B2) Shall indicate whether this cable is an optically isolated Active Cable 
+or not (as defined in [USB Type-C 2.4]). Optically Isolated Active Cables Shall have a re-timer or linear re-driver 
+(LRD) as the active element and do not support [USB 2.0] or carry VBUS.
+6.4.4.3.1.7.27
+  USB4 Asymmetric Mode Supported Field
+The USB4 Asymmetric Mode Supported field (B1) Shall indicate that the Active Cable supports asymmetric mode 
+as defined in [USB4] and [USB Type-C 2.4].
+6.4.4.3.1.7.28
+  USB Gen Field
+The USB Gen field (B0) Shall indicate the signaling Gen the cable supports. Gen 1 Shall only be used by [USB 3.2] 
+cables as indicated by the USB 3.2 Supported field. Gen 2 or higher May be used by either [USB 3.2] or [USB4] 
+cables as indicated by their respective supported fields. When Gen 2 or higher is indicated the USB Highest Speed 
+(Active Cable) field in VDO1 Shall indicate the actual Gen supported.
+6.4.4.3.1.8
+  Alternate Mode Adapter VDO
+The Alternate Mode Adapter (AMA) VDO has been Deprecated. PDUSB Devices which support one or more Alternate 
+Modes Shall set an appropriate Product Type (UFP), and Shall set the Modal Operation Supported bit to '1'.

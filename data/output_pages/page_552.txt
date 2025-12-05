@@ -1,0 +1,49 @@
+Page 552
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+30
+PHY Layer appends a CRC and sends the PS_RDY 
+Message. Starts CRCReceiveTimer.
+PHY Layer receives the PS_RDY Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+31
+PHY Layer removes the CRC and forwards the PS_RDY 
+Message to the Protocol Layer. 
+32
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received PS_RDY 
+Message information to the Policy Engine that 
+consumes it. The Policy Engine stops the 
+PSSourceOnTimer, informs the power supply that it can 
+start consuming power.
+33
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+34
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+PHY Layer appends a CRC and sends the GoodCRC 
+Message. The Policy Engine stops the 
+PSSourceOnTimer, informs the power supply it can 
+now sink power and resets the Protocol Layer.
+35
+PHY Layer removes the CRC and forwards the GoodCRC 
+to the Protocol Layer. 
+36
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+PS_RDY Message was successfully sent. The Policy 
+Engine resets the CapsCounter, resets the Protocol 
+Layer and starts the SwapSourceStartTimer which 
+must timeout before sending any Source_Capabilities 
+Messages.
+The Power Role Swap is complete, the Power Roles have been reversed and the Port Partners are free to Negotiate for more 
+power.
+Table 8.63  Steps for a Successful Sink Initiated Power Role Swap Sequence
+Step
+Initial Sink Port
+Initial Source Port

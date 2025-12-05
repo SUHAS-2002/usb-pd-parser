@@ -1,0 +1,22 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 261
+and run this timer upon entry into the PE_SRC_Ready State when in EPR Mode and Shall disable it upon exit from 
+the PE_SRC_Ready State when EPR Mode.
+While operating in EPR Mode, the Source Shall stop the SourceEPRKeepAliveTimer timer whenever:
+
+The last bit of the GoodCRC Message EOP, in response any Message from the Sink, is transmitted by the 
+PHY Layer.
+
+The PHY Layer receives the last bit of the GoodCRC Message EOP in response to any Message sent to the 
+Source. 
+If the timer expires the Source Shall send Hard Reset Signaling.
+6.6.21.4
+  tEPRSourceCableDiscovery
+After Port Partners are Attached or after a Hard Reset or after a Power Role Swap or after a Fast Role Swap an EPR 
+Source Shall discover the Cable Plug within tEPRSourceCableDiscovery of entering the First Explicit Contract.
+The EPR Source Shall send the Discover Identity REQ Command, to the Cable Plug, within 
+tEPRSourceCableDiscovery of receiving the GoodCRC Message acknowledging the PS_RDY Message as part of the 
+Explicit Contract Negotiation.
+Note:
+If the EPR Source is not the VCONN Source, tEPRSourceCableDiscovery, will also include the time needed 
+for the VCONN Swap.

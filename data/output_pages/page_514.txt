@@ -1,0 +1,70 @@
+Page 514
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.5
+  Data Reset
+8.3.2.5.1
+  DFP Initiated Data Reset where the DFP is the VCONN Source
+This is an example of a Data Reset operation where the DFP is also the VCONN Source and initiates a Data Reset. 
+Figure 8.26, "DFP Initiated Data Reset where the DFP is the VCONN Source" shows the Messages as they flow across 
+the bus and within the devices to accomplish the Data Reset.
+Figure 8.26 DFP Initiated Data Reset where the DFP is the VCONN Source
+: Protocol
+1: Send Data_Reset
+: PHY
+: PHY
+: Protocol
+2: Data_Reset
+3: Data_Reset + CRC
+4: Data_Reset
+Start CRCReceiveTimer
+5: Data_Reset received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Data_Reset sent
+Start SenderResponseTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+14: Accept received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Accept sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+Data_Reset Complete, USB Connection Established
+DFP/VCONN Source 
+(Reset Initiator)
+UFP
+(Reset Responder)
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Inform DPM that Data_Reset 
+has been received
+Stop SenderResponseTimer
+Tell DPM to perform Data Reset
+19: Send Data_Reset_Complete
+20: Data_Reset_Complete
+21: Data_Reset_Complete + CRC
+22: Data_Reset_Complete
+Start CRCReceiveTimer
+23: Data_Reset_Complete received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+27: Data_Reset_Complete sent
+Inform DPM that 
+Data_Reset_Complete has been sent
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Inform DPM that 
+Data_Reset_Complete has 
+been received
+DPM indicates that Data 
+Reset process is complete

@@ -1,0 +1,49 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 61
+
+If the Soft Reset process cannot be completed a Hard Reset will be issued within tHardReset of 
+the CRCReceiveTimer to restore VBUS to USB Default Operation within ~1-1.5s:
+
+When the Source is also the VCONN Source, VCONN will also be power cycled during the Hard 
+Reset.
+
+When the Source operating in SPR PPS Mode fails to receive periodic communication (e.g., a Request 
+Message) from the Sink within tPPSTimeout:
+
+Source issues a Hard Reset and takes VBUS to vSafe5V.
+
+When the Source operating in the EPR Mode fails to receive periodic communication (i.e., an 
+EPR_KeepAlive Message or any other Message) from the Sink within tSourceEPRKeepAlive:
+
+Source issues a Hard Reset and takes VBUS to vSafe5V.
+
+Receiving no response to further attempts at communication is interpreted by the Source as an error 
+(see Error handling).
+
+Errors during power transitions will automatically lead to a Hard Reset to restore power to default 
+levels.
+
+Error handling:
+
+Protocol Errors are handled by a Soft_Reset Message issued by either Port Partner, that resets 
+counters, timers and states, but does not change the Negotiated voltage and current or the Port's 
+role (e.g., Source, DFP/UFP, VCONN Source) and does not cause an exit from Modal Operation.
+
+Serious errors are handled by Hard Reset Signaling issued by either Port Partner. A Hard Reset: 
+
+Resets protocol as for a Soft Reset but also returns the power supply to USB Default Operation 
+(vSafe0V or vSafe5V output) in order to protect the Sink.
+
+Restores the Port's Data Role to DFP.
+
+Restores the Port's power to its USB default state.
+
+When the Sink is the VCONN Source it removes VCONN then the Source Port is restored as the VCONN 
+Source.
+
+Causes all Active Modes to be exited such that the Source is no longer in Modal Operation.
+
+After a Hard Reset it is expected that the Port Partner will respond within tNoResponse. If this does 
+not occur then nHardResetCount further Hard Resets are carried out before the Source performs 
+additional Error Recovery steps, as defined in [USB Type-C 2.4], by entering the ErrorRecovery 
+state.

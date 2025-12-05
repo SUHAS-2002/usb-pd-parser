@@ -1,0 +1,63 @@
+Page 26
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+10
+Power Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 995
+Figure  10.1
+SPR Source Power Rule Illustration for Fixed Supply PDOs.......................................................1000
+Figure  10.2
+SPR Source Power Rule Example For Fixed Supply PDOs...........................................................1001
+Figure  10.3
+Valid SPR AVS Operating Region for a Source advertising in the range of 27W < PDP ≤ 45W
+1003
+Figure  10.4
+Valid SPR AVS Operating Region for a Source advertising in the range of 45W < PDP ≤ 60W
+1003
+Figure  10.5
+Valid SPR AVS Operating Region for a Source advertising in the range of 60W < PDP ≤ 
+100W...................................................................................................................................................................1004
+Figure  10.6
+Valid EPR AVS Operating Region............................................................................................................1011
+Figure  10.7
+EPR Source Power Rule Illustration for Fixed PDOs......................................................................1012
+A
+CRC calculation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1015
+B
+Message Sequence Examples (Deprecated) . . . . . . . . . . . . . . . . . . . . . . . 1016
+C
+VDM Command Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1017
+D
+BMC Receiver Design Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1032
+Figure  D.1
+Circuit Block of BMC Finite Difference Receiver..............................................................................1032
+Figure  D.2
+BMC AC and DC noise from VBUS at Power Sink...............................................................................1033
+Figure  D.3
+Sample BMC Signals (a) without USB 2.0 SE0 Noise (b) with USB 2.0 SE0 Noise.............1033
+Figure  D.4
+Scaled BMC Signal Derivative with 50ns Sampling Rate (a) without USB 2.0 Noise (b) with 
+USB 2.0 Noise ..................................................................................................................................................1034
+Figure  D.5
+BMC Signal and Finite Difference Output with Various Time Steps........................................1034
+Figure  D.6
+Output of Finite Difference in dash line and Edge Detector in solid line..............................1035
+Figure  D.7
+Noise Zone and Detect Zone of BMC Receiver..................................................................................1035
+Figure  D.8
+Circuit Block of BMC Subtraction Receiver........................................................................................1036
+Figure  D.9
+(a) Output of LPF1 and LPF2 (b) Subtraction of LPF1 and LPF2 Output..............................1036
+Figure  D.10
+Output of the BMC LPF1 in blue dash curve and the Subtractor in red solid curve (a) at 
+Power Source (b) at Power Sink.............................................................................................................1037
+E
+FRS System Level Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1038
+Figure  E.1
+Example FRS Capable System..................................................................................................................1038
+Figure  E.2
+Slow VBUS Discharge ....................................................................................................................................1039
+Figure  E.3
+Fast VBUS Discharge......................................................................................................................................1040
+Figure  E.4
+Slow VBUS discharge after FR_Swap message is sent.....................................................................1044
+Figure  E.5
+VBUS discharges quickly before FR_Swap message is sent after adapter disconnected.1046

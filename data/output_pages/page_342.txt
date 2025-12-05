@@ -1,0 +1,74 @@
+Page 342
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 7.22 Transition Diagram for Increasing the Voltage
+t3
+t1
+t2
+Source VOLD
+Source VNEW
+Source
+� V
+4
+3
+7
+Source Port
+Policy Engine
+Sink Port
+Policy Engine
+Source Port
+Device Policy Mgr
+Source Port
+Power Supply
+8
+Port to Port 
+Messaging
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+Send
+Accept
+Evaluate
+Accept
+Send
+PS_RDY
+Evaluate
+PS_RDY
+1
+2
+5
+6
+PSTransitionTimer
+tSrcTransition
+Good 
+CRC
+tSrcTransReq
+Good 
+CRC
+�����������
+Sink � IOLD
+� IOLD
+� IOLD
+Sink to Sink 
+Standby
+Sink iSnkStdBy
+Sink Standby 
+to Sink
+VOLD
+Sink Port
+Device Policy Mgr
+Sink Port
+Power Supply
+Source Port
+Voltage
+Sink Port
+Current
+I1 � iSnkStdBy + cSnkBulkPd( VBUS/ t)
+VNEW
+I1
+...
+�

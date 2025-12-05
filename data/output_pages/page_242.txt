@@ -1,0 +1,53 @@
+Page 242
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.13.12
+  Sink Modes
+The Sink Modes bit field Shall identify the charging Capabilities and the power sources that can be used by the Sink. 
+When bit 0 is set, the Sink has the ability to use a PPS Source for fast charging.
+The source of power a Sink can use: 
+
+When bit 1 is set, the Sink has the ability to be sourced by VBUS. 
+
+When bit 2 is set, the Sink has the ability to be sourced by an AC Supply.
+
+When bit 3 is set, the Sink has the ability to be sourced by a Battery.
+
+When bit 4 is set, the Sink has the ability to be sourced by a Battery with essentially infinite energy (e.g., 
+a car battery).
+Bits 1-4 May be set independently of one another. The combination indicates what sources of power the Sink can 
+utilize. For example, some Sinks are only powered by a Battery (e.g., an automobile battery) rather than the more 
+common AC Supply and some Sinks are only powered from VBUS or VCONN.
+When bit 5 is set, the Sink has the ability to support AVS.
+6.5.13.13
+  SPR Sink Minimum PDP 
+The SPR Sink Minimum PDP field Shall contain the minimum power Source PDP needed by the Sink, rounded up 
+to the next integer, to operate at its lowest level of functionality without requiring power from its Battery if present. 
+Battery charging may be an opportunistic feature, however this PDP Should be designed for basic functionality, not 
+for charging. The SPR Sink Minimum PDP field Shall be less than or equal to the SPR Sink Operational PDP. The 
+value is used by the Source to determine whether or not it has sufficient power to minimally support the Attached 
+Sink. If the Sink is EPR Capable and is unable to operate at PDPs less than 100W, it Shall set this field to the 
+minimum power to sustain PD communication.
+If the Sink is self-powered, such that it doesn't need power from a Source, then it Shall set this field to zero.
+The SPR Sink Minimum PDP is used to indicate to Shared Capacity Chargers the power that Should be delivered 
+to the Sink to guarantee at least basic functionality for the end user.
+Possible examples of SPR Sink Minimum PDP could be:
+
+The minimum power a wireless Charger would require in order to detect, and deliver the minimum 
+required amount of power to the attached device.
+
+The power required to have basic functionality by a Batteryless Sink,
+
+On a device with a Battery, it can power the minimum functionality of the device
+6.5.13.14
+  SPR Sink Operational PDP 
+The SPR Sink Operational PDP field Shall contain the Source PDP that the manufacturer recommends for the 
+normal functionality of the Sink, rounded up to the next integer. This corresponds to the PDP Rating of Sources that 
+the Sink is designed to operate with (See Section 10.3.2, "Normative Sink Rules"). The SPR Sink Operational PDP 
+field Shall be sufficient to operate all the Sink's functional modes normally AND charge the Sink's Battery if present. 
+For Sinks with a Battery(s), the SPR Sink Operational PDP field Shall correspond to the PDP Rating of the Charger 
+shipped with the Sink or the recommended Charger's PDP Rating. If the Sink is EPR Capable and is unable to operate 
+at PDPs less than 100W, it Shall set the SPR Sink Minimum PDP field to the minimum power to sustain PD 
+communication.
+If the Sink is self-powered, such that it doesn't need power from a Source, then it Shall set this field to zero.
+The SPR Sink Operational PDP is used to indicate to Shared Capacity Chargers that at this power level the user is 
+not expected to receive any performance warning related to the power being supplied to the Sink.

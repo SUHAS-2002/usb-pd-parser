@@ -1,0 +1,74 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 75
+2.8
+  Charging Models
+This section provides a charging model overview for each of the primary power delivery methods: Fixed Supply, 
+Programmable Power Supply and Adjustable Voltage Supply.
+2.8.1
+  Fixed Supply Charging Models
+USB Power Delivery supports Fixed Supply charging using a set of defined standard voltages with current available 
+up to the limit of the Source's and cable's Advertised Capabilities. As summarized in Table 2.1, "Fixed Supply Power 
+Ranges", the standard voltages are available in either the Standard Power Range (SPR) and/or the Extended Power 
+Range (EPR).
+2.8.2
+  Programmable Power Supply (PPS) Charging Models
+USB Power Delivery includes support for Programmable Power Supply (PPS) charging using a set of defined 
+standard voltage ranges. With current up to the limit of the Source's and cable's Advertised Capabilities. 
+Additionally, when operating in SPR Mode the current is also limited by the Operating Current field value in the 
+Request Message. 
+Note:
+PPS operation is not available in EPR Mode.
+The standard voltage ranges available in the Standard Power Range (SPR) for PPS are summarized in Table 2.2, 
+"PPS Voltage Power Ranges".
+Table 2.1  Fixed Supply Power Ranges
+Power Range
+Available Current and 
+Voltages
+PDP Range
+Notes
+Standard Power Range (SPR)
+3A:
+5V, 9V, 15V, 20V
+5A1:
+20V
+15 – 60W
+>60 – 100W
+Extended Power Range (EPR)
+3A2: 
+5V, 9V, 15V, 20V
+5A2:
+20V
+5A2:
+28V, 36V, 48V
+15 – 60W
+>60 – 100W
+>100 – 240W
+Requires entry into EPR Mode.
+1)
+Requires 5A cable.
+2)
+Requires EPR cable.
+Table 2.2  PPS Voltage Power Ranges
+Available Current
+Prog
+Min Voltage (V)
+Max Voltage (V)
+PDP Range
+3A
+9V Prog
+5
+11
+16 – 60W
+15V Prog
+5
+16
+20V Prog
+5
+21
+5A1
+20V Prog
+5
+21
+61 – 100W
+1)
+Requires 5A cable.

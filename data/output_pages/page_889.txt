@@ -1,0 +1,57 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 889
+
+There are no Active Modes (not in Modal Operation).
+The Policy Engine Shall transition to either the PE_SRC_Hard_Reset or PE_SNK_Hard_Reset states when:
+
+A DR_Swap Message is received and
+
+There are one or more Active Modes (Modal Operation).
+The Policy Engine Shall transition to the PE_DRS_DFP_UFP_Send_Swap state when:
+
+The Device Policy Manager indicates that a Data Role Swap is required.
+8.3.3.19.1.2
+  PE_DRS_DFP_UFP_Evaluate_Swap State
+On entry to the PE_DRS_DFP_UFP_Evaluate_Swap state the Policy Engine Shall ask the Device Policy Manager 
+whether a Data Role Swap can be made.
+The Policy Engine Shall transition to the PE_DRS_DFP_UFP_Accept_Swap state when:
+
+The Device Policy Manager indicates that a Data Role Swap is OK.
+The Policy Engine Shall transition to the PE_DRS_DFP_UFP_Reject_Swap state when:
+
+The Device Policy Manager indicates that a Data Role Swap is not OK.
+
+Or further evaluation of the Data Role Swap request is needed.
+8.3.3.19.1.3
+  PE_DRS_DFP_UFP_Accept_Swap State
+On entry to the PE_DRS_DFP_UFP_Accept_Swap state the Policy Engine Shall request the Protocol Layer to send an 
+Accept Message.
+The Policy Engine Shall transition to the PE_DRS_DFP_UFP_Change_to_UFP state when:
+
+The Accept Message has been sent.
+8.3.3.19.1.4
+  PE_DRS_DFP_UFP_Change_to_UFP State
+On entry to the PE_DRS_DFP_UFP_Change_to_UFP state the Policy Engine Shall request the Device Policy Manager 
+to change the Port from a DFP to a UFP.
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state when:
+
+The Device Policy Manager indicates that the Port has been changed to a UFP.
+8.3.3.19.1.5
+  PE_DRS_DFP_UFP_Send_Swap State
+On entry to the PE_DRS_DFP_UFP_Send_Swap state the Policy Engine Shall request the Protocol Layer to send a 
+DR_Swap Message and Shall start the SenderResponseTimer.
+On exit from the PE_DRS_DFP_UFP_Send_Swap state the Policy Engine Shall stop the SenderResponseTimer.
+The Policy Engine Shall continue as a DFP and Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state 
+when:
+
+A Reject Message is received.
+
+Or a Wait Message is received.
+
+Or the SenderResponseTimer times out.
+The Policy Engine Shall transition to the PE_DRS_DFP_UFP_Change_to_UFP state when:
+
+An Accept Message is received.
+8.3.3.19.1.6
+  PE_DRS_DFP_UFP_Reject_Swap State
+On entry to the PE_DRS_DFP_UFP_Reject_Swap state the Policy Engine Shall request the Protocol Layer to send:

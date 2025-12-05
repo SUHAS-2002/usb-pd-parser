@@ -1,0 +1,46 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 73
+2.7
+  Extended Power Range (EPR) Operation
+Extended Power Range is a Mode that provides for up to 240W which is considerably more power than the 100W 
+the original PD specification (SPR Mode) offered. It is a Mode of operation that can be entered only when an Explicit 
+Contract is in place and both the Ports and the Cable Plug(s) support EPR.
+Entry into EPR Mode follows a strict process; this assures that the higher voltages, at power levels above 100W, are 
+only transferred between known EPR Capable Sources and EPR Capable Sinks over EPR Capable cables. EPR Sources 
+are capable of both Fixed Supply and Adjustable Voltage Supply (AVS) operation. Maintaining EPR Mode operation 
+also requires maintaining a regular cadence of USB PD communications; loss of communications between the EPR 
+Source and EPR Sink will cause a Hard Reset to be initiated resulting in a return to SPR operation.
+The EPR Mode entry, operational and exit process is summarized by the following steps:
+1)
+Negotiate and enter into an Explicit Contract in the Standard Power Range. During this step, EPR Capable 
+Sources and Sinks will declare their supported EPR Capabilities through PDO/APDO and RDO exchanges.
+2)
+An EPR Sink, having discovered an EPR Source, can request EPR Mode entry.
+3)
+The EPR Source, having already confirmed that the Attached cable assembly is EPR Capable during the 
+First Explicit Contract Negotiation, will respond to the EPR Sink with an acknowledgment of the EPR 
+Mode entry request.
+4)
+While in EPR Mode:
+a)
+The EPR Source sends EPR Capabilities (Fixed Supply PDOs and an AVS APDO) to the EPR Sink which 
+requires the Sink to evaluate and respond as appropriate to adjust the Explicit Contract.
+b)
+The EPR Sink maintains a regular cadence of communications with the EPR Source to allow EPR 
+Mode to continue.
+5)
+When either the EPR Source or EPR Sink no longer wants to remain in EPR Mode operation, a normal 
+exit from EPR Mode will first require adjusting the Explicit Contract to a voltage of 20V or lower (SPR 
+(A)PDO) followed by an explicit EPR Mode exit request.
+a)
+Source initiated: EPR Source sends an EPR_Source_Capabilities Message that only includes SPR 
+voltages to force the EPR Sink to drop to 20V or below followed by the EPR Mode exit. Once EPR Mode 
+is exited, a new SPR Contract is Negotiated to return to SPR Mode operation.
+b)
+Sink initiated; EPR Sink requests a drop to 20V or below followed by the EPR Mode exit. Once EPR 
+Mode is exited, a new SPR Contract is Negotiated to return to SPR Mode operation.
+Figure 2.6, "Example of a Normal EPR Mode Operational Flow" illustrates an example of a normal EPR Mode 
+operational flow. In this example, at some time during the EPR Mode operation, the Source decides that it needs to 
+exit EPR Mode, so it resends the EPR Capabilities to the Sink with only SPR (A)PDOs to cause the Sink to Negotiate 
+an SPR Contract of 20V or lower and then the Source follows with an EPR Mode exit Message. Once EPR Mode is 
+exited, a new SPR Contract is Negotiated to return to SPR Mode operation.

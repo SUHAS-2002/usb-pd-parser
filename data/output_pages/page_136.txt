@@ -1,0 +1,54 @@
+Page 136
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.3.17
+  Get_Source_Cap_Extended Message
+The Get_Source_Cap_Extended Message is sent by a Port to request additional information about a Port's Source 
+Capabilities. The Port Shall respond by returning a Source_Capabilities_Extended Message (see Section 6.5.1, 
+"Source_Capabilities_Extended Message").
+6.3.18
+  Get_Status Message
+The Get_Status Message is sent by a Port using SOP to request the Port Partner's present status. 
+The Port Partner Shall respond by returning a Status Message (see Section 6.5.2, "Status Message"). A Port that 
+receives an Alert Message (see Section 6.4.6, "Alert Message") indicates that the Source or Sink's Status has changed 
+and Should be re-read using a Get_Status Message.
+The Get_Status Message May also be sent to an Active Cable to get its present status using SOP’/SOP’’. 
+The Active Cable Shall respond by returning a Status Message (see Section 6.5.2, "Status Message"). 
+6.3.19
+  FR_Swap Message
+The FR_Swap Message Shall be sent by the New Source within tFRSwapInit after it has detected a Fast Role Swap 
+signal (see Section 5.8.6.3, "Fast Role Swap Detection" and Section 6.6.17.3, "tFRSwapInit"). The Fast Role Swap AMS 
+is necessary to apply Rp to the New Source and Rd to the New Sink and to re-synchronize the state machines. The 
+tFRSwapInit time Shall be measured from the time the Fast Role Swap Request has been sent for tFRSwapRx (max) 
+until the last bit of the EOP of the FR_Swap Message has been transmitted by the PHY Layer.
+The recipient of the FR_Swap Message Shall respond by sending an Accept Message.
+After a successful Fast Role Swap the Port Partners Shall reset their respective Protocol Layers (equivalent to a Soft 
+Reset): resetting their MessageIDCounter, RetryCounter and Protocol Layer state machines before attempting to 
+establish the First Explicit Contract. At this point the Source Shall also reset its CapsCounter. 
+This ensures that only the Cable Plug responds with a GoodCRC Message to the Discover Identity Command.
+Prior to the Fast Role Swap AMS, the New Source Shall have Rd asserted on the CC wire and the New Sink Shall have 
+Rp asserted on the CC wire.
+Note:
+This is an incorrect assignment of Rp/Rd (since Rp follows the Source and Rd follows the Sink as defined 
+in [USB Type-C 2.4]) that is corrected by the Fast Role Swap AMS.
+During the Fast Role Swap AMS, the New Source Shall change its CC wire resistor from Rd to Rp and the New Sink 
+Shall change its CC wire resistor from Rp to Rd. The DFP (Host), UFP (Device) Data Roles and VCONN Source Shall 
+remain unchanged during the Fast Role Swap process.
+The Initial Source Should avoid being the VCONN Source (by using the VCONN Swap process) whenever not actively 
+communicating with the cable, since it is difficult for the Initial Source to maintain VCONN power during the Fast Role 
+Swap process.
+Note:
+A Fast Role Swap is a "best effort" solution to a situation where a PDUSB Device has lost its external 
+power. This process can occur at any time, even during an AMS in which case error handling such as Hard 
+Reset or [USB Type-C 2.4] Error Recovery will be triggered.
+Note:
+During the Fast Role Swap process the Initial Sink does not disconnect even though VBUS drops below 
+vSafe5V.
+For more information regarding the Fast Role Swap process, refer to:
+
+Section 7.1.13, "Fast Role Swap"
+
+Section 7.2.10, "Fast Role Swap"
+
+Section 8.3.3.19.5, "Policy Engine in Source to Sink Fast Role Swap State Diagram"
+
+Section 8.3.3.19.6, "Policy Engine in Sink to Source Fast Role Swap State Diagram"

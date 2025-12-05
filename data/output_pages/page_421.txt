@@ -1,0 +1,48 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 421
+ensure that the user is informed of the condition. When another Port in the system could satisfy the Consumer's 
+power requirements the user Should be directed to move the Device to the alternate Port.
+In order to identify a more suitable Source Port for the Consumer the System Policy Manager Shall communicate 
+with the Device Policy Manager in order to determine the Consumer's requirements. The Device Policy Manager 
+Shall use a Get_Sink_Cap Message (see Section 6.3.8, "Get_Sink_Cap Message") to discover which power levels can 
+be utilized by the Consumer.
+8.2.6
+  Use of "Unconstrained Power" bit with Batteries and AC 
+supplies
+The Device Policy Manager in a Provider or Consumer May monitor the status of any variable sources of power that 
+could have an impact on its Capabilities as a Source such as Batteries and AC supplies and reflect this in the 
+"Unconstrained Power" bit (see Section 6.4.1.2.1.3, "Unconstrained Power" and Section 6.4.1.3.1.3, "Unconstrained 
+Power") provided as part of the Source_Capabilities or Sink_Capabilities Message (see Section 6.4.1, "Capabilities 
+Message"). When monitored, and a USB interface is supported, the External Power status (see [UCSI]) and the 
+Battery state (see Section 9.4.1, "GetBatteryStatus") Shall also be reported to the System Policy Manager using the 
+USB interface.
+8.2.6.1
+  AC Supplies
+The Unconstrained Power bit provided by Sources and Sinks (see Section 6.4.1.2.1.3, "Unconstrained Power" and 
+Section 6.4.1.3.1.3, "Unconstrained Power") notifies a connected device that it is acceptable to use the Advertised 
+power for charging as well as for what is needed for normal operation. A device that sets the Unconstrained Power 
+bit has either an external source of power that is sufficient to adequately power the system while charging external 
+devices or expects to charge external devices as a primary state of function (such as a battery pack).
+In the case of the external power source, the power can either be from an AC Supply directly connected to the device 
+or from an AC Supply connected to an Attached device, which is also getting unconstrained power from its power 
+supply. The Unconstrained Power bit is in this way communicated through a PD system indicating that the origin 
+of the power is from a single or multiple AC supplies, from a battery bank, or similar:
+
+If the "Unconstrained Power" bit is set, then that power is originally sourced from an AC Supply.
+
+Devices capable of consuming on multiple ports can only claim that they have "Unconstrained Power" 
+for the power Advertised as a Provider Port if there is unconstrained power beyond that needed for nor-
+mal operation coming from external supplies, (e.g., multiple AC supplies).
+
+This concept applies as the power is routed through multiple Provider and Consumer tiers, so, as an ex-
+ample. Power provided out of a monitor that is connected to a monitor that gets power from an AC Sup-
+ply, will claim it has "Unconstrained Power" even though it is not directly connected to the AC Supply.
+An example use case is a Tablet computer that is used with two USB A/V displays that are daisy chained (see Figure 
+8.1, "Example of daisy chained displays"). The tablet and 1st display are not externally powered, (meaning, they 
+have no source of power outside of USB PD). The 2nd display has an external supply Attached which could either 
+be a USB PD based supply or some other form of external supply. When the displays are connected as shown, the 
+power adapter Attached to the 2nd display is able to power both the 1st display and the tablet. In this case the 2nd 
+display will indicate the presence of a sufficiently sized Charger to the 1st display, by setting its "Unconstrained 
+Power" bit. The 1st display will then in turn assess and indicate the presence of the extra power to the tablet by 
+setting its "Unconstrained Power" bit. Power is transmitted through the system to all devices, provided that there 
+is sufficient power available from the external supply.

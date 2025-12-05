@@ -1,0 +1,29 @@
+Page 882
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.17
+  Security State Diagrams
+8.3.3.17.1
+  Send Security Request State Diagram
+Figure 8.168, "Send security request State Diagram" shows the state diagram for a Source or Sink on receiving a 
+request from the Device Policy Manager to send a security request. See also Section 6.5.8, "Security Messages".
+Figure 8.168 Send security request State Diagram
+8.3.3.17.1.1
+  PE_Send_Security_Request State
+The Policy Engine Shall transition to the PE_Send_Security_Request state, from either the PE_SRC_Ready or 
+PE_SNK_Ready state, due to a request to send a security request from the Device Policy Manager. 
+On entry to the PE_Send_Security_Request state the Policy Engine Shall send a Security_Request Message.
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready state as appropriate (see 
+Figure 8.132, "Source Port State Diagram" and Figure 8.133, "Sink Port State Diagram") when:
+
+The Security_Request Message has been sent.
+Send security request 
+from Device Policy Manager
+Security_Request
+Message sent
+PE_SRC_Ready or
+PE_SNK_Ready
+PE_Send_Security_Request
+Actions on entry:
+Send Security_Request Message
+Power = Explicit Contract 
+PD = Connected

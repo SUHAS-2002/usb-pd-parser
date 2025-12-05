@@ -1,0 +1,18 @@
+Page 192
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Number of Data Objects field in the Message Header Shall be set to 1 or 2 since the Attention Command Shall 
+Not contain more than 1 VDO. When a VDO is included in an Attention Command the contents of the 32-bit VDO is 
+defined by the Alternate Mode.
+Figure 6.24, "Exit Mode sequence" shows the sequence of events when an Attention Command is received.
+Figure 6.25 Attention Command request/response sequence
+6.4.4.4
+  Command Processes
+The Message flow of Commands during a Process is a query followed by a response. Every Command request sent 
+has to be responded to with a GoodCRC Message. The GoodCRC Message only indicates the Command request was 
+received correctly; it does not mean that the Responder understood or even supports a particular SVID. Figure 6.26, 
+"Command request/response sequence" shows the request/response sequence including the GoodCRC Messages.
+Initiator
+Responder
+GoodCRC
+Command (Attention)
+Command Complete

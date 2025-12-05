@@ -1,0 +1,8 @@
+Universal Serial Bus
+Power Delivery Specification
+Revision:
+3.2
+Version:
+1.1
+Release Date:
+2024-10

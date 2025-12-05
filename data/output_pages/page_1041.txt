@@ -1,0 +1,62 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1041
+E.2
+  FRS Initial Setup
+Before a Fast Role Swap can occur, some initial setup steps are required. They require the laptop to discover 
+whether Fast Role Swap is supported by the Hub, the amount of current the Hub requires after a Fast Role Swap, 
+and whether the laptop is able and willing to provide that amount. They also ensure that the laptop supplies VCONN 
+before, during and after an FRS. Table E.1, "Sequence for setup of a Fast Role Swap (Hub connected to Power Adapter 
+first)" and Table E.2, "Sequence for setup of a Fast Role Swap (Hub connected to laptop before Power Adapter)" below 
+show two typical sequences that might be used to prepare a laptop to support Fast Role Swap.
+Table E.1  Sequence for setup of a Fast Role Swap (Hub connected to Power Adapter first)
+Step #
+Hub
+Laptop
+1
+Hub connected to power adapter
+2
+Hub is connected to laptop.
+3
+Laptop sources 5 V to VBUS (vSafe5V).
+Laptop sources 5 V to VCONN
+4
+Laptop reads the cable to check its current 
+carrying capability and/or if it is an Active Cable 
+requiring VCONN.
+5
+Laptop sends a Capabilities Message
+6
+Hub sends a Request Message
+7
+Hub and laptop establish an Explicit Contract with Hub as Sink.
+8
+Laptop sends a Get_Source_Cap Message to 
+determine how much power the Hub can provide.
+9
+Hub sends a Source_Capabilities Message with the 
+Dual-Role Power bit set, and Unconstrained Power 
+bit set, and Maximum Current > 0.
+10
+Since the Hub can supply power the laptop sends a 
+PR_Swap Message
+11
+Hub sends an Accept Message and starts supplying 
+VBUS 
+12
+Laptop sends a Get_Sink_Cap Message to 
+determine the current required by the Hub to 
+support an FRS. If the Hub does not support FRS or 
+the laptop cannot supply the required current, the 
+laptop Ignores any Fast Role Swap Requests it 
+might see. 
+13
+If the Hub can supply more than 3A, it initiates a 
+VCONN Swap to make to make itself the VCONN Source 
+and reads the cable to check its current carrying 
+capability. 
+14
+Hub sends a Sink_Capabilities Message 
+15
+Laptop sends a Request Message
+16
+Hub and laptop establish an Explicit Contract with Hub as source.

@@ -1,0 +1,17 @@
+Page 1014
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+A Sink Shall Not Advertise Fixed Supply PDO maximum voltages and currents that exceed the PDP Rating 
+they were designed to use.
+
+A Sink Shall Not Advertise Variable Supply PDO maximum voltages and currents that exceed the PDP 
+Rating they were designed to use.
+
+A Sink Shall Not Advertise a Battery Supply PDO maximum allowable power that exceeds the PDP Rating 
+they were designed to use.
+
+A Sink Shall Not Advertise a PPS APDO maximum allowable power that exceeds the PDP Rating they 
+were designed to use.
+
+A Sink Shall Not Advertise an AVS APDO maximum allowable power that exceeds the PDP Rating they 
+were designed to use.

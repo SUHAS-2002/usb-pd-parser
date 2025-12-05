@@ -1,0 +1,22 @@
+Page 58
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+allowed to communicate with the Cable Plug and does not recognize any SOP’ Packets/SOP’’ Packets received. Only 
+the DFP, when acting as a VCONN Source, is allowed to send SOP* Packets to control the entry and exiting of Modes 
+and to manage Modal Operation.
+Figure 2.2 Example SOP' Communication between VCONN Source and Cable Plug(s)
+VCONN Source 
+(DFP/UFP)
+SOP signaling
+SOP’
+signaling
+SOP’’
+signaling
+Cable 
+Plug1 
+(SOP’’)
+Electronically Marked 
+Cable
+Cable 
+Plug1 
+(SOP’)
+VCONN

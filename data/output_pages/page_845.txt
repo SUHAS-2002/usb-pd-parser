@@ -1,0 +1,82 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 845
+8.3.3.5
+  Data Reset State Diagrams
+8.3.3.5.1
+  DFP Data_Reset Message State Diagrams
+Figure 8.136, "DFP Data_Reset Message State Diagram" shows the state diagram for a Data_Reset Message sent or 
+received by a DFP.
+Figure 8.136 DFP Data_Reset Message State Diagram
+8.3.3.5.1.1
+  PE_DDR_Send_Data_Reset State
+The PE_DDR_Send_Data_Reset State Shall be entered from the PE_SRC_Ready or PE_SNK_Ready State when 
+requested by the Device Policy Manager.
+On entry to the PE_DDR_Send_Data_Reset State the Policy Engine Shall request the Protocol Layer to send a 
+Data_Reset Message and then initialize and start the SenderResponseTimer.
+On exit from the PE_DDR_Send_Data_Reset State the Policy Engine Shall initialize and start the 
+DataResetFailTimer.
+The Policy Engine Shall transition to the PE_DDR_Perform_Data_Reset State when:
+
+An Accept Message has been received and
+
+The DFP is presently the VCONN Source.
+The Policy Engine Shall transition to the PE_DDR_Wait_For_VCONN_Off State when:
+
+An Accept Message has been received and
+PE_DDR_Send_Data_Reset
+Actions on entry:
+Send Data_Reset Message
+Initialize and start SenderResponseTimer
+Power = Explicit Contract 
+PD = connected
+Data Reset request from DPM
+Accept Message Received & 
+VCONN Source
+PE_SRC_Ready or 
+PE_SNK_Ready (DFP)
+PE_DDR_Data_Reset_Received
+Actions on entry:
+Inform Device Policy Manager of 
+Data_Reset Message
+Send Accept Message
+Power = Explicit Contract 
+PD = connected
+Data_Reset Message 
+received
+Accept Message Sent &
+VCONN Source
+ErrorRecovery
+SenderResponseTimer Timeout | 
+Protocol Error
+PE_DDR_Wait_for_VCONN_Off
+Actions on entry:
+Initialize and start VCONNDischargeTimer
+Power = Explicit Contract 
+PD = connected
+Accept Message Received & 
+Not VCONN Source
+VCONNDischargeTimer Timeout |
+Protocol Error
+PS_RDY Received
+PE_DDR_Perform_Data_Reset
+Actions on entry:
+Tell Device Policy Manager to perform Data Reset
+Power = Explicit Contract 
+PD = connected
+PE_SRC_Ready or 
+PE_SNK_Ready (DFP)
+Data Reset process is complete
+Accept Message Sent & 
+Not VCONN Source
+Protocol Error
+DataResetFailTimer Timeout |
+Protocol Error
+Actions on exit:
+Stop DataResetFailTimer
+Send Data_Reset_Complete Message
+Actions on exit:
+Initialize and start DataResetFailTimer1
+Actions on exit:
+Initialize and start DataResetFailTimer1
+1)
+Note that the DataResetFailTimer Shall continue to run in every state until it is stopped or times out.

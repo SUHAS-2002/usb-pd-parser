@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 57
+2.4
+  SOP* Communication
+2.4.1
+  Introduction
+The Start of Packet (or SOP) is used as an addressing scheme to identify whether the communications were 
+intended for one of the Port Partners (SOP Communication) or one of the Cable Plugs (SOP’ Communication/SOP’’ 
+Communication). SOP/SOP’ and SOP’’ are collectively referred to as SOP*. All SOP* Communications take place over 
+a single wire (CC). The term Cable Plug in the SOP’ Communication/SOP’’ Communication case is used to represent 
+a logical entity in the cable which is capable of PD Communication, and which might or might not be physically 
+located in the plug.
+Note:
+There are there are other SOPs defined for special operation such as debug which are not discussed here.
+The following sections describe how this addressing scheme operates for Port-to-Port and Port to Cable Plug 
+communication.
+2.4.2
+  SOP* Collision Avoidance
+For all SOP* the Source co-ordinates communication to avoid bus collisions by allowing the Sink to initiate 
+messaging when it does not need to communicate itself. Once an Explicit Contract is in place, the Source 
+manipulates its Rp value (3A) to indicate to the Sink that it can initiate an Atomic Message Sequence (AMS). This AMS 
+can be communication with the Source or with one of the Cable Plugs. As soon as the Source itself needs to initiate 
+an AMS, it will manipulate its Rp value (1.5A) to indicate this to the Sink. The Source then waits for any outstanding 
+Sink SOP* Communication to complete before initiating an AMS itself. In all cases, the Port initiating an AMS waits 
+for CC to be Idle before putting the Message on CC.
+2.4.3
+  SOP Communication
+SOP Communication is used for Port-to-Port communication between the Source and the Sink. SOP Communication 
+is recognized by both Port Partners but not by any intervening Cable Plugs. SOP Communication takes priority over 
+other SOP* Communications since it is critical to complete power related operations as soon as possible.
+2.4.4
+  SOP'/SOP'' Communication with Cable Plugs
+SOP’ Communication is recognized by electronics in one Cable Plug (see [USB Type-C 2.4]). SOP’’ Communication 
+can also be supported when SOP’ Communication is also supported. SOP’ and SOP’’ assignment in the cable 
+assembly is fixed and does not change dynamically.
+SOP Communication between the Port Partners is not recognized by the Cable Plug. Figure 2.2, "Example SOP' 
+Communication between VCONN Source and Cable Plug(s)" outlines the usage of SOP* Communications between a 
+VCONN Source (DFP/UFP) and the Cable Plugs.
+Since all SOP* Communications take place over a single wire (CC), the SOP* Communication periods must be 
+coordinated to prevent important communication from being blocked. For a product which does not recognize 
+SOP/SOP’ or SOP’’ Packets, this will look like a non-Idle channel, leading to missed Packets and retries. 
+Communications between the Port Partners take precedence meaning that communications with the Cable Plug 
+can be interrupted but will not lead to a Soft Reset or Hard Reset.
+When a Default Contract or Implicit Contract is in place (e.g., at startup, after a Power Role Swap or Fast Role Swap) 
+only the Source Port that is supplying VCONN is allowed to send Packets to a Cable Plug (SOP’) and is allowed to 
+respond to Packets from the Cable Plug (SOP’) with a GoodCRC Message in order to discover the Cable Plug's 
+characteristics (see Figure 2.2, "Example SOP' Communication between VCONN Source and Cable Plug(s)"). During 
+this phase, all communication with the Cable Plug is initiated and controlled by the VCONN Source which acts to 
+prevent conflicts between SOP Packets and SOP’ Packets. The Sink does not communicate with the Cable Plug and 
+Discards any SOP’ Packets received.
+When an Explicit Contract is in place, only the VCONN Source (either the DFP or the UFP) can communicate with the 
+Cable Plug(s) using SOP’ Packets/SOP’’ Packets (see Figure 2.2, "Example SOP' Communication between VCONN 
+Source and Cable Plug(s)"). During this phase, all communication with the Cable Plug is initiated and controlled by 
+the VCONN Source which acts to prevent conflicts between SOP* Packets. The Port that is not the VCONN Source is not 

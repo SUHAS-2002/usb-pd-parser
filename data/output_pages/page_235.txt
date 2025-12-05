@@ -1,0 +1,64 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 235
+6.5.10
+  PPS_Status Message
+The PPS_Status Message Shall be sent in response to a Get_PPS_Status Message. The PPS_Status Message enables 
+a Sink to query the Source to get additional information about its operational state. The Get_PPS_Status Message 
+and the PPS_Status Message Shall only be supported when the Alert Message is also supported.
+The PPS_Status Message Shall return a 4-byte PPS Status Data Block (PPSSDB) whose format Shall be as shown in 
+Figure 6.49, "PPS_Status Message" and Table 6.62, "PPS Status Data Block (PPSSDB)".
+Figure 6.49 PPS_Status Message
+6.5.10.1
+  Output Voltage Field
+The Output Voltage field Shall return the Source's output voltage at the time of the request. The output voltage is 
+measured either at the Source's receptacle or, if the Source has a captive cable, where the voltage is applied to the 
+cable.
+The measurement accuracy Shall be +/-3% rounded to the nearest 20mV in SPR PPS Mode.
+If the Source does not support the Output Voltage field, the field Shall be set to 0xFFFF.
+6.5.10.2
+  Output Current Field
+The Output Current field Shall return the Source's output current at the time of the request measured at the 
+Source's receptacle. 
+The measurement accuracy Shall be +/-150mA. 
+If the Source does not support the Output Current field, the field Shall be set to 0xFF.
+Table 6.62   PPS Status Data Block (PPSSDB)
+Offset (Byte)
+Field
+Description
+0
+Output Voltage
+2
+Source’s output voltage in 20mV units. 
+When set to 0xFFFF, the Source does not support this field.
+2
+Output Current
+1
+Source’s output current in 50mA units. 
+When set to 0xFF, the Source does not support this field.
+3
+Real Time Flags
+Bit
+Description
+0
+Reserved and Shall be set to zero
+1...2
+PTF
+
+PTF: 00 – Not Supported
+
+PTF: 01 – Normal
+
+PTF: 10 – Warning
+
+PTF: 11 – Over temperature
+3
+OMF
+OMF (Operating Mode Flag) is set when operating in Current 
+Limit mode and cleared when operating in Constant Voltage 
+mode.
+4...7
+Reserved and Shall be set to zero
+Extended Header
+Data Size = 4
+PPSSDB
+(4-byte Data Block)

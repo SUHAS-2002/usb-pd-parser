@@ -1,0 +1,85 @@
+Page 160
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+Process reception of a BIST Shared Test Mode Exit BIST Data Object that Shall cause the UUT to exit 
+the BIST Shared Capacity Test Mode.
+When a Port receives a BIST Message BIST Data Object for a BIST Mode when not operating at vSafe5V, the BIST 
+Message Shall be Ignored.
+When a Port receives a BIST Message BIST Data Object for a BIST Mode it does not support the BIST Message Shall 
+be Ignored.
+When a Port or Cable Plug receives a BIST Message BIST Data Object for a Continuous BIST Mode the Port or Cable 
+Plug enters the requested BIST Mode and Shall remain in that BIST Mode for tBISTContMode and then Shall return 
+to normal operation (see Section 6.6.7.2, "BISTContModeTimer").
+The usage model of the PHY Layer BIST Modes generally assumes that some controlling agent will request a test of 
+its Port Partner.
+In Section 8.3.2.15, "Built in Self-Test (BIST)" there is a sequence description of the test sequences used for 
+compliance testing.
+The fields in the BIST Data Object are defined in the Table 6.27, "BIST Data Object".
+6.4.3.1
+  BIST Carrier Mode
+Upon receipt of a BIST Message, with a BIST Carrier Mode BIST Data Object, the UUT Shall send out a continuous 
+string of BMC encoded alternating "1"s and "0"s.
+The UUT Shall exit the Continuous BIST Mode within tBISTContMode of this Continuous BIST Mode being enabled 
+(see Section 6.6.7.2, "BISTContModeTimer").
+6.4.3.2
+  BIST Test Data Mode
+Upon receipt of a BIST Message, with a BIST Test Data BIST Data Object, the UUT Shall return a GoodCRC Message 
+and Shall enter BIST Test Data Mode in which it sends no further Messages except for GoodCRC Messages in 
+response to received Messages. See Section 5.9.2, "BIST Test Data Mode" for the definition of the Test Frame.
+The test Shall be ended by sending Hard Reset Signaling to reset the UUT.
+Table 6.27  BIST Data Object
+Bit(s)
+Value
+Parameter
+Description
+Reference
+Applicability
+B31…28
+0000b…0100b
+Reserved
+Shall Not be used
+Section 1.4.2 
+-
+0101b
+BIST Carrier Mode
+Request 
+Transmitter to enter 
+BIST Carrier Mode
+Section 6.4.3.1
+Mandatory
+0110b…0111b
+Reserved
+Shall Not be used
+Section 1.4.2 
+-
+1000b
+BIST Test Data
+Sends a Test Frame.
+Section 6.4.3.2
+Mandatory
+1001b
+BIST Shared Test Mode Entry
+Requests UUT to 
+enter BIST Shared 
+Capacity Test Mode.
+Section 6.4.3.3.1
+Mandatory for UUTs 
+with shared capacity
+1010b
+BIST Shared Test Mode Exit
+Requests UUT to exit 
+BIST Shared 
+Capacity Test Mode.
+Section 6.4.3.3.2
+Mandatory for UUTs 
+with shared capacity
+1011b…1111b
+Reserved
+Shall Not be used
+Section 1.4.2 
+-
+B27…0
+Reserved
+Shall be set to zero.
+Section 1.4.2 
+-

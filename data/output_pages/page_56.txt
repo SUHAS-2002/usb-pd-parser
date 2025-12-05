@@ -1,0 +1,40 @@
+Page 56
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+Source Power
+
+Communicate using SOP Packets.
+
+Optionally Communicate using SOP* Packets.
+
+Optionally Sink power (a Dual-Role Power Device).
+
+Optionally communicate via USB.
+
+Optionally support Alternate Modes.
+
+A Source that can be:
+
+An externally powered source (e.g., AC powered).
+
+Power Storage (e.g., Battery/Power Bank).
+
+Derived from another Port (e.g., bus-powered Hub).
+
+A Sink that can be:
+
+Power Storage (e.g., a Battery/Power Bank).
+
+Used to power internal functions.
+
+Used to power devices Attached to other devices (e.g., a bus-powered Hub).
+
+A VCONN Source that:
+
+Can be either Port Partner, either the DFP/UFP or Source/Sink.
+
+Powers the Cable Plug(s).
+
+Powers VPDs (VCONN Powered USB Devices).
+
+Is the only Port allowed to talk to the Cable Plug(s) at any given time.

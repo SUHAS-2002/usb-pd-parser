@@ -1,0 +1,38 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 95
+Figure 5.13 Transmitting or Receiving BMC Encoded Frame Terminated by Zero with Low to High Last 
+Transition
+Figure 5.14 Transmitting or Receiving BMC Encoded Frame Terminated by One with Low to High Last 
+Transition
+Note:
+There is no requirement to maintain a timing phase relationship between back-to-back Packets.
+1UI
+1UI
+max tEndDriveBMC
+tInterFrameGap
+min tHoldLowBMC
+final bit
+of frame
+0
+pre-amable for 
+next frame
+0
+trailing edge of 
+final bit
+High Impedance 
+(level set by Rp/Rd)
+1UI
+1UI
+max tEndDriveBMC
+tInterFrameGap
+min tHoldLowBMC
+final bit
+of frame
+1
+pre-amable for 
+next frame
+0
+trailing edge of 
+final bit
+High Impedance 
+(level set by Rp/Rd)

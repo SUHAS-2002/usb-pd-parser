@@ -1,0 +1,15 @@
+Page 498
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+17
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. 
+18
+The Protocol Layer verifies and increments the 
+MessageIDCounter. It informs the Policy Engine that 
+the Source_Capabilities Message was successfully sent. 
+The Protocol Layer stops the CRCReceiveTimer.
+EPR Mode Exited. Power Negotiation proceeds as defined in Section 8.3.2.2.1.1, "SPR Explicit Contract Negotiation".
+Table 8.47  Steps for Exiting EPR Mode (Source Initiated)
+Step
+Sink
+Source

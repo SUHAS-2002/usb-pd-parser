@@ -1,0 +1,53 @@
+Page 254
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+A UUT Shall enter BIST Carrier Mode within tBISTCarrierMode of the last bit of the GoodCRC Message EOP, 
+corresponding to the received the BIST Message used to initiate the test, being transmitted by the PHY Layer. In 
+BIST Carrier Mode when transmitting a continuous carrier signal transmission Shall start as soon as the UUT enters 
+BIST Mode.
+6.6.7.2
+  BISTContModeTimer
+The BISTContModeTimer is used by a UUT to ensure that a Continuous BIST Mode (i.e., BIST Carrier Mode) is exited 
+in a timely fashion. A UUT that has been put into a Continuous BIST Mode Shall return to normal operation (either 
+PE_SRC_Transition_to_default, PE_SNK_Transition_to_default, or PE_CBL_Ready) within tBISTContMode of 
+starting to transmit a continuous carrier signal.
+6.6.7.3
+  tBISTSharedTestMode
+tBISTSharedTestMode is used to define the maximum time that a UUT has to enter BIST Shared Capacity Test Mode 
+when requested by a Tester. 
+A UUT Shall enter BIST Shared Capacity Test Mode and send a new Source_Capabilities Message from all Ports 
+within the Shared Capacity Group within tBISTSharedTestMode of the last bit of the GoodCRC Message EOP, 
+corresponding to the received the BIST Message used to initiate the test, being transmitted by the PHY Layer.
+6.6.8
+  Power Role Swap Timers
+6.6.8.1
+  SwapSourceStartTimer
+The SwapSourceStartTimer Shall be used by the New Source, after a Power Role Swap or Fast Role Swap, to ensure 
+that it does not send Source_Capabilities Message before the New Sink is ready to receive the Source_Capabilities 
+Message. The New Source Shall Not send the Source_Capabilities Message earlier than tSwapSourceStart after the 
+last bit of the EOP of GoodCRC Message sent in response to the PS_RDY Message sent by the New Source indicating 
+that its power supply is ready. The Sink Shall be ready to receive a Source_Capabilities Message tSwapSinkReady 
+after having sent the last bit of the EOP of GoodCRC Message sent in response to the PS_RDY Message sent by the 
+New Source indicating that its power supply is ready.
+6.6.9
+  Soft Reset Timers
+6.6.9.1
+  tSoftReset
+A failure to see a GoodCRC Message in response to any Message within tReceive (after nRetryCount retries), when 
+a Port Pair is Connected, is indicative of a communications failure. This Shall cause the Source or Sink to send a 
+Soft_Reset Message, transmission of which Shall be completed within tSoftReset of the CRCReceiveTimer 
+expiring.
+6.6.9.2
+  tProtErrSoftReset
+If the Protocol Error occurs that causes the Source or Sink to send a Soft_Reset Message, the transmission of the 
+Soft_Reset Message Shall be completed within tProtErrSoftReset of the EOP of the GoodCRC sent in response to 
+the Message that caused the Protocol Error.
+6.6.10
+   Data Reset Timers
+6.6.10.1
+  VCONNDischargeTimer
+The VCONNDischargeTimer is used by the Policy Engine in the DFP to ensure the UFP actively discharges VCONN in 
+a timely manner to ensure the cable will restore Ra. Once the UFP has discharged VCONN below vRaReconnect (see 
+[USB Type-C 2.4]) it sends a PS_RDY Message (see also Section 7.1.15, "VCONN Power Cycle").
+If the DFP does not receive a PS_RDY Message from the UFP within tVCONNSourceDischarge of the last bit of the 
+GoodCRC acknowledging the Accept Message in response to the Data_Reset Message, the VCONNDischargeTimer 
+will time out and the Policy Engine Shall enter the ErrorRecovery State.

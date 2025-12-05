@@ -1,0 +1,47 @@
+Page 338
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.2.9.3
+  Over Temperature Protection
+Sinks Shall implement over temperature protection (OTP) to prevent damage from temperature that exceeds the 
+thermal capability of the Sink. The definition of thermal capability and the monitoring locations used to trigger the 
+over temperature protection are left to the discretion of the Sink implementation. 
+Sinks Shall attempt to send Hard Reset Signaling when over temperature protection engages followed by an Alert 
+Message indicating an OTP event once an Explicit Contract has been established. The over temperature protection 
+response May engage at either the Port or system level. Systems or ports that have engaged over temperature 
+protection Should attempt to resume USB Default Operation after sufficient cooling is achieved and May latch off 
+to protect the Port or system. The definition of sufficient cooling is left to the discretion of the Sink implementation.
+The Sink Shall be able to Re-negotiate with the Source after resuming USB Default Operation. The decision of how 
+to respond to Re-negotiation after an over temperature event is left to the discretion of the Sink implementation.
+The Sink Shall prevent continual system or Port cycling if over temperature protection continues to engage after 
+initially resuming either USB Default Operation or Re-negotiation. Latching off the Port or system is an acceptable 
+response to recurring over temperature.
+7.2.9.4
+  Over Current Protection
+Sinks that operate with a Programmable Power Supply Shall implement their own internal current protection 
+mechanism to protect against internal VBUS current faults as well as erratic Source current regulation. The Sink 
+Shall never draw higher current than the Maximum Current value in the PPS APDO.
+7.2.10
+  Fast Role Swap
+As described in Section 7.1.13, "Fast Role Swap" a Fast Role Swap limits the interruption of VBUS power to a bus 
+powered accessory connected to a Hub DFP that has a UFP Attached to a power source and a DRP Attached to a Host 
+Port that supports DRP. This configuration is shown in Figure 7.16, "VBUS Power during Fast Role Swap".
+The Host DRP, upon establishing an Explicit Contract, Shall query the Initial Source's Sink Capabilities to determine 
+whether the Initial Source supports Fast Role Swap, and what level of current it requires. If the Sink_Capabilities 
+Message received from the Initial Source has at least one of the Fast Role Swap required USB Type-C Current bits 
+set, and the Host DRP is able to source the requested current at 5V, the Host DRP May arm itself for Fast Role Swap. 
+If the Host DRP has not queried the Sink Capabilities from the Initial Source, or if the Sink_Capabilities Message 
+reports no Fast Role Swap support or a current that is beyond what the Host DRP is able or willing to source in the 
+event of a Fast Role Swap, the Host DRP Shall Not arm itself for Fast Role Swap and Shall Ignore any Fast Role Swap 
+Requests that are detected.
+When the Host DRP that supports Fast Role Swap detects the FFast Role Swap Request, the Host DRP Shall stop 
+sinking current and Shall be ready and able to source vSafe5V if the residual VBUS voltage level at the Host DRP 
+connector is greater than vSafe5V. When the residual VBUS voltage level at the Host DRP connector discharges 
+below vSafe5V(min) the Host DRP as the New Source Shall supply vSafe5V to the Hub DRP within tSrcFRSwap. The 
+Host DRP Shall Not enable VBUS discharge circuitry when changing Power Roles from Initial Sink to New Source.
+The New Source Shall supply vSafe5V at USB Type-C Current (see [USB Type-C 2.4]) at the value Advertised in the 
+Fast Role Swap required USB Type-C Current field (see Section 6.4.1.3.1.6, "Fast Role Swap USB Type-C Current"). 
+All Source requirements Shall apply to the New Source after the Fast Role Swap is complete The Fast Role Swap 
+response of the Hub DRP is described in Section 7.1.13, "Fast Role Swap" since the Hub DRP is operating as the Initial 
+Source prior to the Fast Role Swap.
+After the Host DRP is providing VBUS power to the Hub DRP, a PS_RDY Message Shall be sent to the Hub DRP as 
+defined by the Fast Role Swap Request and the AMS detailed in Section 7.3.4, "Transitions Caused by Fast Role Swap".

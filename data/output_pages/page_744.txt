@@ -1,0 +1,25 @@
+Page 744
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+14
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+15
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+16
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+17
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Firmware_Update_Response Message was successfully 
+sent.
+The firmware update exchange is complete.
+Table 8.127  Steps for a Sink requesting a firmware update exchange with a Source Sequence
+Step
+Sink Port
+Source Port

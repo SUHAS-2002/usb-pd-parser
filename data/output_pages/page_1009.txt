@@ -1,0 +1,64 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1009
+
+The Max Voltage offered by an EPR Source Shall Not exceed 48V.
+Table 10.12  EPR Source Capabilities based on the Port Maximum PDP and using an EPR Capable Cable
+Port 
+Maximum 
+PDP (W)
+SPR Fixed and AVS
+28V Fixed
+36V 
+Fixed3
+48V Fixed 
+EPR AVS3, 4
+100 < x ≤ 140
+Required per Table 10.2, "SPR 
+Normative Voltages and Minimum 
+Currents" (or Table 10.3, "SPR Source 
+Capabilities When Port Present PDP is 
+less than Port Maximum PDP" when 
+applicable)
+(PDP/28)A2
+N/A1
+N/A1
+(15V – PDP/5A):
+
+5A
+(>PDP/5A – 28V):
+
+(PDP/AVS voltage) A
+140 < x ≤ 180
+5A
+(PDP/
+36)A2
+N/A1
+(15V – PDP/5A):
+
+5A
+(>PDP/5A – 36V):
+
+(PDP/AVS voltage) A
+180 < x ≤ 240
+5A
+5A
+(PDP/48)A2
+(15V – PDP/5A):
+
+5A
+(>PDP/5A – 48V):
+
+(PDP/AVS voltage) A
+1)
+EPR Sources are disallowed from offering Fixed Supply voltages that are above the defined voltages for a given PDP, e.g., 36V is 
+disallowed for any PDP of 140W or lower.
+2)
+The Fixed PDOs Maximum Current field Shall Advertise either RoundDown (PDP/voltage) or RoundUp (PDP/voltage) to the 
+nearest 10mA.
+3)
+EPR Sources Shall reject any request for more than the Advertised PDP, i.e., when output voltage and operating current requested 
+in the Sink RDO is outside of the defined AVS voltage and current range represented by the Advertised PDP, the RDO will be rejected.
+4)
+The current available for a given AVS voltage is as indicated in this column. The current defined here is describing the top edge of 
+the Valid Operating Region as illustrated in Figure 10.6, "Valid EPR AVS Operating Region". The AVS APDO does not have a 
+Maximum Current field, so the maximum current has to be calculated from the PDP.

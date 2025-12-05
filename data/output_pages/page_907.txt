@@ -1,0 +1,57 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 907
+8.3.3.19.6.1
+  PE_FRS_SNK_SRC_Start_AMS State
+The Policy Engine Shall transition to the PE_FRS_SNK_SRC_Start_AMS state from any other state provided there is 
+an Explicit Contract in place when:
+
+The Sink Capabilities received from the Initial Source by the Policy Engine has at least one of the Fast 
+Role Swap bits set.
+
+The system has sufficient reserve power to provide the requested current to the Initial Source, as 
+requested in the Fast Role Swap bits in the Sink Capabilities, and is willing to dedicate it to the Port
+
+The Device Policy Manager indicates that a Fast Role Swap signal has been detected on the CC wire.
+On entry to the PE_FRS_SNK_SRC_Start_AMS state the Policy Engine Shall notify the Protocol Layer that the first 
+Message in an AMS will follow.
+The Policy Engine Shall transition to the PE_FRS_SNK_SRC_Send_Swap state when:
+
+The Protocol Layer has been notified.
+8.3.3.19.6.2
+  PE_FRS_SNK_SRC_Send_Swap State
+On entry to the PE_FRS_SNK_SRC_Send_Swap state the Policy Engine Shall request the Protocol Layer to send an 
+FR_Swap Message and Shall initialize and run the SenderResponseTimer.
+The Policy Engine Shall transition to the PE_FRS_SNK_SRC_Transition_to_off state when:
+
+An Accept Message is received.
+The Policy Engine Shall transition to the ErrorRecovery state when:
+
+The SenderResponseTimer times out or
+
+The FR_Swap Message is not sent after retries (a GoodCRC Message has not been received). A Soft Reset 
+Shall Not be initiated in this case.
+8.3.3.19.6.3
+  PE_FRS_SNK_SRC_Transition_to_off State
+On entry to the PE_FRS_SNK_SRC_Transition_to_off state the Policy Engine Shall initialize and run the 
+PSSourceOffTimer and then request the Device Policy Manager to turn off the Sink.
+The Policy Engine Shall transition to the ErrorRecovery state when:
+
+The PSSourceOffTimer times out.
+The Policy Engine Shall transition to the PE_FRS_SNK_SRC_VBUS_Applied state when:
+
+A PS_RDY Message is received.
+8.3.3.19.6.4
+  PE_FRS_SNK_SRC_VBUS_Applied State
+On entry to the PE_FRS_SNK_SRC_VBUS_Applied state the Policy Engine waits for a notification from the Device 
+Policy Manager that the local power source has applied vSafe5V to VBUS (see Section 5.8.6.3, "Fast Role Swap 
+Detection").
+Note:
+This could have already been applied prior to entering this state or could be applied while waiting in this 
+state.
+The Policy Engine Shall transition to the PE_FRS_SNK_SRC_Assert_Rp state when:
+
+The Device Policy Manager indicates that vSafe5V is being applied.
+8.3.3.19.6.5
+  PE_FRS_SNK_SRC_Assert_Rp State
+On entry to the PE_FRS_SNK_SRC_Assert_Rp state the Policy Engine Shall request the Device Policy Manager to 
+change the resistor asserted on the CC wire from Rd to Rp.

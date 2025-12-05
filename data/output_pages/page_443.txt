@@ -1,0 +1,68 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 443
+8.3.2.1.3.22
+  AMS: Firmware Update
+Table 8.26  AMS: Firmware Update
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+Source requests 
+firmware update 
+exchange with Sink
+1.
+Firmware_Update_Request 
+Message
+Started by 
+Source
+Section 8.3.2.13.1
+Section 8.3.3.18.1,
+Section 8.3.3.18.2,
+Section 8.3.3.18.3
+Sink requests 
+firmware update 
+exchange with 
+Source
+1.
+Firmware_Update_Request 
+Message
+Started by Sink Section 8.3.2.13.2
+VCONN Source 
+requests firmware 
+update exchange 
+with Cable Plug
+1.
+Firmware_Update_Request 
+Message
+Started by 
+VCONN Source
+Section 8.3.2.13.3
+Source responds to 
+firmware update 
+exchange with Sink
+1.
+Firmware_Update_Response 
+Message
+Started by 
+Source
+Section 8.3.2.13.1
+Sink responds to 
+firmware update 
+exchange with 
+Source
+1.
+Firmware_Update_Response 
+Message
+Started by Sink Section 8.3.2.13.2
+VCONN Source 
+responds to 
+firmware update 
+exchange with Cable 
+Plug
+1.
+Firmware_Update_Response 
+Message
+Started by 
+VCONN Source
+Section 8.3.2.13.3

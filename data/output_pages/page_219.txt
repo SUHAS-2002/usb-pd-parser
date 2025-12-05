@@ -1,0 +1,57 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 219
+cycle defined as Peak Current1, Peak Current2 and Peak Current3 that the Source supports. A Source May offer 
+no Peak Current capability. A Source Shall populate unused Peak Current bit fields with zero.
+The Bit Fields within Peak Current1, Peak Current2 and Peak Current3 contain the following subfields:
+
+Percentage Overload
+
+Shall be the maximum peak current reported in 10% increments as a percentage of the Negotiated 
+operating current (IoC) offered by the Source. Values higher than 25 (11001b) are clipped to 250%.
+
+Overload Period
+
+Shall be the minimum rolling average time window in 20ms increments, where a value of 20ms is 
+recommended.
+
+Duty Cycle
+
+Shall be the maximum percentage of overload period reported in 5% increments. The values 
+Should be 5%, 10% and 50% for PeakCurrent1, PeakCurrent2, and PeakCurrent3, respectively.
+
+VBUS Droop
+
+Shall be set to one to indicate there is an additional 5% voltage droop on VBUS when the overload 
+conditions occur as defined by vSrcPeak. However, it is recommended that the Source Should pro-
+vide VBUS in the range of vSrcNew when overload conditions occur and set this bit to zero.
+6.5.1.11
+  Touch Temp Field
+The Touch Temp field Shall report the IEC standard used to determine the surface temperature of the Source's 
+enclosure. Safety limits for the Source's touch temperature are set in applicable product safety standards (e.g., [IEC 
+60950-1] or [IEC 62368-1]). The Source May report when its touch temperature performance conforms to the TS1 
+or TS2 limits described in [IEC 62368-1].
+6.5.1.12
+  Source Inputs Field
+The Source Inputs field Shall identify the possible inputs that provide power to the Source:
+
+When bit 0 is set, the Source can be sourced by an external power supply.
+
+When bits 0 and 1 are set, the Source can be sourced by an external power supply which is assumed to 
+be effectively "infinite" i.e., it won't run down over time.
+
+When bit 2 is set the Source can be sourced by an internal Battery.
+Note:
+Some Sources are only powered by a Battery (e.g., an automobile) rather than the more common AC 
+Supply. 
+Note:
+Bit 2 May be set independently of bits 0 and 1.
+6.5.1.13
+  Number of Batteries/Battery Slots Field
+The Number of Batteries/Battery Slots field Shall report the number of Fixed Batteries and Hot Swappable 
+Battery Slots the Source supports. This field Shall independently report the number of Battery Slots and the 
+number of Fixed Batteries.
+A Source Shall have no more than 4 Fixed Batteries and no more than 4 Battery Slots. 
+Fixed Batteries Shall be numbered consecutively from 0 to 3. The number assigned to a given Fixed Battery Shall 
+Not change between Attach and Detach. 
+Battery Slots Shall be numbered consecutively from 4 to 7. The number assigned to a given Battery Slot Shall Not 
+change between Attach and Detach.

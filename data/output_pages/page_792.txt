@@ -1,0 +1,44 @@
+Page 792
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 8.117 BIST Test Data Test
+: Protocol
+1: Send BIST(Test Data)
+: PHY
+: PHY
+: Protocol
+2: BIST(Test Data)
+3: BIST(Test Data) + CRC
+4: BIST(Test Data)
+Start CRCReceiveTimer
+5: BIST(Test Data) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: BIST(Test Data) sent
+: Policy Engine
+: Policy Engine
+Go to BIST Test Data mode
+Tester
+UUT
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Check MessageID against 
+local copy
+Store copy of MessageID
+End of Test (Hard Reset)
+Enter BIST Test Data mode
+10: Send BIST(Test Data)
+11: BIST(Test Data)
+12: BIST(Test Data) + CRC
+13: BIST(Test Data)
+Start CRCReceiveTimer
+14: BIST(Test Data) received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: BIST(Test Data) sent
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Check MessageID against 
+local copy
+Store copy of MessageID

@@ -1,0 +1,45 @@
+Page 318
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 7.6 SPR PPS Programmable Voltage and Current Limit
+7.1.4.2.3
+  SPR PPS Constant Power Mode
+In Constant Power mode (when the PPS Power Limited bit is set) the Source May supply power that exceeds the 
+Source's PDP Rating. Sinks May limit their Operating Current request in the RDO and Shall meet the requirements 
+of Section 7.2.9, "Robust Sink Operation".
+The tolerances along the Constant Power Curve Shall Not extend into the Guaranteed Capability Area of Figure 7.7, 
+"SPR PPS Constant Power".
+Current
+Voltage
+PPS APDO
+Min Voltage (max)
+PPS APDO
+Max Voltage
+iPpsCLMin
+PPS APDO 
+Max Current
+vPpsNew
+PPS RDO
+Operating Current
+PPS RDO
+Output Voltage
+Programmable 
+Voltage Only 
+Region
+Programmable Voltage & 
+Programmable Current Limit Region
+Valid Current Limit Response
+Invalid Current Limit Response
+iPpsCLNew
+a
+Current Limit Flag set
+Current Limit Flag cleared
+b
+c
+c
+c
+Source Disconnect Region
+vPpsShutdown (min)
+Point a represents entry into the transition region between Constant Voltage mode and Current Limit mode.
+Point b represents exit from the transition region between Constant Voltage mode and Current Limit mode.
+Point c represents the exit from the iPpsCLNew region as the voltage drops below the PPS APDO Min Voltage.
+The Source May disconnect at any point inside the tolerance range of the minimum voltage defined in the PPS APDO.

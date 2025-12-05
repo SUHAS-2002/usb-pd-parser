@@ -1,0 +1,46 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 819
+8.3.2.17.2
+  VDEM
+Figure 8.126, "VDEM Message Sequence" shows an example sequence of an VDEM transaction between a DFP and 
+UFP. The figure below shows the Messages as they flow across the bus after UFP Enters into Modal Operation.
+Figure 8.126 VDEM Message Sequence
+: Protocol
+: DFP Policy Engine
+: PHY
+: PHY
+: Protocol
+: UFP Policy Engine
+New Mode Entered
+20 : Send VDEM
+Start CRCReceive Timer
+21 : VDEM
+22 : VDEM + CRC
+23 : VDEM
+Check MessageID against local copy 
+Store Copy of MessageID
+23 : VDEM Received
+Evaluate VDEM 
+Reply with the application specific 
+response which can be again a VDEM 
+Start CRCReceive Timer
+Check and Increment MessageIDCounter
+Stop CRCReceiveTimer
+10: Send VDEM
+11:  VDEM
+18:  VDEM Sent
+17: GoodCRC
+Check MessageID against local copy 
+Store Copy of MessageID
+12 : VDEM + CRC
+16: GoodCRC + CRC
+11:  VDEM
+15: GoodCRC
+14:  VDEM Received
+Process VDEM as required
+24 : GoodCRC
+25 : GoodCRC + CRC
+26 : GoodCRC
+Check and Increment MessageIDCounter
+Stop CRCReceiveTimer
+27 : VDEM Sent

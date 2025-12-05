@@ -1,0 +1,82 @@
+Page 820
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 8.153, "Steps for VDEM Message Sequence" below provides a detailed explanation of what happens at each 
+labeled step in Figure 8.126, "VDEM Message Sequence" above.
+Table 8.153  Steps for VDEM Message Sequence
+Step
+DFP
+UFP
+1
+The DFP has an Explicit Contract and has entered an 
+Active Mode with the UFP. The Policy Engine directs 
+the Protocol Layer to send a Vendor_Defined_Extended 
+Message.
+The UFP has an Explicit Contract and has entered an 
+Active Mode with the UFP
+2
+Protocol Layer creates the Vendor_Defined_Extended 
+Message and passes to PHY Layer.
+3
+PHY Layer appends CRC and sends the 
+Vendor_Defined_Extended Message. Starts 
+CRCReceiveTimer.
+PHY Layer receives the Vendor_Defined_Extended 
+Message and checks the CRC to verify the Message.
+4
+PHY Layer removes the CRC and forwards the 
+Vendor_Defined_Extended Message to the Protocol 
+Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the 
+Vendor_Defined_Extended Message information to the 
+Policy Engine that consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY LayerPHY Layer receives the GoodCRC Message 
+and checks the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Vendor_Defined_Extended Message was successfully 
+sent.
+10
+In this example the Vendor protocol requires a 
+response. The Policy Engine tells the Protocol Layer to 
+form a Vendor_Defined_Extended Message.
+11
+Protocol Layer creates the Vendor_Defined_Extended 
+Message and passes to PHY Layer.
+12
+PHY Layer receives the Vendor_Defined_Extended 
+Message and compares the CRC it calculated with the 
+one sent to verify the Message.
+PHY Layer appends a CRC and sends the 
+Vendor_Defined_Extended Message. Starts 
+CRCReceiveTimer.
+13
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the 
+Vendor_Defined_Extended Message information to the 
+Policy Engine that consumes it.
+14
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+15
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.

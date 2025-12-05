@@ -1,0 +1,66 @@
+Page 86
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.6.1.2.4
+  Start of Packet Sequence Prime Debug (SOP'_Debug)
+The SOP’_Debug ordered set is defined as the following sequence of K-codes: Sync-1, RST-2, RST-2, Sync-3 (see 
+Table 5.8, "SOP’_Debug Ordered Set"). The usage of this Ordered Set is presently undefined.
+5.6.1.2.5
+  Start of Packet Sequence Double Prime Debug (SOP''_Debug)
+The SOP’’_Debug ordered set is defined as the following sequence of K-codes: Sync-1, RST-2, Sync-3, Sync-2 (see 
+Table 5.9, "SOP’’_Debug Ordered Set"). The usage of this Ordered Set is presently undefined.
+5.6.1.3
+  Packet Payload
+The Packet data is delivered from the Protocol Layer (see Section 6.2, "Messages") and Shall be encoded with the 
+hex data codes from Table 5.1, "4b5b Symbol Encoding".
+5.6.1.4
+  CRC
+The CRC Shall be inserted just after the Payload. It is described in Section 5.6.2, "CRC".
+5.6.1.5
+  End of Packet (EOP)
+The end of Packet marker Shall be a single EOP K-code as defined in Figure 5.1, "Interpretation of ordered sets". This 
+Shall mark the end of the CRC. After the EOP, the CRC-residual Shall be checked. If the CRC is not good, the whole 
+transmission Shall be Discarded, if it is good, the Packet Shall be delivered to the Protocol Layer.
+Note:
+An EOP May be used to prematurely terminate a Packet e.g., before sending Hard Reset Signaling.
+5.6.2
+  CRC
+The Message Header and data Shall be protected by a 32-bit CRC. 
+
+CRC-32 protects the data integrity of the data Payload. CRC-32 is defined as follows: 
+
+The CRC-32 polynomial Shall be = 04C1_1DB7h. 
+
+The CRC-32 Initial value Shall be = FFFF_FFFFh. 
+
+CRC-32 Shall be calculated for all bytes of the Payload not inclusive of any Packet framing symbols (i.e., 
+excludes the Preamble, SOP*, EOP).
+
+CRC-32 calculation Shall begin at byte 0, bit 0 and continue to bit 7 of each of the bytes of the Packet.
+
+The remainder of CRC-32 Shall be complemented.
+
+The residual of CRC-32 Shall be C704 DD7Bh.
+Table 5.8  SOP’_Debug Ordered Set
+K-Code Number
+K-Code in Code 
+Table
+1
+Sync-1
+2
+RST-2
+3
+RST-2
+4
+Sync-3
+Table 5.9  SOP’’_Debug Ordered Set
+K-Code Number
+K-Code in Code 
+Table
+1
+Sync-1
+2
+RST-2
+3
+Sync-3
+4
+Sync-2

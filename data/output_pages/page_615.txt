@@ -1,0 +1,50 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 615
+8.3.2.10.2.3
+  VCONN Source Swap (Wait)
+Figure 8.57, "VCONN Source Swap with Wait" shows an example where the Port requests a VCONN Swap which is 
+delayed with a wait. During the process the Port Partners, keep their Power Role as Source or Sink, maintain their 
+operation as either a Source or a Sink (power remains constant) and don't exchange the VCONN Source.
+Figure 8.57 VCONN Source Swap with Wait
+: Protocol
+1: Send VCONN_Swap
+: PHY
+: PHY
+: Protocol
+2:VCONN_Swap
+3: VCONN_Swap + CRC
+4: VCONN_Swap
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: VCONN_Swap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:VCONN_Swap sent
+Start SenderResponseTimer
+10: Send Wait
+11: Wait
+12: Wait + CRC
+13: Wait
+Check MessageID against local copy
+Store copy of MessageID
+14: Wait received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Wait sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Evaluate VCONN_Swap 
+request
+: Policy Engine
+: Policy Engine
+Initially VCONN off
+Initially VCONN Source Port
+VCONN Source
+VCONN Off
+Stop SenderResponseTimer

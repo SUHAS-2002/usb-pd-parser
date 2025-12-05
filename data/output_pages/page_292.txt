@@ -1,0 +1,14 @@
+Page 292
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.12.2.2.3.2
+  PRL_Tx_Snk_Pending State
+In the PRL_Tx_Snk_Pending state the Protocol Layer has the first Message in a Sink initiated AMS ready to send and 
+is waiting for Rp to transition to SinkTxOK before sending the Message.
+The Protocol Layer Shall transition to the PRL_Tx_Construct_Message state when:
+
+A Message is Pending that is not a Soft_Reset Message and
+
+Rp is set to SinkTxOK.
+The Protocol Layer Shall transition to the PRL_Tx_Layer_Reset_for_Transmit state when:
+
+A Soft_Reset Message is pending.

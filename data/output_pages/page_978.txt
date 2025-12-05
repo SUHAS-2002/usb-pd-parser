@@ -1,0 +1,38 @@
+Page 978
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+In a USB based system, policy is managed by the host and communication of system level policy information is via 
+standard USB data line communication. This is a separate mechanism to the USB Power Delivery VBUS protocol 
+which is used to manage Local Policy. When USB Communication is used, status information and control requests 
+are passed directly between the System Policy Manager (SPM) on the host and the Provider or Consumer. See Figure 
+9.3, "Use of SPM in the PD System".
+Figure 9.3 Use of SPM in the PD System
+Status information comes from a Provider or Consumer to the SPM so it can better manage the resources on the host 
+and provide feedback to the end user.
+Real systems will be a mixture of devices which in terms of power management support might have implemented 
+PD, [USB 2.0], [USB 3.2], [USB4], [USB Type-C 2.4] or [USBBC 1.2] or they might even just be non-compliant 
+“power sucking devices”. The level of communication of system status to the SPM will therefore not necessarily be 
+comprehensive. The aim of the status mechanisms described here is to provide a mechanism whereby each 
+connected entity in the system provides as much information as possible on the status of itself.
+Information described in this section that is communicated to the SPM is as follows:
+
+Versions of USB Type-C®, PD and BC supported.
+
+Capabilities as a Provider/Consumer.
+
+Current operational state of each Port e.g. Standard, USB Type-C Current, BC, PD and Negotiated power 
+level.
+
+Status of AC or Battery Power for each PDUSB Device in the system.
+The SPM can Negotiate with Providers or Consumers in the system in order to request a different Local Policy, or to 
+request the amount of power to be delivered by the Provider to the Consumer. Any change in Local Policy could 
+Device
+Device
+Device
+Host
+(SPM)
+AC/Battery
+AC/Battery
+Power
+PD Communication
+USB Communication
+Hub

@@ -1,0 +1,53 @@
+Page 34
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+1
+ Introduction
+USB has evolved from a data interface capable of supplying limited power to a primary provider of power with a 
+data interface. Today many devices charge or get their power from USB Ports contained in laptops, cars, aircraft or 
+even wall sockets. USB has become a ubiquitous power socket for many small devices such as cell phones and other 
+hand-held devices. Users need USB to fulfill their requirements not only in terms of data but also to provide power 
+to, or charge, their devices simply, often without the need to load a driver, in order to carry out “traditional” USB 
+functions.
+There are, however, still many devices which either require an additional power connection to the wall, or exceed 
+the USB default current in order to operate. Increasingly, international regulations require better energy 
+management due to ecological and practical concerns relating to the availability of power. Regulations limit the 
+amount of power available from the wall which has led to a pressing need to optimize power usage. The USB Power 
+Delivery Specification has the potential to minimize waste as it becomes a standard for charging devices that are 
+not satisfied by [USBBC 1.2] or [USB Type-C 2.4].
+Wider usage of wireless solutions is an attempt to remove data cabling but the need for “tethered” charging 
+remains. In addition, industrial design requirements drive wired connectivity to do much more over the same 
+connector.
+USB Power Delivery is designed to enable the maximum functionality of USB by providing more flexible power 
+delivery along with data over a single cable. Its aim is to operate with and build on the existing USB ecosystem; 
+increasing power levels from existing USB standards, for example [USBBC 1.2], enabling new higher power use 
+cases such as USB powered Hard Disk Drives (HDDs), laptops and monitors.
+With USB Power Delivery the power direction is no longer fixed. This enables the product with the power (USB 
+Host or Peripheral) to provide the power. For example, a display with a supply from the wall can power, or charge, 
+a laptop. Alternatively, USB Chargers are able to supply power to laptops and other Battery powered devices 
+through their, traditional power providing, USB Ports.
+USB Power Delivery enables Hubs (including Hubs embedded in other devices such as docks or monitors) to 
+become the means to optimize power management across multiple peripherals by allowing each device to take 
+only the power it requires, and to get more power when required for a given application. Optionally the Hubs can 
+communicate with the PC to enable even more intelligent and flexible management of power either automatically 
+or with some level of user intervention.
+USB Power Delivery allows low power cases such as headsets to Negotiate for only the power they require. This 
+provides a simple solution that enables USB devices to operate at their optimal power levels. 
+The Power Delivery Specification, in addition to providing mechanisms to Negotiate power also can be used as a 
+side-band channel for standard and vendor defined messaging. The specification enables discovery of cable 
+Capabilities such as supported speeds and current levels. Power Delivery enables alternative modes of operation 
+by providing the mechanisms to discover, enter and exit Modes such as EPR Mode, USB4® Mode or Alternate 
+Modes.
+1.1
+  Overview
+This specification defines how USB Devices can Negotiate for more current and/or higher or lower voltages over 
+the USB cable (using the USB Type-C® CC wire as the communications channel) than are defined in the [USB 2.0], 
+[USB 3.2], [USB4], [USB Type-C 2.4] or [USBBC 1.2] specifications. It allows Devices with greater power 
+requirements than can be met with today's specification to get the power they require to operate from VBUS and 
+Negotiate with external power sources (e.g., Chargers).
+In addition, it allows a Source and Sink to swap Power Roles such that a USB Device could supply power to the USB 
+Host. For example, a display could supply power to a laptop to operate or charge its Battery. This specification also 
+adds a mechanism to swap the Data Roles such that the upstream facing Port becomes the downstream facing Port 
+and vice versa. It also enables a swap of the end supplying VCONN to a powered cable.
+The USB Power Delivery Specification is guided by the following principles:
+
+Works seamlessly with legacy USB Devices.

@@ -1,0 +1,12 @@
+Page 950
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Policy Engine Shall transition to the PE_CBL_Ready state when:
+
+The Structured VDM Enter Mode ACK Command response has been sent.
+8.3.3.25.4.1.3
+  PE_CBL_Mode_Entry_NAK State
+On entry to the PE_CBL_Mode_Entry_NAK state the Policy Engine Shall send a Structured VDM Enter Mode NAK 
+Command response as indicated by the Device Policy Manager.
+The Policy Engine Shall transition to the PE_CBL_Ready state when:
+
+The Structured VDM Enter Mode NAK Command response has been sent.

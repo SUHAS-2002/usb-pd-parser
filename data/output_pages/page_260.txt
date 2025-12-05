@@ -1,0 +1,55 @@
+Page 260
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+SourcePPSCommTimer Shall be re-initialized and restarted when, after receiving any Message that causes the 
+Source to enter the PE_SRC_Ready state, the last bit of the corresponding GoodCRC Message EOP is transmitted by 
+the PHY Layer.
+The Source Shall stop the SourcePPSCommTimer when:
+
+After receiving any Message that causes the Source to leave the PE_SRC_Ready state, the last bit of the 
+of the corresponding GoodCRC Message EOP is sent by the PHY Layer, or
+
+The last bit of any Signaling is received by the PHY Layer from the Sink by the Source that causes the 
+Source to leave the PE_SRC_Ready state.
+When the SourcePPSCommTimer times out the Source Shall issue Hard Reset Signaling.
+6.6.20
+  tEnterUSB
+The DFP Shall send the Enter_USB Message within tEnterUSB of either:
+
+The last bit of the GoodCRC acknowledging the Data_Reset_Complete Message in response to the 
+Data_Reset Message or
+
+A PD Connection, specifically the last bit of the GoodCRC acknowledging the Source_Capabilities Mes-
+sage after the initial entry into the PE_SRC_Send_Capabilities state or 
+
+The last bit of the GoodCRC acknowledging the Accept Message in response to the DR_Swap Message
+Failure by the DFP to meet this timeout parameter can result in the ports not transitioning into [USB4] operation. 
+Any AMS initiated by the UFP prior to receiving the Enter_USB Message will delay reception of the Enter_USB 
+Message and [USB4] operation, therefore a USB4® -capable UFP Should Not initiate any AMS until the DFP has been 
+given time to send the Enter_USB Message.
+6.6.21
+  EPR Timers
+6.6.21.1
+  SinkEPREnterTimer Timer
+The SinkEPREnterTimer is used to ensure the EPR Mode entry process completes within tEnterEPR. The Sink 
+Shall start the timer when it sees the last bit of the GoodCRC Message in response to the EPR_Mode Message with 
+the Action field set to 1 (Enter). The Sink Shall stop the timer when the last bit of the corresponding GoodCRC 
+Message EOP, corresponding to the received EPR_Mode Message with the Action field set to 3 (Enter Succeeded), 
+has been transmitted by the PHY Layer. If the timer expires the Sink Shall send a Soft_Reset Message.
+6.6.21.2
+  SinkEPRKeepAlive Timer
+The SinkEPRKeepAliveTimer Shall be used by the Sink's Policy Engine to ensure that communication between the 
+Sink and Source occurs within a bounded time of tSinkEPRKeepAlive. The Sink Shall initialize and run this timer 
+upon entry into the PE_SNK_Ready State when in EPR Mode and Shall stop it upon exit from the PE_SNK_Ready 
+when in EPR Mode.
+While operating in EPR Mode, the Sink Shall stop the SinkEPRKeepAliveTimer timer whenever:
+
+The last bit of the GoodCRC Message EOP, in response any Message from the Source, is transmitted by 
+the PHY Layer.
+
+The PHY Layer receives the last bit of the GoodCRC Message EOP in response to any Message sent to the 
+Source.
+If the timer expires the Sink Shall send an EPR_KeepAlive Message.
+6.6.21.3
+  SourceEPRKeepAlive Timer
+The SourceEPRKeepAliveTimer Shall be used by the Source's Policy Engine to ensure that communication 
+between the Sink and Source occurs within a bounded time of tSourceEPRKeepAlive. The Source Shall initialize 

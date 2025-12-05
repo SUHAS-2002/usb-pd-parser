@@ -1,0 +1,19 @@
+Page 236
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.10.3
+  Real Time Flags Field
+Real Time flags provide a real-time indication of the Source's operating state:
+
+The PTF (Present Temperature Flag) Shall provide a real-time indication of the Source's internal 
+thermal status. If the PTF is not supported, it will be set to zero: 
+
+Normal indicates that the Source is operating within its normal thermal envelope. 
+
+Warning indicates that the Source is over-heating but is not in imminent danger of shutting down.
+
+Over Temperature indicates that the Source is over heated and will shut down soon or has already 
+shutdown and has sent the OTP Event flag in an Alert Message.
+
+The OMF (Operating Mode Flag) Shall provide a real-time indication of the SPR PPS Source's operating 
+mode. When set, the Source is operating in Current Limit mode; when cleared it is operating Constant 
+Voltage mode. This bit Shall be set to zero when not in SPR PPS Mode.

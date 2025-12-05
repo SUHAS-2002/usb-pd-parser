@@ -1,0 +1,15 @@
+Page 642
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Sink_Capabilities Message was successfully sent.
+The Sink has informed the Source of its capabilities.
+Table 8.93  Steps for a Source getting Sink Capabilities Sequence
+Step
+Source Port
+Sink Port

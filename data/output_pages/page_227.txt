@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 227
+6.5.3
+  Get_Battery_Cap Message
+The Get_Battery_Cap (Get Battery Capabilities) Message is used to request the capability of a Battery present in its 
+Port Partner. The Port Shall respond by returning a Battery_Capabilities Message (see Section 6.5.5, 
+"Battery_Capabilities Message") containing a Battery Capabilities Data Block (BCDB) for the targeted Battery.
+The Get_Battery_Cap Message contains a 1-byte Get Battery Cap Data Block (GBCDB), whose format Shall be as 
+shown in Figure 6.40, "Get_Battery_Cap Message" and Table 6.57, "Get Battery Cap Data Block (GBCDB)". This block 
+defines for which Battery the request is being made.
+The Data Size field in the Get_Battery_Cap Message Shall be set to 1.
+Figure 6.40 Get_Battery_Cap Message
+6.5.4
+  Get_Battery_Status Message
+The Get_Battery_Status (Get Battery Status) Message is used to request the status of a Battery present in its Port 
+Partner. The Port Shall respond by returning a Battery_Status Message (see Section 6.4.5, "Battery_Status 
+Message") containing a Battery Status Data Object (BSDO) for the targeted Battery.
+The Get_Battery_Status Message contains a 1-byte Get Battery Status Data Block (GBSDB) whose format Shall be 
+as shown in Figure 6.41, "Get_Battery_Status Message" and Table 6.58, "Get Battery Status Data Block (GBSDB)". This 
+block contains details of the requested Battery. The Data Size field in the Get_Battery_Status Message Shall be set 
+to 1.
+Figure 6.41 Get_Battery_Status Message
+Table 6.57  Get Battery Cap Data Block (GBCDB)
+Offset
+Field
+Description
+0
+Battery Cap Ref
+Number of the Battery indexed from zero:
+
+Values 0…3 represent the Fixed Batteries.
+
+Values 4…7 represent the Hot Swappable Batteries.
+
+Values 8…255 are Reserved and Shall Not be used.
+Table 6.58  Get Battery Status Data Block (GBSDB)
+Offset
+Field
+Description
+0
+Battery Status Ref
+Number of the Battery indexed from zero:
+
+Values 0…3 represent the Fixed Batteries.
+
+Values 4…7 represent the Hot Swappable Batteries.
+
+Values 8…255 are Reserved and Shall Not be used.
+Extended Header
+Data Size = 1
+GBCDB
+Extended Header
+Data Size = 1
+GBSDB

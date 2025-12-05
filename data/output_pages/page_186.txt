@@ -1,0 +1,61 @@
+Page 186
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.2
+  Discover SVIDs
+The Discover SVIDs Command is used by an Initiator to determine the SVIDs for which a Responder has Modes. The 
+Discover SVIDs Command is used in conjunction with the Discover Modes Command in the Discovery Process to 
+determine which Modes a device supports. The list of SVIDs is always terminated with one or two 0x0000 SVIDs.
+The SVID in the Discover SVIDs Command Shall be set to the PD SID (see "Table 6.31, "SVID Values") by both the 
+Initiator and the Responder for this Command. 
+The Number of Data Objects field in the Message Header in the Discover SVIDs Command request Shall be set to 
+1 since the Discover SVIDs Command request Shall Not contain any VDOs. 
+The Discover SVIDs Command ACK sent back by the Responder Shall contain one or more SVIDs. The SVIDs are 
+returned 2 per VDO (see Table 6.45, "Discover SVIDs Responder VDO"). If there are an odd number of supported 
+SVIDs, the Discover SVIDs Command is returned ending with a SVID value of 0x0000 in the last part of the last VDO. 
+If there are an even number of supported SVIDs, the Discover SVIDs Command is returned ending with an 
+additional VDO containing two SVIDs with values of 0x0000. A Responder Shall only return SVIDs for which a 
+Discover Modes Command request for that SVID will return at least one Alternate Mode. 
+A Responder that does not support any SVIDs Shall return a NAK.
+The Number of Data Objects field in the Message Header in the Discover SVIDs Command NAK and BUSY 
+responses Shall be set to 1 since they Shall Not contain any VDOs.
+If the Responder supports 12 or more SVIDs then the Discover SVIDs Command Shall be executed multiple times 
+until a Discover SVIDs VDO is returned ending either with a SVID value of 0x0000 in the last part of the last VDO 
+or with a VDO containing two SVIDs with values of 0x0000. Each Discover SVID ACK Message, other than the one 
+containing the terminating 0x0000 SVID, Shall convey 12 SVIDs. The Responder Shall restart the list of SVIDs each 
+time a Discover Identity Command request is received from the Initiator.
+Note:
+Since a Cable Plug does not retry Messages if the GoodCRC Message from the Initiator becomes corrupted 
+the Cable Plug will consider the Discover SVIDs Command ACK unsent and will send the same list of 
+SVIDs again.
+Figure 6.18, "Example Discover SVIDs response with 3 SVIDs" shows an example response to the Discover SVIDs 
+Command request with two VDOs containing three SVIDs. Figure 6.19, "Example Discover SVIDs response with 4 
+SVIDs" shows an example response with two VDOs containing four SVIDs followed by an empty VDO to terminate 
+the response. Figure 6.20, "Example Discover SVIDs response with 12 SVIDs followed by an empty response" shows an 
+example response with six VDOs containing twelve SVIDs followed by an additional request that returns an empty 
+VDO indicating there are no more SVIDs to return.
+Figure 6.18 Example Discover SVIDs response with 3 SVIDs
+Table 6.45  Discover SVIDs Responder VDO
+Bit(s)
+Field
+Description
+B31…16
+SVID n
+16-bit unsigned integer, assigned by the USB-IF or 0x0000 if this is the 
+last VDO and the Responder supports an even number of SVIDs.
+B15…0
+SVID n+1
+16-bit unsigned integer, assigned by the USB-IF or 0x0000 if this is the 
+last VDO and the Responder supports an odd or even number of SVIDs.
+Header
+No. of Data Objects = 3
+VDM Header
+VDO 1
+SVID 0 
+(B31..16)
+SVID 1 
+(B15..0)
+VDO 2
+SVID 2 
+(B31..16)
+0x0000 
+(B15..0)

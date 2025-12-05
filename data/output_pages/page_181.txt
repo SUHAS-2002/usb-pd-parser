@@ -1,0 +1,99 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 181
+6.4.4.3.1.7.1
+  HW Version Field
+The HW Version field (B31…28) contains a HW version assigned by the VID owner.
+6.4.4.3.1.7.2
+  FW Version Field
+The Firmware Version field (B27…24) contains a FW version assigned by the VID owner.
+6.4.4.3.1.7.3
+  VDO Version Field
+The VDO Version field (B23…20) contains a VDO Version for this VDM Version number. This field indicates the 
+expected content for the Active Cable VDOs.
+6.4.4.3.1.7.4
+  Connector Type Field
+The USB Type-C plug to USB Type-C/Captive field (B19…18) Shall contain a value indicating whether the opposite 
+end from the USB Type-C plug is another USB Type-C plug (i.e., a detachable Standard USB Type-C Cable Assembly) 
+or is a Captive Cable Assembly.
+6.4.4.3.1.7.5
+  EPR Mode Capable
+The EPR Capable (Active Cable) is a Static bit which Shall only be set when the cable is specifically designed for 
+safe operation when carrying up to 48 volts at 5 amps.
+6.4.4.3.1.7.6
+  Cable Latency Field
+The Cable Latency field (B16…13) Shall contain a value corresponding to the signal latency through the cable 
+which can be used as an approximation for its length.
+B11
+U3 to U0 transition 
+mode
+
+0b: U3 to U0 direct
+
+1b: U3 to U0 through U3S
+B10
+Physical connection
+
+0b = Copper
+
+1b = Optical
+B9
+Active element
+
+0b = Active Re-driver
+
+1b = Active Re-timer
+B8
+USB4 Supported
+
+0b = [USB4] supported
+
+1b = [USB4]not supported
+B7…6
+USB 2.0 Hub Hops 
+Consumed
+Number of [USB 2.0] ‘hub hops’ cable consumes.
+Shall be set to zero if USB 2.0 not supported.
+B5
+USB 2.0 Supported
+
+0b = [USB 2.0] supported
+
+1b = [USB 2.0] not supported
+B4
+USB 3.2 Supported
+
+0b = [USB 3.2] SuperSpeed supported
+
+1b = [USB 3.2] SuperSpeed not supported
+B3
+USB Lanes Supported
+
+0b = One lane
+
+1b = Two lanes
+B2
+Optically Isolated 
+Active Cable
+
+0b = No
+
+1b = Yes
+B1
+USB4 Asymmetric Mode 
+Supported
+
+0b = No
+
+1b = Yes
+Shall be set to zero if asymmetry is not supported.
+B0
+USB Gen
+
+0b = Gen 1
+
+1b = Gen 2 or higher
+Note: See VDO1 USB Highest Speed for details of Gen supported.
+Table 6.43  Active Cable VDO2 (Continued)
+Bit(s)
+Field
+Description

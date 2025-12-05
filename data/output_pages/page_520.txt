@@ -1,0 +1,85 @@
+Page 520
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.5.3
+  DFP Initiated Data Reset where the UFP is the VCONN Source
+This is an example of a Data Reset operation where the DFP initiates a Data Reset and the UFP is the VCONN Source. 
+Figure 8.28, "DFP Initiated Data Reset where the UFP is the VCONN Source" shows the Messages as they flow across 
+the bus and within the devices to accomplish the Data Reset.
+Figure 8.28 DFP Initiated Data Reset where the UFP is the VCONN Source
+: Protocol
+1: Send Data_Reset
+: PHY
+: PHY
+: Protocol
+2: Data_Reset
+3: Data_Reset + CRC
+4: Data_Reset
+Start CRCReceiveTimer
+5: Data_Reset received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Data_Reset sent
+Start SenderResponseTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+14: Accept received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Accept sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+Data_Reset Complete, USB Connection Established
+DFP
+(Reset Initiator)
+UFP/VCONN Source 
+(Reset Responder)
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Inform DPM that Data_Reset 
+has been received
+Stop SenderResponseTimer
+Start VCONNDischargeTimer
+19: Send PS_RDY
+20: PS_RDY
+21: PS_RDY + CRC
+22: PS_RDY
+23: PS_RDY received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+27: PS_RDY sent
+Start CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Stop VCONNDischargeTimer
+Request DPM to perform a Data Reset
+Request DPM to turn off VCONN
+DPM indicates VCONN is off
+28: Send Data_Reset_Complete
+29: Data_Reset_Complete
+30: Data_Reset_Complete + CRC
+31: Data_Reset_Complete
+Start CRCReceiveTimer
+32: Data_Reset_Complete received
+33: GoodCRC
+34: GoodCRC + CRC
+35: GoodCRC
+36: Data_Reset_Complete sent
+Inform DPM that 
+Data_Reset_Complete has been sent
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Inform DPM that 
+Data_Reset_Complete has 
+been received
+DPM indicates that Data 
+Reset process is complete

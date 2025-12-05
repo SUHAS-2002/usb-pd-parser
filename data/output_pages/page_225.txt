@@ -1,0 +1,37 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 225
+6.5.2.1.7
+  Power state change
+The Power State Change field contains two status bytes; the New Power State and New Power State indicator status 
+bytes.
+6.5.2.1.7.1
+  New power state
+The New Power State status byte indicates a power state change to one of the specified power states. Any device 
+that supports the ACPI standard system power states Shall use the ACPI states. For devices that do not support the 
+ACPI power states, the following mapping Should be used:
+
+High power (on) state 
+-> S0
+
+Sleep state 
+-> S3
+
+Low power (off) state 
+-> S5 or G3
+6.5.2.1.7.2
+  New power state indicator
+The New Power State indicator status byte defines the host's desired indicator for the specified power state. This 
+indicator allows several possibilities for predefined behaviors that the host can specify to indicate its system 
+power state to the user via the downstream device. The New Power State indicator is a "best effort" indicator. If 
+the device cannot provide the requested indicator, then it provides the best indicator that it can. If a Breathing 
+indicator cannot be provided, then a Blinking indicator Should be provided. If a Blinking indicator cannot be 
+provided, then a constant on indicator Should be provided.
+New Power State indicators in decreasing precedence:
+
+Breathing
+
+Blinking
+
+Constant on
+
+No indicator

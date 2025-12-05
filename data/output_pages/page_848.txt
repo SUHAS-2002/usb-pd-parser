@@ -1,0 +1,54 @@
+Page 848
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+The SenderResponseTimer has timed out or
+
+A Protocol Error occurs.
+8.3.3.5.2.2
+  PE_UDR_Data_Reset_Received State
+The PE_UDR_Data_Reset_Received State Shall be entered from either the PE_SRC_Ready or PE_SNK_Ready State 
+when a Data_Reset Message is received.
+On entry to the PE_UDR_Data_Reset_Received State the Policy Engine Shall inform the Device Policy Manager and 
+then Shall send an Accept Message.
+On exit from the PE_UDR_Data_Reset_Received State the Policy Engine Shall initialize and run the 
+DataResetFailUFPTimer.
+The Policy Engine Shall transition to the PE_UDR_Turn_Off_VCONN State when:
+
+An Accept Message has been sent and
+
+The UFP is presently the VCONN Source.
+The Policy Engine Shall transition to the PE_UDR_Wait_For_Data_Reset_Complete State when:
+
+An Accept Message has been sent and
+
+The UFP is not presently the VCONN Source.
+The Policy Engine Shall transition to ErrorRecovery when:
+
+A Protocol Error occurs.
+8.3.3.5.2.3
+  PE_UDR_Turn_Off_VCONN State
+On entry to the PE_UDR_Turn_Off_VCONN State the Policy Engine Shall request the Device Policy Manager to turn off 
+VCONN.
+The Policy Engine Shall transition to the PE_UDR_Send_Ps_Rdy State when:
+
+The DPM indicates that VCONN has been turned off (VCONN below vRaReconnect see [USB Type-C 2.4]).
+The Policy Engine Shall transition to ErrorRecovery when:
+
+A Protocol Error occurs.
+8.3.3.5.2.4
+  PE_UDR_Send_Ps_Rdy State
+On entry to the PE_UDR_Send_Ps_Rdy State the Policy Engine Shall send a PS_RDY Message.
+The Policy Engine Shall transition to the PE_UDR_Wait_For_Data_Reset_Complete State when:
+
+The PS_RDY Message has been sent.
+The Policy Engine Shall transition to ErrorRecovery when:
+
+A Protocol Error occurs.
+8.3.3.5.2.5
+  PE_UDR_Wait_For_Data_Reset_Complete State
+On entry to the PE_UDR_Wait_For_Data_Reset_Complete State the Policy Engine Shall wait for the 
+Data_Reset_Complete Message.
+On exit from the PE_UDR_Wait_For_Data_Reset_Complete State the Policy Engine Shall stop the 
+DataResetFailUFPTimer.
+The Policy Engine Shall transition back to either the PE_SRC_Ready or PE_SNK_Ready State depending on the UFP's 
+Power Role when:

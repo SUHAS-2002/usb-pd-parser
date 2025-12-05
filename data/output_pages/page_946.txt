@@ -1,0 +1,54 @@
+Page 946
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.25.2.4
+  UFP/VCONN Source SOP'/SOP'' Soft Reset of a Cable Plug or VPD 
+State Diagram
+Figure 8.207, "UFP/VCONN Source Soft Reset of a Cable Plug or VPD State Diagram" below shows the state diagram 
+for the UFP Policy Engine in a VCONN Source when performing a Soft Reset of a Cable Plug or VPD on SOP’/SOP’’. The 
+following sections describe operation in each of the states.
+Figure 8.207 UFP/VCONN Source Soft Reset of a Cable Plug or VPD State Diagram
+8.3.3.25.2.4.1
+  PE_UFP_VCS_CBL_Send_Soft_Reset State
+The PE_UFP_VCS_CBL_Send_Soft_Reset state Shall be entered from any state when a Protocol Error is detected on 
+SOP’/SOP’’ by the Protocol Layer (see Section 6.8.1, "Soft Reset and Protocol Error") or when a Message has not been 
+sent after retries on SOP’/SOP’’ while communicating with a Cable Plug/VPD and when there was previous 
+communication with the Cable Plug that did not result in a Transmission Error or whenever the Device Policy 
+Manager directs a Soft Reset on SOP’/SOP’’.
+On entry to the PE_UFP_VCS_CBL_Send_Soft_Reset state the Policy Engine Shall request the SOP’/SOP’’ Protocol 
+Layer to perform a Soft Reset, then Shall send a Soft_Reset Message on SOP’/SOP’’ to the Cable Plug, and initialize 
+and run the SenderResponseTimer. 
+The Policy Engine Shall transition to either the PE_SRC_Ready or PE_SNK_Ready state, depending on the UFP VCONN 
+Source's Power Role, when:
+
+An Accept Message has been received on SOP’/SOP’’.
+The Policy Engine Shall transition to either the PE_SRC_Hard_Reset or PE_SNK_Hard_Reset state, depending on the 
+UFP VCONN Source's Power Role, when:
+
+A SenderResponseTimer timeout occurs
+
+Or the Protocol Layer indicates that a transmission error has occurred
+
+Or when a Protocol Error is detected on SOP’/SOP’’ by the Protocol Layer.
+PE_UFP_VCS_CBL_Send_Soft_Reset
+Actions on entry:
+Reset Protocol Layer
+Send Soft Reset Message on SOP’/SOP’’
+Initialize and run SenderResponseTimer
+Power = DefauIt/Implicit or Explicit Contract
+PD = Connected
+Message not sent after retries on SOP’/SOP’’ (no GoodCRC received)1  &
+Previously Cable Discovered | Protocol error detected on SOP’/SOP’’
+SenderResponseTimer
+Timeout |
+Transmission
+Error indication 
+from Protocol Layer | 
+Protocol Error
+Accept Message
+Received on SOP’/SOP’’
+PE_SRC_Ready or 
+PE_SNK_Ready (VCONN Source)
+PE_SRC_Hard_Reset or 
+PE_SNK_Hard_Reset
+1)
+Excludes the Soft_Reset Message itself.

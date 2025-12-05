@@ -1,0 +1,63 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 335
+7.2
+  Sink Requirements
+7.2.1
+  Behavioral Aspects
+A PDUSB Sink exhibits the following behaviors:
+
+Shall Not draw more than [USB Type-C 2.4] USB Type-C Current from VBUS while in a Default Contract 
+or Implicit Contract.
+
+Shall follow the requirements as specified in Section 7.1.5, "Response to Hard Resets" when Hard Reset 
+Signaling is received.
+
+Shall control VBUS in-rush current when increasing current consumption according to [USB 2.0] or 
+[USB 3.2] as appropriate.
+7.2.2
+  Sink Bulk Capacitance 
+The Sink bulk capacitance consists of C3 and C4 as shown in Figure 7.21, "Placement of Sink Bulk Capacitance". The 
+Ohmic Interconnect might consist of PCB traces for power distribution or power switching devices. The Ohmic 
+Interconnect is expected to be part of an input Over Voltage Protection (Sink OVP) circuit implemented by the Sink 
+as described in Section 7.2.9.2, "Input Over Voltage Protection" to protect against excessive VBUS input voltage. A 
+Sink Shall implement OVP. The Sink Shall Not rely on the Source output voltage limit for its input OVP. The 
+capacitance might be a single capacitor, a capacitor bank or distributed capacitance. An upper bound of 
+cSnkBulkPd Shall Not be exceeded so that the transient charging, or discharging, of the total bulk capacitance on 
+VBUS can be accounted for during voltage transitions.
+The Sink bulk capacitance that is within the cSnkBulk max or cSnkBulkPd max limits is allowed to change to 
+support a newly Negotiated power level. The capacitance can be changed when the Sink enters Sink Standby or 
+during a voltage transition or when the Sink begins to operate at the new power level. Changing the Sink bulk 
+capacitance Shall Not cause a transient current on VBUS that violates the present Contract. During a Power Role 
+Swap the Default Sink Shall transition to Swap Standby before operating as the New Source. Any change in bulk 
+capacitance required to complete the Power Role Swap Shall occur during Swap Standby.
+Figure 7.21 Placement of Sink Bulk Capacitance
+7.2.3
+  Sink Standby
+The Sink Shall transition to Sink Standby before a positive voltage transition of VBUS. During Sink Standby the Sink 
+Shall reduce the current drawn to iSnkStdby. This allows the Source to manage the voltage transition as well as 
+supply sufficient operating current to the Sink to maintain PD operation during the transition. The Sink Shall 
+complete this transition to Sink Standby within tSnkStdby after evaluating the Accept Message from the Source. The 
+transition when returning to Sink operation from Sink Standby Shall be completed within tSnkNewPower. The 
+iSnkStdby requirement Shall only apply if the Sink current draw is higher than this level.
+See Section 7.3, "Transitions" for details.
+GND
+SHIELD
+VBUS
+...
+Data
+Lines
+C3
+GND
+SHIELD
+VBUS
+...
+Data
+Lines
+SINK
+CABLE
+C4
+Load
+Sink Bulk Capacitance
+Ohmic  
+Interconnect
+OVP

@@ -1,0 +1,111 @@
+Page 106
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.8.5
+  BMC Transmitter Specifications
+The transmitter Shall meet the specifications defined in Table 5.18, "BMC Transmitter Normative Requirements".
+Table 5.18  BMC Transmitter Normative Requirements
+Name
+Description
+Min
+Nom
+Max Units
+Comment
+pBitRate
+Maximum difference between the 
+bit-rate during the part of the 
+Packet following the Preamble 
+and the reference bit-rate.
+0.25
+%
+The reference bit rate is the 
+average bit rate of the last 32 bits 
+of the Preamble.
+rFRSwapTx
+Fast Role Swap Request transmit 
+driver resistance (excluding cable 
+resistance)
+5
+Ω
+Maximum driver resistance of a 
+Fast Role Swap Request 
+transmitter. Assumes a worst case 
+cable resistance of 15Ω as defined 
+in [USB Type-C 2.4]. 
+Note: Based on this value the 
+maximum combined 
+driver and cable resistance 
+of a Fast Role Swap Request 
+transmitter is 20Ω.
+tEndDriveBMC
+Time to cease driving the line 
+after the end of the last bit of the 
+Frame.
+23
+µs
+Min value is limited by 
+tHoldLowBMC.
+tFall
+Fall Time
+300
+ns
+10% and 90% amplitude points, 
+minimum is under an unloaded 
+condition.
+tHoldLowBMC
+Time to cease driving the line 
+after the final high-to-low 
+transition.
+1
+µs
+Max value is limited by 
+tEndDriveBMC.
+tInterFrameGap
+Time from the end of last bit of a 
+Frame until the start of the first 
+bit of the next Preamble.
+25
+µs
+tFRSwapTx
+Fast Role Swap Request transmit 
+duration
+60
+120
+µs
+Fast Role Swap Request is 
+indicated from the Initial Source 
+to the Initial Sink by driving CC 
+low for this time.
+tRise
+Rise time
+300
+ns
+10% and 90% amplitude points, 
+minimum is under an unloaded 
+condition.
+tStartDrive
+Time before the start of the first 
+bit of the Preamble when the 
+transmitter Shall start driving 
+the line.
+-1
+1
+µs
+vSwing
+Voltage Swing
+1.05
+1.125
+1.2
+V
+Applies to both no load condition 
+and under the load condition 
+specified in Section 5.8.3, 
+"Transmitter Load Model".
+zDriver
+Transmitter output impedance
+33
+75
+Ω
+Source output impedance at the 
+Nyquist frequency of [USB 2.0] 
+low speed (750 kHz) while the 
+Source is driving the CC line.

@@ -1,0 +1,97 @@
+Page 164
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+A DFP, UFP or Cable Plug which supports Structured VDMs and receiving a Structured VDM for a SVID that it does 
+not recognize Shall reply with a NAK Command.
+Table 6.29  Structured VDM Header
+Bit(s)
+Field
+Description
+B31…16
+Standard or Vendor ID (SVID)
+Unique 16-bit unsigned integer, assigned by the USB-IF
+B15
+VDM Type
+1 = Structured VDM
+B14…13
+Structured VDM Version 
+(Major)
+Version Number (Major) of the Structured VDM (not this specification 
+Version):
+
+Version 1.0 = 00b (Deprecated and Shall Not be used)
+
+Version 2.x = 01b
+
+Values 2-3 are Reserved and Shall Not be used
+B12…11
+Structured VDM Version 
+(Minor)
+For Commands 0…15 Version Number (Minor) of the Structured VDM
+
+Version 2.0 = 00b (Used for ports implemented prior to USB PD 
+Revision 3.1, Version 1.6)
+
+Version 2.1 = 01b (Used for ports implemented starting with USB 
+PD Revision 3.1, Version 1.6) 
+
+All other Values are Reserved and Shall Not be used
+
+SVID Specific Commands (16…31) defined by the SVID.
+B10…8
+Object Position
+For the Enter Mode, Exit Mode, and Attention Commands (Requests/
+Responses):
+
+000b = Reserved and Shall Not be used.
+
+001b…110b = Index into the list of VDOs to identify the desired 
+Alternate Mode VDO
+
+111b = Exit all Active Modes (equivalent of a power on reset). Shall
+
+ only be used with the Command.
+Commands 0…3, 7…15:
+
+000b
+
+001b…111b = Reserved and Shall Not be used.
+SVID Specific Commands (16…31) defined by the SVID.
+B7…6
+Command Type
+00b = 
+REQ
+(Request from Initiator Port)
+01b = 
+ACK
+(Acknowledge Response from Responder Port)
+10b = 
+NAK
+(Negative Acknowledge Response from Responder Port)
+11b = 
+BUSY
+(Busy Response from Responder Port)
+B5
+Reserved
+ Shall be set to zero and Shall be Ignored
+B4…01
+Command
+0 = 
+Reserved and Shall Not be used.
+1 = 
+Discover Identity
+2 = 
+Discover SVIDs
+3 = 
+Discover Modes
+4 = 
+Enter Mode
+5 = 
+Exit Mode
+6 = 
+Attention
+7-15 = 
+Reserved and Shall Not be used.
+16…31 = SVID Specific Commands
+1)
+In the case where a SID is used the modes are defined by a standard. When a VID is used the modes are defined by the 
+Vendor.

@@ -1,0 +1,59 @@
+Page 454
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+15
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+16
+PHY Layer appends CRC and sends the Message.
+PHY Layer receives the Message and compares the CRC it 
+calculated with the one sent to verify the Message.
+17
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. 
+18
+The Protocol Layer verifies and increments the 
+MessageIDCounter. It informs the Policy Engine that 
+the Request Message was successfully sent. The Protocol 
+Layer stops the CRCReceiveTimer.
+The Policy Engine starts SenderResponseTimer. 
+19
+Policy Engine evaluates the Request Message sent by 
+the Sink and decides it can’t meet the request. It tells the 
+Protocol Layer to form a Reject Message. 
+20
+The Protocol Layer forms the Reject Message that is 
+passed to the PHY Layer.
+21
+PHY Layer appends CRC and sends the Reject Message. 
+Starts CRCReceiveTimer.
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the Message.
+22
+PHY Layer forwards the Reject Message to the Protocol 
+Layer.
+23
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+Protocol Layer informs the Policy Engine that a Reject 
+Message has been received. The Policy Engine stops 
+SenderResponseTimer.
+24
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+25
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the Message.
+PHY Layer appends CRC and sends the Message.
+26
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. The Protocol Layer verifies and 
+increments the MessageIDCounter and stops the 
+CRCReceiveTimer.
+27
+The Protocol Layer informs the Policy Engine that a 
+Reject Message was successfully sent.
+Table 8.33  Steps for a rejected Power Negotiation
+Step
+Source
+Sink

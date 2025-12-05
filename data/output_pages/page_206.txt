@@ -1,0 +1,81 @@
+Page 206
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.10
+  EPR_Mode Message
+The EPR_Mode Message is used to enter, acknowledge, and exit the EPR Mode. The Action field is used to describe 
+the action that is to be taken by the recipient of the EPR_Mode Message. The Data field provides additional 
+information for the Message recipient in the EPR Mode Data Object (ERMDO).
+The EPR_Mode Message Shall be as shown in Figure 6.33, "EPR Mode DO Message" and Table 6.50, "EPR Mode Data 
+Object (EPRMDO)".
+Figure 6.33 EPR Mode DO Message
+6.4.10.1
+  Process to enter EPR Mode
+An EPR Source Shall enter EPR Mode upon request by an EPR Sink connected with an EPR Cable when able to offer 
+the Source Capabilities as defined in the Power Rules (See Table 10.12, "EPR Source Capabilities based on the Port 
+Maximum PDP and using an EPR Capable Cable" and Table 10.13, "EPR Source Capabilities when Port Present PDP is 
+less than Port Maximum PDP and using an EPR-capable cable").
+For Port Partners to successfully enter EPR Mode, the following conditions must be met:
+
+The Sink Shall request entry into the EPR Mode.
+Table 6.50  EPR Mode Data Object (EPRMDO)
+Bit(s)
+Field
+Description
+B31…24
+Action
+Value
+Action
+Sent By
+0x00
+Reserved and Shall Not be used.
+0x01
+Enter
+Sink only
+0x02
+Enter Acknowledged
+Source only
+0x03
+Enter Succeeded
+Source only
+0x04
+Enter Failed
+Source only
+0x05
+Exit
+Sink or Source
+0x06…0xFF
+Reserved and Shall Not be used.
+B23...16
+Data
+Action Field
+Data Field Value
+Enter
+Shall be set to the EPR Sink Operational PDP
+Enter Acknowledged Shall be set to zero
+Enter Succeeded
+Shall be set to zero
+Enter Failed
+Shall be one of the following values:
+
+0x00 - Unknown cause
+
+0x01 - Cable not EPR Capable
+
+0x02 –Source failed to become VCONN Source.
+
+0x03 – EPR Capable bit not set in RDO.
+
+0x04 – Source unable to enter EPR Mode1.
+
+0x05 - EPR Capable bit not set in PDO. 
+All other values are Reserved and Shall Not be used
+Exit
+Shall be set to zero
+B15...0
+Reserved
+Shall be set to zero
+1)
+The Sink May retry entering EPR Mode after receiving this Enter Failed response.
+Header
+No. of Data Objects = 1
+EPRMDO

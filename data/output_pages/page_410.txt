@@ -1,0 +1,138 @@
+Page 410
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+vAvsSlewPos
+AVS maximum slew 
+rate for positive 
+voltage changes.
+30
+mV/µs
+Section 7.1.8.4
+vAvsSmallStep
+AVS step size defined 
+as a small step relative 
+to the previous 
+vAvsNew.
+-1.0
+1.0
+V
+Section 7.1.4.3.1
+vAvsStep
+AVS voltage 
+programming step 
+size.
+100
+mV
+Section 7.1.8.4
+vAvsValid
+The range in addition 
+to vAvsNew which the 
+AVS output is 
+considered Valid 
+during and after a 
+transition as well as in 
+response to a transient 
+load condition.
+-0.5
+0.5
+V
+Section 7.1.8.4
+vPpsCLCVTransient
+CL to CV load transient 
+voltage bounds.
+Operating 
+Voltage * 
+0.95 – 
+0.1V
+Operating 
+Voltage * 
+1.05 + 
+0.1V
+V
+Section 7.1.4.2.2
+vPpsMaxVoltage
+Maximum Voltage 
+Field in the 
+Programmable Power 
+Supply APDO.
+APDO
+Max
+Voltage 
+*0.95
+APDO Max
+Voltage * 
+1.05
+V
+Section 7.1.4.2.1
+vPpsMinVoltage
+Minimum Voltage 
+Field in the 
+Programmable Power 
+Supply APDO.
+APDO
+Min
+Voltage 
+*0.95
+APDO Min 
+Voltage * 
+1.05
+V
+Section 7.1.4.2.1
+vPpsNew
+Programmable RDO 
+Output Voltage 
+measured at the 
+Source receptacle.
+RDO 
+Output 
+Voltage 
+*0.95
+RDO 
+Output 
+Voltage
+RDO 
+Output 
+Voltage 
+*1.05
+V
+Section 7.1.8.3
+vPpsShutdown
+The voltage at which 
+the SPR PPS shuts 
+down when operating 
+in CL.
+APDO 
+Minimum 
+Voltage * 
+0.85
+APDO 
+Minimum
+Voltage * 
+0.95
+V
+Section 7.1.4.2.2
+vPpsSlewNeg
+Programmable Power 
+Supply maximum slew 
+rate for negative 
+voltage changes
+-30
+mV/µs
+Section 7.1.8.3
+vPpsSlewPos
+Programmable Power 
+Supply maximum slew 
+rate for positive 
+voltage changes
+30
+mV/µs
+Section 7.1.8.3
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

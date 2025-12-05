@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 825
+8.3.3.1.1
+  SenderResponseTimer State Diagram
+Figure 8.131, "SenderResponseTimer Policy Engine State Diagram" below shows the state diagram for the Policy 
+Engine in a Source Port or a Sink Port. The following sections describe operation in each of the states.
+Figure 8.131 SenderResponseTimer Policy Engine State Diagram
+8.3.3.1.1.1
+  SRT_Stopped State
+The SRT_Stopped State Shall be the starting state for the SenderResponseTimer either on power up or after a 
+Hard Reset. On entry to this state the Policy Engine Shall stop incrementing the SR_Timer. 
+The Policy Engine Shall transition to the SRT_Running State:
+
+When the SenderResponseTimer is started from within a Policy Engine state, or
+
+When a Start_SRT is requested from the Chunking Layer.
+8.3.3.1.1.2
+  SRT_Running State
+On entry to the SRT_Running State the SenderResponseTimer state machine Shall:
+
+Set the SR_Timer to zero
+
+Start running SR_Timer.
+The SenderResponseTimer state machine Shall transition to the SRT_Expired State:
+
+When the SR_Timer reaches its maximum count
+The SenderResponseTimer state machine Shall transition to the SRT_Stopped State:
+
+When the SenderResponseTimer is stopped by exiting a Policy Engine state, or
+
+When a Stop_SRT is requested from the Chunking Layer
+SRT_Stopped
+Actions on entry:
+Stop Incrementing SR_Timer1
+Power-up |
+Hard Reset |
+SenderResponseTimer stopped on exit from Policy Engine State |
+Stop_SRT requested from Chunking Layer
+Actions on entry:
+Zero SR_Timer
+Start Incrementing SR_Timer1
+SRT_Running
+SenderResponseTimer started 
+from within Policy Engine State |
+Start_SRT requested from Chunking Layer
+Actions on entry:
+Inform Policy Engine of 
+SenderResponseTimer timeout
+SRT_Expired
+SR_Timer1 reached
+ maximum count
+Policy Engine informed
+1)
+The SR_Timer is regarded as the mechanism within the SenderResponseTimer state diagram that implements the SenderResponseTimer.  

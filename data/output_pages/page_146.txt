@@ -1,0 +1,76 @@
+Page 146
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.1.2.4.2
+  SPR Adjustable Voltage Supply APDO
+Table 6.14, "SPR Adjustable Voltage Supply APDO – Source" below describes the SPR AVS (1110b) APDO for a Source 
+operating in SPR Mode and supplying 9V up to 20V. 
+6.4.1.2.4.2.1
+  Peak Current
+The Peak Current field follows the same definition as for the Peak Current field (see Section 6.4.1.2.1.8, "Peak 
+Current" and Table 6.10, "Fixed Power Source Peak Current Capability".
+6.4.1.2.4.3
+  EPR Adjustable Voltage Supply APDO
+Table 6.15, "EPR Adjustable Voltage Supply APDO – Source" below describes the EPR AVS (1101b) APDO for a Source 
+operating in EPR Mode and supplying 15V up to 48V. 
+6.4.1.2.4.3.1
+  PDP
+The PDP field Shall contain the AVS Port's PDP.
+See Section 10.2.3.3, "Optional Normative Extended Power Range (EPR)" and Figure 10.6, "Valid EPR AVS Operating 
+Region" for more information regarding how PDP in the AVS APDO relates to maximum available current.
+6.4.1.2.4.3.2
+  Peak Current
+The USB Power Delivery EPR AVS is only required to deliver the amount of current requested in the Operating 
+Current field (IoC) of an AVS RDO. In some usages however, for example computer systems, where there are short 
+bursts of activity, it might be desirable to overload the Source for short periods.
+For example, when a computer system tries to maintain average power consumption, the higher the peak current, 
+the longer the low current period needed to maintain such average power (see Section 7.2.8, "Sink Peak Current 
+Operation"). The Peak Current (Source EPR AVS) field allows a Source to Advertise this additional capability. This 
+Table 6.14  SPR Adjustable Voltage Supply APDO – Source
+Bit(s)
+Field
+Description
+B31…30 APDO
+11b – Augmented Power Data Object (APDO)
+B29…28 SPR AVS
+10b – SPR AVS
+B27…26
+Peak Current
+Peak Current (see Table 6.10, "Fixed Power Source Peak Current 
+Capability"))
+B25…20 Reserved
+Reserved – Shall be set to zero.
+B19…10
+Maximum Current 15V
+For 9V – 15V range: Maximum current in 10mA units equal to the 
+Maximum Current field of the 15V Fixed Supply PDO
+B9…0
+Maximum Current 20V
+For 15V – 20V range: Maximum current in 10mA units equal to the 
+Maximum Current field of the 20V Fixed Supply PDO, set to 0 if the 
+maximum voltage in the SPR AVS range is 15V.
+Table 6.15  EPR Adjustable Voltage Supply APDO – Source
+Bit(s)
+Field
+Description
+B31…30
+APDO
+11b – Augmented Power Data Object (APDO)
+B29…28
+EPR AVS
+01b – EPR AVS
+B27…26
+Peak Current (Source EPR AVS)
+Peak Current (see Table 6.16, "EPR AVS Power Source Peak Current 
+Capability")
+B25…17
+Maximum Voltage
+Maximum voltage in 100mV increments 
+B16
+Reserved
+Reserved – Shall be set to zero.
+B15…8
+Minimum Voltage
+Minimum voltage in 100mV increments
+B7…0
+PDP
+PDP in 1W increments

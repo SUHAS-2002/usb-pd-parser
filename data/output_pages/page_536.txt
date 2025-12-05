@@ -1,0 +1,54 @@
+Page 536
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+12
+The Protocol Layer informs the PHY Layer that the Hard 
+Reset is complete.
+The PHY Layer enables the PHY Layer communications 
+channel for transmission and reception.
+The reset is complete and protocol communication can restart.
+13
+Policy Engine directs the Protocol Layer to send a 
+Source_Capabilities Message that represents the 
+power supply’s present capabilities. Starts the 
+SourceCapabilityTimer.
+14
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+15
+PHY Layer appends CRC and sends the 
+Source_Capabilities Message. Starts CRCReceiveTimer.
+PHY Layer receives the Source_Capabilities Message 
+and checks the CRC to verify the Message.
+16
+PHY Layer removes the CRC and forwards the 
+Source_Capabilities Message to the Protocol Layer.
+17
+Protocol Layer stores the MessageID of the incoming 
+Message.
+The Protocol Layer forwards the received 
+Source_Capabilities Message information to the Policy 
+Engine that consumes it.
+18
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+19
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+20
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+21
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Source_Capabilities Message was successfully sent.
+Policy Engine stops the SourceCapabilityTimer, stops 
+the NoResponseTimer and starts the 
+SenderResponseTimer. 
+USB Power Delivery communication is re-established.
+Table 8.59  Steps for Source initiated Hard Reset - Sink long reset
+Step
+Source
+Sink

@@ -1,0 +1,33 @@
+Page 842
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Protocol Errors occurring in the following situations Shall Not lead to a Soft Reset, but Shall result in a transition 
+to the PE_SRC_Ready state where the Message received will be handled as if it had been received in the 
+PE_SRC_Ready state:
+
+When in an Explicit Contract and Protocol Errors occurred on SOP during any AMS where the first 
+Message in the AMS has not yet been sent i.e., an unexpected Message is received instead of the expected 
+GoodCRC Message response.
+On entry to the PE_SRC_Send_Soft_Reset state the Policy Engine Shall request the SOP Protocol Layer to perform a 
+Soft Reset, then Shall send a Soft_Reset Message to the Sink on SOP, and initialize and run the 
+SenderResponseTimer. 
+The Policy Engine Shall transition to the PE_SRC_Send_Capabilities state when:
+
+An Accept Message has been received on SOP.
+The Policy Engine Shall transition to the PE_SRC_Hard_Reset state when:
+
+A SenderResponseTimer timeout occurs.
+
+Or the Protocol Layer indicates that a transmission error has occurred.
+8.3.3.4.1.2
+  PE_SRC_Soft_Reset State
+The PE_SRC_Soft_Reset state Shall be entered from any state when a Soft_Reset Message is received on SOP from 
+the Protocol Layer.
+On entry to the PE_SRC_Soft_Reset state the Policy Engine Shall reset the SOP Protocol Layer and Shall then request 
+the Protocol Layer to send an Accept Message on SOP.
+The Policy Engine Shall transition to the PE_SRC_Send_Capabilities state (see Section 8.3.3.2.3, 
+"PE_SRC_Send_Capabilities State") when:
+
+The Accept Message has been sent on SOP.
+The Policy Engine Shall transition to the PE_SRC_Hard_Reset state when:
+
+The Protocol Layer indicates that a transmission error has occurred.

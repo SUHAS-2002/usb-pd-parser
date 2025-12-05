@@ -1,0 +1,109 @@
+Page 2
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Revision History
+Revision Version
+Comments
+Issue Date
+1.0
+1.0
+Initial release Revision 1.0
+5 July, 2012
+1.0
+1.1
+Including errata through 31-October-2012
+31 October 2012
+1.0
+1.2
+Including errata through 26-June-2013
+26 June, 2013
+1.0
+1.3
+Including errata through 11-March-2014
+11 March 2014
+2.0
+1.0
+Initial release Revision 2.0
+11 August 2014
+2.0
+1.1
+Including errata through 7-May 2015
+7 May 2015
+2.0
+1.2
+Including errata through 25-March-2016
+25 March 2016
+2.0
+1.3
+Including errata through 11-January-2017
+11 January 2017
+3.0
+1.0
+Initial release Revision 3.0
+11 December 2015
+3.0
+1.0a
+Including errata through 25-March-2016
+25 March 2016
+3.0
+1.1
+Including errata through 12-January-2017
+12 January 2017
+3.0
+1.2
+Including errata through 21-June-2018
+21 June 2018
+3.0
+2.0
+Including errata through 29-August-2019
+29 August 2019
+3.1
+1.0
+Including errata through May 2021
+May 2021
+3.1
+1.1
+Including errata through July 2021
+This version incorporates the following ECNs:
+
+EPR Clarifications
+
+Define AMS starting point
+July 2021
+3.1
+1.2
+Including errata through October 2021
+This version incorporates the following ECNs:
+
+Clarify use of Retries
+
+Battery Capabilities
+
+FRS timing problem
+
+PPS power rule clarifications
+
+Peak current support for EPR AVS APDO
+October 2021
+3.1
+1.3
+This version incorporates the following ECNs:
+
+Robust EPR Source Operation
+
+EPR Source Caps Editorial
+
+SRC PPS behavior in low current request
+
+Enter USB
+January 2022
+3.1
+1.4
+Editorial changes
+This version incorporates the following ECNs:
+
+Capabilities Mismatch Update
+
+Chunking Timing Issue
+
+OT Mitigation
+April 2022

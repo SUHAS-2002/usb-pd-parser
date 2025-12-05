@@ -1,0 +1,8 @@
+Page 416
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8
+ Device Policy
+8.1
+  Overview
+This section describes the Device Policy and Policy Engine that implements it. For an overview of the architecture and 
+how the Device Policy Manager fits into this architecture, please see Section 2.6, "Architectural Overview".

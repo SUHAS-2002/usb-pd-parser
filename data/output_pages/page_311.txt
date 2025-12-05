@@ -1,0 +1,29 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 311
+6.14
+  Value Parameters
+Table 6.84, "Value Parameters" contains value parameters used in this section.
+Table 6.84  Value Parameters
+Parameter
+Description
+Value
+Unit
+Reference
+MaxExtendedMsgLen
+Maximum length of an Extended Message as 
+expressed in the Data Size field.
+260
+Byte
+Section 6.2.1.2
+MaxExtendedMsgChunkLen
+Maximum length of an Extended Message 
+Chunk.
+26
+Byte
+Section 6.2.1.2
+MaxExtendedMsgLegacyLen
+Maximum length of an Extended Message 
+that can be sent without Chunking.
+26
+Byte
+Section 6.2.1.2

@@ -1,0 +1,29 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 861
+8.3.3.8.4
+  Sink Give Sink Capabilities Extended State Diagram
+Figure 8.147, "Sink Give Sink Capabilities Extended State Diagram" shows the state diagram for a Source on receiving 
+a Get_Sink_Cap_Extended Message. See also Section 6.5.13, "Sink_Capabilities_Extended Message".
+Figure 8.147 Sink Give Sink Capabilities Extended State Diagram
+8.3.3.8.4.1
+  PE_SNK_Give_Sink_Cap_Ext State
+The Policy Engine Shall transition to the PE_SNK_Give_Sink_Cap_Ext state, from the PE_SNK_Ready state, when a 
+Get_Sink_Cap_Extended Message is received. 
+On entry to the PE_SNK_Give_Sink_Cap_Ext state the Policy Engine Shall request the present extended Source 
+Capabilities from the Device Policy Manager and then send a Sink_Capabilities_Extended Message based on these 
+capabilities.
+The Policy Engine Shall transition back to the PE_SNK_Ready state (see Figure 8.133, "Sink Port State Diagram") 
+when:
+
+The Sink_Capabilities_Extended Message has been successfully sent.
+Get_Sink_Cap_Extended Message
+received
+Sink_Capabilities_Extended
+Message sent
+PE_SNK_Ready
+PE_SNK_Give_Sink_Cap_Ext
+Actions on entry:
+Get present extended Sink capabilities from Device Policy Manager
+Send Sink_Capabilities_Extended Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

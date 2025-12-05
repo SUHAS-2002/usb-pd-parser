@@ -1,0 +1,52 @@
+Page 760
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.14.2.2
+  Initiator to Responder Discover SVIDs (NAK)
+Figure 8.106, "Initiator to Responder Discover SVIDs (NAK)" shows an example sequence between an Initiator and 
+Responder, where both Port Partners are in an Explicit Contract and the Initiator attempts to discover SVID 
+information from the Responder but receives a NAK.
+Figure 8.106 Initiator to Responder Discover SVIDs (NAK)
+: Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+Initiator
+Responder
+1: Send Discover_SVIDs
+2: Discover_SVIDs
+3: Discover_SVIDs + CRC
+4: Discover_SVIDs
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Discover_SVIDs received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9: Discover_SVIDs sent
+Start VDMResponseTimer
+10: Send Discover_SVIDs NAK
+11: Discover_SVIDs NAK
+12: Discover_SVIDs NAK + CRC
+13: Discover_SVIDs NAK
+Check MessageID against local copy
+Store copy of MessageID
+14: Discover_SVIDs NAK received
+Stop VDMResponseTimer
+DPM evaluates SVIDs 
+information
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Discover_SVIDs NAK sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Explicit PD Contract
+Explicit PD Contract
+Request SVIDs from Device Policy 
+Manager

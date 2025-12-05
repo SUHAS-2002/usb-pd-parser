@@ -1,0 +1,25 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 943
+8.3.3.25.2.2
+  Cable Plug Hard Reset State Diagram
+Figure 8.205, "Cable Plug Hard Reset State Diagram" shows the Cable Plug state diagram for a Hard Reset or Cable 
+Reset.
+Figure 8.205 Cable Plug Hard Reset State Diagram
+8.3.3.25.2.2.1
+  PE_CBL_Hard_Reset State
+The PE_CBL_Hard_Reset state Shall be entered from any state when either Hard Reset Signaling or Cable Reset 
+Signaling is detected.
+On entry to the PE_CBL_Hard_Reset state the Policy Engine Shall reset the Cable Plug (equivalent to a power cycle).
+The Policy Engine Shall transition to the PE_CBL_Ready state when:
+
+The Cable Plug reset is complete.
+Hard Reset signalling
+Received |
+Cable Reset Command
+PE_CBL_Hard_Reset
+Actions on entry:
+Reset Cable Plug
+Cable = Awake/Asleep
+PD = Not Connected
+Cable reset complete
+PE_CBL_Ready

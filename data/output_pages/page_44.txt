@@ -1,0 +1,76 @@
+Page 44
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+EPR Mode
+A Power Delivery mode of operation where maximum allowable voltage is 48V. The Sink 
+complies to the requirements of [IEC 62368-1] for operation with a PS3 Source. The Source 
+complies to the requirements of [IEC 62368-1] for operation with a PS3 Sink. The cable complies 
+with [IEC 62368-1]. Entry into the EPR Mode requires that an EPR Source is Attached to an EPR 
+Sink with an EPR Cable. The EPR Source will only enter the EPR Mode when requested to do so 
+by the Sink and it has determined it is Attached to an EPR Sink with an EPR Capable cable.
+Only the EPR_Source_Capabilities and the EPR_Request Messages are allowed to Negotiate EPR 
+Explicit Contracts. The SPR Mode Messages (Source_Capabilities and Request) are not allowed 
+to be used while in EPR Mode.
+EPR (A)PDO
+Fixed Supply PDO that offers either 28V, 36V or 48V.
+Adjustable Voltage Supply (AVS) APDO whose Maximum voltage is the highest Fixed Supply PDO 
+voltage in the EPR_Source_Capabilities Message and no more than 240W.
+EPR Sink
+A Sink that supports both SPR Mode and EPR Mode.
+EPR Sink Port
+A Port exposed on an EPR Sink.
+EPR Source
+A Source that supports both SPR Mode and EPR Mode.
+EPR Source Port
+A Port exposed on an EPR Source.
+Error Recovery
+Port enters the ErrorRecovery State as defined in [USB Type-C 2.4].
+Explicit Contract
+An agreement reached between a Port Pair as a result of the Power Delivery Negotiation 
+process. An Explicit Contract is established (or continued) when a Source sends an Accept 
+Message in response to a Request Message sent by a Sink followed by a PS_RDY Message sent by 
+the Source to indicate that the power supply is ready. This corresponds to the PE_SRC_Ready 
+State for a Source Policy Engine and the PE_SNK_Ready State for a Source Policy Engine. The 
+Explicit Contract can be altered through the Re-negotiation process. 
+Extended Capabilities
+An Extended Message containing Capabilities information.
+Extended Control Message
+An Extended Message containing control information only.
+Extended Message
+A Message containing Data Blocks. The Extended Message is defined by the Extended field in the 
+Message Header being set to one and contains an Extended Message Header immediately 
+following the Message Header.
+Extended Message Header
+Every Extended Message contains a 16-bit Extended Message Header immediately following the 
+Message Header containing information about the Data Block and any Chunking being applied.
+Extended Power Range
+Extends the power range from a maximum of 100W (SPR) to a maximum of 240W (EPR). When 
+operating in the EPR Mode, only EPR specific Messages (the EPR_Source_Capabilities Message 
+and the EPR_Request Message) are used to Negotiate Explicit Contracts.
+External Supply
+Power supply external to the device. This could be powered from the wall or from any other 
+power source.
+Fast Role Swap
+Process of exchanging the Source and Sink Power Roles between Port Partners rapidly due to the 
+disconnection of an external power supply.
+Fast Role Swap Request
+An indication from an Initial Source to the Initial Sink that a Fast Role Swap is needed. The Fast 
+Role Swap Request is indicated by driving the CC line to ground for a short period; it is not a 
+Message or Signaling.
+First Explicit Contract
+The Explicit Contract that immediately follows an Attach, power on Hard Reset, Power Role Swap 
+or Fast Role Swap event.
+Fixed Battery
+Fixed Batteries
+A Battery that is not easily removed or replaced by an end user e.g., requires a special tool to 
+access or is soldered in.
+Fixed Supply
+A well-regulated fixed voltage power supply. This is exposed by the Fixed Supply PDO (see 
+Section 6.4.1.2.1, "Fixed Supply Power Data Object")
+Frame
+Generic term referring to an atomic communication transmitted by PD such as a Packet, Test 
+Frame or Signaling.
+FRS
+See Fast Role Swap.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

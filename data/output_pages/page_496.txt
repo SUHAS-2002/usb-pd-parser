@@ -1,0 +1,43 @@
+Page 496
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.2.4.2
+  Exiting EPR Mode (Source Initiated)
+This is an example of an Exit EPR Mode operation where the Source requests EPR Mode to be exited. Figure 8.20, 
+"Exiting EPR Mode (Source Initiated)" shows the Messages as they flow across the bus and within the devices to 
+accomplish the Exit EPR process.
+Figure 8.20 Exiting EPR Mode (Source Initiated)
+: Protocol
+1: Send EPR_Mode (Exit)
+: PHY
+: PHY
+: Protocol
+2: EPR_Mode (Exit)
+3: EPR_Mode (Exit) + CRC
+4: EPR_Mode (Exit)
+Start CRCReceiveTimer
+5: EPR_Mode (Exit) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: EPR_Mode (Exit) sent
+: Policy Engine
+: Policy Engine
+EPR Mode exited
+Sink
+Source
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+10: Send Source_Capabilities
+11: Source_Capabilities
+12: Source_Capabilities + CRC
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Source_Capabilities sent
+Start CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+13: Source_Capabilities
+14: Source_Capabilities received
+Ports in EPR Mode with SPR PDO Explicit Contract

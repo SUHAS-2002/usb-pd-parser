@@ -1,0 +1,41 @@
+Page 1032
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+D
+ BMC Receiver Design Examples
+The BMC signal is DC-coupled so that the voltage level is affected by the ground IR Drop. The DC offset of the BMC 
+signal at Power Source and Power Sink are in the opposite directions. When the VBUS current is increased from 0A, 
+the BMC signal waveform shifts downward at Power Sink and shifts upward at Power Source. This section 
+introduces two sample BMC receiver circuit implementations, which are immune from DC offset and high current 
+load step. They can be used in Power Source, Power Sink and inside cables. 
+D.1
+  Finite Difference Scheme
+D.1.1
+  Sample Circuitry
+The sample Finite Difference BMC receiver shown in Figure D.1, "Circuit Block of BMC Finite Difference 
+Receiver"consists of the Rx bandwidth limiting filter with the time constant tRxFilter, a sampler with the sampling 
+step ΔtS, 50ns, a Finite Difference Calculator which calculates the voltage difference between the time interval of 
+ΔtFD, 300ns, an edge detector controlled by two voltage thresholds, Vth, H and Vth, L and a logic block for bit 
+recognition.
+Figure D.1 Circuit Block of BMC Finite Difference Receiver
+D.1.2
+  Theory
+This section describes the fundamental theory of Finite Difference Scheme to recover the received BMC signal with 
+the input and output signal waveforms of the circuit blocks shown in Figure D.1, "Circuit Block of BMC Finite 
+Difference Receiver". To illustrate the robustness of the implementation, the VBUS current load step rate is 
+intentionally increased to 2A/µs at the Sink load. In Figure D.2, "BMC AC and DC noise from VBUS at Power Sink" (a), 
+the red curve represents the VBUS current measured at the Power Sink when the current is increased at 9 µs from 
+0A to 5A and the blue dash curve represents the VBUS current measured at the USB Type-C ®connector of the power 
+Sink. In this example, the peak current overshoot with larger load step rate is increased to 518 mA which exceeds 
+iOvershoot. Figure D.2, "BMC AC and DC noise from VBUS at Power Sink" (b) shows the total BMC noise at Power Sink, 
+coupled from VBUS and D+/D- through the worst [USB Type-C 2.4] compliant cable, after the Rx bandwidth limiting 
+filter with the time constant tRxFilter is applied. The noise can be decomposed into 3 components. The first is the 
+DC offset, IVBUS(t)*RGND, while IVBUS is the VBUS current and RGND is the ground DC resistance of the cable. The 
+offset is negative in Power Sink and positive at Power Source. The second noise component is the inductive VBUS 
+noise, M*d IVBUS(t)/dt, while M is the mutual inductance between the VBUS and CC wires in the cable and d IVBUS(t)/
+dt is the load step rate. The third component is [USB 2.0] Full Speed SE0 coupling noise which would normally 
+occur randomly but was assumed to occur periodically in the simulation to account for the crosstalk in any phase 
+between the BMC and [USB 2.0] signals. In Figure D.3, "Sample BMC Signals (a) without USB 2.0 SE0 Noise (b) with 
+USB 2.0 SE0 Noise", the blue dash curve represents the BMC signal when there is no VBUS current, and the red solid 
+curve represents the BMC signal affected by the VBUS coupling noise shown in Figure D.2, "BMC AC and DC noise from 
+VBUS at Power Sink"(b). The green solid curve is the sample [USB 2.0] noise, after the Rx bandwidth limiting filter 
+with the time constant tRxFilter is applied.

@@ -1,0 +1,29 @@
+Page 234
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.9
+  Firmware Update Messages
+The firmware update process between Port Partners or a Port and Cable Plug is fully described in 
+[USBPDFirmwareUpdate 1.0]. This specification describes two Extended Messages used by the firmware update 
+process when applied to PD.
+6.5.9.1
+  Firmware_Update_Request
+The Firmware_Update_Request Message is used by a Port to pass a firmware update data structure to its Port 
+Partner or a Cable Plug.
+The Firmware_Update_Request Message contains a Firmware Update Request Data Block (FRQDB) whose format 
+Shall be as shown in Figure 6.47, "Firmware_Update_Request Message". The contents of the FRQDB and its use are 
+defined in [USBPDFirmwareUpdate 1.0].
+Figure 6.47 Firmware_Update_Request Message
+6.5.9.2
+  Firmware_Update_Response
+The Firmware_Update_Response Message is used by a Port or Cable Plug to pass a firmware update data structure 
+to the Port that sent the Firmware_Update_Request Message.
+The Firmware_Update_Response Message contains a Firmware Update Response Data Block (FRPDB) whose 
+format Shall be as shown in Figure 6.48, "Firmware_Update_Response Message". The contents of the FRPDB and its 
+use are defined in [USBPDFirmwareUpdate 1.0].
+Figure 6.48 Firmware_Update_Response Message
+Extended Header
+Data Size = 4..260
+FRQDB
+Extended Header
+Data Size = 4..260
+FRPDB

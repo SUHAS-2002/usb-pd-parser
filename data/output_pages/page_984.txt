@@ -1,0 +1,41 @@
+Page 984
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+9.1.4
+  PDUSB Device Enumeration
+As described earlier, a PDUSB Device acts as a self-powered device with some caveats with respect to how it 
+transitions from the USB Attached State to USB Powered State. Figure 9.9, "Enumeration of a PDUSB Device" gives a 
+high-level overview of the enumeration steps involved due to this change. A PDUSB Device will first (Step1) interact 
+with the Power Delivery hardware and the Local Policy manager to determine whether or not it can get sufficient 
+power to enumerate/operate.
+PD is likely to have established a Explicit Contract prior to enumeration. The SPM will be notified (Step 2) of the 
+result of this Negotiation between the Power Delivery hardware and the PDUSB Device. After successfully 
+negotiating a mutually agreeable Explicit Contract the device will signal a connect to the xHC. The standard USB 
+enumeration process (Steps 3, 4 and 5) is then followed to load the appropriate driver for the function(s) that the 
+PDUSB Device exposes.
+Figure 9.9 Enumeration of a PDUSB Device
+If a PDUSB Device cannot perform its intended function with the amount of power that it can get from the Port it is 
+connected to, then the host system Should display a notification (on a PD aware OS) about the failure to provide 
+sufficient power to the device. In addition, the device Shall follow the requirements listed in Section 8.2.5.2.1, "Local 
+device handling of mismatch".
+Client Drivers
+Client Drivers
+Client Drivers
+USB Driver Interface
+Composite Class Driver
+Client Drivers
+USB Driver Interface
+Hub Driver
+Internal Hub/Host Interface
+Host Controller Driver
+xHC Interface
+Host Controller
+PD xface
+Power Delivery
+System
+Policy
+Manager
+5
+4
+3
+2
+1

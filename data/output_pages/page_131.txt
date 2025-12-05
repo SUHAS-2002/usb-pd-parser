@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 131
+6.3.7
+  Get_Source_Cap Message
+The Get_Source_Cap (Get Source Capabilities) Message May be sent by a Port to request the Source Capabilities and 
+Dual-Role Power capability of its Port Partner (e.g., Dual-Role Power capable). The Port Shall respond by returning 
+a Source_Capabilities Message (see Section 6.4.1.5, "SPR Source Capabilities Message").
+6.3.8
+  Get_Sink_Cap Message
+The Get_Sink_Cap (Get Sink Capabilities) Message May be sent by a Port to request the Sink Capabilities and Dual-
+Role Power capability of its Port Partner (e.g., Dual-Role Power capable). The Port Shall respond by returning a 
+Sink_Capabilities Message (see Section 6.4.1.6, "SPR Sink Capabilities Message").
+6.3.9
+  DR_Swap Message
+The DR_Swap Message is used to exchange DFP and UFP operation between Port Partners while maintaining the 
+direction of power flow over VBUS. The Data Role Swap process can be used by Port Partners whether or not they 
+support USB Communications capability. A DFP that supports USB Communication capability starts as the USB Host 
+on Attachment. A UFP that supports USB Communication capability starts as the USB Device on Attachment.
+[USB Type-C 2.4] Dual-Role Data (DRD) Ports Shall have the capability to perform a Data Role Swap from the 
+PE_SRC_Ready or PE_SNK_Ready states. DFPs and UFPs May have the capability to perform a Data Role Swap from 
+the PE_SRC_Ready or PE_SNK_Ready states. A Data Role Swap Shall be regarded in the same way as a cable Detach/
+Re-attach in relation to any USB Communication which is ongoing between the Port Partners. If there are any Active 
+Modes between the Port Partners when a DR_Swap Message is a received, then a Hard Reset Shall be performed 
+(see Section 6.4.4.3.4, "Enter Mode Command"). If the Cable Plug has any Active Modes then the DFP Shall Not issue 
+a DR_Swap Message and Shall cause all Active Modes in the Cable Plug to be exited before accepting a Data Role 
+Swap request.
+The source of VBUS and VCONN Source Shall remain unchanged as well as the Rp/Rd resistors on the CC wire during 
+the Data Role Swap process.
+The DR_Swap Message May be sent by either Port Partner. The recipient of the DR_Swap Message Shall respond 
+by sending an Accept Message, a Wait Message or a Reject Message (see Section 6.9, "Accept, Reject and Wait").
+
+If an Accept Message is sent, the Source and Sink Shall exchange Data Roles.
+
+If a Reject Message is sent, the requester is informed that the recipient is unable, or unwilling, to do a 
+Data Role Swap and no action Shall be taken.
+
+If a Wait Message is sent, the requester is informed that a Data Role Swap might be possible in the future 
+but that no immediate action Shall be taken.
+Before a Data Role Swap the initial DFP Shall have its Port Data Role bit set to DFP, and the initial UFP Shall have 
+its Port Data Role bit set to UFP.
+After a successful Data Role Swap the DFP/Host Shall become the UFP/Device and vice-versa; the new DFP Shall 
+have its Port Data Role bit set to DFP, and the new UFP Shall have its Port Data Role bit set to UFP. Where USB 
+Communication is supported by both Port Partners a USB data connection Should be established according to the 
+new Data Roles.
+If the Data Role Swap, after having been accepted by the Port Partner, is subsequently not successful, in order to 
+attempt a re-establishment of the connection, USB Type-C Error Recovery actions, such as disconnect, as defined in 
+[USB Type-C 2.4] will be necessary.
+See Section 8.3.2.9, "Data Role Swap".
+6.3.10
+  PR_Swap Message
+The PR_Swap Message May be sent by either Port Partner to request an exchange of Power Roles. The recipient of 
+the Message Shall respond by sending an Accept Message, a Wait Message or a Reject Message (see Section 6.9, 
+"Accept, Reject and Wait").

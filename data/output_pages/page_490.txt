@@ -1,0 +1,52 @@
+Page 490
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.2.3
+  EPR Keep Alive
+This is an example of keep alive operation during an Explicit Contract in EPR Mode. Figure 8.18, "EPR Keep 
+Alive"shows the Messages as they flow across the bus and within the devices to accomplish the keep alive.
+Figure 8.18 EPR Keep Alive
+: Source Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Sink Policy Engine
+1: Send EPR_KeepAlive
+2: EPR_KeepAlive
+3: EPR_KeepAlive + CRC
+4: EPR_KeepAlive
+Check MessageID against local copy
+Store copy of MessageID
+5: EPR_KeepAlive received
+Stop SourceEPRKeepAliveTimer
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: EPR_KeepAlive sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Start SenderResponseTimer
+10: Send EPR_KeepAlive_Ack
+11: EPR_KeepAlive_Ack
+12: EPR_KeepAlive_Ack + CRC
+13: EPR_KeepAlive_Ack
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+14: EPR_KeepAlive_Ack received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+18: EPR_KeepAlive_Ack sent
+Stop SenderResponseTimer
+Start SinkEPRKeepAliveTimer
+EPR Mode Continues
+Evaluate EPR_KeepAlive
+Source
+Sink
+SinkEPRKeepAliveTimer Timeout
+Stop SinkEPRKeepAliveTimer
+Start SourceEPRKeepAliveTimer

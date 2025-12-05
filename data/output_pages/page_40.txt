@@ -1,0 +1,77 @@
+Page 40
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+1.6
+  Terms and Abbreviations
+This section defines terms used throughout this document. For additional terms that pertain to the Universal Serial 
+Bus, see Chapter 2, “Terms and Abbreviations,” in [USB 2.0], [USB 3.2], [USB Type-C 2.4] and [USBBC 1.2].
+Table 1.4  Terms and Abbreviations
+Term
+Description
+(A)PDO
+Refers to both the PDO and APDO collectively.
+AC Supply
+AC Supplied
+Refers to the main AC power source typically provided to the wall AKA “mains”.
+Active Cable
+A cable with a USB Type-C plug on each end that incorporates data bus signal conditioning 
+circuits. The cable supports the Structured VDM Discover Identity Command to expose its 
+characteristics in addition to other Structured VDM Commands (Electronically Marked Cable 
+see [USB Type-C 2.4]).
+Active Cable VDO
+VDO defining the Capabilities of an Active Cable.
+Active Mode
+A Mode which has been through the Mode Entry process but not the Mode Exit process.
+Adjustable Voltage Supply
+A power supply whose output voltage can be adjusted to an operating voltage within its 
+Advertised range. These Capabilities are exposed by the Adjustable Voltage Supply (AVS) APDO 
+(see Section 6.4.1.2.4, "Augmented Power Data Object (APDO)").
+Note: Unlike the SPR PPS, the SPR AVS and EPR AVS do not support current limit.
+Advertise
+An offer made by a Source in the Source_Capabilities/EPR_Source_Capabilities Message (e.g., 
+an APDO or PDO).
+Alternate Mode
+Operation defined by a Vendor or Standard’s organization, which is associated with a SVID. The 
+definition of Alternate Modes is outside the scope of USB-IF specifications. Entry to and exit from 
+the Alternate Mode uses the Mode Entry and Mode Exit processes. As defined in [USB Type-C 2.4].
+Alternate Mode Adapter
+A PDUSB Device which supports Alternate Modes as defined in [USB Type-C 2.4].
+Note: Since an AMA is a PDUSB Device, it has a single UFP that is only addressable by SOP 
+Packets.
+Alternate Mode Controller
+A DFP that supports connection to AMAs as defined in [USB Type-C 2.4]. A DFP that is an AMC 
+can also be a PDUSB Host.
+AMA
+See Alternate Mode Adapter.
+AMC
+See Alternate Mode Controller.
+AMS
+See Atomic Message Sequence.
+APDO
+See Augmented Power Data Object.
+Assured Capacity Charger
+As defined in [USB Type-C 2.4]. This maps to a Charger with one or more Guaranteed Capability 
+Ports.
+Assured Capacity Group
+As defined in [USB Type-C 2.4]. This maps to a group of Guaranteed Capability Ports.
+Atomic Message Sequence
+A fixed sequence of Messages as defined in Section 8.3.2, "Atomic Message Sequence Diagrams" 
+typically starting and ending in one of the following states: PE_SRC_Ready, PE_SNK_Ready or 
+PE_CBL_Ready. An AMS is Non-interruptible.
+Attach
+Mechanical joining of the Port Pair by a cable.
+Attached
+USB Power Delivery Ports which are mechanically joined with USB cable.
+Attachment
+See Attach.
+Augmented Power Data 
+Object
+Data Object used to expose a Source Port's or Sink Port's power Capabilities as part of a 
+Source_Capabilities/EPR_Source_Capabilities or Sink_Capabilities/EPR_Sink_Capabilities 
+Message respectively. An SPR PPS Data Object, SPR AVS Data Object and EPR AVS Data Object are 
+defined.
+AVS
+See Adjustable Voltage Supply.
+AVS Mode
+A power supply, currently operating as an AVS, is said to be operating in AVS Mode.
+Battery
+A power storage device residing behind a Port that can either be a Source or Sink of power.

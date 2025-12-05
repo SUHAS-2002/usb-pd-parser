@@ -1,0 +1,35 @@
+Page 90
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.6.5
+  Cable Reset
+Cable Reset Signaling is an ordered set of bytes sent with the purpose to be recognized by the PHY Layer. The Cable 
+Reset Signaling ordered set is defined as the following sequence of K-codes: RST-1, Sync-1, RST-1, Sync-3 (see 
+Table 5.12, "Cable Reset Ordered Set").
+Cable Reset Signaling Shall only be sent by the DFP. The Cable Reset Ordered Set is used to reset the Cable Plugs 
+without the need to Hard Reset the Port Partners. The state of the Cable Plug after the Cable Reset Signaling Shall 
+be equivalent to power cycling the Cable Plug.
+Figure 5.6, "Line format of Cable Reset" shows the line format of Cable Reset Signaling which is a Preamble followed 
+by the Cable Reset Ordered Set.
+Figure 5.6 Line format of Cable Reset
+Table 5.12  Cable Reset Ordered Set
+K-Code Number
+K-Code in Code 
+Table
+1
+RST-1
+2
+Sync-1
+3
+RST-1
+4
+Sync-3
+Preamble(training for receiver)
+RST-1
+LEGEND:
+Preamble provided by the Physical layer, 
+not encoded with 4b5b
+Provided by the Physical 
+layer, encoded with 4b5b
+Sync-1
+RST-1
+Sync-3

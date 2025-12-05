@@ -1,0 +1,51 @@
+Page 816
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.17
+  Unstructured Vendor Defined Messages
+8.3.2.17.1
+  Unstructured VDM
+Figure 8.125, "Unstructured VDM Message Sequence" shows an example sequence of an Unstructured VDM 
+Transaction between a DFP and UFP. The figure below shows the Messages as they flow across the bus after UFP 
+Enters into Modal Operation.
+Figure 8.125 Unstructured VDM Message Sequence
+: Protocol
+: DFP Policy Engine
+: PHY
+: PHY
+: Protocol
+: UFP Policy Engine
+New Mode Entered
+20 : Send Unstructured VDM
+Start CRCReceive Timer
+21 : Unstructured VDM
+22 : Unstructured VDM + 
+CRC
+23 : Unstructured VDM
+Check MessageID against local copy 
+Store Copy of MessageID
+23 : Unstructured VDM Received
+Evaluate Unstructured VDM 
+Reply with the application specific 
+response which can be again a 
+Unstructured VDM 
+Start CRCReceive Timer
+Check and Increment MessageIDCounter
+Stop CRCReceiveTimer
+10: Send Unstructured VDM
+11:  Unstructured VDM
+18:  Unstructured VDM Sent
+17: GoodCRC
+Check MessageID against local copy 
+Store Copy of MessageID
+12 : Unstructured VDM + CRC
+16: GoodCRC + CRC
+11:  Unstructured VDM
+15: GoodCRC
+14:  Unstructured VDM Received
+Process Unstructured VDM as required
+24 : GoodCRC
+25 : GoodCRC + CRC
+26 : GoodCRC
+Check and Increment MessageIDCounter
+Stop CRCReceiveTimer
+27 : Unstructured VDM Sent

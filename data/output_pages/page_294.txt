@@ -1,0 +1,50 @@
+Page 294
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.12.2.3.2
+  PRL_Rx_Layer_Reset_for_Receive state
+On entry to the PRL_Rx_Layer_Reset_for_Receive state the Protocol Layer Shall reset the MessageIDCounter and 
+clear the stored MessageID. The Protocol Layer Shall transition Protocol Layer Message transmission to the 
+PRL_Tx_Wait_for_Message_Request state (see Section 6.12.2.2.1.2, "PRL_Tx_Wait_for_Message_Request State").
+The Protocol Layer Shall transition to the PRL_Rx_Send_GoodCRC State when:
+
+The Soft Reset actions in this state have been completed.
+6.12.2.3.3
+  PRL_Rx_Send_GoodCRC state
+On entry to the PRL_Rx_Send_GoodCRC state the Protocol Layer Shall construct a GoodCRC Message and request 
+the PHY Layer to transmit it.
+The Protocol Layer Shall transition to the PRL_Rx_Check_MessageID state when:
+
+The GoodCRC Message has been passed to the PHY Layer.
+When the PHY Layer indicates that a Message has been Discarded due to CC being busy but CC is now Idle (see 
+Section 5.7, "Collision Avoidance"), the Protocol Layer Shall either:
+
+Transition to the PRL_Rx_Check_MessageID state or
+
+Transition to the PRL_Rx_Wait_for_PHY_Message state.
+6.12.2.3.4
+  PRL_Rx_Check_MessageID state
+On entry to the PRL_Rx_Check_MessageID state the Protocol Layer Shall compare the MessageID of the received 
+Message with its stored value if a value has previously been stored. 
+The Protocol Layer Shall transition to the PRL_Rx_Wait_for_PHY_Message state when:
+
+The MessageID of the received Message equals the stored MessageID value since this is a Message retry 
+which Shall be Discarded.
+The Protocol Layer Shall transition to the PRL_Rx_Store_MessageID state when:
+
+The MessageID of the received Message does not equal the stored MessageID value since this is a new 
+Message or
+
+This is the first received Message and no MessageID value is currently stored.
+6.12.2.3.5
+  PRL_Rx_Store_MessageID state
+On entry to the PRL_Rx_Store_MessageID state the Protocol Layer Shall transition Protocol Layer Message 
+transmission to the PRL_Tx_Discard_Message state, replace the stored value of MessageID with the value of 
+MessageID in the received Message and pass the Message up to the Policy Engine.
+The Protocol Layer Shall transition to the PRL_Rx_Wait_for_PHY_Message state when:
+
+The Message has been passed up to the Policy Engine.
+6.12.2.4
+  Hard Reset operation
+Figure 6.57, "Outline of States" shows the state behavior for the Protocol Layer when receiving a Hard Reset or Cable 
+Reset request from the Policy Engine or Hard Reset Signaling or Cable Reset Signaling from the PHY Layer (see also 
+Section 6.8.3, "Hard Reset" and Section 6.8.4, "Cable Reset").

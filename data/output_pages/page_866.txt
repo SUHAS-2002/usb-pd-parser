@@ -1,0 +1,37 @@
+Page 866
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.10.3
+  Sink Port Get Source PPS Status State Diagram
+Figure 8.152, "Sink Port Get Source PPS Status State Diagram" shows the state diagram for a Sink on receiving a 
+request from the Device Policy Manager to get the Port Partner's Source status when operating as a PPS. See also 
+Section 6.5.10, "PPS_Status Message".
+Figure 8.152 Sink Port Get Source PPS Status State Diagram
+8.3.3.10.3.1
+  PE_SNK_Get_PPS_Status State
+The Policy Engine Shall transition to the PE_SNK_Get_PPS_Status state, from the PE_SNK_Ready state, due to a 
+request to get the remote Source PPS status from the Device Policy Manager. 
+On entry to the PE_SNK_Get_PPS_Status state the Policy Engine Shall send a Get_PPS_Status Message and initialize 
+and run the SenderResponseTimer.
+On exit from the PE_SNK_Get_PPS_Status state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (status or response timeout).
+The Policy Engine Shall transition back to the PE_SNK_Ready state (see Figure 8.133, "Sink Port State Diagram") 
+when:
+
+A PPS_Status Message is received
+
+Or SenderResponseTimer times out.
+get PPS status request 
+from Device Policy Manager
+PPS_Status
+Message received |
+SenderResponseTimer
+Timeout
+PE_SNK_Ready
+PE_SNK_Get_PPS_Status
+Actions on entry:
+Send Get_PPS_Status Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+Actions on exit:
+Pass Source status/outcome to Device Policy Manager

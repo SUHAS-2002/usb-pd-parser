@@ -1,0 +1,52 @@
+Page 252
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.6.5.1
+  PSTransitionTimer
+The PSTransitionTimer is used by the Policy Engine to timeout on a PS_RDY Message. It is started when a request 
+for new Source Capabilities has been accepted and will timeout after tPSTransition if a PS_RDY Message has not 
+been received. This condition leads to a Hard Reset and a return to USB Default Operation. The PSTransitionTimer 
+relates to the time taken for the Source to transition from one voltage, or current level, to another (see Section 7.1, 
+"Source Requirements").
+The PSTransitionTimer Shall be started when the last bit of the GoodCRC Message EOP, corresponding to an 
+Accept Message, has been transmitted by the PHY Layer. The PSTransitionTimer Shall be stopped when the last 
+bit of the GoodCRC Message EOP, corresponding to the PS_RDY Message, has been transmitted by the PHY Layer.
+6.6.5.2
+  PSSourceOffTimer
+6.6.5.2.1
+  Use during Power Role Swap
+The PSSourceOffTimer is used by the Policy Engine in Dual-Role Power Device that is currently acting as a Sink to 
+timeout on a PS_RDY Message during a Power Role Swap AMS. This condition leads to USB Type-C Error Recovery.
+If a PR_Swap Message request has been sent by the Dual-Role Power Device currently acting as a Source the Sink can 
+respond with an Accept Message. When the last bit of the GoodCRC Message EOP, corresponding to this transmitted 
+Accept Message, is received by the Sink's PHY Layer, then the PSSourceOffTimer Shall be started.
+If a PR_Swap Message request has been sent by the Dual-Role Power Device currently acting as a Sink the Source can 
+respond with an Accept Message. When the last bit of the GoodCRC Message EOP, corresponding to this received 
+Accept Message, is transmitted by the Sink's PHY Layer, then the PSSourceOffTimer Shall be started.
+The PSSourceOffTimer Shall be stopped when the last bit of the GoodCRC Message EOP, corresponding to the 
+received PS_RDY Message, is transmitted by the PHY Layer.
+The PSSourceOffTimer relates to the time taken for the remote Dual-Role Power Device to stop supplying power 
+(see also Section 7.3.2.1, "Sink Requested Power Role Swap" and Section 7.3.2.2, "Source Requested Power Role 
+Swap"). The timer Shall time out if a PS_RDY Message has not been received from the remote Dual-Role Power 
+Device within tPSSourceOff indicating this has occurred.
+6.6.5.2.2
+  Use during Fast Role Swap
+The PSSourceOffTimer is used by the Policy Engine in Dual-Role Power Device that is the Initial Sink (currently 
+providing vSafe5V) to timeout on a PS_RDY Message during a Fast Role Swap AMS. This condition leads to USB 
+Type-C Error Recovery.
+When the FR_Swap Message request has been sent by the Initial Sink, the Initial Source Shall respond with an 
+Accept Message. When the last bit of the GoodCRC Message EOP, corresponding to this Accept Message is received 
+by the Initial Sink's PHY Layer, then the PSSourceOffTimer Shall be started.
+The PSSourceOffTimer Shall be stopped when 
+the last bit of the GoodCRC Message EOP, corresponding to the received PS_RDY Message, is transmitted by the PHY 
+Layer.
+The PSSourceOffTimer relates to the time taken for the Initial Source to stop supplying power and for VBUS to 
+revert to vSafe5V (see also Section 7.2.10, "Fast Role Swap" and Section 7.3.4, "Transitions Caused by Fast Role 
+Swap"). The timer Shall time out if a PS_RDY Message has not been received from the Initial Source within 
+tPSSourceOff indicating this has occurred.
+6.6.5.3
+  PSSourceOnTimer
+6.6.5.3.1
+  Use during Power Role Swap
+The PSSourceOnTimer is used by the Policy Engine in Dual-Role Power Device that has just stopped sourcing power 
+and is waiting to start sinking power to timeout on a PS_RDY Message during a Power Role Swap. This condition 
+leads to USB Type-C Error Recovery.

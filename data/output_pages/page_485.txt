@@ -1,0 +1,77 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 485
+Table 8.43, "Steps for a Rejected EPR Power Negotiation" below provides a detailed explanation of what happens at 
+each labeled step in Figure 8.16, "Rejected Fixed EPR Power Negotiation" above.
+Table 8.43  Steps for a Rejected EPR Power Negotiation
+Step
+Source
+Sink
+1
+The Cable Capabilities are detected if these are not 
+already known (see Section 4.4, "Cable Type Detection"). 
+Policy Engine directs the Protocol Layer to send a 
+EPR_Source_Capabilities Message that represents the 
+power supply’s present capabilities.
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the 
+Source_Capabilities Message. Starts CRCReceiveTimer.
+PHY Layer receives the EPR_Source_Capabilities 
+Message and checks the CRC to verify the Message.
+4
+PHY Layer removes the CRC and forwards the 
+EPR_Source_Capabilities Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+EPR_Source_Capabilities Message information to the 
+Policy Engine that consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+EPR_Source_Capabilities Message was successfully 
+sent. Policy Engine starts SenderResponseTimer.
+10
+Policy Engine evaluates the EPR_Source_Capabilities 
+Message sent by the Source and selects which power it 
+would like. It tells the Protocol Layer to form the data 
+(e.g., Power Data Object) that represents its Request into 
+a Message.
+11
+Protocol Layer creates the EPR_Request Message and 
+passes to PHY Layer.
+12
+PHY Layer receives the EPR_Request Message and 
+compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends a CRC and sends the EPR_Request 
+Message. Starts CRCReceiveTimer.
+13
+PHY Layer removes the CRC and forwards the 
+EPR_Request Message to the Protocol Layer. 
+14
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer passes the Request information to 
+the Policy Engine. Policy Engine stops 
+SenderResponseTimer.
+15
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.

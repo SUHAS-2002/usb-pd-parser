@@ -1,0 +1,26 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 957
+
+The SenderResponseTimer times out or
+
+The SinkEPREnterTimer times out.
+8.3.3.26.2.2
+  PE_SNK_EPR_Mode_Wait_For_Response State
+In the State the Policy Engine waits for a confirmation that the EPR Mode entry request has succeeded.
+On exit from the PE_SNK_EPR_Mode_Wait_For_Response state the Policy Engine Shall stop the 
+SinkEPREnterTimer and enter EPR Mode.
+The Policy Engine Shall transition to the PE_SNK_Send_Soft_Reset state when:
+
+An EPR_Mode Message is received which is not Enter Succeeded or
+
+The SinkEPREnterTimer times out.
+The Policy Engine Shall transition to the PE_VCS_Evaluate_Swap State when:
+
+A VCONN_Swap Message is received.
+The Policy Engine Shall transition back from the PE_VCS_Turn_Off_VCONN State to the 
+PE_SNK_EPR_Mode_Wait_For_Response State when:
+
+The VCONN Swap process has completed.
+The Policy Engine Shall transition to the PE_SNK_Wait_for_Capabilities state when:
+
+An EPR_Mode (Enter Succeeded) Message has been received.

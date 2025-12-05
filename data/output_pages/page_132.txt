@@ -1,0 +1,59 @@
+Page 132
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+If an Accept Message is sent, the Source and Sink Shall do a Power Role Swap.
+
+If a Reject Message is sent, the requester is informed that the recipient is unable, or unwilling, to do a 
+Power Role Swap and no action Shall be taken.
+
+If a Wait Message is sent, the requester is informed that a Power Role Swap might be possible in the 
+future but that no immediate action Shall be taken.
+The PR_Swap Message Shall Not be sent while in EPR Mode. While in EPR Mode if a Power Role Swap is required, 
+an EPR Mode exit Shall be done first.
+After a successful Power Role Swap the Port Partners Shall reset their respective Protocol Layers (equivalent to a 
+Soft Reset): resetting their MessageIDCounter, RetryCounter and Protocol Layer state machines before attempting 
+to establish the First Explicit Contract. At this point the New Source Shall also reset its CapsCounter. 
+The New Source Shall have Rp asserted on the CC wire and the New Sink Shall have Rd asserted on the CC wire as 
+defined in [USB Type-C 2.4]. When performing a Power Role Swap from Source to Sink, the Port Shall change its CC 
+wire resistor from Rp to Rd. When performing a Power Role Swap from Sink to Source, the Port Shall change its CC 
+wire resistor from Rd to Rp. The DFP (Host), UFP (Device) Data Roles and VCONN Source Shall remain unchanged by 
+the Power Role Swap process.
+Note:
+During the Power Role Swap process the Initial Sink does not disconnect even though VBUS drops below 
+vSafe5V.
+For more information regarding the Power Role Swap, refer to:
+
+Section 7.3.2, "Transitions Caused by Power Role Swap"
+
+Section 8.3.2.5, "Data Reset".
+
+Section 8.3.3.19.3, "Policy Engine in Source to Sink Power Role Swap State Diagram".
+
+Section 8.3.3.19.4, "Policy Engine in Sink to Source Power Role Swap State Diagram".
+
+Section 9.1.2, "Mapping to USB Device States".
+6.3.11
+  VCONN_Swap Message
+The VCONN_Swap Message Shall be supported by any Port that can operate as a VCONN Source.
+The VCONN_Swap Message May be sent by either Port Partner to request an exchange of VCONN Source. The recipient 
+of the Message Shall respond by sending an Accept Message, Reject Message, Wait Message (see Section 6.9, 
+"Accept, Reject and Wait") or Not_Supported Message.
+
+If an Accept Message is sent, the Port Partners Shall perform a VCONN Swap. The new VCONN Source Shall 
+send a PS_RDY Message within tVcONNSourceOn to indicate that it is now sourcing VCONN. The initial 
+VCONN Source Shall cease sourcing VCONN within tVCONNSourceOff of receipt of the last bit of the EOP of 
+the PS_RDY Message.
+
+If a Reject Message is sent, the requester is informed that the recipient is unable, or unwilling, to do a 
+VCONN Swap and no action Shall be taken. A Reject Message Shall only be sent by the Port that is not 
+presently the VCONN Source in response to a VCONN_Swap Message. The Port that is presently the VCONN 
+Source Shall Not send a Reject Message in response to VCONN_Swap Message. 
+
+If a Wait Message is sent, the requester is informed that a VCONN Swap might be possible in the future 
+but that no immediate action Shall be taken.   A Port after losing the VCONN Source role due to incoming 
+VCONN Swap request Shall Not initiate a VCONN Swap until at least tVCONNSwapDelayDFP/
+tVCONNSwapDelayUFP after completing the previous VCONN Swap AMS.
+
+If a Not_Supported Message is sent, the requester is informed that VCONN Swap is not supported. The 
+Port that is not presently the VCONN Source May turn on VCONN when a Not_Supported Message is 
+received in response to a VCONN_Swap Message.

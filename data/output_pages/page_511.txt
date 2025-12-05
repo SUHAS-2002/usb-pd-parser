@@ -1,0 +1,47 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 511
+8.3.2.4
+  Soft Reset
+This is an example of a Soft Reset operation. Figure 8.25, "Soft Reset" shows the Messages as they flow across the 
+bus and within the devices to accomplish the Soft Reset.
+Figure 8.25 Soft Reset
+: Protocol
+1: Send Soft Reset
+: PHY
+: PHY
+: Protocol
+2: Soft Reset
+3: Soft Reset + CRC
+4: Soft Reset
+Start CRCReceiveTimer
+5: Soft Reset received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: Soft Reset sent
+Start SenderResponseTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+14: Accept received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Accept sent
+Start CRCReceiveTimer
+: Policy Engine
+: Policy Engine
+Reset MessageIDCounter, stored 
+MessageID and RetryCounter
+Reset MessageIDCounter, stored 
+MessageID and RetryCounter
+Reset Complete, Explicit Contract negotiation
+Reset Initiator
+Reset Responder
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Store copy of MessageID
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer

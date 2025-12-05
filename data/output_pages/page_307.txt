@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+Page 307
+Status
+CN33/NS
+CN3/NS
+I
+I
+I
+Vendor_Defined_Extended
+O/NS
+O/NS
+O/I
+O/I
+O/I
+Table 6.79  Applicability of Extended Messages (Continued)
+Message Type
+Source
+Sink
+Dual-Role 
+Power
+Cable
+Plug SOP’
+Cable
+Plug SOP’’
+VPD13
+1)
+Shall be supported by products that contain batteries.
+2)
+Shall be supported by products that can transmit the Get_Source_Cap_Extended Message.
+3)
+Shall be supported by products that can transmit the Get_Status Message.
+4)
+Shall be supported by products that can transmit the Get_Battery_Cap Message.
+5)
+Shall be supported by products that can transmit the Get_Manufacturer_Info Message.
+6)
+Shall be supported by products that support USB security communication as defined in [USBTypeCAuthentication 
+1.0].
+7)
+Shall be supported by products that support USB firmware update communication as defined in 
+[USBPDFirmwareUpdate 1.0].
+8)
+Shall be supported when PPS is supported.
+9)
+Shall be supported by products that can transmit the Get_PPS_Status Message.
+10)
+Shall be supported when required by a country authority.
+11)
+Shall be supported by products that can transmit the Get_Sink_Cap_Extended Message.
+12)
+Shall be supported by Active Cables.
+13)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a CT-VPD Shall only take place 
+when not Connected to a Charger.
+14)
+Shall be supported by products that support operation in EPR Mode.
+15)
+Shall be supported by Sources that support the Alert Message.

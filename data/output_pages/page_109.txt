@@ -1,0 +1,18 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 109
+5.8.5.6
+  Fast Role Swap Transmission
+The Fast Role Swap process is intended for use by a PDUSB Hub that presently has an external supply and is 
+providing power both through its downstream Ports to USB Devices and upstream to a USB Host such as a laptop. 
+On removal of the external wall supply Fast Role Swap enables a VBUS supply to be maintained by allowing the USB 
+Host to apply vSafe5V when it sees VBUS droop below vSafe5V after having detected Fast Role Swap Signaling. The 
+Fast Role Swap AMS is then used to correctly assign Source/Sink Power Roles and configure the Rp/Rd resistors (see 
+Section 8.3.2.8, "Fast Role Swap").
+The Initial Source Shall signal a Fast Role Swap Request by driving CC to ground with a resistance of less than 
+rFRSwapTx for tFRSwapTx. The Initial Source Shall only send a Fast Role Swap Request when it has an Explicit 
+Contract. The Initial Source May send a Fast Role Swap Request even if it has not yet had its Sink Capabilities queried 
+by the Initial Sink. On transmission of the Fast Role Swap Request any pending Messages Shall be Discarded (see 
+Section 6.12.2.2.1, "Common Protocol Layer Message Transmission State Diagram").
+The Fast Role Swap Signaling May override any active transmissions. 
+Since the Initial Sink's response to the Fast Role Swap signal is to send an FR_Swap Message, the Initial Source Shall 
+ensure Rp is set to SinkTxOK once the Fast Role Swap Signaling is complete.

@@ -1,0 +1,150 @@
+Page 1010
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Note:
+EPR Managed Capability Ports when power constrained are defined to offer higher voltages at lower Port 
+Present PDP (as per Table 10.13, "EPR Source Capabilities when Port Present PDP is less than Port 
+Maximum PDP and using an EPR-capable cable") than the port's Port Maximum PDP (as per Table 10.12, 
+"EPR Source Capabilities based on the Port Maximum PDP and using an EPR Capable Cable") because these 
+voltages would otherwise be available if the Managed Capability Port power hadn't been constrained. 
+Managed Capability Ports are required to be properly identified to the user based on the port's Port 
+Maximum PDP.
+In reference to Table 10.13, "EPR Source Capabilities when Port Present PDP is less than Port Maximum PDP and 
+using an EPR-capable cable", Table 10.14, "EPR Source Examples when Port Present PDP is less than Port Maximum 
+PDP" gives examples of which EPR Capabilities, in addition to the required SPR Fixed Supply PDOs and SPR AVS 
+APDO, are Advertised based on Port Present PDP and the port's Port Maximum PDP.
+Table 10.13  EPR Source Capabilities when Port Present PDP is less than Port Maximum PDP and using an 
+EPR-capable cable
+Port Present 
+PDP (W)
+SPR Fixed and AVS
+28V Fixed
+36V Fixed4
+48V Fixed4
+EPR AVS with Max Voltage of 28V, 36V or 48V 
+per Table 10.122, 5, 6
+28V
+36V
+48V
+7.5 ≤ x ≤ 15
+Required per Table 10.2, "SPR 
+Normative Voltages and 
+Minimum Currents" (or 
+Table 10.3, "SPR Source 
+Capabilities When Port 
+Present PDP is less than Port 
+Maximum PDP" when 
+applicable)
+(PDP/28) A3
+(PDP/36) A3
+(PDP/48) A3
+
+(15V – max voltage):
+
+(PDP/AVS Voltage) A3
+15 < x ≤ 27
+27 < x ≤ 45
+(PDP/28) A1
+45 < x ≤ 60
+(PDP/36) 
+A1
+60 < x ≤ 100
+(PDP/48) 
+A1
+Up to 75W:
+
+(15V – max voltage):
+
+(PDP/AVS voltage) A 
+Above 75W:
+
+(15V – PDP/5A):
+
+5A 
+
+(>PDP/5A – max voltage):
+
+(PDP/AVS voltage) A
+100 < x ≤ 140
+Table 10.3, "SPR Source 
+Capabilities When Port 
+Present PDP is less than Port 
+Maximum PDP" with a Port 
+Present PDP of 100W.
+140 < x ≤ 180
+5A
+180 < x ≤ 240
+5A
+5A
+1)
+The Fixed Supply PDOs Maximum Current field Shall Advertise either RoundDown (PDP/voltage) or RoundUp (PDP/voltage) to the 
+nearest 10mA.
+2)
+EPR Sources Shall reject any Request for more than the Advertised PDP, i.e., when output voltage and operating current requested in 
+the Sink RDO is outside of the defined AVS voltage and current range represented by the Advertised PDP, the RDO will be rejected.
+3)
+EPR Sources May offer an (A)PDOs at this Port Present PDP. When offered, the Fixed Supply PDOs Maximum Current field Shall 
+Advertise either RoundDown (PDP/Voltage) or RoundUp (PDP/Voltage) to the nearest 10mA.
+4)
+This EPR Fixed Supply voltage is only available if allowed by Table 10.12, "EPR Source Capabilities based on the Port Maximum 
+PDP and using an EPR Capable Cable" based on the port’s PDP Rating.
+5)
+The Max Voltage for AVS is what is allowed by TTable 10.12, "EPR Source Capabilities based on the Port Maximum PDP and 
+using an EPR Capable Cable" based on the port’s Port Maximum PDP.
+6)
+The current available based on AVS voltage is as indicated in this column. The current defined here is describing the top edge of the 
+Valid Operating Region as illustrated in Figure 10.6, "Valid EPR AVS Operating Region". AVS APDO does not have a Maximum 
+Current field so the maximum current has to be calculated from the PDP.
+Table 10.14  EPR Source Examples when Port Present PDP is less than Port Maximum PDP
+Port Maximum 
+PDP
+Port Present 
+PDP
+Offers
+28V Fixed
+36V Fixed
+48V Fixed
+AVS
+200W
+108W
+3.86A
+3A
+2.25A
+48V@108W
+160W
+108W
+3.86A
+3A
+Not offered
+36V@108W
+120W
+108W
+3.86A
+Not offered
+Not offered
+28V@108W
+200W
+72W
+2.57A
+2A
+1.5A
+48V@72W
+160W
+72W
+2.57A
+2A
+Not offered
+36V@72W
+120W
+72W
+2.57A
+Not offered
+Not offered
+28V@72W
+200W
+36W
+1.29A
+1A1
+0.75A1
+48V@36W1
+1)
+These Capabilities are not required but may be offered at this Port Present PDP.

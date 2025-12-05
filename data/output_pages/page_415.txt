@@ -1,0 +1,78 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 415
+7.4.3
+  Common Electrical Parameters
+Electrical Parameters that are common to both the Source and the Sink that Shall be followed are specified in 
+Table 7.25, "Common Source/Sink Electrical Parameters"”.
+Table 7.25  Common Source/Sink Electrical Parameters
+Parameter
+Description
+MIN TYP MAX UNITS
+Reference
+tSafe0V
+Time to reach vSafe0V max.
+650
+ms
+Section 7.1.5
+Figure 7.10
+Table 7.20
+Table 7.21
+tSafe5V
+Time to reach vSafe5V max.
+275
+ms
+Section 7.1.5
+Figure 7.10
+Table 7.20
+Table 7.21
+tVCONNReapplied
+When the UFP is the VCONN Source: 
+time from the last bit of the 
+GoodCRC acknowledging the 
+PS_RDY Message before 
+reapplying VCONN. 
+When the DFP is the VCONN Source: 
+time from when VCONN drops 
+below vRaReconnect.
+10
+20
+ms
+Figure 7.19
+Figure 7.20
+tVCONNValid
+Time from tVCONNReapplied until 
+VCONN is within vVconnValid (see 
+[USB Type-C 2.4]).1
+0
+5
+ms
+Figure 7.19
+Figure 7.20
+tVCONNZero
+Time from the last bit of the 
+GoodCRC acknowledging the 
+Accept Message in response to the 
+Data_Reset Message until VCONN is 
+below vRaReconnect (see [USB 
+Type-C 2.4]).
+125
+ms
+Figure 7.19
+Figure 7.20
+vSafe0V
+Safe operating voltage at “zero 
+volts”.
+0
+0.8
+V
+Section 7.1.5
+vSafe5V
+Safe operating voltage at 5V. See 
+[USB 2.0] and [USB 3.2] for 
+allowable VBUS voltage range.
+4.75
+5.5
+V
+Section 7.1.5
+1)
+tVCONNStable (See [USB Type-C 2.4]) still applies.

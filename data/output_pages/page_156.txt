@@ -1,0 +1,117 @@
+Page 156
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Table 6.24  Battery Request Data Object
+Bit(s)
+Field
+Description
+B31…28
+Object Position
+Object position (0000b and 1110b…1111b are 
+Reserved and Shall Not be used)
+B27
+Giveback
+GiveBack flag = 0- Deprecated and Shall be set to zero.
+B26
+Capability Mismatch
+Set to ‘1’ for a Capabilities Mismatch
+B25
+USB Communications Capable
+Set to ‘1’ if USB Communications Capable
+B24
+No USB Suspend
+Set to ‘1’ if requesting No USB Suspend
+B23
+Unchunked Extended Messages Supported
+Set to ‘1’ if Unchunked Extended Messages Supported
+B22
+EPR Capable
+Set to ‘1’ if EPR Capable
+B21…20
+Reserved
+Reserved – Shall be set to zero.
+B19…10
+Operating Power
+Operating Power in 250mW units
+B9…0
+Maximum Operating Power
+Maximum Operating Power in 250mW units
+Table 6.25  PPS Request Data Object
+Bit(s)
+Field
+Description
+B31…28
+Object Position
+Object position (0000b and 1110b…1111b are 
+Reserved and Shall Not be used)
+B27
+Reserved
+Reserved – Shall be set to zero.
+B26
+Capability Mismatch
+Set to ‘1’ for a Capabilities Mismatch
+B25
+USB Communications Capable
+Set to ‘1’ if USB Communications Capable
+B24
+No USB Suspend
+Set to ‘1’ if requesting No USB Suspend
+B23
+Unchunked Extended Messages Supported
+Set to ‘1’ if Unchunked Extended Messages 
+Supported
+B22
+EPR Capable
+Set to ‘1’ if EPR Capable
+B21
+Reserved
+Reserved – Shall be set to zero.
+B20...9
+Output Voltage
+Output voltage in 20mV units.
+B8...7
+Reserved
+Reserved – Shall be set to zero.
+B6...0
+Operating Current
+Operating current 50mA units.
+Table 6.26  AVS Request Data Object
+Bit(s)
+Field
+Description
+B31…28
+Object Position
+Object position (0000b and 1110b…1111b are 
+Reserved and Shall Not be used)
+B27
+Reserved
+Reserved – Shall be set to zero.
+B26
+Capability Mismatch
+Set to ‘1’ for a Capabilities Mismatch
+B25
+USB Communications Capable
+Set to ‘1’ if USB Communications Capable
+B24
+No USB Suspend
+Set to ‘1’ if requesting No USB Suspend
+B23
+Unchunked Extended Messages Supported
+Set to ‘1’ if Unchunked Extended Messages 
+Supported
+B22
+EPR Capable
+Set to ‘1’ if EPR Capable
+B21
+Reserved
+Reserved – Shall be set to zero.
+B20...9
+Output Voltage
+Output voltage in 25mV units, the least two 
+significant bits Shall be set to zero making the 
+effective voltage step size 100mV.
+B8...7
+Reserved
+Reserved – Shall be set to zero.
+B6...0
+Operating Current
+Operating current 50mA units.

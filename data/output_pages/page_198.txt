@@ -1,0 +1,57 @@
+Page 198
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.6
+  Alert Message
+The Alert Message is provided to allow Port Partners to inform each other when there is a status change event. 
+Some of the events are critical such as OCP, OVP and OTP, while others are informational such as change in a 
+Battery's status from charging to neither charging nor discharging. 
+The Alert Message Shall only be sent when the Source or Sink detects a status change. 
+The Alert Message Shall contain exactly one Alert Data Object (ADO) and the format Shall be as shown in Figure 
+6.29, "Alert Message" and Table 6.47, "Alert Data Object (ADO)".
+Figure 6.29 Alert Message
+Table 6.47  Alert Data Object (ADO)
+Bit(s)
+Field
+Description
+B31…24
+Type of Alert
+Bit
+Description
+0
+Reserved and Shall be set to zero.
+1
+Battery Status Change Event
+Battery Status Change Event (Attach/Detach/charging/discharging/
+idle)
+2
+OCP Event
+OCP event when set (Source only, for Sink Reserved and Shall be set to 
+zero).
+3
+OTP Event
+OTP event when set
+4
+Operating Condition Change
+Operating Condition Change when set
+5
+Source Input Change Event
+Source Input Change Event when set
+6
+OVP Event
+OVP event when set
+7
+Extended Alert Event
+Extended Alert Event when set
+B23…20
+Fixed Batteries
+When Battery Status Change Event bit set indicates which Fixed Batteries have had 
+a status change. B20 corresponds to Battery 0 and B23 corresponds to Battery 3.
+B19…16
+Hot Swappable 
+Batteries
+When Battery Status Change Event bit set indicates which Hot Swappable 
+Batteries have had a status change. B16 corresponds to Battery 4 and B19 
+corresponds to Battery 7.
+Header
+No. of Data Objects = 1
+ADO

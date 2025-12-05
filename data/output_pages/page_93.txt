@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 93
+Figure 5.9 BMC Receiver Block Diagram
+The USB PD baseband signal Shall be driven on the CC wire with a tristate driver that Shall cause a vSwing swing 
+on CC. The tristate driver is slew rate limited (see min rise/fall time in Section 5.8.5, "BMC Transmitter 
+Specifications") to limit coupling to D+/D- and to other signal lines in the USB Type-C fully featured cables (see [USB 
+Type-C 2.4]). This slew rate limiting can be performed either with driver design or an RC filter on the driver output.
+When sending the Preamble, the transmitter Shall start by transmitting a low level. The receiver Shall tolerate the 
+loss of the first edge. The transmitter May vary the start of the Preamble by tStartDrive min (see Figure 5.10, "BMC 
+Encoded Start of Preamble").
+Figure 5.10 BMC Encoded Start of Preamble
+The transmitter Shall terminate the final bit of the Frame by an edge (the “trailing edge”) to help ensure that the 
+receiver clocks the final bit. If the trailing edge results in the transmitter driving CC low (i.e., the final half-UI of the 
+Frame is high, see Figure 5.11, "Transmitting or Receiving BMC Encoded Frame Terminated by Zero with High-to-Low 
+Last Transition" and Figure 5.12, "Transmitting or Receiving BMC Encoded Frame Terminated by One with High-to-
+Low Last Transition"), then the transmitter:
+
+Shall continue to drive CC low for tHoldLowBMC.
+
+Should release CC to high impedance as soon as possible after min tHoldLowBMC and Shall release CC 
+by max tEndDriveBMC.
+Figure 5.11, "Transmitting or Receiving BMC Encoded Frame Terminated by Zero with High-to-Low Last Transition" 
+illustrates the end of a BMC encoded Frame with an encoded zero for which the final bit of the Frame is terminated 
+by a high to low transition. Figure 5.12, "Transmitting or Receiving BMC Encoded Frame Terminated by One with 
+High-to-Low Last Transition" illustrates the end of a BMC Encoded Frame with an encoded one for which the final 
+bit of the Frame is terminated by a high to low transition. Both figures also illustrate the tInterFrameGap timing 
+requirement before the start of the next Frame when the Port has either been transmitting or receiving the 
+previous Frame (see Section 5.8.5.4, "Inter-Frame Gap").
+Data
+from CC
+5b4b
+Decoder
+CRC
+BMC 
+Decoder
+SOP 
+Detect
+1UI
+1UI
+1UI
+1UI
+1UI
+1UI
+0
+1
+0
+1
+0
+1
+etc
+High Impedance
+(level set by Rp/Rd)
+tStartDrive

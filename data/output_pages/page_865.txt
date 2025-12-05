@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 865
+8.3.3.10.2
+  Give Status State Diagram
+Figure 8.151, "Give Status State Diagram" shows the state diagram for a Source on receiving a Get_Status Message. 
+See also Section 6.5.2, "Status Message".
+Figure 8.151 Give Status State Diagram
+8.3.3.10.2.1
+  PE_Give_Status State
+The Policy Engine Shall transition to the PE_Give_Status state, from the PE_SRC_Ready, PE_SNK_Ready or 
+PE_CBL_Ready States, when a Get_Status Message is received. 
+On entry to the PE_Give_Status state the Policy Engine Shall request the present Source status from the Device 
+Policy Manager and then send a Status Message based on these capabilities.
+The Policy Engine Shall transition back to the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready States as 
+appropriate (see Figure 8.132, "Source Port State Diagram", Figure 8.133, "Sink Port State Diagram"and Figure 
+8.203, "Cable Ready State Diagram") when:
+
+The Status Message has been successfully sent.
+Get_Status Message
+received
+Status
+Message sent
+PE_SRC_Ready,
+PE_SNK_Ready,
+PE_CBL_Ready
+PE_Give_Status
+Actions on entry:
+Get present Status from Device Policy Manager
+Send Status Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

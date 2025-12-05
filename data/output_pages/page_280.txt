@@ -1,0 +1,24 @@
+Page 280
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Chunked Rx State Machine Shall transition to the RCH_Report_Error state when:
+
+A Message, other than a Chunk, is received from the Protocol Layer, or
+
+The ChunkSenderResponseTimer expires.
+6.12.2.1.2.6
+  RCH_Report_Error State
+The Chunked Rx State Machine Shall enter the RCH_Report_Error state:
+
+When any Message is received and the Chunked Rx State Machine is not in one of the states 
+RCH_Waiting_Chunk or RCH_Wait_For_Message_From_Protocol_Layer.
+On entry to the RCH_Report_Error state the Chunked Rx state machine Shall:
+
+Report the error to the Policy Engine.
+
+If the state was entered because a Message was received, this Message Shall be passed to the Policy 
+Engine.
+The Chunked Rx State Machine Shall transition to the RCH_Wait_For_Message_From_Protocol_Layer state when:
+
+The error has been reported.
+
+Any Message received was passed to the Policy Engine.

@@ -1,0 +1,40 @@
+Page 124
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 6.6 Example byte transmission for Security_Response Message of Data Size 30 (Chunked bit is set to 
+zero)
+6.2.1.2.5.2
+  Security_Request/Security_Response Chunked Example
+Figure 6.7, "Example Security_Request sequence Chunked (Chunked bit = 1)" illustrates a typical sequence for a 
+Security_Request Message responded to by a Security_Response Message using Chunked Extended Messages 
+(Chunked bit is one) between a USB Host and a Charger.
+Note:
+ Chunk Number zero in every Extended Message is sent without the need for a Chunk Request, but Chunk 
+Number one and following need to be requested with a Chunk request.
+Message Header
+(16 bit)
+Message Type = 
+Security_Response
+Number of Data 
+Objects = 0 (Reserved)
+Data (30 bytes)
+Extended Message 
+Header
+(16 bit)
+Chunked = 0
+Data Size = 30
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+Message 
+Header 
+LSB
+Message
+Header 
+MSB
+B0
+B1
+B28
+B29

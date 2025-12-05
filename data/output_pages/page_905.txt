@@ -1,0 +1,10 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 905
+8.3.3.19.6
+  Policy Engine in Sink to Source Fast Role Swap State Diagram
+Dual-Role Ports that combine Sink and Source functionality Shall comprise Sink and Source Policy Engine state 
+machines. In addition, they Should have the capability to do a Fast Role Swap from the PE_SNK_Ready state and 
+Shall return to USB Default Operation on a Hard Reset.
+Figure 8.179, "Dual-role Port in Sink to Source Fast Role Swap State Diagram" shows the additional state diagram 
+required to perform a Fast Role Swap from Sink to Source Power Roles and the changes that Shall be followed for 
+error handling.

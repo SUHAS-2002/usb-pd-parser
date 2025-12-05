@@ -1,0 +1,52 @@
+Page 778
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.14.4.2
+  DFP to UFP Exit Mode
+Figure 8.112, "DFP to UFP Exit Mode" shows an example sequence between a DFP and a UFP, where the DFP 
+commands the UFP to exit the only Active Mode.
+Figure 8.112 DFP to UFP Exit Mode
+: DFP Policy Engine
+: Protocol
+: PHY
+: PHY
+: Protocol
+: UFP Policy Engine
+DFP
+UFP
+1: Send Exit Mode
+2: Exit Mode
+3: Exit Mode + CRC
+4: Exit Mode
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Exit Mode received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9: Exit Mode sent
+Start VDMModeExitTimer
+10: Send Exit Mode ACK
+11: Exit Mode ACK
+12: Exit Mode ACK + CRC
+13: Exit Mode ACK
+Check MessageID against local copy
+Store copy of MessageID
+14: Exit Mode ACK received
+Stop VDMModeExitTimer
+Enter USB Operation
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Exit Mode ACK sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+In Mode
+In Mode
+Enter USB Safe State
+Evaluate Exit Mode request
+Enter USB Operation
+USB operation

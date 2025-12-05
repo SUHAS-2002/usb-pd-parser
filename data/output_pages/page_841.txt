@@ -1,0 +1,86 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 841
+8.3.3.4
+  SOP Soft Reset and Protocol Error State Diagrams
+8.3.3.4.1
+  SOP Source Port Soft Reset and Protocol Error State Diagram
+Figure 8.134, "SOP Source Port Soft Reset and Protocol Error State Diagram" below shows the state diagram for the 
+Policy Engine in a Source Port when performing a Soft Reset of its Port Partner i.e., using SOP. The following sections 
+describe operation in each of the states.
+Figure 8.134 SOP Source Port Soft Reset and Protocol Error State Diagram
+8.3.3.4.1.1
+  PE_SRC_Send_Soft_Reset State
+The PE_SRC_Send_Soft_Reset state Shall be entered from any state when:
+
+A Protocol Error on SOP is detected by the Protocol Layer during a Non-interruptible AMS (see Section 
+6.8.1, "Soft Reset and Protocol Error") or
+
+A Message has not been sent after retries to the Sink or
+
+When not in an Explicit Contract and Protocol Errors occurred on SOP during any AMS where the first 
+Message in the AMS has not yet been sent i.e., an unexpected Message is received instead of the expected 
+GoodCRC Message response or
+
+When in SPR Mode and the EPR Mode entry process fails.
+The main exceptions to this rule are when: 
+
+The Source is in the PE_SRC_Send_Capabilities state, there is a Source_Capabilities Message sending 
+failure on SOP (without a GoodCRC Message) and the Source is not presently Attached (as indicated in 
+Figure 8.132, "Source Port State Diagram"). In this case, the PE_SRC_Discovery state is entered (see 
+Section 8.3.3.2.2, "PE_SRC_Discovery State"). 
+
+When the voltage is in transition due to a new Explicit Contract being Negotiated (see Section 8.3.3.2, 
+"Policy Engine Source Port State Diagram"). In this case Hard Reset Signaling will be generated.
+
+During a Power Role Swap when the power supply is in transition (see Section 8.3.3.19.3, "Policy Engine 
+in Source to Sink Power Role Swap State Diagram" and Section 8.3.3.19.4, "Policy Engine in Sink to Source 
+Power Role Swap State Diagram"). In this case USB Type-C Error Recovery will be triggered directly.
+
+During a Data Role Swap when there is a mismatch in the Port Data Role field (see Section 6.2.1.1.6, 
+"Port Data Role"). In this case USB Type-C Error Recovery will be triggered directly.
+PE_SRC_Send_Soft_Reset
+Actions on entry:
+Reset Protocol Layer
+Send Soft Reset message to SOP
+Initialize and run SenderResponseTimer
+Power = DefauIt/Implicit or Explicit Contract
+PD = Connected
+Message not sent after retries on SOP (no GoodCRC received)1  |
+Protocol Error2 on SOP during AMS |
+(Not in Explicit Contract &
+Protocol Error2 on SOP before first Message 
+in AMS sent (no GoodCRC received) |
+(SPR Mode & EPR Mode Entry process fails)3
+SenderResponseTimer
+Timeout |
+Transmission
+Error indication 
+from Protocol Layer
+Accept message
+Received from SOP
+Accept message
+Sent to SOP
+Soft Reset message 
+Received on SOP
+PE_SRC_Soft_Reset
+Actions on entry:
+Reset Protocol Layer
+Send Accept message to SOP
+Power = DefauIt/Implicit or 
+Explicit Contract 
+PD = Connected
+PE_SRC_Send_Capabilities
+Transmission
+Error indication 
+from Protocol Layer
+PE_SRC_Ready
+In Explicit Contract &
+Protocol Error2 before first Message 
+in AMS sent (no GoodCRC received)
+PE_SRC_Hard_Reset
+1)
+Excludes the Soft_Reset Message itself.
+2)
+An Unrecognized or Unsupported Message received on SOP will result in a Not_Supported Message response being generated on SOP (see Section 6.3.16 “Not_Supported Message”).
+3)
+See Section 6.4.10.1 “Process to enter EPR Mode” for the conditions when a Soft_Reset Message Shall be sent by the Source during the EPR Mode entry process.

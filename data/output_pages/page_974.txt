@@ -1,0 +1,23 @@
+Page 974
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Sink EPR Mode Exit
+PE_SNK_Send_EPR_Mode_Exit
+Section 8.3.3.26.4.1
+PE_SNK_EPR_Mode_Exit_Received
+Section 8.3.3.26.4.2
+BIST
+BIST Carrier Mode
+PE_BIST_Carrier_Mode
+Section 8.3.3.27.1.1
+BIST Carrier Mode
+PE_BIST_Test_Mode
+Section 8.3.3.27.2.1
+BIST Shared Capacity Test Mode
+PE_BIST_Shared_Capacity_Test_Mode
+Section 8.3.3.27.3.1
+USB Type-C referenced states
+ErrorRecovery
+Section 8.3.3.28.1
+Table 8.154  Policy Engine States
+State name
+Reference

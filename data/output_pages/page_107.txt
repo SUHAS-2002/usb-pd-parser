@@ -1,0 +1,32 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 107
+5.8.5.1
+  Capacitance when not transmitting
+cReceiver is the capacitance that a DFP or UFP Shall present on the CC line when the DFP or UFP's receiver is not 
+transmitting on the line. The transmitter May have more capacitance than cReceiver while driving the CC line, but 
+Shall meet the waveform mask requirements. Once transmission is complete, the transmitter Shall disengage 
+capacitance in excess of cReceiver from the CC wire within tInterFrameGap.
+5.8.5.2
+  Source Output Impedance
+Source output impedance zDriver is determined by the driver resistance and the shunt capacitance of the Source 
+and is hence a frequency dependent term. zDriver impacts the noise ingression in the cable. It is specified such that 
+the noise at the Receiver is bounded.
+zDriver is defined by the following equation:
+zDriver=rOutput/(1+s*rOutput*cShunt)
+Figure 5.25 Transmitter diagram illustrating zDriver
+cShunt Shall Not cause a violation of cReceiver when not transmitting.
+5.8.5.3
+  Bit Rate Drift
+Limits on the drift in fBitRate are set to help low-complexity receiver implementations.
+fBitRate is the reciprocal of the average bit duration from the previous 32 bits at a given portion of the Packet. The 
+change in fBitRate during a Packet Shall be less than pBitRate. The reference bit rate (refBitRate) is the average 
+fBitRate over the last 32 bits of the Preamble. fBitRate throughout the Packet, including the EOP, Shall be within 
+pBitRate of refBitRate. pBitRate is expressed as a percentage:
+pBitRate = | fBitRate - refBitRate | / refBitRate x 100%
+The transmitter Shall have the same pBitRate for all Packet types. The BIST Carrier Mode and Bit Stream signals 
+are continuous signals without a Payload. When checking pBitRate any set of 1044 bits (20 bit SOP followed by 
+1024 PRBS bits) within a continuous signal May be considered as the part of the Packet following the Preamble and 
+the 32 preceding bits considered to be the last 32 bits of the Preamble used to compute refBitRate.
+rOutput
+cShunt
+zDriver

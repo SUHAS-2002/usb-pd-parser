@@ -1,0 +1,13 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 379
+7.3.1.3.5
+  Same Request Programmable Power Supply (PPS)
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed when the Sink requests 
+the same voltage and current levels as the present Negotiated levels for voltage and current is shown in Figure 7.35, 
+"Transition Diagram for no change in Current or Voltage in PPS mode". The sequence that Shall be followed is 
+described in Table 7.14, "Sequence Description for no change in Current or Voltage in PPS mode". The timing 
+parameters that Shall be followed are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink 
+Electrical Parameters", and Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In Figure 7.35, "Transition Diagram for no change in Current or Voltage in PPS mode", the Sink has previ-
+ously sent a Request Message to the Source.

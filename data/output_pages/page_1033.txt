@@ -1,0 +1,13 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1033
+Figure D.2 BMC AC and DC noise from VBUS at Power Sink
+Figure D.3 Sample BMC Signals (a) without USB 2.0 SE0 Noise (b) with USB 2.0 SE0 Noise
+The BMC signals shown in Figure D.3, "Sample BMC Signals (a) without USB 2.0 SE0 Noise (b) with USB 2.0 SE0 Noise" 
+are sampled every 50ns and the scaled derivative waveforms, Vcc(t) - Vcc (t - 50ns), without and with [USB 2.0] 
+noise are shown in Figure D.4, "Scaled BMC Signal Derivative with 50ns Sampling Rate (a) without USB 2.0 Noise (b) 
+with USB 2.0 Noise" (a) and (b), respectively. In Figure D.4, "Scaled BMC Signal Derivative with 50ns Sampling Rate 
+(a) without USB 2.0 Noise (b) with USB 2.0 Noise" (a), if there is no [USB 2.0] noise, the derivative waveform just 
+changes slightly before and after the VBUS current transition. That means, the slope of the BMC waveform is not 
+sensitive to the DC offset and is very useful to be used to design a robust receiver against a large DC offset. However, 
+the derivative waveforms with [USB 2.0] noise have large perturbation as shown in Figure D.4, "Scaled BMC Signal 
+Derivative with 50ns Sampling Rate (a) without USB 2.0 Noise (b) with USB 2.0 Noise" (b). 

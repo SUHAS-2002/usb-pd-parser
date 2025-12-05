@@ -1,0 +1,82 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 43
+Default Contract
+An agreement on current at 5V is reached between a Port Pair based on USB Type-C current 
+([USB Type-C 2.4]).
+Detach
+Mechanical unjoining of the Port Pair by removal of the cable.
+Detached
+USB Power Delivery Ports which are no longer mechanically joined with USB cable.
+Detaches
+See Detach.
+Device
+When lower cased (device), it refers to any USB product, either USB Device or USB Host. When 
+in upper case refers to a USB Device (Peripheral or Hub).
+Device Policy
+Policy applied across multiple Ports in a Source or Sink.
+Device Policy Manager
+Module running in a Source or Sink that applies Device Policy to each Port in the device, as Local 
+Policy, via the Policy Engine.
+DFP
+See Downstream Facing Port.
+DFP VDO
+VDO returned by the DFP containing Capabilities.
+Differential Non-Linearity
+The difference between an ideal LSB step, and the real observable LSB step when the Power 
+Source is operating in either PPS or AVS mode. A DNL of 0 indicates that the step is ideal. If DNL 
+is positive the step is larger than the ideal LSB, and if it is negative then the step is smaller than 
+ideal.
+Discovery Process
+Command sequence using Structured Vendor Defined Messages resulting in identification of the 
+Port Partner and Cable Plug, and their supported SVIDs and Alternate Modes.
+DNL
+See Differential Non-Linearity.
+Downstream Facing Port
+Indicates the Port's position in the USB topology which typically corresponds to a USB Host root 
+Port or Hub downstream Port as defined in [USB Type-C 2.4]. At connection, the Port defaults to 
+operation as the Source and as a USB Host (when USB Communication is supported).
+DPM
+See Device Policy Manager.
+DRD
+See Dual-Role Data.
+DRP
+See Dual-Role Power.
+Dual-Role Data
+Capability of operating as either a DFP or UFP.
+Dual-Role Data Port
+A Port capable of operating as DRD.
+Dual-Role Power
+Capability of operating as either a Source or Sink.
+Dual-Role Power Device
+A product containing one or more Dual-Role Power Ports that can operate as either a Source or 
+a Sink.
+Dual-Role Power Port
+A Port capable of operating as a DRP.
+EM
+See Extended Message.
+End of Packet
+K-code marker used to delineate the end of a Packet.
+EOP
+See End of Packet.
+EPR
+See Extended Power Range.
+EPR AVS
+A power supply operating in EPR Mode whose output voltage can be adjusted to an operating 
+voltage within its Advertised range. Unlike SPR PPS it does not support current limit. The AVS 
+Capabilities are exposed by the Adjustable Voltage Supply APDO (see Section 6.4.1.2.4, 
+"Augmented Power Data Object (APDO)"). 
+EPR AVS Mode
+A EPR Source, currently operating in an EPR AVS Contract, is said to be operating in EPR AVS 
+Mode.
+EPR Cable
+A cable which is rated to operate in both SPR Mode and EPR Mode.
+EPR Capabilities
+The EPR Capabilities Messages (EPR_Source_Capabilities and EPR_Sink_Capabilities) are 
+Extended Messages with the first seven positions filled with the same SPR (A)PDOs returned by 
+the SPR Capabilities Messages (Source_Capabilities and Sink_Capabilities) followed by the EPR 
+(A)PDOs starting in the eighth position.
+EPR Capable
+A product which has the ability to operate in EPR Mode.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

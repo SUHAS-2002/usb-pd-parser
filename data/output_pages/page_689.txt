@@ -1,0 +1,77 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 689
+Table 8.109, "Steps for a Source getting Sink's Battery Manufacturer Information Sequence" below provides a 
+detailed explanation of what happens at each labeled step in Figure 8.82, "Source Gets Sink's Battery Manufacturer 
+Information" above.
+Table 8.109  Steps for a Source getting Sink's Battery Manufacturer Information Sequence
+Step
+Source Port
+Sink Port
+1
+The Port has Port Power Role set to Source and the Rp 
+pull up on its CC wire.
+Policy Engine directs the Protocol Layer to send a 
+Get_Manufacturer_Info Message with a request for 
+Battery information for a given Battery.
+The Port has Port Power Role set to Sink with the Rd pull 
+down on its CC wire.
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer appends CRC and sends the 
+Get_Manufacturer_Info Message. Starts 
+CRCReceiveTimer.
+PHY Layer receives the Get_Manufacturer_Info 
+Message and checks the CRC to verify the Message.
+4
+PHY Layer removes the CRC and forwards the 
+Get_Manufacturer_Info Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Get_Manufacturer_Info Message information to the 
+Policy Engine that consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer receives the GoodCRC Message and checks 
+the CRC to verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+8
+PHY Layer removes the CRC and forwards the 
+GoodCRC Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Get_Manufacturer_Info Message was successfully sent. 
+Policy Engine starts SenderResponseTimer.
+10
+Policy Engine requests the DPM for the Battery’s 
+manufacturer information for a given Battery which is 
+provided. 
+The Policy Engine tells the Protocol Layer to form a 
+Manufacturer_Info Message.
+11
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+12
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the 
+Manufacturer_Info Message.
+PHY Layer appends a CRC and sends the 
+Manufacturer_Info Message. Starts CRCReceiveTimer.
+13
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received 
+Manufacturer_Info Message information to the Policy 
+Engine that consumes it.
+14
+The Policy Engine stops the SenderResponseTimer.

@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 417
+8.2
+  Device Policy Manager
+The Device Policy Manager is responsible for managing the power used by one or more USB Power Delivery ports. 
+In order to have sufficient knowledge to complete this task it needs relevant information about the device it resides 
+in. Firstly, it has a priori knowledge of the device including the Capabilities of the power supply and the receptacles 
+on each Port since these will for example have specific current ratings. It also has to know information from the 
+USB-C® Port Control module regarding cable insertion, type and rating of cable etc. It also has to have information 
+from the power supply about changes in its Capabilities as well as being able to request power supply changes. 
+With all of this information the Device Policy Manager is able to provide up to date information regarding the 
+Capabilities available to a specific Port and to manage the power resources within the device.
+When working out the Capabilities for a given Source Port the Device Policy Manager will take into account firstly 
+the current rating of the Port's receptacle and whether the inserted cable is PD or non-PD rated and if so, what is 
+the capability of the plug. This will set an upper bound for the Capabilities which might be offered. After this the 
+Device Policy Manager will consider the available power supply resources since this will bound which voltages and 
+currents might be offered. Finally, the Device Policy Manager will consider what power is currently allocated to 
+other ports, which power is in the Power Reserve and any other amendments to Policy from the System Policy 
+Manager. The Device Policy Manager will offer a set of Capabilities within the bounds detailed above.
+When selecting a capability for a given Sink Port the Device Policy Manager will look at the Capabilities offered by 
+the Source. This will set an upper bound for the Capabilities which might be requested. The Device Policy Manager 
+will also consider which Capabilities are required by the Sink in order to operate. If an appropriate match for 
+voltage and Current can be found within the limits of the receptacle and cable, then this will be requested from the 
+Source. If an appropriate match cannot be found then a request for an offered voltage and current will be made, 
+along with an indication of a Capabilities Mismatch.
+USB PD defines two types of power sources:
+
+Predefined voltage sources (Fixed Supply, Variable Supply and Battery Supply) 
+
+Programmable voltage sources:
+
+Programmable Power Supply (PPS)
+
+Adjustable Voltage Supply (AVS)
+The first are generally used for classic charging wherein the Charger electronics reside inside the Sink. The Device 
+Policy Manager in the Sink requests a fixed voltage from the list of PDOs offered by the Source and which is 
+converted internally to charge the Sink's Battery and/or power its function. 
+The second moves the Charger electronics that manage the voltage control outside the Sink and back into the 
+Source itself. When in SPR PPS Mode, the Device Policy Manager in the Sink requests a specific voltage with a 20mV 
+accuracy and sets a current limit. Unlike traditional USB where Sinks are responsible for limiting the current, they 
+consume, the SPR PPS Source limits the current to what the Sink has requested. When operating in, the Device Policy 
+Manager in the Sink requests a specific voltage with a 100mV accuracy and requests a maximum current it is 
+allowed to draw. 
+Note:
+The AVS Sources unlike SPR PPS Sources do not support current limit mode. A Sink operating in is respon-
+sible not to draw more current than it requests.
+The process to request power is the same for both types of power Sources although the actual format and contents 
+of the request are slightly different. The primary operational differences are:
+
+A Sink that is using SPR PPS is required to periodically sent requests to let the Source know it is still alive 
+and communicating. When this communication fails a Hard Reset results.
+
+A Sink operating in SPR Mode has no special timing requirements.
+
+A Sink operating in EPR Mode is required to periodically communicate with the Source to let it know it 
+is still operational. If the communication fails, a Hard Reset results.
+For Dual-Role Power Ports the Device Policy Manager manages the functionality of both a Source and a Sink. In 
+addition, it is able to manage the Power Role Swap process between the two. In terms of power management this 

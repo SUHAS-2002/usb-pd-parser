@@ -1,0 +1,74 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 51
+Upstream Facing Port
+Indicates the Port’s position in the USB topology typically a Port on a Device as defined in [USB 
+Type-C 2.4]. At connection, the Port defaults to operation as a USB Device (when USB 
+Communication is supported) and Sink.
+USB Attached State
+Synonymous with the [USB 2.0] and [USB 3.2] definition of the Attached state
+USB Communication
+Transfer of USB data Packets as defined in [USB 2.0] and [USB 3.2].
+USB Default Operation
+Operation of a Port at Attach or after a Hard Reset where the DFP Source applies vSafe5V on VBUS 
+and the UFP Sink is operating at vSafe5V as defined in [USB 2.0], [USB 3.2], [USB Type-C 2.4] or 
+[USBBC 1.2].
+USB Device
+Either a Hub or a Peripheral device as defined in [USB 2.0], [USB 3.2] and [USB4].
+USB Host
+The computer system where the USB Host controller is installed as defined in [USB 2.0], [USB 
+3.2] and [USB4].
+USB Hub
+See Hub.
+USB Powered State
+Synonymous with the [USB 2.0] and [USB 3.2] definition of the powered state.
+USB Safe State
+State of the USB Type-C connector when there are pins to be re-purposed (see [USB Type-C 2.4]) 
+so they are not damaged by and do not cause damage to their Port Partner.
+USB Type-A
+Term used to refer to any A plug or receptacle including USB Micro-A plugs and USB Standard-
+A plugs and receptacles. USB Micro-AB receptacles are assumed to be a combination of USB 
+Type-A and USB Type-B.
+USB Type-B
+Terms used to refer to any B-plug or receptacle including USB Micro-B plugs and USB Standard-
+B plugs and receptacles, including the PD and non-PD versions. USB Micro-AB receptacles are 
+assumed to be a combination of USB Type-A and USB Type-B.
+USB Type-C
+Term used to refer to the USB Type-C connector plug, or receptacle as defined in [USB Type-C 
+2.4].
+USB Type-C Multi-Port 
+Charger
+A product that exposes multiple USB Type-C Source Ports for the purpose of charging multiple 
+connected USB Devices as defined in [USB Type-C 2.4].
+USB-C® Port Control
+Module in a PD Capable device which controls Attach/Detach and either detects or sets the Rp 
+value.
+USB-IF PD SID
+Standard ID allocated to this specification by the USB Implementer’s Forum.
+USB4® Mode
+Device is operating in a Mode as defined in [USB4].
+UUT
+See Unit Under Test.
+Variable Supply
+A poorly regulated power supply that is not a Battery. This is exposed by the Variable Supply PDO 
+(see Section 6.4.2, "Request Message").
+VBUS
+The VBUS wire delivers power from a Source to a Sink.
+VCONN
+Once the connection between USB Host and device is established, the CC pin (CC1 or CC2) in the 
+receptacle that is not connected via the CC wire through the standard cable is re-purposed to 
+source VCONN to power circuits in a Cable Plug, VCONN Powered Accessory or VCONN Powered USB 
+Device (see [USB Type-C 2.4]).
+VCONN Powered Accessory
+An accessory that is powered from VCONN to operate in an Alternate Mode (see [USB Type-C 
+2.4]).
+VCONN Powered USB Charge 
+Through Device
+A CT-VPD is a VPD with an additional port for connecting a Source (e.g., a Charger) as defined in 
+[USB Type-C 2.4]. 
+When no Charger is connected, a CT-VPD behaves as a VPD. 
+When a Charger is connected, no PD communication to the CT-VPD itself is possible as CC is 
+connected to the Charger port. Hence all PD communication then is with the Charger and the 
+cable with which it is connected.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

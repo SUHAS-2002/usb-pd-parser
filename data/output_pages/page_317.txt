@@ -1,0 +1,36 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 317
+PPS response to the load change Shall settle within the iPpsCLNew tolerance band by the time 
+tPpsCVCLTransient. The Operating Mode Flag Shall be set when the SPR PPS load change response 
+settles.
+
+If the PPS Status OMF is set both before and after the load change, the SPR PPS responds by adjusting 
+its output voltage to maintain the output current. The SPR PPS output current Shall stay within the 
+iPpsCLTransient range. The SPR PPS response to the load change Shall settle within the iPpsCLNew 
+tolerance band by the time tPpsCLSettle. The Operating Mode Flag Shall remain set during the load 
+change response of the SPR PPS.
+
+If the PPS Status OMF is set before the load change and cleared after the load change, the PPS responds 
+to the load change by increasing its output voltage to vPpsNew and then maintaining it. The SPR PPS 
+output voltage Shall stay within the vPpsCLCVTransient range. The SPR PPS response to the load 
+change Shall settle within the vPpsNew tolerance band by the time tPpsCLCVTransient. The Operating 
+Mode Flag Shall be cleared when the PPS load change response settles.
+The SPR PPS Source Shall maintain its output voltage at the value requested in the PPS RDO for all static and 
+dynamic load conditions except when in Current Limit operation. In response to any static or dynamic load 
+condition during Current Limit operation that causes the SPR PPS output voltage to drop below vPpsShutdown the 
+Source May send Hard Reset Signaling and Shall discharge VBUS to vSafe0V then resumes USB Default Operation at 
+vSafe5V.
+When the Sink attempts to draw more current than the Operating Current in the RDO, the Source Shall limit its 
+output current. The current available from the Source during Current Limit mode Shall meet iPpsCLNew. The Sink 
+May Not reduce its Operating Current request in the RDO when the PPS Status OMF is set.
+Current limiting Shall be performed by the SPR PPS Source. Sinks that rely on PPS Current Limiting Shall meet the 
+requirements of Section 7.2.9, "Robust Sink Operation". The Source Shall Not shutdown or otherwise disrupt the 
+available output power while in Current Limit mode unless another protection mechanism as outlined in Section 
+7.1.7, "Robust Source Operation" is engaged to protect the Source from damage.
+An SPR PPS Source that is operating in Current Limit Shall Not change its set-point in a manner that exceeds 
+iPpsCLLoadStepRate or iPpsCLLoadReleaseRate.
+The relationship between SPR PPS programmable output voltage and SPR PPS programmable Current Limit Shall 
+be as shown in Figure 7.6, "SPR PPS Programmable Voltage and Current Limit". The transition between the Constant 
+Voltage mode and the Current Limit mode occurs between points a and b. The PPS Status OMF Shall be set or 
+cleared within this region. In Current Limit mode when the load resistance changes, the output current of the 
+Source Shall stay within iPpsCLNew. The proper behavior is represented by point c. 

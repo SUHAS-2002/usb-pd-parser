@@ -1,0 +1,63 @@
+Page 968
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Source/Sink Extended Capabilities
+Sink Port Get Source Capabilities Extended
+PE_SNK_Get_Source_Cap_Ext
+Section 8.3.3.8.1.1
+Source Port Give Source Capabilities Extended
+PE_SRC_Give_Source_Cap_Ext
+Section 8.3.3.8.2.1
+Source Port Get Sink Capabilities Extended
+PE_SRC_Get_Sink_Cap_Ext
+Section 8.3.3.8.3.1
+Source Port Give Source Capabilities Extended
+PE_SNK_Give_Sink_Cap_Ext
+Section 8.3.3.8.4.1
+Source Information
+Sink Port Get Source Information
+PE_SNK_Get_Source_Info
+Section 8.3.3.9.1.1
+Source Port Give Source Information
+PE_SRC_Give_Source_Info
+Section 8.3.3.9.2.1
+Status
+Get Status
+PE_Get_Status
+Section 8.3.3.10.1.1
+Give Status
+PE_Give_Status
+Section 8.3.3.10.1.1
+Sink Port Get PPS Status
+PE_SNK_Get_PPS_Status
+Section 8.3.3.10.3.1
+Source Port Give PPS Status
+PE_SRC_Give_PPS_Status
+Section 8.3.3.10.4.1
+Battery Capabilities
+Get Battery Capabilities
+PE_Get_Battery_Cap
+Section 8.3.3.11.1.1
+Give Battery Capabilities
+PE_Give_Battery_Cap
+Section 8.3.3.11.2.1
+Battery Status
+Get Battery Status
+PE_Get_Battery_Status
+Section 8.3.3.12.1.1
+Give Battery Status
+PE_Give_Battery_Status
+Section 8.3.3.12.2.1
+Manufacturer Information
+Get Manufacturer Information
+PE_Get_Manufacturer_Info
+Section 8.3.3.13.1.1
+Give Manufacturer Information
+PE_Give_Manufacturer_Info
+Section 8.3.3.13.2.1
+Country Codes and Information
+Get Country Codes
+PE_Get_Country_Codes
+Section 8.3.3.14.1.1
+Table 8.154  Policy Engine States
+State name
+Reference

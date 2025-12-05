@@ -1,0 +1,57 @@
+Page 210
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+ii)
+Abort the EPR Mode entry process and remain in the existing SPR Explicit Contract.
+7)
+The Source Shall send the EPR_Mode Message with the Action field set to 3 (Enter Succeeded) and Shall 
+enter EPR Mode.
+8)
+If the Sink receives an EPR_Mode Message with the Action field set to 3 (Enter Succeeded) it Shall enter 
+EPR Mode, otherwise it Shall initiate a Soft Reset.
+If the EPR Mode entry process successfully completes within tEnterEPR of the last bit of the GoodCRC Message sent 
+in response to the EPR_Mode Message with the Action field set to 1 (Enter), the Source Shall send an 
+EPR_Source_Capabilities Message within tFirstSourceCap. 
+If the EPR Mode entry process has not been aborted or does not complete within tEnterEPR of the last bit of the 
+GoodCRC Message sent in response to the EPR_Mode Message with the Action field set to 1 (Enter), the Sink Shall 
+initiate a Soft Reset. 
+6.4.10.2
+  Operation in EPR Mode
+While operating in EPR Mode, the Source Shall only send EPR_Source_Capabilities Messages to Advertise its power 
+Capabilities and the Sink Shall only respond with EPR_Request Messages to Negotiate Explicit Contracts. The 
+EPR_Request Message May be for either an SPR or EPR (A)PDO.
+If the Source sends a Source_Capabilities Message, that is not in response to a Sink Get_Source_Cap Message, the 
+Sink Shall initiate a Hard Reset. If the Sink sends a Request Message, the Source Shall initiate a Hard Reset.
+The Source Shall monitor the CC communications path to ensure that there is periodic traffic. The Sink Shall send 
+an EPR_KeepAlive Message when it has not sent any Messages for more than tSinkEPRKeepAlive to ensure there 
+is timely periodic traffic. If there is no traffic for more than tSourceEPRKeepAlive, the Source Shall initiate a Hard 
+Reset.
+6.4.10.3
+  Exiting EPR Mode
+6.4.10.3.1
+  Commanded Exit
+While in EPR Mode, either the Source or Sink May exit EPR Mode by sending an EPR_Mode Message with the Action 
+field set to 5 (Exit).
+The ports Shall be in an Explicit Contract with an SPR (A)PDO prior to the EPR Mode exit process by either:
+
+The Source sending an EPR_Source_Capabilities Message with no EPR (A)PDO s (e.g., only SPR (A)PDO 
+s) or
+
+The Sink negotiating a new Explicit Contract with bit 31 in the RDO set to zero (e.g., only SPR (A)PDO s)).
+The process to exit EPR Mode is a Non-interruptible multi-Message AMS and Shall follow these steps in order:
+1)
+The Port Partners Shall be in an Explicit Contract with an SPR (A)PDO.
+2)
+Either the Source or Sink Shall send an EPR_Mode Message with the Action field set to 5 (Exit) to exit 
+the EPR Mode 
+3)
+The Source Shall send a Source_Capabilities Message within tFirstSourceCap of the GoodCRC Message 
+in response to the EPR_Mode Message with the Action field set to 5 (Exit).
+4)
+If the Sink does not receive a Source_Capabilities Message within tTypeCSinkWaitCap of the last bit of 
+the GoodCRC Message in response to the EPR_Mode Message with the Action field set to 5 (Exit), Sink 
+Shall initiate a Hard Reset.
+6.4.10.3.2
+  Implicit Exit
+EPR Mode Shall be exited as the side-effect of the Power Role Swap and Fast Role Swap processes. This is because 
+at the end of these processes VBUS will be at vSafe5V and the Ports will be in an Implicit Contract. The New Source 
+will then send a Source_Capabilities Message (not an EPR_Source_Capabilities Message) to begin the process of 

@@ -1,0 +1,79 @@
+Page 148
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.1.3
+  Sink Power Data Objects
+This section lists the types of PDOs a Sink can use in an SPR or EPR Capabilities Message.
+6.4.1.3.1
+  Sink Fixed Supply Power Data Object
+Table 6.17, "Fixed Supply PDO – Sink" describes the Sink Fixed Supply (00b) PDO. See Section 7.1.3, "Types of Sources" 
+for the electrical requirements of the power supply. The Sink Shall set the Voltage field to its required voltage and 
+the Operational Current field to its required operating current. Required operating current is defined as the 
+amount of current a given device needs to be functional. This value could be the maximum current the Sink will 
+ever require or could be sufficient to operate the Sink in one of its modes of operation.
+Since all USB Consumers support vSafe5V, the required vSafe5V Fixed Supply Power Data Object is also used to 
+convey additional information that is returned in bits 29 through 20. All other Fixed Supply Power Data Objects 
+Shall set bits 29…20 to zero.
+For a Sink requiring no power from the Source, the Voltage field Shall be set to 5V and the Operational Current 
+field Shall be set to 0mA.
+6.4.1.3.1.1
+  Dual-Role Power
+The Dual-Role Power bit Shall be set when the Port is Dual-Role Power capable i.e., supports the PR_Swap Message. 
+This is a Static capability which Shall remain fixed for a given device regardless of the device's present Power Role. 
+If the Dual-Role Power bit is set to one in the Source_Capabilities Message the Dual-Role Power bit in the 
+Sink_Capabilities Message Shall also be set to one. If the Dual-Role Power bit is set to zero in the 
+Source_Capabilities Message the Dual-Role Power bit in the Sink_Capabilities Message Shall also be set to zero.
+6.4.1.3.1.2
+  Higher Capability
+In the case that the Sink needs more than vSafe5V (e.g., 15V) to provide full functionality, then the Higher 
+Capability bit Shall be set.
+6.4.1.3.1.3
+  Unconstrained Power
+The Unconstrained Power bit Shall be set when an external source of power is available that is sufficient to 
+adequately power the system while charging external devices, or when the device's primary function is to charge 
+external devices.
+Table 6.17  Fixed Supply PDO – Sink
+Bit(s)
+Field
+Description
+B31…30
+Fixed Supply
+00b - Fixed Supply PDO
+B29
+Dual-Role Power
+Set to ‘1’ if Dual-Role Power supported
+B28
+Higher Capability
+Set to ‘1’ if Higher Capability supported
+B27
+Unconstrained Power
+Set to ‘1’ if Unconstrained Power supported
+B26
+USB Communications Capable
+Set to ‘1’ if USB Communications Capable
+B25
+Dual-Role Data
+Dual-Role Data
+B24...23
+Fast Role Swap required USB Type-C 
+Current
+Fast Role Swap required USB Type-C current (see also [USB Type-C 
+2.4]):
+Value
+Description
+00b
+Fast Role Swap not supported (default)
+01b
+Default USB Port
+10b
+1.5A@5V
+11b
+3.0A@5V
+B22...20
+Reserved
+Reserved – Shall be set to zero.
+B19…10
+Voltage
+Voltage in 50mV units
+B9…0
+Operational Current
+Operational current in 10mA units 

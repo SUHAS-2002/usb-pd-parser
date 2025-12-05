@@ -1,0 +1,28 @@
+Page 224
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.2.1.4
+  Event Flags Field
+The Event Flags field returns event flags. The OTP, OVP and OCP event flags Shall be set when there is an event and 
+Shall only be cleared when read with the Get_Status Message.
+When the OTP Event flag is set the Temperature Status field Shall also be set to over temperature.
+The CL/CV Mode flag is only Valid when operating as a Programmable Power Supply and Shall be Ignored 
+otherwise. When the Source is operating as a Programmable Power Supply the CL/CV Mode flag Shall be set when 
+operating in Current Limit mode (CL) and Shall be cleared when operating in Constant Voltage mode (CV).
+6.5.2.1.5
+  Temperature Status Field
+The Temperature Status field returns the current temperature status of the device either: normal, warning or 
+over temperature. When the Temperature Status field is set to over temperature the OTP Event flag Shall also be 
+set.
+6.5.2.1.6
+  Power Status Field
+The Power Status field indicates the current status of a Source. A non-zero return of the field indicates Advertised 
+Source power is being reduced for either:
+
+The cable does not support the full Source current.
+
+The Source is supplying power to other ports and is unable to provide its full power.
+
+The external power to the Source is insufficient to support full power.
+
+An Event has occurred that is causing the Source to reduce its Advertised power.
+A Sink Shall set this field to zero.

@@ -1,0 +1,72 @@
+Page 534
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.6.3
+  Source Initiated Hard Reset - Sink Long Reset
+This is an example of a Hard Reset operation when initiated by a Source. In this example the Sink is slow responding 
+to the reset causing the Source to send multiple Source_Capabilities Messages before it receives a GoodCRC 
+Message response. Figure 8.32, "Source initiated reset - Sink long reset" shows the Messages as they flow across the 
+bus and within the devices to accomplish the Hard Reset.
+Figure 8.32 Source initiated reset - Sink long reset
+: Protocol
+: PHY
+: PHY
+: Protocol
+: Policy Engine
+: Policy Engine
+Source
+Sink
+1: Send Hard Reset
+2: Send Hard Reset
+3: Hard Reset
+4: Hard Reset received
+Hard Reset Complete
+Start NoResponseTimer
+Wait tPSHardReset
+Reset Power Supply
+Reset Port Data Role to DFP
+Turn off VCONN
+Reset MessageIDCounter, stored 
+copy of MessageID and 
+RetryCounter
+Reset MessageIDCounter, stored 
+copy of MessageID and 
+RetryCounter
+5: Hard Reset received
+Reset Power Sink
+Reset Port Data Role to UFP
+Turn off VCONN
+6: Power Supply Reset
+11: Power Sink Reset
+13: Send Capabilities
+14: Capabilities
+15: Capabilities + CRC
+16: Capabilities
+Start CRCReceiveTimer
+Store copy of MessageID
+17: Capabilities received
+18: GoodCRC
+19: GoodCRC + CRC
+20: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+21: Capabilities sent
+Stop SourceCapabilitiesTimer
+Stop NoResponseTimer
+Start SenderResponseTimer
+Evaluate Capabilities
+8: Send Capabilities
+9: Capabilities
+10: Capabilities + CRC
+Run SourceCapabilityTimer
+Send Capabilities messages 
+until GoodCRC response is 
+received.
+12: Hard Reset Complete
+Power Sink Reset
+Power Supply Reset
+Turn on VCONN
+Channel disabled
+Channel disabled
+7: Hard Reset Complete
+Channel enabled
+Channel enabled

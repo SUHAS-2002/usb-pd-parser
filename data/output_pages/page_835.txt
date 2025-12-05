@@ -1,0 +1,176 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 835
+8.3.3.3
+  Policy Engine Sink Port State Diagram
+Figure 8.133, "Sink Port State Diagram" below shows the state diagram for the Policy Engine in a Sink Port. The 
+following sections describe operation in each of the states.
+Figure 8.133 Sink Port State Diagram
+1)
+Source Capabilities Messages received in States other than PE_SNK_Wait_for_Capabilities, PE_SNK_Ready or 
+PE_SNK_Get_Source_Cap constitute a Protocol Error.
+2)
+The SinkRequestTimer Should Not be stopped if a Ping (Deprecated) Message is received in the PE_SNK_Ready state 
+since it represents the maximum time between requests after a Wait Message which is not reset by a Ping (Deprecat-
+ed) Message.
+3)
+During a Hard Reset the Source voltage will transition to vSafe0V and then transition to vSafe5V. Sinks need to ensure 
+that VBUS present is not indicated until after the Source has completed the Hard Reset process by detecting both of these 
+transitions.
+New power required |
+SinkRequestTimer
+Timeout |
+SinkPPSPeriodicTimer 
+Timeout
+Start
+Explicit Contract &
+(Reject message received | 
+Wait message received)
+Hard reset signalling received
+Power Sink
+ at default
+Protocol Layer Reset
+Hard Reset complete
+VBUS
+6 present3
+((SPR Mode & Source_Capabilities Message) | 
+(EPR Mode & EPR_Source_Capabilities Message received))1
+Device Policy Manager Response received
+Accept message received
+PS_RDY message
+received
+Get_Sink_Cap Message |
+EPR_Get_Sink_Cap Message
+Sink capabilities 
+message sent
+((SinkWaitCapTimer timeout |
+PSTransitionTimer timeout) &
+(HardResetCounter � nHardResetCount)) |
+Hard Reset request from 
+Device Policy Manager |
+EPR Mode & (EPR_Source _Capabilites message 
+with An EPR PDO in positions 1..7 |
+Source_Capabilities Message not 
+requested by Get_Source_caps)
+PE_SNK_Startup
+Actions on entry:
+Reset Protocol Layer
+Power = DefauIt (0V or 5V) or Implicit Contract
+PD = Connected/not Connected
+SenderResponseTimer
+Timeout
+PE_SNK_Discovery
+Actions on entry:
+Wait for VBUS
+6
+Power = Default (0V or 5V) or Implicit Contract
+PD = Connected/not Connected
+PE_SNK_Wait_for_Capabilities
+Actions on entry:
+Initialize and run SinkWaitCapTimer
+Power = Default (5V) or Implicit Contract
+PD = Connected/not Connected
+PE_SNK_Evaluate_Capability
+Actions on entry:
+Reset HardResetCounter to zero.
+Ask Device Policy Manager to evaluate the options based on supplied 
+capabilities, any Power Reserve that it needs, and respond indicating 
+the selected capability and, Optionally, a “Capability Mismatch”.
+Power = DefauIt (5V) or Implicit/Explicit Contract
+PD = Connected
+PE_SNK_Select_Capability
+Actions on entry:
+Send Request based on Device Policy Manager response:
+• Request from present capabilities
+• Optionally Indicate that other capabilities would be preferred 
+(“Capability Mismatch”)
+Initialize and run SenderResponseTimer
+Power = DefauIt (5V) or Implicit/Explicit Contract
+PD = Connected
+PE_SNK_Transition_Sink
+Actions on entry:
+Initialize and run PSTransitionTimer
+Power = transition
+PD = Connected
+Actions on exit:
+Request Device Policy Manager transitions sink power 
+supply to new power (if required)
+PE_SNK_Ready
+Actions on entry:
+Initialize and run SinkRequestTimer2 (on receiving Wait)
+Initialize and run DiscoverIdentityTimer4
+Initialize and run the SinkPPSPeriodicTimer5
+In EPR Mode Initialize and run the SinkEPRKeepAliveTimer8
+If Sink supports Fast Role Swap send Get_Sink_Cap Message7
+Power = Explicit Contract
+PD = Connected
+PE_SNK_Give_Sink_Cap
+Actions on entry:
+Get present sink capabilities from Device Policy Manager
+Send Capabilities message (based on Device Policy Manager response):
+• If Get_Sink_Cap Message received send Sink_Capabilities Message.
+• In EPR_Get_Sink Cap Message received send EPR_Sink_Capabilities Message
+Power = Explicit Contract
+PD = Connected
+PE_SNK_Hard_Reset
+Actions on entry:
+Generate Hard Reset signalling.
+Increment HardResetCounter.
+Power = DefauIt (5V) or Implicit/Explicit Contract
+PD = Connected/not Connected
+PE_SNK_Transition_to_default
+Actions on entry:
+Request Device Policy Manager to request power 
+sink transition to default
+Reset local HW
+Set Port Data Role to UFP and turn off VCONN
+Power = rising/falling to default (5V)
+PD = not Connected
+Actions on exit:
+Inform Protocol Layer Hard Reset complete
+no Explicit Contract &
+(Reject message received | 
+Wait message received)
+((SPR Mode & Source_Capabilities Message) |
+(EPR Mode & EPR_Source Capabilities Message))1
+Actions on exit:
+If the Sink is initiating an AMS then notify the Protocol Layer that the first Message 
+in the AMS will follow.
+Protocol Error
+PE_SNK_EPR_Keep_Alive
+Actions on entry:
+Send EPR_KeepAlive Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract
+PD = Connected
+SinkEPRKeepAliveTimer Timeout
+EPR_KeepAlive_Ack Message
+SenderResponseTimer Timeout
+PE_SNK_Get_Source_Cap
+Actions on entry:
+If SPR Mode capabilities requested send 
+Get_Source_Cap Message
+If EPR Mode capabilities requested send 
+EPR_Get_Source_Cap Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+get source capabilities request 
+from Device Policy Manager
+(EPR Mode &
+SPR Source Capabilities requested &
+Source_Capabilities Message
+ received) |
+(SPR MODE & 
+EPR Source Capabilities requested &
+EPR_Source_Capabilities Message
+received) |
+SenderResponseTimer timeout
+Actions on exit:
+Pass Source capabilities/outcome to Device 
+Policy Manager
+(SPR Mode &
+SPR Source Capabilities requested &
+Source_Capabilities Message) |
+(EPR MODE & 
+EPR Source Capabilities requested &
+EPR_Source_Capabilities Message)

@@ -1,0 +1,63 @@
+Page 304
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+EPR_Request
+CN9
+NA
+I
+I
+I
+EPR_Mode
+CN9
+CN9
+I
+I
+I
+Source_Info
+NA
+N
+N
+I
+I
+I
+Revision
+N
+N
+I
+I
+I
+Table 6.78  Applicability of Data Messages (Continued)
+Message Type
+Source
+Sink
+Dual-Role 
+Power
+Cable
+Plug SOP’
+Cable
+Plug SOP’’
+VPD6
+1)
+For details of which BIST Modes and BIST Messages Shall be supported see Section 5.9 and Section 6.4.3.
+2)
+Shall be supported by products that contain batteries.
+3)
+Shallbe supported by products that support the Get_Battery_Status Message.
+4)
+Shall be supported by products that support the Get_Sink_Cap Message.
+5)
+Shall be supported when required by a country authority.
+6)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a CT-VPD Shall only take 
+place when not Connected to a Charger.
+7)
+Shall be supported by products that support [USB4].
+8)
+Shall be supported by Active Cables that support [USB4].
+9)
+Shall be supported by products that support Source operation in EPR Mode.
+10)
+Shall be supported by all Source Ports except singlePort SPR Chargers with Invariant PDOs.
+11)
+Shall be supported when SPR PPS Mode is supported.
+12)
+Shall be supported by Active Cables.

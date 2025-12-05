@@ -1,0 +1,69 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 967
+Soft Reset and Protocol Error
+Source Port Soft Reset
+PE_SRC_Send_Soft_Reset
+Section 8.3.3.4.1.1
+PE_SRC_Soft_Reset
+Section 8.3.3.4.1.2
+Sink Port Soft Reset
+PE_SNK_Send_Soft_Reset
+Section 8.3.3.4.2.1
+PE_SNK_Soft_Reset
+Section 8.3.3.4.2.2
+Data Reset
+DFP Data Reset
+PE_DDR_Send_Data_Reset
+Section 8.3.3.5.1.1
+PE_DDR_Data_Reset_Received
+Section 8.3.3.5.1.2
+PE_DDR_Wait_For_VCONN_Off
+Section 8.3.3.5.1.3
+PE_DDR_Perform_Data_Reset
+Section 8.3.3.5.1.4
+UFP Data Reset
+PE_UDR_Send_Data_Reset
+Section 8.3.3.5.2.1
+PE_UDR_Data_Reset_Received
+Section 8.3.3.5.2.2
+PE_UDR_Turn_Off_VCONN
+Section 8.3.3.5.2.3
+PE_UDR_Send_Ps_Rdy
+Section 8.3.3.5.2.4
+PE_UDR_Wait_For_Data_Reset_Complete
+Section 8.3.3.5.2.5
+Not Supported Message
+Source Port Not Supported
+PE_SRC_Send_Not_Supported
+Section 8.3.3.6.1.1
+PE_SRC_Not_Supported_Received
+Section 8.3.3.6.1.2
+PE_SRC_Chunk_Received
+Section 8.3.3.6.1.3
+Sink Port Not Supported
+PE_SNK_Send_Not_Supported
+Section 8.3.3.6.2.1
+PE_SNK_Not_Supported_Received
+Section 8.3.3.6.2.2
+PE_SNK_Chunk_Received
+Section 8.3.3.6.2.3
+Source Alert
+Source Port Source Alert
+PE_SRC_Send_Source_Alert
+Section 8.3.3.7.1.1
+PE_SRC_Wait_for_Get_Status
+Section 8.3.3.7.1.2
+Sink Port Source Alert
+PE_SNK_Source_Alert_Received
+Section 8.3.3.7.2.1
+Sink Port Sink Alert
+PE_SNK_Send_Sink_Alert
+Section 8.3.3.7.3.1
+PE_SNK_Wait_for_Get_Status
+Section 8.3.3.7.3.2
+Source Port Sink Alert
+PE_SRC_Sink_Alert_Received
+Section 8.3.3.7.4.1
+Table 8.154  Policy Engine States
+State name
+Reference

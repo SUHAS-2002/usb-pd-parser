@@ -1,0 +1,66 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 1027
+C.4.3
+  Enter Mode Command request with additional VDO.
+The Initiator of the Enter Mode Command request sends a Message Header with the Number of Data Objects field 
+set to 2 indicating an additional VDO followed by a VDM Header with the Command Type (B7…6) set to zero 
+indicating the Command is from an Initiator and the Command (B4…0) set to 4 to request the Responder to enter 
+its mode of operation and sets the Object Position field to the desired functional VDO based on its offset as received 
+during Discovery. 
+Table C.10, "Enter Mode Command request with additional VDO Example" shows the contents of the key fields in the 
+Message Header and VDM Header for an Initiator sending an Enter Mode Command request with an additional VDO.
+Table C.10  Enter Mode Command request with additional VDO Example
+Bit(s)
+Field
+Value
+Message Header
+15
+Reserved
+0
+14…12
+Number of Data Objects
+1 (VDM Header)
+11…9
+MessageID
+0…7
+8
+Port Power Role
+0 or 1
+7…6
+Specification Revision
+10b (Revision 3.x)
+5…4
+Reserved
+0
+3…0
+Message Type
+1111b (Vendor Defined Message)
+VDM Header
+B31…16
+Standard or Vendor ID (SVID)
+SVID for the Mode being entered
+B15
+VDM Type
+1 (Structured VDM)
+B14…13
+Structured VDM Version (Major)
+01b (Version 2.0)
+B12…11
+Structured VDM Version (Minor)
+01b (Version 2.1)
+B10…8
+Object Position
+001b (a one in this field indicates a request to enter 
+the first Mode in list returned by Discover Modes)
+B7…6
+Command Type
+00b (Initiator)
+B5
+Reserved
+0
+B4…0
+Command
+4 (Enter Mode)
+Including Optional Mode specific VDO
+B31…0
+Mode specific

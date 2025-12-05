@@ -1,0 +1,65 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 315
+result in a voltage that is greater than or equal to the previous PPS output voltage. Likewise, all PPS voltage 
+decreases Shall result in a voltage that is less than or equal to the previous PPS output voltage.
+Since a Sink can draw current up to the Negotiated APDO current level in case of a voltage step, the voltage might 
+not increase to the requested level due to the power supply operating in CL mode. Likewise, since a Sink can have 
+a Battery connected to VBUS, the voltage might not decrease to the requested level due to the Battery voltage being 
+higher than the output voltage set point the Source is transitioning to. Were the Source to rely on checking the 
+voltage on VBUS, in either case, to determine when its power supply is ready a PS_RDY Message would never be sent. 
+When the PPS voltage steps up or down, a PS_RDY Message Shall be sent within:
+
+tPpsSrcTransLarge after the last bit of the GoodCRC Message following the Accept Message for steps 
+larger than vPpsSmallStep.
+
+tPpsSrcTransSmall after the last bit of the GoodCRC Message following the Accept Message for steps 
+less than or equal to vPpsSmallStep provided that either the voltage on VBUS has reached vPpsNew or 
+the power supply is in CL mode.
+When vPpsNew is lower than the Battery voltage, or the Source's primary power is cut off the Sink Shall 
+immediately disconnect its Battery from VBUS. In these situations, the output current could reverse polarity and the 
+Sink is not allowed to source current (see Section 7.2.1, "Behavioral Aspects" and Section 7.2.9, "Robust Sink 
+Operation").
+Figure 7.4, "PPS Positive Voltage Transitions" and Figure 7.5, "PPS Negative Voltage Transitions" below show the 
+output voltage behavior of a Programmable Power Supply in response to positive and negative voltage change 
+requests. The parameters vPpsMinVoltage and vPpsMaxVoltage define the lower and upper limits of the PPS 
+range respectively (see Table 10.11, "SPR Programmable Power Supply Voltage Ranges" for required ranges). 
+vPpsMinVoltage corresponds to the Minimum Voltage field in the PPS APDO and vPpsMaxVoltage corresponds 
+to Maximum Voltage field in the PPS APDO. If the Sink negotiates for a new PPS APDO, then the transition between 
+the two PPS APDOs Shall occur as described in Section 7.3.1, "Transitions caused by a Request Message".
+Figure 7.4 PPS Positive Voltage Transitions
+vPpsMinVoltage
+V(2) = 1 + vPpsMinVoltage
+vPpsMinVoltage V(1)
+�
+�
+Programmable Power Supply Output Range
+�
+vPpsSlewPos
+V(3) = 1+n + vPpsMinVoltage
+�
+�
+0 Volts
+vPpsMaxVoltage
+�
+�
+�
+vPpsSlewPos
+vPpsSlewPos
+�
+�
+�
+�
+vPpsValid
+� vPpsNew
+�
+vPpsValid
+vPpsValid
+� vPpsNew
+�
+vPpsValid
+Nominal V(2)
+Nominal V(3)
+vPpsMaxVoltage V(4)
+V(2) > V(1)
+V(3) > V(2)
+V(4) > V(3)

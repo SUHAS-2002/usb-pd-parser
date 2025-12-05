@@ -1,0 +1,112 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 25
+Figure  8.173
+Firmware update response received State Diagram.........................................................................887
+Figure  8.174
+DFP to UFP Data Role Swap State Diagram...........................................................................................888
+Figure  8.175
+UFP to DFP Data Role Swap State Diagram...........................................................................................891
+Figure  8.176
+Dual-Role Port in Source to Sink Power Role Swap State Diagram............................................894
+Figure  8.177
+Dual-role Port in Sink to Source Power Role Swap State Diagram.............................................898
+Figure  8.178
+Dual-Role Port in Source to Sink Fast Role Swap State Diagram.................................................902
+Figure  8.179
+Dual-role Port in Sink to Source Fast Role Swap State Diagram..................................................906
+Figure  8.180
+Dual-Role (Source) Get Source Capabilities diagram .......................................................................909
+Figure  8.181
+Dual-Role (Source) Give Sink Capabilities diagram ..........................................................................910
+Figure  8.182
+Dual-Role (Sink) Get Sink Capabilities State Diagram......................................................................911
+Figure  8.183
+Dual-Role (Sink) Give Source Capabilities State Diagram ..............................................................912
+Figure  8.184
+Dual-Role (Source) Get Source Capabilities Extended State Diagram ......................................913
+Figure  8.185
+Dual-Role (Sink) Give Source Capabilities Extended diagram......................................................914
+Figure  8.186
+Dual-Role (Sink) Get Sink Capabilities Extended State Diagram.................................................915
+Figure  8.187
+Dual-Role (Source) Give Sink Capabilities Extended diagram......................................................916
+Figure  8.188
+Dual-Role (Source) Get Source Information State Diagram ..........................................................917
+Figure  8.189
+Dual-Role (Source) Give Source Information diagram ....................................................................918
+Figure  8.190
+VCONN Swap State Diagram ..........................................................................................................................919
+Figure  8.191
+Initiator to Port VDM Discover Identity State Diagram...................................................................922
+Figure  8.192
+Initiator VDM Discover SVIDs State Diagram ......................................................................................924
+Figure  8.193
+Initiator VDM Discover Modes State Diagram.....................................................................................926
+Figure  8.194
+Initiator VDM Attention State Diagram ..................................................................................................928
+Figure  8.195
+Responder Structured VDM Discover Identity State Diagram .....................................................929
+Figure  8.196
+Responder Structured VDM Discover SVIDs State Diagram..........................................................930
+Figure  8.197
+Responder Structured VDM Discover Modes State Diagram........................................................931
+Figure  8.198
+Receiving a Structured VDM Attention State Diagram ....................................................................932
+Figure  8.199
+DFP VDM Mode Entry State Diagram ......................................................................................................933
+Figure  8.200
+DFP VDM Mode Exit State Diagram..........................................................................................................935
+Figure  8.201
+UFP Structured VDM Enter Mode State Diagram...............................................................................937
+Figure  8.202
+UFP Structured VDM Exit Mode State Diagram...................................................................................939
+Figure  8.203
+Cable Ready State Diagram..........................................................................................................................941
+Figure  8.204
+Cable Plug Soft Reset State Diagram........................................................................................................942
+Figure  8.205
+Cable Plug Hard Reset State Diagram......................................................................................................943
+Figure  8.206
+DFP/VCONN Source Soft Reset or Cable Reset of a Cable Plug or VPD State Diagram.........944
+Figure  8.207
+UFP/VCONN Source Soft Reset of a Cable Plug or VPD State Diagram .......................................946
+Figure  8.208
+Source Startup Structured VDM Discover Identity State Diagram .............................................947
+Figure  8.209
+Cable Plug Structured VDM Enter Mode State Diagram..................................................................949
+Figure  8.210
+Cable Plug Structured VDM Exit Mode State Diagram .....................................................................951
+Figure  8.211
+Source EPR Mode Entry State Diagram ..................................................................................................953
+Figure  8.212
+Sink EPR Mode Entry State Diagram........................................................................................................956
+Figure  8.213
+Source EPR Mode Exit State Diagram......................................................................................................958
+Figure  8.214
+Sink EPR Mode Exit State Diagram...........................................................................................................959
+Figure  8.215
+BIST Carrier Mode State Diagram.............................................................................................................960
+Figure  8.216
+BIST Test Data Mode State Diagram ........................................................................................................962
+Figure  8.217
+BIST Shared Capacity Test Mode State Diagram ................................................................................964
+9
+States and Status Reporting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 975
+Figure  9.1
+Example PD Topology ....................................................................................................................................976
+Figure  9.2
+Mapping of PD Topology to USB................................................................................................................977
+Figure  9.3
+Use of SPM in the PD System.......................................................................................................................978
+Figure  9.4
+USB Attached to USB Powered State Transition.................................................................................980
+Figure  9.5
+Any USB State to USB Attached State Transition (When operating as a Consumer)..........981
+Figure  9.6
+Any USB State to USB Attached State Transition (When operating as a Provider).............981
+Figure  9.7
+Any USB State to USB Attached State Transition (After a USB Type-C Data Role Swap)..982
+Figure  9.8
+Software stack on a PD aware OS..............................................................................................................983
+Figure  9.9
+Enumeration of a PDUSB Device................................................................................................................984

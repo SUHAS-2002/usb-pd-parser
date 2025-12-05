@@ -1,0 +1,49 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 733
+8.3.2.12.2
+  Sink requests security exchange with Source
+Figure 8.97, "Sink requests security exchange with Source" shows an example sequence for a security exchange 
+between a Sink and a Source. 
+Figure 8.97 Sink requests security exchange with Source
+: Protocol
+1: Send Security_Request
+: PHY
+: PHY
+: Protocol
+2:Security_Request
+3: Security_Request + CRC
+4: Security_Request
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Security_Request received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Security_Request sent
+10: Send Security_Response
+11: Security_Response
+12: Security_Response + CRC
+13: Security_Response
+Check MessageID against local copy
+Store copy of MessageID
+14: Security_Response received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get security response 
+from DPM
+: Policy Engine
+: Policy Engine
+Sink Port
+Source Port
+18: Security_Response sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

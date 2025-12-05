@@ -1,0 +1,83 @@
+Page 360
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 7.28 Transition Diagram for no change in Current or Voltage
+Table 7.7  Sequence Description for no change in Current or Voltage
+Step
+Source Port
+Sink Port
+1
+Policy Engine sends the Accept Message to the Sink.
+Policy Engine receives the Accept Message.
+2
+Protocol Layer receives the GoodCRC Message from 
+the Sink.
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then starts the 
+PSTransitionTimer and evaluates the Accept 
+Message.
+3
+The Policy Engine waits tSrcTransition then sends 
+the PS_RDY Message to the Sink starting within 
+tSrcTransReq of the end of the GoodCRC Message 
+following the Accept Message.
+Policy Engine receives the PS_RDY Message.
+4
+Policy Engine receives the GoodCRC Message from 
+the Sink.
+Note: The decision that no power transition is re-
+quired could be made either by the Device Pol-
+icy Manager or the power supply depending 
+on implementation.
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine evaluates the PS_RDY Message.
+Source Port
+Policy Engine
+Sink Port
+Policy Engine
+Source Port
+Device Policy Mgr
+Source Port
+Power Supply
+Sink Port
+Device Policy Mgr
+Sink Port
+Power Supply
+Source Port
+Voltage
+Sink Port
+Current
+Sink ��IOLD
+VBUS doesn’t change
+Source VOLD
+Current doesn’t change
+Port to Port 
+Messaging
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+Send
+Accept
+Evaluate
+Accept
+Send
+PS_RDY
+Evaluate
+PS_RDY
+1
+2
+3
+4
+PSTransitionTimer
+tSrcTransition
+Good 
+CRC
+Good 
+CRC
+tSrcTransReq
+Vold
+Source VOLD

@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 287
+The Protocol Layer Shall transition to the PRL_Tx_Construct_Message state when:
+
+A Message request is received from the Policy Engine which is not a Soft_Reset Message.
+The Protocol Layer Shall transition to the PRL_Tx_Layer_Reset_for_Transmit state when:
+
+A Message request is received from the Policy Engine which is a Soft_Reset Message.
+6.12.2.2.1.3
+  PRL_Tx_Layer_Reset_for_Transmit State
+On entry to the PRL_Tx_Layer_Reset_for_Transmit state the Protocol Layer Shall reset the MessageIDCounter. 
+The Protocol Layer Shall transition Protocol Layer Message reception to the PRL_Rx_Wait_for_PHY_Message state 
+(see Section 6.12.2.3.1, "PRL_Rx_Wait_for_PHY_Message state") in order to reset the stored MessageID.
+The Protocol Layer Shall transition to the PRL_Tx_Construct_Message state when:
+
+The layer reset actions in this state have been completed.
+6.12.2.2.1.4
+  PRL_Tx_Construct_Message State
+On entry to the PRL_Tx_Construct_Message state the Protocol Layer Shall construct the Message requested by the 
+Policy Engine, or resend a previously constructed Message, and then pass this Message to the PHY Layer.
+The Protocol Layer Shall transition to the PRL_Tx_Wait_for_PHY_Response state when:
+
+The Message has been sent to the PHY Layer.
+6.12.2.2.1.5
+  PRL_Tx_Wait_for_PHY_Response State
+On entry to the PRL_Tx_Wait_for_PHY_Response state, once the Message has been sent, the Protocol Layer Shall 
+initialize and run the CRCReceiveTimer (see Section 6.6.1, "CRCReceiveTimer").
+The Protocol Layer Shall transition to the PRL_Tx_Match_MessageID state when:
+
+A GoodCRC Message response is received from the PHY Layer.
+The Protocol Layer Shall transition to the PRL_Tx_Check_RetryCounter state when:
+
+The CRCReceiveTimer times out.
+
+Or the PHY Layer indicates that a Message has been Discarded due to the channel being busy but the 
+channel is now Idle (see Section 5.7, "Collision Avoidance").
+6.12.2.2.1.6
+  PRL_Tx_Match_MessageID State
+On entry to the PRL_Tx_Match_MessageID state the Protocol Layer Shall compare the MessageIDCounter and the 
+MessageID of the received GoodCRC Message.
+The Protocol Layer Shall transition to the PRL_Tx_Message_Sent state when:
+
+The MessageIDCounter and the MessageID of the received GoodCRC Message match.
+The Protocol Layer Shall transition to the PRL_Tx_Check_RetryCounter state when:
+
+The MessageIDCounter and the MessageID of the received GoodCRC Message do not match.
+6.12.2.2.1.7
+  PRL_Tx_Message_Sent State
+On entry to the PRL_Tx_Message_Sent state the Protocol Layer Shall increment the MessageIDCounter and inform 
+the Policy Engine that the Message has been sent.
+The Protocol Layer Shall transition to the PRL_Tx_Wait_for_Message_Request state when:
+
+The Policy Engine has been informed that the Message has been sent.

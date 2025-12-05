@@ -1,0 +1,13 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 359
+7.3.1.1.1.7
+  No change in Current or Voltage
+The interaction of the System Policy, Device Policy, and power supply that Shall be followed when changing from 
+one (A)PDO to another while the Sink requests the same voltage and Current as it is currently operating at is shown 
+in Figure 7.28, "Transition Diagram for no change in Current or Voltage". The sequence that Shall be followed is 
+described in Table 7.7, "Sequence Description for no change in Current or Voltage". The timing parameters that Shall 
+be followed are listed in Table 7.23, "Source Electrical Parameters", Table 7.24, "Sink Electrical Parameters", and 
+Table 7.25, "Common Source/Sink Electrical Parameters".
+Note:
+In Figure 7.28, "Transition Diagram for no change in Current or Voltage", the Sink has previously sent a 
+Request Message to the Source.

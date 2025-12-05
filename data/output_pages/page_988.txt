@@ -1,0 +1,85 @@
+Page 988
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+9.2.3
+  PD Consumer Port Capability Descriptor
+A PDUSB Device Shall support the PD_CONSUMER_PORT_CAPABILITY descriptor shown in Table 9.4, "PD 
+Consumer Port Descriptor" if it is a Consumer.
+Table 9.4  PD Consumer Port Descriptor
+Offset
+Field
+Size
+Value
+Description
+0
+bLength
+1
+Number
+Size of descriptor
+1
+bDescriptorType
+1
+Constant
+DEVICE CAPABILITY Descriptor type
+2
+bDevCapabilityType
+1
+Constant
+Capability type: PD_CONSUMER_PORT_CAPABILITY
+3
+bReserved
+1
+Number
+ Reserved and Shall be set to zero.
+4
+bmCapabilities
+2
+Bitmap
+Capability: This field Shall indicate the specification the 
+Consumer Port will operate under.
+Bit
+Description
+0
+Battery Charging (BC)
+1
+USB Power Delivery (PD)
+2
+USB Type-C Current
+15:3
+Reserved and Shall be set to zero.
+6
+wMinVoltage
+2
+Number
+Shall contain the minimum voltage in 50mV units that this 
+Consumer is capable of operating at.
+8
+wMaxVoltage
+2
+Number
+Shall contain the maximum voltage in 50mV units that this 
+Consumer is capable of operating at.
+10
+wReserved
+2
+Number
+ Reserved and Shall be set to zero.
+12
+dwMaxOperatingPower
+4
+Number
+Shall contain the maximum power in 10mW units this 
+Consumer can draw when it is in a steady state operating mode.
+16
+dwMaxPeakPower
+4
+Number
+Shall contain the maximum power in 10mW units this 
+Consumer can draw for a short duration of time 
+(dwMaxPeakPowerTime) before it falls back into a steady state.
+20
+dwMaxPeakPowerTime
+4
+Number
+Shall contain the time in 100ms units that this Consumer can 
+draw peak current.
+A device Shall set this field to 0xFFFF if this value is unknown.

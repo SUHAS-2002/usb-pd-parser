@@ -1,0 +1,173 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 263
+tPSSourceOff
+SPR Mode
+750
+835
+920
+ms
+Section 6.6.5.2
+EPR Mode
+1120
+1260
+1400
+tPSSourceOn
+SPR Mode
+390
+435
+480
+ms
+Section 6.6.5.3
+tPSTransition
+SPR Mode
+450
+500
+550
+ms
+Section 6.6.5.1
+EPR Mode
+830
+925
+1020
+tReceive
+0.9
+1.0
+1.1
+ms
+Section 6.6.1
+tReceiverResponse
+15
+ms
+Section 6.6.2
+tRetry
+195
+µs
+Section 6.6.1
+tSenderResponse
+27
+30
+33 
+ms
+Section 6.6.2
+tSinkDelay
+5
+ms
+Section 5.7
+tSinkRequest
+100
+ms
+Section 6.6.4.1
+tSinkTx
+16
+18
+20
+ms
+Section 6.6.16
+tSoftReset
+15
+ms
+Section 6.8.1
+tSrcHoldsBus
+50
+ms
+Section 8.3.3.2
+tSwapSinkReady
+15
+ms
+Section 6.6.8.1
+tSwapSourceStart
+20
+ms
+Section 6.6.8.1
+tTransmit
+195
+µs
+Section 6.6.1
+tTypeCSendSourceCap
+100
+150
+200
+ms
+Section 6.6.3.1
+tTypeCSinkWaitCap
+310
+465
+620
+ms
+Section 6.6.3.2
+tVCONNSourceDischarge
+160
+200
+240
+ms
+Section 6.6.10.1
+tVCONNSourceOff
+25
+ms
+Section 6.6.13
+tVcONNSourceOn
+50
+ms
+Section 6.3.11
+tVCONNSourceTimeout
+100
+150
+200
+ms
+Section 6.6.13
+tVCONNSwapWait
+100
+ms
+Section 6.6.4.4
+tVCONNSwapDelayDFP
+100
+ms
+Section 6.6.4.5
+tVCONNSwapDelayUFP
+500
+ms
+Section 6.6.4.6
+tVDMBusy
+50
+ms
+Section 6.6.12.4
+tVDMEnterMode
+25
+ms
+Section 6.6.12.2
+tVDMExitMode
+25
+ms
+Section 6.6.12.3
+tVDMReceiverResponse
+15
+ms
+Section 6.6.12.1
+tVDMSenderResponse
+24
+27
+30
+ms
+Section 6.6.12.1
+tVDMWaitModeEntry
+40
+45
+50
+ms
+Section 6.6.12.2
+tVDMWaitModeExit
+40
+45
+50
+ms
+Section 6.6.12.3
+Table 6.68  Time Values (Continued)
+Parameter
+Value 
+(min)
+Value 
+(Nom)
+Value 
+(max)
+Units
+Reference

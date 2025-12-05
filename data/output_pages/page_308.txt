@@ -1,0 +1,69 @@
+Page 308
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+6.13.4
+  Applicability of Extended Control Messages
+Table 6.80, "Applicability of Extended Control Messages" details Extended Control Messages that Shall/Should/ 
+Shall Not be transmitted and received by a Source, Sink, Cable Plug or VPD. Requirements for Dual-Role Power Ports 
+and Dual-Role Data Ports Shall override any requirements for Source-only or Sink-Only Ports.
+Table 6.80  Applicability of Extended Control Messages
+Message Type
+Source
+Sink
+Dual-Role 
+Power
+Dual-Role 
+Data
+Cable Plug
+VPD2
+Transmitted Message
+EPR_Get_Source_Cap
+NA
+CN1
+CN1
+ 
+NA
+NA
+EPR_Get_Sink_Cap
+CN1
+NA
+CN1
+NA
+NA
+EPR_KeepAlive
+NA
+CN1
+NA
+NA
+EPR_KeepAlive_Ack
+CN1
+NA
+NA
+NA
+Received Message
+EPR_Get_Source_Cap
+CN1
+NS
+CN1
+I
+I
+EPR_Get_Sink_Cap
+NS
+CN1
+CN1
+I
+I
+EPR_KeepAlive
+CN1
+NS
+I
+I
+EPR_KeepAlive_Ack
+NS
+CN1
+I
+I
+1)
+Shall be supported by products that support EPR Mode.
+2)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a CT-VPD Shall only take 
+place when not Connected to a Charger.

@@ -1,0 +1,79 @@
+Page 98
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+5.8.2.2
+  Receive Masks
+A Source using the BMC Signaling Scheme Shall be capable of receiving a signal that complies with the mask when 
+sourcing power as defined in Figure 5.17, "BMC Rx 'ONE' Mask when Sourcing Power", Figure 5.18, "BMC Rx 'ZERO' 
+Mask when Sourcing Power" and Table 5.16, "BMC Rx Mask Definition". The Source Rx mask is bounded by sweeping 
+a Tx mask compliant signal, with added vNoiseActive between power neutral and Source offsets. 
+A Consumer using the BMC Signaling Scheme Shall be capable of receiving a signal that complies with the mask 
+when sinking power as defined in Figure 5.21, "BMC Rx 'ONE' Mask when Sinking Power", Figure 5.22, "BMC Rx 
+'ZERO' Mask when Sinking Power" and Table 5.16, "BMC Rx Mask Definition". The Consumer Rx mask is bounded by 
+sweeping a Tx mask compliant signal, with added vNoiseActive between power neutral and Consumer offsets. 
+Every product using the BMC Signaling Scheme Shall be capable of receiving a signal that complies with the mask 
+when power neutral as defined in Figure 5.19, "BMC Rx 'ONE' Mask when Power neutral", FFigure 5.20, "BMC Rx 
+'ZERO' Mask when Power neutral" and Table 5.16, "BMC Rx Mask Definition".
+Dual-Role Power Devices Shall meet the receiver requirements for a Source when providing power during any 
+transmission using the BMC Signaling Scheme or a Sink when consuming power during any transmission using the 
+BMC Signaling Scheme.
+Cable Plugs Shall meet the receiver requirements for both a Source and a Sink during any transmission using the 
+BMC Signaling Scheme.
+The parameters used in the masks are specified to be appropriate to either edge triggered or oversampling 
+receiver implementations.
+The masks are defined for 'ONE' and 'ZERO' separately as BMC enforces a transition at the midpoint of the unit 
+interval while a 'ONE' is transmitted.
+The Rx masks are defined to bound the Rx noise after the Rx bandwidth limiting filter with the time constant 
+tRxFilter has been applied.
+The boundaries of Rx outer mask, Y1Rx and Y5Rx, are specified according to vSwing max and accommodate half 
+of vNoiseActive from cable noise coupling and the signal offset vIRDropGNDC due to the ground offset when 
+current is flowing in the cable. 
+The vertical dimension of the Rx inner mask, Y4Rx - Y2Rx, for power neutral is derived by reducing the vertical 
+dimension of the Tx inner mask, Y7Tx - Y3Tx, at time location X3Tx by vNoiseActive to account for cable noise 
+coupling. The received signal is composed of a waveform compliant to the Tx mask plus vNoiseActive.
+The vertical dimension of the Rx inner mask for sourcing power is derived by reducing the vertical dimension of 
+the Tx inner mask by vNoiseActive and vIRDropGNDC to account for both cable noise coupling and signal DC offset. 
+Table 5.15  BMC Tx Mask Definition, Y Values
+Name
+Description
+Value
+Units
+Y1Tx
+Lower bound of Out-
+er mask
+-0.075
+V
+Y2Tx
+Lower bound of in-
+ner mask
+0.075
+V
+Y3Tx
+see figure
+0.15
+V
+Y4Tx
+see figure
+0.325
+V
+Y5Tx
+Inner mask vertical 
+midpoint
+0.5625
+V
+Y6Tx
+see figure
+0.8
+V
+Y7Tx
+see figure
+0.975
+V
+Y8Tx
+see figure
+1.04
+V
+Y9Tx
+Upper Bound of Out-
+er mask
+1.2
+V

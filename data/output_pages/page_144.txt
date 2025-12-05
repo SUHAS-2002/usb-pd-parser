@@ -1,0 +1,19 @@
+Page 144
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Sink May monitor the Battery voltage.
+Table 6.12  Battery Supply PDO – Source
+Bit(s)
+Field
+Description
+B31…30
+Battery Supply
+10b - Battery Supply PDO
+B29…20
+Maximum Voltage
+Maximum voltage in 50mV units
+B19…10
+Minimum Voltage
+Minimum voltage in 50mV units
+B9…0
+Maximum Allowable Power
+Maximum allowable power in 250mW units

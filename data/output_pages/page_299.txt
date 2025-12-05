@@ -1,0 +1,47 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 299
+Chunking
+Chunked Rx
+RCH_Wait_For_Message_From_Protocol_Layer
+Section 6.12.2.2.1.1
+RCH_Pass_Up_Message
+Section 6.12.2.2.1.1
+RCH_Processing_Extended_Message
+Section 6.12.2.2.1.1
+RCH_Requesting_Chunk
+Section 6.12.2.2.1.1
+RCH_Waiting_Chunk
+Section 6.12.2.2.1.1
+RCH_Report_Error
+Section 6.12.2.2.1.1
+Chunked Tx
+TCH_Wait_For_Message_Request_From_Policy_Engine
+Section 6.12.2.1.3.1
+TCH_Pass_Down_Message
+Section 6.12.2.1.3.2
+TCH_Wait_For_Transmision_Complete
+Section 6.12.2.1.3.3
+TCH_Message_Sent
+Section 6.12.2.1.3.4
+TCH_Prepare_To_Send_Chunked_Message
+Section 6.12.2.1.3.5
+TCH_Construct_Chunked_Message
+Section 6.12.2.1.3.6
+TCH_Sending_Chunked_Message
+Section 6.12.2.1.3.7
+TCH_Wait_Chunk_Request
+Section 6.12.2.1.3.8
+TCH_Message_Received
+Section 6.12.2.1.3.9
+TCH_Report_Error
+Section 6.12.2.1.3.10
+Chunked Message Router
+RTR_Wait_for_Message_From_Protocol_Layer
+Section 6.12.2.1.4.1
+RTR_Rx_Chunks
+Section 6.12.2.1.4.2
+RTR_Tx_Chunks
+Section 6.12.2.1.4.3
+Table 6.75  Protocol Layer States (Continued)
+State Name
+Section

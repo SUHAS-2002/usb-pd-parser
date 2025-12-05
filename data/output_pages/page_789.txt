@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 789
+8.3.2.15
+  Built in Self-Test (BIST)
+8.3.2.15.1
+  BIST Carrier Mode
+The following is an example of a BIST Carrier Mode test between a Tester and a UUT. When the UUT is connected to 
+the Tester the sequence below is executed. 
+Figure 8.116, "BIST Carrier Mode Test" shows the Messages as they flow across the bus and within the devices. This 
+test enables the measurement of power supply noise and frequency drift.
+1)
+Connection is established and stable.
+2)
+Tester sends a BIST Message with a BIST Carrier Mode BIST Data Object.
+3)
+UUT answers with a GoodCRC Message.
+4)
+UUT starts sending the Test Pattern.
+5)
+Operator does the measurements.
+6)
+The test ends after tBISTContMode.
+See also Section 5.9.1, "BIST Carrier Mode" and Section 6.4.3.1, "BIST Carrier Mode".
+Figure 8.116 BIST Carrier Mode Test
+: Protocol
+1: Send BIST(Carrier Mode)
+: PHY
+: PHY
+: Protocol
+2: BIST(Carrier Mode)
+3: BIST(Carrier Mode) + CRC
+4: BIST(Carrier Mode)
+Start CRCReceiveTimer
+5: BIST(Carrier Mode) received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+9: BIST(Carrier Mode) sent
+: Policy Engine
+: Policy Engine
+Go to BIST Carrier Mode
+Tester
+UUT
+12: Send Test Pattern
+13: Send Test Pattern
+14: Test Pattern
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Check MessageID against 
+local copy
+Store copy of MessageID
+End of Test (after tBISTContMode)
+Enter BIST Carrier Mode mode
+10: Go to BIST Carrier Mode
+11: Go to BIST Carrier Mode

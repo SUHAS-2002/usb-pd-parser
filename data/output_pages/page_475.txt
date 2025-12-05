@@ -1,0 +1,66 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 475
+16
+PHY Layer appends CRC and sends the Message.
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the Message.
+17
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. 
+18
+The Protocol Layer verifies and increments the 
+MessageIDCounter. It informs the Policy Engine that 
+the EPR_Mode (Enter Acknowledged) Message was 
+successfully sent. The Protocol Layer stops the 
+CRCReceiveTimer.
+19
+If the Source is not the VCONN Source the Source initiates the VCONN Swap process as described in Section 8.3.2.10, 
+"VCONN Swap".
+20
+The Source performs Cable Discovery to determine whether the cable supports EPR; cable is not EPR Capable. The 
+Cable Discovery process is described in Section 8.3.2.14.1, "Discover Identity".
+21
+The Source determines that there has been a failure or 
+incompatibility during the EPR process (see Section 
+6.4.10, "EPR_Mode Message").
+The Policy Engine tells the Protocol Layer to form a 
+EPR_Mode (Enter Failed) Message.
+22
+Protocol Layer creates the EPR_Mode (Enter Failed) 
+Message and passes to PHY Layer.
+23
+PHY Layer receives the EPR_Mode (Enter Failed) 
+Message and compares the CRC it calculated with the one 
+sent to verify the Message.
+PHY Layer appends a CRC and sends the EPR_Mode 
+(Enter Failed) Message. Starts CRCReceiveTimer.
+24
+PHY Layer removes the CRC and forwards the 
+EPR_Mode (Enter Failed) Message to the Protocol Layer. 
+25
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer passes the EPR_Mode (Enter Failed) 
+information to the Policy Engine. The Policy Engine 
+stops the SinkEPREnterTimer.
+26
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+27
+PHY Layer appends CRC and sends the Message.
+PHY Layer receives the Message and compares the CRC it 
+calculated with the one sent to verify the Message.
+28
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. 
+29
+The Protocol Layer verifies and increments the 
+MessageIDCounter. It informs the Policy Engine that 
+the EPR_Mode (Enter Failed) Message was successfully 
+sent. The Protocol Layer stops the CRCReceiveTimer.
+EPR Mode is not entered. Sink Initiates Soft Reset
+Table 8.40  Steps for Entering EPR Mode (Failure due to non-EPR cable)
+Step
+Sink
+Source

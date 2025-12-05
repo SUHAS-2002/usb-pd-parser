@@ -1,0 +1,28 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 867
+8.3.3.10.4
+  Source Give Source PPS Status State Diagram
+Figure 8.153, "Source Give Source PPS Status State Diagram" shows the state diagram for a Source on receiving a 
+Get_PPS_Status Message. See also Section 6.5.10, "PPS_Status Message".
+Figure 8.153 Source Give Source PPS Status State Diagram
+8.3.3.10.4.1
+  PE_SRC_Give_PPS_Status State
+The Policy Engine Shall transition to the PE_SRC_Give_PPS_Status state, from the PE_SRC_Ready state, when a 
+Get_PPS_Status Message is received. 
+On entry to the PE_SRC_Give_PPS_Status state the Policy Engine Shall request the present Source PPS status from 
+the Device Policy Manager and then send a PPS_Status Message based on these capabilities.
+The Policy Engine Shall transition back to the PE_SRC_Ready state (see Figure 8.132, "Source Port State Diagram") 
+when:
+
+The PPS_Status Message has been successfully sent.
+Get_PPS_Status Message
+received
+PPS_Status
+Message sent
+PE_SRC_Ready
+PE_SRC_Give_PPS_Status
+Actions on entry:
+Get present Source PPS status from Device Policy Manager
+Send PPS_Status Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

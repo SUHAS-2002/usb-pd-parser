@@ -1,0 +1,77 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 171
+6.4.4.3.1.1.4
+  Product Type (Cable Plug)
+The SOP’ Product Type (Cable Plug/VPD) field indicates the type of Product when the Product is a Cable Plug or VPD, 
+whether a VDO will be returned and if so the type of VDO to be returned. Table 6.35, "Product Types (Cable Plug/
+VPD)" defines the Product Type VDOs which Shall be returned.
+6.4.4.3.1.1.5
+  Modal Operation Supported
+The Modal Operation Supported bit is used to indicate whether or not the Product (either a Cable Plug or a device 
+that can operate in the UFP role) is capable of supporting Modes. The Modal Operation Supported bit does not 
+describe a DFP's Alternate Mode Controller functionality.
+A product that supports Modal Operation Shall respond to the Discover SVIDs Command with a list of SVIDs for all 
+of the Modes it is capable of supporting whether or not those Modes can currently be entered.
+6.4.4.3.1.1.6
+  Product Type (DFP)
+The SOP - Product Type (DFP) field indicates the type of Product when in DFP Data Role, whether a VDO will be 
+returned and if so the type of VDO to be returned. The Product Type indicated in the SOP - Product Type (DFP) field 
+Shall be the closest categorization of the main functionality of the Product in DFP Data Role or "Undefined" when 
+there is no suitable category for the product. For DRD Products this field Shall always indicate the Product Type 
+when in DFP role regardless of the present Data Role. Table 6.36, "Product Types (DFP)" defines the Product Type 
+VDOs which Shall be returned.
+In SOP’ Communication (Cable Plugs and VPDs) this bit field is Reserved and Shall be set to zero.
+6.4.4.3.1.1.7
+  Connector Type Field
+The Connector Type field (B22…21) Shall contain a value identifying it as either a USB Type-C receptacle or a USB 
+Type-C plug.
+Table 6.35  Product Types (Cable Plug/VPD)
+Product Type
+Description
+Product Type 
+VDO
+Reference
+Undefined
+Shall be used where no other Product Type value 
+is appropriate.
+None
+Active Cable
+Shall be used when the Product is a cable that 
+incorporates signal conditioning circuits.
+Active Cable VDO
+Section 6.4.4.3.1.7
+Passive Cable
+Shall be used when the Product is a cable that 
+does not incorporate signal conditioning circuits.
+Passive Cable VDO
+Section 6.4.4.3.1.6
+VCONN Powered USB 
+Device
+Shall be used when the Product is a PDUSB 
+VCONN Powered USB Device.
+VPD VDO
+Section 6.4.4.3.1.9
+Table 6.36  Product Types (DFP)
+Product Type
+Description
+Product Type 
+VDO
+Reference
+Undefined
+Shall be used where no other Product Type value 
+is appropriate.
+None
+PDUSB Hub
+Shall be used when the Product is a PDUSB Hub.
+DFP VDO
+Section 6.4.4.3.1.7
+PDUSB Host
+Shall be used when the Product is a PDUSB Host 
+or a PDUSB host that supports one or more 
+Alternate Modes as an AMC.
+DFP VDO
+Section 6.4.4.3.1.6
+Charger
+Shall be used when the Product is a Charger.
+DFP VDO
+Section 6.4.4.3.1.9

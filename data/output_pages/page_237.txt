@@ -1,0 +1,51 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 237
+6.5.11
+  Country_Codes Message
+The Country_Codes Message Shall be sent in response to a Get_Country_Codes Message. The Country_Codes 
+Message enables a Port to query its Port Partner to get a list of alpha-2 country codes as defined in [ISO 3166] for 
+which the Port Partner has country specific information. 
+The Country_Codes Message Shall contain a 4…26-byte Country Code Data Block (CCDB) whose format Shall be as 
+shown in Figure 6.50, "Country_Codes Message" and Table 6.63, "Country Codes Data Block (CCDB)".
+Figure 6.50 Country_Codes Message
+6.5.11.1
+  Country Code Field
+The Country Code field Shall contain Length Country Codes in the Alpha-2 Country Code defined by [ISO 3166].
+Table 6.63  Country Codes Data Block (CCDB)
+Offset
+Field
+Description
+0
+Length
+Number of country codes in the Message
+1
+Reserved
+Shall be set to zero.
+2...
+Length * 2n
+Country 
+Code
+Offset
+Field
+Description
+2
+1st Country Code
+First character of the Alpha-2 Country Code defined by 
+[ISO 3166]
+3
+Second character of the Alpha-2 Country Code defined by 
+[ISO 3166]
+4
+2nd Country Code 
+First character of the Alpha-2 Country Code defined by 
+[ISO 3166]
+5
+Second character of the Alpha-2 Country Code defined by 
+[ISO 3166]
+…
+Length * 2n
+nth Country Code
+Extended Header
+Data Size = 4-26
+CCDB
+(4-26 byte Data Block)

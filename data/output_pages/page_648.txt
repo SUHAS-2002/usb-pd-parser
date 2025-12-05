@@ -1,0 +1,21 @@
+Page 648
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+16
+PHY Layer appends a CRC and sends the GoodCRC 
+Message.
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+17
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+18
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Source_Capabilities Message was successfully sent.
+The Source has informed the Sink of its EPR Capabilities.
+Table 8.95  Steps for a Sink getting EPR Source Capabilities Sequence
+Step
+Sink Port
+Source Port

@@ -1,0 +1,66 @@
+Page 62
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+2.5.2
+  Sink Operation
+
+At Attach (no PD Connection or Contract):
+
+Sink detects Source Attachment through the presence of vSafe5V.
+
+For a DRP that toggles between Source and Sink operation, the Port becomes a Sink Port on 
+Attachment of a Source.
+
+Once the Sink detects the presence of vSafe5V on VBUS it waits for a Source_Capabilities Message 
+indicating the presence of a PD Capable Source.
+
+If the Sink does not receive a Source_Capabilities Message within tTypeCSinkWaitCap then it can 
+issue Hard Reset Signaling in order to cause the Source Port to send a Source_Capabilities Message 
+if the Source Port is PD Capable.
+
+The Sink does not generate SOP’ Packets or SOP’’ Packets, is not required to detect SOP’ Packets or 
+SOP’’ Packets and Discards them.
+
+Establishing PD Connection (no PD Connection or Contract):
+
+The Sink receives a Source_Capabilities Message and responds with a GoodCRC Message.
+
+The Sink does not generate SOP’ Packets or SOP’’ Packets, is not required to detect SOP’ Packets or 
+SOP’’ Packets and Discards them.
+
+Establishing the First Explicit Contract after an Attach, Hard Reset or Implicit Contract as a result of a 
+Power Role Swap or Fast Role Swap:
+
+The Sink receives a Source_Capabilities Message from the Source and responds with a Request 
+Message. If this is a Valid request the Sink receives an Accept Message followed by a PS_RDY Message 
+when the Source's power supply is ready to source power at the agreed level. At this point the Source 
+and Sink have entered into an Explicit Contract:
+
+The Sink Port can request one of the Capabilities offered by the Source, even if this is the vSafe5V 
+output offered by [USB 2.0], [USB 3.2], [USB Type-C 2.4] or [USBBC 1.2], in order to enable 
+future power Negotiation:
+
+A Sink not requesting any Valid capability with a Request Message results in an error.
+
+A Sink unable to fully operate at the offered Capabilities requests the default capability but in-
+dicates that it would prefer another power level by setting the Capability Mismatch bit in the 
+Request Message and also providing a physical indication of the failure to the end user (e.g., 
+using an LED).
+
+The Sink does not generate SOP’ Packets or SOP’’ Packets, is not required to detect SOP’ Packets or 
+SOP’’ Packets and Discards them.
+
+During PD Connection (Explicit Contract - PE_SNK_Ready state):
+
+The Sink processes and responds (if a response is required) to all Messages received and sends 
+appropriate Messages whenever its Local Policy requires.
+
+A Sink whose power needs have changed indicates this to the Source with a new Request Message. 
+The Sink Port can request one of the Capabilities previously offered by the Source, even if this is the 
+vSafe5V output offered by [USB 2.0], [USB 3.2], [USB Type-C 2.4] or [USBBC 1.2], in order to enable 
+future power Negotiation:
+
+Not requesting any capability with a Request Message results in an error.
+
+A Sink unable to fully operate at the offered Capabilities requests an offered capability but 
+indicates a Capabilities Mismatch i.e., that it would prefer another power level also providing a 
+physical indication of the failure to the end user (e.g., using an LED).

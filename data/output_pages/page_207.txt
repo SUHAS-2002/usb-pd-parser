@@ -1,0 +1,28 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 207
+
+The Source Shall verify the cable is EPR Capable.
+
+A Sink Shall Not be Connected to the Source through a Charge Through VPD (CT-VPD).
+
+The Source and Sink Shall already be in an SPR Explicit Contract.
+
+The EPR Capable bit Shall be set in the Fixed Supply 5V PDO.
+
+The EPR Capable bit Shall have been set in the RDO in the last Request Message received by the Source.
+To verify the cable is EPR Capable, the EPR Source Shall have already done the following (see Section 6.6.21.4, 
+"tEPRSourceCableDiscovery"):
+
+Discover the cable prior to entering its First Explicit Contract
+
+Alternatively, within tEPRSourceCableDiscovery of entry into the First Explicit Contract
+
+If it is the VCONN Source, discover the cable. 
+
+If not the VCONN Source, do a VCONN Swap then discover the cable.
+ and can verify the cable is EPR Capable by completing steps 5 and 6 in the entry process in Figure 6.34, "Illustration 
+of process to enter EPR Mode".
+The EPR Mode entry process is a Non-interruptible multi-Message AMS. An illustration of this AMS is shown in 
+Figure 6.34, "Illustration of process to enter EPR Mode". 
+Note:
+Figure 6.34, "Illustration of process to enter EPR Mode" is not Normative but is Informative only.

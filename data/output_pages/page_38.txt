@@ -1,0 +1,37 @@
+Page 38
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+1.4.3
+  Numbering
+Numbers that are immediately followed by a lowercase “b” (e.g., 01b) are binary values. Numbers that are 
+immediately followed by an uppercase “B” are byte values. Numbers that are immediately followed by a lowercase 
+“h” (e.g., 3Ah) or are preceded by “0x” (e.g., 0xFF00) are hexadecimal values. Numbers not immediately followed by 
+either a “b”, “B”, or “h” are decimal values.
+Reserved
+Reserved is a keyword indicating bits, bytes, words, fields, and code values that 
+are set-aside for future standardization. Their use and interpretation May be 
+specified by future extensions to this specification and Shall Not be utilized or 
+adapted by vendor implementation. A Reserved bit, byte, word, or field Shall be 
+set to zero by the sender and Shall be Ignored by the receiver. Reserved field 
+values Shall Not be sent by the sender and Shall be Ignored by the receiver.
+Shall
+Shall and Normative are equivalent keywords indicating a mandatory 
+requirement. Designers are mandated to implement all such requirements to 
+ensure interoperability with other compliant devices.
+Shall Not
+Shall Not is a keyword that is the inverse of Shall indicating non-compliant 
+operation.
+Should
+Should is a keyword indicating flexibility of choice with a preferred alternative; 
+equivalent to the phrase “it is recommended that…”.
+Should Not
+Should Not is a keyword is the inverse of Should; equivalent to the phrase “it is 
+recommended that implementations do not…”.
+Static
+Static is a keyword indicating that a field that never changes.
+Valid
+Valid is a keyword that is the inverse of Invalid indicating either a Packet or 
+Signaling that fall within the defined specification or an Explicit Contract that can 
+be maintained by the Source.
+Table 1.2  Keywords (Continued)
+Keyword
+Definition

@@ -1,0 +1,49 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 159
+This field Shall apply to the Fixed Supply and Variable Supply RDO in SPR Mode and the Fixed Supply RDO in EPR 
+Capable.
+6.4.2.10
+  Operating Power
+The Operating Power field in the Request Data Object Shall be set to the highest power the Sink will draw 
+throughout the Explicit Contract.
+This field Shall apply to the Battery Supply RDO.
+6.4.2.11
+  Maximum Operating Power
+The Maximum Operating Power field has been functionally Deprecated. In order to maintain backward 
+compatibility with Sources that may try to interpret the Maximum Operating Power field in the Request Message, 
+the field Shall be set equal to the value of the Operating Power field. To ensure backward compatibility, the Source 
+Should Ignore this field.
+This field Shall apply to the Battery Supply RDO.
+6.4.2.12
+  Output Voltage 
+The Output Voltage field in the Programmable and AVS Request Data Objects Shall be set by the Sink to the voltage 
+the Sink requires as measured at the Source's output connector. The Output Voltage field Shall be greater than or 
+equal to the Minimum Voltage field and less than or equal to the Maximum Voltage field in the Programmable 
+Power Supply and AVS APDOs, respectively.
+This field Shall apply to the Programmable RDO and AVS RDO.
+6.4.3
+  BIST Message
+The BIST Message is sent to request the Port to enter a PHY Layer test mode (see Section 5.9, "Built in Self-Test 
+(BIST)") that performs one of the following functions:
+
+Enter a Continuous BIST Mode to send a continuous stream of test data to the Tester.
+
+Enter and leave a Shared Capacity Group test mode.
+The Message format is as shown in Figure 6.14, "BIST Message".
+Figure 6.14 BIST Message
+All Ports Shall be able to be a Unit Under Test (UUT) only when operating at vSafe5V. All of the following BIST 
+Modes Shall be supported:
+
+Process reception of a BIST Carrier Mode BIST Data Object that Shall result in the generation of the 
+appropriate carrier signal.
+
+Process reception of a BIST Test Data BIST Data Object that Shall result in the Message being Ignored.
+UUTs with Ports constituting a Shared Capacity Group (see [USB Type-C 2.4]) Shall support the following BIST 
+Mode:
+
+Process reception of a BIST Shared Test Mode Entry BIST Data Object that Shall cause the UUT to enter 
+BIST Shared Capacity Test Mode; a mode in which the UUT offers its full Source Capabilities on every Port 
+in the Shared Capacity Group. 
+Header
+No. of Data Objects = 1 or 7
+BIST Data Object

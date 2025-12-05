@@ -1,0 +1,9 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 849
+
+The Data_Reset_Complete Message is received.
+The Policy Engine Shall transition to ErrorRecovery when:
+
+The DataResetFailUFPTimer times out or
+
+A Protocol Error occurs.

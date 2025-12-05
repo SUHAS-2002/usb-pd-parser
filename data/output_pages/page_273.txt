@@ -1,0 +1,15 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 273
+6.10
+  Collision Avoidance
+To avoid Message collisions due to asynchronous Messaging sent from the Sink, the Source sets Rp to SinkTxOK to 
+indicate to the Sink that it is OK to initiate an AMS. When the Source wishes to initiate an AMS, it sets Rp to SinkTxNG. 
+When the Sink detects that Rp is set to SinkTxOK it May initiate an AMS. When the Sink detects that Rp is set to 
+SinkTxNG it Shall Not initiate an AMS and Shall only send Messages that are part of an AMS the Source has initiated.
+Note:
+This restriction applies to SOP* AMS's i.e., for both Port to Port and Port to Cable Plug communications.
+If a transition into the PE_SRC_Ready state will result in an immediate transition out of the PE_SRC_Ready state 
+within tSrcHoldsBus e.g. it is due to a Protocol Error that has not resulted in a Soft Reset, then the notifications of 
+the end of AMS and first Message in an AMS May Not be sent to avoid changing the Rp value unnecessarily.
+Note:
+A Sink can still send Hard Reset Signaling at any time.

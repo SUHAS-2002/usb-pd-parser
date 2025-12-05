@@ -1,0 +1,76 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 491
+Table 8.45, "Steps for EPR Keep Alive" below provides a detailed explanation of what happens at each labeled step 
+in Figure 8.18, "EPR Keep Alive" above.
+Table 8.45  Steps for EPR Keep Alive
+Step
+Source
+Sink
+1
+The SinkEPRKeepAliveTimer times out in the Policy 
+Engine. The Policy Engine stops the 
+SinkEPRKeepAliveTimer timer and tells the Protocol 
+Layer to form an EPR_KeepAlive Message.
+2
+The Protocol Layer creates the EPR_KeepAlive Message 
+and passes it to PHY Layer. The Protocol Layer.
+3
+PHY Layer receives the EPR_KeepAlive Message and 
+compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends a CRC and sends the Request 
+Message. Starts CRCReceiveTimer.
+4
+PHY Layer removes the CRC and forwards the 
+EPR_KeepAlive Message to the Protocol Layer. 
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer passes the Request information to 
+the Policy Engine. Policy Engine stops the 
+SourceEPRKeepAliveTimer.
+6
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+7
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+PHY Layer receives the GoodCRC Message and 
+compares the CRC it calculated with the one sent to verify 
+the Message.
+8
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. 
+9
+The Protocol Layer verifies and increments the 
+MessageIDCounter. It informs the Policy Engine that 
+the SinkEPRKeepAliveTimer Message was successfully 
+sent. The Protocol Layer stops the CRCReceiveTimer.
+The Policy Engine starts SenderResponseTimer.
+10
+Policy Engine requests the DPM to evaluate the 
+SourceEPRKeepAliveTimer Message sent by the Sink 
+and decides if the Source can meet the request. The 
+Policy Engine tells the Protocol Layer to form an 
+EPR_KeepAlive_Ack Message.
+11
+The Protocol Layer forms the EPR_KeepAlive_Ack 
+Message that is passed to the PHY Layer.
+12
+PHY Layer appends CRC and sends the 
+EPR_KeepAlive_Ack Message. Starts CRCReceiveTimer.
+PHY Layer receives the EPR_KeepAlive_Ack Message 
+and compares the CRC it calculated with the one sent to 
+verify the Message.
+13
+PHY Layer forwards the EPR_KeepAlive_Ack Message to 
+the Protocol Layer.
+14
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+Protocol Layer informs the Policy Engine that an Accept 
+Message has been received. The Policy Engine stops 
+SenderResponseTimer, starts the 
+SinkEPRKeepAliveTimer.

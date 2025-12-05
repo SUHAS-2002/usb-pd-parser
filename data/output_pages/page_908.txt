@@ -1,0 +1,17 @@
+Page 908
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The Policy Engine Shall transition to the PE_FRS_SNK_SRC_Source_on state when:
+
+The Device Policy Manager indicates that Rp is asserted.
+8.3.3.19.6.6
+  PE_FRS_SNK_SRC_Source_on State
+On entry to the PE_FRS_SNK_SRC_Source_on state the Policy Engine Shall request the Device Policy Manager to turn 
+on the Source.
+On exit from the PE_FRS_SNK_SRC_Source_on state the Policy Engine Shall send a PS_RDY Message.
+The Policy Engine Shall transition to the PE_SRC_Startup state when:
+
+The PS_RDY Message has been sent.
+The Policy Engine Shall transition to the ErrorRecovery state when:
+
+The PS_RDY Message is not sent after retries (a GoodCRC Message has not been received). A Soft Reset 
+Shall Not be initiated in this case.

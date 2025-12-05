@@ -1,0 +1,66 @@
+Page 60
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+The Source receives a Request Message from the Sink and, if this is a Valid request, responds with 
+an Accept Message followed by a PS_RDY Message when its power supply is ready to source power 
+at the agreed level. At this point an Explicit Contract has been agreed.
+
+A DFP that does not generate SOP’ Packets or SOP’’ Packets, is not required to detect SOP’ Packets or 
+SOP’’ Packets and Discards them.
+
+When in an Explicit Contract (PE_SRC_Ready State):
+
+The Source processes and responds (if a response is required) to all Messages received and sends 
+appropriate Messages whenever its Local Policy requires:
+
+The Source informs the Sink whenever its Capabilities change, by sending a Source_Capabilities 
+Message.
+
+The Source responds to a Sink Request Message with the Capabilities mismatch bit set, by 
+sending a Source_Capabilities Message with its maximum available power.
+
+The Source will always have an Rp value asserted on its CC wire used for Collision Avoidance.
+
+When this Port is a DRP the Source can initiate or receive a request for the exchange of Power 
+Roles. After the Power Role Swap this Port will be a Sink and in an Implicit Contract until an 
+Explicit Contract is Negotiated immediately afterwards.
+
+When this Port is a DRD the Source can initiate or receive a request for an exchange of Data Roles. 
+After a Data Role Swap the DFP (USB Host) becomes a UFP (USB Device). The Port remains a 
+Source and the VCONN Source role remains unchanged.
+
+The Source can initiate or receive a request for an exchange of VCONN Source role. During a VCONN 
+Swap VCONN is applied by both Ports (make before break). The Port remains a Source and DFP/
+UFP Data Roles remain unchanged.
+
+The Source when it is the VCONN Source can communicate with a Cable Plug using SOP’ 
+Communication or SOP’’ Communication at any time it is not engaged in any other SOP 
+Communication:
+
+If SOP Packets are received by the Source, during SOP’ Communication or SOP’’ Communication, 
+the SOP’ Communication or SOP’’ Communication is immediately terminated (the Cable Plug 
+times out and does not retry).
+
+If the Source needs to initiate an SOP Communication during an ongoing SOP’ Communication or 
+SOP’’ Communication (e.g., for a Capabilities change) then the SOP’ Communication or SOP’’ 
+Communications will be interrupted. 
+
+When the Source Port is also a DFP:
+
+The Source can control the entry and exiting of Modes in the Cable Plug(s) and control Modal 
+Operation.
+
+The Source can initiate Unstructured VDMs or Structured VDMs.
+
+The Source can control the entry and exiting of Modes in the Sink and control Modal Operation 
+using Structured VDMs.
+
+Detach or communications failure:
+
+A Source detects plug Detach and takes VBUS down to vSafe5V within tSafe5V and vSafe0V within 
+tSafe0V (i.e. using USB Type-C Detach detection via CC).
+
+When the Source detects the failure to receive a GoodCRC Message in response to a Message within 
+tReceive:
+
+Leads to a Soft Reset, within tSoftReset of the CRCReceiveTimer expiring.

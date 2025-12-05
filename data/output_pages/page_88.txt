@@ -1,0 +1,94 @@
+Page 88
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 5.4 CRC-32 Generation
+The CRC-32 Shall be encoded before transmission.
+Table 5.10  CRC-32 Mapping
+CRC-32
+Result Bit Position in CRC-32 Field
+0
+31
+1
+30
+2
+29
+3
+28
+4
+27
+5
+26
+6
+25
+7
+24
+8
+23
+9
+22
+10
+21
+11
+20
+12
+19
+13
+18
+14
+17
+15
+16
+16
+15
+17
+14
+18
+13
+19
+12
+20
+11
+21
+10
+22
+9
+23
+8
+24
+7
+25
+6
+26
+5
+27
+4
+28
+3
+29
+2
+30
+1
+31
+0
+7 6 5 4 3 2 1 0
+15 14 13 12 11 10 9 8 23 22 21 20 19 18 17 16 31 30 29 28 27 26 25 24
+= Flip Flop
+7 6 5 4
+3 2 1 0
+23222120 19181716 15141312 1110 9 8
+31302928 27262524
+Data Byte 2
+Data Byte 1
+Data Byte 0
+76543210
+Byte Order
+Bit
+Order
+Input
+7
+B
+D
+1
+1
+C
+4
+0

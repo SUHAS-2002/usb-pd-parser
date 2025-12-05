@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 337
+7.2.9
+  Robust Sink Operation 
+7.2.9.1
+  Sink Bulk Capacitance Discharge at Detach
+When a Source is Detached from a Sink, the Sink Shall continue to draw power from its input bulk capacitance until 
+VBUS is discharged to vSafe5V or lower by no longer than tSafe5V from the Detach event. This safe Sink 
+requirement Shall apply to all Sinks operating with a Negotiated VBUS level greater than vSafe5V and Shall apply 
+during all low power and high-power operating modes of the Sink.
+ If the Detach is detected during a Sink low power state, such as USB Suspend, the Sink can then draw as much 
+power as needed from its bulk capacitance since a Source is no longer Attached. In order to achieve a successful 
+Detach detect based on VBUS voltage level droop, the Sink power consumption Shall be high enough so that VBUS 
+will decay below vSrcValid(min) well within tSafe5V after the Source bulk capacitance is removed due to the 
+Detach. Once adequate VBUS droop has been achieved, a discharge circuit can be enabled to meet the safe Sink 
+requirement.
+ To illustrate the point, the following set of Sink conditions will not meet the safe Sink requirement without 
+additional discharge circuitry:
+
+Negotiated VBUS = 20V.
+
+Maximum allowable supplied VBUS voltage = 21.55V.
+
+Maximum bulk capacitance = 30µF.
+
+Power consumption at Detach = 12.5mW.
+When the Detach occurs (hence removal of the Source bulk capacitance) the 12.5mW power consumption will 
+draw down the VBUS voltage from the worst-case maximum level of 21.55V to 17V in approximately 205ms. At this 
+point, with VBUS well below vSrcValid (min) an approximate 100mW discharge circuit can be enabled to increase 
+the rate of Sink bulk capacitance discharge and meet the safe Sink requirement. The power level of the discharge 
+circuit is dependent on how much time is left to discharge the remaining voltage on the Sink bulk capacitance. If a 
+Sink has the ability to detect the Detach in a different manner and in much less time than tSafe5V, then this different 
+manner of detection can be used to enable a discharge circuit, allowing even lower power dissipation during low 
+power modes such as USB Suspend.
+ In most applications, the safe Sink requirement will limit the maximum Sink bulk capacitance well below the 
+cSnkBulkPd limit. A Detach occurring during Sink high power operating modes must quickly discharge the Sink 
+bulk capacitance to vSafe5V or lower as long as the Sink continues to draw adequate power until VBUS has decayed 
+to vSafe5V or lower.
+7.2.9.2
+  Input Over Voltage Protection
+Sinks Shall implement input Over-Voltage Protection (OVP) to prevent damage from input voltage that exceeds the 
+voltage handling capability of the Sink. The definition of voltage handling capability is left to the discretion of the 
+Sink implementation. The over voltage response of Sinks Shall Not interfere with normal PD operation and Shall 
+account for vSrcNew, vSrcValid or vPpsNew, vPpsValid as determined by the Negotiated VBUS value. SPR Sinks 
+Should tolerate input voltages as high as vSprMax and Shall meet applicable safety requirements if vSprMax is 
+exceeded. Likewise, EPR Sinks Should tolerate input voltages as high as vEprMax and Shall meet applicable safety 
+requirements if vEprMax is exceeded.
+Sinks Should attempt to send Hard Reset Signaling when OVP engages followed by an Alert Message indicating an 
+OVP event once an Explicit Contract has been established. The OVP response May engage at either the Port or 
+system level. Systems or ports that have engaged OVP Shall resume USB Default Operation when the Source has re-
+established vSafe5V on VBUS.
+The Sink Shall be able to Re-negotiate with the Source after resuming USB Default Operation. The decision of how 
+to respond to Re-negotiation after an OVP event is left to the discretion of the Sink implementation.
+The Sink Shall prevent continual system or Port cycling if OVP continues to engage after initially resuming either 
+USB Default Operation or Re-negotiation. Latching off the Port or system is an acceptable response to recurring over 
+voltage.

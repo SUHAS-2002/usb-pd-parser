@@ -1,0 +1,101 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 413
+7.4.2
+  Sink Electrical Parameters
+The Sink Electrical Parameters that Shall be followed are specified in Table 7.24, "Sink Electrical Parameters".
+Table 7.24  Sink Electrical Parameters
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+cSnkBulk
+Sink bulk capacitance on VBUS at 
+Attach and during FRS after the 
+Initial Source stops sourcing and 
+prior to establishing the First 
+Explicit Contract (see Appendix E, 
+"FRS System Level Example" for an 
+example).1
+See [USB 3.2]
+Section 7.2.2
+[USB 3.2]
+cSnkBulkPd
+Bulk capacitance on VBUS a Sink is 
+allowed after a successful 
+Negotiation.1
+100
+µF
+Section 7.2.2
+iLoadReleaseRate
+Load release di/dt.
+-150
+mA/
+µs
+Section 7.2.6
+iLoadStepRate
+Load step di/dt.
+150
+mA/
+µs
+Section 7.2.6
+iNewFrsSink
+Maximum current the New Sink 
+can draw during a Fast Role Swap 
+until the New Source applies Rp.
+Matches the required Fast Role 
+Swap required USB Type-C 
+Current Current field of the Fixed 
+Supply PDO of the Initial Source’s 
+Sink_Capabilities Message.
+Default USB 
+current or 1.5 
+or 3.0
+A
+Section 7.1.13
+iOvershoot
+Positive or negative overshoot 
+when a load change occurs less 
+than or equal to iLoadStepRate; 
+relative to the settled value after 
+the load change.
+-230
+230
+mA
+Section 7.2.6
+iPpsCLLoadStep 
+Maximum Current set-point 
+change while operating in CL 
+mode.
+-500
+500
+mA
+Section 7.2.3.1
+iSafe0mA
+Maximum current a Sink is 
+allowed to draw when VBUS is 
+driven to vSafe0V.
+1.0
+mA
+Figure 7.29
+Figure 7.30
+iSnkStdby
+Maximum current during voltage 
+transition.
+500
+mA
+Section 7.2.3
+iSnkSwapStdby
+Maximum current a Sink can draw 
+during Swap Standby. Ideally this 
+current is very near to 0 mA 
+largely influenced by Port leakage 
+current.
+2.5
+mA
+Section 7.2.7
+1)
+If more bypass capacitance than cSnkBulk max or cSnkBulkPd max is required in the device, then the device Shall 
+incorporate some form of VBUS surge current limiting as described in [USB 3.2] Section 11.4.4.1.

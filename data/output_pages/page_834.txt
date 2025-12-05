@@ -1,0 +1,17 @@
+Page 834
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.2.15
+  8.3.3.2.15PE_SRC_Give_Source_Cap State
+
+On entry to the PE_SRC_Give_Source_Cap State the Policy Engine Shall request the Device Policy 
+Manager for the current system capabilities. 
+The Policy Engine Shall then request the Protocol Layer to send a Source Capabilities Message containing these 
+capabilities. 
+ The Policy Engine Shall send:
+
+A Source_Capabilities Message when a Get_Source_Cap Message is received or
+
+An EPR_Source_Capabilities Message when a EPR_Get_Source_Cap Message is received.
+The Policy Engine Shall transition to the PE_SNK_Ready state when:
+
+The Source Capabilities Message has been successfully sent.

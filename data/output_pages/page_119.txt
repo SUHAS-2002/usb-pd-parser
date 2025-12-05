@@ -1,0 +1,91 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 119
+2)
+The Cable Plug responds with a Discover Identity ACK setting the Specification Revision field in the 
+Message to the highest Revision of the Power Delivery Specification the VCONN Source supports that is 
+equal to or lower than the Specification Revision it received from the Source Port.
+3)
+The Cable Plug and VCONN Source Shall communicate using the lower of the two revisions until an 
+Explicit Contract has been established.
+4)
+Table 6.2, "Revision Interoperability during an Explicit Contract" shows the Specification Revision that 
+Shall be used between the Port Partners and the Cable Plugs when the Specification Revision has been 
+discovered and an Explicit Contract is in place.
+Notes:
+
+A VCONN Source that does not communicate with the Cable Plug(s) May skip the above procedure.
+
+When a Cable Plug does not respond to a Revision 3.x Discover Identity REQ with a Discover Identity 
+ACK or BUSY the VCONN Source May repeat steps 1-4 using a Revision 2.0 Discover Identity REQ in step 
+1 before establishing that there is no Cable Plug to communicate with.
+A VCONN Source that supports Revision 3.x of the Power Delivery Specification May communicate with a Cable Plug 
+also supporting Revision 3.x using Revision 3.x Compliant Communications regardless of the Specification Revision 
+of its Port Partner while no Explicit Contract exists. After an Explicit Contract has been established the Port Partners 
+and Cable Plug(s) Shall use Table 6.2, "Revision Interoperability during an Explicit Contract" to determine the 
+Revision to be used.
+All data in all Messages Shall be consistent with the Specification Revision field in the Message Header for that 
+particular Message.
+A Cable Plug Shall Not save the state of the agreed Specification Revision. A Cable Plug Shall respond with the 
+highest Specification Revision it supports that is equal to or lower than the Specification Revision contained in the 
+Message received from the VCONN Source.
+Cable Plugs Shall operate using the same Specification Revision for both SOP’ and SOP’’. Cable assemblies with two 
+Cable Plugs Shall operate using the same Specification Revision for both Cable Plugs.
+See Table 6.2, "Revision Interoperability during an Explicit Contract" for details of how various Revisions Shall 
+inter-operate.
+6.2.1.1.6
+  Port Data Role
+The 1-bit Port Data Role field Shall indicate the Port's present Data Role:
+
+0b UFP
+
+1b DFP
+Table 6.2  Revision Interoperability during an Explicit Contract
+Port 1 Revision
+Cable Plug Revision
+Port 2 Revision
+Port to Port 
+Operating 
+Revision
+Port to Cable 
+Plug Operating 
+Revision
+2
+2
+2
+2
+2
+2
+2
+3
+2
+2
+2
+3
+2
+2
+2
+2
+3
+3
+2
+2
+3
+2
+2
+2
+2
+3
+2
+3
+3
+2
+3
+3
+2
+2
+2
+3
+3
+3
+3
+3

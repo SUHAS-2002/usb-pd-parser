@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 895
+8.3.3.19.3.1
+  PE_SRC_Ready State
+The Power Role Swap process Shall start only from the PE_SRC_Ready state where power is stable.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Evaluate_Swap state when:
+
+A PR_Swap Message is received.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Send_Swap state when:
+
+The Device Policy Manager indicates that a Power Role Swap is required.
+8.3.3.19.3.2
+  PE_PRS_SRC_SNK_Evaluate_Swap State
+On entry to the PE_PRS_SRC_SNK_Evaluate_Swap state the Policy Engine Shall ask the Device Policy Manager 
+whether a Power Role Swap can be made.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Accept_Swap state when:
+
+The Device Policy Manager indicates that a Power Role Swap is OK.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Reject_Swap state when:
+
+The Device Policy Manager indicates that a Power Role Swap is not OK.
+
+Or further evaluation of the Power Role Swap request is needed.
+8.3.3.19.3.3
+  PE_PRS_SRC_SNK_Accept_Swap State
+On entry to the PE_PRS_SRC_SNK_Accept_Swap state the Policy Engine Shall request the Protocol Layer to send an 
+Accept Message.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Transition_to_off state when:
+
+The Accept Message has been sent.
+8.3.3.19.3.4
+  PE_PRS_SRC_SNK_Transition_to_off State
+On entry to the PE_PRS_SRC_SNK_Transition_to_off state the Policy Engine Shall request the Device Policy Manager 
+to turn off the Source.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Assert_Rd state when:
+
+The Device Policy Manager indicates that the Source has been turned off.
+8.3.3.19.3.5
+  PE_PRS_SRC_SNK_Assert_Rd State
+On entry to the PE_PRS_SRC_SNK_Assert_Rd state the Policy Engine Shall request the Device Policy Manager to 
+change the resistor asserted on the CC wire from Rp to Rd.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Wait_Source_on state when:
+
+The Device Policy Manager indicates that Rd is asserted.
+8.3.3.19.3.6
+  PE_PRS_SRC_SNK_Wait_Source_on State
+On entry to the PE_PRS_SRC_SNK_Wait_Source_on state the Policy Engine Shall request the Protocol Layer to send 
+a PS_RDY Message and Shall start the PSSourceOnTimer.
+On exit from the Source off state the Policy Engine Shall stop the PSSourceOnTimer.
+The Policy Engine Shall transition to the PE_SNK_Startup when:
+
+A PS_RDY Message is received indicating that the remote Source is now supplying power.
+The Policy Engine Shall transition to the ErrorRecovery state when:

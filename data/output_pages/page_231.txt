@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 231
+6.5.7
+  Manufacturer_Info Message
+The Manufacturer_Info Message Shall be sent in response to a Get_Manufacturer_Info Message. The 
+Manufacturer_Info Message contains the USB VID and the Vendor's PID to identify the device or Battery and the 
+device or Battery's manufacturer byte array in a variable length Data Block of up to MaxExtendedMsgLegacyLen.
+The Manufacturer_Info Message returns a Manufacturer Info Data Block (MIDB) whose format Shall be as shown 
+in Figure 6.44, "Manufacturer_Info Message" and Table 6.61, "Manufacturer Info Data Block (MIDB)".
+Figure 6.44 Manufacturer_Info Message
+6.5.7.1
+  Vendor ID (VID)
+If the in Manufacturer Info Target field in the Get_Manufacturer_Info Message is associated with this Port/Cable 
+Plug, the VID field Shall contain:
+
+The manufacturer's VID associated with the Port/Cable Plug, as defined by the USB-IF, or 
+
+0xFFFF in the case that the vendor does not have a VID.
+If the in Manufacturer Info Target field in the Get_Manufacturer_Info Message is associated with a Device that has 
+a USB data interface, the Device Shall report the same VID as the idVendor in the Standard Device Descriptor (see 
+[USB 2.0] and [USB 3.2]).
+If the in Manufacturer Info Target field in the Get_Manufacturer_Info Message is associated with a Battery, the 
+VID field Shall contain:
+
+The manufacturer VID associated with the Battery specified, as defined by the USB-IF, or
+
+0xFFFF in the case that the vendor does not have a VID.
+If the in Manufacturer Info Target field in the Get_Manufacturer_Info Message:
+
+Is Invalid, this VID field Shall be 0xFFFF.
+
+Is Battery (01b) and the Manufacturer Info Ref field is Invalid, the VID field Shall be 0xFFFF.
+6.5.7.2
+  Product ID (PID)
+If the VID is 0xFFFF, the PID field Shall contain 0x0000.
+Otherwise:
+Table 6.61  Manufacturer Info Data Block (MIDB)
+Offset
+Field
+Description
+0
+VID
+Vendor ID (assigned by the USB-IF)
+2
+PID
+Product ID (assigned by the manufacturer)
+4
+Manufacturer String
+Vendor defined null terminated string of 0…21 characters.
+If the Manufacturer Info Target field or Manufacturer Info 
+Ref field in the Get_Manufacturer_Info Message is 
+unrecognized the field Shall return a null terminated ASCII 
+text string “Not Supported”.
+Extended Header
+Data Size = 5..26
+MIDB

@@ -1,0 +1,47 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 243
+6.5.13.15
+  SPR Sink Maximum PDP 
+The SPR Sink Maximum PDP field Shall contain the highest PDP the Sink will ever request under any operating 
+condition, rounded up to the next integer, including charging its Battery if present. The SPR Sink Maximum PDP 
+field Shall Not be less than the SPR Sink Operational PDP field, but May be the same. The value is used by the 
+Source to determine the maximum amount of power it has to budget for the Attached Sink. If the Sink is EPR Capable 
+and is unable to operate at PDPs less than 100W, it Shall set this field to the minimum power to sustain PD 
+communication.
+If the Sink is self-powered, such that it doesn't need power from a Source, then it Shall set this field to zero.
+6.5.13.16
+  EPR Sink Minimum PDP 
+The EPR Sink Minimum PDP field Shall contain the Source PDP needed by an EPR Sink, rounded up to the next 
+integer, to operate at its lowest level of functionality without requiring power from its Battery, if present. Battery 
+charging may be an opportunistic feature, however this PDP Should be designed for basic functionality, not for 
+charging. The EPR Sink Minimum PDP field Shall be less than or equal to the EPR Sink Operational PDP field 
+value. The value is used by the Source to determine whether or not it has sufficient power to minimally support the 
+Attached Sink. If the Sink is not EPR Capable, or if the Sink is self-powered, such that it doesn't need power from a 
+Source, this field Shall be set to zero.
+The EPR Sink Minimum PDP is used to indicate to Shared Capacity Chargers the power that Should be delivered 
+to the Sink to guarantee at least basic functionality for the end user.
+Possible examples of EPR Sink Minimum PDP could be:
+
+The power required to have basic functionality by a Batteryless Sink,
+
+On a device with a Battery, it can power the minimum functionality of the device.
+Note:
+EPR Sink Minimum PDP can be the same as its SPR Sink Minimum PDP.
+6.5.13.17
+  EPR Sink Operational PDP 
+The EPR Sink Operational PDP field Shall contain the Source PDP that the manufacturer recommends for the 
+normal functionality of the Sink, rounded up to the next integer. This corresponds to the PDP Rating of EPR Sources 
+that the Sink is designed to operate with (See Section 10.3.2, "Normative Sink Rules"). The EPR Sink Operational 
+PDP Shall be sufficient to operate all the Sink's functional modes normally AND charge the Sink's Battery if present. 
+For Sinks with a Battery(s), it Shall correspond to the PDP Rating of the Charger shipped with the EPR Sink or the 
+recommended Charger's PDP Rating. If the Sink is not EPR Capable, or if the Sink is self-powered, such that it doesn't 
+need power from a Source, this field Shall be set to zero.
+The EPR Sink Operational PDP is used to indicate to Shared Capacity Chargers that at this power level the user is 
+not expected to receive any performance warning related to the power being supplied to the Sink.
+6.5.13.18
+  EPR Sink Maximum PDP 
+The EPR Sink Maximum PDP field Shall be highest PDP the EPR Sink will ever request under any operating 
+condition, rounded up to the next integer, including charging its Battery if present. The EPR Sink Maximum PDP 
+field Shall Not be less than the EPR Sink Operational PDP, but May be the same. The value is used by the Source 
+to determine the maximum amount of power it has to budget for the Attached Sink. If the Sink is not EPR Capable, 
+or if the Sink is self-powered, such that it doesn't need power from a Source, this field Shall be set to zero.

@@ -1,0 +1,10 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 897
+8.3.3.19.4
+  Policy Engine in Sink to Source Power Role Swap State Diagram
+Dual-Role Ports that combine Sink and Source functionality Shall comprise Sink and Source Policy Engine state 
+machines. In addition, they Shall have the capability to do a Power Role Swap from the PE_SNK_Ready state and 
+Shall return to USB Default Operation on a Hard Reset.
+Figure 8.177, "Dual-role Port in Sink to Source Power Role Swap State Diagram" shows the additional state diagram 
+required to perform a Power Role Swap from Sink to Source Power Roles and the changes that Shall be followed for 
+error handling.

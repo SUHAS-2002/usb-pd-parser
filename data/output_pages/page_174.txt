@@ -1,0 +1,33 @@
+Page 174
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+The bits in the bit-field Shall be non-zero when the corresponding USB Device speed is supported and Shall be set 
+to zero when the corresponding USB Device speed is not supported.
+[USB 2.0] "Device capable" and "Device capable Billboard only" (bits 0 and 1) Shall Not be simultaneously set.
+6.4.4.3.1.4.3
+  Connector Type Field
+Th Connector Type (Legacy) field was previously used for the UFP VDO's Connector Type. Shall be set to 00b by 
+the Cable Plug and Shall be Ignored by the receiver. The receiver can find this information in the Connector Type 
+field in the ID Header VDO (Section 6.4.4.3.1.1.7, "Connector Type Field").
+6.4.4.3.1.4.4
+  VCONN Power Field
+When the VCONN Required field indicates that VCONN is required the VCONN Power field Shall indicate how much 
+power an AMA needs in order to fully operate. When the VCONN Required field is set to "No" the VCONN Power field 
+is Reserved and Shall be set to zero.
+6.4.4.3.1.4.5
+  VCONN Required Field
+The VCONN Required field Shall indicate whether VCONN is needed for the AMA to operate. The VCONN Required field 
+Shall only be used if the Alternate Modes field indicates that an Alternate Mode is supported. If no Alternate Modes 
+are supported, this field is Reserved and Shall be set to zero.
+6.4.4.3.1.4.6
+  VBUS Required Field
+The VBUS Required field Shall indicate whether VBUS is needed for the AMA to operate. The VBUS required field 
+Shall only be used if the Alternate Modes field indicates that an Alternate Mode is supported. If no Alternate Modes 
+are supported, this field is Reserved and Shall be set to zero.
+6.4.4.3.1.4.7
+  Alternate Modes Field
+The Alternate Modes field Shall be used to identify all the types of Alternate Modes, if any, a device supports.
+6.4.4.3.1.4.8
+  USB Highest Speed Field
+The USB Highest Speed field Shall indicate the Port's highest speed capability. The DFP Shall consider all values 
+indicated in this field that are higher than the highest value that the DFP recognizes as being Valid and functionally 
+compatible with the highest speed that the DFP supports.

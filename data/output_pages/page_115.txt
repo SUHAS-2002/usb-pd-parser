@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 115
+6.2
+  Messages
+This specification defines three types of Messages:
+
+Control Messages that are short and used to manage the Message flow between Port Partners or to 
+exchange Messages that require no additional data. Control Messages are 16 bits in length.
+
+Data Messages that are used to exchange information between a pair of Port Partners. Data Messages 
+range from 48 to 240 bits in length. 
+
+Some examples of Data Messages are:
+
+Those used to expose Capabilities and Negotiate power.
+
+Those used for the BIST.
+
+Those that are Vendor Defined Messages.
+
+Extended Messages that are used to exchange information between a pair of Port Partners. Extended 
+Messages are up to MaxExtendedMsgLen bytes.
+
+Some examples of Extended Messages are:
+
+Those used for Source and Battery information.
+
+Those used for Security.
+
+Those used for Firmware Update.
+
+Those that are Vendor Defined Extended Messages.
+6.2.1
+  Message Construction
+All Messages Shall be composed of a Message Header and a variable length (including zero) data portion. A Message 
+either originates in the Protocol Layer and is passed to the PHY Layer, or it is received by the PHY Layer and is 
+passed to the Protocol Layer.
+Figure 6.1, "USB Power Delivery Packet Format for a Control Message" illustrates a Control Message as part of a 
+Packet showing the parts are provided by the Protocol Layer and PHY Layer.
+Figure 6.1 USB Power Delivery Packet Format for a Control Message
+Figure 6.2, "USB Power Delivery Packet Format including Data Message Payload" illustrates a Data Message as part 
+of a Packet showing the parts are provided by the Protocol Layer and PHY Layer.
+Preamble
+SOP* (Start 
+Of Packet)
+CRC
+EOP (End Of 
+Packet)
+Message Header 
+(16 bit)
+Legend:
+PHY Layer
+Protocol Layer

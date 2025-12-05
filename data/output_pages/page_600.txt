@@ -1,0 +1,77 @@
+Page 600
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.10
+  VCONN Swap
+8.3.2.10.1
+  VCONN Source Swap, initiated by VCONN Source
+8.3.2.10.1.1
+  VCONN Source Swap, initiated by VCONN Source (Accept)
+Figure 8.52, "Successful VCONN Source Swap, initiated by VCONN Source" shows an example sequence where the 
+VCONN Source and tells its Port Partner to supply VCONN. During the process the Port Partners, keep their Power Role 
+as Source or Sink, maintain their operation as either a Source or a Sink (power remains constant) but exchange the 
+VCONN Source role.
+Figure 8.52 Successful VCONN Source Swap, initiated by VCONN Source
+: Protocol
+1: Send VCONN_Swap
+: PHY
+: PHY
+: Protocol
+2:VCONN_Swap
+3: VCONN_Swap + CRC
+4: VCONN_Swap
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: VCONN_Swap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:VCONN_Swap sent
+Start SenderResponseTimer
+10: Send Accept
+11: Accept
+12: Accept + CRC
+13: Accept
+Check MessageID against local copy
+Store copy of MessageID
+14: Accept received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Accept sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Evaluate VCONN_Swap 
+request
+: Policy Engine
+: Policy Engine
+Initially VCONN Source Port
+Initially VCONN off
+Vconn is on
+19: Send PS_RDY
+20: PS_RDY
+21: PS_RDY + CRC
+22: PS_RDY
+Check MessageID against local copy
+Store copy of MessageID
+23: PS_RDY received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+27: PS_RDY sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Stop SenderResponseTimer
+Start VCONNOnTimer
+Stop VCONNOnTimer
+Tell power supply to turn off VCONN
+VCONN has been swapped
+VCONN off
+VCONN Source
+Tell power supply to 
+start supplying VCONN
+VCONN is off

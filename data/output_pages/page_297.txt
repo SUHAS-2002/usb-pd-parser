@@ -1,0 +1,24 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 297
+
+The Indication to the Policy Engine has been sent.
+6.12.2.4.6
+  PRL_HR_Wait_for_PE_Hard_Reset_Complete state
+In the PRL_HR_Wait_for_PE_Hard_Reset_Complete state the Protocol Layer Shall wait for the Policy Engine to 
+indicate that the Hard Reset or Cable Reset has been completed.
+The Protocol Layer Shall transition to the PRL_HR_PE_Hard_Reset_Complete state when:
+
+A Hard Reset complete indication is received from the Policy Engine or
+
+A Cable Reset complete indication is received from the Policy Engine.
+6.12.2.4.7
+  PRL_HR_PE_Hard_Reset_Complete
+On entry to the PRL_HR_PE_Hard_Reset_Complete state the Protocol Layer Shall inform the PHY Layer that the 
+Hard Reset or Cable Reset is complete.
+The Protocol Layer Shall exit from the Hard Reset and return to normal operation when:
+
+The PHY Layer has been informed that the Hard Reset is complete so that it will re-enable the 
+communications channel. If Hard Reset Signaling is still pending due to a non-Idle channel this Shall be 
+cleared and not sent or
+
+The PHY Layer has been informed that the Cable Reset is complete.

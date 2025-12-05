@@ -1,0 +1,49 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 249
+6.6
+  Timers
+All the following timers are defined in terms of bits on the bus regardless of where they are implemented in terms 
+of the logical architecture. This is to ensure a fixed reference for the starting and stopping of timers. It is left to the 
+implementer to ensure that this timing is observed in a real system.
+6.6.1
+  CRCReceiveTimer
+The CRCReceiveTimer Shall be used by the sender's Protocol Layer to ensure that a Message has not been lost. 
+Failure to receive an acknowledgment of a Message (a GoodCRC Message) whether caused by a bad GoodCRC 
+Message on the receiving end or by a garbled Message within tReceive is detected when the CRCReceiveTimer 
+expires.
+The sender's Protocol Layer response when a CRCReceiveTimer expires Shall be to retry nRetryCount times. 
+Note:
+Cable Plugs do not retry Messages and large Extended Messages that are not Chunked are not retried (see 
+Section 6.7.2, "Retry Counter").
+Sending of the Preamble corresponding to the retried Message Shall start within tRetry of the CRCReceiveTimer 
+expiring.
+The CRCReceiveTimer Shall be started when the last bit of the Message EOP has been transmitted by the PHY 
+Layer. The CRCReceiveTimer Shall be stopped when the last bit of the EOP corresponding to the GoodCRC Message 
+has been received by the PHY Layer.
+The Protocol Layer receiving a Message Shall respond with a GoodCRC Message within tTransmit in order to 
+ensure that the sender's CRCReceiveTimer does not expire. The tTransmit time Shall be measured from when the 
+last bit of the Message EOP has been received by the PHY Layer until the first bit of the Preamble of the GoodCRC 
+Message has been transmitted by the PHY Layer.
+6.6.2
+  SenderResponseTimer
+The SenderResponseTimer Shall be used by the sender's Policy Engine to ensure that a Message requesting a 
+response (e.g., Get_Source_Cap Message) is responded to within a bounded time of tSenderResponse. Failure to 
+receive the expected response is detected when the SenderResponseTimer expires.
+For Extended Messages received as Chunks, the SenderResponseTimer will also be started and stopped by the 
+Chunking Rx State Machine. See Section 8.3.3.1.1, "SenderResponseTimer State Diagram" for more details of the 
+SenderResponseTimer operation.
+The Policy Engine's response when the SenderResponseTimer expires Shall be dependent on the Message sent 
+(see Section 8.3, "Policy Engine").
+The SenderResponseTimer Shall be started from the time the last bit of the GoodCRC Message EOP, corresponding 
+to the Message requesting a response, has been received by the PHY Layer.
+The SenderResponseTimer Shall be stopped when the last bit of the EOP of the GoodCRC Message, corresponding 
+to the expected response Message, has been transmitted by the PHY Layer.
+The receiver of a Message requiring a response Shall respond within tReceiverResponse in order to ensure that 
+the sender's SenderResponseTimer does not expire.
+The tReceiverResponse time Shall be measured from the time the last bit of the GoodCRC Message EOP, 
+corresponding to the expected request Message, has been transmitted by the PHY Layer until the first bit of the 
+response Message Preamble has been transmitted by the PHY Layer.
+6.6.3
+  Capability Timers
+Sources and Sinks use Capability Timers to determine Attachment of a PD Capable device. By periodically sending 
+or requesting Capabilities, it is possible to determine PD device Attachment when a response is received.

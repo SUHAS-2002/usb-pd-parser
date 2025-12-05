@@ -1,0 +1,82 @@
+Page 480
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 8.15 Successful Fixed EPR Power Negotiation
+: Source Policy Engine
+: Protocol
+1: Send EPR_Source_Capabilities
+: PHY
+: PHY
+: Protocol
+: Sink Policy Engine
+2: EPR_Source_Capabilities
+3: EPR_Source_Capabilities + CRC
+4: EPR_Source_Capabilities
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: EPR_Source_Capabilities received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9: EPR_Source_Capabilities sent
+Start SenderResponseTimer
+10: Send EPR_Request
+11: EPR_Request
+12: EPR_Request + CRC
+13: EPR_Request
+Check MessageID against local copy
+Store copy of MessageID
+14: EPR_Request received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: EPR_Request sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Start SenderResponseTimer
+19: Send Accept
+20: Accept
+21: Accept + CRC
+22: Accept
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+23: Accept received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+27: Accept sent
+Power supply adjusted to negotiated output
+Stop SenderResponseTimer
+Start PSTransitionTimer
+Reduce current
+28: Send PS_RDY
+29: PS_RDY
+30: PS_RDY + CRC
+31: PS_RDY
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+32: PS_RDY received
+33: GoodCRC
+34: GoodCRC + CRC
+35: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+36: PS_RDY sent
+Stop PSTransitionTimer
+Start SinkEPRKeepAliveTimer
+New Power level
+Evaluate EPR Capabilities
+Evaluate EPR Request
+Prepare for new power
+Source
+Sink
+Cable EPR_Source_Capabilities detected
+Start SourceEPRKeepAliveTimer

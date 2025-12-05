@@ -1,0 +1,55 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 133
+The DFP (Host), UFP (Device) Data Roles and Source of VBUS Shall remain unchanged as well as the Rp/Rd resistors 
+on the CC wire during the VCONN Swap process.
+VCONN Shall be continually sourced during the VCONN Swap process to maintain power to the Cable Plug(s) i.e., make 
+before break.
+Before communicating with a Cable Plug a Port Shall ensure that it is the VCONN Source and that the Cable Plugs are 
+powered, by performing a VCONN Swap if necessary. Since it cannot be guaranteed that the present VCONN Source is 
+supplying VCONN, the only means to ensure that the Cable Plugs are powered is for a Port wishing to communicate 
+with a Cable Plug to become the VCONN Source. If a Not_Supported Message is returned in response to the 
+VCONN_Swap Message, then the Port is allowed to become the VCONN Source until a Hard Reset or Detach.
+A VCONN Source that is also a Source can attempt to send a Discover Identity Command using SOP’ to a Cable Plug 
+prior to the establishment of the First Explicit Contract.
+Note:
+Even when it is presently the VCONN Source, the Sink is not permitted to initiate an AMS with a Cable Plug 
+unless Rp is set to SinkTxOK (see Section 6.9, "Accept, Reject and Wait").
+6.3.12
+  Wait Message
+The Wait Message is a Valid response to one of the following Messages:
+
+It Shall be sent to signal the Sink, in response to a Request Message in SPR Mode during Negotiation, to 
+indicate that the Source is currently unable to meet the request.
+
+It Shall be sent to signal the Sink, in response to a EPR_Request Message in EPR Mode during 
+Negotiation, to indicate that the Source is currently unable to meet the request.
+
+It Shall be sent by the recipient of a PR_Swap Message to indicate it is currently unable to do a Power 
+Role Swap.
+
+It Shall be sent by the recipient of a DR_Swap Message to indicate it is currently unable to do a Data Role 
+Swap.
+
+It Shall be sent by the recipient of a VCONN_Swap Message that is not presently the VCONN Source to 
+indicate it is currently unable to do a VCONN Swap.
+
+It Shall be sent by the recipient of an Enter_USB Message to indicate it is currently unable to enter the 
+requested USB Mode.
+The Wait Message Shall be sent within tReceiverResponse of the receipt of the last bit of the Message (see Section 
+6.9, "Accept, Reject and Wait").
+6.3.12.1
+  Wait in response to a Request Message
+The Wait Message allows the Source time to recover the power it requires to meet the request, e.g., through Re-
+negotiation with other Sinks or an upstream Source. A Source Should only send a Wait Message in response to a 
+Request Message when an Explicit Contract exists between the Port Partners.
+The Sink is allowed to repeat the Request Message using the SinkRequestTimer and Shall ensure that there is 
+tSinkRequest after receiving the Wait Message before sending another Request Message.
+6.3.12.2
+  Wait in response to a PR_Swap Message
+The Wait Message is used when responding to a PR_Swap Message to indicate that a Power Role Swap might be 
+possible in the future. This can occur in any case where the device receiving the PR_Swap Message needs to 
+evaluate the request further e.g., by requesting Sink Capabilities from the originator of the PR_Swap Message. Once 
+it has completed this evaluation one of the Port Partners Should initiate the Power Role Swap process again by 
+sending a PR_Swap Message.
+The Wait Message is also used where a Hub is operating in hybrid mode when a request cannot be satisfied (see 
+[UCSI]). 

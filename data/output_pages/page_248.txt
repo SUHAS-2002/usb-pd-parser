@@ -1,0 +1,14 @@
+Page 248
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+VDEMs Shall only be used during Modal Operation in the context of an Active Mode i.e., only after the 
+UFP has Ack'ed the Enter Mode Command can VDEMs be sent or received. The Active Mode and the 
+associated VDEMs Shall use the same SVID.
+
+VDEMs May be used with SOP* Packets.
+
+When a DFP or UFP does not support VDEMs or does not recognize the VID it Shall return a 
+Not_Supported Message.
+Note:
+Usage of VDEMs with Chunking is not recommended since this is less efficient than using Unstructured 
+VDMs.

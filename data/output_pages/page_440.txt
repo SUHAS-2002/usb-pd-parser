@@ -1,0 +1,113 @@
+Page 440
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.1.3.14
+  AMS: Extended Capabilities
+8.3.2.1.3.15
+  AMS: Battery Capabilities
+Table 8.18  AMS: Extended Capabilities
+AMS
+Interruptible
+Message 
+Sequence
+Conditions
+AMS Ref
+Sink Gets Source 
+Extended 
+Capabilities
+1.
+Get_Source_Cap_Extended 
+Message
+2.
+Source_Capabilities_Extended M
+essage
+Started by Sink Section 8.3.2.11.4.1
+Section 8.3.3.8.1,
+Section 8.3.3.8.2
+Dual-Role Power 
+Source Gets Source 
+Extended 
+Capabilities from a 
+Dual-Role Power 
+Sink
+1.
+Get_Source_Cap_Extended 
+Message
+2.
+Source_Capabilities_Extended M
+essage
+Started by 
+Source
+Section 8.3.2.11.4.2
+Section 8.3.3.19.11,
+Section 8.3.3.19.12
+Source Gets Sink 
+Extended 
+Capabilities
+1.
+Get_Sink_Cap_Extended 
+Message
+2.
+Sink_Capabilities_Extended 
+Message
+Started by 
+Source
+Section 8.3.2.11.4.3
+Section 8.3.3.8.3,
+Section 8.3.3.8.4
+Dual-Role Power 
+Sink Gets Sink 
+Extended 
+Capabilities from a 
+Dual-Role Power 
+Source
+1.
+Get_Sink_Cap_Extended 
+Message
+2.
+Sink_Capabilities_Extended 
+Message
+Started by Sink Section 8.3.2.11.4.4
+Section 8.3.3.19.13,
+Section 8.3.3.19.14
+Table 8.19  AMS: Battery Capabilities
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+Sink Gets Battery 
+Capabilities
+1.
+Get_Battery_Cap Message
+2.
+Battery_Capabilities 
+Message
+Started by Sink Section 8.3.2.11.5.1
+Section 8.3.3.11.1,
+Section 8.3.3.11.2
+Source Gets Battery 
+Capabilities
+1.
+Get_Battery_Cap Message
+2.
+Battery_Capabilities 
+Message
+Started by 
+Source
+Section 8.3.2.11.5.2
+Sink Gets Battery 
+Status
+1.
+Get_Battery_Status Message
+2.
+Battery_Status Message
+Started by Sink Section 8.3.2.11.5.3
+Section 8.3.3.12.1,
+Section 8.3.3.12.2
+Sink Gets Battery 
+Status
+1.
+Get_Battery_Cap Message
+2.
+Battery_Status Message
+Started by Sink Section 8.3.2.11.5.4

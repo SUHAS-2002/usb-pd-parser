@@ -1,0 +1,31 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 879
+8.3.3.15.2
+  Give Revision State Diagram
+Figure 8.165, "Give Revision State Diagram" shows the state diagram for a Source, Sink or Cable Plug on receiving a 
+Get_Revision Message. See also Section 6.3.24, "Get_Revision Message" and Section 6.4.12, "Revision Message".
+Figure 8.165 Give Revision State Diagram
+8.3.3.15.2.1
+  PE_Give_Revision State
+The Policy Engine Shall transition to the PE_Give_Revision state, from either the PE_SRC_Ready, PE_SNK_Ready or 
+PE_CBL_Ready state, when a Get_Revision Message is received. 
+On entry to the PE_Give_Revision state the Policy Engine Shall request the Revision information from the Device 
+Policy Manager and then send a Revision Message based on this information.
+The Policy Engine Shall transition back to either the PE_SRC_Ready, PE_SNK_Ready or PE_CBL_Ready state as 
+appropriate (see Figure 8.132, "Source Port State Diagram", Figure 8.133, "Sink Port State Diagram" and Figure 
+8.203, "Cable Ready State Diagram") when:
+
+The Revision Message has been successfully sent.
+Get_Revision Message
+received
+Revision
+Message sent
+PE_SRC_Ready, 
+PE_SNK_Ready or 
+PE_CBL_Ready
+PE_Give_Revision
+Actions on entry:
+Get present Revision Information from Device Policy Manager
+Send Revision Message (based on Device Policy Manager response)
+Power = Explicit Contract
+PD = Connected

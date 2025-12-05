@@ -1,0 +1,64 @@
+Page 312
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7
+ Power Supply
+7.1
+  Source Requirements
+7.1.1
+  Behavioral Aspects
+A PDUSB Source exhibits the following behaviors:
+
+Shall supply [USB Type-C 2.4] USB Type-C® current to VBUS while in a Default Contract or Implicit 
+Contract.
+
+Shall follow the requirements as specified in Section 7.1.5, "Response to Hard Resets" when Hard Reset 
+Signaling is received.
+
+Shall control VBUS voltage transitions as bound by undershoot, overshoot and transition time 
+requirements.
+7.1.2
+  Source Bulk Capacitance
+The Source bulk capacitance Shall Not be placed between the transceiver isolation impedance and the USB 
+receptacle. The Source bulk capacitance consists of C1 and C2 as shown in Figure 7.1, "Placement of Source Bulk 
+Capacitance". The Ohmic Interconnect might consist of PCB traces for power distribution or power switching 
+devices. The Ohmic Interconnect might also be part of the circuit implemented by the Source to limit its VBUS Output 
+Voltage Limit (OVL) as described in Section 7.1.7.5, "Output Voltage Limit". Though a Source Shall limit its output 
+voltage, a Sink Shall implement Sink OVP as described in Section 7.2.9.2, "Input Over Voltage Protection" to protect 
+against excessive VBUS input voltage. The capacitance might be a single capacitor, a capacitor bank or distributed 
+capacitance. If the power supply is shared across multiple ports, the bulk capacitance is defined as 
+cSrcBulkShared. If the power supply is dedicated to a single Port, the minimum bulk capacitance is defined as 
+cSrcBulk.
+The Source bulk capacitance is allowed to change for a newly Negotiated power level. The capacitance change Shall 
+occur before the Source is ready to operate at the new power level. During a Power Role Swap, the Initial Source 
+Shall transition to Swap Standby before operating as the New Sink. Any change in bulk capacitance required to 
+complete the Power Role Swap Shall occur during Swap Standby.
+Figure 7.1 Placement of Source Bulk Capacitance
+7.1.3
+   Types of Sources
+Consistent with the Power Data Objects discussed in Section 6.4.1, "Capabilities Message", the power supply types 
+that are available as Sources in a USB Power Delivery System are:
+
+The Fixed Supply PDO exposes well-regulated fixed voltage power supplies. Sources Shall support at 
+least one Fixed Supply capable of supplying vSafe5V. The output voltage of a Fixed Supply Shall remain 
+C2
+Ohmic  
+Interconnect
+GND
+SHIELD
+VBUS
+...
+Data
+Lines
+GND
+SHIELD
+VBUS
+...
+Data
+Lines
+SOURCE
+CABLE
+C1
+Power
+Supply
+Source Bulk Capacitance
+OVL

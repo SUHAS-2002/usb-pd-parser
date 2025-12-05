@@ -1,0 +1,7 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 851
+On entry to the PE_SRC_Chunk_Received state (from the PE_SRC_Ready state) the Policy Engine Shall initialize and 
+run the ChunkingNotSupportedTimer.
+The Policy Engine Shall transition to PE_SRC_Send_Not_Supported when:
+
+The ChunkingNotSupportedTimer has timed out.

@@ -1,0 +1,6 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 961
+The Policy Engine Shall transition to either the PE_SRC_Transition_to_default state, 
+PE_SNK_Transition_to_default state or PE_CBL_Ready state (as appropriate) when:
+
+The BISTContModeTimer times out.

@@ -1,0 +1,4 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 853
+
+The ChunkingNotSupportedTimer has timed out.

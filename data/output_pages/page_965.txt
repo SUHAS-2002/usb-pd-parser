@@ -1,0 +1,15 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 965
+8.3.3.28
+  USB Type-C Referenced States
+This section contains states cross-referenced from the [USB Type-C 2.4] specification.
+8.3.3.28.1
+  ErrorRecovery state
+The ErrorRecovery state is used to electronically disconnect Port Partners using the USB Type-C connector. The 
+ErrorRecovery state Shall be entered when there are errors on USB Type-C Ports which cannot be recovered by 
+Hard Reset. The ErrorRecovery state Shall map to USB Type-C ErrorRecovery state operation as defined in the 
+[USB Type-C 2.4] specification. Bus powered Sinks Shall Not be required to meet this requirement as removal of 
+their power will serve the same purpose.
+On entry to the ErrorRecovery state the Explicit Contract and PD Connection Shall be ended.
+On exit from the ErrorRecovery state a new Explicit Contract Should be established once the Port Partners have 
+re-connected over the CC wire.

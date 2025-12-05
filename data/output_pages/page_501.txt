@@ -1,0 +1,65 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 501
+14
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+15
+PHY Layer receives the GoodCRC Message and 
+compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+16
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. The Protocol Layer verifies and 
+increments the MessageIDCounter and stops the 
+CRCReceiveTimer.
+17
+The Protocol Layer informs the Policy Engine that an 
+Accept Message was successfully sent.
+Power supply Adjusts its Output to the Negotiated Value
+18
+The DPM informs the Policy Engine that the power 
+supply has settled at the new operating condition and 
+tells the Protocol Layer to send a PS_RDY Message.
+19
+The Protocol Layer forms the PS_RDY Message.
+20
+PHY Layer appends CRC and sends the PS_RDY Message. 
+Starts CRCReceiveTimer.
+PHY Layer receives the PS_RDY Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+21
+PHY Layer forwards the PS_RDY Message to the 
+Protocol Layer.
+22
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+Protocol Layer informs the Policy Engine that a RS_RDY 
+has been received. The Policy Engine stops the 
+PSTransitionTimer.
+23
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+24
+PHY Layer receives the GoodCRC Message and 
+compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+25
+PHY Layer forwards the GoodCRC Message to the 
+Protocol Layer. The Protocol Layer verifies and 
+increments the MessageIDCounter. Stops the 
+CRCReceiveTimer.
+ 
+26
+The Protocol Layer informs the Policy Engine that the 
+PS_RDY Message was successfully sent.
+New Power Level Negotiated
+Table 8.48  Steps for EPR Sink Makes Request (Accept)
+Step
+Source
+Sink

@@ -1,0 +1,43 @@
+Page 412
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+vSrcSlewPos
+Maximum slew rate 
+allowed for positive 
+voltage transitions. 
+Limits current based 
+on a 3 A connector 
+rating and maximum 
+Sink bulk capacitance 
+of 100 µF.
+30
+mV/µs
+Section 7.1.4
+Figure 7.2
+vSrcValid
+The range in addition 
+to vSrcNew which a 
+newly Negotiated 
+voltage is considered 
+Valid during and after 
+a transition as well as 
+in response to a 
+transient load 
+condition. This range 
+also applies to 
+vSafe5V.
+-0.5
+0.5
+V
+Figure 7.2
+Figure 7.3
+Section 7.1.8
+Table 7.23  Source Electrical Parameters (Continued)
+Parameter
+Description
+MIN
+TYP
+MAX
+UNITS
+Reference
+1)
+The Source Shall charge and discharge the total bulk capacitance to meet the transition time requirements.

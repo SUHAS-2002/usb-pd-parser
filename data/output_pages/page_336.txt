@@ -1,0 +1,54 @@
+Page 336
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+7.2.3.1
+  Programmable Power Supply Sink Standby
+A Sink is not required to transition to Sink Standby when operating within the Negotiated PPS APDO. A Sink May 
+consume the Operating Current value in the PPS RDO during PPS output voltage changes. However, prior to 
+operating the SPR PPS in Current Limit, the Sink Shall program the PPS Operating Voltage to the lowest practical 
+level that satisfies the Sink load requirement. Doing so will minimize the inrush current that occurs when the 
+transition to Current Limit occurs. When operating with an SPR PPS Source that is in Current Limit, the Sink Shall 
+Not change its load in a manner that exceeds iPpsCLLoadStepRate or iPpsCLLoadReleaseRate. The load change 
+magnitude Shall Not request a change to the Current Limit set-point that exceeds iPpsCLLoadStep.
+If the Sink Negotiates for a new PPS APDO, that is expected to increase VBUS voltage, then the Sink Shall transition 
+to Sink Standby while changing between PPS APDOs as described in Section 7.3.1, "Transitions caused by a Request 
+Message".
+7.2.4
+  Suspend Power Consumption
+When Source has set its USB Suspend Supported flag (see Section 6.4.1.2.1.2, "USB Suspend Supported"), a Sink Shall 
+go to the lowest power state during USB suspend. The lowest power state Shall be pSnkSusp or lower for a PDUSB 
+Peripheral and pHubSusp or lower for a PDUSB Hub. There is no requirement for the Source voltage to be changed 
+during USB suspend.
+7.2.5
+  Zero Negotiated Current
+When a Sink Requests zero current as part of a power Negotiation with a Source, the Sink Shall go to the lowest 
+power state, pSnkSusp or lower, where it can still communicate using PD signaling.
+7.2.6
+  Transient Load Behavior
+When a Sink's operating current changes due to a load step, load release or any other change in load level, the 
+positive or negative overshoot of the new load current Shall Not exceed the range defined by iOvershoot. For the 
+purposes of measuring iOvershoot the new load current value is defined as the average steady state value of the 
+load current after the load step has settled. The rate of change of any shift in Sink load current during normal 
+operation Shall Not exceed iLoadStepRate (for load steps) and iLoadReleaseRate (for load releases) as measured 
+at the Sink receptacle.
+The Sink's operating current Shall Not change faster than the value reported in the Source's Load Step Slew Rate 
+in its Voltage Regulation bit field and Shall ensure that PD Communications meet the transmit and receive masks 
+as specified in Section 5.8.2, "Transmit and Receive Masks".
+7.2.7
+  Swap Standby for Sinks
+The Sink functionality in a Dual-Role Power Port Shall support Swap Standby. Swap Standby occurs for the Sink after 
+evaluating the Accept Message from the Source during a Power Role Swap. While in Swap Standby the Sink's current 
+draw Shall Not exceed iSnkSwapStdby from VBUS and the Dual-Role Power Port Shall be configured as a Source 
+after VBUS has been discharged to vSafe0V by the existing Initial Source. The Sink's USB connection Should Not be 
+reset even though vSafe5V is not present on the VBUS conductor (see Section 9.1.2, "Mapping to USB Device States"). 
+The time for the Sink to transition to Swap Standby Shall be no more than tSnkSwapStdby. When in Swap Standby 
+the Sink has relinquished its Power Role as Sink and will prepare to become the New Source. The transition time 
+from Swap Standby to New Source Shall be no more than tNewSrc.
+7.2.8
+  Sink Peak Current Operation
+Sinks Shall only make use of a Source overload capability when the corresponding Fixed Supply PDO Peak Current 
+(see Section 6.4.1.2.1.8, "Peak Current") or AVS APDO Peak Current (see Section 6.4.1.2.4.3.2, "Peak Current") bits are 
+set to 01b, 10b and 11b. Sinks Shall manage thermal aspects of the overload event by not exceeding the average 
+Negotiated output of a Fixed Supply or AVS that supports Peak Current operation.
+Sinks that depend on the Peak Current capability for enhanced system performance Shall also function correctly 
+when Attached to a Source that does not offer the Peak Current capability or when the Peak Current capability has 
+been inhibited by the Source.

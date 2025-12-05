@@ -1,0 +1,48 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 419
+The Device Policy Manager Shall communicate over USB with the System Policy Manager according to the 
+requirements detailed in [UCSI]. Whenever requested the Device Policy Manager Shall implement a Local Policy 
+according to that requested by the System Policy Manager. For example, the System Policy Manager might request 
+that a Battery powered Device temporarily stops charging so that there is sufficient power for an HDD to spin up.
+Note:
+Due to timing constraints, a PD Capable device Shall be able to respond autonomously to all time-critical 
+PD related requests.
+8.2.3
+  Control of Source/Sink
+The Device Policy Manager for a Provider Shall manage the power supply for each PD Source Port and Shall know 
+at any given time what the Negotiated power is. It Shall request transitions of the supply and inform the Policy 
+Engine whenever a transition completes.
+The Device Policy Manager for a Consumer Shall manage the Sink for each PD Sink Port and Shall know at any given 
+time what the Negotiated power is.
+The Device Policy Manager for a Dual-Role Power Device Shall manage the transition between Source/Sink Power 
+Roles for each PD Dual-Role Power Port and Shall know at any given time what Power Role the Port is in.
+8.2.4
+  Cable Detection
+8.2.4.1
+  Device Policy Manager in a Provider
+The Device Policy Manager in the Provider Shall control the USB-C® Port Control module and Shall be able to use the 
+USB-C® Port Control module to determine the Attachment status.
+Note:
+It might be necessary for the Device Policy Manager to also initiate additional discovery using the Discov-
+er Identity Command in order to determine the full Capabilities of the cabling (see Section 6.4.4.3.1, "Dis-
+cover Identity").
+8.2.4.2
+  Device Policy Manager in a Consumer
+The Device Policy Manager in a Consumer controls the USB-C® Port Control module and Shall be able to use the USB-
+C® Port Control module to determine the Attachment status.
+8.2.4.3
+  Device Policy Manager in a Consumer/Provider
+The Device Policy Manager in a Consumer/Provider inherits characteristics of Consumers and Providers and Shall 
+control the USB-C® Port Control module in order to support the Dead Battery back-powering case to determine the 
+following for a given Port:
+
+Attachment of a USB Power Delivery Provider/Consumer which supports Dead Battery back-powering.
+
+Presence of VBUS.
+8.2.4.4
+  Device Policy Manager in a Provider/Consumer
+The Device Policy Manager in a Provider/Consumer inherits characteristics of Consumers and Providers and May 
+control the USB-C® Port Control module in order to support the Dead Battery back-powering case to determine the 
+following for a given Port:
+
+Presence of VBUS.

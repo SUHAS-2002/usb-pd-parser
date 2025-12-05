@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 563
+28
+The Policy Engine directs the DPM to apply the Rp pull 
+up.
+Note: At some point (either before or after receiving 
+the PS_RDY Message) the New Source has ap-
+plied vSafe5V no later than tSrcFRSwap after 
+detecting the Fast Role Swap Request and that 
+VBUS has dropped below vSafe5V.
+Policy Engine, when its power supply is ready to 
+supply power, tells the Protocol Layer to form a PS_RDY 
+Message. The Port Power Role Messageis set to Source.
+29
+Protocol Layer creates the PS_RDY Message and passes 
+to PHY Layer.
+30
+PHY Layer appends a CRC and sends the PS_RDY 
+Message. Starts CRCReceiveTimer.
+PHY Layer receives the PS_RDY Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+31
+PHY Layer removes the CRC and forwards the PS_RDY 
+Message to the Protocol Layer. 
+32
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received PS_RDY 
+Message information to the Policy Engine that 
+consumes it. The Policy Engine stops the 
+PSSourceOnTimer.
+33
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+34
+PHY Layer receives GoodCRC Message and compares 
+the CRC it calculated with the one sent to verify the 
+Message.
+PHY Layer appends a CRC and sends the GoodCRC 
+Message. The Policy Engine resets the Protocol Layer.
+35
+PHY Layer removes the CRC and forwards the 
+GoodCRC to the Protocol Layer. 
+36
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+PS_RDY Message was successfully sent. The Policy 
+Engine resets the CapsCounter, resets the Protocol 
+Layer and starts the SwapSourceStartTimer which 
+must timeout before sending any Source_Capabilities 
+Messages.
+The Fast Role Swap is complete, the Power Roles have been reversed and the Port Partners are free to Negotiate for more 
+power.
+Table 8.66  Steps for a Successful Fast Role Swap Sequence
+Step
+Initial Sink Port
+Initial Source Port

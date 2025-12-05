@@ -1,0 +1,108 @@
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+Page 309
+6.13.5
+  Applicability of Structured VDM Commands
+Table 6.81, "Applicability of Structured VDM Commands" details Structured VDM Commands that Shall/Should/ 
+Shall Not be transmitted and received by a DFP, UFP, Cable Plug or VPD. If Structured VDMs are not supported, the 
+DFP or UFP receiving a VDM Command Shall send a Not_Supported Message in response.
+Table 6.81  Applicability of Structured VDM Commands
+Command Type
+DFP
+UFP
+Cable Plug 
+SOP’
+Cable Plug 
+SOP’’
+VPD4
+Transmitted Command Request
+Discover Identity
+CN1,6/R
+R2
+NA
+NA
+NA
+Discover SVIDs
+CN1/O
+O
+NA
+NA
+NA
+Discover Modes
+CN1/O
+O
+NA
+NA
+NA
+Enter Mode
+CN1/NA
+NA
+NA
+NA
+NA
+Exit Mode
+CN1/NA
+NA
+NA
+NA
+NA
+Attention
+O
+O
+NA
+NA
+NA
+Received Command Request/Transmitted Command Response
+Discover Identity
+CN5,6/R/
+NK3
+CN1,6/R/
+NK3
+N
+I
+N
+Discover SVIDs
+O/NK3
+CN1/NK3
+CN1/NK
+I
+NK
+Discover Modes
+O/NK3
+CN1/NK3
+CN1/NK
+I
+NK
+Enter Mode
+NK3
+CN1/NK3
+CN1/NK
+O
+NK
+Exit Mode
+NK3
+CN1/NK3
+CN1/NK
+O
+NK
+Attention
+O/I3
+O/I3
+I
+I
+I
+1)
+Shall be supported when Modal Operation is supported.
+2)
+May be transmitted by a UFP/Source during discovery (see Section 6.4.4.3.1, "Discover 
+Identity" and Section 8.3.3.25.3, "Source Startup Structured VDM Discover Identity of a 
+Cable Plug State Diagram").
+3)
+If Structured VDMs are not supported, the DFP or UFP receiving a VDM Command Shall 
+send a Not_Supported Message in response.
+4)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a CT-
+VPD Shall only take place when not Connected to a Charger.
+5)
+Shall be supported by products with more than one DFP.
+6)
+Shall be supported by products that support [USB4].

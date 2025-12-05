@@ -1,0 +1,17 @@
+Page 976
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 9.1 Example PD Topology
+Consumer
+Consumer
+Consumer/
+Provider
+Consumer/
+Provider
+Provider
+AC/Battery
+AC/Battery
+Power
+PD Communication
+P/C P/C P/C
+P/C
+Provider/Consumer

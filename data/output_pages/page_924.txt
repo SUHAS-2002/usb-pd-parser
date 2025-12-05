@@ -1,0 +1,48 @@
+Page 924
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.3.21.2
+  Initiator Structured VDM Discover SVIDs State Diagram
+Figure 8.192, "Initiator VDM Discover SVIDs State Diagram" shows the state diagram for an Initiator when 
+discovering SVIDs of its Port Partner or Cable Plug.
+Figure 8.192 Initiator VDM Discover SVIDs State Diagram
+8.3.3.21.2.1
+  PE_INIT_VDM_SVIDs_Request State
+The Policy Engine transitions to the PE_INIT_VDM_SVIDs_Request state from either the PE_SRC_Ready or 
+PE_SNK_Ready state when:
+
+The Device Policy Manager requests the discovery of the SVIDs of the Port Partner or a Cable Plug.
+On entry to the PE_INIT_VDM_SVIDs_Request state the Policy Engine Shall send a Structured VDM Discover SVIDs 
+Command request and Shall start the VDMResponseTimer.
+The Policy Engine Shall transition to the PE_INIT_VDM_SVIDs_ACKed state when:
+
+A Structured VDM Discover SVIDs ACK Command response is received.
+The Policy Engine Shall transition to the PE_INIT_VDM_SVIDs_NAKed state when:
+
+A Structured VDM Discover SVIDs NAK or BUSY Command response is received or
+
+The VDMResponseTimer times out.
+PE_SRC_Ready or PE_SNK_Ready
+PE_INIT_VDM_SVIDs_Request
+Actions on entry:
+Send Discover SVIDs request
+Start VDMResponseTimer
+Power = Explicit Contract
+PD = Connected
+DPM requests 
+SVIDs discovery
+Discover SVIDs ACK
+received
+PE_INIT_VDM_SVIDs_ACKed
+Actions on entry:
+Inform DPM of SVIDs
+Power = Explicit Contract
+PD = Connected
+PE_INIT_VDM_SVIDs_NAKed
+Actions on entry:
+Inform DPM of result
+Power = Explicit Contract
+PD = Connected
+Discover SVIDs NAK/BUSY |
+VDMResponseTimer Timeout
+DPM informed
+DPM informed

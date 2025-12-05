@@ -1,0 +1,33 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 105
+5.8.4
+  BMC Common specifications
+This section defines the common receiver and transmitter requirements.
+5.8.4.1
+  BMC Common Parameters
+The electrical requirements specified in Table 5.17, "BMC Common Normative Requirements" Shall apply to both 
+the transmitter and receiver.
+Table 5.17  BMC Common Normative Requirements
+Name
+Description
+Min
+Nom
+Max
+Units
+Comment
+fBitRate
+Bit rate
+270
+300
+330
+Kbps
+tUnitInterval
+Unit Interval1
+3.03
+3.70
+µs
+1/fBitRate
+1)
+Denotes the time to transmit an unencoded data bit, not the shortest high or low times on the wire after encoding 
+with BMC. A single data bit cell has duration of 1UI, but a data bit cell with value 1 will contain a centrally placed 
+01 or 10 transition in addition to the transition at the start of the cell.

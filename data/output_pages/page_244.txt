@@ -1,0 +1,84 @@
+Page 244
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.5.14
+  Extended_Control Message
+The Extended_Control Message extends the Control Message space. The Extended_Control Message includes one 
+byte of data. The Extended_Control Message Shall be as shown in Figure 6.53, "Extended_Control Message" and 
+Table 6.66, "Extended Control Data Block (ECDB)".
+Figure 6.53 Extended_Control Message
+The Extended_Control Message types are specified in the Type field of the ECDB and are listed in Table 6.67, 
+"Extended Control Message Types". The Sent by column indicates entities which May send the given Message 
+(Source, Sink or Cable Plug); entities not listed Shall Not issue the corresponding Message. The "Valid Start of 
+Packet" column indicates the Messages which Shall only be issued in SOP Packets.
+6.5.14.1
+  EPR_Get_Source_Cap Message
+The EPR_Get_Source_Cap (EPR Get Source Capabilities) Message Shall only be sent by a Port capable of operating 
+as a Sink and that supports EPR Mode to request the Source Capabilities and Dual-Role Power capability of its Port 
+Partner. A Port that can operate as an EPR Source Shall respond by returning an EPR_Source_Capabilities Message 
+(see Section 6.5.15.2, "EPR_Source_Capabilities Message"). A Port that does not support EPR Mode as a Source Shall 
+return the Not_Supported Message.
+An EPR Capable Sink Port that is operating in SPR Mode Shall treat the EPR_Source_Capabilities Message as 
+informational only and Shall Not respond with an EPR_Request Message.
+6.5.14.2
+  EPR_Get_Sink_Cap Message
+The EPR_Get_Sink_Cap (EPR Get Sink Capabilities) Message Shall only be sent by a Port capable of operating as a 
+Source and that supports EPR Mode to request the Sink Capabilities and Dual-Role Power capability of its Port 
+Partner. A Port that is EPR Capable operating as a Sink Shall respond by returning an EPR_Sink_Capabilities 
+Message (see Section 6.5.15.3, "EPR_Sink_Capabilities Message"). A Port that does not support EPR Mode as a Sink 
+Shall return the Not_Supported Message.
+Table 6.66  Extended Control Data Block (ECDB)
+Offset Field
+Value
+Description
+0
+Type
+Unsigned Int
+Extended Control Message Type
+1
+Data
+Byte
+Shall be set to zero when not used.
+Table 6.67  Extended Control Message Types
+Type
+Data
+Message Type
+Sent by
+Description
+Valid Start 
+of Packet
+0
+Reserved
+All values not explicitly defined are 
+Reserved and Shall Not be used.
+1
+Not used
+EPR_Get_Source_Cap
+Sink or DRP
+See Section 6.5.14.1
+SOP only
+2
+Not used
+EPR_Get_Sink_Cap
+Source or DRP
+See Section 6.5.14.2
+SOP only
+3
+Not used
+EPR_KeepAlive
+Sink
+See Section 6.5.14.3
+SOP only
+4
+Not Used
+EPR_KeepAlive_Ack
+Source
+See Section 6.5.14.4
+SOP only
+5...255
+Reserved
+All values not explicitly defined are 
+Reserved and Shall Not be used.
+Extended Header
+Data Size = 2
+ECDB
+(2-byte block)

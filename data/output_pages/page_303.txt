@@ -1,0 +1,170 @@
+Universal Serial Bus Power Delivery SpecificationRevision 3.2, Version 1.1, 2024-10
+Page 303
+6.13.2
+  Applicability of Data Messages
+Table 6.78, "Applicability of Data Messages" details Data Messages (except for VDM Commands) that Shall/Should/ 
+Shall Not be transmitted and received by a Source, Sink, Cable Plug or VPD. Requirements for Dual-Role Power Ports 
+Shall override any requirements for Source-only or Sink-Only Ports.
+Table 6.78  Applicability of Data Messages
+Message Type
+Source
+Sink
+Dual-Role 
+Power
+Cable
+Plug SOP’
+Cable
+Plug SOP’’
+VPD6
+Transmitted Message
+Source_Capabilities
+N
+NA
+N
+NA
+NA
+NA
+Request
+NA
+N
+NA
+NA
+NA
+Get_Country_Info
+CN5/O
+CN5/O
+NA
+NA
+NA
+BIST
+N1
+N1
+NA
+NA
+NA
+Sink_Capabilities
+NA
+N
+N
+NA
+NA
+NA
+Battery_Status
+CN2
+CN2
+NA
+NA
+NA
+Alert
+CN11/R
+CN11/R
+NA
+NA
+NA
+Enter_USB
+CN7/O
+CN7/O
+NA
+NA
+NA
+EPR_Request
+NA
+CN9
+NA
+NA
+NA
+EPR_Mode
+CN9
+CN9
+NA
+NA
+NA
+Source_Info
+CN10
+NA
+N
+NA
+NA
+NA
+Revision
+N
+N
+CN12/O/I
+NA
+O
+Received Message
+Source_Capabilities
+NS
+N
+N
+I
+I
+I
+Request
+N
+NS
+I
+I
+I
+Get_Country_Info
+CN5/NS
+CN5/NS
+I
+I
+I
+BIST
+N1
+N1
+N1
+N1
+N1
+Sink_Capabilities
+CN4
+NS
+CN4
+I
+I
+I
+Battery_Status
+CN3/NS
+CN3/NS
+I
+I
+I
+Alert
+R/NS
+R/NS
+I
+I
+I
+Enter_USB
+CN7/O
+CN7/O
+CN8/I
+CN8/I
+I
+1)
+For details of which BIST Modes and BIST Messages Shall be supported see Section 5.9 and Section 6.4.3.
+2)
+Shall be supported by products that contain batteries.
+3)
+Shallbe supported by products that support the Get_Battery_Status Message.
+4)
+Shall be supported by products that support the Get_Sink_Cap Message.
+5)
+Shall be supported when required by a country authority.
+6)
+VPD includes CT-VPDs when not Connected to a Charger. PD communication with a CT-VPD Shall only take 
+place when not Connected to a Charger.
+7)
+Shall be supported by products that support [USB4].
+8)
+Shall be supported by Active Cables that support [USB4].
+9)
+Shall be supported by products that support Source operation in EPR Mode.
+10)
+Shall be supported by all Source Ports except singlePort SPR Chargers with Invariant PDOs.
+11)
+Shall be supported when SPR PPS Mode is supported.
+12)
+Shall be supported by Active Cables.

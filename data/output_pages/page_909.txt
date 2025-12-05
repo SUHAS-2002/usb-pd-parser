@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 909
+8.3.3.19.7
+  Dual-Role (Source Port) Get Source Capabilities State Diagram
+Figure 8.180, "Dual-Role (Source) Get Source Capabilities diagram" shows the state diagram for a Dual-Role device, 
+presently operating as a Source, on receiving a request from the Device Policy Manager to get the Port Partner's 
+Source Capabilities. See also Section , "A Source Port Shall report its Capabilities in a series of 32-bit Power Data 
+Objects (see Table 6.7, "Power Data Object") as part of a Source_Capabilities Message (see Figure 6.13, "Example 
+Capabilities Message with 2 Power Data Objects"). Power Data Objects are used to convey a Source Port's Capabilities 
+to provide power including Dual-Role Power ports presently operating as a Sink.".
+Figure 8.180 Dual-Role (Source) Get Source Capabilities diagram
+8.3.3.19.7.1
+  PE_DR_SRC_Get_Source_Cap State
+The Policy Engine Shall transition to the PE_DR_SRC_Get_Source_Cap state, from the PE_SRC_Ready state, due to a 
+request to get the remote Source Capabilities from the Device Policy Manager. 
+
+On entry to the PE_DR_SRC_Get_Source_Cap state the Policy Engine Shall request the Protocol Layer to 
+send a get Source Capabilities Message in order to retrieve the Source Capabilities. The Policy Engine 
+Shall send:
+
+A Get_Source_Cap Message when the Device Policy Manager requests SPR capabilities or
+
+An EPR_Get_Source_Cap Message when the Device Policy Manager requests EPR Capabilities.
+The Policy Engine Shall then start the SenderResponseTimer.
+On exit from the PE_DR_SRC_Get_Source_Cap state the Policy Engine Shall inform the Device Policy Manager of the 
+outcome (capabilities or response timeout).
+The Policy Engine Shall transition back to the PE_SRC_Ready State (see Figure 8.132, "Source Port State Diagram") 
+when:
+
+In SPR Mode and SPR Source Capabilities were requested and a Source_Capabilities Message is received 
+or
+
+In EPR Mode and EPR Source Capabilities were requested and an EPR_Source_Capabilities Message is 
+received or
+
+The SenderResponseTimer times out.
+get source capabilities request 
+from Device Policy Manager
+SPR Souce Capabilities requested & Source_Capabilities Message received |
+EPR Souce Capabilities requested & EPR_Source_Capabilities Message received |
+SenderResponseTimer Timeout
+PE_SRC_Ready
+PE_DR_SRC_Get_Source_Cap
+Actions on entry:
+If SPR Source Capabilities requested Send Get_Source_Cap Message1
+If EPR Source Capabilities requested Send EPR_Get_Source_Cap Message1
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+Actions on exit:
+Pass source capabilities/outcome to Device Policy Manager
+1)
+Either SPR or EPR Source Capabilities May be requested, regardless of whether or not the Source is currently operating in SPR or EPR Mode.

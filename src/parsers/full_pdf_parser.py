@@ -1,7 +1,9 @@
 # src/parsers/full_pdf_parser.py
+
 from typing import List, Dict
-from ..core.base_parser import BaseParser
-from ..core.pdf_text_strategy import PDFTextStrategy
+from src.core.base_parser import BaseParser
+from src.core.pdf_text_strategy import PDFTextStrategy
+
 
 class FullPDFParser(BaseParser):
     """
@@ -18,11 +20,13 @@ class FullPDFParser(BaseParser):
         Each page is {"page_number": int, "text": str}
         """
         pages = self._strategy.extract_text(self.pdf_path)
-        # Ensure format is consistent
+
+        # Normalize output
         normalized = []
         for p in pages:
             normalized.append({
                 "page_number": int(p.get("page_number", 0)),
                 "text": p.get("text", "") or ""
             })
+
         return normalized

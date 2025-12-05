@@ -1,0 +1,217 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 827
+8.3.3.2
+  Policy Engine Source Port State Diagram
+Figure 8.132, "Source Port State Diagram" below shows the state diagram for the Policy Engine in a Source Port. The 
+following sections describe operation in each of the states.
+Figure 8.132 Source Port State Diagram
+1)
+Implementation of the CapsCounter is Optional. In the case where this is not implemented the Source Shall continue 
+to send Source_Capabilities Messages each time the SourceCapabilityTimer times out.
+2)
+Since the Sink is required to make a Valid request from the offered capabilities the expected transition is via "Request 
+can be met" unless the Source Capabilities have changed since the last offer.
+3)
+“Contract Invalid" means that the previously Negotiated voltage and Current values are no longer included in the 
+Source's new Capabilities. If the Sink fails to make a Valid Request in this case, then Power Delivery operation is no lon-
+ger possible and Power Delivery mode is exited with a Hard Reset.
+Protocol LayerReset4 | 
+SwapSourceStartTimer timeout
+PE_SRC_Discovery
+Actions on entry:
+Initialize and run SourceCapabilityTimer
+Power = Default (5V) or Implicit Contract
+PD = not Connected
+PE_SRC_Ready
+Actions on entry:
+Notify Protocol Layer of end of AMS8
+Initialize and run DiscoverIdentityTimer7
+Initialize and run SourcePPSCommTimer10
+Initialize and run SourceEPRKeepAliveTimer11
+Power = Explicit Contract 
+PD = Connected
+PE_SRC_Transition_Supply
+Actions on entry:
+Send Accept message (within tReceiverResponse)
+Request Device Policy Manager to transition Power Supply 
+Power = transition
+PD = Connected
+Actions on exit:
+Send PS_RDY message
+(In SPR Mode & Request Message) |
+(In EPR Mode & EPR_Request Message)
+PE_SRC_Negotiate_Capability
+Actions on entry:
+Get Device Policy Manager evaluation of sink request:
+• Can be met
+• Can’t be met
+• Could be met later from Power Reserve
+If the sink request for Operating Current or Operating Power can be 
+met, but the sink still requires more power (“Capability Mismatch”) 
+this information will be passed to Device Policy Manager4
+Power = DefauIt (5V) or Implicit/Explicit Contract  
+PD = Connected
+PE_SRC_Capability_Response
+Actions on entry:
+Send Reject message if request can’t be met
+Send Wait message if request could be met 
+later from the Power Reserve and present 
+Contract is still valid
+Power = DefauIt (5V) or Implicit/
+Explicit Contract 
+PD = Connected
+Start
+Explicit Contract
+(Reject message sent &
+Contract still valid) |
+Wait message sent
+PE_SRC_Send_Capabilities
+Actions on entry:
+Request present source capabilities from Device Policy Manager
+In SPR Mode Send Source_Capabilities Message
+In EPR Mode Send EPR_Source_Capabilities Message
+Increment CapsCounter (optional)1
+If GoodCRC received:
+• stop NoResponseTimer
+• reset HardResetCounter and CapsCounter
+• initialize and run SenderResponseTimer
+Power = DefauIt (5V) or Implicit/Explicit Contract 
+PD = Connected/not Connected
+PE_SRC_Hard_Reset
+Actions on entry:
+Generate Hard Reset signalling
+Initialize and start NoResponseTimer
+Start PSHardResetTimer
+Increment HardResetCounter
+Power = DefauIt (5V) or 
+Implicit/Explicit Contract
+PD = Connected/not Connected
+Request can’t be met | 
+Request met later
+from Power Reserve
+Explicit Contract &
+Reject message sent &
+Contract Invalid4
+PSHardResetTimer 
+timeout
+Request can be met
+Power supply ready
+Power source at default
+(SourceCapabilityTimer timeout & 
+CapsCounter � nCapsCount1)
+Capabilities message sending failure 
+(without GoodCRC) &not presently PD Connected6
+In SPR Mode Request Message received |
+In EPR Mode EPR_Request Message received 
+PE_SRC_Get_Sink_Cap
+Actions on entry:
+If SPR Mode capabilities requested send 
+Get_Sink_Cap Message
+If EPR Mode capabilities requested send 
+EPR_Get_Sink_Cap Message
+Initialize and run SenderResponseTimer
+Power = Explicit Contract 
+PD = Connected
+get sink capabilities request 
+from Device Policy Manager12
+(SPR Sink Capabilities requested 
+& Sink_Capabilities Message) |
+(EPR Sink Capabilities requested 
+& EPR_Sink_Capabilities Message) |
+SenderResponseTimer timeout
+Actions on exit:
+Pass sink capabilities/outcome to Device Policy 
+Manager
+Hard reset signalling received
+SenderResponseTimer timeout
+not previously PD Connected6&
+NoResponseTimer timeout &
+HardResetCounter > nHardResetCount1
+PSHardResetTimer 
+timeout
+(SourceCapabilityTimer timeout & CapsCounter > nCapsCount1) |
+(not previously PD Connected6  &
+NoResponseTimer timeout & 
+HardResetCounter > nHardResetCount1)
+PE_SRC_Startup
+Actions on entry:
+Reset CapsCounter
+Reset Protocol Layer
+Start SwapSourceStartTimer (only after Swap)
+Power = DefauIt (0V or 5V) or Implicit Contract
+PD = Connected/not Connected
+PE_SRC_Transition_to_default
+Actions on entry:
+Request Device Policy Manager to request power 
+supply Hard Resets to vSafe5V via vSafe0V
+Reset local HW
+Request Device Policy Manager to set Port Data 
+Role to DFP and turn off VCONN
+Power = rising/falling to default (5V)
+PD = not Connected
+PE_SRC_Disabled
+Actions on entry:
+Disable Power Delivery
+Power = DefauIt (5V)
+PD =not Connected
+Actions on exit:
+Request Device Policy Manager to turn on VCONN
+Inform Protocol Layer Hard Reset complete
+ErrorRecovery
+previously PD Connected6 &
+NoResponseTimer timeout &
+HardResetCount
+> nHardResetCount
+PE_SRC_Wait_New_Capabilities
+Actions on entry:
+Wait for new Source Capabilities9
+Power = DefauIt (5V)
+PD =Connected
+PE_SRC_Hard_Reset_Received
+Actions on entry:
+Start PSHardResetTimer
+Initialize and start NoResponseTimer
+Power = DefauIt (5V) or 
+Implicit/Explicit Contract
+PD = Connected/not Connected
+Source capability 
+change
+(from Device 
+Policy Manager)
+no Explicit Contract &
+(Reject message sent |
+Wait message sent)
+Source capability change
+(from Device Policy Manager) |
+(In SPR Mode & Get_Source_Cap Message) |
+(In EPR Mode & EPR_Get_Source_Cap Message)
+Protocol Error
+Actions on exit:
+If the Source is initiating an AMS then notify the 
+Protocol Layer than the first Message in an AMS 
+will follow8
+SourcePPSCommTimer timeout |
+SourceEPRKeepAliveTimer timeout
+PE_SRC_EPR_Keep_Alive
+Actions on entry:
+Send EPR_Keep_Alive_Ack Message
+Power = Explicit Contract 
+PD = Connected
+EPR_Keep_Alive Message
+EPR_Keep_Alive_Ack Sent
+Hard Reset request from 
+Device Policy Manager |
+EPR Mode & Request Message received |
+EPR Capable & SPR Mode & EPR_Request Message received
+(In EPR Mode & Get_Source_Cap Message) |
+(In SPR Mode & EPR_Get_Source_Cap Message)
+Source capabilities 
+message sent
+PE_SRC_Give_Source_Cap
+Actions on entry:
+Get present Source capabilities from Device Policy Manager
+Send Capabilities message (based on Device Policy Manager response):
+• If Get_Source_Cap Message received send Source_Capabilities Message.
+• In EPR_Get_Source_Cap Message received send EPR_Source_Capabilities Message
+Power = Explicit Contract
+PD = Connected

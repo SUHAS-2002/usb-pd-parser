@@ -1,0 +1,7 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 77
+3
+ USB Type-A and USB Type-B Cable Assemblies and 
+Connectors
+This section has been Deprecated. Please refer to [USBPD 2.0] for details of cables and connectors used in scenar-
+ios utilizing the BFSK Signaling Scheme in conjunction with USB Type-A or USB Type-B connectors.

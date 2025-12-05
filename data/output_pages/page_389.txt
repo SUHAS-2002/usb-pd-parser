@@ -1,0 +1,100 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 389
+Figure 7.39 Transition Diagram for a Sink Requested Power Role Swap
+t4
+t2
+t3
+t1
+New Sink
+New Source
+New Source
+New Sink
+Initial Sink
+Initial Source
+Initial Sink
+Initial Source
+Source to 
+Swap Standby
+Sink � IOLD
+Swap Standby
+Swap Standby 
+to Source
+Swap Standby 
+to Sink
+Implicit Contract
+IOLD
+Source VOLD
+Sink to Swap 
+Standby
+VOLD
+3
+4
+7
+not driven
+Swap Standby
+vSafe5V
+10
+not driven
+I2
+I2
+I1
+I1
+Initial Source Port
+Policy Engine
+Initial Sink Port
+Policy Engine
+Initial Source Port
+Device Policy Mgr
+Source � Sink
+Power Supply
+Initial Sink Port
+Device Policy Mgr
+Sink � Source
+Power Supply
+Source Port
+Voltage
+Sink Port
+Current
+I1 � iSnkSwapStdby                                                           I2 ��iSnkSwapStdby + cSnkBulkPd( VBUS/ t)
+Source vSafe5V
+Port to Port 
+Messaging
+Source Port 
+Interaction
+Sink Port 
+Interaction
+Source 
+VBUS Voltage
+Sink 
+VBUS Current
+Rd to Rp
+���p to Rd
+Send
+Accept
+Evaluate
+Accept
+Send
+PS_RDY
+Evaluate
+PS_RDY
+1
+2
+5
+6
+PSSourceOffTimer
+tSrcTransition
+Good 
+CRC
+tSrcTransOff
+Good 
+CRC
+PSSourceOnTimer
+Send
+PS_RDY
+Evaluate
+PS_RDY
+Good 
+CRC
+8
+9
+tSrcTransOn

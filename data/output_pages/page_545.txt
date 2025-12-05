@@ -1,0 +1,59 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 545
+8.3.2.7.1.3
+  Source Initiated Power Role Swap (Wait)
+This is an example of a Power Role Swap operation, with a wait response, initiated by a Port which initially, at the 
+start of this Message sequence, is acting as a Source and therefore has Rp pulled up on its CC wire.
+There are several phases to the Power Role Swap:
+
+A PR_Swap Message is sent.
+
+A Wait Message in response to the PR_Swap Message.
+Figure 8.35, "Power Role Swap Sequence with wait Initiated by the Source" shows the Messages as they flow across 
+the bus and within the devices.
+Figure 8.35 Power Role Swap Sequence with wait Initiated by the Source
+: Protocol
+1: Send PR_Swap
+: PHY
+: PHY
+: Protocol
+2:PR_Swap
+3: PR_Swap + CRC
+4: PR_Swap
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: PR_Swap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:PR_Swap sent
+Start SenderResponseTimer
+10: Send Wait
+11: Wait
+12: Wait + CRC
+13: Wait
+Check MessageID against local copy
+Store copy of MessageID
+14: Wait received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: Wait sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Evaluate PR_Swap 
+request
+: Policy Engine
+: Policy Engine
+Initial Source Port
+Initial Sink Port
+Stop SenderResponseTimer
+Tell Power Supply to stop sourcing power
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

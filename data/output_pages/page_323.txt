@@ -1,0 +1,51 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 323
+Figure 7.10 Source VBUS and VCONN Response to Hard Reset
+VCONN will meet tVCONNDischarge relative to the start of the voltage transition as shown in Figure 7.10, "Source VBUS 
+and VCONN Response to Hard Reset" due to the discharge circuitry in the Cable Plug. VCONN Shall meet tVCONNOn 
+relative to VBUS reaching vSafe5V. 
+Note:
+tVCONNOn and tVCONNDischarge are defined in [USB Type-C 2.4].
+7.1.6
+  Changing the Output Power Capability
+Some USB Power Delivery Negotiations will require the Source to adjust its output power capability without 
+changing the output voltage. In this case the Source Shall be able to supply a higher or lower load current within 
+tSrcReady.
+7.1.7
+  Robust Source Operation
+7.1.7.1
+  Output Over Current Protection 
+Sources Shall implement over current protection to prevent damage from output current that exceeds the current 
+handling capability of the Source. The definition of current handling capability is left to the discretion of the Source 
+implementation and Shall take into consideration the current handling capability of the connector contacts. If the 
+over current protection implementation does not use a Hard Reset or Error Recovery, it Shall Not interfere with the 
+Negotiated VBUS current level.
+After three consecutive over current events Source Shall go to ErrorRecovery.
+Sources Should attempt to send Hard Reset Signaling when over current protection engages followed by an Alert 
+Message indicating an OCP event once an Explicit Contract has been established. The over current protection 
+response May engage at either the Port or system level. Systems or ports that have engaged over current protection 
+Should attempt to resume USB Default Operation after determining that the cause of over current is no longer 
+present and May latch off to protect the Port or system. The definition of how to detect if the cause of over current 
+is still present is left to the discretion of the Source implementation.
+The Source Shall Re-negotiate with the Sink after choosing to resume USB Default Operation. The decision of how 
+to Re-negotiate after an over current event is left to the discretion of the Source implementation.
+The Source Shall prevent continual system or Port cycling if over current protection continues to engage after 
+initially resuming either USB Default Operation or Re-negotiation. Latching off the Port or system is an acceptable 
+response to recurring over current.
+During the over current response and subsequent system or Port shutdown, all affected Source ports operating 
+with VBUS greater than vSafe5V Shall discharge VBUS to vSafe5V by the time tSafe5V and vSafe0V by the time 
+tSafe0V.
+Old voltage
+0V
+vSafe0V(max)
+vSrcNeg(max)
+t0
+tSafe5V
+tSafe0V
+tSrcTurnOn
+vSafe5V(max), VCONN(max)
+�
+vVconnDischarge
+tVconnDischarge
+tVconnOn
+tSrcRecover

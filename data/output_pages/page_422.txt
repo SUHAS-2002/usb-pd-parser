@@ -1,0 +1,37 @@
+Page 422
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 8.1 Example of daisy chained displays
+Another example use case is a laptop computer that is Attached to both an external supply and a Tablet computer. 
+In this situation, if the external supply is large enough to power the laptop in its normal state as well as charge an 
+external device, the laptop would set its "Unconstrained Power" bit and the tablet will allow itself to charge at its 
+peak rate. If the external supply is small, however, and would not prevent the laptop from discharging if maximal 
+power is drawn by the external device, the laptop would not set its "Unconstrained Power" bit, and the tablet can 
+choose to draw less than what is offered. This amount could be just enough to prevent the tablet from discharging, 
+or none at all. Alternatively, if the tablet determines that the laptop has significantly larger battery with more 
+charge than the tablet has, the tablet can still choose to charge itself, although possibly not at the maximal rate.
+In this way, Sinks that do not receive the Unconstrained Power bit from the connected Source can still choose to 
+charge their batteries, or charge at a reduced rate, if their policy determines that the impact to the Source is 
+minimal -- such as in the case of a phone with a small battery charging from a laptop with a large battery. These 
+policies can be decided via further USB PD communication.
+8.2.6.2
+  Battery Supplies
+When monitored, and a USB interface is supported, the Battery state Shall be reported to the System Policy 
+Manager using the USB interface.
+If the device is Battery-powered but is in a state that is primarily for charging external devices, the device is 
+considered to be an unconstrained source of power and thus Should set the "Unconstrained Power" bit.
+A simplified algorithm is detailed below to ensure that Battery powered devices will get charge from non-Battery 
+powered devices when possible, and also to ensure that devices do not constantly Power Role Swap back and forth.
+When two devices are connected that do not have Unconstrained Power, they Should define their own policies so 
+as to prevent constant Power Role Swapping.
+This algorithm uses the "Unconstrained Power" bit (see Section 6.4.1.2.1.3, "Unconstrained Power" and Section 
+6.4.1.3.1.3, "Unconstrained Power"), thus the decisions are based on the availability and sufficiency of an external 
+supply, not the full Capabilities of a system or device or product.
+Recommendations:
+
+Provider/Consumers using large external sources ("Unconstrained Power" bit set) Should always deny 
+Power Role Swap requests from Consumer/Providers not using external sources ("Unconstrained Pow-
+er" bit cleared).
+AC
+Tablet
+Display 1
+Display 2

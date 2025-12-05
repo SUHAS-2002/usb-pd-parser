@@ -1,0 +1,65 @@
+Page 76
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+2.8.3
+  Adjustable Voltage Supply (AVS) Charging Models
+USB Power Delivery operating in SPR Mode (when PDP is higher than 27W) and EPR Mode includes support for 
+Adjustable Voltage Supply (AVS) charging using a set of defined standard voltage ranges based on the Source's PDP 
+Rating.
+The standard voltage ranges available for AVS are summarized in Table 2.3, "AVS Voltage Power Ranges".
+Table 2.3  AVS Voltage Power Ranges
+PDP
+Minimum 
+Voltage (V)
+Maximum 
+Voltage (V)
+Maximum 
+Available 
+Current3
+Minimum 
+Voltage (V)
+Maximum 
+Voltage (V)
+Maximum 
+Available 
+Current
+>27…45W
+9
+15
+3A
+N/A
+>45…60W
+9
+20
+3A
+>60…100W
+9
+20
+5A1
+100…140W
+9
+20
+5A2
+15
+28
+5A2
+>140…180W
+9
+20
+5A2
+15
+36
+5A2
+>180…240W
+9
+20
+5A2
+15
+48
+5A2
+1)
+Requires 5A cable.
+2)
+Requires an EPR Cable.
+3)
+The maximum available SPR AVS current is determined by the maximum available current in the 
+Fixed Supply 15V PDO in the 9 - 15V range and Fixed Supply 20V PDO in the 15 - 20V range.

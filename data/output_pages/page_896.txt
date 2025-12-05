@@ -1,0 +1,36 @@
+Page 896
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+
+The PSSourceOnTimer times out or
+
+The PS_RDY Message is not sent after retries (a GoodCRC Message has not been received).
+Note:
+A Soft Reset Shall Not be initiated in this case.
+8.3.3.19.3.7
+  PE_PRS_SRC_SNK_Send_Swap State
+On entry to the PE_PRS_SRC_SNK_Send_Swap state the Policy Engine Shall request the Protocol Layer to send a 
+PR_Swap Message and Shall start the SenderResponseTimer.
+On exit from the PE_PRS_SRC_SNK_Send_Swap state the Policy Engine Shall stop the SenderResponseTimer.
+The Policy Engine Shall transition to the PE_SRC_Ready state when:
+
+A Reject Message is received.
+
+Or a Wait Message is received.
+
+Or the SenderResponseTimer times out.
+The Policy Engine Shall transition to the PE_PRS_SRC_SNK_Transition_to_off state when:
+
+An Accept Message is received.
+8.3.3.19.3.8
+  PE_PRS_SRC_SNK_Reject_Swap State
+On entry to the PE_PRS_SRC_SNK_Reject_Swap state the Policy Engine Shall request the Protocol Layer to send:
+
+A Reject Message if the device is unable to perform a Power Role Swap at this time.
+
+A Wait Message if further evaluation of the Power Role Swap request is required.
+Note:
+In this case it is expected that one of the Port Partners will send a PR_Swap Message at a later time (see 
+Section 6.3.12.2, "Wait in response to a PR_Swap Message").
+The Policy Engine Shall transition to the PE_SRC_Ready when:
+
+The Reject or Wait Message has been sent.

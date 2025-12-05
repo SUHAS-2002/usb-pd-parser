@@ -1,0 +1,57 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 265
+6.7
+  Counters
+6.7.1
+  MessageID Counter
+The MessageIDCounter is a rolling counter, ranging from 0 to nMessageIDCount, used to detect duplicate 
+Messages. This value is used for the MessageID field in the Message Header of each transmitted Message.
+Each Port Shall maintain a copy of the last MessageID value received from its Port Partner. Devices that support 
+multiple ports, such as Hubs, Shall maintain copies of the last MessageID on a per Port basis. A Port which 
+communicates using SOP* Packets Shall maintain copies of the last MessageID for each type of SOP* it uses.
+The transmitter Shall use the MessageID in a GoodCRC Message to verify that a particular Message was received 
+correctly. The receiver Shall use the MessageID to detect duplicate Messages.
+6.7.1.1
+  Transmitter Usage
+The Transmitter Shall use the MessageID as follows:
+
+Upon receiving either Hard Reset Signaling, or a Soft_Reset Message, the transmitter Shall set its 
+MessageIDCounter to zero and re-initialize its retry mechanism.
+
+If a GoodCRC Message with a MessageID matching the MessageIDCounter is not received before the 
+CRCReceiveTimer expires, it Shall retry the same Packet up to nRetryCount times using the same 
+MessageID.
+
+If a GoodCRC Message is received with a MessageID matching the current MessageIDCounter before 
+the CRCReceiveTimer expires, the transmitter Shall re-initialize its retry mechanism and increment its 
+MessageIDCounter.
+
+If the Message is aborted by the Policy Engine, the transmitter Shall delete the Message from its transmit 
+buffer, re-initialize its retry mechanism and increment its MessageIDCounter.
+6.7.1.2
+  Receiver Usage
+The Receiver Shall use the MessageID as follows:
+
+When the first good Packet is received after a reset, the receiver Shall store a copy of the received 
+MessageID value.
+
+For subsequent Messages, if MessageID value in a received Message is the same as the stored value, the 
+receiver Shall return a GoodCRC Message with that MessageID value and drop the Message (this is a 
+retry of an already received Message). 
+Note:
+This Shall Not apply to the Soft_Reset Message which always has a MessageID value of zero.
+
+If MessageID value in the received Message is different than the stored value, the receiver Shall return 
+a GoodCRC Message with the new MessageID value, store a copy of the new MessageID value and pro-
+cess the Message.
+6.7.2
+  Retry Counter
+The RetryCounter is used by a Port whenever there is a Message transmission failure (timeout of 
+CRCReceiveTimer). If the nRetryCount retry fails, then the link Shall be reset using the Soft Reset mechanism. 
+The following rules apply to retries when there is a Message transmission failure (see also Section 6.12.2.2, 
+"Protocol Layer Message Transmission"):
+
+Cable Plugs Shall Not retry Messages.
+
+Extended Messages of Data Size > MaxExtendedMsgLegacyLen that are not Chunked (Chunked flag set 
+to zero) Shall Not be retried.

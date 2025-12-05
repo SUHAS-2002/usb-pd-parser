@@ -1,0 +1,65 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 221
+6.5.2
+  Status Message
+The Status Message Shall be sent in response to a Get_Status Message. The content of the Status Message depends 
+on the target of the Get_Status Message. When sent to SOP the Status Message returns the status of the Port's Port 
+Partner. When sent to SOP’ or SOP’’ the Status Message returns the status of one of the Active Cable's Cable Plugs.
+6.5.2.1
+  SOP Status Message
+A Status Message, sent in response to Get_Status Message to SOP, enables a Port to inform its Port Partner about 
+the present status of the Source or Sink. Typically, a Get_Status Message will be sent by the Port after receipt of an 
+Alert Message. Some of the reported events are critical such as OCP, OVP and OTP, while others are informational 
+such as change in a Battery's status from charging to neither charging nor discharging. 
+The Status Message returns a 7-byte Status Data Block (SDB) whose format Shall be as shown in Figure 6.38, "SOP 
+Status Message" and Table 6.55, "SOP Status Data Block (SDB)".
+Figure 6.38 SOP Status Message
+Table 6.55  SOP Status Data Block (SDB)
+Offset (Byte)
+Field
+Description
+0
+Internal Temp
+Source or Sink’s internal temperature in °C
+
+0 = feature not supported
+
+1 = temperature is less than 2°C. 
+
+2-255 = temperature in °C.
+1
+Present Input
+Bit
+Description
+0
+Reserved and Shall be set to zero
+1
+External Power when set
+2
+External Power AC/DC (Valid when Bit 1 set)
+
+0: DC
+
+1: AC 
+Reserved when Bit 1 is zero
+3
+Internal Power from Battery when set
+4
+Internal Power from non-Battery power source when set
+5...7
+Reserved and Shall be set to zero
+2
+Present Battery 
+Input
+When Present Input field bit 3 set Shall contain the bit corresponding 
+to the Battery or Batteries providing power:
+
+Upper nibble = Hot Swappable Battery (b7…4)
+
+Lower nibble = Fixed Battery (b3…0)
+When Present Input field bit 3 is not set this field is Reserved and 
+Shall be set to zero.
+Extended Header
+Data Size = 7
+SDB
+(7-byte block)

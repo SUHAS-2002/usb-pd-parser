@@ -1,0 +1,77 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 497
+Table 8.47, "Steps for Exiting EPR Mode (Source Initiated)" below provides a detailed explanation of what happens 
+at each labeled step in Figure 8.20, "Exiting EPR Mode (Source Initiated)" above. 
+Table 8.47  Steps for Exiting EPR Mode (Source Initiated)
+Step
+Sink
+Source
+The Port Partners are in an Explicit Contract using an SPR (A)PDO (Voltage <= 20V)
+1
+The Policy Engine directs the Protocol Layer to 
+generate an EPR_Mode (Exit) Message to request entry 
+to EPR Mode. 
+2
+Protocol Layer creates the Message and passes to PHY 
+Layer.
+3
+PHY Layer receives the EPR_Mode (Exit) Message and 
+compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends CRC and sends the EPR_Mode 
+(Exit) Message. Starts CRCReceiveTimer.
+4
+PHY Layer removes the CRC and forwards the 
+EPR_Mode (Exit) Message to the Protocol Layer.
+5
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer forwards the received EPR_Mode 
+(Exit) Message information to the Policy Engine that 
+consumes it.
+6
+Protocol Layer generates a GoodCRC Message and 
+passes it PHY Layer.
+7
+PHY Layer appends CRC and sends the GoodCRC 
+Message.
+PHY Layer receives the GoodCRC and checks the CRC to 
+verify the Message.
+8
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+9
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+EPR_Mode (Exit) Message was successfully sent.
+10
+Policy Engine evaluates the EPR_Mode (Exit) Message 
+sent by the Sink. It tells the Protocol Layer to form a 
+Source_Capabilities Message.
+11
+Protocol Layer creates the Source_Capabilities Message 
+and passes to PHY Layer. Starts CRCReceiveTimer.
+12
+PHY Layer receives the Source_Capabilities Message 
+and compares the CRC it calculated with the one sent to 
+verify the Message.
+PHY Layer appends a CRC and sends the 
+Source_Capabilities Message.
+13
+PHY Layer removes the CRC and forwards the 
+Source_Capabilities Message to the Protocol Layer. 
+14
+Protocol Layer checks the MessageID in the incoming 
+Message is different from the previously stored value 
+and then stores a copy of the new value.
+The Protocol Layer passes the EPR_Mode (Enter 
+Succeeded) information to the Policy Engine.
+15
+The Protocol Layer generates a GoodCRC Message and 
+passes it to its PHY Layer.
+16
+PHY Layer appends CRC and sends the Message.
+PHY Layer receives the Message and compares the CRC 
+it calculated with the one sent to verify the Message.

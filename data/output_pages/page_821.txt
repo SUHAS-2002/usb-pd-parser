@@ -1,0 +1,15 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 821
+16
+PHY Layer removes the CRC and forwards the GoodCRC 
+Message to the Protocol Layer. 
+17
+Protocol Layer verifies and increments the 
+MessageIDCounter and stops CRCReceiveTimer. 
+Protocol Layer informs the Policy Engine that the 
+Vendor_Defined_Extended Message was successfully 
+sent.
+Table 8.153  Steps for VDEM Message Sequence
+Step
+DFP
+UFP

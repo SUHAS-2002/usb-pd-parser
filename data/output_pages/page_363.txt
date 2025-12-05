@@ -1,0 +1,54 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 363
+Table 7.8  Sequence Description for Increasing the Current
+Step
+Source Port
+Sink Port
+1
+Policy Engine sends the Accept Message to the Sink.
+Policy Engine receives the Accept Message.
+2
+Protocol Layer receives the GoodCRC Message from 
+the Sink. The Policy Engine tells the Device Policy 
+Manager to instruct the power supply to modify its 
+output power. 
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then starts the 
+PSTransitionTimer and evaluates the Accept 
+Message.
+3
+tSrcTransition after the GoodCRC Message was 
+received, the power supply starts to change its output 
+power capability. The power supply Shall be ready to 
+operate at the new power level within tSrcReady 
+(t1). The power supply informs the Device Policy 
+Manager that it is ready to operate at the new power 
+level. The power supply status is passed to the Policy 
+Engine.
+4
+The Policy Engine sends the PS_RDY Message to the 
+Sink starting within tSrcTransReq of the end of the 
+GoodCRC Message following the Accept Message.
+The Policy Engine receives the PS_RDY Message from 
+the Source.
+5
+Protocol Layer receives the GoodCRC Message from 
+the Sink.
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then stops the 
+PSTransitionTimer, evaluates the PS_RDY Message 
+from the Source and tells the Device Policy Manager 
+that the Source is operating at the new (A)PDO.
+If the PS_RDY Message is not received before 
+PSTransitionTimer times out the Sink sends Hard 
+Reset Signaling.
+6
+The Sink May begin operating at the new power level 
+any time after evaluation of the PS_RDY Message. 
+This time duration is indeterminate.
+7
+The Sink Shall Not violate the transient load 
+behavior defined in Section 7.2.6, "Transient Load 
+Behavior" while transitioning to and operating at the 
+new power level. The time duration (t2) depends on 
+the magnitude of the load change.

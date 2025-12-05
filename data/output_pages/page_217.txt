@@ -1,0 +1,97 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 217
+6.5.1.1
+  Vendor ID (VID) Field
+The VID field Shall contain the 16-bit Vendor ID (VID) assigned to the Source's vendor by the USB-IF. If the vendor 
+does not have a VID, the VID field Shall be set to 0xFFFF. Devices that have a USB data interface Shall report the 
+same VID as the idVendor in the Standard Device Descriptor (see [USB 2.0] and [USB 3.2]).
+14
+Peak Current1
+Bit
+Description
+0...4
+Percent overload in 10% increments Values higher than 25 (11001b) are 
+clipped to 250%.
+5...10
+Overload period in 20ms
+11...14
+Duty cycle in 5% increments
+15
+VBUS voltage droop
+16
+Peak Current2
+Bit
+Description
+0...4
+Percent overload in 10% increments Values higher than 25 (11001b) are 
+clipped to 250%.
+5...10
+Overload period in 20ms
+11...14
+Duty cycle in 5% increments
+15
+VBUS voltage droop
+18
+Peak Current3
+Bit
+Description
+0...4
+Percent overload in 10% increments Values higher than 25 (11001b) are 
+clipped to 250%.
+5...10
+Overload period in 20ms
+11...14
+Duty cycle in 5% increments
+15
+VBUS voltage droop
+20
+Touch Temp
+Temperature conforms to:
+
+0 = [IEC 60950-1] (default)
+
+1 = [IEC 62368-1] TS1
+
+2 = [IEC 62368-1] TS2
+Note: All other values Reserved and Shall Not be used.
+21
+Source Inputs
+Bit
+Description
+0
+
+0b: No external supply
+
+1b: External supply present
+1
+If bit 0 is set:
+
+0b: External supply is constrained.
+
+1b: External supply is unconstrained.
+If bit 0 is not set Reserved and Shall be set to zero
+2
+
+0b: No internal Battery
+
+1b: Internal Battery present
+3...7
+Reserved and Shall be set to zero
+22
+Number of Batteries/
+Battery Slots
+Upper Nibble = Number of Hot Swappable Battery Slots (0…4)
+Lower Nibble = Number of Fixed Batteries (0…4)
+23
+SPR Source PDP 
+Rating
+0…6: Source PDP Rating (EPR Source’s PDP Rating when operating in SPR Mode.
+7: Reserved and Shall be set to zero
+24
+EPR Source PDP 
+Rating
+0…7: EPR Source PDP Rating
+Table 6.54  Source Capabilities Extended Data Block (SCEDB) (Continued)
+Offset
+Field
+Description

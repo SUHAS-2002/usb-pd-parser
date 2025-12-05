@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 839
+On entry to the PE_SNK_Hard_Reset state the Policy Engine Shall request the generation of Hard Reset Signaling 
+by the PHY Layer and increment the HardResetCounter.
+The Policy Engine Shall transition to the PE_SNK_Transition_to_default state when:
+
+The Hard Reset is complete.
+8.3.3.3.9
+  PE_SNK_Transition_to_default State
+The Policy Engine Shall transition from any state to PE_SNK_Transition_to_default state when:
+
+Hard Reset Signaling is detected.
+When Hard Reset Signaling is received or transmitted then the Policy Engine Shall transition from any state to 
+PE_SNK_Transition_to_default. This state can also be entered from the PE_SNK_Hard_Reset state.
+On entry to the PE_SNK_Transition_to_default state the Policy Engine Shall:
+
+indicate to the Device Policy Manager that the Sink Shall transition to default 
+
+request a reset of the local hardware
+
+request the Device Policy Manager that the Port Data Role is set to UFP.
+The Policy Engine Shall transition to the PE_SNK_Startup state when:
+
+The Device Policy Manager indicates that the Sink has reached the default level.
+8.3.3.3.10
+  PE_SNK_Give_Sink_Cap State
+
+On entry to the PE_SNK_Give_Sink_Cap state the Policy Engine Shall request the Device Policy Manager 
+for the current system capabilities. The Policy Engine Shall then request the Protocol Layer to send a 
+Sink_Capabilities Message containing these capabilities. The Policy Engine Shall send:
+
+A Sink_Capabilities Message when a Get_Sink_Cap Message is received or
+
+An EPR_Sink_Capabilities Message when a EPR_Get_Sink_Cap Message is received.
+The Policy Engine Shall transition to the PE_SNK_Ready state when:
+
+The Sink_Capabilities Message has been successfully sent.
+8.3.3.3.11
+  PE_SNK_EPR_Keep_Alive
+On entry to the PE_SNK_EPR_Keep_Alive State the Policy Engine Shall send an EPR_KeepAlive Message and 
+initialize and run the SenderResponseTimer.
+The Policy Engine Shall transition to the PE_SNK_Ready state when:
+
+A EPR_KeepAlive_Ack Message is received.
+The Policy Engine Shall transition to the PE_SNK_Hard_Reset state when:
+
+The SenderResponseTimer times out.
+8.3.3.3.12
+  PE_SNK_Get_Source_Cap State
+
+On entry to the PE_SNK_Get_Source_Cap state the Policy Engine Shall request the Protocol Layer to send 
+a get Source Capabilities Message in order to retrieve the Source Capabilities. The Policy Engine Shall 
+send:
+
+A Get_Source_Cap Message when the Device Policy Manager requests SPR capabilities or
+
+An EPR_Get_Source_Cap Message when the Device Policy Manager requests EPR Capabilities.
+The Policy Engine Shall then start the SenderResponseTimer.

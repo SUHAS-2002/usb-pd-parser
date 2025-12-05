@@ -1,0 +1,18 @@
+Page 824
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Conditions listed on state transitions will come from one of three sources and, when there is a conflict, Should be 
+serviced in the following order:
+1)
+Message and related indications passed up to the Policy Engine from the Protocol Layer (Message sent; 
+Message received etc.).
+2)
+Events triggered within the Policy Engine e.g., timer timeouts.
+3)
+Information and requests coming from the Device Policy Manager relating either to Local Policy, or to 
+other modules which the Device Policy Manager controls such as power supply and USB-C® Port Control.
+Note:
+The following state diagrams are not intended to cover all possible corner cases that could be 
+encountered. For example, where an outgoing Message is Discarded, due to an incoming Message by the 
+Protocol Layer (see Section 6.12.2.3, "Protocol Layer Message Reception") it will be necessary for the 
+higher layers of the system to handle a retry of the AMS that was being initiated, after first handling the 
+incoming Message.

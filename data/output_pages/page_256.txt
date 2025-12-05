@@ -1,0 +1,49 @@
+Page 256
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Enter Mode and Exit Mode Commands which have their own timers (VDMModeEntryTimer and 
+VDMModeExitTimer respectively). Failure to receive the expected response is detected when the 
+VDMResponseTimer expires. 
+The Policy Engine's response when the VDMResponseTimer expires Shall be dependent on the Message sent (see 
+Section 8.3, "Policy Engine").
+The VDMResponseTimer Shall be started from the time the last bit of the GoodCRC Message EOP, corresponding 
+to the VDM Command requesting a response, has been received by the PHY Layer. The VDMResponseTimer Shall 
+be stopped when the last bit of the EOP of the GoodCRC Message, corresponding to the expected VDM Command 
+response, has been transmitted by the PHY Layer.
+The receiver of a Message requiring a response Shall respond within tVDMReceiverResponse in order to ensure 
+that the sender's VDMResponseTimer does not expire.
+The tVDMReceiverResponse time Shall be measured from the time the last bit of the Message EOP has been 
+transmitted by the PHY Layer until the first bit of the response Message Preamble has been transmitted by the PHY 
+Layer.
+6.6.12.2
+  VDMModeEntryTimer
+The VDMModeEntryTimer Shall be used by the Initiator's Policy Engine to ensure that the response to a Structured 
+VDM Enter Mode Command request (ACK or NAK with ACK indicating that the requested Alternate Mode has been 
+entered) arrives within a bounded time of tVDMWaitModeEntry. Failure to receive the expected response is 
+detected when the VDMModeEntryTimer expires.
+The Policy Engine's response when the VDMModeEntryTimer expires is to inform the Device Policy Manager (see 
+Section 8.3.3.23.1, "DFP Structured VDM Mode Entry State Diagram").
+The VDMModeEntryTimer Shall be started from the time the last bit of the EOP of the GoodCRC Message, 
+corresponding to the VDM Command request, has been received by the PHY Layer. The VDMModeEntryTimer 
+Shall be stopped when the last bit of the EOP of the GoodCRC Message, corresponding to the expected Structured 
+VDM Command response (ACK, NAK or BUSY), has been transmitted by the PHY Layer.
+The receiver of a Message requiring a response Shall respond within tVDMEnterMode in order to ensure that the 
+sender's VDMModeEntryTimer does not expire.
+The tVDMEnterMode time Shall be measured from the time the last bit of the EOP of the GoodCRC Message, 
+corresponding to VDM Command Request, has been transmitted by the PHY Layer until the first bit of the response 
+Message Preamble has been transmitted by the PHY Layer.
+6.6.12.3
+  VDMModeExitTimer
+The VDMModeExitTimer Shall be used by the Initiator's Policy Engine to ensure that the ACK response to a 
+Structured VDM Exit Mode Command, indicating that the requested Alternate Mode has been exited, arrives within 
+a bounded time of tVDMWaitModeExit. Failure to receive the expected response is detected when the 
+VDMModeExitTimer expires.
+The Policy Engine's response when the VDMModeExitTimer expires is to inform the Device Policy Manager (see 
+Section 8.3.3.23.2, "DFP Structured VDM Mode Exit State Diagram").
+The VDMModeExitTimer Shall be started from the time the last bit of the GoodCRC Message EOP, corresponding 
+to the VDM Command requesting a response, has been received by the PHY Layer. The VDMModeExitTimer Shall 
+be stopped when the last bit of the GoodCRC Message EOP, corresponding to the expected Structured VDM 
+Command response ACK, has been transmitted by the PHY Layer.
+The receiver of a Message requiring a response Shall respond within tVDMExitMode in order to ensure that the 
+sender's VDMModeExitTimer does not expire.
+The tVDMExitMode time Shall be measured from the time the last bit of the Message EOP has been received by the 
+PHY Layer until the first bit of the response Message Preamble has been transmitted by the PHY Layer.

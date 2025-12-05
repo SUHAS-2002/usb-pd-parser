@@ -1,0 +1,56 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 697
+8.3.2.11.7
+  Country Codes
+8.3.2.11.7.1
+  8.3.2.12.7.1Source Gets Country Codes from a Sink
+Figure 8.85, "Source Gets Sink's Country Codes" shows an example sequence between a Source and a Sink when the 
+Source gets the Sink's Country Codes. 
+Figure 8.85 Source Gets Sink's Country Codes
+: Protocol
+1: Send Get_Country_Codes
+: PHY
+: PHY
+: Protocol
+2:Get_Country_Codes
+3: Get_Country_Codes + CRC
+4: Get_Country_Codes
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Country_Codes 
+received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Country_Codes sent
+Start SenderResponseTimer
+10: Send Country_Codes
+11: Country_Codes
+12: Country_Codes
++ CRC
+13: Country_Codes
+Check MessageID against local copy
+Store copy of MessageID
+14: Country_Codes
+received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Country Codes 
+Information from DPM
+: Policy Engine
+: Policy Engine
+Sink Port
+Source Port
+Stop SenderResponseTimer
+18: Country_Codes sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

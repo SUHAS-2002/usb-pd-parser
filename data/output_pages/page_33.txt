@@ -1,0 +1,69 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 33
+Table 10.7
+Fixed Supply PDO - Source 15V...................................................................................................................1002
+Table 10.8
+Fixed Supply PDO - Source 20V...................................................................................................................1002
+Table 10.9
+SPR Adjustable Voltage Supply (AVS) Voltage Ranges......................................................................1004
+Table 10.10
+SPR Programmable Power Supply PDOs and APDOs based on the Port Maximum PDP...1005
+Table 10.11
+SPR Programmable Power Supply Voltage Ranges............................................................................1006
+Table 10.12
+EPR Source Capabilities based on the Port Maximum PDP and using an EPR Capable Cable
+1009
+Table 10.14
+EPR Source Examples when Port Present PDP is less than Port Maximum PDP...................1010
+Table 10.13
+EPR Source Capabilities when Port Present PDP is less than Port Maximum PDP and using 
+an EPR-capable cable.......................................................................................................................................1010
+Table 10.15
+EPR Adjustable Voltage Supply (AVS) Voltage Ranges.....................................................................1012
+A
+CRC calculation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1015
+B
+Message Sequence Examples (Deprecated) . . . . . . . . . . . . . . . . . . . . . . . 1016
+C
+VDM Command Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1017
+Table C.1
+Discover Identity Command request from Initiator Example .......................................................1017
+Table C.2
+Discover Identity Command response from Active Cable Responder Example ....................1018
+Table C.3
+Discover Identity Command response from Hub Responder Example .....................................1020
+Table C.4
+Discover SVIDs Command request from Initiator Example............................................................1021
+Table C.5
+Discover SVIDs Command response from Responder Example ...................................................1022
+Table C.6
+Discover Modes Command request from Initiator Example ..........................................................1023
+Table C.7
+Discover Modes Command response from Responder Example..................................................1024
+Table C.8
+Enter Mode Command request from Initiator Example...................................................................1025
+Table C.9
+Enter Mode Command response from Responder Example...........................................................1026
+Table C.10
+Enter Mode Command request with additional VDO Example .....................................................1027
+Table C.11
+Exit Mode Command request from Initiator Example ......................................................................1028
+Table C.12
+Exit Mode Command response from Responder Example..............................................................1029
+Table C.13
+Attention Command request from Initiator Example........................................................................1030
+Table C.14
+Attention Command request from Initiator with additional VDO Example ............................1031
+D
+BMC Receiver Design Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1032
+E
+FRS System Level Example . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1038
+Table E.1
+Sequence for setup of a Fast Role Swap (Hub connected to Power Adapter first)...............1041
+Table E.2
+Sequence for setup of a Fast Role Swap (Hub connected to laptop before Power Adapter)
+1042
+Table E.3
+Sequence for slow VBUS discharge (it discharges after FR_Swap message is sent)..............1045
+Table E.4
+VBUS discharges quickly after adapter disconnected.........................................................................1046

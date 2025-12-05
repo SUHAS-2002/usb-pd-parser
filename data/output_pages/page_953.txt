@@ -1,0 +1,86 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 953
+8.3.3.26
+  EPR Mode State Diagrams
+8.3.3.26.1
+  Source EPR Mode Entry State Diagram
+Figure 8.211, "Source EPR Mode Entry State Diagram" shows the state diagram for an EPR Source in response to an 
+EPR_Mode Message.
+Figure 8.211 Source EPR Mode Entry State Diagram
+8.3.3.26.1.1
+  PE_SRC_Evaluate_EPR_Mode_Entry State
+The Policy Engine transitions to the PE_SRC_Evaluate_EPR_Mode_Entry state from the PE_SRC_Ready state when:
+
+An EPR_Mode (Enter) Message is received from the Sink.
+On Entry to the PE_SRC_Evaluate_EPR_Mode_Entry state the Policy Engine Shall request the Device Policy Manager 
+to evaluate the EPR_Mode (Enter) Message.
+The Policy Engine Shall transition to the PE_SRC_EPR_Mode_Entry_Ack state when:
+
+The Device Policy Manager indicates that EPR Mode can be entered.
+The Policy Engine Shall transition to the PE_SRC_EPR_Mode_Entry_Failed state when:
+
+The Device Policy Manager indicates that the EPR Mode is not to be entered.
+EPR_Mode (Enter) received
+PE_SRC_EPR_Mode_Entry_ACK
+Actions on entry:
+Send EPR Enter Mode Acknowledge
+If Source is not the VCONN Source initiate VCONN Swap 
+process
+PE_SRC_Evaluate_EPR Mode_Entry
+Actions on entry:
+Request DPM to evaluate request to enter EPR Mode
+Power = Explicit Contract
+PD = Connected
+PE_SRC_EPR_Mode_Entry_Failed
+Actions on entry:
+Send Enter Mode (Enter Failed) with 
+appropriate failure code.
+DPM says enter EPR Mode
+EPR Enter Mode (Enter Failed) sent
+PE_SRC_Ready
+PE_VCS_Send_Swap
+PE_VCS_Force_VCONN or
+PE_VCS_Send_PS_RDY
+VCONN Swap Process
+DPM says don’t 
+enter EPR Mode
+PE_SRC_EPR_Mode_Discover_Cable
+Actions on entry:
+Check Vconn Swap Result if Vconn Swap Process 
+carried out.
+Power = Explicit Contract
+PD = Connected
+Power = Explicit Contract
+PD = Connected
+Power = Explicit Contract
+PD = Connected
+EPR Enter Mode (Enter Acknowledged) Sent &
+Source is VCONN Source &
+Unknown Cable
+PE_INIT_PORT_VDM_Identity_Request
+PE_INIT_PORT_VDM_Identity_ACKed or
+PE_INIT_PORT_VDM_Identity_NAKed
+Source is the VCONN Source
+Cable Discovery Process
+PE_SRC_EPR_Mode_Evaluate_Cable_EPR
+Actions on entry:
+Ask DPM to evaluate Cable Discovery results
+Power = Explicit Contract
+PD = Connected
+PE_SRC_EPR_Mode_Entry_Succeeded
+Actions on entry:
+Send EPR Mode (Enter Succeeded)
+Enter EPR Mode.
+Power = Explicit Contract
+PD = Connected
+VCONN Swap Process Complete
+Cable Discovery Process Complete
+Cable Plug is EPR capable
+PE_SRC_Send_Capabilities
+EPR Mode Entered
+Cable Plug is not EPR capable
+EPR Enter Mode (Enter Acknowledged) Sent &
+(captive cable |  known EPR Capable Cable)
+EPR Enter Mode (Enter Acknowledged) Sent &
+Source is not VCONN Source &
+Unknown Cable

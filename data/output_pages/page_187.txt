@@ -1,0 +1,63 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 187
+Figure 6.19 Example Discover SVIDs response with 4 SVIDs
+Figure 6.20 Example Discover SVIDs response with 12 SVIDs followed by an empty response
+Header
+No. of Data Objects = 4
+VDM Header
+VDO 1
+SVID 0 
+(B31..16)
+SVID 1 
+(B15..0)
+VDO 2
+SVID 2 
+(B31..16)
+SVID 3 
+(B15..0)
+VDO 3
+0x0000 
+(B31..16)
+0x0000
+(B15..0)
+Header
+No. of Data Objects = 7
+VDM Header
+VDO 1
+SVID 0 
+(B31..16)
+SVID 1 
+(B15..0)
+VDO 2
+SVID 2 
+(B31..16)
+SVID 3 
+(B15..0)
+VDO 3
+SVID 4 
+(B31..16)
+SVID 5 
+(B15..0)
+VDO 4
+SVID 6 
+(B31..16)
+SVID 7 
+(B15..0)
+VDO 5
+SVID 8 
+(B31..16)
+SVID 9 
+(B15..0)
+Header
+No. of Data Objects = 2
+VDM Header
+VDO 1
+0x0000 
+(B31..16)
+0x0000 
+(B15..0)
+VDO 6
+SVID 10 
+(B31..16)
+SVID 11 
+(B15..0)

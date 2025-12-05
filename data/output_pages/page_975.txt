@@ -1,0 +1,32 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 975
+9
+ States and Status Reporting
+9.1
+  Overview
+This chapter describes the Status reporting mechanisms for devices with data connections (e.g., D+/D- and or 
+SSTx+/- and SSRx+/-). It also describes the corresponding USB state a device that supports USB PD Shall transition 
+to as a result of changes to the USB PD state that the device is in. 
+This chapter does not define the System Policy or the System Policy Manager. That is defined in [UCSI]. In addition, 
+the Policies themselves are not described here; these are left to the implementers of the relevant products and 
+systems to define.
+All PD Capable USB (PDUSB) Devices Shall report themselves as self-powered devices (over USB) when plugged 
+into a PD capable Port even if they are entirely powered from VBUS. However, there are some differences between 
+PD and [USB 2.0] / [USB 3.2]; for example, the presence of VBUS alone does not mean that the device (Consumer) 
+moves from the USB Attached State to the USB Powered State. Similarly, the removal of VBUS alone does not move 
+the device (Consumer) from any of the USB states to the USB Attached State. See Section 9.1.2, "Mapping to USB 
+Device States" for details.
+PDUSB Devices Shall follow the PD requirements when it comes to suspend (see Section 6.4.1.2.1.2, "USB Suspend 
+Supported"), configured, and operational power. The PD requirements when the device is configured or 
+operational are defined in this section (see Table 9.4, "PD Consumer Port Descriptor"). 
+Note:
+The power requirements reported in the PD Consumer Port descriptor of the device Shall override the 
+power draw reported in the bMaxPower field in the configuration descriptor. A PDUSB Device Shall 
+report zero in the bMaxPower field after successfully negotiating a mutually agreeable Explicit Contract 
+and Shall disconnect and re-enumerate when it switches operation back to operating in standard [USB 
+2.0], [USB 3.2], [USB4], [USB Type-C 2.4] or [USBBC 1.2]. When operating in [USB 2.0], [USB 3.2], [USB 
+Type-C 2.4] or [USBBC 1.2] mode it Shall report its power draw via the bMaxPower field.
+Each Provider and Consumer will have their own Local Policies which operate between Port Partners. An example 
+of a typical PD system is shown in Figure 9.1, "Example PD Topology". This example consists of a Provider, 
+Consumer/Providers and Consumers connected together in a tree topology. Between directly connected devices 
+there is both a flow of Power and also Communication consisting of both Status and Control information.

@@ -1,0 +1,53 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 899
+
+A PR_Swap Message is received.
+The Policy Engine Shall transition to the PE_PRS_SNK_SRC_Send_Swap state when:
+
+The Device Policy Manager indicates that a Power Role Swap is required.
+8.3.3.19.4.2
+  PE_PRS_SNK_SRC_Evaluate_Swap State
+On entry to the PE_PRS_SNK_SRC_Send_Swap state the Policy Engine Shall ask the Device Policy Manager whether 
+a Power Role Swap can be made.
+The Policy Engine Shall transition to the PE_PRS_SNK_SRC_Accept_Swap state when:
+
+The Device Policy Manager indicates that a Power Role Swap is OK.
+The Policy Engine Shall transition to the PE_PRS_SNK_SRC_Reject_Swap state when:
+
+The Device Policy Manager indicates that a Power Role Swap is not OK.
+8.3.3.19.4.3
+  PE_PRS_SNK_SRC_Accept_Swap State
+On entry to the PE_PRS_SNK_SRC_Accept_Swap state the Policy Engine Shall request the Protocol Layer to send an 
+Accept Message and Shall disable the Fast Role Swap receiver if this is enabled.
+The Policy Engine Shall transition to the PE_PRS_SNK_SRC_Transition_to_off state when:
+
+The Accept Message has been sent.
+8.3.3.19.4.4
+  PE_PRS_SNK_SRC_Transition_to_off State
+On entry to the PE_PRS_SNK_SRC_Transition_to_off state the Policy Engine Shall initialize and run the 
+PSSourceOffTimer and then request the Device Policy Manager to turn off the Sink.
+The Policy Engine Shall transition to the ErrorRecovery state when:
+
+The PSSourceOffTimer times out.
+The Policy Engine Shall transition to the PE_PRS_SNK_SRC_Assert_Rp state when:
+
+A PS_RDY Message is received.
+8.3.3.19.4.5
+  PE_PRS_SNK_SRC_Assert_Rp State
+On entry to the PE_PRS_SNK_SRC_Assert_Rp state the Policy Engine Shall request the Device Policy Manager to 
+change the resistor asserted on the CC wire from Rd to Rp.
+The Policy Engine Shall transition to the PE_PRS_SNK_SRC_Source_on state when:
+
+The Device Policy Manager indicates that Rd is asserted.
+8.3.3.19.4.6
+  PE_PRS_SNK_SRC_Source_on State
+On entry to the PE_PRS_SNK_SRC_Source_on state the Policy Engine Shall request the Device Policy Manager to turn 
+on the Source.
+On exit from the PE_PRS_SNK_SRC_Source_on state the Policy Engine Shall send a PS_RDY Message.
+The Policy Engine Shall transition to the PE_SRC_Startup state when:
+
+The Source Port VBUS is at vSafe5V.
+The Policy Engine Shall transition to the ErrorRecovery state when:
+
+The PS_RDY Message is not sent after retries (a GoodCRC Message has not been received). A Soft Reset 
+Shall Not be initiated in this case.

@@ -1,0 +1,42 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 91
+5.7
+  Collision Avoidance
+The PHY Layer Shall monitor the channel for data transmission and only initiate transmissions when CC is Idle. If 
+the bus Idle condition is present, it Shall be considered safe to start a transmission provided the conditions detailed 
+in Section 5.8.5.4, "Inter-Frame Gap" are met. The bus Idle condition Shall be checked immediately prior to 
+transmission. If transmission cannot be initiated, then the Packet Shall be Discarded. If the Packet is Discarded 
+because CC is not Idle, the PHY Layer Shall signal to the Protocol Layer that it has Discarded the Message as soon 
+as CC becomes Idle. See Section 5.8.6.1, "Definition of Idle" for the definition of Idle CC.
+In addition, during an Explicit Contract, the PHY Layer Shall control the Rp resistor value to avoid collisions 
+between Source and Sink transmissions. The Source Shall set an Rp value corresponding to a current of 3A 
+(SinkTxOK) to indicate to the Sink that it May initiate an AMS. The Source Shall set an Rp value corresponding to a 
+current of 1.5A (SinkTxNG) this Shall indicate to the Sink that it Shall Not initiate an AMS and Shall only respond 
+to Messages as part of an AMS. See [USB Type-C 2.4] (USB Type-C) for details of the corresponding Rp values. During 
+the Implicit Contract that precedes an Explicit Contract (including Power Role Swap and Fast Role Swap) the Rp 
+resistor value is used to specify USB Type-C current and is not used for Collision Avoidance.
+Table 5.13, "Rp values used for Collision Avoidance" details the Rp values that Shall be used by the Source to control 
+Sink initiation of an AMS.
+See also Section 6.6.16, "Collision Avoidance Timers" and Section 6.10, "Collision Avoidance".
+Table 5.13  Rp values used for Collision Avoidance
+Source Rp Parameter
+Description
+Sink Operation
+Source Operation
+1.5A@5V
+SinkTxNG
+Sink Transmit “No Go,”
+The Sink Shall Not initiate 
+an AMS once tSinkDelay has 
+elapsed after SinkTxNG is 
+asserted.
+Source can initiate an AMS 
+tSinkTx after setting Rp to 
+this value.
+3A@5V
+SinkTxOK
+Sink Transmit “Ok”
+Sink can initiate an AMS.
+Source cannot initiate an 
+AMS while it has this value 
+set.

@@ -1,0 +1,25 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 823
+Figure 8.128 References to states
+Figure 8.129 Example of state reference with conditions
+Figure 8.130 Example of state reference with the same entry and exit
+Timers are included in many of the states. Timers are initialized (set to their starting condition) and run (timer is 
+counting) in the particular state it is referenced. As soon as the state is exited then the timer is no longer active. 
+Where the timers continue to run outside of the state (such as the NoResponseTimer), this is called out in the text. 
+Timeouts of the timers are listed as conditions on state transitions.
+The SenderResponseTimer is a special case, as it May be stopped and started from outside the states in which it 
+is used. To allow this to be done without over-complicating the state diagrams, the SenderResponseTimer is 
+described with its own state diagram (Figure 8.131, "SenderResponseTimer Policy Engine State Diagram"). The 
+control of this Timer is shared between the Policy Engine and the Chunking Layer.
+<Name of reference state> 
+(<DFP | UFP>)
+Hard Reset:
+• Consumer or 
+Consumer/Provider -> 
+PE_SNK_....
+• Provider/Consumer in 
+Source role -> 
+PE_SRC_...
+<Name of reference state 1> or 
+<Name of reference state 2> 
+(<DFP | UFP>)

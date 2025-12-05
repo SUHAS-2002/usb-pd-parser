@@ -1,0 +1,56 @@
+Page 258
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.6.16.2
+  tSrcHoldsBus
+If a transition into the PE_SRC_Ready state will result in an immediate transition out of the PE_SRC_Ready state 
+within tSrcHoldsBus e.g. it is due to a Protocol Error that has not resulted in a Soft Reset, then the notifications of 
+the end of AMS and first Message in an AMS May Not be sent to avoid changing the Rp value unnecessarily.
+6.6.17
+  Fast Role Swap Timers
+6.6.17.1
+  tFRSwap5V
+The tFRSwap5V time Shall be measured from:
+
+The later of:
+
+The last bit of the GoodCRC Message EOP, corresponding to the Accept Message or
+
+VBUS being within vSafe5V.
+
+Until the first bit of the response PS_RDY Message Preamble has been transmitted by the PHY Layer.
+During a Fast Role Swap, the Initial Source Shall start the PS_RDY Message within tFRSwap5V after both:
+
+The Initial Source has sent the Accept Message, and
+
+VBUS is at or below vSafe5V.
+6.6.17.2
+  tFRSwapComplete
+During a fast-role swap, the Initial Sink Shall respond with a the PS_RDY Message within tFRSwapComplete after 
+it has received the PS_RDY Message from the Initial Source. The tFRSwapComplete time Shall be measured from 
+the time the last bit of the GoodCRC Message EOP, corresponding to the PS_RDY Message, has been transmitted by 
+the PHY Layer until the first bit of the response PS_RDY Message Preamble has been transmitted by the PHY Layer.
+6.6.17.3
+  tFRSwapInit
+That last bit of the EOP of the FR_Swap Message Shall be transmitted by the New Source no later than tFRSwapInit 
+after the Fast Role Swap Request has been detected (see Section 5.8.6.3, "Fast Role Swap Detection").
+6.6.18
+   Chunking Timers
+6.6.18.1
+  ChunkingNotSupportedTimer
+The ChunkingNotSupportedTimer is used by a Source or Sink which does not support multi-chunk Chunking but 
+has received a Message Chunk.
+The ChunkingNotSupportedTimer Shall be started when:
+
+The last bit of the GoodCRC Message EOP, corresponding to a Message Chunk of a multi-chunk Message, 
+is transmitted by the PHY Layer. The Policy Engine Shall Not send its Not_Supported Message before 
+the ChunkingNotSupportedTimer expires.
+6.6.18.2
+  ChunkSenderRequestTimer
+The ChunkSenderRequestTimer is used during a Chunked Message transmission.
+The ChunkSenderRequestTimer Shall be used by the sender's Chunking state machine to ensure that a Chunk 
+Response is responded to within a bounded time of tChunkSenderRequest. Failure to receive the expected 
+response is detected when the ChunkSenderRequestTimer expires. 
+The ChunkSenderRequestTimer Shall be started when:
+
+The last bit of the GoodCRC Message EOP, corresponding to the Chunk Response Message, is received by 
+the PHY Layer.

@@ -1,0 +1,66 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 69
+The Device Policy Manager talks to the communication stack, Source/Sink, and the USB-C® Port Control block to 
+manage the resources in the Provider or Consumer.
+Figure 2.5, "High Level Architecture View" illustrates a Provider and a Consumer. Dual-Role Power Devices can be 
+constructed by combining the elements of both Provider and Consumer into a single device. Providers can also 
+contain multiple Source Ports each with their own communications stack and USB-C® Port Control.
+Figure 2.5 High Level Architecture View
+2.6.1
+  Policy
+There are two levels of Policy:
+1)
+System Policy applied system wide by the System Policy Manager across multiple Providers or Consumers.
+3)
+Local Policy enforced on a Provider or Consumer by the Device Policy Manager for a device.
+Policy comprises several logical blocks:
+
+System Policy Manager (system wide).
+
+Device Policy Manager (one per Provider or Consumer).
+
+Policy Engine (one per Source Port or Sink Port).
+2.6.1.1
+  System Policy Manager
+Since the USB Power Delivery protocol is Port to Port, implementation of a System Policy requires communication 
+by an additional data communication mechanism i.e., USB. [UCSI]has been created to define an interface for the 
+System Policy Manager to communicate with the Device Policy Manager. When present, the System Policy Manager 
+monitors and controls System Policy between various Providers and Consumers connected via USB. The System 
+Policy Manager resides in the USB Host and communicates via USB with the Device Policy Manager in each 
+connected Device. Devices without USB Communication capability or are not data connected, will not be able to 
+participate in System Policy.
+The System Policy Manager is Optional so USB Power Delivery Providers and Consumers will operate without it 
+being present. This includes systems where the USB Host does not provide a System Policy Manager and can also 
+include "headless" systems without any USB Host. In those cases where a USB Host is not present, USB Power 
+Delivery is useful for charging purposes, or the powering of devices since useful USB functionality is not possible. 
+Where there is a USB Host, but no System Policy Manager, Providers and Consumers can Negotiate power between 
+Power 
+Source(s)
+Physical Layer
+Protocol
+Source Port
+Device Policy Manager
+Provider
+Policy Engine
+Power 
+Sink
+Physical Layer
+Protocol
+Sink Port
+Device Policy Manager
+Consumer
+Policy Engine
+USB-C Port 
+Control
+USB-C Port 
+Control
+VBUS
+USB Port
+VBUS
+USB Port
+CC
+CC
+BMC
+BMC
+CC
+VBUS

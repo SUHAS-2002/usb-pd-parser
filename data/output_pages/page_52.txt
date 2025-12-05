@@ -1,0 +1,63 @@
+Page 52
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+1.7
+  Parameter Values
+The parameters in this specification are expressed in terms of absolute values. For details of how each parameter 
+is measured in compliance please see [USBPDCompliance].
+1.8
+  Changes from Revision 3.0 
+Extended Power Range (EPR) including Adjustable Voltage Supply (AVS) has been added.
+1.9
+  Compatibility with Revision 2.0
+This Revision of the USB Power Delivery specification is designed to be fully inter-operable with [USBPD 2.0] 
+systems using BMC Signaling over the [USB Type-C 2.4] connector and to be compatible with Revision 2.0 
+hardware.
+Please see Section 2.3, "USB Power Delivery Capable Devices" for more details of the mechanisms defined to enable 
+compatibility. 
+VCONN Powered USB Device
+A captive cable USB Device that can be powered by either VCONN or VBUS as defined in [USB Type-
+C 2.4]. 
+A VPD is a captive cable USB Device that can be powered by either VCONN or VBUS and only 
+responds to SOP’ Communication as defined in the Tables in Section 6.12, "State behavior"). It 
+only responds to Messages sent with a Specification Revision of at least Revision 3.x. A VPD is not 
+allowed to support Alternate Modes.
+The term VPD refers to either a VPD or a CT-VPD with no Charger connected.
+VCONN Source
+The USB Type-C Port responsible for sourcing VCONN.
+VCONN Swap
+Process of exchanging the VCONN Source between Port Partners.
+VDEM
+See Vendor Defined Extended Message.
+VDM
+See Vendor Defined Message.
+VDM Header
+The first Data Object following the Message Header in a Vendor Defined Message. The VDM 
+Header contains the SVID relating to the VDM being sent and provides information relating to 
+the Command in the case of a Structured VDM (see Section 6.4.4, "Vendor Defined Message").
+VDO
+See Vendor Data Object.
+Vendor Data Object
+Data Object used to send Vendor specific information as part of a Message.
+Vendor Defined Extended 
+Message
+PD Extended Message defined for vendor/standards usage. A VDEM does not define any 
+structure and Messages can be created in any manner that the vendor chooses.
+Vendor Defined Message
+PD Data Message defined for vendor/standards usage. These are further partitioned into 
+Structured Vendor Defined Messages, where Commands are defined in this specification, and 
+Unstructured Vendor Defined Messages which are entirely vendor defined (see Section 6.4.4, 
+"Vendor Defined Message").
+Vendor ID
+16-bit unsigned value assigned by the USB-IF to a given Vendor.
+Version
+A minor release of the USB Power Delivery specification associated with a particular Revision.
+Version numbers are also defined in VDMs.
+VI
+Same as power (i.e., voltage * current = power)
+VID
+See Vendor ID.
+VPD
+See VCONN Powered USB Device.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

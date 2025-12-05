@@ -1,0 +1,52 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 643
+8.3.2.11.3.1.4
+  Dual-Role Sink Get Sink Capabilities from a Dual-Role Source
+Figure 8.67, "Dual-Role Sink Gets Dual-Role Source's Capabilities as a Sink" shows an example sequence between a 
+Dual-Role Power Source and a Dual-Role Power Sink when the Dual-Role Power Sink gets the Dual-Role Power Source 
+Capabilities as a Sink. 
+Figure 8.67 Dual-Role Sink Gets Dual-Role Source's Capabilities as a Sink
+: Protocol
+1: Send Get_Sink_Cap
+: PHY
+: PHY
+: Protocol
+2:Get_Sink_Cap
+3: Get_Sink_Cap + CRC
+4: Get_Sink_Cap
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Sink_Cap received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Sink_Cap sent
+Start SenderResponseTimer
+10: Send Sink_Capabilities
+11: Sink_Capabilities
+12: Sink_Capabilities + CRC
+13: Sink_Capabilities
+Check MessageID against local copy
+Store copy of MessageID
+14: Sink_Capabilities received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Sink capability 
+Information from DPM
+: Policy Engine
+: Policy Engine
+Dual-Role Sink Port
+Dual-Role Source Port
+Stop SenderResponseTimer
+18: Sink_Capabilities sent
+Port Power Role = Source
+CC = Rp
+Port Power Role = Sink
+CC = Rd

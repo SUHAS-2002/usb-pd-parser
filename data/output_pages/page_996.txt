@@ -1,0 +1,71 @@
+Page 996
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+10.2.1
+  Source Power Rule Considerations
+The Source Power Rules are designed to:
+
+Ensure the PDP Rating (PDP) of an adapter specified in watts explicitly defines the voltages and 
+currents at each voltage the adapter supports.
+
+Ensure that adapters with a large PDP Ratings are always capable of providing the power to devices 
+designed for use with adapters with a smaller PDP Rating.
+
+Enable an ecosystem of adapters that are inter-operable with the devices in the ecosystem.
+The considerations that lead to the Source Power Rules are based are summarized in Table 10.1, "Considerations for 
+Sources".
+Table 10.1  Considerations for Sources
+Considerations
+Rationale
+Consequence
+Simple to identify capability
+A user going into an electronics retailer 
+knows what they need
+Cannot have a complex identification 
+scheme 
+Higher power Sources are a superset of 
+smaller ones
+Bigger is always better in user’s eyes – don’t 
+want a degradation in performance
+Higher power Sources do everything smaller 
+ones do
+Unambiguous Source definitions
+Sources with the same power rating but 
+different VI combinations might not inter-
+operate
+To avoid user confusion, any given power 
+rating has a single definition
+A range of power ratings
+Users and companies will want freedom to 
+pick appropriate Source ratings
+Fixed profiles at specific power levels don’t 
+provide adequate flexibility, e.g., profiles as 
+defined in previous versions of PD.
+5V@3A USB Type-C Source is defined by 
+[USB Type-C 2.4]
+5V@3A USB Type-C Source is considered
+All > 15W adapters must support 5V@3A or 
+superset consideration is violated
+Maximize 3A cable utilization
+3A cables will be ubiquitous
+Increase to maximum voltage (20V) before 
+increasing current beyond 3A
+Optimize voltage rail count
+More rails are a higher burden for Sources, 
+particularly in terms of testing
+5V is a basic USB requirement. 48V provides 
+the maximum capability. 
+Some Sources are not able to provide 
+significant power
+Some small Battery-operated Sources e.g., 
+mobile devices, are able to provide more 
+power directly from their Battery than from 
+a regulated 5V supply
+In addition to the minimal 5V 
+Advertisements are able to Advertise more 
+power from their Battery
+Some Sources share power between 
+multiple Ports (Hubs and multi-Port 
+Chargers)
+Hubs and multi-port Chargers have to be 
+supported
+See Section 10.3, "Sink Power Rules"

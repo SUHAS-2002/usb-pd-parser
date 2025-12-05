@@ -1,0 +1,103 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 445
+8.3.2.1.3.24
+  AMS: Built-In Self-Test (BIST)
+8.3.2.1.3.25
+  AMS: Enter USB
+8.3.2.1.3.26
+  AMS: Unstructured VDM
+Table 8.28  AMS: Built-In Self-Test (BIST)
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+BIST Carrier Mode
+1.
+BIST (BIST Carrier Mode) 
+Message
+Started by 
+Tester
+Section 8.3.2.15.1
+Section 8.3.3.27.1
+BIST Test Data Mode 1.
+BIST (BIST Test Data) 
+Message
+Section 8.3.2.15.2
+Section 8.3.3.27.2
+BIST Shared 
+Capacity Test Mode
+1.
+BIST (BIST Shared Test Mode 
+Entry) Message
+2.
+Series of Messages
+3.
+BIST (BIST Shared Test Mode 
+Exit) Message
+Section 8.3.2.15.3
+Section 8.3.3.27.3
+Table 8.29  AMS: Enter USB
+AMS
+Message Sequence
+Conditions
+AMS Ref
+State Machine Ref
+UFP Entering USB4® 
+Mode (Accept)
+1.
+Enter_USB Message
+2.
+Accept Message
+Started by DFP
+Section 8.3.2.16.1.1
+Section 8.3.3.16.1,
+Section 8.3.3.16.2
+UFP Entering USB4 
+Mode (Reject)
+1.
+Enter_USB Message
+2.
+Reject Message
+Section 8.3.2.16.1.2
+UFP Entering USB4 
+Mode (Wait)
+1.
+Enter_USB Message
+2.
+Wait Message
+Section 8.3.2.16.1.3
+Cable Plug Entering 
+USB4 Mode (Accept)
+1.
+Enter_USB Message
+2.
+Accept Message
+Section 8.3.2.16.2.1
+Cable Plug Entering 
+USB4 Mode (Reject)
+1.
+Enter_USB Message
+2.
+Reject Message
+Section 8.3.2.16.2.2
+Cable Plug Entering 
+USB4 Mode (Wait)
+1.
+Enter_USB Message
+2.
+Wait Message
+Section 8.3.2.16.2.3
+Table 8.30  AMS: Unstructured VDM
+AMS
+Message Sequence
+AMS Ref
+State Machine Ref
+Unstructured VDM
+1.
+Unstructured Vendor_Defined 
+Message
+Section 8.3.2.17.1
+VDEM
+1.
+Vendor_Defined_Extended Message Section 8.3.2.17.2

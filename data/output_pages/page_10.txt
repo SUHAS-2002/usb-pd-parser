@@ -1,0 +1,198 @@
+Page 10
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Timo Toivola
+Microsoft Corporation
+Hung-Chih Chiu
+Power Forest Technology Corporation
+Toby Nixon
+Microsoft Corporation
+Jay Tu
+Power Forest Technology Corporation
+Vahid Vassey
+Microsoft Corporation
+Adel Lahham
+Power Integrations
+Vivek Gupta
+Microsoft Corporation
+Aditya Kulkarni
+Power Integrations
+Yang You
+Microsoft Corporation
+Akshay Nayaknur
+Power Integrations
+Adib Al Abaji
+Molex LLC
+Amruta Patra
+Power Integrations
+Aaron Xu
+Monolithic Power Systems Inc.
+K R Rahul Raj
+Power Integrations
+Bo Zhou
+Monolithic Power Systems Inc.
+Kaushik Raam
+Power Integrations
+Christian Sporck
+Monolithic Power Systems Inc.
+Rahul Joshi
+Power Integrations
+Di Han
+Monolithic Power Systems Inc.
+Ricardo Pregiteer
+Power Integrations
+Zhihong Yu
+Monolithic Power Systems Inc.
+Shruti Anand
+Power Integrations
+Dan Wagner
+Motorola Mobility Inc.
+Amit gupta
+Qualcomm, Inc
+Ben Crowe
+MQP Electronics Ltd.
+George Paparrizos
+Qualcomm, Inc
+Pat Crowe
+MQP Electronics Ltd.
+Giovanni Garcea
+Qualcomm, Inc
+Sten Carlsen
+MQP Electronics Ltd.
+Jack Pham
+Qualcomm, Inc
+Kenji Oguma
+NEC Corporation
+James Goel
+Qualcomm, Inc
+ChinJui Lin
+Nexperia B.V.
+Joshua Warner
+Qualcomm, Inc
+Max Guan
+Nexperia B.V.
+Karyn Vuong
+Qualcomm, Inc
+Stefan Seider
+Nexperia B.V.
+Lalan Mishra
+Qualcomm, Inc
+Frank Borngräber
+Nokia Corporation
+Nicholas Cadieux
+Qualcomm, Inc
+Kai Inha
+Nokia Corporation
+Vamsi Samavedam
+Qualcomm, Inc
+Pekka Leinonen
+Nokia Corporation
+Vatsal Patel
+Qualcomm, Inc
+Richard Petrie
+Nokia Corporation
+Chris Sporck
+Qualcomm, Inc.
+Sten Carlsen
+Nokia Corporation
+Craig Aiken
+Qualcomm, Inc.
+Abhijeet Kulkarni
+NXP Semiconductors
+Narendra Mehta
+Qualcomm, Inc.
+Ahmad Yazdi
+NXP Semiconductors
+Terry Remple
+Qualcomm, Inc.
+Bart Vertenten
+NXP Semiconductors
+Will Kun
+Qualcomm, Inc.
+Dennis Ha
+NXP Semiconductors
+Yoram Rimoni
+Qualcomm, Inc.
+Dong Nguyen
+NXP Semiconductors
+Fan-Hau Hsu
+Realtek Semiconductor Corp.
+Guru Prasad
+NXP Semiconductors
+Tsung-Peng Chuang
+Realtek Semiconductor Corp.
+Ken Jaramillo
+NXP Semiconductors
+Atsushi Mitamura
+Renesas Electronics Corp.
+Krishnan TN
+NXP Semiconductors
+Bob Dunstan
+Renesas Electronics Corp.
+Michael Joehren
+NXP Semiconductors
+Brian Allen
+Renesas Electronics Corp.
+Robert de Nie
+NXP Semiconductors
+Dan Aoki
+Renesas Electronics Corp.
+Rod Whitby
+NXP Semiconductors
+Fengshuan Zhou
+Renesas Electronics Corp.
+Vijendra Kuroodi
+NXP Semiconductors
+Hajime Nozaki
+Renesas Electronics Corp.
+Winston Langeslag
+NXP Semiconductors
+John Carpenter
+Renesas Electronics Corp.
+Robert Heaton
+Obsidian Technology
+Kiichi Muto
+Renesas Electronics Corp.
+Andrew Yoo
+ON Semiconductor
+Masami Katagiri
+Renesas Electronics Corp.
+Brady Maasen
+ON Semiconductor
+Nobuo Furuya
+Renesas Electronics Corp.
+Bryan McCoy
+ON Semiconductor
+Patrick Yu
+Renesas Electronics Corp.
+Christian Klein
+ON Semiconductor
+Peter Teng
+Renesas Electronics Corp.
+Cor Voorwinden
+ON Semiconductor
+Philip Leung
+Renesas Electronics Corp.
+Edward Berrios
+ON Semiconductor
+Steve Roux
+Renesas Electronics Corp.
+Michael Smith
+ON Semiconductor
+Tetsu Sato
+Renesas Electronics Corp.
+Oscar Freitas
+ON Semiconductor
+Toshifumi Yamaoka
+Renesas Electronics Corp.
+Tom Duffy
+ON Semiconductor
+Yimin Chen
+Renesas Electronics Corp.
+Brian Collins
+Parade Technologies Inc.
+Chunan Kuo
+Richtek Technology Corporation
+Craig Wiley
+Parade Technologies Inc.
+Heinz Wei
+Richtek Technology Corporation

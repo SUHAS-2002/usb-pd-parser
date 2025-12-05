@@ -1,0 +1,68 @@
+Page 152
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Figure 6.12, "SPR Capabilities Message Construction" describes the construction of an SPR Capabilities Message. The 
+Message will always have at least one Fixed Supply 5V PDO and may have up to six more PDOs depending on the 
+Source Capabilities.
+Figure 6.12 SPR Capabilities Message Construction
+Figure 6.13 Example Capabilities Message with 2 Power Data Objects
+In the 27W Source as shown in Figure 6.13, "Example Capabilities Message with 2 Power Data Objects", the Number 
+of Data Objects field is 2: vSafe5V plus one other voltage.
+Power Data Objects (PDO) and Augmented Power Data Objects (APDO) are identified by the Message Header's 
+Message Type field. They are used to form SPR Capabilities Messages.
+6.4.1.5
+  SPR Source Capabilities Message
+Sources send a Source_Capabilities Message either as part of advertising Port Capabilities, or in response to a 
+Get_Source_Cap Message. See Section 6.5.15.2, "EPR_Source_Capabilities Message" for information about EPR Source 
+Capabilities Messages.
+Following a Hard Reset, a power-on event or plug insertion event, a Source Port Shall send a Source_Capabilities 
+Message after every SourceCapabilityTimer timeout as an Advertisements that Shall be interpreted by the Sink 
+Port on Attachment. The Source Shall continue sending a minimum of nCapsCount Source_Capabilities Messages 
+until a GoodCRC Message is received.
+Additionally, a Source_Capabilities Message Shall only be sent by a Port in the following cases:
+
+By the Source Port from the PE_SRC_Ready state upon a change in its ability to supply power to this 
+Port.
+
+By a Source Port or Dual-Role Power Port in response to a Get_Source_Cap Message.
+
+Optionally by a Source Port from the PE_SRC_Ready state when available power in a multi-Port system 
+changes, even if the Source Capabilities for this Port have not changed.
+A Source Port Shall report its Capabilities in a series of 32-bit Power Data Objects (see Table 6.7, "Power Data 
+Object") as part of a Source_Capabilities Message (see Figure 6.13, "Example Capabilities Message with 2 Power 
+Data Objects"). Power Data Objects are used to convey a Source Port's Capabilities to provide power including Dual-
+Role Power ports presently operating as a Sink.
+Each Power Data Object Shall describe a specific Source capability such as a Battery (e.g., 2.8-4.1V) or a Fixed Supply 
+(e.g., 15V) at a maximum allowable current. The Number of Data Objects field in the Message Header Shall define 
+the number of Power Data Objects that follow the Message Header in a Data Message. All Sources Shall minimally 
+offer one Power Data Object that reports vSafe5V. A Source Shall Not offer multiple Power Data Objects of the same 
+type (Fixed Supply, Variable Supply, Battery Supply) and the same voltage but Shall instead offer one Power Data 
+Object with the highest available current for that Source capability and voltage. 
+Header
+2 bytes
+PDO
+1
+PDO
+2
+PDO
+3
+PDO
+4
+PDO
+5
+PDO
+6
+PDO
+7
+001b
+010b
+011b
+100b
+101b
+110b
+111b
+Header
+No. of Data Objects = 2
+Fixed 5V 
+PDO
+Fixed 9V 
+PDO

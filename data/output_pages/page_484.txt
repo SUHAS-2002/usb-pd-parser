@@ -1,0 +1,73 @@
+Page 484
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.2.2.2.2
+  EPR Explicit Contract Negotiation (Reject)
+Figure 8.16, "Rejected Fixed EPR Power Negotiation" illustrates an example of a Message flow where the request is 
+rejected while negotiating an Explicit Contract in EPR Mode. The Negotiation goes through several distinct phases:
+
+The Source sends out its power Capabilities in an EPR_Source_Capabilities Message.
+
+The Sink evaluates these Capabilities and, in the request phase, selects one power level by sending an 
+EPR_Request Message.
+
+The Source evaluates the request and accepts the request with a Reject Message.
+Figure 8.16 Rejected Fixed EPR Power Negotiation
+: Source Policy Engine
+: Protocol
+1: Send EPR_Source_Capabilities
+: PHY
+: PHY
+: Protocol
+: Sink Policy Engine
+2: EPR_Source_Capabilities
+3: EPR_Source_Capabilities + CRC
+4: EPR_Source_Capabilities
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: EPR_Source_Capabilities received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9: EPR_Source_Capabilities sent
+Start SenderResponseTimer
+10: Send EPR_Request
+11: EPR_Request
+12: EPR_Request + CRC
+13: EPR_Request
+Check MessageID against local copy
+Store copy of MessageID
+14: EPR_Request received
+Stop SenderResponseTimer
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+18: EPR_Request sent
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Start SenderResponseTimer
+19: Send Reject
+20: Reject
+21: Reject + CRC
+22: Reject
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+23: Reject received
+24: GoodCRC
+25: GoodCRC + CRC
+26: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+27: Reject sent
+Stop SenderResponseTimer
+Start PSTransitionTimer
+Reduce current
+Evaluate EPR Capabilities
+Evaluate EPR Request
+Source
+Sink
+Cable EPR_Source_Capabilities detected

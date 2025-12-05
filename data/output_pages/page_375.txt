@@ -1,0 +1,45 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 375
+Table 7.12  Sequence Description for increasing the Current in PPS mode
+Step
+Source Port
+Sink Port
+1
+Policy Engine sends the Accept Message to the Sink.
+Policy Engine receives the Accept Message.
+2
+Protocol Layer receives the GoodCRC Message from 
+the Sink. The Policy Engine tells the Device Policy 
+Manager to instruct the power supply to increase its 
+set-point for the current limit.
+Protocol Layer sends the GoodCRC Message to the 
+Source. Policy Engine then starts the 
+PSTransitionTimer and evaluates the Accept 
+Message.
+3
+The Power Supply increases its Current Limit set-
+point to the new requested value. 
+The Sink draws current according to the increased 
+Current Limit of the Source.
+4
+The Policy Engine waits tPpsSrcTransSmall then 
+sends the PS_RDY Message to the Sink starting within 
+tPpsCLProgramSettle of the end of the GoodCRC 
+Message following the Accept Message.
+Policy Engine receives the PS_RDY Message.
+5
+Policy Engine receives the GoodCRC Message from 
+the Sink.
+Protocol Layer sends the GoodCRC Message to the 
+Source. 
+6
+Policy Engine then stops the PSTransitionTimer, 
+evaluates the PS_RDY Message and tells the Device 
+Policy Manager it can increase the current up to the 
+requested value without the Source going into CL 
+mode.
+If the PS_RDY Message is not received before 
+PSTransitionTimer times out the Sink sends Hard 
+Reset Signaling.
+7
+The Sink increases its current.

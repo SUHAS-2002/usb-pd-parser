@@ -1,0 +1,60 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 829
+
+And the NoResponseTimer times out 
+
+And the HardResetCounter > nHardResetCount. 
+Note:
+In the PE_SRC_Disabled state the Attached device is assumed to be unresponsive. The Policy Engine 
+operates as if the device is Detached until such time as a Detach/Re-attach is detected.
+8.3.3.2.3
+  PE_SRC_Send_Capabilities State
+Note:
+This state can be entered from the PE_SRC_Soft_Reset state.
+On entry to the PE_SRC_Send_Capabilities state the Policy Engine Shall request the present Port capabilities from 
+the Device Policy Manager. The Policy Engine Shall then request the Protocol Layer to send a capabilities Message 
+containing these capabilities. The Policy Engine Shall request:
+
+A Source_Capabilities Message if the Source is in SPR Mode or
+
+An EPR_Source_Capabilities Message if the Source is in EPR Mode.
+The Policy Engine Shall then increment the CapsCounter (if implemented). 
+If a GoodCRC Message is received, then the Policy Engine Shall:
+
+Stop the NoResponseTimer.
+
+Reset the HardResetCounter and CapsCounter to zero.
+Note:
+The HardResetCounter Shall only be set to zero in this state and at power up; its value Shall be 
+maintained during a Hard Reset.
+
+Initialize and run the SenderResponseTimer.
+Once a Source_Capabilities Message has been received and acknowledged by a GoodCRC Message, the Sink is 
+required to then send a Request Message within tSenderResponse.
+The Policy Engine Shall transition to the PE_SRC_Negotiate_Capability state when:
+
+A Request Message is received from the Sink and the Source is operating in SPR Mode or
+
+An EPR_Request Message is received from the Sink and the Source is operating in EPR Mode.
+The Policy Engine Shall transition to the PE_SRC_Discovery state when:
+
+The Protocol Layer indicates that the Message has not been sent and we are presently not Connected. 
+This is part of the Capabilities sending process whereby successful Message sending indicates 
+connection to a PD Sink Port.
+The Policy Engine Shall transition to the PE_SRC_Hard_Reset state when:
+
+The SenderResponseTimer times out. In this case a transition back to USB Default Operation is 
+required.
+When:
+
+The Port Partners have not been PD Connected (the Source Port remains Attached to a Port it has not 
+had a PD Connection with during this Attachment)
+
+And the NoResponseTimer times out 
+
+And the HardResetCounter > nHardResetCount. 
+The Policy Engine Shall do one of the following:
+
+Transition to the PE_SRC_Discovery state.
+
+Transition to the PE_SRC_Disabled state.

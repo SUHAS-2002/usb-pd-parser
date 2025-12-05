@@ -1,0 +1,83 @@
+Page 170
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+6.4.4.3.1.1.1
+  USB Communications Capable as a USB Host
+The USB Communications Capable as USB Host field is used to indicate whether or not the Port has a USB Host 
+Capability.
+6.4.4.3.1.1.2
+  USB Communications Capable as a USB Device
+The USB Communications Capable as a USB Device field is used to indicate whether or not the Port has a USB Device 
+Capability.
+6.4.4.3.1.1.3
+  Product Type (UFP)
+The SOP Product Type (UFP) field indicates the type of Product when in UFP Data Role, whether a VDO will be 
+returned and if so the type of VDO to be returned. The Product Type indicated in the SOP Product Type (UFP) field 
+Shall be the closest categorization of the main functionality of the Product in UFP Data Role or "Undefined" when 
+there is no suitable category for the product. For DRD Products this field Shall always indicate the Product Type 
+when in UFP role regardless of the present Data Role. Table 6.34, "Product Types (UFP)" defines the Product Type 
+VDOs which Shall be returned.
+B26
+Modal Operation Supported
+Section 6.4.4.3.1.1.4
+
+Shall be set to one if the product (UFP/Cable Plug) is capable of 
+supporting Modal Operation (Alternate Modes).
+
+Shall be set to zero otherwise.
+B25…23
+SOP - Product Type (DFP)
+Section 6.4.4.3.1.1.6
+
+000b – Not a DFP
+
+001b – PDUSB Hub
+
+010b – PDUSB Host
+
+011b – Power Brick
+
+100b…111b – Reserved, Shall Not be used.
+SOP’: Reserved, Shall Not be used.
+B22…21
+Connector Type
+Section 6.4.4.3.1.1.7
+
+00b – Reserved, for compatibility with legacy systems.
+
+01b – Reserved, Shall Not be used.
+
+10b – USB Type-C Receptacle
+
+11b – USB Type-C Plug
+B20…16
+Reserved, Shall Not be used.
+B15…0
+USB Vendor ID
+Section 6.4.4.3.1.1.8
+[USB 2.0]/[USB 3.2]/[USB4]
+Table 6.34  Product Types (UFP)
+Product Type
+Description
+Product Type 
+VDO
+Reference
+Undefined
+ Shall be used when this is not a UFP.
+None
+PDUSB Hub
+ Shall be used when the Product is a PDUSB Hub.
+UFP VDO
+Section 6.4.4.3.1.4
+PDUSB Peripheral
+ Shall be used when the Product is a PDUSB 
+Device other than a PDUSB Hub.
+UFP VDO
+Section 6.4.4.3.1.4
+PSD
+ Shall be used when the Product is a PSD, e.g., 
+power bank. 
+None
+Table 6.33  ID Header VDO (Continued)
+Bit(s)
+Description
+Reference

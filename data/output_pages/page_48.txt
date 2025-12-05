@@ -1,0 +1,83 @@
+Page 48
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Protocol Layer
+The entity that forms the Messages used to communicate information between Port Partners.
+Provider
+A PD Port (typically a USB Host, Hub, or Charger DFP) that can source power over the power 
+conductor (e.g., VBUS). This corresponds to a USB Type-C Port with Rp asserted on its CC wire.
+Provider/Consumer
+A Provider with the additional capability to act as a Consumer. This corresponds to a Dual-Role 
+Power Port with Rp asserted on its CC wire.
+PS1
+PS2
+PS3
+Classification of electrical power as defined in [IEC 62368-1].
+PSD
+Sink which draws power but has no other USB or Alternate Mode communication function e.g., a 
+power bank.
+Ra
+Prior to application of VCONN, a powered cable applies a pull-down resistor Ra on its VCONN pin.
+Rd
+Pull-down resistor on the USB Type-C CC wire used to indicate that the Port is a Sink (see [USB 
+Type-C 2.4]).
+RDO
+See Request Data Object.
+Re-attach
+Attach of the Port Pair by a cable after a previous Detach.
+Re-negotiate
+See Re-negotiation.
+Re-negotiated
+See Re-negotiation.
+Re-negotiation
+A process wherein one of the Port Partners wants to alter the Negotiated Contract.
+Request
+Message used by a Sink Port to Negotiate a Contract; refers to either a Request/EPR_Request 
+Message.
+Request Data Object
+Data Object used by a Sink Port to Negotiate a Contract as a part of a Request/EPR_Request 
+Message.
+Responder
+The receiver of a Command request sent by an Initiator that replies with a Command response.
+Revision
+Major release of the USB Power Delivery specification. Each Revision will have variousVersions 
+associated with it.
+Revision 1.0
+Deprecated major Revision of the USB Power Delivery Specification.
+Revision 2.0
+Superseded major Revision of the USB Power Delivery Specification as defined in [USBPD 2.0], 
+with which this specification is compatible.
+Revision 3.x
+Current major Revisions of the USB Power Delivery Specification.
+Rp
+Pull-up resistor on the USB Type-C CC wire used to indicate that the Port is a Source (see [USB 
+Type-C 2.4]).
+Safe Operation
+Sources must have the ability to tolerate vSafe5V applied by both Port Partners.
+Shared Capacity Charger
+As defined in [USB Type-C 2.4]. This maps to a Charger with multiple Managed Capability Ports.
+Shared Capacity Group
+As defined in [USB Type-C 2.4]. This maps to a group with Managed Capability Ports.
+SID
+See Standard ID.
+Signaling
+A Preamble followed by an ordered set of four K-codes used to indicate a particular line symbol 
+e.g., Hard Reset as defined in Section 5.4, "Ordered Sets".
+Signaling Scheme
+Physical mechanism used to transmit bits. Only the BMC Signaling Scheme is defined in this 
+specification. 
+Note: The BFSK Signaling Scheme supported in Revision 1.0 of this specification has been 
+Deprecated.
+Single-Role Port
+A Port that is only capable of operating either as a Source or Sink, but not both. E.g., the port is 
+not a DRP.
+Sink
+The Port consuming power from VBUS; most commonly a USB Device.
+Sink Capabilities
+Capabilities wanted by a Sink.
+Sink Directed Charge
+A charging scheme whereby the Sink connects the Source to its Battery through safety and other 
+circuitry. When the SPR PPS Current Limit feature is activated, the Source automatically controls 
+its output current by adjusting its output voltage.
+Table 1.4  Terms and Abbreviations (Continued)
+Term
+Description

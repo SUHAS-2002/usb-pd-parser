@@ -1,0 +1,48 @@
+Page 628
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+8.3.2.11.2.3
+  VCONN Source Gets Cable Plug Status
+Figure 8.62, "VCONN Source Gets Cable Plug Status" shows an example sequence between a VCONN Source and a Cable 
+Plug where, after the VCONN Source has received an alert (see Section 8.3.2.11.2, "Status") that there has been a 
+status change, the VCONN Source gets more details on the change. 
+Figure 8.62 VCONN Source Gets Cable Plug Status
+: Protocol
+1: Send Get_Status
+: PHY
+: PHY
+: Protocol
+2:Get_Status
+3: Get_Status + CRC
+4: Get_Status
+Start CRCReceiveTimer
+Check MessageID against local copy
+Store copy of MessageID
+5: Get_Status received
+6: GoodCRC
+7: GoodCRC + CRC
+8: GoodCRC
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+9:Get_Status sent
+Start SenderResponseTimer
+10: Send Status
+11: Status
+12: Status + CRC
+13: Status
+Check MessageID against local copy
+Store copy of MessageID
+14: Status received
+15: GoodCRC
+16: GoodCRC + CRC
+17: GoodCRC
+Start CRCReceiveTimer
+Check and increment MessageIDCounter
+Stop CRCReceiveTimer
+Get Status Information 
+from DPM
+: Policy Engine
+: Policy Engine
+VCONN Source Port
+Cable Plug
+Stop SenderResponseTimer
+18: Status sent

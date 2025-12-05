@@ -1,0 +1,58 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 331
+A Source May have greater capability to source peak current than can be reported using the Peak Current field in 
+the Fixed Supply PDO or AVS APDO. In this case the Source Shall report its additional capability in the Peak 
+Current1/Peak Current2/Peak Current3 fields in the Source_Capabilities_Extended Message.
+Each overload period Shall be followed by a period of reduced current draw such that the rolling average current 
+over the Overload Period field value with the specified Duty Cycle field value (see Section 6.5.1.10, "Peak Current 
+Field") Shall Not exceed the Negotiated current. This is calculated as:
+Period of reduced current = (1 - value in Duty Cycle field/100) * value in Overload Period field 
+7.1.12.5
+  Source Inputs
+The Source Inputs field identifies the possible inputs that provide power to the Source. 
+Note:
+Some Sources are only powered by a Battery (e.g., an automobile) rather than the more common AC 
+Supply. 
+7.1.12.6
+  Batteries
+The Number of Batteries/Battery Slots field Shall report the number of Batteries the Source supports. The Source 
+Shall independently report the number of Hot Swappable Batteries and the number of Fixed Batteries.
+7.1.13
+  Fast Role Swap
+A Fast Role Swap limits the interruption of VBUS power to a bus powered accessory connected to a Hub DFP that has 
+a UFP Attached to a power source and a DRP Attached to a Host Port supporting DRP as shown in Figure 7.16, "VBUS 
+Power during Fast Role Swap".
+Figure 7.16 VBUS Power during Fast Role Swap
+When the power source connected to the Hub UFP stops sourcing power and VBUS at the Hub DRP connector 
+discharges below vSrcValid(min), if VBUS has been Negotiated to a higher voltage than vSafe5V, or vSafe5V (min) 
+the Fast Role Swap Request Shall be sent from the Hub DRP to the Host DRP and the Hub DRP Shall sink power. In 
+the Fast Role Swap use case, the Hub DRP behaves like a bidirectional power path. The Hub DRP Shall Not enable 
+VBUS discharge circuitry when changing operation from Initial Source to New Sink. The Hub DFP Port(s) Shall 
+support default USB Type-C Current (see [USB Type-C 2.4]) until a new Explicit Contract is Negotiated.
+After sending the Fast Role Swap Request and while VBUS > vSafe5V (min), the New Sink Shall Not draw more than 
+iNewFrsSink until the New Source has applied its Rp. The New Sink Shall Not draw more than iSnkStdby from VBUS 
+until tSnkFRSwap after it has started sending the Fast Role Swap Request or VBUS has fallen below vSafe5V (min). 
+The tSnkFRSwap time Shall start at the beginning of the Fast Role Swap Request or when VBUS falls below vSafe5V 
+(min), whichever comes later. After waiting for tSnkFRSwap, the New Sink Shall Not draw more than iNewFrsSink 
+until the New Source has applied its Rp. After the New Source has applied its Rp, the New Sink Shall be limited to USB 
+Type-C Current (see [USB Type-C 2.4]) in an Implicit Contract until a new Explicit Contract is Negotiated. All Sink 
+requirements Shall apply to the New Sink after the Fast Role Swap is complete. The Fast Role Swap response of the 
+Host DRP is described in Section 7.2.10, "Fast Role Swap" since the Host DRP is operating as the Initial Sink prior to 
+the Fast Role Swap.
+After the VBUS voltage level at the Hub DRP connector drops below vSafe5V a PS_RDY Message Shall be sent to the 
+Host DRP as shown in the Fast Role Swap transition diagram of Section 7.3.4, "Transitions Caused by Fast Role Swap".
+USB PD Capable
+Hub
+DRP
+UFP
+DFP
+Power Source
+Bus Powered 
+Accessory
+USB PD Capable 
+Host
+DRP
+Power flow before the 
+Fast Role Swap
+Power flow after the 
+Fast Role Swap

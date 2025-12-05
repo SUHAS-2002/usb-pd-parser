@@ -1,0 +1,100 @@
+Universal Serial Bus Power Delivery Specification, Revision 3.2, Version 1.1, 2024-10
+Page 203
+Figure 6.31 Enter_USB Message
+Table 6.49  Enter_USB Data Object (EUDO)
+Bit(s)
+Field
+Description
+B31
+Reserved
+Shall be set to zero.
+B30…28
+USB Mode 1
+
+000b: 
+
+001b: 
+
+010b: 
+
+111b…011b: Reserved, Shall Not be used.
+B27
+Reserved
+Shall be set to zero.
+B26
+USB4 DRD 2
+
+0b: Not capable of operating as a [USB4] Device
+
+1b: Capable of operating as a [USB4] Device
+B25
+USB3 DRD 2
+
+0b: Not capable of operating as a [USB 3.2] Device
+
+1b: Capable of operating as a [USB 3.2] Device
+B24
+Reserved
+Shall be set to zero.
+B23…21
+Cable Speed 2,3
+
+000b: [USB 2.0]only, no SuperSpeed support
+
+001b: [USB 3.2] Gen1
+
+010b: [USB 3.2]Gen2 and [USB4] Gen2
+
+011b: [USB4] Gen3
+
+100b: [USB4] Gen4
+
+101b…111b: Reserved, Shall Not be used.
+B20…19
+Cable Type 2,3
+
+00b: Passive
+
+01b: Active Re-timer
+
+10b: Active Re-driver
+
+11b: Optically Isolated
+B18…17
+Cable Current 2
+
+00b = VBUS is not supported 
+
+01b = Reserved
+
+10b = 3A
+
+11b = 5A
+B16
+PCIe Support 2
+[USB4] PCIe tunneling supported by the host
+B15
+DP Support 2
+[USB4] DP tunneling supported by the host
+B14
+TBT Support 2
+[TBT3] is supported by the host’s USB4® Connection Manager
+B13
+Host Present 2
+A Host is present at the top of the USB tree. 
+When this bit is set PCIe Support, DP Support and TBT Support 
+represent the Host’s Capabilities that Shall be propagated down the Hub 
+tree.
+B12…0
+Reserved
+Shall be set to zero.
+1)
+Entry into [USB 3.2] and [USB4] include entry into [USB 2.0].
+2)
+ Shall be Ignored when received by a Cable Plug (e.g., SOP’ or SOP’’).
+3)
+The DFP Shall interpret the Cable Plug’s reported capability as defined in [USB Type-C 2.4] in the USB4 
+Discovery and Entry Section.
+Header
+No. of Data Objects = 1
+EUDO
