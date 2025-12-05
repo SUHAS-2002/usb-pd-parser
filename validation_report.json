@@ -1,0 +1,4846 @@
+{
+  "matched": [
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.1",
+      "title": "Overview",
+      "page": 34,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.1 Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.2",
+      "title": "Purpose",
+      "page": 35,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.2 Purpose",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.2.1",
+      "title": "Scope",
+      "page": 36,
+      "level": 3,
+      "parent_id": "1.2",
+      "full_path": "1.2.1 Scope",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.3",
+      "title": "Section Overview",
+      "page": 36,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.3 Section Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.4",
+      "title": "Conventions",
+      "page": 37,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.4 Conventions",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.4.1",
+      "title": "Precedence",
+      "page": 37,
+      "level": 3,
+      "parent_id": "1.4",
+      "full_path": "1.4.1 Precedence",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.4.2",
+      "title": "Keywords",
+      "page": 37,
+      "level": 3,
+      "parent_id": "1.4",
+      "full_path": "1.4.2 Keywords",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.4.3",
+      "title": "Numbering",
+      "page": 38,
+      "level": 3,
+      "parent_id": "1.4",
+      "full_path": "1.4.3 Numbering",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.5",
+      "title": "Related Documents",
+      "page": 39,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.5 Related Documents",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.6",
+      "title": "Terms and Abbreviations",
+      "page": 40,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.6 Terms and Abbreviations",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.7",
+      "title": "Parameter Values",
+      "page": 52,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.7 Parameter Values",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.8",
+      "title": "Changes from Revision 3.0",
+      "page": 52,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.8 Changes from Revision 3.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.9",
+      "title": "Compatibility with Revision 2.0",
+      "page": 52,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.9 Compatibility with Revision 2.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.0",
+      "title": "SE0 Noise (b) with USB 2.0 SE0 Noise",
+      "page": 1033,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.0 SE0 Noise (b) with USB 2.0 SE0 Noise",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.1",
+      "title": "Introduction",
+      "page": 53,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.1 Introduction",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.1.1",
+      "title": "Power Delivery Source Operational Contracts",
+      "page": 53,
+      "level": 3,
+      "parent_id": "2.1",
+      "full_path": "2.1.1 Power Delivery Source Operational Contracts",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.1.2",
+      "title": "Power Delivery Contract Negotiation",
+      "page": 53,
+      "level": 3,
+      "parent_id": "2.1",
+      "full_path": "2.1.2 Power Delivery Contract Negotiation",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.1.3",
+      "title": "Other Uses for Power Delivery",
+      "page": 54,
+      "level": 3,
+      "parent_id": "2.1",
+      "full_path": "2.1.3 Other Uses for Power Delivery",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.2",
+      "title": "Compatibility with Revision 2.0",
+      "page": 54,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.2 Compatibility with Revision 2.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.3",
+      "title": "USB Power Delivery Capable Devices",
+      "page": 55,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.3 USB Power Delivery Capable Devices",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.4",
+      "title": "SOP* Communication",
+      "page": 57,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.4 SOP* Communication",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.4.1",
+      "title": "Introduction",
+      "page": 57,
+      "level": 3,
+      "parent_id": "2.4",
+      "full_path": "2.4.1 Introduction",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.4.2",
+      "title": "SOP* Collision Avoidance",
+      "page": 57,
+      "level": 3,
+      "parent_id": "2.4",
+      "full_path": "2.4.2 SOP* Collision Avoidance",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.4.3",
+      "title": "SOP Communication",
+      "page": 57,
+      "level": 3,
+      "parent_id": "2.4",
+      "full_path": "2.4.3 SOP Communication",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.4.4",
+      "title": "SOP'/SOP'' Communication with Cable Plugs",
+      "page": 57,
+      "level": 3,
+      "parent_id": "2.4",
+      "full_path": "2.4.4 SOP'/SOP'' Communication with Cable Plugs",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.5",
+      "title": "Operational Overview",
+      "page": 59,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.5 Operational Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.5.1",
+      "title": "Source Operation",
+      "page": 59,
+      "level": 3,
+      "parent_id": "2.5",
+      "full_path": "2.5.1 Source Operation",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.5.2",
+      "title": "Sink Operation",
+      "page": 62,
+      "level": 3,
+      "parent_id": "2.5",
+      "full_path": "2.5.2 Sink Operation",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.5.3",
+      "title": "Cable Plugs",
+      "page": 65,
+      "level": 3,
+      "parent_id": "2.5",
+      "full_path": "2.5.3 Cable Plugs",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6",
+      "title": "Architectural Overview",
+      "page": 66,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.6 Architectural Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.1",
+      "title": "Policy",
+      "page": 69,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.1 Policy",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.2",
+      "title": "Message Formation and Transmission",
+      "page": 70,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.2 Message Formation and Transmission",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.3",
+      "title": "Collision Avoidance",
+      "page": 70,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.3 Collision Avoidance",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.4",
+      "title": "Power supply",
+      "page": 71,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.4 Power supply",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.5",
+      "title": "DFP/UFP",
+      "page": 71,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.5 DFP/UFP",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.6",
+      "title": "Cable and Connectors",
+      "page": 72,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.6 Cable and Connectors",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.7",
+      "title": "Interactions between Non-PD, BC, and PD devices",
+      "page": 72,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.7 Interactions between Non-PD, BC, and PD devices",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.6.8",
+      "title": "Power Rules",
+      "page": 72,
+      "level": 3,
+      "parent_id": "2.6",
+      "full_path": "2.6.8 Power Rules",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.7",
+      "title": "Extended Power Range (EPR) Operation",
+      "page": 73,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.7 Extended Power Range (EPR) Operation",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.8",
+      "title": "Charging Models",
+      "page": 75,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.8 Charging Models",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.8.1",
+      "title": "Fixed Supply Charging Models",
+      "page": 75,
+      "level": 3,
+      "parent_id": "2.8",
+      "full_path": "2.8.1 Fixed Supply Charging Models",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.8.2",
+      "title": "Programmable Power Supply (PPS) Charging Models",
+      "page": 75,
+      "level": 3,
+      "parent_id": "2.8",
+      "full_path": "2.8.2 Programmable Power Supply (PPS) Charging Models",
+      "tags": [
+        "power",
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.8.3",
+      "title": "Adjustable Voltage Supply (AVS) Charging Models",
+      "page": 76,
+      "level": 3,
+      "parent_id": "2.8",
+      "full_path": "2.8.3 Adjustable Voltage Supply (AVS) Charging Models",
+      "tags": [
+        "power",
+        "state",
+        "table"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "4.1",
+      "title": "Interoperability with other USB Specifications",
+      "page": 78,
+      "level": 2,
+      "parent_id": "4",
+      "full_path": "4.1 Interoperability with other USB Specifications",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "4.2",
+      "title": "Dead Battery Detection / Unpowered Port Detection",
+      "page": 78,
+      "level": 2,
+      "parent_id": "4",
+      "full_path": "4.2 Dead Battery Detection / Unpowered Port Detection",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "4.3",
+      "title": "Cable IR Ground Drop (IR Drop)",
+      "page": 78,
+      "level": 2,
+      "parent_id": "4",
+      "full_path": "4.3 Cable IR Ground Drop (IR Drop)",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "4.4",
+      "title": "Cable Type Detection",
+      "page": 78,
+      "level": 2,
+      "parent_id": "4",
+      "full_path": "4.4 Cable Type Detection",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.1",
+      "title": "Physical Layer Overview",
+      "page": 79,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.1 Physical Layer Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.2",
+      "title": "Physical Layer Functions",
+      "page": 79,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.2 Physical Layer Functions",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.3",
+      "title": "Symbol Encoding",
+      "page": 80,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.3 Symbol Encoding",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.4",
+      "title": "Ordered Sets",
+      "page": 81,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.4 Ordered Sets",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.5",
+      "title": "Transmitted Bit Ordering",
+      "page": 83,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.5 Transmitted Bit Ordering",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.6",
+      "title": "Packet Format",
+      "page": 84,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.6 Packet Format",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.6.1",
+      "title": "Packet Framing",
+      "page": 84,
+      "level": 3,
+      "parent_id": "5.6",
+      "full_path": "5.6.1 Packet Framing",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.6.2",
+      "title": "CRC",
+      "page": 86,
+      "level": 3,
+      "parent_id": "5.6",
+      "full_path": "5.6.2 CRC",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.6.3",
+      "title": "Packet Detection Errors",
+      "page": 89,
+      "level": 3,
+      "parent_id": "5.6",
+      "full_path": "5.6.3 Packet Detection Errors",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.6.4",
+      "title": "Hard Reset",
+      "page": 89,
+      "level": 3,
+      "parent_id": "5.6",
+      "full_path": "5.6.4 Hard Reset",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.6.5",
+      "title": "Cable Reset",
+      "page": 90,
+      "level": 3,
+      "parent_id": "5.6",
+      "full_path": "5.6.5 Cable Reset",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.7",
+      "title": "Collision Avoidance",
+      "page": 91,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.7 Collision Avoidance",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.8",
+      "title": "Bi-phase Mark Coding (BMC) Signaling Scheme",
+      "page": 92,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.8 Bi-phase Mark Coding (BMC) Signaling Scheme",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.8.1",
+      "title": "Encoding and signaling",
+      "page": 92,
+      "level": 3,
+      "parent_id": "5.8",
+      "full_path": "5.8.1 Encoding and signaling",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.8.2",
+      "title": "Transmit and Receive Masks",
+      "page": 96,
+      "level": 3,
+      "parent_id": "5.8",
+      "full_path": "5.8.2 Transmit and Receive Masks",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.8.3",
+      "title": "Transmitter Load Model",
+      "page": 103,
+      "level": 3,
+      "parent_id": "5.8",
+      "full_path": "5.8.3 Transmitter Load Model",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.8.4",
+      "title": "BMC Common specifications",
+      "page": 105,
+      "level": 3,
+      "parent_id": "5.8",
+      "full_path": "5.8.4 BMC Common specifications",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.8.5",
+      "title": "BMC Transmitter Specifications",
+      "page": 106,
+      "level": 3,
+      "parent_id": "5.8",
+      "full_path": "5.8.5 BMC Transmitter Specifications",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.8.6",
+      "title": "BMC Receiver Specifications",
+      "page": 110,
+      "level": 3,
+      "parent_id": "5.8",
+      "full_path": "5.8.6 BMC Receiver Specifications",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.9",
+      "title": "Built in Self-Test (BIST)",
+      "page": 113,
+      "level": 2,
+      "parent_id": "5",
+      "full_path": "5.9 Built in Self-Test (BIST)",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.9.1",
+      "title": "BIST Carrier Mode",
+      "page": 113,
+      "level": 3,
+      "parent_id": "5.9",
+      "full_path": "5.9.1 BIST Carrier Mode",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "5.9.2",
+      "title": "BIST Test Data Mode",
+      "page": 113,
+      "level": 3,
+      "parent_id": "5.9",
+      "full_path": "5.9.2 BIST Test Data Mode",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.1",
+      "title": "Overview",
+      "page": 114,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.1 Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.2",
+      "title": "Messages",
+      "page": 115,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.2 Messages",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.2.1",
+      "title": "Message Construction",
+      "page": 115,
+      "level": 3,
+      "parent_id": "6.2",
+      "full_path": "6.2.1 Message Construction",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3",
+      "title": "Control Message",
+      "page": 128,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.3 Control Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.1",
+      "title": "GoodCRC Message",
+      "page": 129,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.1 GoodCRC Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.2",
+      "title": "GotoMin Message (Deprecated)",
+      "page": 129,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.2 GotoMin Message (Deprecated)",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.3",
+      "title": "Accept Message",
+      "page": 129,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.3 Accept Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.4",
+      "title": "Reject Message",
+      "page": 129,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.4 Reject Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.5",
+      "title": "Ping Message",
+      "page": 130,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.5 Ping Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.6",
+      "title": "PS_RDY Message",
+      "page": 130,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.6 PS_RDY Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.7",
+      "title": "Get_Source_Cap Message",
+      "page": 131,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.7 Get_Source_Cap Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.8",
+      "title": "Get_Sink_Cap Message",
+      "page": 131,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.8 Get_Sink_Cap Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.9",
+      "title": "DR_Swap Message",
+      "page": 131,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.9 DR_Swap Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.10",
+      "title": "PR_Swap Message",
+      "page": 131,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.10 PR_Swap Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.11",
+      "title": "VCONN_Swap Message",
+      "page": 132,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.11 VCONN_Swap Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.12",
+      "title": "Wait Message",
+      "page": 133,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.12 Wait Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.13",
+      "title": "Soft Reset Message",
+      "page": 134,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.13 Soft Reset Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.14",
+      "title": "Data_Reset Message",
+      "page": 135,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.14 Data_Reset Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.15",
+      "title": "Data_Reset_Complete Message",
+      "page": 135,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.15 Data_Reset_Complete Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.16",
+      "title": "Not_Supported Message",
+      "page": 135,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.16 Not_Supported Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.17",
+      "title": "Get_Source_Cap_Extended Message",
+      "page": 136,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.17 Get_Source_Cap_Extended Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.18",
+      "title": "Get_Status Message",
+      "page": 136,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.18 Get_Status Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.19",
+      "title": "FR_Swap Message",
+      "page": 136,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.19 FR_Swap Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.20",
+      "title": "Get_PPS_Status",
+      "page": 137,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.20 Get_PPS_Status",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.21",
+      "title": "Get_Country_Codes",
+      "page": 137,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.21 Get_Country_Codes",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.22",
+      "title": "Get_Sink_Cap_Extended Message",
+      "page": 137,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.22 Get_Sink_Cap_Extended Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.23",
+      "title": "Get_Source_Info Message",
+      "page": 137,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.23 Get_Source_Info Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.3.24",
+      "title": "Get_Revision Message",
+      "page": 137,
+      "level": 3,
+      "parent_id": "6.3",
+      "full_path": "6.3.24 Get_Revision Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4",
+      "title": "Data Message",
+      "page": 138,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.4 Data Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.1",
+      "title": "Capabilities Message",
+      "page": 139,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.1 Capabilities Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.2",
+      "title": "Request Message",
+      "page": 155,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.2 Request Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.3",
+      "title": "BIST Message",
+      "page": 159,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.3 BIST Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.4",
+      "title": "Vendor Defined Message",
+      "page": 162,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.4 Vendor Defined Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.5",
+      "title": "Battery_Status Message",
+      "page": 196,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.5 Battery_Status Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.6",
+      "title": "Alert Message",
+      "page": 198,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.6 Alert Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.7",
+      "title": "Get_Country_Info Message",
+      "page": 201,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.7 Get_Country_Info Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.8",
+      "title": "Enter_USB Message",
+      "page": 202,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.8 Enter_USB Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.9",
+      "title": "EPR_Request Message",
+      "page": 205,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.9 EPR_Request Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.10",
+      "title": "EPR_Mode Message",
+      "page": 206,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.10 EPR_Mode Message",
+      "tags": [
+        "state",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.11",
+      "title": "Source_Info Message",
+      "page": 212,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.11 Source_Info Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.4.12",
+      "title": "Revision Message",
+      "page": 214,
+      "level": 3,
+      "parent_id": "6.4",
+      "full_path": "6.4.12 Revision Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5",
+      "title": "Extended Message",
+      "page": 215,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.5 Extended Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.1",
+      "title": "Source_Capabilities_Extended Message",
+      "page": 216,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.1 Source_Capabilities_Extended Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.2",
+      "title": "Status Message",
+      "page": 221,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.2 Status Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.3",
+      "title": "Get_Battery_Cap Message",
+      "page": 227,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.3 Get_Battery_Cap Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.4",
+      "title": "Get_Battery_Status Message",
+      "page": 227,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.4 Get_Battery_Status Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.5",
+      "title": "Battery_Capabilities Message",
+      "page": 228,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.5 Battery_Capabilities Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.6",
+      "title": "Get_Manufacturer_Info Message",
+      "page": 230,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.6 Get_Manufacturer_Info Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.7",
+      "title": "Manufacturer_Info Message",
+      "page": 231,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.7 Manufacturer_Info Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.8",
+      "title": "Security Messages",
+      "page": 233,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.8 Security Messages",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.9",
+      "title": "Firmware Update Messages",
+      "page": 234,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.9 Firmware Update Messages",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.10",
+      "title": "PPS_Status Message",
+      "page": 235,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.10 PPS_Status Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.11",
+      "title": "Country_Codes Message",
+      "page": 237,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.11 Country_Codes Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.12",
+      "title": "Country_Info Message",
+      "page": 238,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.12 Country_Info Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.13",
+      "title": "Sink_Capabilities_Extended Message",
+      "page": 239,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.13 Sink_Capabilities_Extended Message",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.14",
+      "title": "Extended_Control Message",
+      "page": 244,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.14 Extended_Control Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.15",
+      "title": "EPR Capabilities Message",
+      "page": 245,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.15 EPR Capabilities Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.5.16",
+      "title": "Vendor_Defined_Extended Message",
+      "page": 247,
+      "level": 3,
+      "parent_id": "6.5",
+      "full_path": "6.5.16 Vendor_Defined_Extended Message",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6",
+      "title": "Timers",
+      "page": 249,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.6 Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.1",
+      "title": "CRCReceiveTimer",
+      "page": 249,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.1 CRCReceiveTimer",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.2",
+      "title": "SenderResponseTimer",
+      "page": 249,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.2 SenderResponseTimer",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.3",
+      "title": "Capability Timers",
+      "page": 249,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.3 Capability Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.4",
+      "title": "Wait Timers and Times",
+      "page": 251,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.4 Wait Timers and Times",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.5",
+      "title": "Power Supply Timers",
+      "page": 251,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.5 Power Supply Timers",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.6",
+      "title": "NoResponseTimer",
+      "page": 253,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.6 NoResponseTimer",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.7",
+      "title": "BIST Timers",
+      "page": 253,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.7 BIST Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.8",
+      "title": "Power Role Swap Timers",
+      "page": 254,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.8 Power Role Swap Timers",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.9",
+      "title": "Soft Reset Timers",
+      "page": 254,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.9 Soft Reset Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.10",
+      "title": "Data Reset Timers",
+      "page": 254,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.10 Data Reset Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.11",
+      "title": "Hard Reset Timers",
+      "page": 255,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.11 Hard Reset Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.12",
+      "title": "Structured VDM Timers",
+      "page": 255,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.12 Structured VDM Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.13",
+      "title": "VCONN Timers",
+      "page": 257,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.13 VCONN Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.14",
+      "title": "tCableMessage",
+      "page": 257,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.14 tCableMessage",
+      "tags": [
+        "device",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.15",
+      "title": "DiscoverIdentityTimer",
+      "page": 257,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.15 DiscoverIdentityTimer",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.16",
+      "title": "Collision Avoidance Timers",
+      "page": 257,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.16 Collision Avoidance Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.17",
+      "title": "Fast Role Swap Timers",
+      "page": 258,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.17 Fast Role Swap Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.18",
+      "title": "Chunking Timers",
+      "page": 258,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.18 Chunking Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.19",
+      "title": "Programmable Power Supply Timers",
+      "page": 259,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.19 Programmable Power Supply Timers",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.20",
+      "title": "tEnterUSB",
+      "page": 260,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.20 tEnterUSB",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.21",
+      "title": "EPR Timers",
+      "page": 260,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.21 EPR Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.6.22",
+      "title": "Time Values and Timers",
+      "page": 262,
+      "level": 3,
+      "parent_id": "6.6",
+      "full_path": "6.6.22 Time Values and Timers",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7",
+      "title": "Counters",
+      "page": 265,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.7 Counters",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7.1",
+      "title": "MessageID Counter",
+      "page": 265,
+      "level": 3,
+      "parent_id": "6.7",
+      "full_path": "6.7.1 MessageID Counter",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7.2",
+      "title": "Retry Counter",
+      "page": 265,
+      "level": 3,
+      "parent_id": "6.7",
+      "full_path": "6.7.2 Retry Counter",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7.3",
+      "title": "Hard Reset Counter",
+      "page": 266,
+      "level": 3,
+      "parent_id": "6.7",
+      "full_path": "6.7.3 Hard Reset Counter",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7.4",
+      "title": "Capabilities Counter",
+      "page": 266,
+      "level": 3,
+      "parent_id": "6.7",
+      "full_path": "6.7.4 Capabilities Counter",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7.5",
+      "title": "Discover Identity Counter",
+      "page": 266,
+      "level": 3,
+      "parent_id": "6.7",
+      "full_path": "6.7.5 Discover Identity Counter",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7.6",
+      "title": "VDMBusyCounter",
+      "page": 266,
+      "level": 3,
+      "parent_id": "6.7",
+      "full_path": "6.7.6 VDMBusyCounter",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.7.7",
+      "title": "Counter Values and Counters",
+      "page": 267,
+      "level": 3,
+      "parent_id": "6.7",
+      "full_path": "6.7.7 Counter Values and Counters",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.8",
+      "title": "Reset",
+      "page": 268,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.8 Reset",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.8.1",
+      "title": "Soft Reset and Protocol Error",
+      "page": 268,
+      "level": 3,
+      "parent_id": "6.8",
+      "full_path": "6.8.1 Soft Reset and Protocol Error",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.8.2",
+      "title": "Data Reset",
+      "page": 270,
+      "level": 3,
+      "parent_id": "6.8",
+      "full_path": "6.8.2 Data Reset",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.8.3",
+      "title": "Hard Reset",
+      "page": 270,
+      "level": 3,
+      "parent_id": "6.8",
+      "full_path": "6.8.3 Hard Reset",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.8.4",
+      "title": "Cable Reset",
+      "page": 271,
+      "level": 3,
+      "parent_id": "6.8",
+      "full_path": "6.8.4 Cable Reset",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.9",
+      "title": "Accept, Reject and Wait",
+      "page": 272,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.9 Accept, Reject and Wait",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.10",
+      "title": "Collision Avoidance",
+      "page": 273,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.10 Collision Avoidance",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.11",
+      "title": "Message Discarding",
+      "page": 274,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.11 Message Discarding",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.12",
+      "title": "State behavior",
+      "page": 275,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.12 State behavior",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.12.1",
+      "title": "Introduction to state diagrams used in Chapter 6",
+      "page": 275,
+      "level": 3,
+      "parent_id": "6.12",
+      "full_path": "6.12.1 Introduction to state diagrams used in Chapter 6",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.12.2",
+      "title": "State Operation",
+      "page": 276,
+      "level": 3,
+      "parent_id": "6.12",
+      "full_path": "6.12.2 State Operation",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.12.3",
+      "title": "List of Protocol Layer States",
+      "page": 298,
+      "level": 3,
+      "parent_id": "6.12",
+      "full_path": "6.12.3 List of Protocol Layer States",
+      "tags": [
+        "state",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13",
+      "title": "Message Applicability",
+      "page": 300,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.13 Message Applicability",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13.1",
+      "title": "Applicability of Control Messages",
+      "page": 301,
+      "level": 3,
+      "parent_id": "6.13",
+      "full_path": "6.13.1 Applicability of Control Messages",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13.2",
+      "title": "Applicability of Data Messages",
+      "page": 303,
+      "level": 3,
+      "parent_id": "6.13",
+      "full_path": "6.13.2 Applicability of Data Messages",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13.3",
+      "title": "Applicability of Extended Messages",
+      "page": 305,
+      "level": 3,
+      "parent_id": "6.13",
+      "full_path": "6.13.3 Applicability of Extended Messages",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13.4",
+      "title": "Applicability of Extended Control Messages",
+      "page": 308,
+      "level": 3,
+      "parent_id": "6.13",
+      "full_path": "6.13.4 Applicability of Extended Control Messages",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13.5",
+      "title": "Applicability of Structured VDM Commands",
+      "page": 309,
+      "level": 3,
+      "parent_id": "6.13",
+      "full_path": "6.13.5 Applicability of Structured VDM Commands",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13.6",
+      "title": "Applicability of Reset Signaling",
+      "page": 310,
+      "level": 3,
+      "parent_id": "6.13",
+      "full_path": "6.13.6 Applicability of Reset Signaling",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.13.7",
+      "title": "Applicability of Fast Role Swap Request",
+      "page": 310,
+      "level": 3,
+      "parent_id": "6.13",
+      "full_path": "6.13.7 Applicability of Fast Role Swap Request",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "6.14",
+      "title": "Value Parameters",
+      "page": 311,
+      "level": 2,
+      "parent_id": "6",
+      "full_path": "6.14 Value Parameters",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1",
+      "title": "Source Requirements",
+      "page": 312,
+      "level": 2,
+      "parent_id": "7",
+      "full_path": "7.1 Source Requirements",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.1",
+      "title": "Behavioral Aspects",
+      "page": 312,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.1 Behavioral Aspects",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.2",
+      "title": "Source Bulk Capacitance",
+      "page": 312,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.2 Source Bulk Capacitance",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.3",
+      "title": "Types of Sources",
+      "page": 312,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.3 Types of Sources",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.4",
+      "title": "Source Transitions",
+      "page": 313,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.4 Source Transitions",
+      "tags": [
+        "device",
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.5",
+      "title": "Response to Hard Resets",
+      "page": 322,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.5 Response to Hard Resets",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.6",
+      "title": "Changing the Output Power Capability",
+      "page": 323,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.6 Changing the Output Power Capability",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.7",
+      "title": "Robust Source Operation",
+      "page": 323,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.7 Robust Source Operation",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.8",
+      "title": "Output Voltage Tolerance and Range",
+      "page": 325,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.8 Output Voltage Tolerance and Range",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.9",
+      "title": "Charging and Discharging the Bulk Capacitance on VBUS",
+      "page": 328,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.9 Charging and Discharging the Bulk Capacitance on VBUS",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.10",
+      "title": "Swap Standby for Sources",
+      "page": 328,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.10 Swap Standby for Sources",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.11",
+      "title": "Source Peak Current Operation",
+      "page": 328,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.11 Source Peak Current Operation",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.12",
+      "title": "Source Capabilities Extended Parameters",
+      "page": 329,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.12 Source Capabilities Extended Parameters",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.13",
+      "title": "Fast Role Swap",
+      "page": 331,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.13 Fast Role Swap",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.14",
+      "title": "Non-application of VBUS Slew Rate Limits",
+      "page": 332,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.14 Non-application of VBUS Slew Rate Limits",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.1.15",
+      "title": "VCONN Power Cycle",
+      "page": 333,
+      "level": 3,
+      "parent_id": "7.1",
+      "full_path": "7.1.15 VCONN Power Cycle",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2",
+      "title": "Sink Requirements",
+      "page": 335,
+      "level": 2,
+      "parent_id": "7",
+      "full_path": "7.2 Sink Requirements",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.1",
+      "title": "Behavioral Aspects",
+      "page": 335,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.1 Behavioral Aspects",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.2",
+      "title": "Sink Bulk Capacitance",
+      "page": 335,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.2 Sink Bulk Capacitance",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.3",
+      "title": "Sink Standby",
+      "page": 335,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.3 Sink Standby",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.4",
+      "title": "Suspend Power Consumption",
+      "page": 336,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.4 Suspend Power Consumption",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.5",
+      "title": "Zero Negotiated Current",
+      "page": 336,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.5 Zero Negotiated Current",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.6",
+      "title": "Transient Load Behavior",
+      "page": 336,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.6 Transient Load Behavior",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.7",
+      "title": "Swap Standby for Sinks",
+      "page": 336,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.7 Swap Standby for Sinks",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.8",
+      "title": "Sink Peak Current Operation",
+      "page": 336,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.8 Sink Peak Current Operation",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.9",
+      "title": "Robust Sink Operation",
+      "page": 337,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.9 Robust Sink Operation",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.2.10",
+      "title": "Fast Role Swap",
+      "page": 338,
+      "level": 3,
+      "parent_id": "7.2",
+      "full_path": "7.2.10 Fast Role Swap",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.3",
+      "title": "Transitions",
+      "page": 339,
+      "level": 2,
+      "parent_id": "7",
+      "full_path": "7.3 Transitions",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.3.1",
+      "title": "Transitions caused by a Request Message",
+      "page": 340,
+      "level": 3,
+      "parent_id": "7.3",
+      "full_path": "7.3.1 Transitions caused by a Request Message",
+      "tags": [
+        "state",
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.3.2",
+      "title": "Transitions Caused by Power Role Swap",
+      "page": 388,
+      "level": 3,
+      "parent_id": "7.3",
+      "full_path": "7.3.2 Transitions Caused by Power Role Swap",
+      "tags": [
+        "power",
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.3.3",
+      "title": "Transitions Caused by Hard Reset",
+      "page": 396,
+      "level": 3,
+      "parent_id": "7.3",
+      "full_path": "7.3.3 Transitions Caused by Hard Reset",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.3.4",
+      "title": "Transitions Caused by Fast Role Swap",
+      "page": 400,
+      "level": 3,
+      "parent_id": "7.3",
+      "full_path": "7.3.4 Transitions Caused by Fast Role Swap",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.4",
+      "title": "Electrical Parameters",
+      "page": 404,
+      "level": 2,
+      "parent_id": "7",
+      "full_path": "7.4 Electrical Parameters",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.4.1",
+      "title": "Source Electrical Parameters",
+      "page": 404,
+      "level": 3,
+      "parent_id": "7.4",
+      "full_path": "7.4.1 Source Electrical Parameters",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.4.2",
+      "title": "Sink Electrical Parameters",
+      "page": 413,
+      "level": 3,
+      "parent_id": "7.4",
+      "full_path": "7.4.2 Sink Electrical Parameters",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "7.4.3",
+      "title": "Common Electrical Parameters",
+      "page": 415,
+      "level": 3,
+      "parent_id": "7.4",
+      "full_path": "7.4.3 Common Electrical Parameters",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.1",
+      "title": "Overview",
+      "page": 416,
+      "level": 2,
+      "parent_id": "8",
+      "full_path": "8.1 Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2",
+      "title": "Device Policy Manager",
+      "page": 417,
+      "level": 2,
+      "parent_id": "8",
+      "full_path": "8.2 Device Policy Manager",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2.1",
+      "title": "Capabilities",
+      "page": 418,
+      "level": 3,
+      "parent_id": "8.2",
+      "full_path": "8.2.1 Capabilities",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2.2",
+      "title": "System Policy",
+      "page": 418,
+      "level": 3,
+      "parent_id": "8.2",
+      "full_path": "8.2.2 System Policy",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2.3",
+      "title": "Control of Source/Sink",
+      "page": 419,
+      "level": 3,
+      "parent_id": "8.2",
+      "full_path": "8.2.3 Control of Source/Sink",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2.4",
+      "title": "Cable Detection",
+      "page": 419,
+      "level": 3,
+      "parent_id": "8.2",
+      "full_path": "8.2.4 Cable Detection",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2.5",
+      "title": "Managing Power Requirements",
+      "page": 420,
+      "level": 3,
+      "parent_id": "8.2",
+      "full_path": "8.2.5 Managing Power Requirements",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2.6",
+      "title": "Use of \"Unconstrained Power\" bit with Batteries and AC supplies",
+      "page": 421,
+      "level": 3,
+      "parent_id": "8.2",
+      "full_path": "8.2.6 Use of \"Unconstrained Power\" bit with Batteries and AC supplies",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.2.7",
+      "title": "Interface to the Policy Engine",
+      "page": 423,
+      "level": 3,
+      "parent_id": "8.2",
+      "full_path": "8.2.7 Interface to the Policy Engine",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.3",
+      "title": "Policy Engine",
+      "page": 424,
+      "level": 2,
+      "parent_id": "8",
+      "full_path": "8.3 Policy Engine",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.3.1",
+      "title": "Introduction",
+      "page": 424,
+      "level": 3,
+      "parent_id": "8.3",
+      "full_path": "8.3.1 Introduction",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.3.2",
+      "title": "Atomic Message Sequence Diagrams",
+      "page": 425,
+      "level": 3,
+      "parent_id": "8.3",
+      "full_path": "8.3.2 Atomic Message Sequence Diagrams",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "8.3.3",
+      "title": "State Diagrams",
+      "page": 822,
+      "level": 3,
+      "parent_id": "8.3",
+      "full_path": "8.3.3 State Diagrams",
+      "tags": [
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.1",
+      "title": "Overview",
+      "page": 975,
+      "level": 2,
+      "parent_id": "9",
+      "full_path": "9.1 Overview",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.1.1",
+      "title": "PDUSB Device and Hub Requirements",
+      "page": 979,
+      "level": 3,
+      "parent_id": "9.1",
+      "full_path": "9.1.1 PDUSB Device and Hub Requirements",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.1.2",
+      "title": "Mapping to USB Device States",
+      "page": 980,
+      "level": 3,
+      "parent_id": "9.1",
+      "full_path": "9.1.2 Mapping to USB Device States",
+      "tags": [
+        "device",
+        "state"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.1.3",
+      "title": "PD Software Stack",
+      "page": 983,
+      "level": 3,
+      "parent_id": "9.1",
+      "full_path": "9.1.3 PD Software Stack",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.1.4",
+      "title": "PDUSB Device Enumeration",
+      "page": 984,
+      "level": 3,
+      "parent_id": "9.1",
+      "full_path": "9.1.4 PDUSB Device Enumeration",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.2",
+      "title": "PD Specific Descriptors",
+      "page": 985,
+      "level": 2,
+      "parent_id": "9",
+      "full_path": "9.2 PD Specific Descriptors",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.2.1",
+      "title": "USB Power Delivery Capability Descriptor",
+      "page": 986,
+      "level": 3,
+      "parent_id": "9.2",
+      "full_path": "9.2.1 USB Power Delivery Capability Descriptor",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.2.2",
+      "title": "Battery Info Capability Descriptor",
+      "page": 987,
+      "level": 3,
+      "parent_id": "9.2",
+      "full_path": "9.2.2 Battery Info Capability Descriptor",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.2.3",
+      "title": "PD Consumer Port Capability Descriptor",
+      "page": 988,
+      "level": 3,
+      "parent_id": "9.2",
+      "full_path": "9.2.3 PD Consumer Port Capability Descriptor",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.2.4",
+      "title": "PD Provider Port Capability Descriptor",
+      "page": 989,
+      "level": 3,
+      "parent_id": "9.2",
+      "full_path": "9.2.4 PD Provider Port Capability Descriptor",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.3",
+      "title": "PD Specific Requests and Events",
+      "page": 990,
+      "level": 2,
+      "parent_id": "9",
+      "full_path": "9.3 PD Specific Requests and Events",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.3.1",
+      "title": "PD Specific Requests",
+      "page": 990,
+      "level": 3,
+      "parent_id": "9.3",
+      "full_path": "9.3.1 PD Specific Requests",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.4",
+      "title": "PDUSB Hub and PDUSB Peripheral Device Requests",
+      "page": 991,
+      "level": 2,
+      "parent_id": "9",
+      "full_path": "9.4 PDUSB Hub and PDUSB Peripheral Device Requests",
+      "tags": [
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.4.1",
+      "title": "GetBatteryStatus",
+      "page": 991,
+      "level": 3,
+      "parent_id": "9.4",
+      "full_path": "9.4.1 GetBatteryStatus",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "9.4.2",
+      "title": "SetPDFeature",
+      "page": 992,
+      "level": 3,
+      "parent_id": "9.4",
+      "full_path": "9.4.2 SetPDFeature",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.1",
+      "title": "Introduction",
+      "page": 995,
+      "level": 2,
+      "parent_id": "10",
+      "full_path": "10.1 Introduction",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.2",
+      "title": "Source Power Rules",
+      "page": 995,
+      "level": 2,
+      "parent_id": "10",
+      "full_path": "10.2 Source Power Rules",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.2.1",
+      "title": "Source Power Rule Considerations",
+      "page": 996,
+      "level": 3,
+      "parent_id": "10.2",
+      "full_path": "10.2.1 Source Power Rule Considerations",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.2.2",
+      "title": "Normative Voltages and Currents",
+      "page": 997,
+      "level": 3,
+      "parent_id": "10.2",
+      "full_path": "10.2.2 Normative Voltages and Currents",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.2.3",
+      "title": "Optional Voltages/Currents",
+      "page": 1005,
+      "level": 3,
+      "parent_id": "10.2",
+      "full_path": "10.2.3 Optional Voltages/Currents",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.3",
+      "title": "Sink Power Rules",
+      "page": 1013,
+      "level": 2,
+      "parent_id": "10",
+      "full_path": "10.3 Sink Power Rules",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.3.1",
+      "title": "Sink Power Rule Considerations",
+      "page": 1013,
+      "level": 3,
+      "parent_id": "10.3",
+      "full_path": "10.3.1 Sink Power Rule Considerations",
+      "tags": [
+        "power",
+        "device"
+      ]
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "10.3.2",
+      "title": "Normative Sink Rules",
+      "page": 1013,
+      "level": 3,
+      "parent_id": "10.3",
+      "full_path": "10.3.2 Normative Sink Rules",
+      "tags": [
+        "device"
+      ]
+    }
+  ],
+  "missing": [],
+  "title_mismatches": [],
+  "page_discrepancies": [
+    {
+      "section_id": "1.1",
+      "toc_page": 34,
+      "chunk_range": [
+        1,
+        1
+      ]
+    },
+    {
+      "section_id": "1.2",
+      "toc_page": 35,
+      "chunk_range": [
+        2,
+        12
+      ]
+    },
+    {
+      "section_id": "1.2.1",
+      "toc_page": 36,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "1.3",
+      "toc_page": 36,
+      "chunk_range": [
+        2,
+        2
+      ]
+    },
+    {
+      "section_id": "1.4",
+      "toc_page": 37,
+      "chunk_range": [
+        2,
+        12
+      ]
+    },
+    {
+      "section_id": "1.4.1",
+      "toc_page": 37,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "1.4.2",
+      "toc_page": 37,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "1.4.3",
+      "toc_page": 38,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "1.5",
+      "toc_page": 39,
+      "chunk_range": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "1.6",
+      "toc_page": 40,
+      "chunk_range": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "1.7",
+      "toc_page": 52,
+      "chunk_range": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "1.8",
+      "toc_page": 52,
+      "chunk_range": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "1.9",
+      "toc_page": 52,
+      "chunk_range": [
+        3,
+        12
+      ]
+    },
+    {
+      "section_id": "2.1",
+      "toc_page": 53,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.1.1",
+      "toc_page": 53,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.1.2",
+      "toc_page": 53,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.1.3",
+      "toc_page": 54,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.2",
+      "toc_page": 54,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.3",
+      "toc_page": 55,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.4",
+      "toc_page": 57,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.4.1",
+      "toc_page": 57,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.4.2",
+      "toc_page": 57,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.4.3",
+      "toc_page": 57,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.4.4",
+      "toc_page": 57,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.5",
+      "toc_page": 59,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.5.1",
+      "toc_page": 59,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.5.2",
+      "toc_page": 62,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.5.3",
+      "toc_page": 65,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.6",
+      "toc_page": 66,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.6.1",
+      "toc_page": 69,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.6.2",
+      "toc_page": 70,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.6.3",
+      "toc_page": 70,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.6.4",
+      "toc_page": 71,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.6.5",
+      "toc_page": 71,
+      "chunk_range": [
+        13,
+        13
+      ]
+    },
+    {
+      "section_id": "2.6.6",
+      "toc_page": 72,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "2.6.7",
+      "toc_page": 72,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "2.6.8",
+      "toc_page": 72,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "2.7",
+      "toc_page": 73,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "2.8",
+      "toc_page": 75,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "2.8.1",
+      "toc_page": 75,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "2.8.2",
+      "toc_page": 75,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "2.8.3",
+      "toc_page": 76,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "4.1",
+      "toc_page": 78,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "4.2",
+      "toc_page": 78,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "4.3",
+      "toc_page": 78,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "4.4",
+      "toc_page": 78,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.1",
+      "toc_page": 79,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.2",
+      "toc_page": 79,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.3",
+      "toc_page": 80,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.4",
+      "toc_page": 81,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.5",
+      "toc_page": 83,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.6",
+      "toc_page": 84,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.6.1",
+      "toc_page": 84,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.6.2",
+      "toc_page": 86,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.6.3",
+      "toc_page": 89,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.6.4",
+      "toc_page": 89,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.6.5",
+      "toc_page": 90,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.7",
+      "toc_page": 91,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.8",
+      "toc_page": 92,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.8.1",
+      "toc_page": 92,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.8.2",
+      "toc_page": 96,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.8.3",
+      "toc_page": 103,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.8.4",
+      "toc_page": 105,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.8.5",
+      "toc_page": 106,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.8.6",
+      "toc_page": 110,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.9",
+      "toc_page": 113,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.9.1",
+      "toc_page": 113,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "5.9.2",
+      "toc_page": 113,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.1",
+      "toc_page": 114,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.2",
+      "toc_page": 115,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.2.1",
+      "toc_page": 115,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3",
+      "toc_page": 128,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.1",
+      "toc_page": 129,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.2",
+      "toc_page": 129,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.3",
+      "toc_page": 129,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.4",
+      "toc_page": 129,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.5",
+      "toc_page": 130,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.6",
+      "toc_page": 130,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.7",
+      "toc_page": 131,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.8",
+      "toc_page": 131,
+      "chunk_range": [
+        14,
+        14
+      ]
+    },
+    {
+      "section_id": "6.3.9",
+      "toc_page": 131,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.10",
+      "toc_page": 131,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.11",
+      "toc_page": 132,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.12",
+      "toc_page": 133,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.13",
+      "toc_page": 134,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.14",
+      "toc_page": 135,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.15",
+      "toc_page": 135,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.16",
+      "toc_page": 135,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.17",
+      "toc_page": 136,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.18",
+      "toc_page": 136,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.19",
+      "toc_page": 136,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.20",
+      "toc_page": 137,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.21",
+      "toc_page": 137,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.22",
+      "toc_page": 137,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.23",
+      "toc_page": 137,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.3.24",
+      "toc_page": 137,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4",
+      "toc_page": 138,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.1",
+      "toc_page": 139,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.2",
+      "toc_page": 155,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.3",
+      "toc_page": 159,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.4",
+      "toc_page": 162,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.5",
+      "toc_page": 196,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.6",
+      "toc_page": 198,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.7",
+      "toc_page": 201,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.8",
+      "toc_page": 202,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.9",
+      "toc_page": 205,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.10",
+      "toc_page": 206,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.11",
+      "toc_page": 212,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.4.12",
+      "toc_page": 214,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5",
+      "toc_page": 215,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.1",
+      "toc_page": 216,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.2",
+      "toc_page": 221,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.3",
+      "toc_page": 227,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.4",
+      "toc_page": 227,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.5",
+      "toc_page": 228,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.6",
+      "toc_page": 230,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.7",
+      "toc_page": 231,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.8",
+      "toc_page": 233,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.9",
+      "toc_page": 234,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.10",
+      "toc_page": 235,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.11",
+      "toc_page": 237,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.12",
+      "toc_page": 238,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.13",
+      "toc_page": 239,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.14",
+      "toc_page": 244,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.15",
+      "toc_page": 245,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.5.16",
+      "toc_page": 247,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6",
+      "toc_page": 249,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.1",
+      "toc_page": 249,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.2",
+      "toc_page": 249,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.3",
+      "toc_page": 249,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.4",
+      "toc_page": 251,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.5",
+      "toc_page": 251,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.6",
+      "toc_page": 253,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.7",
+      "toc_page": 253,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.8",
+      "toc_page": 254,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.9",
+      "toc_page": 254,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.10",
+      "toc_page": 254,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.11",
+      "toc_page": 255,
+      "chunk_range": [
+        15,
+        15
+      ]
+    },
+    {
+      "section_id": "6.6.12",
+      "toc_page": 255,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.13",
+      "toc_page": 257,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.14",
+      "toc_page": 257,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.15",
+      "toc_page": 257,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.16",
+      "toc_page": 257,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.17",
+      "toc_page": 258,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.18",
+      "toc_page": 258,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.19",
+      "toc_page": 259,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.20",
+      "toc_page": 260,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.21",
+      "toc_page": 260,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.6.22",
+      "toc_page": 262,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7",
+      "toc_page": 265,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7.1",
+      "toc_page": 265,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7.2",
+      "toc_page": 265,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7.3",
+      "toc_page": 266,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7.4",
+      "toc_page": 266,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7.5",
+      "toc_page": 266,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7.6",
+      "toc_page": 266,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.7.7",
+      "toc_page": 267,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.8",
+      "toc_page": 268,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.8.1",
+      "toc_page": 268,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.8.2",
+      "toc_page": 270,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.8.3",
+      "toc_page": 270,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.8.4",
+      "toc_page": 271,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.9",
+      "toc_page": 272,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.10",
+      "toc_page": 273,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.11",
+      "toc_page": 274,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.12",
+      "toc_page": 275,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.12.1",
+      "toc_page": 275,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.12.2",
+      "toc_page": 276,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.12.3",
+      "toc_page": 298,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13",
+      "toc_page": 300,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13.1",
+      "toc_page": 301,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13.2",
+      "toc_page": 303,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13.3",
+      "toc_page": 305,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13.4",
+      "toc_page": 308,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13.5",
+      "toc_page": 309,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13.6",
+      "toc_page": 310,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.13.7",
+      "toc_page": 310,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "6.14",
+      "toc_page": 311,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1",
+      "toc_page": 312,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.1",
+      "toc_page": 312,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.2",
+      "toc_page": 312,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.3",
+      "toc_page": 312,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.4",
+      "toc_page": 313,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.5",
+      "toc_page": 322,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.6",
+      "toc_page": 323,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.7",
+      "toc_page": 323,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.8",
+      "toc_page": 325,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.9",
+      "toc_page": 328,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.10",
+      "toc_page": 328,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.11",
+      "toc_page": 328,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.12",
+      "toc_page": 329,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.13",
+      "toc_page": 331,
+      "chunk_range": [
+        16,
+        16
+      ]
+    },
+    {
+      "section_id": "7.1.14",
+      "toc_page": 332,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.1.15",
+      "toc_page": 333,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2",
+      "toc_page": 335,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.1",
+      "toc_page": 335,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.2",
+      "toc_page": 335,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.3",
+      "toc_page": 335,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.4",
+      "toc_page": 336,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.5",
+      "toc_page": 336,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.6",
+      "toc_page": 336,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.7",
+      "toc_page": 336,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.8",
+      "toc_page": 336,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.9",
+      "toc_page": 337,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.2.10",
+      "toc_page": 338,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.3",
+      "toc_page": 339,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.3.1",
+      "toc_page": 340,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.3.2",
+      "toc_page": 388,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.3.3",
+      "toc_page": 396,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.3.4",
+      "toc_page": 400,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.4",
+      "toc_page": 404,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.4.1",
+      "toc_page": 404,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.4.2",
+      "toc_page": 413,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "7.4.3",
+      "toc_page": 415,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.1",
+      "toc_page": 416,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2",
+      "toc_page": 417,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2.1",
+      "toc_page": 418,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2.2",
+      "toc_page": 418,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2.3",
+      "toc_page": 419,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2.4",
+      "toc_page": 419,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2.5",
+      "toc_page": 420,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2.6",
+      "toc_page": 421,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.2.7",
+      "toc_page": 423,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.3",
+      "toc_page": 424,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.3.1",
+      "toc_page": 424,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.3.2",
+      "toc_page": 425,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "8.3.3",
+      "toc_page": 822,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.1",
+      "toc_page": 975,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.1.1",
+      "toc_page": 979,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.1.2",
+      "toc_page": 980,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.1.3",
+      "toc_page": 983,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.1.4",
+      "toc_page": 984,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.2",
+      "toc_page": 985,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.2.1",
+      "toc_page": 986,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.2.2",
+      "toc_page": 987,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.2.3",
+      "toc_page": 988,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.2.4",
+      "toc_page": 989,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.3",
+      "toc_page": 990,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.3.1",
+      "toc_page": 990,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.4",
+      "toc_page": 991,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.4.1",
+      "toc_page": 991,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "9.4.2",
+      "toc_page": 992,
+      "chunk_range": [
+        17,
+        17
+      ]
+    },
+    {
+      "section_id": "10.1",
+      "toc_page": 995,
+      "chunk_range": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "10.2",
+      "toc_page": 995,
+      "chunk_range": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "10.2.1",
+      "toc_page": 996,
+      "chunk_range": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "10.2.2",
+      "toc_page": 997,
+      "chunk_range": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "10.2.3",
+      "toc_page": 1005,
+      "chunk_range": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "10.3",
+      "toc_page": 1013,
+      "chunk_range": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "10.3.1",
+      "toc_page": 1013,
+      "chunk_range": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "10.3.2",
+      "toc_page": 1013,
+      "chunk_range": [
+        18,
+        18
+      ]
+    }
+  ],
+  "total_toc": 251
+}

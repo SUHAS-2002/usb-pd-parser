@@ -1,0 +1,14 @@
+{
+  "quality_score": 80.08,
+  "match_percentage": 100.0,
+  "title_accuracy": 100.0,
+  "page_accuracy": 0.4,
+  "total_toc": 251,
+  "missing_count": 0,
+  "mismatch_count": 0,
+  "page_error_count": 250,
+  "recommendations": [
+    "Section boundaries need refinement.",
+    "Extraction quality needs improvement."
+  ]
+}
