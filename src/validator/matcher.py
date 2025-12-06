@@ -10,32 +10,22 @@ class SectionMatcher:
     Matches TOC entries to Content Chunks using:
         ✓ Exact section_id mapping
         ✓ Fuzzy title similarity
-        ✓ Page range consistency
-
-    Returns a detailed diagnostic report.
+        ✓ Optional Page range consistency
     """
 
     def __init__(self, title_threshold: float = 0.85):
         self.title_threshold = title_threshold
 
-    # ----------------------------------------------------------
     def _normalize(self, s: str) -> str:
-        """Normalize strings for comparison."""
         s = s.lower()
         s = re.sub(r"\s+", " ", s)
         s = re.sub(r"[^\w\s]", "", s)
         return s.strip()
 
-    # ----------------------------------------------------------
     def _similarity(self, a: str, b: str) -> float:
-        """Fuzzy string similarity."""
         return SequenceMatcher(None, self._normalize(a), self._normalize(b)).ratio()
 
-    # ----------------------------------------------------------
     def match(self, toc: List[Dict], chunks: List[Dict]) -> Dict:
-        """
-        Validate mapping between TOC entries and extracted content chunks.
-        """
 
         chunk_map = {c["section_id"]: c for c in chunks}
 
@@ -47,30 +37,32 @@ class SectionMatcher:
         for entry in toc:
             sid = entry["section_id"]
 
-            # --- Case: Missing Chunk ---
+            # Missing section
             if sid not in chunk_map:
                 missing.append(entry)
                 continue
 
             chunk = chunk_map[sid]
 
-            # --- Fuzzy title validation ---
-            sim = self._similarity(entry["title"], chunk["title"])
+            # Title validation
+            sim = self._similarity(entry["title"], chunk.get("title", ""))
             if sim < self.title_threshold:
                 title_mismatches.append({
                     "section_id": sid,
                     "toc_title": entry["title"],
-                    "chunk_title": chunk["title"],
-                    "similarity": sim
+                    "chunk_title": chunk.get("title"),
+                    "similarity": sim,
                 })
 
-            # --- Page Range consistency ---
-            if entry["page"] < chunk["page_range"][0] or entry["page"] > chunk["page_range"][1]:
-                page_discrepancies.append({
-                    "section_id": sid,
-                    "toc_page": entry["page"],
-                    "chunk_range": chunk["page_range"]
-                })
+            # Page-range validation ONLY if available
+            if "page_range" in chunk:
+                start, end = chunk["page_range"]
+                if entry["page"] < start or entry["page"] > end:
+                    page_discrepancies.append({
+                        "section_id": sid,
+                        "toc_page": entry["page"],
+                        "chunk_range": chunk["page_range"],
+                    })
 
             matched.append(entry)
 

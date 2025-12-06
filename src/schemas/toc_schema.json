@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "USB PD TOC Entry Schema",
+  "description": "Schema for each Table of Contents (TOC) entry extracted from the USB Power Delivery specification PDF.",
+  "type": "object",
+  "properties": {
+    "doc_title": { "type": "string" },
+    "section_id": { "type": "string", "pattern": "^\\d+(\\.\\d+)*$" },
+    "title": { "type": "string" },
+    "page": { "type": "integer", "minimum": 1 },
+    "level": { "type": "integer", "minimum": 1 },
+    "parent_id": {
+      "type": ["string", "null"],
+      "pattern": "^\\d+(\\.\\d+)*$"
+    },
+    "full_path": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "doc_title",
+    "section_id",
+    "title",
+    "page",
+    "level",
+    "full_path",
+    "tags"
+  ]
+}

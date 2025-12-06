@@ -17,7 +17,7 @@ class ExcelReportGenerator:
     - Summary sheet + chart
     - Auto-fit columns & freeze header
     - Hyperlinks
-    - Timestamped output (no overwrite, no permission error)
+    - Timestamped output (no overwrite)
     """
 
     GREEN = "C6EFCE"
@@ -153,7 +153,6 @@ class ExcelReportGenerator:
 
         summary.add_chart(chart, "D2")
 
-        # Save final file
         wb.save(final_output)
 
         print(f"\n✅ Excel report generated: {final_output}\n")

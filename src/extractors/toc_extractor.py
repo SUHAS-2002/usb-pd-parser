@@ -20,53 +20,57 @@ class TocEntry:
 
 class ToCExtractor:
     """
-    Restored full-coverage TOC extractor for USB-PD specification.
-    FIXES:
-      ✓ Restores full TOC count (≈ 250 entries)
-      ✓ Handles multi-column TOC fully (not only first column)
-      ✓ Removes overly strict chapter filtering
-      ✓ Allows valid .0 sections (2.0, 3.0, etc.)
-      ✓ Removes backward jumps but keeps real page order
-      ✓ Rejects garbage page numbers (> 1100)
+    High-coverage TOC extractor for the USB-PD specification.
+    Includes:
+      ✓ Multi-column TOC extraction
+      ✓ Two-line (ID + title/page) detection
+      ✓ Garbage page filtering
+      ✓ Off-by-one PDF page correction (CRITICAL FIX)
     """
 
     DOC_TITLE = "USB Power Delivery Specification"
-    MAX_REAL_PAGE = 1100  # the PDF has 1047 pages
+    MAX_REAL_PAGE = 1100   # PDF actually has 1047 pages
 
-    # Multi-column pattern — extract ALL columns in a TOC row
+    # Multi-column pattern — extracts SID, title, page
     MULTI_RE = re.compile(
         r"(\d+(?:\.\d+)+)\s+(.+?)\.{3,}\s*(\d{1,4})(?!\S)"
     )
 
-    # ID only, on its own line
+    # ID-only line
     PURE_ID_RE = re.compile(r"^\s*(\d+(?:\.\d+)+)\s*$")
 
-    # Title .......... 55
+    # Title .................................. 55
     TITLE_LINE_RE = re.compile(r"^\s*(.+?)\.{3,}\s*(\d{1,4})\s*$")
 
-    # --------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def extract(self, pages: List[Dict]) -> List[Dict]:
         raw_entries: List[tuple[str, str, int]] = []
 
-        # Extract from all pages
+        # Extract TOC matches from all pages
         for page in pages:
             text = page.get("text", "") or ""
             raw_entries.extend(self._extract_from_page(text))
 
-        # Hold TOC entries — keep earliest page per section_id
+        # Store earliest page for each section_id
         by_id: Dict[str, TocEntry] = {}
 
         for sid, title, page_num in raw_entries:
 
-            # Reject garbage page numbers
-            if page_num > self.MAX_REAL_PAGE:
+            # -------------- CRITICAL FIX -----------------
+            # TOC page numbers are 1 page behind actual PDF numbering
+            corrected_page = page_num + 1
+            # --------------------------------------------
+
+            # Reject obviously invalid pages
+            if corrected_page > self.MAX_REAL_PAGE:
                 continue
 
+            # Reject invalid section IDs or very short titles
             if not self._plausible(sid, title):
                 continue
 
-            # Keep first occurrence page
-            if sid in by_id and page_num >= by_id[sid].page:
+            # Keep earliest page for each section
+            if sid in by_id and corrected_page >= by_id[sid].page:
                 continue
 
             level = sid.count(".") + 1
@@ -78,40 +82,40 @@ class ToCExtractor:
                 doc_title=self.DOC_TITLE,
                 section_id=sid,
                 title=title,
-                page=page_num,
+                page=corrected_page,
                 level=level,
                 parent_id=parent_id,
                 full_path=full_path,
                 tags=tags,
             )
 
-        # Correct sorting: first by page, then by section structure
+        # Sort TOC entries: first by page, then by section structure
         entries = sorted(
             by_id.values(),
             key=lambda e: (e.page, self._section_key(e.section_id))
         )
 
-        # Fix any backward page jumps
+        # Fix backward page jumps
         for i in range(1, len(entries)):
             if entries[i].page < entries[i - 1].page:
                 entries[i].page = entries[i - 1].page + 1
 
         return [asdict(e) for e in entries]
 
-    # --------------------------------------------------------------
+    # ----------------------------------------------------------------------
     # Extract from a single page
-    # --------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def _extract_from_page(self, text: str) -> List[tuple[str, str, int]]:
         triples: List[tuple[str, str, int]] = []
         lines = text.splitlines()
 
-        # Full multi-column support — extract ALL matches per line
+        # Multi-column TOC extraction
         for line in lines:
             matches = self.MULTI_RE.findall(line)
             for sid, title, page in matches:
                 triples.append((sid, title.strip(), int(page)))
 
-        # Two-line ID + title pattern support
+        # Two-line ID + title/page detection
         n = len(lines)
         i = 0
         while i < n - 1:
@@ -128,17 +132,15 @@ class ToCExtractor:
 
         return triples
 
-    # --------------------------------------------------------------
+    # ----------------------------------------------------------------------
     # Helpers
-    # --------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def _plausible(self, sid: str, title: str) -> bool:
-        """Reject obvious garbage, but allow valid .0 sections."""
+        """Reject garbage SIDs or invalid titles."""
 
         parts = sid.split(".")
 
-        # Allow .0 sections → no more rejecting them!
-
-        # First section number must be 1–20 (USB-PD has 11 chapters)
+        # First number must be 1–20 (USB-PD has 11 chapters)
         try:
             top = int(parts[0])
         except ValueError:
@@ -147,7 +149,7 @@ class ToCExtractor:
         if not (1 <= top <= 20):
             return False
 
-        # Title must be at least 3 characters ("PD", "IO", etc. excluded)
+        # Title must be meaningful
         if len(title) < 3:
             return False
 
