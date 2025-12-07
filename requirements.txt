@@ -1,31 +1,125 @@
 # USB PD Specification Parser - Dependencies
 # Install with: pip install -r requirements.txt
+# Python 3.8+ required
 
-# Core PDF processing
-pdfplumber==0.10.3
+# ==============================================================================
+# Core PDF Processing Libraries
+# ==============================================================================
+
+# PyMuPDF (fitz) - High-performance PDF text extraction and rendering
 PyMuPDF==1.23.8
 
-# Alternative PDF libraries (optional)
+# pdfplumber - Advanced PDF table extraction and layout analysis
+pdfplumber==0.10.3
+
+# PDFMiner.six - Alternative PDF text extraction (backup strategy)
 pdfminer.six==20221105
 
-# Data modeling and validation
+
+# ==============================================================================
+# Data Modeling & Validation
+# ==============================================================================
+
+# Pydantic - Data validation and schema definition
 pydantic==2.5.0
 
-# Text processing
+# jsonschema - JSON schema validation for output files
+jsonschema==4.20.0
+
+
+# ==============================================================================
+# Text Processing & Pattern Matching
+# ==============================================================================
+
+# NLTK - Natural Language Toolkit for text processing
 nltk==3.8.1
+
+# regex - Advanced regular expressions for ToC extraction
 regex==2023.10.3
 
-# Fuzzy matching for validation
+# python-Levenshtein - Fast fuzzy string matching for validation
 python-Levenshtein==0.23.0
 
-# Optional: Advanced features
-# sentence-transformers==2.2.2  # For semantic chunking
-# networkx==3.2.1  # For knowledge graphs
-# langchain==0.1.0  # For LLM integration
+# fuzzywuzzy - Fuzzy string matching utilities
+fuzzywuzzy==0.18.0
 
-# Development and testing
+
+# ==============================================================================
+# Data Output & Reporting
+# ==============================================================================
+
+# openpyxl - Excel file generation for validation reports
+openpyxl==3.1.2
+
+# pandas - Data manipulation for reports (optional but recommended)
+pandas==2.1.4
+
+
+# ==============================================================================
+# CLI & Utilities
+# ==============================================================================
+
+# click - Command-line interface framework
+click==8.1.7
+
+# tqdm - Progress bars for long-running operations
+tqdm==4.66.1
+
+# colorama - Cross-platform colored terminal output
+colorama==0.4.6
+
+
+# ==============================================================================
+# Development & Testing
+# ==============================================================================
+
+# pytest - Testing framework
 pytest==7.4.3
+
+# pytest-cov - Code coverage reports
 pytest-cov==4.1.0
+
+# black - Code formatter
 black==23.12.1
+
+# flake8 - Linting tool
 flake8==6.1.0
+
+# mypy - Static type checker
 mypy==1.7.1
+
+# pylint - Advanced code analysis
+pylint==3.0.3
+
+
+# ==============================================================================
+# Optional Advanced Features (Uncomment to enable)
+# ==============================================================================
+
+# Semantic text analysis and embeddings
+# sentence-transformers==2.2.2
+
+# Graph-based section relationship modeling
+# networkx==3.2.1
+
+# LLM integration for intelligent parsing
+# langchain==0.1.0
+# openai==1.6.1
+
+# Advanced OCR for scanned PDFs
+# pytesseract==0.3.10
+# pdf2image==1.16.3
+
+# Document layout analysis
+# pdfminer.six[layout]==20221105
+
+
+# ==============================================================================
+# Platform-Specific Notes
+# ==============================================================================
+
+# Windows users: No additional dependencies required
+# Linux users: May need to install system packages:
+#   sudo apt-get install python3-dev libxml2-dev libxslt1-dev
+# macOS users: May need to install poppler:
+#   brew install poppler
