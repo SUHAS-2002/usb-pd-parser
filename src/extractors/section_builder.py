@@ -1,51 +1,74 @@
+# src/extractors/section_builder.py
+
 from typing import List, Dict
 
 
 class SectionContentBuilder:
     """
-    Combines TOC entries and extracted pages to produce final
-    section-based content blocks, including correct page ranges.
+    Build final section-based content blocks from TOC entries
+    and extracted pages. Produces accurate page ranges and
+    concatenated text for each section.
     """
 
     def build(self, toc: List[Dict], pages: List[Dict]) -> List[Dict]:
-        # Map page_number -> text
-        page_map = {p["page"]: p["text"] for p in pages}
-        sections = []
+        """
+        Assemble sections using TOC page references.
 
-        for i, entry in enumerate(toc):
+        Parameters
+        ----------
+        toc : List[Dict]
+            Ordered TOC entries with section metadata.
+        pages : List[Dict]
+            Extracted page text with page numbers.
+
+        Returns
+        -------
+        List[Dict]
+            Section-level structured content blocks.
+        """
+        page_map = {p["page"]: p["text"] for p in pages}
+        sections: List[Dict] = []
+
+        max_page = max(page_map.keys())
+
+        for index, entry in enumerate(toc):
             start_page = entry["page"]
 
-            # ---------------------------------------------------------
-            # FIXED LOGIC — prevents end_page < start_page (your issue)
-            # ---------------------------------------------------------
-            if i + 1 < len(toc):
-                next_page = toc[i + 1]["page"]
+            # Determine end page
+            if index + 1 < len(toc):
+                next_page = toc[index + 1]["page"]
 
-                # If next section starts on SAME page → end_page = start_page
+                # Prevent end_page < start_page (critical fix)
                 if next_page <= start_page:
                     end_page = start_page
                 else:
                     end_page = next_page - 1
             else:
-                end_page = max(page_map.keys())  # last section goes to end
-            # ---------------------------------------------------------
+                end_page = max_page
 
-            # Combine all pages for this section
-            combined_text = []
-            for p in range(start_page, end_page + 1):
-                combined_text.append(page_map.get(p, ""))
+            # Collect all section pages
+            combined = []
+            for pg in range(start_page, end_page + 1):
+                combined.append(page_map.get(pg, ""))
 
-            sections.append({
-                "doc_title": entry.get("doc_title", "USB Power Delivery Specification"),
-                "section_id": entry["section_id"],
-                "title": entry["title"],
-                "full_path": entry["full_path"],
-                "page": start_page,
-                "page_range": [start_page, end_page],   # VALID FOR VALIDATOR
-                "level": entry["level"],
-                "parent_id": entry["parent_id"],
-                "tags": entry.get("tags", []),
-                "text": "\n".join(combined_text).strip()
-            })
+            text = "\n".join(combined).strip()
+
+            sections.append(
+                {
+                    "doc_title": entry.get(
+                        "doc_title",
+                        "USB Power Delivery Specification",
+                    ),
+                    "section_id": entry["section_id"],
+                    "title": entry["title"],
+                    "full_path": entry["full_path"],
+                    "page": start_page,
+                    "page_range": [start_page, end_page],
+                    "level": entry["level"],
+                    "parent_id": entry["parent_id"],
+                    "tags": entry.get("tags", []),
+                    "text": text,
+                }
+            )
 
         return sections

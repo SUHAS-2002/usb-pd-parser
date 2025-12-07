@@ -1,4 +1,5 @@
 # src/extractors/table_extractor.py
+
 from typing import List, Dict, Any
 
 
@@ -6,12 +7,9 @@ class TableExtractor:
     """
     Extracts tables from PDF data.
 
-    Currently implemented as a placeholder (no real table detection),
-    but structured for future extension.
-
-    Responsibilities:
-    - Provide a consistent interface for table extraction.
-    - Allow easy upgrade to real table parsing without breaking other modules.
+    This implementation is a placeholder. It maintains a consistent
+    interface so real table parsing can be added later without
+    breaking other modules.
     """
 
     def extract(self, pdf_data: Any) -> List[Dict]:
@@ -21,12 +19,11 @@ class TableExtractor:
         Parameters
         ----------
         pdf_data : Any
-            The parsed PDF content (text blocks, layout info, etc.)
+            Parsed PDF content (text blocks, layout, metadata).
 
         Returns
         -------
         List[Dict]
-            A list of table representations. Currently empty.
+            List of detected tables. Currently returns an empty list.
         """
-        # Placeholder: No tables detected
         return []

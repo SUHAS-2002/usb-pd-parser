@@ -7,48 +7,60 @@ from src.core.pdf_text_strategy import PDFTextStrategy
 
 class PyMuPDFAdapter(PDFTextStrategy):
     """
-    High-fidelity PyMuPDF text extractor.
+    High-fidelity text extractor using PyMuPDF.
 
-    Uses block-level extraction to capture:
-        - multi-column layouts
-        - tables (text inside cells)
-        - text inside diagrams / vector graphics
-        - section labels embedded in figures (e.g., Example 6.1.1.1.1)
-        - correct reading order
+    Features:
+    - Handles multi-column layouts.
+    - Preserves table block structure.
+    - Extracts text inside diagrams.
+    - Maintains visual reading order.
 
-    Output:
-        [
-            {"page_number": 1, "text": "<full block-joined text>"},
-            ...
-        ]
+    Returns a list:
+        {
+            "page_number": int,
+            "text": str
+        }
     """
 
     def extract_text(self, pdf_path: str) -> List[Dict]:
+        """
+        Extract text using block-level reading.
+
+        Parameters
+        ----------
+        pdf_path : str
+            Path to the PDF file.
+
+        Returns
+        -------
+        List[Dict]
+            Normalized list of pages.
+        """
         doc = fitz.open(pdf_path)
-        extracted_pages = []
+        pages: List[Dict] = []
 
         try:
-            for page_idx in range(doc.page_count):
-                page = doc.load_page(page_idx)
-
-                # 🟢 CRITICAL CHANGE: use block extraction instead of "text"
-                blocks = page.get_text("blocks")   # returns list of 6-tuple blocks
-                text_parts = []
+            for idx in range(doc.page_count):
+                page = doc.load_page(idx)
+                blocks = page.get_text("blocks")
+                parts: List[str] = []
 
                 for block in blocks:
-                    block_text = block[4]  # (x0, y0, x1, y1, text, block_no)
+                    # block structure:
+                    # (x0, y0, x1, y1, text, block_no)
+                    block_text = block[4]
                     if block_text and block_text.strip():
-                        text_parts.append(block_text.strip())
+                        parts.append(block_text.strip())
 
-                # Combine blocks with intact order (maintains layout)
-                page_text = "\n".join(text_parts)
+                page_text = "\n".join(parts)
 
-                extracted_pages.append({
-                    "page_number": page_idx + 1,
-                    "text": page_text
-                })
-
+                pages.append(
+                    {
+                        "page_number": idx + 1,
+                        "text": page_text,
+                    }
+                )
         finally:
             doc.close()
 
-        return extracted_pages
+        return pages

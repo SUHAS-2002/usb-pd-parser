@@ -1,3 +1,5 @@
+# src/excel_validation_report.py
+
 import json
 from pathlib import Path
 from datetime import datetime
@@ -6,22 +8,27 @@ import xlsxwriter
 
 class ExcelValidationReport:
     """
-    Generates a full validation Excel report from validation_report.json.
+    Generates a full validation Excel report based on
+    validation_report.json.
+
     Includes:
-        - Summary sheet
-        - Missing sections
-        - Title mismatches
-        - Page discrepancies
-        - Quality statistics
-        - Bar chart
+    - Summary sheet
+    - Missing sections
+    - Title mismatches
+    - Page discrepancies
+    - Quality scores
+    - Column chart
     """
 
-    def generate(self, report_json_path: str, output_xlsx: str):
+    def generate(self, report_json_path: str,
+                 output_xlsx: str) -> None:
+        """Generate a detailed Excel validation report."""
         report_json_path = Path(report_json_path)
         output_xlsx = Path(output_xlsx)
 
-        # Load validation JSON
-        with report_json_path.open("r", encoding="utf-8") as f:
+        with report_json_path.open(
+            "r", encoding="utf-8"
+        ) as f:
             data = json.load(f)
 
         workbook = xlsxwriter.Workbook(str(output_xlsx))
@@ -35,11 +42,14 @@ class ExcelValidationReport:
         page_errors = len(data.get("page_discrepancies", []))
         quality_score = data.get("quality_score", 0)
 
-        match_percentage = round((matched / total) * 100, 2) if total else 0
+        if total:
+            match_pct = round((matched / total) * 100, 2)
+        else:
+            match_pct = 0
 
-        # =====================================================================
+        # ============================================================
         # 1) SUMMARY SHEET
-        # =====================================================================
+        # ============================================================
         summary = workbook.add_worksheet("Summary")
 
         summary.write("A1", "USB PD VALIDATION REPORT", bold)
@@ -51,66 +61,105 @@ class ExcelValidationReport:
         rows = [
             ("Total TOC Sections", total),
             ("Matched Sections", matched),
-            ("Match Percentage %", match_percentage),
+            ("Match Percentage %", match_pct),
             ("Missing Sections", missing),
             ("Title Mismatches", mismatches),
             ("Page Errors", page_errors),
             ("Quality Score %", quality_score),
         ]
 
-        for i, (k, v) in enumerate(rows, start=6):
-            summary.write(i, 0, k)
-            summary.write(i, 1, v)
+        for idx, (label, value) in enumerate(rows, start=6):
+            summary.write(idx, 0, label)
+            summary.write(idx, 1, value)
 
-        # Add bar chart
+        # Chart ------------------------------------------------------
         chart = workbook.add_chart({"type": "column"})
-        chart.add_series({
-            "categories": ["Summary", 6, 0, 12, 0],
-            "values": ["Summary", 6, 1, 12, 1],
-            "name": "Validation Metrics"
-        })
+        chart.add_series(
+            {
+                "categories": ["Summary", 6, 0, 12, 0],
+                "values": ["Summary", 6, 1, 12, 1],
+                "name": "Validation Metrics",
+            }
+        )
         chart.set_title({"name": "Validation Overview"})
         summary.insert_chart("D5", chart)
 
-        # =====================================================================
-        # 2) Missing Sections Sheet
-        # =====================================================================
-        missing_ws = workbook.add_worksheet("Missing Sections")
-        missing_ws.write_row(0, 0, ["Section ID", "Title", "Page"], bold)
+        # ============================================================
+        # 2) MISSING SECTIONS
+        # ============================================================
+        ws_missing = workbook.add_worksheet("Missing Sections")
+        ws_missing.write_row(
+            0, 0, ["Section ID", "Title", "Page"], bold
+        )
 
-        for row, m in enumerate(data.get("missing", []), start=1):
-            missing_ws.write_row(row, 0, [
-                m["section_id"],
-                m["title"],
-                m["page"]
-            ])
+        for row, sec in enumerate(
+            data.get("missing", []), start=1
+        ):
+            ws_missing.write_row(
+                row,
+                0,
+                [
+                    sec["section_id"],
+                    sec["title"],
+                    sec["page"],
+                ],
+            )
 
-        # =====================================================================
-        # 3) Title Mismatches Sheet
-        # =====================================================================
-        mismatch_ws = workbook.add_worksheet("Title Mismatches")
-        mismatch_ws.write_row(0, 0, ["Section ID", "TOC Title", "Chunk Title", "Similarity"], bold)
+        # ============================================================
+        # 3) TITLE MISMATCHES
+        # ============================================================
+        ws_mismatch = workbook.add_worksheet(
+            "Title Mismatches"
+        )
+        ws_mismatch.write_row(
+            0,
+            0,
+            [
+                "Section ID",
+                "TOC Title",
+                "Chunk Title",
+                "Similarity",
+            ],
+            bold,
+        )
 
-        for row, m in enumerate(data.get("title_mismatches", []), start=1):
-            mismatch_ws.write_row(row, 0, [
-                m["section_id"],
-                m["toc_title"],
-                m["chunk_title"],
-                m["similarity"]
-            ])
+        for row, mis in enumerate(
+            data.get("title_mismatches", []), start=1
+        ):
+            ws_mismatch.write_row(
+                row,
+                0,
+                [
+                    mis["section_id"],
+                    mis["toc_title"],
+                    mis["chunk_title"],
+                    mis["similarity"],
+                ],
+            )
 
-        # =====================================================================
-        # 4) Page Errors Sheet
-        # =====================================================================
-        pages_ws = workbook.add_worksheet("Page Errors")
-        pages_ws.write_row(0, 0, ["Section ID", "TOC Page", "Chunk Page Range"], bold)
+        # ============================================================
+        # 4) PAGE ERRORS
+        # ============================================================
+        ws_pages = workbook.add_worksheet("Page Errors")
+        ws_pages.write_row(
+            0,
+            0,
+            ["Section ID", "TOC Page", "Chunk Page Range"],
+            bold,
+        )
 
-        for row, p in enumerate(data.get("page_discrepancies", []), start=1):
-            pages_ws.write_row(row, 0, [
-                p["section_id"],
-                p["toc_page"],
-                str(p["chunk_range"])
-            ])
+        for row, err in enumerate(
+            data.get("page_discrepancies", []), start=1
+        ):
+            ws_pages.write_row(
+                row,
+                0,
+                [
+                    err["section_id"],
+                    err["toc_page"],
+                    str(err["chunk_range"]),
+                ],
+            )
 
         workbook.close()
-        print(f"Validation Excel report saved → {output_xlsx}")
+        print(f"✔ Validation Excel report saved → {output_xlsx}")

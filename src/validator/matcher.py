@@ -1,41 +1,56 @@
 # src/validator/matcher.py
 
 import re
-from typing import List, Dict
+from typing import List, Dict, Any
 from difflib import SequenceMatcher
 
 
 class SectionMatcher:
     """
-    Matches TOC entries to Content Chunks using:
-        ✓ Exact section_id mapping
-        ✓ Fuzzy title similarity
-        ✓ Optional Page range consistency
+    Matches TOC entries against extracted content chunks.
+
+    Features:
+    - Exact section_id matching
+    - Fuzzy title similarity check
+    - Page-range consistency check (optional)
     """
 
-    def __init__(self, title_threshold: float = 0.85):
-        self.title_threshold = title_threshold
+    def __init__(self, title_threshold: float = 0.85) -> None:
+        self._threshold = title_threshold
 
-    def _normalize(self, s: str) -> str:
-        s = s.lower()
-        s = re.sub(r"\s+", " ", s)
-        s = re.sub(r"[^\w\s]", "", s)
-        return s.strip()
+    def _normalize(self, text: str) -> str:
+        """Lowercase, remove punctuation, collapse whitespace."""
+        cleaned = text.lower()
+        cleaned = re.sub(r"\s+", " ", cleaned)
+        cleaned = re.sub(r"[^\w\s]", "", cleaned)
+        return cleaned.strip()
 
     def _similarity(self, a: str, b: str) -> float:
-        return SequenceMatcher(None, self._normalize(a), self._normalize(b)).ratio()
+        """Return normalized similarity between two titles."""
+        a_norm = self._normalize(a)
+        b_norm = self._normalize(b)
+        return SequenceMatcher(None, a_norm, b_norm).ratio()
 
-    def match(self, toc: List[Dict], chunks: List[Dict]) -> Dict:
+    def match(
+        self,
+        toc: List[Dict[str, Any]],
+        chunks: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """
+        Match TOC entries with extracted chunks using:
+        - section_id alignment
+        - fuzzy title similarity
+        - optional page-range validation
+        """
+        chunk_map = {c.get("section_id"): c for c in chunks}
 
-        chunk_map = {c["section_id"]: c for c in chunks}
-
-        matched = []
-        missing = []
-        title_mismatches = []
-        page_discrepancies = []
+        matched: List[Dict[str, Any]] = []
+        missing: List[Dict[str, Any]] = []
+        title_miss: List[Dict[str, Any]] = []
+        page_err: List[Dict[str, Any]] = []
 
         for entry in toc:
-            sid = entry["section_id"]
+            sid = entry.get("section_id")
 
             # Missing section
             if sid not in chunk_map:
@@ -44,32 +59,42 @@ class SectionMatcher:
 
             chunk = chunk_map[sid]
 
-            # Title validation
-            sim = self._similarity(entry["title"], chunk.get("title", ""))
-            if sim < self.title_threshold:
-                title_mismatches.append({
-                    "section_id": sid,
-                    "toc_title": entry["title"],
-                    "chunk_title": chunk.get("title"),
-                    "similarity": sim,
-                })
+            # -------------- Title Similarity -----------------
+            toc_title = entry.get("title", "")
+            chunk_title = chunk.get("title", "")
+            sim = self._similarity(toc_title, chunk_title)
 
-            # Page-range validation ONLY if available
-            if "page_range" in chunk:
-                start, end = chunk["page_range"]
-                if entry["page"] < start or entry["page"] > end:
-                    page_discrepancies.append({
+            if sim < self._threshold:
+                title_miss.append(
+                    {
                         "section_id": sid,
-                        "toc_page": entry["page"],
-                        "chunk_range": chunk["page_range"],
-                    })
+                        "toc_title": toc_title,
+                        "chunk_title": chunk_title,
+                        "similarity": sim,
+                    }
+                )
+
+            # -------------- Page Range Check -----------------
+            pr = chunk.get("page_range")
+            if pr:
+                start, end = pr
+                toc_page = entry.get("page", 0)
+
+                if toc_page < start or toc_page > end:
+                    page_err.append(
+                        {
+                            "section_id": sid,
+                            "toc_page": toc_page,
+                            "chunk_range": pr,
+                        }
+                    )
 
             matched.append(entry)
 
         return {
             "matched": matched,
             "missing": missing,
-            "title_mismatches": title_mismatches,
-            "page_discrepancies": page_discrepancies,
-            "total_toc": len(toc)
+            "title_mismatches": title_miss,
+            "page_discrepancies": page_err,
+            "total_toc": len(toc),
         }

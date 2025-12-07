@@ -1,3 +1,5 @@
+# src/excel_report.py
+
 import json
 from pathlib import Path
 from typing import List, Dict
@@ -12,51 +14,68 @@ from openpyxl.chart import BarChart, Reference
 
 class ExcelReportGenerator:
     """
-    Full Excel report generator with:
-    - Colored coverage sheet
-    - Summary sheet + chart
-    - Auto-fit columns & freeze header
-    - Hyperlinks
-    - Timestamped output (no overwrite)
+    Generates Excel coverage report:
+      - Coverage sheet with colors
+      - Summary sheet + chart
+      - Auto-fit columns, filters, freeze panes
     """
 
     GREEN = "C6EFCE"
     RED = "FFC7CE"
     YELLOW = "FFEB9C"
 
-    def __init__(self, toc_path: str, chunks_path: str, output_xlsx: str):
+    def __init__(
+        self,
+        toc_path: str,
+        chunks_path: str,
+        output_xlsx: str,
+    ) -> None:
+
         self.toc_path = Path(toc_path)
         self.chunks_path = Path(chunks_path)
         self.output_xlsx = Path(output_xlsx)
 
+    # ------------------------------------------------------------------
     @staticmethod
     def _load_jsonl(path: Path) -> List[Dict]:
-        data = []
+        """Load JSONL into a list of dictionaries."""
+        items: List[Dict] = []
         with path.open("r", encoding="utf-8") as f:
             for line in f:
                 if line.strip():
-                    data.append(json.loads(line))
-        return data
+                    items.append(json.loads(line))
+        return items
 
+    # ------------------------------------------------------------------
     def _timestamped_output(self) -> Path:
-        """Ensures unique filename to avoid PermissionError."""
-        stamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        new_name = f"{self.output_xlsx.stem}_{stamp}{self.output_xlsx.suffix}"
-        return self.output_xlsx.parent / new_name
+        """Create timestamped output filename."""
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        name = f"{self.output_xlsx.stem}_{stamp}"
+        name = f"{name}{self.output_xlsx.suffix}"
+        return self.output_xlsx.parent / name
 
-    # ---------------------------------------------------------------------
-    # MAIN GENERATE FUNCTION
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    def _safe_map(self, data: List[Dict]) -> Dict[str, Dict]:
+        """Safely create map: section_id → entry."""
+        return {
+            d["section_id"]: d
+            for d in data
+            if isinstance(d, dict) and "section_id" in d
+        }
+
+    # ------------------------------------------------------------------
     def generate(self) -> Path:
+        """Generate full Excel coverage report."""
         toc = self._load_jsonl(self.toc_path)
         chunks = self._load_jsonl(self.chunks_path)
 
-        toc_map = {e["section_id"]: e for e in toc}
-        chunk_map = {c["section_id"]: c for c in chunks}
+        toc_map = self._safe_map(toc)
+        chunk_map = self._safe_map(chunks)
 
         all_ids = sorted(set(toc_map) | set(chunk_map))
+        rows: List[Dict] = []
 
-        rows = []
+        # ----------------- Build coverage table -------------------------
         for sid in all_ids:
             t = toc_map.get(sid)
             c = chunk_map.get(sid)
@@ -73,25 +92,21 @@ class ExcelReportGenerator:
                     "section_id": sid,
                     "toc_title": t["title"] if t else None,
                     "toc_page": t["page"] if t else None,
-                    "chunk_title": c.get("title") if c else None,
-                    "chunk_page": c.get("page") if c else None,
+                    "chunk_title": c["title"] if c else None,
+                    "chunk_page": c["page"] if c else None,
                     "status": status,
                 }
             )
 
         df = pd.DataFrame(rows)
-
-        # ----- STEP 1: timestamp output -----
         final_output = self._timestamped_output()
 
-        # ----- STEP 2: write basic Excel file -----
         df.to_excel(final_output, index=False, sheet_name="coverage")
-
         wb = load_workbook(final_output)
         ws = wb["coverage"]
 
-        # ----- STEP 3: row coloring -----
-        color_map = {
+        # -------------------- Row Coloring -----------------------------
+        colors = {
             "MATCHED": self.GREEN,
             "MISSING_IN_CONTENT": self.RED,
             "EXTRA_IN_CONTENT": self.YELLOW,
@@ -99,33 +114,45 @@ class ExcelReportGenerator:
 
         for row in ws.iter_rows(min_row=2):
             status = row[5].value
-            color = color_map.get(status, "FFFFFF")
-            fill = PatternFill(start_color=color, end_color=color, fill_type="solid")
+            color = colors.get(status, "FFFFFF")
+            fill = PatternFill(
+                start_color=color,
+                end_color=color,
+                fill_type="solid",
+            )
             for cell in row:
                 cell.fill = fill
 
-        # ----- STEP 4: Hyperlinks -----
+        # ---------------- Hyperlinks for easier navigation --------------
         for row in ws.iter_rows(min_row=2):
-            row[0].hyperlink = f"#coverage!A{row[0].row}"
-            row[0].style = "Hyperlink"
+            cell = row[0]
+            cell.hyperlink = f"#coverage!A{cell.row}"
+            cell.style = "Hyperlink"
 
-        # ----- STEP 5: Filters + Freeze -----
+        # ---------------- Filters + Freeze header -----------------------
         ws.auto_filter.ref = "A1:F1"
         ws.freeze_panes = "A2"
 
-        # ----- STEP 6: Autofit columns -----
+        # ---------------- Auto-fit column widths ------------------------
         for col in ws.columns:
-            length = max(len(str(cell.value)) for cell in col if cell.value)
-            ws.column_dimensions[get_column_letter(col[0].column)].width = length + 2
+            values = [
+                str(cell.value)
+                for cell in col
+                if cell.value is not None
+            ]
+            width = max((len(v) for v in values), default=8)
+            col_letter = get_column_letter(col[0].column)
+            ws.column_dimensions[col_letter].width = width + 2
 
-        # ----- STEP 7: Summary Sheet -----
+        # ---------------- Summary sheet --------------------------------
         summary = wb.create_sheet("summary")
 
         total = len(df)
         matched = len(df[df["status"] == "MATCHED"])
         missing = len(df[df["status"] == "MISSING_IN_CONTENT"])
         extra = len(df[df["status"] == "EXTRA_IN_CONTENT"])
-        pct = round((matched / total) * 100, 2) if total else 0
+
+        match_pct = round((matched / total) * 100, 2) if total else 0
 
         summary_rows = [
             ["Metric", "Value"],
@@ -133,27 +160,29 @@ class ExcelReportGenerator:
             ["Matched", matched],
             ["Missing", missing],
             ["Extra", extra],
-            ["Match %", pct],
+            ["Match %", match_pct],
         ]
 
         for row in summary_rows:
             summary.append(row)
 
+        # Bold header
         for cell in summary[1]:
             cell.font = Font(bold=True)
 
-        # ----- STEP 8: Add Chart -----
+        # ---------------- Add Chart ------------------------------------
         chart = BarChart()
         chart.title = "Content Match Summary"
 
-        data = Reference(summary, min_col=2, min_row=3, max_row=5)
-        labels = Reference(summary, min_col=1, min_row=3, max_row=5)
-        chart.add_data(data, titles_from_data=False)
-        chart.set_categories(labels)
+        data_ref = Reference(summary, min_col=2, min_row=3, max_row=5)
+        label_ref = Reference(summary, min_col=1, min_row=3, max_row=5)
+
+        chart.add_data(data_ref, titles_from_data=False)
+        chart.set_categories(label_ref)
 
         summary.add_chart(chart, "D2")
 
         wb.save(final_output)
 
-        print(f"\n✅ Excel report generated: {final_output}\n")
+        print(f"\n✔ Excel report generated → {final_output}\n")
         return final_output
