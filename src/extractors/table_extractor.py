@@ -1,29 +1,28 @@
-# src/extractors/table_extractor.py
+"""
+Table extractor (compact OOP, ≤79 chars).
 
-from typing import List, Dict, Any
+Provides a stable interface for future table parsing logic.
+"""
+
+from typing import List, Dict, Any, Protocol, runtime_checkable
+
+
+@runtime_checkable
+class TableExtractorProtocol(Protocol):
+    def extract(self, pdf_data: Any) -> List[Dict]:
+        ...
 
 
 class TableExtractor:
     """
-    Extracts tables from PDF data.
-
-    This implementation is a placeholder. It maintains a consistent
-    interface so real table parsing can be added later without
-    breaking other modules.
+    Placeholder table extractor strategy.
     """
+
+    def __init__(self) -> None:
+        pass
 
     def extract(self, pdf_data: Any) -> List[Dict]:
         """
         Extract tables from parsed PDF data.
-
-        Parameters
-        ----------
-        pdf_data : Any
-            Parsed PDF content (text blocks, layout, metadata).
-
-        Returns
-        -------
-        List[Dict]
-            List of detected tables. Currently returns an empty list.
         """
         return []

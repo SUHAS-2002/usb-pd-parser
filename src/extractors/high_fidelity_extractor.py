@@ -1,30 +1,47 @@
-# src/extractors/high_fidelity_extractor.py
+"""
+High-fidelity PDF extractor (compact OOP, ≤79 chars).
+
+Features:
+  - Multi-column text extraction
+  - Table/diagram text preservation
+  - OCR fallback for non-text blocks
+"""
 
 import fitz
 import pytesseract
 from PIL import Image
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from src.core.extractor_base import BaseExtractor
 
 
 class HighFidelityExtractor(BaseExtractor):
     """
-    Extracts high-fidelity page text with:
-      - Multi-column reading
-      - Table text preservation
-      - OCR extraction for diagrams/images
-      - Clean and stable block ordering
+    Strategy for high-fidelity PDF extraction.
     """
 
     def __init__(self, ocr: bool = True) -> None:
         self._ocr = ocr
 
-    def _ocr_image(self, pix) -> str:
-        """
-        Convert a pixmap block into OCR text.
+    # ---------------------------------------------------------------
+    # Encapsulated OCR flag
+    # ---------------------------------------------------------------
+    @property
+    def ocr(self) -> bool:
+        return self._ocr
 
-        Returns an empty string if OCR fails.
+    @ocr.setter
+    def ocr(self, val: bool) -> None:
+        if not isinstance(val, bool):
+            raise ValueError("ocr must be True or False")
+        self._ocr = val
+
+    # ---------------------------------------------------------------
+    # Internal OCR helper
+    # ---------------------------------------------------------------
+    def _ocr_img(self, pix) -> str:
+        """
+        OCR a pixmap into text. Returns empty string on failure.
         """
         try:
             img = Image.frombytes(
@@ -36,57 +53,52 @@ class HighFidelityExtractor(BaseExtractor):
         except Exception:
             return ""
 
-    def extract(self, pdf_path: str) -> List[Dict]:
+    # ---------------------------------------------------------------
+    # Main extract method
+    # ---------------------------------------------------------------
+    def extract(self, pdf: str) -> List[Dict]:
         """
-        Extract text and OCR content from all PDF pages.
+        Extract page text + OCR content.
 
-        Parameters
-        ----------
-        pdf_path : str
-            Location of the input PDF.
-
-        Returns
-        -------
-        List[Dict]
-            A list of page dictionaries with:
-                - page number
-                - combined extracted + OCR text
+        Returns:
+          List of {"page": int, "text": str}
         """
-        doc = fitz.open(pdf_path)
-        pages: List[Dict] = []
+        doc = fitz.open(pdf)
+        out: List[Dict] = []
 
-        for index, page in enumerate(doc):
+        for idx, page in enumerate(doc):
             blocks = page.get_text("blocks")
-            blocks = sorted(blocks, key=lambda b: (b[1], b[0]))
+            blocks = sorted(
+                blocks,
+                key=lambda b: (b[1], b[0]),
+            )
 
-            items: List[str] = []
+            texts: List[str] = []
 
-            for block in blocks:
-                blk_text = block[4].strip()
+            for blk in blocks:
+                txt = blk[4].strip()
 
-                if blk_text:
-                    items.append(blk_text)
+                if txt:
+                    texts.append(txt)
                     continue
 
-                # OCR fallback for non-text blocks
                 if self._ocr:
                     try:
-                        rect = block[:4]
+                        rect = blk[:4]
                         pix = page.get_pixmap(clip=rect)
-                        ocr_text = self._ocr_image(pix)
-                        if ocr_text.strip():
-                            items.append(ocr_text)
+                        ocr_txt = self._ocr_img(pix)
+                        if ocr_txt.strip():
+                            texts.append(ocr_txt)
                     except Exception:
-                        # Ignore OCR failures safely
                         pass
 
-            joined = "\n".join(items)
+            joined = "\n".join(texts)
 
-            pages.append(
+            out.append(
                 {
-                    "page": index + 1,
+                    "page": idx + 1,
                     "text": joined,
                 }
             )
 
-        return pages
+        return out

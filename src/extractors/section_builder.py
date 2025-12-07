@@ -1,74 +1,90 @@
-# src/extractors/section_builder.py
+"""
+Section builder (compact OOP, ≤79 chars).
 
-from typing import List, Dict
+Builds section-level content blocks from TOC entries and pages.
+"""
+
+from typing import List, Dict, Protocol, runtime_checkable
+
+
+@runtime_checkable
+class SectionBuilder(Protocol):
+    def build(self, toc: List[Dict], pages: List[Dict]) -> List[Dict]:
+        ...
 
 
 class SectionContentBuilder:
     """
-    Build final section-based content blocks from TOC entries
-    and extracted pages. Produces accurate page ranges and
-    concatenated text for each section.
+    Concrete section builder strategy.
     """
 
+    def __init__(self) -> None:
+        pass
+
+    # ---------------------------------------------------------------
+    def _map_pages(self, pages: List[Dict]) -> Dict[int, str]:
+        """
+        Build a mapping {page_number: text}.
+        """
+        return {p["page"]: p["text"] for p in pages}
+
+    # ---------------------------------------------------------------
+    def _safe_range(
+        self,
+        toc: List[Dict],
+        idx: int,
+        max_page: int,
+    ) -> List[int]:
+        """
+        Compute safe page range for a TOC entry.
+        """
+        start = toc[idx]["page"]
+
+        if idx + 1 < len(toc):
+            nxt = toc[idx + 1]["page"]
+            end = start if nxt <= start else nxt - 1
+        else:
+            end = max_page
+
+        return [start, end]
+
+    # ---------------------------------------------------------------
     def build(self, toc: List[Dict], pages: List[Dict]) -> List[Dict]:
         """
-        Assemble sections using TOC page references.
-
-        Parameters
-        ----------
-        toc : List[Dict]
-            Ordered TOC entries with section metadata.
-        pages : List[Dict]
-            Extracted page text with page numbers.
-
-        Returns
-        -------
-        List[Dict]
-            Section-level structured content blocks.
+        Build structured section blocks.
         """
-        page_map = {p["page"]: p["text"] for p in pages}
-        sections: List[Dict] = []
+        if not toc or not pages:
+            return []
 
+        page_map = self._map_pages(pages)
         max_page = max(page_map.keys())
+        out: List[Dict] = []
 
-        for index, entry in enumerate(toc):
-            start_page = entry["page"]
+        for idx, ent in enumerate(toc):
+            start, end = self._safe_range(toc, idx, max_page)
 
-            # Determine end page
-            if index + 1 < len(toc):
-                next_page = toc[index + 1]["page"]
+            parts: List[str] = []
+            for pg in range(start, end + 1):
+                parts.append(page_map.get(pg, ""))
 
-                # Prevent end_page < start_page (critical fix)
-                if next_page <= start_page:
-                    end_page = start_page
-                else:
-                    end_page = next_page - 1
-            else:
-                end_page = max_page
+            txt = "\n".join(parts).strip()
 
-            # Collect all section pages
-            combined = []
-            for pg in range(start_page, end_page + 1):
-                combined.append(page_map.get(pg, ""))
-
-            text = "\n".join(combined).strip()
-
-            sections.append(
+            out.append(
                 {
-                    "doc_title": entry.get(
+                    "doc_title": ent.get(
                         "doc_title",
                         "USB Power Delivery Specification",
                     ),
-                    "section_id": entry["section_id"],
-                    "title": entry["title"],
-                    "full_path": entry["full_path"],
-                    "page": start_page,
-                    "page_range": [start_page, end_page],
-                    "level": entry["level"],
-                    "parent_id": entry["parent_id"],
-                    "tags": entry.get("tags", []),
-                    "text": text,
+                    "section_id": ent["section_id"],
+                    "title": ent["title"],
+                    "full_path": ent["full_path"],
+                    "page": start,
+                    "page_range": [start, end],
+                    "level": ent["level"],
+                    "parent_id": ent["parent_id"],
+                    "tags": ent.get("tags", []),
+                    "text": txt,
                 }
             )
 
-        return sections
+        return out
