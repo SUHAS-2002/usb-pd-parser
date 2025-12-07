@@ -50,8 +50,7 @@ class ExcelReportGenerator:
     def _timestamped_output(self) -> Path:
         """Create timestamped output filename."""
         stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        name = f"{self.output_xlsx.stem}_{stamp}"
-        name = f"{name}{self.output_xlsx.suffix}"
+        name = f"{self.output_xlsx.stem}_{stamp}{self.output_xlsx.suffix}"
         return self.output_xlsx.parent / name
 
     # ------------------------------------------------------------------
@@ -99,6 +98,16 @@ class ExcelReportGenerator:
             )
 
         df = pd.DataFrame(rows)
+
+        # ------------------------------------------------------------------
+        # FIX: Correct hierarchical section ordering (1.9 → 2.0 → … → 10.1)
+        # ------------------------------------------------------------------
+        def sort_key(section_id):
+            return [int(x) for x in str(section_id).split(".")]
+
+        df = df.sort_values(by="section_id", key=lambda col: col.map(sort_key))
+        # ------------------------------------------------------------------
+
         final_output = self._timestamped_output()
 
         df.to_excel(final_output, index=False, sheet_name="coverage")
@@ -148,9 +157,9 @@ class ExcelReportGenerator:
         summary = wb.create_sheet("summary")
 
         total = len(df)
-        matched = len(df[df["status"] == "MATCHED"])
-        missing = len(df[df["status"] == "MISSING_IN_CONTENT"])
-        extra = len(df[df["status"] == "EXTRA_IN_CONTENT"])
+        matched = (df["status"] == "MATCHED").sum()
+        missing = (df["status"] == "MISSING_IN_CONTENT").sum()
+        extra = (df["status"] == "EXTRA_IN_CONTENT").sum()
 
         match_pct = round((matched / total) * 100, 2) if total else 0
 
