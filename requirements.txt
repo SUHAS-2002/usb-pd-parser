@@ -123,3 +123,23 @@ pylint==3.0.3
 #   sudo apt-get install python3-dev libxml2-dev libxslt1-dev
 # macOS users: May need to install poppler:
 #   brew install poppler
+
+
+# --- Core language / validation ---
+pydantic>=2.11.5
+pydantic-settings>=2.10.1
+
+# --- NLP ---
+nltk>3.8.1
+
+# --- LangChain (modular, modern stack) ---
+langchain-core>=1.2.1
+langchain-community==0.4.1
+langchain-openai>=1.1.0
+langgraph==1.0.5
+
+# --- Utilities ---
+requests>=2.32.5
+PyYAML>=6.0
+tenacity>=8.1.0
+typing-extensions>=4.7
