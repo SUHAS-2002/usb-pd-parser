@@ -2,7 +2,7 @@
 
 import json
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Any
 from datetime import datetime
 
 import pandas as pd
@@ -63,6 +63,34 @@ class ExcelReportGenerator:
         }
 
     # ------------------------------------------------------------------
+    @staticmethod
+    def _sort_key(section_id: Any) -> List[int]:
+        """
+        Stable sort key for section IDs.
+
+        Order:
+          - Front matter: FM-0, FM-1, ...
+          - Numeric: 1, 1.1, 2.3.4
+        """
+        if section_id is None:
+            return [9999]
+
+        sid = str(section_id)
+
+        # Front-matter sections
+        if sid.startswith("FM-"):
+            try:
+                return [-1, int(sid.split("-")[1])]
+            except Exception:
+                return [-1, 0]
+
+        # Numeric sections
+        try:
+            return [int(x) for x in sid.split(".")]
+        except Exception:
+            return [9999]
+
+    # ------------------------------------------------------------------
     def generate(self) -> Path:
         """Generate full Excel coverage report."""
         toc = self._load_jsonl(self.toc_path)
@@ -71,7 +99,11 @@ class ExcelReportGenerator:
         toc_map = self._safe_map(toc)
         chunk_map = self._safe_map(chunks)
 
-        all_ids = sorted(set(toc_map) | set(chunk_map))
+        all_ids = sorted(
+            set(toc_map) | set(chunk_map),
+            key=self._sort_key,
+        )
+
         rows: List[Dict] = []
 
         # ----------------- Build coverage table -------------------------
@@ -99,18 +131,9 @@ class ExcelReportGenerator:
 
         df = pd.DataFrame(rows)
 
-        # ------------------------------------------------------------------
-        # FIX: Correct hierarchical section ordering (1.9 → 2.0 → … → 10.1)
-        # ------------------------------------------------------------------
-        def sort_key(section_id):
-            return [int(x) for x in str(section_id).split(".")]
-
-        df = df.sort_values(by="section_id", key=lambda col: col.map(sort_key))
-        # ------------------------------------------------------------------
-
         final_output = self._timestamped_output()
-
         df.to_excel(final_output, index=False, sheet_name="coverage")
+
         wb = load_workbook(final_output)
         ws = wb["coverage"]
 
@@ -132,17 +155,17 @@ class ExcelReportGenerator:
             for cell in row:
                 cell.fill = fill
 
-        # ---------------- Hyperlinks for easier navigation --------------
+        # ---------------- Hyperlinks ----------------------------------
         for row in ws.iter_rows(min_row=2):
             cell = row[0]
             cell.hyperlink = f"#coverage!A{cell.row}"
             cell.style = "Hyperlink"
 
-        # ---------------- Filters + Freeze header -----------------------
+        # ---------------- Filters + Freeze header ----------------------
         ws.auto_filter.ref = "A1:F1"
         ws.freeze_panes = "A2"
 
-        # ---------------- Auto-fit column widths ------------------------
+        # ---------------- Auto-fit columns -----------------------------
         for col in ws.columns:
             values = [
                 str(cell.value)
@@ -175,11 +198,10 @@ class ExcelReportGenerator:
         for row in summary_rows:
             summary.append(row)
 
-        # Bold header
         for cell in summary[1]:
             cell.font = Font(bold=True)
 
-        # ---------------- Add Chart ------------------------------------
+        # ---------------- Chart ---------------------------------------
         chart = BarChart()
         chart.title = "Content Match Summary"
 
