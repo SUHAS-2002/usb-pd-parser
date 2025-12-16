@@ -1,7 +1,7 @@
 """
 Section builder (compact OOP, ≤79 chars).
 
-Builds section-level content blocks from TOC entries and pages.
+Builds clean section-level content blocks from TOC and pages.
 """
 
 from typing import List, Dict, Protocol, runtime_checkable
@@ -15,7 +15,7 @@ class SectionBuilder(Protocol):
 
 class SectionContentBuilder:
     """
-    Concrete section builder strategy.
+    Robust section content builder.
     """
 
     def __init__(self) -> None:
@@ -23,10 +23,12 @@ class SectionContentBuilder:
 
     # ---------------------------------------------------------------
     def _map_pages(self, pages: List[Dict]) -> Dict[int, str]:
-        """
-        Build a mapping {page_number: text}.
-        """
-        return {p["page"]: p["text"] for p in pages}
+        """Build a mapping {page_number: text}."""
+        return {
+            p["page"]: p.get("text", "")
+            for p in pages
+            if "page" in p
+        }
 
     # ---------------------------------------------------------------
     def _safe_range(
@@ -42,7 +44,7 @@ class SectionContentBuilder:
 
         if idx + 1 < len(toc):
             nxt = toc[idx + 1]["page"]
-            end = start if nxt <= start else nxt - 1
+            end = nxt - 1 if nxt > start else start
         else:
             end = max_page
 
@@ -51,7 +53,7 @@ class SectionContentBuilder:
     # ---------------------------------------------------------------
     def build(self, toc: List[Dict], pages: List[Dict]) -> List[Dict]:
         """
-        Build structured section blocks.
+        Build structured section content blocks.
         """
         if not toc or not pages:
             return []
@@ -60,14 +62,32 @@ class SectionContentBuilder:
         max_page = max(page_map.keys())
         out: List[Dict] = []
 
+        # Detect TOC page range to exclude it
+        toc_pages = {
+            e["page"]
+            for e in toc
+            if isinstance(e.get("section_id"), str)
+            and e["section_id"].startswith("FM-")
+        }
+
         for idx, ent in enumerate(toc):
+            sid = ent["section_id"]
             start, end = self._safe_range(toc, idx, max_page)
 
             parts: List[str] = []
+
             for pg in range(start, end + 1):
+                # Skip TOC navigation pages
+                if pg in toc_pages and not sid.startswith("FM-"):
+                    continue
+
                 parts.append(page_map.get(pg, ""))
 
-            txt = "\n".join(parts).strip()
+            text = "\n".join(parts).strip()
+
+            # Skip empty sections (except front-matter)
+            if not text and not sid.startswith("FM-"):
+                continue
 
             out.append(
                 {
@@ -75,7 +95,7 @@ class SectionContentBuilder:
                         "doc_title",
                         "USB Power Delivery Specification",
                     ),
-                    "section_id": ent["section_id"],
+                    "section_id": sid,
                     "title": ent["title"],
                     "full_path": ent["full_path"],
                     "page": start,
@@ -83,7 +103,7 @@ class SectionContentBuilder:
                     "level": ent["level"],
                     "parent_id": ent["parent_id"],
                     "tags": ent.get("tags", []),
-                    "text": txt,
+                    "text": text,
                 }
             )
 

@@ -7201,16 +7201,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "2.0",
-      "title": "Noise",
-      "page": 1034,
-      "level": 2,
-      "parent_id": "2",
-      "full_path": "2.0 Noise",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "FM-214",
       "title": "Noise Zone and Detection Zone",
       "page": 1035,
@@ -7379,7 +7369,18 @@
       ]
     }
   ],
-  "missing": [],
+  "missing": [
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "2.0",
+      "title": "Noise",
+      "page": 1034,
+      "level": 2,
+      "parent_id": "2",
+      "full_path": "2.0 Noise",
+      "tags": []
+    }
+  ],
   "title_mismatches": [],
   "page_discrepancies": [],
   "total_toc": 639
