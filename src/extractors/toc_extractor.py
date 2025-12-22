@@ -1,12 +1,13 @@
 """
 TOC extractor (compact OOP, ≤79 chars).
-Extracts TOC entries using regex + structural gating.
-Includes front matter, TOC, List of Figures, List of Tables.
+
+Extracts TOC entries and synthesizes numeric section IDs
+by aligning TOC pages with body section headings.
 """
 
 import re
 from dataclasses import dataclass, asdict
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 
 
 @dataclass
@@ -22,15 +23,18 @@ class TocEntry:
 
 
 class ToCExtractor:
-    """High-coverage TOC extractor for USB-PD PDF."""
+    """Semantic TOC extractor for USB-PD PDF."""
 
     DOC_TITLE = "USB Power Delivery Specification"
     MAX_REAL_PAGE = 1100
 
-    MULTI_RE = re.compile(
-        r"(\d+(?:\.\d+)+)\s+(.+?)\.{3,}\s*(\d{1,4})(?!\S)"
+    # Numeric headings in BODY: 1, 1.1, 1.1.1, ...
+    BODY_SECTION_RE = re.compile(
+        r"^\s*(\d+(?:\.\d+)*)\s+(.+)$",
+        re.MULTILINE,
     )
 
+    # Unnumbered TOC entries
     FRONT_RE = re.compile(
         r"^\s*([A-Za-z][A-Za-z\s]+?)\.{3,}\s*(\d{1,4})\s*$"
     )
@@ -52,10 +56,11 @@ class ToCExtractor:
 
     # -----------------------------------------------------------
     def extract(self, pages: List[Dict]) -> List[Dict]:
-        raw: List[tuple] = []
+        toc_raw: List[Tuple[str, str, int]] = []
         in_toc = False
         fm_idx = 0
 
+        # 1️⃣ Extract raw TOC entries (unnumbered)
         for pg in pages:
             text = pg.get("text", "") or ""
 
@@ -65,7 +70,6 @@ class ToCExtractor:
             if not in_toc:
                 continue
 
-            # Stop only when chapter body begins
             for ln in text.splitlines():
                 if self.BODY_START_RE.match(ln):
                     in_toc = False
@@ -74,89 +78,109 @@ class ToCExtractor:
             if not in_toc:
                 break
 
-            clean_lines = []
-            for ln in text.splitlines():
-                if not self.SELF_REF_RE.match(ln):
-                    clean_lines.append(ln)
+            lines = [
+                ln for ln in text.splitlines()
+                if not self.SELF_REF_RE.match(ln)
+            ]
 
-            for sid, title, p in self._from_page("\n".join(clean_lines)):
-                if sid is None:
-                    sid = f"FM-{fm_idx}"
-                    fm_idx += 1
-                raw.append((sid, title, p))
+            for title, p in self._from_page("\n".join(lines)):
+                sid = f"FM-{fm_idx}"
+                fm_idx += 1
+                toc_raw.append((sid, title, p))
 
-        by_id: Dict[str, TocEntry] = {}
+        # 2️⃣ Build page → numeric section map from BODY
+        page_to_section = self._build_page_section_map(pages)
 
-        for sid, title, p in raw:
-            if p > self.MAX_REAL_PAGE:
+        # 3️⃣ Promote FM-* using body headings
+        entries: Dict[str, TocEntry] = {}
+
+        for sid, title, page in toc_raw:
+            if page > self.MAX_REAL_PAGE:
                 continue
 
-            if not self._plausible(sid, title):
-                continue
+            real_sid = self._promote(page, page_to_section) or sid
 
-            if sid.startswith("FM-"):
-                lvl = 0
-                par = None
+            if real_sid.startswith("FM-"):
+                level = 0
+                parent = None
                 full = title
             else:
-                lvl = sid.count(".") + 1
-                par = self._parent_id(sid)
-                full = f"{sid} {title}"
+                level = real_sid.count(".") + 1
+                parent = self._parent_id(real_sid)
+                full = f"{real_sid} {title}"
 
-            by_id[sid] = TocEntry(
+            entries[real_sid] = TocEntry(
                 doc_title=self.DOC_TITLE,
-                section_id=sid,
+                section_id=real_sid,
                 title=title,
-                page=p,
-                level=lvl,
-                parent_id=par,
+                page=page,
+                level=level,
+                parent_id=parent,
                 full_path=full,
                 tags=self._infer_tags(title),
             )
 
         items = sorted(
-            by_id.values(),
+            entries.values(),
             key=lambda e: (e.page, self._sid_key(e.section_id)),
         )
 
         return [asdict(e) for e in items]
 
     # -----------------------------------------------------------
-    def _from_page(self, text: str) -> List[tuple]:
-        triples: List[tuple] = []
+    def _from_page(self, text: str) -> List[Tuple[str, int]]:
+        out: List[Tuple[str, int]] = []
 
         for ln in text.splitlines():
-            for sid, title, p in self.MULTI_RE.findall(ln):
-                triples.append((sid, title.strip(), int(p)))
-
             m = self.FRONT_RE.match(ln)
             if m:
                 title, p = m.groups()
-                triples.append((None, title.strip(), int(p)))
+                out.append((title.strip(), int(p)))
 
-        return triples
+        return out
 
     # -----------------------------------------------------------
-    def _plausible(self, sid: str, title: str) -> bool:
-        if sid.startswith("FM-"):
-            return True
+    def _build_page_section_map(
+        self,
+        pages: List[Dict],
+    ) -> Dict[int, str]:
+        """
+        Map page number → first numeric section ID on that page.
+        """
+        mapping: Dict[int, str] = {}
 
-        try:
-            top = int(sid.split(".")[0])
-        except ValueError:
-            return False
+        for p in pages:
+            text = p.get("text", "")
+            m = self.BODY_SECTION_RE.search(text)
+            if m:
+                mapping[p["page"]] = m.group(1)
 
-        return 1 <= top <= 20 and len(title) >= 3
+        return mapping
+
+    # -----------------------------------------------------------
+    def _promote(
+        self,
+        page: int,
+        page_to_section: Dict[int, str],
+    ) -> Optional[str]:
+        """
+        Find the first numeric section at or after a TOC page.
+        """
+        for p in range(page, page + 6):
+            if p in page_to_section:
+                return page_to_section[p]
+        return None
 
     # -----------------------------------------------------------
     def _parent_id(self, sid: str) -> Optional[str]:
-        parts = sid.split(".")
-        return ".".join(parts[:-1]) if len(parts) > 1 else None
+        if "." not in sid:
+            return None
+        return sid.rsplit(".", 1)[0]
 
     # -----------------------------------------------------------
     def _sid_key(self, sid: str) -> List[int]:
         if sid.startswith("FM-"):
-            return [-1, int(sid.split("-")[1])]
+            return [9999]
         return [int(x) for x in sid.split(".")]
 
     # -----------------------------------------------------------
@@ -185,8 +209,5 @@ class ToCExtractor:
             ]
         ):
             tags.append("comm")
-
-        if "table" in t:
-            tags.append("table")
 
         return tags

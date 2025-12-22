@@ -3,9 +3,10 @@ USB PD Specification – End-to-End Parser (High-Fidelity + OOP)
 
 Pipeline:
     1. Extract pages using HighFidelityExtractor (OCR + blocks)
-    2. Extract the Table of Contents
-    3. Build section content using TOC page boundaries
-    4. Save:
+    2. Extract Table of Contents (navigation only)
+    3. Extract inline numeric headings (authoritative)
+    4. Build spec sections from inline headings
+    5. Save:
         data/usb_pd_toc.jsonl
         data/usb_pd_spec.jsonl
 """
@@ -18,11 +19,13 @@ from pathlib import Path
 from src.extractors.high_fidelity_extractor import (
     HighFidelityExtractor,
 )
+from src.extractors.toc_extractor import ToCExtractor
+from src.extractors.inline_heading_extractor import (
+    InlineHeadingExtractor,
+)
 from src.extractors.section_builder import (
     SectionContentBuilder,
 )
-from src.extractors.toc_extractor import ToCExtractor
-
 
 # ------------------------------------------------------------------
 # Logging
@@ -38,13 +41,10 @@ logger = logging.getLogger(__name__)
 # JSONL writer
 # ------------------------------------------------------------------
 def write_jsonl(path: Path, items):
-    """
-    Write a list of dictionaries into a JSONL file.
-    """
+    """Write a list of dictionaries into a JSONL file."""
     with path.open("w", encoding="utf-8") as f:
         for obj in items:
-            line = json.dumps(obj, ensure_ascii=False)
-            f.write(line + "\n")
+            f.write(json.dumps(obj, ensure_ascii=False) + "\n")
 
 
 # ------------------------------------------------------------------
@@ -53,12 +53,9 @@ def write_jsonl(path: Path, items):
 class USBPDParser:
     """
     Coordinates the USB PD PDF parsing pipeline.
-
-    Components:
-        - HighFidelityExtractor : extracts page text
-        - ToCExtractor          : extracts TOC entries
-        - SectionContentBuilder : builds section content blocks
     """
+
+    DOC_TITLE = "USB Power Delivery Specification Rev X"
 
     def __init__(self, pdf_path: str, output_dir: str = "data"):
         self._pdf_path = Path(pdf_path)
@@ -66,6 +63,7 @@ class USBPDParser:
 
         self._page_extractor = HighFidelityExtractor()
         self._toc_extractor = ToCExtractor()
+        self._inline_extractor = InlineHeadingExtractor()
         self._section_builder = SectionContentBuilder()
 
     # --------------------------------------------------------------
@@ -85,33 +83,45 @@ class USBPDParser:
         pages = self._page_extractor.extract(str(self._pdf_path))
 
         if not pages:
-            logger.error(
-                "Page extraction failed: zero pages extracted."
-            )
+            logger.error("No pages extracted from PDF.")
             return
 
         logger.info("Extracted %d pages.", len(pages))
 
+        # Wrap pages for extractors expecting pdf_data
+        pdf_data = {"pages": pages}
+
         # ----------------------------------------------------------
-        # 2. Extract TOC
+        # 2. Extract TOC (navigation only)
         # ----------------------------------------------------------
         toc = self._toc_extractor.extract(pages)
-
-        if toc:
-            logger.info("Extracted %d TOC entries.", len(toc))
-        else:
-            logger.warning("No TOC entries extracted.")
+        logger.info("Extracted %d TOC entries.", len(toc))
 
         # ----------------------------------------------------------
-        # 3. Build section content blocks
+        # 3. Extract inline numeric headings (AUTHORITATIVE)
         # ----------------------------------------------------------
-        sections = self._section_builder.build(toc, pages)
+        inline_headings = self._inline_extractor.extract(pdf_data)
         logger.info(
-            "Built %d section content blocks.", len(sections)
+            "Extracted %d numeric section headings.",
+            len(inline_headings),
         )
 
         # ----------------------------------------------------------
-        # 4. Ensure output directory exists
+        # 4. Build spec sections from numeric headings only
+        # ----------------------------------------------------------
+        sections = self._section_builder.build(
+            toc=toc,
+            pages=pages,
+            headings=inline_headings,
+            doc_title=self.DOC_TITLE,
+        )
+
+        logger.info(
+            "Built %d spec sections.", len(sections)
+        )
+
+        # ----------------------------------------------------------
+        # 5. Ensure output directory exists
         # ----------------------------------------------------------
         self._output_dir.mkdir(
             parents=True,
@@ -119,24 +129,25 @@ class USBPDParser:
         )
 
         toc_path = self._output_dir / "usb_pd_toc.jsonl"
-        content_path = self._output_dir / "usb_pd_spec.jsonl"
+        spec_path = self._output_dir / "usb_pd_spec.jsonl"
 
         # ----------------------------------------------------------
-        # 5. Save JSONL outputs
+        # 6. Save JSONL outputs
         # ----------------------------------------------------------
         write_jsonl(toc_path, toc)
-        write_jsonl(content_path, sections)
+        write_jsonl(spec_path, sections)
 
         logger.info("TOC saved at: %s", toc_path)
-        logger.info("Content saved at: %s", content_path)
+        logger.info("Spec saved at: %s", spec_path)
         logger.info("USB PD Parsing completed successfully.")
 
         return {
             "pages_extracted": len(pages),
             "toc_entries": len(toc),
+            "inline_headings": len(inline_headings),
             "sections_built": len(sections),
             "toc_path": str(toc_path),
-            "content_path": str(content_path),
+            "spec_path": str(spec_path),
         }
 
 
@@ -144,23 +155,20 @@ class USBPDParser:
 # CLI Entry Point
 # ------------------------------------------------------------------
 def main():
-    """
-    CLI entry point for USB PD Parser.
-    Allows providing custom PDF path and output directory.
-    """
+    """CLI entry point for USB PD Parser."""
     parser = argparse.ArgumentParser(
         description="USB PD Specification PDF Parser"
     )
 
     parser.add_argument(
         "pdf",
-        help="Path to the PDF file to parse"
+        help="Path to the PDF file to parse",
     )
 
     parser.add_argument(
         "--output",
         default="data",
-        help="Output directory for JSONL files (default: data)"
+        help="Output directory (default: data)",
     )
 
     args = parser.parse_args()
