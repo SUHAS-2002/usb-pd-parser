@@ -8,6 +8,9 @@ inline headings (authoritative source).
 from typing import List, Dict, Protocol, runtime_checkable, Optional
 
 
+# ------------------------------------------------------------
+# Public interface (stable contract)
+# ------------------------------------------------------------
 @runtime_checkable
 class SectionBuilder(Protocol):
     def build(
@@ -20,63 +23,113 @@ class SectionBuilder(Protocol):
         ...
 
 
+# ------------------------------------------------------------
+# Concrete implementation
+# ------------------------------------------------------------
 class SectionContentBuilder:
     """
     Authoritative section content builder.
 
-    RULES:
-    - Uses ONLY numeric inline headings
-    - Ignores FM-* completely
-    - Produces manager-approved JSONL format
+    Encapsulation rules:
+    - build() is the ONLY public method
+    - all validation and rules are private/protected
+    - FM-* sections are strictly forbidden
     """
 
-    def __init__(self) -> None:
-        pass
-
-    # -----------------------------------------------------------
+    # --------------------------------------------------------
+    # Public API
+    # --------------------------------------------------------
     def build(
         self,
-        toc: List[Dict],            # kept for interface compatibility
-        pages: List[Dict],          # future use (content slicing)
+        toc: List[Dict],            # interface compatibility
+        pages: List[Dict],          # future slicing support
         headings: List[Dict],       # AUTHORITATIVE
         doc_title: str,
     ) -> List[Dict]:
-        """
-        Build spec sections from numeric inline headings.
-        """
         if not headings:
             return []
 
+        return self._build_from_headings(
+            headings,
+            doc_title,
+        )
+
+    # --------------------------------------------------------
+    # Protected helpers
+    # --------------------------------------------------------
+    def _build_from_headings(
+        self,
+        headings: List[Dict],
+        doc_title: str,
+    ) -> List[Dict]:
+        """
+        Build section entries from validated headings.
+        """
         out: List[Dict] = []
 
-        for h in headings:
-            sid = h.get("section_id")
-            title = h.get("title")
-            page = h.get("page")
-
-            if not sid or not title or not page:
+        for heading in headings:
+            if not self.__is_valid_heading(heading):
                 continue
 
-            # 🚫 ABSOLUTE RULE: no FM entries in spec output
-            if sid.startswith("FM-"):
-                continue
-
-            level = sid.count(".") + 1
-            parent_id: Optional[str] = (
-                sid.rsplit(".", 1)[0] if "." in sid else None
+            entry = self._build_section_entry(
+                heading,
+                doc_title,
             )
 
-            out.append(
-                {
-                    "doc_title": doc_title,
-                    "section_id": sid,
-                    "title": title,
-                    "full_path": f"{sid} {title}",
-                    "page": page,
-                    "level": level,
-                    "parent_id": parent_id,
-                    "tags": [],  # tag inference can be added later
-                }
-            )
+            if entry:
+                out.append(entry)
 
         return out
+
+    # --------------------------------------------------------
+    def _build_section_entry(
+        self,
+        heading: Dict,
+        doc_title: str,
+    ) -> Optional[Dict]:
+        """
+        Construct a single JSONL section entry.
+        """
+        sid = heading["section_id"]
+        title = heading["title"]
+        page = heading["page"]
+
+        level = sid.count(".") + 1
+        parent_id = self._parent_id(sid)
+
+        return {
+            "doc_title": doc_title,
+            "section_id": sid,
+            "title": title,
+            "full_path": f"{sid} {title}",
+            "page": page,
+            "level": level,
+            "parent_id": parent_id,
+            "tags": [],  # reserved for future inference
+        }
+
+    # --------------------------------------------------------
+    def _parent_id(self, sid: str) -> Optional[str]:
+        if "." not in sid:
+            return None
+        return sid.rsplit(".", 1)[0]
+
+    # --------------------------------------------------------
+    # Private rule enforcement
+    # --------------------------------------------------------
+    def __is_valid_heading(self, heading: Dict) -> bool:
+        """
+        Enforce authoritative section rules.
+        """
+        sid = heading.get("section_id")
+        title = heading.get("title")
+        page = heading.get("page")
+
+        if not sid or not title or not page:
+            return False
+
+        # 🚫 Absolute rule: no FM sections allowed
+        if sid.startswith("FM-"):
+            return False
+
+        return True

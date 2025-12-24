@@ -10,81 +10,86 @@ class FullPDFParser(BaseParser):
     Full PDF parser with robust page normalization.
 
     Fixes:
-    - Missing page numbers (e.g., page 77 missing).
-    - Out-of-order pages (e.g., 76 → 500 → 78).
-    - Duplicate pages from extractor bugs.
-    - Ensures sorted, gap-free, unique page list.
+    - Missing page numbers
+    - Out-of-order pages
+    - Duplicate pages
+    - Ensures sorted, gap-free page list
     """
 
     def __init__(self, strategy: PDFTextStrategy) -> None:
         super().__init__(strategy)
 
+    # ---------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------
     def parse(self) -> List[Dict]:
-        """
-        Return a normalized list of pages.
-
-        Always produces:
-            [
-                {"page_number": 1, "text": "..."},
-                {"page_number": 2, "text": "..."},
-                ...
-            ]
-
-        Guarantees:
-        - Sorted pages
-        - No duplicates
-        - No missing gaps
-        """
         raw_pages = self._strategy.extract_text(self.pdf_path)
 
-        # -----------------------------------------------------------
-        # 1. Normalize page structure
-        # -----------------------------------------------------------
-        normalized: List[Dict] = []
+        normalized = self.__normalize(raw_pages)
+        unique = self.__deduplicate(normalized)
+
+        if not unique:
+            return []
+
+        return self.__fill_gaps(unique)
+
+    # ---------------------------------------------------------
+    # Private helpers
+    # ---------------------------------------------------------
+    def __normalize(
+        self,
+        raw_pages: List[Dict],
+    ) -> List[Dict]:
+        pages: List[Dict] = []
+
         for page in raw_pages:
             try:
                 num = int(page.get("page_number", 0))
             except Exception:
                 continue
 
-            txt = page.get("text") or ""
-            normalized.append(
-                {"page_number": num, "text": txt}
+            text = page.get("text") or ""
+            pages.append(
+                {"page_number": num, "text": text}
             )
 
-        # -----------------------------------------------------------
-        # 2. Sort pages
-        # -----------------------------------------------------------
-        normalized.sort(key=lambda p: p["page_number"])
+        pages.sort(key=lambda p: p["page_number"])
+        return pages
 
-        # -----------------------------------------------------------
-        # 3. Remove duplicate pages
-        # -----------------------------------------------------------
-        seen: set = set()
+    # ---------------------------------------------------------
+    def __deduplicate(
+        self,
+        pages: List[Dict],
+    ) -> List[Dict]:
+        seen = set()
         unique: List[Dict] = []
 
-        for page in normalized:
+        for page in pages:
             num = page["page_number"]
             if num not in seen:
                 unique.append(page)
                 seen.add(num)
 
-        if not unique:
-            return []
+        return unique
 
-        # -----------------------------------------------------------
-        # 4. Fill missing pages with blank placeholders
-        # -----------------------------------------------------------
-        max_page = unique[-1]["page_number"]
-        page_map = {p["page_number"]: p for p in unique}
+    # ---------------------------------------------------------
+    def __fill_gaps(
+        self,
+        pages: List[Dict],
+    ) -> List[Dict]:
+        max_page = pages[-1]["page_number"]
+        page_map = {
+            p["page_number"]: p for p in pages
+        }
 
         full_pages: List[Dict] = []
+
         for num in range(1, max_page + 1):
-            if num in page_map:
-                full_pages.append(page_map[num])
-            else:
-                full_pages.append(
-                    {"page_number": num, "text": ""}
+            full_pages.append(
+                page_map.get(
+                    num,
+                    {"page_number": num, "text": ""},
                 )
+            )
 
         return full_pages

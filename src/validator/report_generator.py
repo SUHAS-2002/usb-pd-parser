@@ -6,7 +6,10 @@ from typing import List, Dict
 from pathlib import Path
 
 
-@dataclass
+# ------------------------------------------------------------
+# Data model (immutable contract)
+# ------------------------------------------------------------
+@dataclass(frozen=True)
 class ValidationReport:
     """Structured score output for validation results."""
     quality_score: float
@@ -20,14 +23,57 @@ class ValidationReport:
     recommendations: List[str]
 
 
+# ------------------------------------------------------------
+# Report generator
+# ------------------------------------------------------------
 class ReportGenerator:
     """
-    Generates a human-readable validation scorecard and produces
-    JSON reports for external tools.
+    Generates validation scorecards and exports reports.
+
+    Encapsulation rules:
+    - Public methods delegate to private helpers
+    - Scoring, persistence, and rendering are isolated
     """
 
+    # ---------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------
     def generate(self, raw: Dict) -> ValidationReport:
-        """Convert raw validator output into a score object."""
+        """
+        Convert raw validator output into a ValidationReport.
+        """
+        metrics = self.__compute_metrics(raw)
+        recommendations = self.__build_recommendations(metrics)
+
+        return ValidationReport(
+            quality_score=metrics["quality"],
+            match_percentage=metrics["match_pct"],
+            title_accuracy=metrics["title_pct"],
+            page_accuracy=metrics["page_pct"],
+            total_toc=metrics["total"],
+            missing_count=metrics["missing"],
+            mismatch_count=metrics["mismatch"],
+            page_error_count=metrics["page_err"],
+            recommendations=recommendations,
+        )
+
+    # ---------------------------------------------------------
+    def save(
+        self,
+        report: ValidationReport,
+        path: str = "data/score_report.json",
+    ) -> None:
+        self.__save_json(report, Path(path))
+        print(f"Score report saved → {path}")
+
+    # ---------------------------------------------------------
+    def print_console(self, report: ValidationReport) -> None:
+        self.__print_console(report)
+
+    # ---------------------------------------------------------
+    # Private helpers
+    # ---------------------------------------------------------
+    def __compute_metrics(self, raw: Dict) -> Dict[str, float | int]:
         total = raw.get("total_toc", 0)
         matched = len(raw.get("matched", []))
         missing = len(raw.get("missing", []))
@@ -44,62 +90,65 @@ class ReportGenerator:
             page_pct * 0.2
         )
 
+        return {
+            "quality": round(quality, 2),
+            "match_pct": round(match_pct, 2),
+            "title_pct": round(title_pct, 2),
+            "page_pct": round(page_pct, 2),
+            "total": total,
+            "missing": missing,
+            "mismatch": mismatch,
+            "page_err": page_err,
+        }
+
+    # ---------------------------------------------------------
+    def __build_recommendations(
+        self,
+        metrics: Dict[str, float | int],
+    ) -> List[str]:
         recs: List[str] = []
 
-        if missing > 0:
+        if metrics["missing"] > 0:
             recs.append(
-                "Some TOC sections are missing in content. Improve "
-                "chunk extraction."
+                "Some TOC sections are missing in content. "
+                "Improve chunk extraction."
             )
 
-        if mismatch > 0:
+        if metrics["mismatch"] > 0:
             recs.append(
-                "Section title mismatch detected. Improve parsing or "
-                "adjust similarity threshold."
+                "Section title mismatch detected. Improve parsing "
+                "or adjust similarity threshold."
             )
 
-        if page_err > 0:
+        if metrics["page_err"] > 0:
             recs.append(
-                "Section page boundaries appear inaccurate. Refine "
-                "slicing logic."
+                "Section page boundaries appear inaccurate. "
+                "Refine slicing logic."
             )
 
         if not recs:
             recs.append("Excellent extraction quality.")
 
-        return ValidationReport(
-            quality_score=round(quality, 2),
-            match_percentage=round(match_pct, 2),
-            title_accuracy=round(title_pct, 2),
-            page_accuracy=round(page_pct, 2),
-            total_toc=total,
-            missing_count=missing,
-            mismatch_count=mismatch,
-            page_error_count=page_err,
-            recommendations=recs,
-        )
+        return recs
 
-    # ----------------------------------------------------------
-    def save(
+    # ---------------------------------------------------------
+    def __save_json(
         self,
         report: ValidationReport,
-        path: str = "data/score_report.json"
+        path: Path,
     ) -> None:
-        """Save report as JSON inside data/ folder."""
-        output = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Ensure directory exists
-        output.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("w", encoding="utf-8") as f:
+            json.dump(
+                report.__dict__,
+                f,
+                indent=2,
+                ensure_ascii=False,
+            )
 
-        with output.open("w", encoding="utf-8") as f:
-            json.dump(report.__dict__, f, indent=2,
-                      ensure_ascii=False)
-
-        print(f"Score report saved → {output}")
-
-    # ----------------------------------------------------------
-    def print_console(self, report: ValidationReport) -> None:
-        """Pretty-print the scorecard to console."""
+    # ---------------------------------------------------------
+    def __print_console(self, report: ValidationReport) -> None:
         print("\n============== VALIDATION REPORT ==============")
         print(f"Quality Score     : {report.quality_score}%")
         print(f"TOC Match         : {report.match_percentage}%")

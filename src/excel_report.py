@@ -14,31 +14,53 @@ from openpyxl.chart import BarChart, Reference
 
 class ExcelReportGenerator:
     """
-    Generates Excel coverage report:
-      - Coverage sheet with colors
-      - Summary sheet + chart
-      - Auto-fit columns, filters, freeze panes
+    Generates Excel coverage report.
+
+    Encapsulation rules:
+    - generate() is the ONLY public method
+    - filesystem paths are private
+    - rendering steps are isolated
     """
 
-    GREEN = "C6EFCE"
-    RED = "FFC7CE"
-    YELLOW = "FFEB9C"
+    # -------------------- Private constants -------------------
+    __GREEN = "C6EFCE"
+    __RED = "FFC7CE"
+    __YELLOW = "FFEB9C"
 
+    # ---------------------------------------------------------
+    # Construction (private state)
+    # ---------------------------------------------------------
     def __init__(
         self,
         toc_path: str,
         chunks_path: str,
         output_xlsx: str,
     ) -> None:
+        self.__toc_path = Path(toc_path)
+        self.__chunks_path = Path(chunks_path)
+        self.__output_xlsx = Path(output_xlsx)
 
-        self.toc_path = Path(toc_path)
-        self.chunks_path = Path(chunks_path)
-        self.output_xlsx = Path(output_xlsx)
+    # ---------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------
+    def generate(self) -> Path:
+        toc = self.__load_jsonl(self.__toc_path)
+        chunks = self.__load_jsonl(self.__chunks_path)
 
-    # ------------------------------------------------------------------
-    @staticmethod
-    def _load_jsonl(path: Path) -> List[Dict]:
-        """Load JSONL into a list of dictionaries."""
+        rows = self.__build_rows(toc, chunks)
+        df = pd.DataFrame(rows)
+
+        output = self.__timestamped_output()
+        self.__write_excel(df, output)
+        self.__post_process_excel(output, df)
+
+        print(f"\n✔ Excel report generated → {output}\n")
+        return output
+
+    # ---------------------------------------------------------
+    # Private helpers
+    # ---------------------------------------------------------
+    def __load_jsonl(self, path: Path) -> List[Dict]:
         items: List[Dict] = []
         with path.open("r", encoding="utf-8") as f:
             for line in f:
@@ -46,67 +68,28 @@ class ExcelReportGenerator:
                     items.append(json.loads(line))
         return items
 
-    # ------------------------------------------------------------------
-    def _timestamped_output(self) -> Path:
-        """Create timestamped output filename."""
+    # ---------------------------------------------------------
+    def __timestamped_output(self) -> Path:
         stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        name = f"{self.output_xlsx.stem}_{stamp}{self.output_xlsx.suffix}"
-        return self.output_xlsx.parent / name
+        name = f"{self.__output_xlsx.stem}_{stamp}{self.__output_xlsx.suffix}"
+        return self.__output_xlsx.parent / name
 
-    # ------------------------------------------------------------------
-    def _safe_map(self, data: List[Dict]) -> Dict[str, Dict]:
-        """Safely create map: section_id → entry."""
-        return {
-            d["section_id"]: d
-            for d in data
-            if isinstance(d, dict) and "section_id" in d
-        }
-
-    # ------------------------------------------------------------------
-    @staticmethod
-    def _sort_key(section_id: Any) -> List[int]:
-        """
-        Stable sort key for section IDs.
-
-        Order:
-          - Front matter: FM-0, FM-1, ...
-          - Numeric: 1, 1.1, 2.3.4
-        """
-        if section_id is None:
-            return [9999]
-
-        sid = str(section_id)
-
-        # Front-matter sections
-        if sid.startswith("FM-"):
-            try:
-                return [-1, int(sid.split("-")[1])]
-            except Exception:
-                return [-1, 0]
-
-        # Numeric sections
-        try:
-            return [int(x) for x in sid.split(".")]
-        except Exception:
-            return [9999]
-
-    # ------------------------------------------------------------------
-    def generate(self) -> Path:
-        """Generate full Excel coverage report."""
-        toc = self._load_jsonl(self.toc_path)
-        chunks = self._load_jsonl(self.chunks_path)
-
-        toc_map = self._safe_map(toc)
-        chunk_map = self._safe_map(chunks)
+    # ---------------------------------------------------------
+    def __build_rows(
+        self,
+        toc: List[Dict],
+        chunks: List[Dict],
+    ) -> List[Dict]:
+        toc_map = self.__safe_map(toc)
+        chunk_map = self.__safe_map(chunks)
 
         all_ids = sorted(
             set(toc_map) | set(chunk_map),
-            key=self._sort_key,
+            key=self.__sort_key,
         )
 
         rows: List[Dict] = []
 
-        # ----------------- Build coverage table -------------------------
         for sid in all_ids:
             t = toc_map.get(sid)
             c = chunk_map.get(sid)
@@ -129,19 +112,35 @@ class ExcelReportGenerator:
                 }
             )
 
-        df = pd.DataFrame(rows)
+        return rows
 
-        final_output = self._timestamped_output()
-        df.to_excel(final_output, index=False, sheet_name="coverage")
+    # ---------------------------------------------------------
+    def __write_excel(self, df: pd.DataFrame, output: Path) -> None:
+        df.to_excel(output, index=False, sheet_name="coverage")
 
-        wb = load_workbook(final_output)
+    # ---------------------------------------------------------
+    def __post_process_excel(
+        self,
+        output: Path,
+        df: pd.DataFrame,
+    ) -> None:
+        wb = load_workbook(output)
         ws = wb["coverage"]
 
-        # -------------------- Row Coloring -----------------------------
+        self.__apply_row_colors(ws)
+        self.__add_hyperlinks(ws)
+        self.__apply_filters(ws)
+        self.__auto_fit_columns(ws)
+        self.__add_summary_sheet(wb, df)
+
+        wb.save(output)
+
+    # ---------------------------------------------------------
+    def __apply_row_colors(self, ws) -> None:
         colors = {
-            "MATCHED": self.GREEN,
-            "MISSING_IN_CONTENT": self.RED,
-            "EXTRA_IN_CONTENT": self.YELLOW,
+            "MATCHED": self.__GREEN,
+            "MISSING_IN_CONTENT": self.__RED,
+            "EXTRA_IN_CONTENT": self.__YELLOW,
         }
 
         for row in ws.iter_rows(min_row=2):
@@ -155,17 +154,20 @@ class ExcelReportGenerator:
             for cell in row:
                 cell.fill = fill
 
-        # ---------------- Hyperlinks ----------------------------------
+    # ---------------------------------------------------------
+    def __add_hyperlinks(self, ws) -> None:
         for row in ws.iter_rows(min_row=2):
             cell = row[0]
             cell.hyperlink = f"#coverage!A{cell.row}"
             cell.style = "Hyperlink"
 
-        # ---------------- Filters + Freeze header ----------------------
+    # ---------------------------------------------------------
+    def __apply_filters(self, ws) -> None:
         ws.auto_filter.ref = "A1:F1"
         ws.freeze_panes = "A2"
 
-        # ---------------- Auto-fit columns -----------------------------
+    # ---------------------------------------------------------
+    def __auto_fit_columns(self, ws) -> None:
         for col in ws.columns:
             values = [
                 str(cell.value)
@@ -176,7 +178,12 @@ class ExcelReportGenerator:
             col_letter = get_column_letter(col[0].column)
             ws.column_dimensions[col_letter].width = width + 2
 
-        # ---------------- Summary sheet --------------------------------
+    # ---------------------------------------------------------
+    def __add_summary_sheet(
+        self,
+        wb,
+        df: pd.DataFrame,
+    ) -> None:
         summary = wb.create_sheet("summary")
 
         total = len(df)
@@ -184,9 +191,11 @@ class ExcelReportGenerator:
         missing = (df["status"] == "MISSING_IN_CONTENT").sum()
         extra = (df["status"] == "EXTRA_IN_CONTENT").sum()
 
-        match_pct = round((matched / total) * 100, 2) if total else 0
+        match_pct = round(
+            (matched / total) * 100, 2
+        ) if total else 0
 
-        summary_rows = [
+        rows = [
             ["Metric", "Value"],
             ["Total Sections", total],
             ["Matched", matched],
@@ -195,25 +204,55 @@ class ExcelReportGenerator:
             ["Match %", match_pct],
         ]
 
-        for row in summary_rows:
+        for row in rows:
             summary.append(row)
 
         for cell in summary[1]:
             cell.font = Font(bold=True)
 
-        # ---------------- Chart ---------------------------------------
         chart = BarChart()
         chart.title = "Content Match Summary"
 
-        data_ref = Reference(summary, min_col=2, min_row=3, max_row=5)
-        label_ref = Reference(summary, min_col=1, min_row=3, max_row=5)
+        data_ref = Reference(
+            summary,
+            min_col=2,
+            min_row=3,
+            max_row=5,
+        )
+        label_ref = Reference(
+            summary,
+            min_col=1,
+            min_row=3,
+            max_row=5,
+        )
 
         chart.add_data(data_ref, titles_from_data=False)
         chart.set_categories(label_ref)
 
         summary.add_chart(chart, "D2")
 
-        wb.save(final_output)
+    # ---------------------------------------------------------
+    def __safe_map(self, data: List[Dict]) -> Dict[str, Dict]:
+        return {
+            d["section_id"]: d
+            for d in data
+            if isinstance(d, dict) and "section_id" in d
+        }
 
-        print(f"\n✔ Excel report generated → {final_output}\n")
-        return final_output
+    # ---------------------------------------------------------
+    def __sort_key(self, section_id: Any) -> List[int]:
+        if section_id is None:
+            return [9999]
+
+        sid = str(section_id)
+
+        if sid.startswith("FM-"):
+            try:
+                return [-1, int(sid.split("-")[1])]
+            except Exception:
+                return [-1, 0]
+
+        try:
+            return [int(x) for x in sid.split(".")]
+        except Exception:
+            return [9999]

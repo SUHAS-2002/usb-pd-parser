@@ -2,6 +2,7 @@
 
 from typing import List, Dict
 from pdfminer.high_level import extract_text
+
 from src.core.pdf_text_strategy import PDFTextStrategy
 
 
@@ -15,23 +16,22 @@ class PDFMinerAdapter(PDFTextStrategy):
     ]
     """
 
+    # ---------------------------------------------------------
+    # Public API (Strategy interface)
+    # ---------------------------------------------------------
     def extract_text(self, pdf_path: str) -> List[Dict]:
-        """
-        Extract text from a PDF file.
+        full_text = self.__extract_raw_text(pdf_path)
+        return self.__split_into_pages(full_text)
 
-        Parameters
-        ----------
-        pdf_path : str
-            Path to PDF file.
-
-        Returns
-        -------
-        List[Dict]
-            List of pages containing extracted text.
-        """
+    # ---------------------------------------------------------
+    # Private helpers
+    # ---------------------------------------------------------
+    def __extract_raw_text(self, pdf_path: str) -> str:
         with open(pdf_path, "rb") as file_obj:
-            full_text = extract_text(file_obj)
+            return extract_text(file_obj)
 
+    # ---------------------------------------------------------
+    def __split_into_pages(self, full_text: str) -> List[Dict]:
         raw_pages = full_text.split("\f")
         pages: List[Dict] = []
 

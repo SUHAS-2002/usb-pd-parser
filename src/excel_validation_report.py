@@ -4,37 +4,65 @@ import json
 from pathlib import Path
 from datetime import datetime
 import xlsxwriter
+from typing import Dict, Any
 
 
 class ExcelValidationReport:
     """
-    Generates a full validation Excel report based on
-    validation_report.json.
+    Generates a full validation Excel report from validation_report.json.
 
-    Includes:
-    - Summary sheet
-    - Missing sections
-    - Title mismatches
-    - Page discrepancies
-    - Quality scores
-    - Column chart
+    Encapsulation rules:
+    - generate() is the ONLY public method
+    - workbook creation and rendering are private
     """
 
-    def generate(self, report_json_path: str,
-                 output_xlsx: str) -> None:
-        """Generate a detailed Excel validation report."""
-        report_json_path = Path(report_json_path)
-        output_xlsx = Path(output_xlsx)
+    # ---------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------
+    def generate(
+        self,
+        report_json_path: str,
+        output_xlsx: str,
+    ) -> None:
+        self.__report_path = Path(report_json_path)
+        self.__output_path = Path(output_xlsx)
 
-        with report_json_path.open(
+        data = self.__load_report()
+        workbook = self.__create_workbook()
+
+        self.__build_summary_sheet(workbook, data)
+        self.__build_missing_sheet(workbook, data)
+        self.__build_mismatch_sheet(workbook, data)
+        self.__build_page_error_sheet(workbook, data)
+
+        workbook.close()
+        print(
+            f"✔ Validation Excel report saved → "
+            f"{self.__output_path}"
+        )
+
+    # ---------------------------------------------------------
+    # Private helpers
+    # ---------------------------------------------------------
+    def __load_report(self) -> Dict[str, Any]:
+        with self.__report_path.open(
             "r", encoding="utf-8"
         ) as f:
-            data = json.load(f)
+            return json.load(f)
 
-        workbook = xlsxwriter.Workbook(str(output_xlsx))
+    # ---------------------------------------------------------
+    def __create_workbook(self):
+        return xlsxwriter.Workbook(str(self.__output_path))
+
+    # ---------------------------------------------------------
+    def __build_summary_sheet(
+        self,
+        workbook,
+        data: Dict[str, Any],
+    ) -> None:
         bold = workbook.add_format({"bold": True})
+        summary = workbook.add_worksheet("Summary")
 
-        # Extract fields safely
         total = data.get("total_toc", 0)
         matched = len(data.get("matched", []))
         missing = len(data.get("missing", []))
@@ -42,15 +70,10 @@ class ExcelValidationReport:
         page_errors = len(data.get("page_discrepancies", []))
         quality_score = data.get("quality_score", 0)
 
-        if total:
-            match_pct = round((matched / total) * 100, 2)
-        else:
-            match_pct = 0
-
-        # ============================================================
-        # 1) SUMMARY SHEET
-        # ============================================================
-        summary = workbook.add_worksheet("Summary")
+        match_pct = (
+            round((matched / total) * 100, 2)
+            if total else 0
+        )
 
         summary.write("A1", "USB PD VALIDATION REPORT", bold)
         summary.write("A3", "Generated On:")
@@ -72,7 +95,6 @@ class ExcelValidationReport:
             summary.write(idx, 0, label)
             summary.write(idx, 1, value)
 
-        # Chart ------------------------------------------------------
         chart = workbook.add_chart({"type": "column"})
         chart.add_series(
             {
@@ -84,18 +106,27 @@ class ExcelValidationReport:
         chart.set_title({"name": "Validation Overview"})
         summary.insert_chart("D5", chart)
 
-        # ============================================================
-        # 2) MISSING SECTIONS
-        # ============================================================
-        ws_missing = workbook.add_worksheet("Missing Sections")
-        ws_missing.write_row(
-            0, 0, ["Section ID", "Title", "Page"], bold
+    # ---------------------------------------------------------
+    def __build_missing_sheet(
+        self,
+        workbook,
+        data: Dict[str, Any],
+    ) -> None:
+        bold = workbook.add_format({"bold": True})
+        ws = workbook.add_worksheet("Missing Sections")
+
+        ws.write_row(
+            0,
+            0,
+            ["Section ID", "Title", "Page"],
+            bold,
         )
 
         for row, sec in enumerate(
-            data.get("missing", []), start=1
+            data.get("missing", []),
+            start=1,
         ):
-            ws_missing.write_row(
+            ws.write_row(
                 row,
                 0,
                 [
@@ -105,13 +136,16 @@ class ExcelValidationReport:
                 ],
             )
 
-        # ============================================================
-        # 3) TITLE MISMATCHES
-        # ============================================================
-        ws_mismatch = workbook.add_worksheet(
-            "Title Mismatches"
-        )
-        ws_mismatch.write_row(
+    # ---------------------------------------------------------
+    def __build_mismatch_sheet(
+        self,
+        workbook,
+        data: Dict[str, Any],
+    ) -> None:
+        bold = workbook.add_format({"bold": True})
+        ws = workbook.add_worksheet("Title Mismatches")
+
+        ws.write_row(
             0,
             0,
             [
@@ -124,9 +158,10 @@ class ExcelValidationReport:
         )
 
         for row, mis in enumerate(
-            data.get("title_mismatches", []), start=1
+            data.get("title_mismatches", []),
+            start=1,
         ):
-            ws_mismatch.write_row(
+            ws.write_row(
                 row,
                 0,
                 [
@@ -137,21 +172,31 @@ class ExcelValidationReport:
                 ],
             )
 
-        # ============================================================
-        # 4) PAGE ERRORS
-        # ============================================================
-        ws_pages = workbook.add_worksheet("Page Errors")
-        ws_pages.write_row(
+    # ---------------------------------------------------------
+    def __build_page_error_sheet(
+        self,
+        workbook,
+        data: Dict[str, Any],
+    ) -> None:
+        bold = workbook.add_format({"bold": True})
+        ws = workbook.add_worksheet("Page Errors")
+
+        ws.write_row(
             0,
             0,
-            ["Section ID", "TOC Page", "Chunk Page Range"],
+            [
+                "Section ID",
+                "TOC Page",
+                "Chunk Page Range",
+            ],
             bold,
         )
 
         for row, err in enumerate(
-            data.get("page_discrepancies", []), start=1
+            data.get("page_discrepancies", []),
+            start=1,
         ):
-            ws_pages.write_row(
+            ws.write_row(
                 row,
                 0,
                 [
@@ -160,6 +205,3 @@ class ExcelValidationReport:
                     str(err["chunk_range"]),
                 ],
             )
-
-        workbook.close()
-        print(f"✔ Validation Excel report saved → {output_xlsx}")

@@ -1,6 +1,7 @@
 # src/core/parser_factory.py
 
-from typing import Protocol
+from typing import Protocol, Any
+
 from ..parsers.simple_parser import SimpleParser
 from ..parsers.advanced_parser import AdvancedParser
 from ..parsers.full_pdf_parser import FullPDFParser
@@ -9,55 +10,62 @@ from ..parsers.full_pdf_parser import FullPDFParser
 class PDFStrategyProtocol(Protocol):
     """
     Protocol for PDF text extraction strategies.
-    Any strategy must implement extract_text().
     """
 
-    def extract_text(self, pdf_path: str):
+    def extract_text(self, pdf_path: str) -> Any:
         ...
 
 
 class ParserFactory:
     """
-    Factory Pattern: creates parser instances based on `parser_type`.
+    Factory for creating parser instances.
 
-    The factory does NOT create PDF text extraction strategies.
-    A strategy instance must be supplied from outside
-    (Dependency Injection → clean OOP, SOLID-compliant).
+    Encapsulation rules:
+    - create() is the ONLY public method
+    - validation and selection logic is private
     """
 
-    @staticmethod
+    # ---------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------
     def create(
-        parser_type: str = "advanced",
-        pdf_strategy: PDFStrategyProtocol = None
+        self,
+        parser_type: str,
+        pdf_strategy: PDFStrategyProtocol,
     ):
-        """
-        Create and return a parser instance.
+        self.__validate_strategy(pdf_strategy)
+        parser_type = self.__normalize_type(parser_type)
 
-        Parameters
-        ----------
-        parser_type : str
-            One of: "simple", "advanced", "full".
-        pdf_strategy : object
-            A PDF text extraction strategy implementing extract_text().
+        return self.__build_parser(
+            parser_type,
+            pdf_strategy,
+        )
 
-        Returns
-        -------
-        object
-            Instance of SimpleParser, AdvancedParser, or FullPDFParser.
-
-        Raises
-        ------
-        ValueError
-            If pdf_strategy is missing or parser_type is unknown.
-        """
+    # ---------------------------------------------------------
+    # Private helpers
+    # ---------------------------------------------------------
+    def __validate_strategy(
+        self,
+        pdf_strategy: PDFStrategyProtocol,
+    ) -> None:
         if pdf_strategy is None:
             raise ValueError(
-                "ParserFactory.create() requires a pdf_strategy instance. "
-                "Inject the strategy externally to follow good OOP design."
+                "pdf_strategy must be provided "
+                "(Dependency Injection required)."
             )
 
-        parser_type = parser_type.lower()
+    # ---------------------------------------------------------
+    def __normalize_type(self, parser_type: str) -> str:
+        if not isinstance(parser_type, str):
+            raise ValueError("parser_type must be a string")
+        return parser_type.lower()
 
+    # ---------------------------------------------------------
+    def __build_parser(
+        self,
+        parser_type: str,
+        pdf_strategy: PDFStrategyProtocol,
+    ):
         if parser_type == "simple":
             return SimpleParser(pdf_strategy)
 
@@ -67,4 +75,6 @@ class ParserFactory:
         if parser_type == "full":
             return FullPDFParser(pdf_strategy)
 
-        raise ValueError(f"Unknown parser type: '{parser_type}'")
+        raise ValueError(
+            f"Unknown parser type: '{parser_type}'"
+        )

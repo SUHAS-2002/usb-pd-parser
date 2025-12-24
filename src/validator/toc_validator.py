@@ -3,71 +3,78 @@
 import json
 from pathlib import Path
 from typing import List, Dict
+
 from src.validator.matcher import SectionMatcher
 
 
 class TOCValidator:
     """
     Validates consistency between:
-        • TOC entries
-        • Extracted content chunks
+        - TOC entries
+        - Extracted content chunks
 
-    Responsibilities:
-    - Load JSONL TOC + chunk files
-    - Use SectionMatcher to compute discrepancies
-    - Save validation report as JSON
+    Encapsulation rules:
+    - validate() is the ONLY public method
+    - matching and I/O are encapsulated
     """
 
+    # ---------------------------------------------------------
+    # Construction (private state)
+    # ---------------------------------------------------------
     def __init__(self, title_threshold: float = 0.85) -> None:
-        self._matcher = SectionMatcher(title_threshold)
+        self.__matcher = SectionMatcher(title_threshold)
 
+    # ---------------------------------------------------------
+    # Public API
     # ---------------------------------------------------------
     def validate(
         self,
         toc_path: str,
         chunks_path: str,
-        report_path: str = "validation_report.json"
+        report_path: str = "validation_report.json",
     ) -> Dict:
-        """
-        Compare TOC entries with extracted content chunks and
-        produce a validation report.
+        toc = self.__load_jsonl(Path(toc_path))
+        chunks = self.__load_jsonl(Path(chunks_path))
 
-        Parameters
-        ----------
-        toc_path : str
-            Path to TOC JSONL file.
-        chunks_path : str
-            Path to extracted section chunks JSONL file.
-        report_path : str
-            Output JSON report file path.
+        result = self.__match(toc, chunks)
+        self.__persist_report(result, Path(report_path))
 
-        Returns
-        -------
-        dict
-            Raw match results from SectionMatcher.
-        """
-
-        toc = self._load_jsonl(Path(toc_path))
-        chunks = self._load_jsonl(Path(chunks_path))
-
-        result = self._matcher.match(toc, chunks)
-
-        out = Path(report_path)
-        out.write_text(
-            json.dumps(result, indent=2, ensure_ascii=False),
-            encoding="utf-8"
-        )
-
-        print(f"Validation report saved → {out}")
+        print(f"Validation report saved → {report_path}")
         return result
 
     # ---------------------------------------------------------
-    def _load_jsonl(self, path: Path) -> List[Dict]:
-        """Load JSONL file into a list of dictionaries."""
+    # Private helpers
+    # ---------------------------------------------------------
+    def __match(
+        self,
+        toc: List[Dict],
+        chunks: List[Dict],
+    ) -> Dict:
+        return self.__matcher.match(toc, chunks)
+
+    # ---------------------------------------------------------
+    def __persist_report(
+        self,
+        report: Dict,
+        path: Path,
+    ) -> None:
+        path.write_text(
+            json.dumps(
+                report,
+                indent=2,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+
+    # ---------------------------------------------------------
+    def __load_jsonl(self, path: Path) -> List[Dict]:
         items: List[Dict] = []
+
         with path.open("r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if line:
                     items.append(json.loads(line))
+
         return items

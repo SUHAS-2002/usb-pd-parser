@@ -8,14 +8,14 @@ class PDFTextStrategy(ABC):
     """
     Abstract base class for all PDF text extraction strategies.
 
-    The strategy pattern allows interchangeable extractors such as:
+    Strategy Pattern:
+        - PyMuPDF-based extractor
+        - PDFMiner-based extractor
+        - OCR-based extractor
+        - Hybrid extractors for complex layouts
 
-    - PyMuPDF-based extractor
-    - PDFMiner-based extractor
-    - OCR-based extractor
-    - Hybrid extractors for complex layouts
-
-    Each implementation must return a normalized structure:
+    Contract:
+        Implementations MUST return a normalized structure:
 
         List[Dict] where each dict contains:
             {
@@ -24,6 +24,9 @@ class PDFTextStrategy(ABC):
             }
     """
 
+    # ---------------------------------------------------------
+    # Public strategy contract
+    # ---------------------------------------------------------
     @abstractmethod
     def extract_text(self, pdf_path: str) -> List[Dict]:
         """
@@ -37,7 +40,7 @@ class PDFTextStrategy(ABC):
         Returns
         -------
         List[Dict]
-            List of pages in normalized format.
+            Normalized list of extracted pages.
 
         Example:
             [

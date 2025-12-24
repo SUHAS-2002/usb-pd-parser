@@ -10,7 +10,7 @@ Features:
 import fitz
 import pytesseract
 from PIL import Image
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 from src.core.extractor_base import BaseExtractor
 
@@ -18,30 +18,99 @@ from src.core.extractor_base import BaseExtractor
 class HighFidelityExtractor(BaseExtractor):
     """
     Strategy for high-fidelity PDF extraction.
+
+    Public API:
+        - extract(pdf_path)
+
+    All implementation details are encapsulated.
     """
 
+    # ------------------------------------------------------------
+    # Constructor (private state)
+    # ------------------------------------------------------------
     def __init__(self, ocr: bool = True) -> None:
-        self._ocr = ocr
+        self.__ocr = self._validate_ocr_flag(ocr)
 
-    # ---------------------------------------------------------------
-    # Encapsulated OCR flag
-    # ---------------------------------------------------------------
+    # ------------------------------------------------------------
+    # Public read-only property
+    # ------------------------------------------------------------
     @property
     def ocr(self) -> bool:
-        return self._ocr
-
-    @ocr.setter
-    def ocr(self, val: bool) -> None:
-        if not isinstance(val, bool):
-            raise ValueError("ocr must be True or False")
-        self._ocr = val
-
-    # ---------------------------------------------------------------
-    # Internal OCR helper
-    # ---------------------------------------------------------------
-    def _ocr_img(self, pix) -> str:
         """
-        OCR a pixmap into text. Returns empty string on failure.
+        Indicates whether OCR fallback is enabled.
+        """
+        return self.__ocr
+
+    # ------------------------------------------------------------
+    # Template method implementation
+    # ------------------------------------------------------------
+    def _extract_impl(self, pdf_path: str) -> List[Dict]:
+        """
+        Extract page text and OCR content from PDF.
+        """
+        doc = self._open_document(pdf_path)
+        output: List[Dict] = []
+
+        for idx, page in enumerate(doc):
+            text = self._extract_page_text(page)
+            output.append(
+                {
+                    "page": idx + 1,
+                    "text": text,
+                }
+            )
+
+        return output
+
+    # ------------------------------------------------------------
+    # Protected helpers
+    # ------------------------------------------------------------
+    def _open_document(self, pdf_path: str):
+        """
+        Open PDF document.
+        """
+        return fitz.open(pdf_path)
+
+    # ------------------------------------------------------------
+    def _extract_page_text(self, page) -> str:
+        """
+        Extract ordered text blocks from a page.
+        """
+        blocks = page.get_text("blocks")
+        blocks = sorted(blocks, key=lambda b: (b[1], b[0]))
+
+        texts: List[str] = []
+
+        for blk in blocks:
+            txt = blk[4].strip()
+
+            if txt:
+                texts.append(txt)
+                continue
+
+            if self.__ocr:
+                ocr_txt = self._extract_ocr_block(page, blk)
+                if ocr_txt:
+                    texts.append(ocr_txt)
+
+        return "\n".join(texts)
+
+    # ------------------------------------------------------------
+    def _extract_ocr_block(self, page, block) -> str:
+        """
+        Perform OCR on a single non-text block.
+        """
+        try:
+            rect = block[:4]
+            pix = page.get_pixmap(clip=rect)
+            return self._ocr_pixmap(pix).strip()
+        except Exception:
+            return ""
+
+    # ------------------------------------------------------------
+    def _ocr_pixmap(self, pix) -> str:
+        """
+        Convert pixmap to text using Tesseract OCR.
         """
         try:
             img = Image.frombytes(
@@ -53,52 +122,10 @@ class HighFidelityExtractor(BaseExtractor):
         except Exception:
             return ""
 
-    # ---------------------------------------------------------------
-    # Main extract method
-    # ---------------------------------------------------------------
-    def extract(self, pdf: str) -> List[Dict]:
-        """
-        Extract page text + OCR content.
-
-        Returns:
-          List of {"page": int, "text": str}
-        """
-        doc = fitz.open(pdf)
-        out: List[Dict] = []
-
-        for idx, page in enumerate(doc):
-            blocks = page.get_text("blocks")
-            blocks = sorted(
-                blocks,
-                key=lambda b: (b[1], b[0]),
-            )
-
-            texts: List[str] = []
-
-            for blk in blocks:
-                txt = blk[4].strip()
-
-                if txt:
-                    texts.append(txt)
-                    continue
-
-                if self._ocr:
-                    try:
-                        rect = blk[:4]
-                        pix = page.get_pixmap(clip=rect)
-                        ocr_txt = self._ocr_img(pix)
-                        if ocr_txt.strip():
-                            texts.append(ocr_txt)
-                    except Exception:
-                        pass
-
-            joined = "\n".join(texts)
-
-            out.append(
-                {
-                    "page": idx + 1,
-                    "text": joined,
-                }
-            )
-
-        return out
+    # ------------------------------------------------------------
+    # Private helpers
+    # ------------------------------------------------------------
+    def _validate_ocr_flag(self, val: bool) -> bool:
+        if not isinstance(val, bool):
+            raise ValueError("ocr must be a boolean")
+        return val

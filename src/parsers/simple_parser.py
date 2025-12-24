@@ -17,9 +17,12 @@ class SimpleParser(BaseParser):
         ]
     """
 
+    # ---------------------------------------------------------
     def __init__(self, strategy: PDFTextStrategy) -> None:
         super().__init__(strategy)
 
+    # ---------------------------------------------------------
+    # Public API
     # ---------------------------------------------------------
     def parse(self) -> List[Dict]:
         """
@@ -29,8 +32,19 @@ class SimpleParser(BaseParser):
         - sorted output
         """
         raw_pages = self._strategy.extract_text(self.pdf_path)
+        pages = self.__normalize_pages(raw_pages)
+        pages.sort(key=lambda p: p["page_number"])
+        return pages
 
+    # ---------------------------------------------------------
+    # Private helpers
+    # ---------------------------------------------------------
+    def __normalize_pages(
+        self,
+        raw_pages: List[Dict],
+    ) -> List[Dict]:
         pages: List[Dict] = []
+
         for entry in raw_pages:
             num = entry.get("page_number")
             text = entry.get("text", "") or ""
@@ -45,5 +59,4 @@ class SimpleParser(BaseParser):
                 }
             )
 
-        pages.sort(key=lambda p: p["page_number"])
         return pages
