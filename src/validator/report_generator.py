@@ -6,7 +6,10 @@ from typing import List, Dict
 from pathlib import Path
 
 
-@dataclass
+# ------------------------------------------------------------------
+# Domain model
+# ------------------------------------------------------------------
+@dataclass(frozen=True)
 class ValidationReport:
     """Structured score output for validation results."""
     quality_score: float
@@ -19,7 +22,50 @@ class ValidationReport:
     page_error_count: int
     recommendations: List[str]
 
+    # --------------------------------------------------------------
+    # Polymorphism (special methods)
+    # --------------------------------------------------------------
+    def __str__(self) -> str:
+        """Human-readable summary."""
+        return (
+            f"ValidationReport("
+            f"quality={self.quality_score}%, "
+            f"match={self.match_percentage}%, "
+            f"title={self.title_accuracy}%, "
+            f"page={self.page_accuracy}%"
+            f")"
+        )
 
+    def __repr__(self) -> str:
+        """Developer-friendly representation."""
+        return (
+            "ValidationReport("
+            f"quality_score={self.quality_score}, "
+            f"match_percentage={self.match_percentage}, "
+            f"title_accuracy={self.title_accuracy}, "
+            f"page_accuracy={self.page_accuracy}, "
+            f"total_toc={self.total_toc}"
+            ")"
+        )
+
+    def __len__(self) -> int:
+        """Return number of recommendations."""
+        return len(self.recommendations)
+
+    def __eq__(self, other: object) -> bool:
+        """Logical equality based on core metrics."""
+        if not isinstance(other, ValidationReport):
+            return NotImplemented
+        return (
+            self.quality_score == other.quality_score
+            and self.match_percentage == other.match_percentage
+            and self.total_toc == other.total_toc
+        )
+
+
+# ------------------------------------------------------------------
+# Generator
+# ------------------------------------------------------------------
 class ReportGenerator:
     """
     Generates a human-readable validation scorecard and produces
@@ -83,17 +129,19 @@ class ReportGenerator:
     def save(
         self,
         report: ValidationReport,
-        path: str = "data/score_report.json"
+        path: str = "data/score_report.json",
     ) -> None:
         """Save report as JSON inside data/ folder."""
         output = Path(path)
-
-        # Ensure directory exists
         output.parent.mkdir(parents=True, exist_ok=True)
 
         with output.open("w", encoding="utf-8") as f:
-            json.dump(report.__dict__, f, indent=2,
-                      ensure_ascii=False)
+            json.dump(
+                report.__dict__,
+                f,
+                indent=2,
+                ensure_ascii=False,
+            )
 
         print(f"Score report saved → {output}")
 

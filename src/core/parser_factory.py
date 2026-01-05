@@ -1,70 +1,88 @@
 # src/core/parser_factory.py
 
-from typing import Protocol
+from typing import Dict, Type, List
+
+from src.core.base_parser import BaseParser
+from src.core.pdf_text_strategy import PDFTextStrategy
+
 from ..parsers.simple_parser import SimpleParser
 from ..parsers.advanced_parser import AdvancedParser
 from ..parsers.full_pdf_parser import FullPDFParser
 
 
-class PDFStrategyProtocol(Protocol):
-    """
-    Protocol for PDF text extraction strategies.
-    Any strategy must implement extract_text().
-    """
-
-    def extract_text(self, pdf_path: str):
-        ...
-
-
 class ParserFactory:
     """
-    Factory Pattern: creates parser instances based on `parser_type`.
+    Factory Pattern: creates parser instances using a registry.
 
-    The factory does NOT create PDF text extraction strategies.
-    A strategy instance must be supplied from outside
-    (Dependency Injection → clean OOP, SOLID-compliant).
+    - Parsers are registered once
+    - Creation is centralized
+    - Strategy is injected (Dependency Injection)
+    - Registry is encapsulated (private)
     """
 
-    @staticmethod
-    def create(
-        parser_type: str = "advanced",
-        pdf_strategy: PDFStrategyProtocol = None
-    ):
-        """
-        Create and return a parser instance.
+    __registry: Dict[str, Type[BaseParser]] = {}
 
-        Parameters
-        ----------
-        parser_type : str
-            One of: "simple", "advanced", "full".
-        pdf_strategy : object
-            A PDF text extraction strategy implementing extract_text().
-
-        Returns
-        -------
-        object
-            Instance of SimpleParser, AdvancedParser, or FullPDFParser.
-
-        Raises
-        ------
-        ValueError
-            If pdf_strategy is missing or parser_type is unknown.
-        """
-        if pdf_strategy is None:
-            raise ValueError(
-                "ParserFactory.create() requires a pdf_strategy instance. "
-                "Inject the strategy externally to follow good OOP design."
+    # ---------------------------------------------------------
+    @classmethod
+    def register(
+        cls,
+        name: str,
+        parser_cls: Type[BaseParser],
+    ) -> None:
+        """Register a parser type."""
+        if not issubclass(parser_cls, BaseParser):
+            raise TypeError(
+                "parser_cls must inherit from BaseParser"
             )
 
-        parser_type = parser_type.lower()
+        cls.__registry[name.lower()] = parser_cls
 
-        if parser_type == "simple":
-            return SimpleParser(pdf_strategy)
+    # ---------------------------------------------------------
+    @classmethod
+    def create(
+        cls,
+        parser_type: str,
+        strategy: PDFTextStrategy,
+        *args,
+        **kwargs,
+    ) -> BaseParser:
+        """
+        Create and return a parser instance.
+        """
+        if strategy is None:
+            raise ValueError(
+                "ParserFactory.create() requires a PDFTextStrategy instance."
+            )
 
-        if parser_type == "advanced":
-            return AdvancedParser(pdf_strategy)
+        key = parser_type.lower()
+        if key not in cls.__registry:
+            raise ValueError(
+                f"Unknown parser type: '{parser_type}'. "
+                f"Available: {cls.get_available_types()}"
+            )
 
-        if parser_type == "full":
-            return FullPDFParser(pdf_strategy)
+        return cls.__registry[key](strategy, *args, **kwargs)
 
-        raise ValueError(f"Unknown parser type: '{parser_type}'")
+    # ---------------------------------------------------------
+    @classmethod
+    def get_available_types(cls) -> List[str]:
+        """Return all registered parser types."""
+        return list(cls.__registry.keys())
+
+    # ---------------------------------------------------------
+    def __str__(self) -> str:
+        return f"ParserFactory(types={self.get_available_types()})"
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}"
+            f"(registry={self.get_available_types()})"
+        )
+
+
+# ------------------------------------------------------------------
+# Built-in parser registrations (ONE-TIME)
+# ------------------------------------------------------------------
+ParserFactory.register("simple", SimpleParser)
+ParserFactory.register("advanced", AdvancedParser)
+ParserFactory.register("full", FullPDFParser)

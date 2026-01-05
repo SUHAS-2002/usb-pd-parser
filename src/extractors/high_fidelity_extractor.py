@@ -10,38 +10,57 @@ Features:
 import fitz
 import pytesseract
 from PIL import Image
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 from src.core.extractor_base import BaseExtractor
+from src.core.pdf_text_strategy import PDFTextStrategy
 
 
-class HighFidelityExtractor(BaseExtractor):
+class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
     """
-    Strategy for high-fidelity PDF extraction.
+    High-fidelity OCR-based PDF extraction strategy.
     """
-
-    def __init__(self, ocr: bool = True) -> None:
-        self._ocr = ocr
 
     # ---------------------------------------------------------------
-    # Encapsulated OCR flag
+    def __init__(self, ocr: bool = True) -> None:
+        self.__ocr: bool = self._validate_ocr(ocr)
+
+    # ---------------------------------------------------------------
+    # Strategy metadata
+    # ---------------------------------------------------------------
+    @property
+    def strategy_name(self) -> str:
+        """Return the name of this extraction strategy."""
+        return "high_fidelity_ocr"
+
+    # ---------------------------------------------------------------
+    # Encapsulation: OCR flag
     # ---------------------------------------------------------------
     @property
     def ocr(self) -> bool:
-        return self._ocr
+        """Return whether OCR fallback is enabled."""
+        return self.__ocr
 
     @ocr.setter
-    def ocr(self, val: bool) -> None:
-        if not isinstance(val, bool):
-            raise ValueError("ocr must be True or False")
-        self._ocr = val
+    def ocr(self, value: bool) -> None:
+        """Enable or disable OCR fallback."""
+        self.__ocr = self._validate_ocr(value)
+
+    # ---------------------------------------------------------------
+    # Validation helpers
+    # ---------------------------------------------------------------
+    def _validate_ocr(self, value: bool) -> bool:
+        if not isinstance(value, bool):
+            raise ValueError("ocr must be a boolean value")
+        return value
 
     # ---------------------------------------------------------------
     # Internal OCR helper
     # ---------------------------------------------------------------
     def _ocr_img(self, pix) -> str:
         """
-        OCR a pixmap into text. Returns empty string on failure.
+        OCR a pixmap into text.
+        Returns empty string on failure.
         """
         try:
             img = Image.frombytes(
@@ -54,14 +73,15 @@ class HighFidelityExtractor(BaseExtractor):
             return ""
 
     # ---------------------------------------------------------------
-    # Main extract method
+    # Strategy implementation
     # ---------------------------------------------------------------
-    def extract(self, pdf: str) -> List[Dict]:
+    def extract_text(self, pdf: str) -> List[Dict]:
         """
-        Extract page text + OCR content.
+        Concrete Strategy implementation.
 
-        Returns:
-          List of {"page": int, "text": str}
+        NOTE:
+        This method contains the SAME logic that previously
+        existed in extract(). Behavior is unchanged.
         """
         doc = fitz.open(pdf)
         out: List[Dict] = []
@@ -82,7 +102,7 @@ class HighFidelityExtractor(BaseExtractor):
                     texts.append(txt)
                     continue
 
-                if self._ocr:
+                if self.__ocr:
                     try:
                         rect = blk[:4]
                         pix = page.get_pixmap(clip=rect)
@@ -92,12 +112,10 @@ class HighFidelityExtractor(BaseExtractor):
                     except Exception:
                         pass
 
-            joined = "\n".join(texts)
-
             out.append(
                 {
                     "page": idx + 1,
-                    "text": joined,
+                    "text": "\n".join(texts),
                 }
             )
 

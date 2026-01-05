@@ -15,9 +15,42 @@ class SectionMatcher:
     - Page-range consistency check (optional)
     """
 
+    # ---------------------------------------------------------
     def __init__(self, title_threshold: float = 0.85) -> None:
-        self._threshold = title_threshold
+        self.__threshold: float = self._validate_threshold(
+            title_threshold
+        )
 
+    # ---------------------------------------------------------
+    # Encapsulation: threshold
+    # ---------------------------------------------------------
+    @property
+    def threshold(self) -> float:
+        """Return title similarity threshold."""
+        return self.__threshold
+
+    @threshold.setter
+    def threshold(self, value: float) -> None:
+        """Set title similarity threshold (0.0–1.0)."""
+        self.__threshold = self._validate_threshold(value)
+
+    # ---------------------------------------------------------
+    # Validation helpers
+    # ---------------------------------------------------------
+    def _validate_threshold(self, value: float) -> float:
+        if not isinstance(value, (float, int)):
+            raise TypeError(
+                "title_threshold must be a float between 0 and 1"
+            )
+        if not 0.0 <= float(value) <= 1.0:
+            raise ValueError(
+                f"Threshold must be between 0 and 1, got {value}"
+            )
+        return float(value)
+
+    # ---------------------------------------------------------
+    # Text normalization & similarity
+    # ---------------------------------------------------------
     def _normalize(self, text: str) -> str:
         """Lowercase, remove punctuation, collapse whitespace."""
         cleaned = text.lower()
@@ -31,10 +64,13 @@ class SectionMatcher:
         b_norm = self._normalize(b)
         return SequenceMatcher(None, a_norm, b_norm).ratio()
 
+    # ---------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------
     def match(
         self,
         toc: List[Dict[str, Any]],
-        chunks: List[Dict[str, Any]]
+        chunks: List[Dict[str, Any]],
     ) -> Dict[str, Any]:
         """
         Match TOC entries with extracted chunks using:
@@ -59,12 +95,12 @@ class SectionMatcher:
 
             chunk = chunk_map[sid]
 
-            # -------------- Title Similarity -----------------
+            # -------- Title similarity --------
             toc_title = entry.get("title", "")
             chunk_title = chunk.get("title", "")
             sim = self._similarity(toc_title, chunk_title)
 
-            if sim < self._threshold:
+            if sim < self.__threshold:
                 title_miss.append(
                     {
                         "section_id": sid,
@@ -74,7 +110,7 @@ class SectionMatcher:
                     }
                 )
 
-            # -------------- Page Range Check -----------------
+            # -------- Page range check --------
             pr = chunk.get("page_range")
             if pr:
                 start, end = pr
