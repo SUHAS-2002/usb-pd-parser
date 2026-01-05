@@ -129,7 +129,7 @@ class ReportGenerator:
     def save(
         self,
         report: ValidationReport,
-        path: str = "data/score_report.json",
+        path: str = "data/score_report.jsonl",
     ) -> None:
         """Save report as JSON inside data/ folder."""
         output = Path(path)
