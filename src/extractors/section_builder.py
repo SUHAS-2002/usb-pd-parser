@@ -27,6 +27,7 @@ class SectionContentBuilder:
     RULES:
     - Uses ONLY numeric inline headings
     - Ignores FM-* completely
+    - Filters false positives (dates, versions, metadata)
     - Produces manager-approved JSONL format
     """
 
@@ -46,6 +47,7 @@ class SectionContentBuilder:
     ) -> List[Dict]:
         """
         Build spec sections from numeric inline headings.
+        Filters out false positives (dates, versions, metadata).
         """
         if not headings:
             return []
@@ -57,9 +59,14 @@ class SectionContentBuilder:
                 continue
 
             sid = h["section_id"]
+            title = h.get("title", "")
 
             # 🚫 ABSOLUTE RULE: no FM entries
             if self._is_front_matter(sid):
+                continue
+
+            # 🚫 Filter false positives
+            if self._is_false_positive(sid, title):
                 continue
 
             out.append(
@@ -85,6 +92,58 @@ class SectionContentBuilder:
         """Return True if section is front-matter."""
         return section_id.startswith("FM-")
 
+    def _is_false_positive(self, section_id: str, title: str) -> bool:
+        """
+        Detect false positive sections (dates, versions, metadata).
+
+        Returns True if section should be filtered out.
+        """
+        title_lower = title.lower().strip()
+
+        # Filter out version numbers
+        if title_lower in [
+            "version:", "version", "v1.0", "v1.1",
+            "v2.0", "v3.0",
+        ]:
+            return True
+
+        # Filter out release dates
+        if title_lower.startswith("release date"):
+            return True
+
+        # Filter out dates (common patterns)
+        months = [
+            "january", "february", "march", "april", "may", "june",
+            "july", "august", "september", "october",
+            "november", "december",
+        ]
+        if any(m in title_lower for m in months):
+            if len(title_lower.split()) <= 3:
+                return True
+
+        # Numeric section IDs with date-like titles
+        if section_id.isdigit() and any(m in title_lower for m in months):
+            return True
+
+        # Single-digit numeric IDs with date-like titles
+        if len(section_id) == 1 and section_id.isdigit():
+            if any(m in title_lower for m in months):
+                return True
+
+        # Version-like section IDs (e.g. 1.0, 2.0)
+        if section_id.count(".") == 1:
+            major, minor = section_id.split(".", 1)
+            if major.isdigit() and minor.isdigit():
+                if title_lower in [
+                    "1.0", "1.1", "1.2", "1.3",
+                    "2.0", "3.0",
+                ]:
+                    return True
+                if any(m in title_lower for m in months):
+                    return True
+
+        return False
+
     def _build_section_record(
         self,
         heading: Dict,
@@ -108,5 +167,5 @@ class SectionContentBuilder:
             "page": page,
             "level": level,
             "parent_id": parent_id,
-            "tags": [],  # tag inference can be added later
+            "tags": [],
         }

@@ -24,15 +24,10 @@ class TocEntry:
     full_path: str
     tags: List[str]
 
-    # --------------------------------------------------------------
-    # Polymorphism (special methods)
-    # --------------------------------------------------------------
     def __str__(self) -> str:
-        """Human-readable string representation."""
         return f"{self.section_id}: {self.title} (page {self.page})"
 
     def __repr__(self) -> str:
-        """Developer-friendly representation."""
         return (
             "TocEntry("
             f"section_id={self.section_id!r}, "
@@ -41,11 +36,9 @@ class TocEntry:
         )
 
     def __len__(self) -> int:
-        """Return the length of the title."""
         return len(self.title)
 
     def __eq__(self, other: object) -> bool:
-        """Logical equality comparison."""
         if not isinstance(other, TocEntry):
             return NotImplemented
         return (
@@ -69,6 +62,14 @@ class ToCExtractor:
         r"^\s*([A-Za-z][A-Za-z\s]+?)\.{3,}\s*(\d{1,4})\s*$"
     )
 
+    NUMBERED_TOC_RE = re.compile(
+        r"^\s*(\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
+    )
+
+    APPENDIX_TOC_RE = re.compile(
+        r"^\s*([A-E](?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
+    )
+
     TOC_HEADER_RE = re.compile(
         r"\btable\s+of\s+contents\b",
         re.IGNORECASE,
@@ -90,8 +91,6 @@ class ToCExtractor:
         self._max_real_page: int = 1100
 
     # --------------------------------------------------------------
-    # Properties (Encapsulation)
-    # --------------------------------------------------------------
     @property
     def doc_title(self) -> str:
         return self._doc_title
@@ -101,10 +100,31 @@ class ToCExtractor:
         return self._max_real_page
 
     # --------------------------------------------------------------
-    # Public API (unchanged)
+    # Public API
     # --------------------------------------------------------------
     def extract(self, pages: List[Dict]) -> List[Dict]:
-        toc_raw: List[Tuple[str, str, int]] = []
+        toc_entries = self._extract_toc_pages(pages)
+        all_sections = self._extract_all_numeric_headings(pages)
+        merged = self._merge_toc_with_sections(
+            toc_entries,
+            all_sections,
+        )
+
+        items = sorted(
+            merged.values(),
+            key=lambda e: (e.page, self._sid_key(e.section_id)),
+        )
+
+        return [asdict(e) for e in items]
+
+    # --------------------------------------------------------------
+    # TOC extraction (front matter)
+    # --------------------------------------------------------------
+    def _extract_toc_pages(
+        self,
+        pages: List[Dict],
+    ) -> Dict[str, TocEntry]:
+        entries: Dict[str, TocEntry] = {}
         in_toc = False
         fm_idx = 0
 
@@ -119,105 +139,188 @@ class ToCExtractor:
 
             for ln in text.splitlines():
                 if self.BODY_START_RE.match(ln):
-                    in_toc = False
-                    break
-
-            if not in_toc:
-                break
+                    return entries
 
             lines = [
                 ln for ln in text.splitlines()
                 if not self.SELF_REF_RE.match(ln)
             ]
 
-            for title, p in self._from_page("\n".join(lines)):
-                sid = f"FM-{fm_idx}"
-                fm_idx += 1
-                toc_raw.append((sid, title, p))
+            for sid, title, p in self._from_page("\n".join(lines)):
+                if p > self.max_real_page:
+                    continue
 
-        page_to_section = self._build_page_section_map(pages)
-        entries: Dict[str, TocEntry] = {}
+                if sid:
+                    entries[sid] = self._make_entry(sid, title, p)
+                else:
+                    fm = f"FM-{fm_idx}"
+                    fm_idx += 1
+                    entries[fm] = self._make_entry(fm, title, p)
 
-        for sid, title, page in toc_raw:
-            if page > self.max_real_page:
-                continue
+        return entries
 
-            real_sid = self._promote(page, page_to_section) or sid
+    # --------------------------------------------------------------
+    # Full document numeric heading extraction
+    # --------------------------------------------------------------
+    def _extract_all_numeric_headings(
+        self,
+        pages: List[Dict],
+    ) -> Dict[str, Tuple[str, int]]:
+        sections: Dict[str, Tuple[str, int]] = {}
 
-            if real_sid.startswith("FM-"):
-                level = 0
-                parent = None
-                full = title
-            else:
-                level = real_sid.count(".") + 1
-                parent = self._parent_id(real_sid)
-                full = f"{real_sid} {title}"
+        for pg in pages:
+            text = pg.get("text", "") or ""
+            page_no = pg.get("page", 0)
 
-            entries[real_sid] = TocEntry(
-                doc_title=self.doc_title,
-                section_id=real_sid,
-                title=title,
-                page=page,
-                level=level,
-                parent_id=parent,
-                full_path=full,
-                tags=self._infer_tags(title),
-            )
+            for m in self.BODY_SECTION_RE.finditer(text):
+                sid, title = m.groups()
+                sections.setdefault(sid, (title.strip(), page_no))
 
-        items = sorted(
-            entries.values(),
-            key=lambda e: (e.page, self._sid_key(e.section_id)),
-        )
+        return sections
 
-        return [asdict(e) for e in items]
+    # --------------------------------------------------------------
+    # Merge logic
+    # --------------------------------------------------------------
+    def _merge_toc_with_sections(
+        self,
+        toc_entries: Dict[str, TocEntry],
+        all_sections: Dict[str, Tuple[str, int]],
+    ) -> Dict[str, TocEntry]:
+        merged = dict(toc_entries)
+
+        for sid, (title, page) in all_sections.items():
+            if sid not in merged:
+                merged[sid] = self._make_entry(sid, title, page)
+
+        return merged
 
     # --------------------------------------------------------------
     # Internals
     # --------------------------------------------------------------
-    def _from_page(self, text: str) -> List[Tuple[str, int]]:
-        out: List[Tuple[str, int]] = []
+    def _from_page(
+        self,
+        text: str,
+    ) -> List[Tuple[Optional[str], str, int]]:
+        out: List[Tuple[Optional[str], str, int]] = []
 
         for ln in text.splitlines():
-            m = self.FRONT_RE.match(ln)
+            sid = None
+            title = None
+            page = None
+
+            m = self.NUMBERED_TOC_RE.match(ln)
             if m:
-                title, p = m.groups()
-                out.append((title.strip(), int(p)))
+                sid, t, p = m.groups()
+                title = t.strip().rstrip(".").strip()
+                page = int(p)
+            else:
+                m = self.APPENDIX_TOC_RE.match(ln)
+                if m:
+                    sid, t, p = m.groups()
+                    title = t.strip().rstrip(".").strip()
+                    page = int(p)
+                else:
+                    m = self.FRONT_RE.match(ln)
+                    if m:
+                        t, p = m.groups()
+                        title = t.strip()
+                        page = int(p)
+
+            if title and page:
+                if not self._is_false_positive_toc(sid, title):
+                    out.append((sid, title, page))
 
         return out
 
-    def _build_page_section_map(
+    # --------------------------------------------------------------
+    # False-positive filter
+    # --------------------------------------------------------------
+    def _is_false_positive_toc(
         self,
-        pages: List[Dict],
-    ) -> Dict[int, str]:
-        mapping: Dict[int, str] = {}
+        section_id: Optional[str],
+        title: str,
+    ) -> bool:
+        if not section_id:
+            return False
 
-        for p in pages:
-            text = p.get("text", "")
-            m = self.BODY_SECTION_RE.search(text)
-            if m:
-                mapping[p["page"]] = m.group(1)
+        t = title.lower().strip()
 
-        return mapping
+        if t in {
+            "version", "version:",
+            "release date:",
+            "v1.0", "v1.1",
+            "v2.0",
+            "v3.0", "v3.1", "v3.2",
+        }:
+            return True
 
-    def _promote(
+        if title in {
+            "1.0", "1.1", "1.2",
+            "2.0",
+            "3.0", "3.1", "3.2",
+        }:
+            return True
+
+        months = {
+            "january", "february", "march", "april",
+            "may", "june", "july", "august",
+            "september", "october", "november", "december",
+        }
+
+        if any(m in t for m in months):
+            if len(t.split()) <= 3:
+                return True
+
+        if section_id.isdigit():
+            if int(section_id) < 100 and any(m in t for m in months):
+                return True
+
+        return False
+
+    def _make_entry(
         self,
+        sid: str,
+        title: str,
         page: int,
-        page_to_section: Dict[int, str],
-    ) -> Optional[str]:
-        for p in range(page, page + 6):
-            if p in page_to_section:
-                return page_to_section[p]
-        return None
+    ) -> TocEntry:
+        if sid.startswith("FM-"):
+            level = 0
+            parent = None
+            full = title
+        else:
+            level = sid.count(".") + 1
+            parent = self._parent_id(sid)
+            full = f"{sid} {title}"
+
+        return TocEntry(
+            doc_title=self.doc_title,
+            section_id=sid,
+            title=title,
+            page=page,
+            level=level,
+            parent_id=parent,
+            full_path=full,
+            tags=self._infer_tags(title),
+        )
 
     def _parent_id(self, sid: str) -> Optional[str]:
         if "." not in sid:
             return None
         return sid.rsplit(".", 1)[0]
 
+    # ✅ Appendix-safe sort key (CRITICAL FIX)
     def _sid_key(self, sid: str) -> List[int]:
         if sid.startswith("FM-"):
             return [9999]
-        return [int(x) for x in sid.split(".")]
+
+        key: List[int] = []
+        for part in sid.split("."):
+            if part.isdigit():
+                key.append(int(part))
+            else:
+                key.append(ord(part.upper()) - 64)
+
+        return key
 
     def _infer_tags(self, title: str) -> List[str]:
         t = title.lower()

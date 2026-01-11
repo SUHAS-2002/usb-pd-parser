@@ -9,6 +9,7 @@ Features:
 
 import fitz
 import pytesseract
+import logging
 from PIL import Image
 from typing import List, Dict
 
@@ -78,11 +79,8 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
     def extract_text(self, pdf: str) -> List[Dict]:
         """
         Concrete Strategy implementation.
-
-        NOTE:
-        This method contains the SAME logic that previously
-        existed in extract(). Behavior is unchanged.
         """
+        logger = logging.getLogger(__name__)
         doc = fitz.open(pdf)
         out: List[Dict] = []
 
@@ -118,5 +116,39 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
                     "text": "\n".join(texts),
                 }
             )
+
+        # -----------------------------------------------------------
+        # Page coverage verification (STEP 4)
+        # -----------------------------------------------------------
+        page_numbers = [
+            p.get("page") for p in out if p.get("page")
+        ]
+        if page_numbers:
+            min_page = min(page_numbers)
+            max_page = max(page_numbers)
+            total_pages = len(set(page_numbers))
+
+            logger.info(
+                "Page extraction: %d unique pages (range: %d-%d)",
+                total_pages,
+                min_page,
+                max_page,
+            )
+
+            expected_pages = set(
+                range(min_page, max_page + 1)
+            )
+            actual_pages = set(page_numbers)
+            missing = expected_pages - actual_pages
+
+            if missing:
+                logger.warning(
+                    "Missing pages: %d pages not extracted",
+                    len(missing),
+                )
+                logger.warning(
+                    "Sample missing pages: %s",
+                    sorted(missing)[:10],
+                )
 
         return out
