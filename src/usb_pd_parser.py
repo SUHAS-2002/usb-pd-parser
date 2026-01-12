@@ -81,7 +81,7 @@ class USBPDParser(BaseParser):
         self,
         *args,
         pdf_path: str | None = None,
-        output_dir: str = "data",
+        output_dir: str | Path = "data",
         toc_extractor: ToCExtractorProtocol | None = None,
         inline_extractor: InlineHeadingExtractorProtocol | None = None,
         section_builder: SectionBuilderProtocol | None = None,
@@ -115,13 +115,14 @@ class USBPDParser(BaseParser):
 
         super().__init__(strategy)
 
+        # Private attributes
         self._output_dir: Path | None = None
 
-        # validated via setters
+        # Validated via setters
         self.pdf_path = pdf_path  # type: ignore[arg-type]
         self.output_dir = output_dir
 
-        # Composition
+        # Composition (Dependency Injection ready)
         self._page_extractor: PDFExtractorProtocol = strategy
         self._toc_extractor: ToCExtractorProtocol = (
             toc_extractor or ToCExtractor()
@@ -134,7 +135,7 @@ class USBPDParser(BaseParser):
         )
 
     # --------------------------------------------------------------
-    # Context Manager Support (STEP-6)
+    # Context Manager Support
     # --------------------------------------------------------------
     def __enter__(self) -> "USBPDParser":
         return self
@@ -160,15 +161,29 @@ class USBPDParser(BaseParser):
         return 4
 
     # --------------------------------------------------------------
-    # Encapsulation
+    # Encapsulation: output_dir (IMPROVEMENT 8)
     # --------------------------------------------------------------
     @property
     def output_dir(self) -> Path:
+        """Return output directory path."""
         return self._output_dir or Path("data")
 
     @output_dir.setter
-    def output_dir(self, value: str) -> None:
-        self._output_dir = Path(value)
+    def output_dir(self, value: str | Path) -> None:
+        """
+        Set output directory with validation.
+
+        Ensures directory exists and is a valid Path.
+        """
+        if isinstance(value, str):
+            path = Path(value)
+        elif isinstance(value, Path):
+            path = value
+        else:
+            raise ValueError("output_dir must be str or Path")
+
+        path.mkdir(parents=True, exist_ok=True)
+        self._output_dir = path
 
     # --------------------------------------------------------------
     # BaseParser contract
@@ -208,7 +223,6 @@ class USBPDParser(BaseParser):
         logger.info("Built %d spec sections.", len(sections))
 
         # 5. Save outputs
-        self.output_dir.mkdir(parents=True, exist_ok=True)
         toc_path = self.output_dir / "usb_pd_toc.jsonl"
         spec_path = self.output_dir / "usb_pd_spec.jsonl"
 
@@ -228,7 +242,7 @@ class USBPDParser(BaseParser):
 
 
 # ------------------------------------------------------------------
-# Factory registration (STEP-7)
+# Factory registration
 # ------------------------------------------------------------------
 ParserFactory.register("usb_pd", USBPDParser)
 

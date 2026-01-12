@@ -7,6 +7,8 @@ inline headings (authoritative source).
 
 from typing import List, Dict, Protocol, runtime_checkable, Optional
 
+from src.config import CONFIG
+
 
 @runtime_checkable
 class SectionBuilder(Protocol):
@@ -30,12 +32,6 @@ class SectionContentBuilder:
     - Filters false positives (dates, versions, metadata)
     - Produces manager-approved JSONL format
     """
-
-    # -----------------------------------------------------------
-    # TOC page range (must be excluded from spec content)
-    # -----------------------------------------------------------
-    TOC_PAGE_START: int = 13
-    TOC_PAGE_END: int = 18
 
     def __init__(self) -> None:
         # Intentionally stateless
@@ -68,8 +64,8 @@ class SectionContentBuilder:
             title = h.get("title", "")
             page = h.get("page", 0)
 
-            # 🚫 EXCLUDE Table of Contents pages (13–18)
-            if self.TOC_PAGE_START <= page <= self.TOC_PAGE_END:
+            # 🚫 EXCLUDE Table of Contents pages (CONFIG-driven)
+            if CONFIG.pages.TOC_START <= page <= CONFIG.pages.TOC_END:
                 continue
 
             # 🚫 ABSOLUTE RULE: no FM entries
@@ -111,18 +107,15 @@ class SectionContentBuilder:
         """
         title_lower = title.lower().strip()
 
-        # Filter out version numbers
         if title_lower in [
             "version:", "version", "v1.0", "v1.1",
             "v2.0", "v3.0",
         ]:
             return True
 
-        # Filter out release dates
         if title_lower.startswith("release date"):
             return True
 
-        # Filter out dates (common patterns)
         months = [
             "january", "february", "march", "april", "may", "june",
             "july", "august", "september", "october",
@@ -132,16 +125,13 @@ class SectionContentBuilder:
             if len(title_lower.split()) <= 3:
                 return True
 
-        # Numeric section IDs with date-like titles
         if section_id.isdigit() and any(m in title_lower for m in months):
             return True
 
-        # Single-digit numeric IDs with date-like titles
         if len(section_id) == 1 and section_id.isdigit():
             if any(m in title_lower for m in months):
                 return True
 
-        # Version-like section IDs (e.g. 1.0, 2.0)
         if section_id.count(".") == 1:
             major, minor = section_id.split(".", 1)
             if major.isdigit() and minor.isdigit():

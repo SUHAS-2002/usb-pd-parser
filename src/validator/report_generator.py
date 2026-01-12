@@ -2,8 +2,10 @@
 
 import json
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import List, Dict, Any
 from pathlib import Path
+
+from src.core.base_report_generator import BaseReportGenerator
 
 
 # ------------------------------------------------------------------
@@ -22,11 +24,7 @@ class ValidationReport:
     page_error_count: int
     recommendations: List[str]
 
-    # --------------------------------------------------------------
-    # Polymorphism (special methods)
-    # --------------------------------------------------------------
     def __str__(self) -> str:
-        """Human-readable summary."""
         return (
             f"ValidationReport("
             f"quality={self.quality_score}%, "
@@ -37,7 +35,6 @@ class ValidationReport:
         )
 
     def __repr__(self) -> str:
-        """Developer-friendly representation."""
         return (
             "ValidationReport("
             f"quality_score={self.quality_score}, "
@@ -49,11 +46,9 @@ class ValidationReport:
         )
 
     def __len__(self) -> int:
-        """Return number of recommendations."""
         return len(self.recommendations)
 
     def __eq__(self, other: object) -> bool:
-        """Logical equality based on core metrics."""
         if not isinstance(other, ValidationReport):
             return NotImplemented
         return (
@@ -64,16 +59,37 @@ class ValidationReport:
 
 
 # ------------------------------------------------------------------
-# Generator
+# Generator (Improvement 4 compliant)
 # ------------------------------------------------------------------
-class ReportGenerator:
+class ReportGenerator(BaseReportGenerator):
     """
-    Generates a human-readable validation scorecard and produces
-    JSON reports for external tools.
+    Generates a validation scorecard, prints it to console,
+    and saves it as JSON.
+
+    Fully compliant with BaseReportGenerator (LSP, OCP).
     """
 
-    def generate(self, raw: Dict) -> ValidationReport:
-        """Convert raw validator output into a score object."""
+    # ------------------------------------------------------------------
+    def __init__(
+        self,
+        raw_validation: Dict[str, Any],
+        output_path: str = "data/score_report.jsonl",
+    ) -> None:
+        super().__init__(output_path)
+        self._raw = raw_validation
+        self._report: ValidationReport | None = None
+
+    # ------------------------------------------------------------------
+    # Template method steps
+    # ------------------------------------------------------------------
+    def _validate_inputs(self) -> None:
+        if not isinstance(self._raw, dict):
+            raise TypeError("Raw validation data must be a dictionary.")
+
+    def _load_data(self) -> Dict[str, Any]:
+        return self._raw
+
+    def _process_data(self, raw: Dict[str, Any]) -> ValidationReport:
         total = raw.get("total_toc", 0)
         matched = len(raw.get("matched", []))
         missing = len(raw.get("missing", []))
@@ -113,7 +129,7 @@ class ReportGenerator:
         if not recs:
             recs.append("Excellent extraction quality.")
 
-        return ValidationReport(
+        self._report = ValidationReport(
             quality_score=round(quality, 2),
             match_percentage=round(match_pct, 2),
             title_accuracy=round(title_pct, 2),
@@ -125,39 +141,43 @@ class ReportGenerator:
             recommendations=recs,
         )
 
-    # ----------------------------------------------------------
-    def save(
-        self,
-        report: ValidationReport,
-        path: str = "data/score_report.jsonl",
-    ) -> None:
-        """Save report as JSON inside data/ folder."""
-        output = Path(path)
+        return self._report
+
+    def _format_output(self, report: ValidationReport) -> Dict[str, Any]:
+        return report.__dict__
+
+    def _save_report(self, formatted: Dict[str, Any]) -> Path:
+        output = self.output_path
         output.parent.mkdir(parents=True, exist_ok=True)
 
         with output.open("w", encoding="utf-8") as f:
             json.dump(
-                report.__dict__,
+                formatted,
                 f,
                 indent=2,
                 ensure_ascii=False,
             )
 
-        print(f"Score report saved → {output}")
+        return output
 
-    # ----------------------------------------------------------
-    def print_console(self, report: ValidationReport) -> None:
-        """Pretty-print the scorecard to console."""
+    # ------------------------------------------------------------------
+    # Hook: console output
+    # ------------------------------------------------------------------
+    def _post_process(self) -> None:
+        if not self._report:
+            return
+
+        r = self._report
         print("\n============== VALIDATION REPORT ==============")
-        print(f"Quality Score     : {report.quality_score}%")
-        print(f"TOC Match         : {report.match_percentage}%")
-        print(f"Title Accuracy    : {report.title_accuracy}%")
-        print(f"Page Accuracy     : {report.page_accuracy}%")
-        print(f"Total TOC Items   : {report.total_toc}")
-        print(f"Missing Sections  : {report.missing_count}")
-        print(f"Mismatched Titles : {report.mismatch_count}")
-        print(f"Page Errors       : {report.page_error_count}")
+        print(f"Quality Score     : {r.quality_score}%")
+        print(f"TOC Match         : {r.match_percentage}%")
+        print(f"Title Accuracy    : {r.title_accuracy}%")
+        print(f"Page Accuracy     : {r.page_accuracy}%")
+        print(f"Total TOC Items   : {r.total_toc}")
+        print(f"Missing Sections  : {r.missing_count}")
+        print(f"Mismatched Titles : {r.mismatch_count}")
+        print(f"Page Errors       : {r.page_error_count}")
         print("\nRecommendations:")
-        for rec in report.recommendations:
+        for rec in r.recommendations:
             print(f"  - {rec}")
         print("================================================\n")

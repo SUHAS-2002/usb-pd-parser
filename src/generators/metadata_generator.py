@@ -5,6 +5,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Any
 
+from src.utils.jsonl_utils import JSONLHandler
+
 
 class MetadataGenerator:
     """
@@ -23,15 +25,22 @@ class MetadataGenerator:
         self,
         toc_path: str,
         chunks_path: str,
-        output_path: str = "usb_pd_metadata.jsonl"
+        output_path: str = "usb_pd_metadata.jsonl",
     ) -> Path:
         """Load TOC + chunks and write a metadata JSON file."""
-        toc = self._load_jsonl(Path(toc_path))
-        chunks = self._load_jsonl(Path(chunks_path))
 
-        coverage = 0.0
-        if len(toc) > 0:
-            coverage = (len(chunks) / len(toc)) * 100
+        toc: List[Dict[str, Any]] = JSONLHandler.load(
+            Path(toc_path)
+        )
+        chunks: List[Dict[str, Any]] = JSONLHandler.load(
+            Path(chunks_path)
+        )
+
+        coverage = (
+            (len(chunks) / len(toc)) * 100
+            if toc
+            else 0.0
+        )
 
         metadata = {
             "type": "metadata",
@@ -44,20 +53,12 @@ class MetadataGenerator:
 
         output = Path(output_path)
         with output.open("w", encoding="utf-8") as f:
-            json.dump(metadata, f, indent=2, ensure_ascii=False)
+            json.dump(
+                metadata,
+                f,
+                indent=2,
+                ensure_ascii=False,
+            )
 
         print(f"Metadata JSON written → {output}")
         return output
-
-    # -------------------------------------------------------------
-    def _load_jsonl(self, path: Path) -> List[Dict[str, Any]]:
-        """Load a JSONL file into a list of dictionaries."""
-        items: List[Dict[str, Any]] = []
-
-        with path.open("r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line:
-                    items.append(json.loads(line))
-
-        return items
