@@ -31,6 +31,12 @@ class SectionContentBuilder:
     - Produces manager-approved JSONL format
     """
 
+    # -----------------------------------------------------------
+    # TOC page range (must be excluded from spec content)
+    # -----------------------------------------------------------
+    TOC_PAGE_START: int = 13
+    TOC_PAGE_END: int = 18
+
     def __init__(self) -> None:
         # Intentionally stateless
         pass
@@ -60,6 +66,11 @@ class SectionContentBuilder:
 
             sid = h["section_id"]
             title = h.get("title", "")
+            page = h.get("page", 0)
+
+            # 🚫 EXCLUDE Table of Contents pages (13–18)
+            if self.TOC_PAGE_START <= page <= self.TOC_PAGE_END:
+                continue
 
             # 🚫 ABSOLUTE RULE: no FM entries
             if self._is_front_matter(sid):

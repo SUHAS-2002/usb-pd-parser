@@ -53,6 +53,12 @@ class TocEntry:
 class ToCExtractor:
     """Semantic TOC extractor for USB-PD PDF."""
 
+    # ------------------------------------------------------------------
+    # TOC page bounds (USB PD R3.2 v1.1)
+    # ------------------------------------------------------------------
+    TOC_START_PAGE: int = 13
+    TOC_END_PAGE: int = 18
+
     BODY_SECTION_RE = re.compile(
         r"^\s*(\d+(?:\.\d+)*)\s+(.+)$",
         re.MULTILINE,
@@ -120,7 +126,7 @@ class ToCExtractor:
         return [asdict(e) for e in items]
 
     # --------------------------------------------------------------
-    # TOC extraction (front matter)
+    # TOC extraction (front matter) — FIXED
     # --------------------------------------------------------------
     def _extract_toc_pages(
         self,
@@ -130,13 +136,20 @@ class ToCExtractor:
         in_toc = False
 
         for pg in pages:
+            page_num = pg.get("page", 0)
             text = pg.get("text", "") or ""
 
+            # Start extracting only after TOC header is found
             if self.TOC_HEADER_RE.search(text):
                 in_toc = True
 
-            if not in_toc:
+            # Skip everything before real TOC
+            if not in_toc or page_num < self.TOC_START_PAGE:
                 continue
+
+            # Hard stop after TOC ends
+            if page_num > self.TOC_END_PAGE:
+                break
 
             lines = [
                 ln for ln in text.splitlines()
@@ -147,14 +160,9 @@ class ToCExtractor:
                 if p > self.max_real_page:
                     continue
 
-                # ✅ FIX 2: never drop entries
+                # Keep ONLY authoritative section IDs
                 if sid:
                     entries[sid] = self._make_entry(sid, title, p)
-                else:
-                    temp_id = f"TEMP:page={p}:idx={len(entries)}"
-                    entries[temp_id] = self._make_entry(
-                        temp_id, title, p
-                    )
 
         return entries
 
@@ -291,14 +299,9 @@ class ToCExtractor:
         return sid.rsplit(".", 1)[0]
 
     # --------------------------------------------------------------
-    # ✅ CRITICAL FIX: TEMP-safe, appendix-safe sort key
+    # Sort key
     # --------------------------------------------------------------
     def _sid_key(self, sid: str) -> List[int]:
-        # TEMP entries always last
-        if sid.startswith("TEMP:"):
-            return [9999, 9999]
-
-        # Legacy FM safety
         if sid.startswith("FM-"):
             return [9999]
 
