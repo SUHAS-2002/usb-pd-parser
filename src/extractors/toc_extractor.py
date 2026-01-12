@@ -70,13 +70,16 @@ class ToCExtractor:
         r"^\s*([A-E](?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    TOC_HEADER_RE = re.compile(
-        r"\btable\s+of\s+contents\b",
-        re.IGNORECASE,
+    FIGURE_TOC_RE = re.compile(
+        r"^\s*(Figure\s+\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    BODY_START_RE = re.compile(
-        r"^\s*1\s+Introduction\b",
+    TABLE_TOC_RE = re.compile(
+        r"^\s*(Table\s+\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
+    )
+
+    TOC_HEADER_RE = re.compile(
+        r"\btable\s+of\s+contents\b",
         re.IGNORECASE,
     )
 
@@ -90,7 +93,6 @@ class ToCExtractor:
         self._doc_title: str = "USB Power Delivery Specification"
         self._max_real_page: int = 1100
 
-    # --------------------------------------------------------------
     @property
     def doc_title(self) -> str:
         return self._doc_title
@@ -126,7 +128,6 @@ class ToCExtractor:
     ) -> Dict[str, TocEntry]:
         entries: Dict[str, TocEntry] = {}
         in_toc = False
-        fm_idx = 0
 
         for pg in pages:
             text = pg.get("text", "") or ""
@@ -137,10 +138,6 @@ class ToCExtractor:
             if not in_toc:
                 continue
 
-            for ln in text.splitlines():
-                if self.BODY_START_RE.match(ln):
-                    return entries
-
             lines = [
                 ln for ln in text.splitlines()
                 if not self.SELF_REF_RE.match(ln)
@@ -150,12 +147,14 @@ class ToCExtractor:
                 if p > self.max_real_page:
                     continue
 
+                # ✅ FIX 2: never drop entries
                 if sid:
                     entries[sid] = self._make_entry(sid, title, p)
                 else:
-                    fm = f"FM-{fm_idx}"
-                    fm_idx += 1
-                    entries[fm] = self._make_entry(fm, title, p)
+                    temp_id = f"TEMP:page={p}:idx={len(entries)}"
+                    entries[temp_id] = self._make_entry(
+                        temp_id, title, p
+                    )
 
         return entries
 
@@ -174,7 +173,10 @@ class ToCExtractor:
 
             for m in self.BODY_SECTION_RE.finditer(text):
                 sid, title = m.groups()
-                sections.setdefault(sid, (title.strip(), page_no))
+                sections.setdefault(
+                    sid,
+                    (title.strip(), page_no),
+                )
 
         return sections
 
@@ -190,7 +192,9 @@ class ToCExtractor:
 
         for sid, (title, page) in all_sections.items():
             if sid not in merged:
-                merged[sid] = self._make_entry(sid, title, page)
+                merged[sid] = self._make_entry(
+                    sid, title, page
+                )
 
         return merged
 
@@ -208,23 +212,24 @@ class ToCExtractor:
             title = None
             page = None
 
-            m = self.NUMBERED_TOC_RE.match(ln)
-            if m:
-                sid, t, p = m.groups()
-                title = t.strip().rstrip(".").strip()
-                page = int(p)
-            else:
-                m = self.APPENDIX_TOC_RE.match(ln)
+            for rx in (
+                self.NUMBERED_TOC_RE,
+                self.APPENDIX_TOC_RE,
+                self.FIGURE_TOC_RE,
+                self.TABLE_TOC_RE,
+            ):
+                m = rx.match(ln)
                 if m:
                     sid, t, p = m.groups()
                     title = t.strip().rstrip(".").strip()
                     page = int(p)
-                else:
-                    m = self.FRONT_RE.match(ln)
-                    if m:
-                        t, p = m.groups()
-                        title = t.strip()
-                        page = int(p)
+                    break
+
+            if not title:
+                m = self.FRONT_RE.match(ln)
+                if m:
+                    title, p = m.groups()
+                    page = int(p)
 
             if title and page:
                 if not self._is_false_positive_toc(sid, title):
@@ -245,38 +250,15 @@ class ToCExtractor:
 
         t = title.lower().strip()
 
-        if t in {
+        return t in {
             "version", "version:",
             "release date:",
             "v1.0", "v1.1",
             "v2.0",
             "v3.0", "v3.1", "v3.2",
-        }:
-            return True
-
-        if title in {
-            "1.0", "1.1", "1.2",
-            "2.0",
-            "3.0", "3.1", "3.2",
-        }:
-            return True
-
-        months = {
-            "january", "february", "march", "april",
-            "may", "june", "july", "august",
-            "september", "october", "november", "december",
         }
 
-        if any(m in t for m in months):
-            if len(t.split()) <= 3:
-                return True
-
-        if section_id.isdigit():
-            if int(section_id) < 100 and any(m in t for m in months):
-                return True
-
-        return False
-
+    # --------------------------------------------------------------
     def _make_entry(
         self,
         sid: str,
@@ -308,20 +290,31 @@ class ToCExtractor:
             return None
         return sid.rsplit(".", 1)[0]
 
-    # ✅ Appendix-safe sort key (CRITICAL FIX)
+    # --------------------------------------------------------------
+    # ✅ CRITICAL FIX: TEMP-safe, appendix-safe sort key
+    # --------------------------------------------------------------
     def _sid_key(self, sid: str) -> List[int]:
+        # TEMP entries always last
+        if sid.startswith("TEMP:"):
+            return [9999, 9999]
+
+        # Legacy FM safety
         if sid.startswith("FM-"):
             return [9999]
 
         key: List[int] = []
+
         for part in sid.split("."):
             if part.isdigit():
                 key.append(int(part))
-            else:
+            elif len(part) == 1 and part.isalpha():
                 key.append(ord(part.upper()) - 64)
+            else:
+                key.append(9999)
 
         return key
 
+    # --------------------------------------------------------------
     def _infer_tags(self, title: str) -> List[str]:
         t = title.lower()
         tags: List[str] = []
