@@ -13,11 +13,15 @@ class SectionMatcher:
     - Exact section_id matching
     - Fuzzy title similarity check
     - Page-range consistency check (optional)
+
+    Encapsulation:
+    - Minimal public API (`match`)
+    - All helpers are private
     """
 
     # ---------------------------------------------------------
     def __init__(self, title_threshold: float = 0.85) -> None:
-        self.__threshold: float = self._validate_threshold(
+        self._threshold: float = self._validate_threshold(
             title_threshold
         )
 
@@ -27,15 +31,15 @@ class SectionMatcher:
     @property
     def threshold(self) -> float:
         """Return title similarity threshold."""
-        return self.__threshold
+        return self._threshold
 
     @threshold.setter
     def threshold(self, value: float) -> None:
         """Set title similarity threshold (0.0–1.0)."""
-        self.__threshold = self._validate_threshold(value)
+        self._threshold = self._validate_threshold(value)
 
     # ---------------------------------------------------------
-    # Validation helpers
+    # Validation helpers (private)
     # ---------------------------------------------------------
     def _validate_threshold(self, value: float) -> float:
         if not isinstance(value, (float, int)):
@@ -49,17 +53,17 @@ class SectionMatcher:
         return float(value)
 
     # ---------------------------------------------------------
-    # Text normalization & similarity
+    # Text normalization & similarity (private)
     # ---------------------------------------------------------
     def _normalize(self, text: str) -> str:
-        """Lowercase, remove punctuation, collapse whitespace."""
+        """Normalize text for comparison."""
         cleaned = text.lower()
         cleaned = re.sub(r"\s+", " ", cleaned)
         cleaned = re.sub(r"[^\w\s]", "", cleaned)
         return cleaned.strip()
 
     def _similarity(self, a: str, b: str) -> float:
-        """Return normalized similarity between two titles."""
+        """Return normalized similarity score."""
         a_norm = self._normalize(a)
         b_norm = self._normalize(b)
         return SequenceMatcher(None, a_norm, b_norm).ratio()
@@ -100,7 +104,7 @@ class SectionMatcher:
             chunk_title = chunk.get("title", "")
             sim = self._similarity(toc_title, chunk_title)
 
-            if sim < self.__threshold:
+            if sim < self._threshold:
                 title_miss.append(
                     {
                         "section_id": sid,

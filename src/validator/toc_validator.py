@@ -16,11 +16,11 @@ class TOCValidator:
     Responsibilities:
     - Load JSONL TOC + chunk files
     - Delegate comparison to SectionMatcher
-    - Save validation report as JSON
+    - Save validation report as JSON AND JSONL
 
-    Fully DIP-compliant:
-    - Matcher is injectable
-    - Default matcher is lazily constructed
+    Encapsulation:
+    - Minimal public API (`validate`)
+    - All helpers are private
     """
 
     # ---------------------------------------------------------
@@ -29,14 +29,7 @@ class TOCValidator:
         matcher: Optional[SectionMatcher] = None,
         title_threshold: Optional[float] = None,
     ) -> None:
-        """
-        Initialize validator with dependency injection.
-
-        Args:
-            matcher: Optional custom SectionMatcher instance
-            title_threshold: Optional similarity threshold override
-        """
-
+        """Initialize validator with dependency injection."""
         if matcher is not None:
             self._matcher = matcher
         else:
@@ -66,19 +59,58 @@ class TOCValidator:
     ) -> Dict[str, Any]:
         """
         Compare TOC entries with extracted content chunks and
-        produce a validation report.
-        """
+        produce validation reports.
 
+        Outputs:
+        - validation_report.json   (PRIMARY)
+        - validation_report.jsonl  (compatibility)
+        """
         toc = JSONLHandler.load(Path(toc_path))
         chunks = JSONLHandler.load(Path(chunks_path))
 
-        result = self.matcher.match(toc, chunks)
+        result = self._matcher.match(toc, chunks)
 
-        output = Path(report_path)
-        output.write_text(
+        output_path = self._normalize_report_path(report_path)
+
+        self._write_json_report(output_path, result)
+        self._write_jsonl_report(output_path, result)
+        self._notify_user(output_path)
+
+        return result
+
+    # ---------------------------------------------------------
+    # Private helpers (PHASE 3.1)
+    # ---------------------------------------------------------
+    @staticmethod
+    def _normalize_report_path(path: str) -> Path:
+        output_path = Path(path)
+        if output_path.suffix != ".json":
+            output_path = output_path.with_suffix(".json")
+        return output_path
+
+    @staticmethod
+    def _write_json_report(
+        output_path: Path,
+        result: Dict[str, Any],
+    ) -> None:
+        output_path.write_text(
             json.dumps(result, indent=2, ensure_ascii=False),
             encoding="utf-8",
         )
 
-        print(f"Validation report saved → {output}")
-        return result
+    @staticmethod
+    def _write_jsonl_report(
+        output_path: Path,
+        result: Dict[str, Any],
+    ) -> None:
+        jsonl_path = output_path.with_suffix(".jsonl")
+        with jsonl_path.open("w", encoding="utf-8") as handle:
+            handle.write(
+                json.dumps(result, ensure_ascii=False) + "\n"
+            )
+
+    @staticmethod
+    def _notify_user(output_path: Path) -> None:
+        jsonl_path = output_path.with_suffix(".jsonl")
+        print(f"Validation report saved → {output_path}")
+        print(f"Validation report (JSONL) saved → {jsonl_path}")

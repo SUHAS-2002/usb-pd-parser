@@ -5,63 +5,107 @@ Extracts numeric section headings from document body pages.
 These are the authoritative section IDs.
 """
 
+from __future__ import annotations
+
 import re
 import logging
 from typing import List, Dict, Any
 
 from src.core.extractor_base import BaseExtractor
 
+# ------------------------------------------------------------------
+# Module-level logger (encapsulation-friendly)
+# ------------------------------------------------------------------
+_logger = logging.getLogger(__name__)
+
 
 class InlineHeadingExtractor(BaseExtractor):
     """
     Extract numeric section headings from PDF body text.
+
+    Encapsulation:
+    - Regex patterns are private
+    - All helpers are protected
     """
 
-    SECTION_RE = re.compile(
+    # --------------------------------------------------------------
+    # Private class constants
+    # --------------------------------------------------------------
+    _SECTION_RE = re.compile(
         r"^\s*(\d+(?:\.\d+)*)\s+(.+)$",
         re.MULTILINE,
     )
 
-    # ----------------------------------------------------------
+    # --------------------------------------------------------------
+    # Public API
+    # --------------------------------------------------------------
     def extract(self, pdf_data: Dict[str, Any]) -> List[Dict]:
         pages = pdf_data.get("pages", [])
-        out: List[Dict] = []
+        results: List[Dict] = []
+
+        processed_pages = self._extract_from_pages(pages, results)
+
+        _logger.info(
+            "Processed %d pages for inline heading extraction",
+            processed_pages,
+        )
+
+        return results
+
+    # --------------------------------------------------------------
+    # Extraction helpers (protected)
+    # --------------------------------------------------------------
+    def _extract_from_pages(
+        self,
+        pages: List[Dict[str, Any]],
+        results: List[Dict],
+    ) -> int:
         processed_pages = set()
 
         for page in pages:
             page_no = page.get("page")
-            text = page.get("text", "")
-
             if not page_no:
                 continue
 
-            # IMPORTANT: process page even if text is empty
-            if not text:
-                text = ""
-
-            for sid, title in self.SECTION_RE.findall(text):
-                title_clean = title.strip()
-
-                out.append(
-                    {
-                        "section_id": sid,
-                        "title": title_clean,
-                        "page": page_no,
-                        "level": sid.count(".") + 1,
-                        "parent_id": (
-                            sid.rsplit(".", 1)[0]
-                            if "." in sid else None
-                        ),
-                        "full_path": f"{sid} {title_clean}",
-                    }
-                )
-
+            text = page.get("text") or ""
+            self._extract_from_text(
+                text=text,
+                page_no=page_no,
+                results=results,
+            )
             processed_pages.add(page_no)
 
-        logger = logging.getLogger(__name__)
-        logger.info(
-            "Processed %d pages for inline heading extraction",
-            len(processed_pages),
-        )
+        return len(processed_pages)
 
-        return out
+    def _extract_from_text(
+        self,
+        text: str,
+        page_no: int,
+        results: List[Dict],
+    ) -> None:
+        for sid, title in self._SECTION_RE.findall(text):
+            title_clean = title.strip()
+
+            results.append(
+                {
+                    "section_id": sid,
+                    "title": title_clean,
+                    "page": page_no,
+                    "level": self._compute_level(sid),
+                    "parent_id": self._compute_parent(sid),
+                    "full_path": f"{sid} {title_clean}",
+                }
+            )
+
+    # --------------------------------------------------------------
+    # Section helpers (protected)
+    # --------------------------------------------------------------
+    @staticmethod
+    def _compute_level(section_id: str) -> int:
+        return section_id.count(".") + 1
+
+    @staticmethod
+    def _compute_parent(section_id: str) -> str | None:
+        if "." in section_id:
+            return section_id.rsplit(".", 1)[0]
+        return None

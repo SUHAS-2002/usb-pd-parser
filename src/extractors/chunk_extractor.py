@@ -12,52 +12,90 @@ class ChunkExtractor:
     - TOC + internal heading alignment
     - No overlapping or empty chunks
     - Explicit unmapped page capture
+
+    Encapsulation:
+    - All regex patterns are private
+    - Internal helpers are protected
+    - Internal state exposed via read-only properties
     """
 
-    # Strict start-of-line numeric section heading (not tables/figures)
-    SECTION_RE = re.compile(
+    # --------------------------------------------------------------
+    # Private class constants
+    # --------------------------------------------------------------
+    _SECTION_RE = re.compile(
         r"^(?:\s*)(\d+(?:\.\d+)+)\s+[A-Za-z]",
         re.MULTILINE,
     )
 
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # Constructor + private state (FIX 1.2)
+    # --------------------------------------------------------------
+    def __init__(self) -> None:
+        """Initialize chunk extractor with private state."""
+        self._min_page: int | None = None
+        self._max_page: int | None = None
+        self._page_text: Dict[int, str] = {}
+
+    # --------------------------------------------------------------
+    # Encapsulation properties (read-only)
+    # --------------------------------------------------------------
+    @property
+    def min_page(self) -> int | None:
+        """Get minimum page number."""
+        return self._min_page
+
+    @property
+    def max_page(self) -> int | None:
+        """Get maximum page number."""
+        return self._max_page
+
+    @property
+    def page_text(self) -> Dict[int, str]:
+        """Get page text mapping (read-only copy)."""
+        return self._page_text.copy()
+
+    # --------------------------------------------------------------
     # Public API
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     def extract(self, pages: List[Dict], toc: List[Dict]) -> List[Dict]:
         """Build section chunks using TOC + internal heading detection."""
         if not pages:
             return []
 
-        min_page, max_page = self._page_bounds(pages)
+        # ---- update private state ----
+        self._min_page, self._max_page = self._page_bounds(pages)
+        self._page_text = self._build_page_text(pages)
+        self._fill_missing_pages(
+            self._page_text,
+            self._min_page,
+            self._max_page,
+        )
 
-        page_text = self._build_page_text(pages)
-        self._fill_missing_pages(page_text, min_page, max_page)
-
-        internal_starts = self._find_true_internal_headings(page_text)
+        internal_starts = self._find_true_internal_headings(self._page_text)
         toc_sorted = self._sort_toc(toc)
 
         chunks, mapped_pages = self._build_chunks(
             toc_sorted,
             internal_starts,
-            page_text,
-            min_page,
-            max_page,
+            self._page_text,
+            self._min_page,
+            self._max_page,
         )
 
         self._add_unmapped_pages(
             chunks,
             mapped_pages,
-            page_text,
-            min_page,
-            max_page,
+            self._page_text,
+            self._min_page,
+            self._max_page,
         )
 
         chunks.sort(key=lambda c: c["page_range"][0])
         return chunks
 
-    # ------------------------------------------------------------------
-    # Page preparation
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # Page preparation (protected)
+    # --------------------------------------------------------------
     @staticmethod
     def _page_bounds(pages: List[Dict]) -> Tuple[int, int]:
         page_numbers = [p["page_number"] for p in pages]
@@ -79,14 +117,17 @@ class ChunkExtractor:
         for p in range(min_page, max_page + 1):
             page_text.setdefault(p, "")
 
-    # ------------------------------------------------------------------
-    # Chunk construction
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # Chunk construction (protected)
+    # --------------------------------------------------------------
     @staticmethod
     def _sort_toc(toc: List[Dict]) -> List[Dict]:
         return sorted(
             toc,
-            key=lambda e: (e["page"], ChunkExtractor._key(e["section_id"])),
+            key=lambda e: (
+                e["page"],
+                ChunkExtractor._section_sort_key(e["section_id"]),
+            ),
         )
 
     def _build_chunks(
@@ -166,9 +207,9 @@ class ChunkExtractor:
             page_text.get(p, "") for p in range(start, end + 1)
         ).strip()
 
-    # ------------------------------------------------------------------
-    # Unmapped pages
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # Unmapped pages (protected)
+    # --------------------------------------------------------------
     @staticmethod
     def _add_unmapped_pages(
         chunks: List[Dict],
@@ -191,9 +232,9 @@ class ChunkExtractor:
                     }
                 )
 
-    # ------------------------------------------------------------------
-    # Internal heading detection
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # Internal heading detection (protected)
+    # --------------------------------------------------------------
     def _find_true_internal_headings(
         self,
         page_text: Dict[int, str],
@@ -201,21 +242,24 @@ class ChunkExtractor:
         found: Dict[str, int] = {}
 
         for page_num, text in page_text.items():
-            for match in self.SECTION_RE.finditer(text):
+            for match in self._SECTION_RE.finditer(text):
                 sid = match.group(1)
-                if self._plausible(sid):
+                if self._is_plausible_section(sid):
                     found.setdefault(sid, page_num)
 
         return found
 
+    # --------------------------------------------------------------
+    # Section helpers (private semantics)
+    # --------------------------------------------------------------
     @staticmethod
-    def _key(section_id: str) -> Tuple[int, ...]:
+    def _section_sort_key(section_id: str) -> Tuple[int, ...]:
         return tuple(int(x) for x in section_id.split("."))
 
     @staticmethod
-    def _plausible(sid: str) -> bool:
+    def _is_plausible_section(section_id: str) -> bool:
         try:
-            top = int(sid.split(".")[0])
+            top = int(section_id.split(".")[0])
         except ValueError:
             return False
         return 1 <= top <= 20

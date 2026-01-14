@@ -16,8 +16,34 @@ class SpecJSONLGenerator:
     - No metadata header
     - No TOC duplication
     - No artificial 'type' field
+
+    Encapsulation:
+    - Internal state is private
+    - State exposed via read-only properties
     """
 
+    # ---------------------------------------------------------
+    # Constructor + private state (FIX 1.2)
+    # ---------------------------------------------------------
+    def __init__(self) -> None:
+        self._output_path: Path | None = None
+        self._records_written: int = 0
+
+    # ---------------------------------------------------------
+    # Read-only properties (FIX 1.2)
+    # ---------------------------------------------------------
+    @property
+    def output_path(self) -> Path | None:
+        """Return output file path."""
+        return self._output_path
+
+    @property
+    def records_written(self) -> int:
+        """Return number of records written."""
+        return self._records_written
+
+    # ---------------------------------------------------------
+    # Public API
     # ---------------------------------------------------------
     def generate(
         self,
@@ -34,8 +60,10 @@ class SpecJSONLGenerator:
             Path(chunks_path)
         )
 
-        output = Path(output_path)
-        with output.open("w", encoding="utf-8") as f:
+        self._output_path = Path(output_path)
+        self._records_written = 0
+
+        with self._output_path.open("w", encoding="utf-8") as f:
             for section in chunks:
                 clean_section = {
                     key: value
@@ -49,6 +77,7 @@ class SpecJSONLGenerator:
                     )
                     + "\n"
                 )
+                self._records_written += 1
 
-        print(f"Spec JSONL written → {output}")
-        return output
+        print(f"Spec JSONL written → {self._output_path}")
+        return self._output_path

@@ -5,6 +5,8 @@ Extracts TOC entries and synthesizes numeric section IDs
 by aligning TOC pages with body section headings.
 """
 
+from __future__ import annotations
+
 import re
 from dataclasses import dataclass, asdict
 from typing import List, Dict, Optional, Tuple
@@ -31,55 +33,69 @@ class TocEntry:
 # Extractor
 # ------------------------------------------------------------------
 class ToCExtractor:
-    """Semantic TOC extractor for USB-PD PDF."""
+    """
+    Semantic TOC extractor for USB-PD PDF.
 
-    BODY_SECTION_RE = re.compile(
+    Encapsulation:
+    - Minimal public API (`extract`)
+    - All helpers are private
+    - Regex patterns are private class constants
+    """
+
+    # --------------------------------------------------------------
+    # Private regex patterns
+    # --------------------------------------------------------------
+    _BODY_SECTION_RE = re.compile(
         r"^\s*(\d+(?:\.\d+)*)\s+(.+)$",
         re.MULTILINE,
     )
 
-    FRONT_RE = re.compile(
+    _FRONT_RE = re.compile(
         r"^\s*([A-Za-z][A-Za-z\s]+?)\.{3,}\s*(\d{1,4})\s*$"
     )
 
-    NUMBERED_TOC_RE = re.compile(
+    _NUMBERED_TOC_RE = re.compile(
         r"^\s*(\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    APPENDIX_TOC_RE = re.compile(
+    _APPENDIX_TOC_RE = re.compile(
         r"^\s*([A-E](?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    FIGURE_TOC_RE = re.compile(
+    _FIGURE_TOC_RE = re.compile(
         r"^\s*(Figure\s+\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    TABLE_TOC_RE = re.compile(
+    _TABLE_TOC_RE = re.compile(
         r"^\s*(Table\s+\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    TOC_HEADER_RE = re.compile(
+    _TOC_HEADER_RE = re.compile(
         r"\btable\s+of\s+contents\b",
         re.IGNORECASE,
     )
 
-    SELF_REF_RE = re.compile(
+    _SELF_REF_RE = re.compile(
         r"^\s*table\s+of\s+contents\s*\.{3,}",
         re.IGNORECASE,
     )
 
     # --------------------------------------------------------------
     def __init__(self) -> None:
-        self._doc_title = CONFIG.DOC_TITLE
-        self._max_page = CONFIG.pages.MAX_PAGE
+        self._doc_title: str = CONFIG.DOC_TITLE
+        self._max_page: int = CONFIG.pages.MAX_PAGE
 
     # --------------------------------------------------------------
     # Public API
     # --------------------------------------------------------------
     def extract(self, pages: List[Dict]) -> List[Dict]:
-        toc = self._extract_toc_pages(pages)
-        sections = self._extract_all_numeric_headings(pages)
-        merged = self._merge_toc_with_sections(toc, sections)
+        toc_entries = self._extract_toc_pages(pages)
+        body_sections = self._extract_all_numeric_headings(pages)
+
+        merged = self._merge_toc_with_sections(
+            toc_entries,
+            body_sections,
+        )
 
         ordered = sorted(
             merged.values(),
@@ -89,7 +105,7 @@ class ToCExtractor:
         return [asdict(e) for e in ordered]
 
     # --------------------------------------------------------------
-    # TOC extraction (refactored)
+    # TOC page extraction
     # --------------------------------------------------------------
     def _extract_toc_pages(
         self,
@@ -100,9 +116,9 @@ class ToCExtractor:
 
         for page in pages:
             page_num = page.get("page", 0)
-            text = page.get("text", "") or ""
+            text = page.get("text") or ""
 
-            if self.TOC_HEADER_RE.search(text):
+            if self._TOC_HEADER_RE.search(text):
                 in_toc = True
 
             if not self._is_valid_toc_page(in_toc, page_num):
@@ -111,35 +127,34 @@ class ToCExtractor:
             for sid, title, pg in self._parse_page(text):
                 if self._is_valid_entry(sid, title, pg):
                     entries[sid] = self._make_entry(
-                        sid, title, pg
+                        sid,
+                        title,
+                        pg,
                     )
 
         return entries
 
+    # --------------------------------------------------------------
+    # Page parsing helpers
+    # --------------------------------------------------------------
     def _is_valid_toc_page(
         self,
         in_toc: bool,
         page_num: int,
     ) -> bool:
-        if not in_toc:
-            return False
-        if page_num < CONFIG.pages.TOC_START:
-            return False
-        if page_num > CONFIG.pages.TOC_END:
-            return False
-        return True
+        """Check if page is within the TOC page range."""
+        return (
+            in_toc
+            and CONFIG.pages.TOC_START <= page_num <= CONFIG.pages.TOC_END
+        )
 
-    # --------------------------------------------------------------
-    # Page parsing
-    # --------------------------------------------------------------
     def _parse_page(
         self,
         text: str,
     ) -> List[Tuple[Optional[str], str, int]]:
-        lines = self._clean_lines(text)
         parsed: List[Tuple[Optional[str], str, int]] = []
 
-        for line in lines:
+        for line in self._clean_lines(text):
             item = self._parse_toc_line(line)
             if item:
                 parsed.append(item)
@@ -147,9 +162,10 @@ class ToCExtractor:
         return parsed
 
     def _clean_lines(self, text: str) -> List[str]:
+        """Remove self-referential TOC lines."""
         return [
             ln for ln in text.splitlines()
-            if not self.SELF_REF_RE.match(ln)
+            if not self._SELF_REF_RE.match(ln)
         ]
 
     def _parse_toc_line(
@@ -157,23 +173,23 @@ class ToCExtractor:
         line: str,
     ) -> Optional[Tuple[Optional[str], str, int]]:
         for rx in (
-            self.NUMBERED_TOC_RE,
-            self.APPENDIX_TOC_RE,
-            self.FIGURE_TOC_RE,
-            self.TABLE_TOC_RE,
+            self._NUMBERED_TOC_RE,
+            self._APPENDIX_TOC_RE,
+            self._FIGURE_TOC_RE,
+            self._TABLE_TOC_RE,
         ):
-            m = rx.match(line)
-            if m:
-                sid, title, page = m.groups()
+            match = rx.match(line)
+            if match:
+                sid, title, page = match.groups()
                 return (
                     sid,
                     title.strip().rstrip("."),
                     int(page),
                 )
 
-        m = self.FRONT_RE.match(line)
-        if m:
-            title, page = m.groups()
+        front = self._FRONT_RE.match(line)
+        if front:
+            title, page = front.groups()
             return None, title.strip(), int(page)
 
         return None
@@ -190,17 +206,22 @@ class ToCExtractor:
             return False
         return not self._is_false_positive(title)
 
-    def _is_false_positive(self, title: str) -> bool:
+    @staticmethod
+    def _is_false_positive(title: str) -> bool:
         return title.lower().strip() in {
-            "version", "version:",
+            "version",
+            "version:",
             "release date:",
-            "v1.0", "v1.1",
+            "v1.0",
+            "v1.1",
             "v2.0",
-            "v3.0", "v3.1", "v3.2",
+            "v3.0",
+            "v3.1",
+            "v3.2",
         }
 
     # --------------------------------------------------------------
-    # Numeric heading extraction (unchanged)
+    # Numeric heading extraction
     # --------------------------------------------------------------
     def _extract_all_numeric_headings(
         self,
@@ -208,14 +229,15 @@ class ToCExtractor:
     ) -> Dict[str, Tuple[str, int]]:
         sections: Dict[str, Tuple[str, int]] = {}
 
-        for pg in pages:
-            page_no = pg.get("page", 0)
-            text = pg.get("text", "") or ""
+        for page in pages:
+            page_no = page.get("page", 0)
+            text = page.get("text") or ""
 
-            for m in self.BODY_SECTION_RE.finditer(text):
-                sid, title = m.groups()
+            for match in self._BODY_SECTION_RE.finditer(text):
+                sid, title = match.groups()
                 sections.setdefault(
-                    sid, (title.strip(), page_no)
+                    sid,
+                    (title.strip(), page_no),
                 )
 
         return sections
@@ -230,13 +252,15 @@ class ToCExtractor:
         for sid, (title, page) in sections.items():
             if sid not in merged:
                 merged[sid] = self._make_entry(
-                    sid, title, page
+                    sid,
+                    title,
+                    page,
                 )
 
         return merged
 
     # --------------------------------------------------------------
-    # Helpers
+    # Entry helpers
     # --------------------------------------------------------------
     def _make_entry(
         self,
@@ -260,10 +284,7 @@ class ToCExtractor:
 
     @staticmethod
     def _sid_key(sid: str) -> List[int]:
-        return [
-            int(p) for p in sid.split(".")
-            if p.isdigit()
-        ]
+        return [int(p) for p in sid.split(".") if p.isdigit()]
 
     def _infer_tags(self, title: str) -> List[str]:
         t = title.lower()
