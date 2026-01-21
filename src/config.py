@@ -1,5 +1,3 @@
-# src/config.py
-
 """
 Configuration module for USB PD Parser.
 

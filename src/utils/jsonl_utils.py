@@ -15,9 +15,29 @@ class JSONLHandler:
     Handles JSONL file operations with proper error handling
     and type safety.
 
-    Follows SRP: Single responsibility for JSONL operations.
+    Encapsulation:
+    - Stateless utility class
+    - Internal constants are name-mangled
+    - Public API via static methods only
     """
 
+    # ---------------------------------------------------------
+    # TRUE PRIVATE class constants (PHASE 2)
+    # ---------------------------------------------------------
+    __ENCODING = "utf-8"
+    __NEWLINE = "\n"
+
+    # ---------------------------------------------------------
+    # Controlled access to constants
+    # ---------------------------------------------------------
+    @classmethod
+    def _get_encoding(cls) -> str:
+        """Return file encoding (protected)."""
+        return cls.__ENCODING
+
+    # ---------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------
     @staticmethod
     def load(path: Path) -> List[Dict[str, Any]]:
         """
@@ -28,7 +48,7 @@ class JSONLHandler:
 
         items: List[Dict[str, Any]] = []
 
-        with path.open("r", encoding="utf-8") as f:
+        with path.open("r", encoding=JSONLHandler.__ENCODING) as f:
             for line_num, line in enumerate(f, start=1):
                 line = line.strip()
                 if not line:
@@ -51,9 +71,12 @@ class JSONLHandler:
         """
         path.parent.mkdir(parents=True, exist_ok=True)
 
-        with path.open("w", encoding="utf-8") as f:
+        with path.open("w", encoding=JSONLHandler.__ENCODING) as f:
             for obj in items:
-                f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+                f.write(
+                    json.dumps(obj, ensure_ascii=False)
+                    + JSONLHandler.__NEWLINE
+                )
 
     @staticmethod
     def stream(path: Path) -> Iterator[Dict[str, Any]]:
@@ -63,14 +86,16 @@ class JSONLHandler:
         if not path.exists():
             raise FileNotFoundError(f"File not found: {path}")
 
-        with path.open("r", encoding="utf-8") as f:
+        with path.open("r", encoding=JSONLHandler.__ENCODING) as f:
             for line in f:
                 line = line.strip()
                 if line:
                     yield json.loads(line)
 
 
-# Backward-compatible helpers
+# ---------------------------------------------------------
+# Backward-compatible helpers (UNCHANGED)
+# ---------------------------------------------------------
 def load_jsonl(path: Path) -> List[Dict[str, Any]]:
     return JSONLHandler.load(path)
 

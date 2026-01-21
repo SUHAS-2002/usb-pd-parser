@@ -11,22 +11,27 @@ class BaseParser(ABC):
     Abstract base parser defining the public interface
     for all concrete PDF parsers.
 
-    This class is Factory-compatible and Strategy-aware.
+    Encapsulation:
+    - ALL internal state uses name-mangled attributes (__attr)
+    - Public API remains stable
+    - Strategy access is protected
     """
 
     # ---------------------------------------------------------
+    # Constructor (TRUE PRIVATE STATE)
+    # ---------------------------------------------------------
     def __init__(self, strategy: PDFTextStrategy) -> None:
-        self._strategy: PDFTextStrategy = strategy
-        self._pdf_path: str | None = None
+        self.__strategy: PDFTextStrategy = strategy
+        self.__pdf_path: str | None = None
 
     # ---------------------------------------------------------
     # Encapsulation: PDF path
     # ---------------------------------------------------------
     @property
     def pdf_path(self) -> str:
-        if self._pdf_path is None:
+        if self.__pdf_path is None:
             raise ValueError("pdf_path not set")
-        return self._pdf_path
+        return self.__pdf_path
 
     @pdf_path.setter
     def pdf_path(self, value: str) -> None:
@@ -34,7 +39,7 @@ class BaseParser(ABC):
             raise ValueError("pdf_path must be a string")
         if not value.lower().endswith(".pdf"):
             raise ValueError("pdf_path must point to a PDF file")
-        self._pdf_path = value
+        self.__pdf_path = value
 
     # ---------------------------------------------------------
     # Factory entry point
@@ -53,7 +58,7 @@ class BaseParser(ABC):
     @property
     def _pdf_strategy(self) -> PDFTextStrategy:
         """Return the injected PDF extraction strategy."""
-        return self._strategy
+        return self.__strategy
 
     # ---------------------------------------------------------
     @abstractmethod

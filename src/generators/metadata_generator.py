@@ -18,8 +18,41 @@ class MetadataGenerator:
         - Coverage percentage
     """
 
-    TOOL_VERSION = "1.0.0"
+    # -------------------------------------------------------------
+    # Private class constants (PHASE 2)
+    # -------------------------------------------------------------
+    __TOOL_VERSION: str = "1.0.0"
 
+    # -------------------------------------------------------------
+    # Constructor + private instance state (PHASE 3)
+    # -------------------------------------------------------------
+    def __init__(self) -> None:
+        self.__output_path: Path | None = None
+        self.__generated_at: datetime | None = None
+
+    # -------------------------------------------------------------
+    # Controlled access to constants
+    # -------------------------------------------------------------
+    @classmethod
+    def _get_tool_version(cls) -> str:
+        """Return tool version (protected access)."""
+        return cls.__TOOL_VERSION
+
+    # -------------------------------------------------------------
+    # Properties (PHASE 3)
+    # -------------------------------------------------------------
+    @property
+    def output_path(self) -> Path | None:
+        """Get last generated metadata file path."""
+        return self.__output_path
+
+    @property
+    def generated_at(self) -> datetime | None:
+        """Get metadata generation timestamp."""
+        return self.__generated_at
+
+    # -------------------------------------------------------------
+    # Public API
     # -------------------------------------------------------------
     def generate(
         self,
@@ -42,17 +75,19 @@ class MetadataGenerator:
             else 0.0
         )
 
+        self.__generated_at = datetime.now()
+        self.__output_path = Path(output_path)
+
         metadata = {
             "type": "metadata",
-            "tool_version": self.TOOL_VERSION,
-            "generated_at": datetime.now().isoformat(),
+            "tool_version": self._get_tool_version(),
+            "generated_at": self.__generated_at.isoformat(),
             "toc_count": len(toc),
             "section_count": len(chunks),
             "coverage_percentage": round(coverage, 2),
         }
 
-        output = Path(output_path)
-        with output.open("w", encoding="utf-8") as f:
+        with self.__output_path.open("w", encoding="utf-8") as f:
             json.dump(
                 metadata,
                 f,
@@ -60,5 +95,5 @@ class MetadataGenerator:
                 ensure_ascii=False,
             )
 
-        print(f"Metadata JSON written → {output}")
-        return output
+        print(f"Metadata JSON written → {self.__output_path}")
+        return self.__output_path

@@ -59,7 +59,7 @@ class ValidationReport:
 
 
 # ------------------------------------------------------------------
-# Generator (Improvement 4 compliant)
+# Generator
 # ------------------------------------------------------------------
 class ReportGenerator(BaseReportGenerator):
     """
@@ -76,18 +76,31 @@ class ReportGenerator(BaseReportGenerator):
         output_path: str = "data/score_report.jsonl",
     ) -> None:
         super().__init__(output_path)
-        self._raw = raw_validation
-        self._report: ValidationReport | None = None
+        self.__raw: Dict[str, Any] = raw_validation
+        self.__report: ValidationReport | None = None
+
+    # ------------------------------------------------------------------
+    # Properties (PHASE 3)
+    # ------------------------------------------------------------------
+    @property
+    def raw_validation(self) -> Dict[str, Any]:
+        """Return raw validation input (read-only)."""
+        return self.__raw
+
+    @property
+    def report(self) -> ValidationReport | None:
+        """Return generated validation report (read-only)."""
+        return self.__report
 
     # ------------------------------------------------------------------
     # Template method steps
     # ------------------------------------------------------------------
     def _validate_inputs(self) -> None:
-        if not isinstance(self._raw, dict):
+        if not isinstance(self.__raw, dict):
             raise TypeError("Raw validation data must be a dictionary.")
 
     def _load_data(self) -> Dict[str, Any]:
-        return self._raw
+        return self.__raw
 
     def _process_data(self, raw: Dict[str, Any]) -> ValidationReport:
         total = raw.get("total_toc", 0)
@@ -129,7 +142,7 @@ class ReportGenerator(BaseReportGenerator):
         if not recs:
             recs.append("Excellent extraction quality.")
 
-        self._report = ValidationReport(
+        self.__report = ValidationReport(
             quality_score=round(quality, 2),
             match_percentage=round(match_pct, 2),
             title_accuracy=round(title_pct, 2),
@@ -141,7 +154,7 @@ class ReportGenerator(BaseReportGenerator):
             recommendations=recs,
         )
 
-        return self._report
+        return self.__report
 
     def _format_output(self, report: ValidationReport) -> Dict[str, Any]:
         return report.__dict__
@@ -164,10 +177,10 @@ class ReportGenerator(BaseReportGenerator):
     # Hook: console output
     # ------------------------------------------------------------------
     def _post_process(self) -> None:
-        if not self._report:
+        if not self.__report:
             return
 
-        r = self._report
+        r = self.__report
         print("\n============== VALIDATION REPORT ==============")
         print(f"Quality Score     : {r.quality_score}%")
         print(f"TOC Match         : {r.match_percentage}%")

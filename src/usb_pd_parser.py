@@ -63,15 +63,15 @@ class USBPDParser(BaseParser):
     Coordinates the USB PD PDF parsing pipeline.
 
     Encapsulation rules:
-    - All internal state is private
-    - Dependencies injected via constructor
-    - Workflow decomposed into protected steps
+    - ALL internal state uses name-mangled private attributes (__attr)
+    - External access only via properties
+    - Workflow decomposed into protected methods
     """
 
     DOC_TITLE: str = "USB Power Delivery Specification Rev X"
 
     # --------------------------------------------------------------
-    # Constructor (PHASE-2 REFACTORED)
+    # Constructor (AGGRESSIVE ENCAPSULATION)
     # --------------------------------------------------------------
     def __init__(
         self,
@@ -89,24 +89,19 @@ class USBPDParser(BaseParser):
         - USBPDParser(strategy, pdf_path, output_dir)
         """
 
-        # 1️⃣ Normalize invocation
         strategy, pdf_path, output_dir = self._parse_args(
             args, strategy, pdf_path, output_dir
         )
 
-        # 2️⃣ Initialize base class
         super().__init__(strategy)
 
-        # 3️⃣ Initialize private state
-        self._initialize_state()
+        self.__initialize_state()
 
-        # 4️⃣ Set validated properties
         if pdf_path is not None:
             self.pdf_path = pdf_path
         self.output_dir = output_dir
 
-        # 5️⃣ Initialize dependencies
-        self._initialize_dependencies(
+        self.__initialize_dependencies(
             toc_extractor,
             inline_extractor,
             section_builder,
@@ -114,7 +109,7 @@ class USBPDParser(BaseParser):
         )
 
     # --------------------------------------------------------------
-    # Extracted: argument parsing
+    # Argument normalization (protected)
     # --------------------------------------------------------------
     def _parse_args(
         self,
@@ -123,7 +118,6 @@ class USBPDParser(BaseParser):
         pdf_path: str | None,
         output_dir: str | Path,
     ) -> Tuple[PDFTextStrategy, str | None, str | Path]:
-        """Normalize constructor invocation styles."""
         if args:
             if isinstance(args[0], PDFTextStrategy):
                 return (
@@ -145,34 +139,37 @@ class USBPDParser(BaseParser):
         )
 
     # --------------------------------------------------------------
-    # Extracted: internal state initialization
+    # Private state initialization (TRUE PRIVATE)
     # --------------------------------------------------------------
-    def _initialize_state(self) -> None:
-        """Initialize all private attributes."""
-        self._output_dir: Path | None = None
-        self._page_extractor: PDFExtractorProtocol | None = None
-        self._toc_extractor: ToCExtractorProtocol | None = None
-        self._inline_extractor: InlineHeadingExtractorProtocol | None = None
-        self._section_builder: SectionBuilderProtocol | None = None
+    def __initialize_state(self) -> None:
+        self.__output_dir: Path | None = None
+        self.__page_extractor: PDFExtractorProtocol | None = None
+        self.__toc_extractor: ToCExtractorProtocol | None = None
+        self.__inline_extractor: InlineHeadingExtractorProtocol | None = None
+        self.__section_builder: SectionBuilderProtocol | None = None
+
+        self.__pages: list[dict] | None = None
+        self.__toc: list[dict] | None = None
+        self.__headings: list[dict] | None = None
+        self.__sections: list[dict] | None = None
 
     # --------------------------------------------------------------
-    # Extracted: dependency wiring
+    # Dependency wiring (private)
     # --------------------------------------------------------------
-    def _initialize_dependencies(
+    def __initialize_dependencies(
         self,
         toc_extractor: ToCExtractorProtocol | None,
         inline_extractor: InlineHeadingExtractorProtocol | None,
         section_builder: SectionBuilderProtocol | None,
         strategy: PDFTextStrategy,
     ) -> None:
-        """Wire all collaborators via composition."""
-        self._page_extractor = strategy
-        self._toc_extractor = toc_extractor or ToCExtractor()
-        self._inline_extractor = inline_extractor or InlineHeadingExtractor()
-        self._section_builder = section_builder or SectionContentBuilder()
+        self.__page_extractor = strategy
+        self.__toc_extractor = toc_extractor or ToCExtractor()
+        self.__inline_extractor = inline_extractor or InlineHeadingExtractor()
+        self.__section_builder = section_builder or SectionContentBuilder()
 
     # --------------------------------------------------------------
-    # Context manager support
+    # Context manager
     # --------------------------------------------------------------
     def __enter__(self) -> "USBPDParser":
         return self
@@ -181,7 +178,7 @@ class USBPDParser(BaseParser):
         return False
 
     # --------------------------------------------------------------
-    # Dunder methods (polymorphism)
+    # Dunder methods
     # --------------------------------------------------------------
     def __str__(self) -> str:
         return f"USBPDParser(pdf={Path(self.pdf_path).name})"
@@ -198,17 +195,44 @@ class USBPDParser(BaseParser):
         return 4
 
     # --------------------------------------------------------------
-    # Encapsulation: output_dir
+    # Encapsulation: output_dir (controlled access)
     # --------------------------------------------------------------
     @property
     def output_dir(self) -> Path:
-        return self._output_dir or Path("data")
+        return self.__output_dir or Path("data")
 
     @output_dir.setter
     def output_dir(self, value: str | Path) -> None:
         path = Path(value)
         path.mkdir(parents=True, exist_ok=True)
-        self._output_dir = path
+        self.__output_dir = path
+
+    # --------------------------------------------------------------
+    # Read-only dependency accessors
+    # --------------------------------------------------------------
+    @property
+    def page_extractor(self) -> PDFExtractorProtocol:
+        if self.__page_extractor is None:
+            raise RuntimeError("Page extractor not initialized")
+        return self.__page_extractor
+
+    @property
+    def toc_extractor(self) -> ToCExtractorProtocol:
+        if self.__toc_extractor is None:
+            raise RuntimeError("ToC extractor not initialized")
+        return self.__toc_extractor
+
+    @property
+    def inline_extractor(self) -> InlineHeadingExtractorProtocol:
+        if self.__inline_extractor is None:
+            raise RuntimeError("Inline extractor not initialized")
+        return self.__inline_extractor
+
+    @property
+    def section_builder(self) -> SectionBuilderProtocol:
+        if self.__section_builder is None:
+            raise RuntimeError("Section builder not initialized")
+        return self.__section_builder
 
     # --------------------------------------------------------------
     # BaseParser contract
@@ -238,20 +262,23 @@ class USBPDParser(BaseParser):
     # --------------------------------------------------------------
     def _extract_pages(self) -> list[dict]:
         _logger.info("Extracting pages from PDF: %s", self.pdf_path)
-        pages = self._page_extractor.extract(self.pdf_path)
+        pages = self.page_extractor.extract(self.pdf_path)
         if not pages:
             raise RuntimeError("No pages extracted from PDF")
+        self.__pages = pages
         return pages
 
     def _extract_toc(self, pages: list[dict]) -> list[dict]:
-        toc = self._toc_extractor.extract(pages)
+        toc = self.toc_extractor.extract(pages)
         _logger.info("Extracted %d TOC entries", len(toc))
+        self.__toc = toc
         return toc
 
     def _extract_inline_headings(self, pages: list[dict]) -> list[dict]:
         data = {"pages": pages}
-        headings = self._inline_extractor.extract(data)
+        headings = self.inline_extractor.extract(data)
         _logger.info("Extracted %d inline headings", len(headings))
+        self.__headings = headings
         return headings
 
     def _build_sections(
@@ -260,13 +287,14 @@ class USBPDParser(BaseParser):
         toc: list[dict],
         headings: list[dict],
     ) -> list[dict]:
-        sections = self._section_builder.build(
+        sections = self.section_builder.build(
             toc=toc,
             pages=pages,
             headings=headings,
             doc_title=self.DOC_TITLE,
         )
         _logger.info("Built %d spec sections", len(sections))
+        self.__sections = sections
         return sections
 
     def _persist_outputs(

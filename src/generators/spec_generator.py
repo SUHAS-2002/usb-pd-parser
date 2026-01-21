@@ -18,29 +18,43 @@ class SpecJSONLGenerator:
     - No artificial 'type' field
 
     Encapsulation:
-    - Internal state is private
-    - State exposed via read-only properties
+    - Internal state is fully private (name-mangled)
+    - State exposed via validated properties
     """
 
     # ---------------------------------------------------------
-    # Constructor + private state (FIX 1.2)
+    # Constructor + private state
     # ---------------------------------------------------------
     def __init__(self) -> None:
-        self._output_path: Path | None = None
-        self._records_written: int = 0
+        self.__output_path: Path | None = None
+        self.__records_written: int = 0
 
     # ---------------------------------------------------------
-    # Read-only properties (FIX 1.2)
+    # Properties (PHASE 3)
     # ---------------------------------------------------------
     @property
     def output_path(self) -> Path | None:
-        """Return output file path."""
-        return self._output_path
+        """Get output file path (read-only)."""
+        return self.__output_path
+
+    @output_path.setter
+    def output_path(self, value: str | Path) -> None:
+        """Set output file path with validation."""
+        path = Path(value)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        self.__output_path = path
 
     @property
     def records_written(self) -> int:
-        """Return number of records written."""
-        return self._records_written
+        """Get number of records written."""
+        return self.__records_written
+
+    @records_written.setter
+    def records_written(self, value: int) -> None:
+        """Set records written (must be non-negative)."""
+        if not isinstance(value, int) or value < 0:
+            raise ValueError("records_written must be a non-negative integer")
+        self.__records_written = value
 
     # ---------------------------------------------------------
     # Public API
@@ -60,10 +74,10 @@ class SpecJSONLGenerator:
             Path(chunks_path)
         )
 
-        self._output_path = Path(output_path)
-        self._records_written = 0
+        self.output_path = output_path
+        self.records_written = 0
 
-        with self._output_path.open("w", encoding="utf-8") as f:
+        with self.output_path.open("w", encoding="utf-8") as f:
             for section in chunks:
                 clean_section = {
                     key: value
@@ -77,7 +91,7 @@ class SpecJSONLGenerator:
                     )
                     + "\n"
                 )
-                self._records_written += 1
+                self.records_written += 1
 
-        print(f"Spec JSONL written → {self._output_path}")
-        return self._output_path
+        print(f"Spec JSONL written → {self.output_path}")
+        return self.output_path

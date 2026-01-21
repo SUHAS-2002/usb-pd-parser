@@ -29,15 +29,15 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
     High-fidelity OCR-based PDF extraction strategy.
 
     Encapsulation:
-    - OCR flag is private and validated
-    - OCR and block handling are isolated helpers
+    - OCR flag uses name-mangled private attribute (__ocr)
+    - OCR and block handling isolated in protected helpers
     """
 
     # ---------------------------------------------------------------
-    # Constructor
+    # Constructor (TRUE PRIVATE STATE)
     # ---------------------------------------------------------------
     def __init__(self, ocr: bool = True) -> None:
-        self._ocr: bool = self._validate_ocr(ocr)
+        self.__ocr: bool = self._validate_ocr(ocr)
 
     # ---------------------------------------------------------------
     # Strategy metadata
@@ -51,11 +51,12 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
     # ---------------------------------------------------------------
     @property
     def ocr(self) -> bool:
-        return self._ocr
+        """Return OCR enabled flag (read-only)."""
+        return self.__ocr
 
     @ocr.setter
     def ocr(self, value: bool) -> None:
-        self._ocr = self._validate_ocr(value)
+        self.__ocr = self._validate_ocr(value)
 
     # ---------------------------------------------------------------
     # Validation helpers
@@ -67,7 +68,7 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
         return value
 
     # ---------------------------------------------------------------
-    # Strategy implementation (PHASE 2.3)
+    # Strategy implementation
     # ---------------------------------------------------------------
     def extract_text(self, pdf: str) -> List[Dict]:
         """
@@ -86,7 +87,7 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
         return pages
 
     # ---------------------------------------------------------------
-    # Extracted helpers (method split)
+    # Extracted helpers
     # ---------------------------------------------------------------
     def _extract_page(
         self,
@@ -141,7 +142,7 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
         if text:
             return text
 
-        if not self._ocr:
+        if not self.__ocr:
             return ""
 
         return self._ocr_block(page, block, page_index)

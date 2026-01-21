@@ -1,5 +1,3 @@
-# src/core/interfaces.py
-
 from typing import Protocol, List, Dict
 
 

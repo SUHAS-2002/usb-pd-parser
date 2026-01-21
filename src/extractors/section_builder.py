@@ -33,33 +33,38 @@ class SectionContentBuilder:
 
     Encapsulation:
     - Public API: build()
-    - Private internal state with read-only properties
-    - All logic isolated in protected helpers
+    - ALL internal state uses name-mangled attributes (__attr)
+    - Read-only statistics via properties
+    - Logic isolated in protected helpers
     """
 
     # -----------------------------------------------------------
-    # Constructor + private state
+    # Constructor + TRUE PRIVATE state
     # -----------------------------------------------------------
     def __init__(self) -> None:
-        self._max_scan_pages: int = 50
-        self._processed_count: int = 0
-        self._filtered_count: int = 0
-        self._toc_page_count: int = 0
+        self.__max_scan_pages: int = 50
+
+        self.__processed_count: int = 0
+        self.__filtered_count: int = 0
+        self.__toc_page_count: int = 0
+
+        self.__page_text_map: Dict[int, str] = {}
+        self.__sections: List[Dict] = []
 
     # -----------------------------------------------------------
-    # Read-only properties
+    # Read-only statistics
     # -----------------------------------------------------------
     @property
     def processed_count(self) -> int:
-        return self._processed_count
+        return self.__processed_count
 
     @property
     def filtered_count(self) -> int:
-        return self._filtered_count
+        return self.__filtered_count
 
     @property
     def toc_page_count(self) -> int:
-        return self._toc_page_count
+        return self.__toc_page_count
 
     # -----------------------------------------------------------
     # Public API
@@ -72,21 +77,22 @@ class SectionContentBuilder:
         doc_title: str,
     ) -> List[Dict]:
 
-        self._processed_count = 0
-        self._filtered_count = 0
-        self._toc_page_count = 0
+        # Reset counters
+        self.__processed_count = 0
+        self.__filtered_count = 0
+        self.__toc_page_count = 0
 
         if not headings or not pages:
             return []
 
-        page_text = self._build_page_text_map(pages)
-        sections: List[Dict] = []
+        self.__page_text_map = self._build_page_text_map(pages)
+        self.__sections = []
 
         for idx, heading in enumerate(headings):
-            self._processed_count += 1
+            self.__processed_count += 1
 
             if not self._is_valid_heading(heading):
-                self._filtered_count += 1
+                self.__filtered_count += 1
                 continue
 
             page = heading["page"]
@@ -95,26 +101,26 @@ class SectionContentBuilder:
 
             # Exclude ToC pages
             if CONFIG.pages.TOC_START <= page <= CONFIG.pages.TOC_END:
-                self._toc_page_count += 1
+                self.__toc_page_count += 1
                 continue
 
             # Exclude front matter
             if self._is_front_matter(sid):
-                self._filtered_count += 1
+                self.__filtered_count += 1
                 continue
 
-            # Filter false positives (PHASE 2.2)
+            # Filter false positives
             if self._is_false_positive(sid, title):
-                self._filtered_count += 1
+                self.__filtered_count += 1
                 continue
 
             content = self._extract_section_content(
                 index=idx,
                 headings=headings,
-                page_text_map=page_text,
+                page_text_map=self.__page_text_map,
             )
 
-            sections.append(
+            self.__sections.append(
                 self._build_section_record(
                     heading=heading,
                     doc_title=doc_title,
@@ -122,7 +128,7 @@ class SectionContentBuilder:
                 )
             )
 
-        return sections
+        return self.__sections.copy()
 
     # -----------------------------------------------------------
     # Heading validation
@@ -173,7 +179,7 @@ class SectionContentBuilder:
 
         for page in range(
             start_page,
-            min(end_page + 1, start_page + self._max_scan_pages),
+            min(end_page + 1, start_page + self.__max_scan_pages),
         ):
             raw = page_text_map.get(page)
             if not raw:
@@ -246,14 +252,9 @@ class SectionContentBuilder:
         return any(m in lower for m in markers) and len(line) < 60
 
     # -----------------------------------------------------------
-    # False-positive detection (PHASE 2.2 – SPLIT)
+    # False-positive detection
     # -----------------------------------------------------------
     def _is_false_positive(self, section_id: str, title: str) -> bool:
-        """
-        Detect false positive sections.
-
-        Returns True if section should be filtered out.
-        """
         title_lower = title.lower().strip()
 
         if self._is_version_string(title_lower):

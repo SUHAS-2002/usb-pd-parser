@@ -37,53 +37,68 @@ class ToCExtractor:
     Semantic TOC extractor for USB-PD PDF.
 
     Encapsulation:
-    - Minimal public API (`extract`)
-    - All helpers are private
-    - Regex patterns are private class constants
+    - Public API: extract()
+    - ALL regex patterns are name-mangled (__PATTERN)
+    - ALL internal state uses name-mangled attributes (__attr)
     """
 
     # --------------------------------------------------------------
-    # Private regex patterns
+    # Private regex patterns (TRUE PRIVATE)
     # --------------------------------------------------------------
-    _BODY_SECTION_RE = re.compile(
+    __BODY_SECTION_PATTERN = re.compile(
         r"^\s*(\d+(?:\.\d+)*)\s+(.+)$",
         re.MULTILINE,
     )
 
-    _FRONT_RE = re.compile(
+    __FRONT_PATTERN = re.compile(
         r"^\s*([A-Za-z][A-Za-z\s]+?)\.{3,}\s*(\d{1,4})\s*$"
     )
 
-    _NUMBERED_TOC_RE = re.compile(
+    __NUMBERED_TOC_PATTERN = re.compile(
         r"^\s*(\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    _APPENDIX_TOC_RE = re.compile(
+    __APPENDIX_TOC_PATTERN = re.compile(
         r"^\s*([A-E](?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    _FIGURE_TOC_RE = re.compile(
+    __FIGURE_TOC_PATTERN = re.compile(
         r"^\s*(Figure\s+\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    _TABLE_TOC_RE = re.compile(
+    __TABLE_TOC_PATTERN = re.compile(
         r"^\s*(Table\s+\d+(?:\.\d+)*)\s+(.+?)\s*\.{2,}\s*(\d+)\s*$"
     )
 
-    _TOC_HEADER_RE = re.compile(
+    __TOC_HEADER_PATTERN = re.compile(
         r"\btable\s+of\s+contents\b",
         re.IGNORECASE,
     )
 
-    _SELF_REF_RE = re.compile(
+    __SELF_REF_PATTERN = re.compile(
         r"^\s*table\s+of\s+contents\s*\.{3,}",
         re.IGNORECASE,
     )
 
     # --------------------------------------------------------------
+    # Controlled pattern access
+    # --------------------------------------------------------------
+    @classmethod
+    def _get_patterns(cls) -> Tuple[re.Pattern, ...]:
+        """Return TOC line parsing patterns (protected)."""
+        return (
+            cls.__NUMBERED_TOC_PATTERN,
+            cls.__APPENDIX_TOC_PATTERN,
+            cls.__FIGURE_TOC_PATTERN,
+            cls.__TABLE_TOC_PATTERN,
+        )
+
+    # --------------------------------------------------------------
+    # Constructor
+    # --------------------------------------------------------------
     def __init__(self) -> None:
-        self._doc_title: str = CONFIG.DOC_TITLE
-        self._max_page: int = CONFIG.pages.MAX_PAGE
+        self.__doc_title: str = CONFIG.DOC_TITLE
+        self.__max_page: int = CONFIG.pages.MAX_PAGE
 
     # --------------------------------------------------------------
     # Public API
@@ -118,7 +133,7 @@ class ToCExtractor:
             page_num = page.get("page", 0)
             text = page.get("text") or ""
 
-            if self._TOC_HEADER_RE.search(text):
+            if self.__TOC_HEADER_PATTERN.search(text):
                 in_toc = True
 
             if not self._is_valid_toc_page(in_toc, page_num):
@@ -142,7 +157,6 @@ class ToCExtractor:
         in_toc: bool,
         page_num: int,
     ) -> bool:
-        """Check if page is within the TOC page range."""
         return (
             in_toc
             and CONFIG.pages.TOC_START <= page_num <= CONFIG.pages.TOC_END
@@ -151,8 +165,8 @@ class ToCExtractor:
     def _parse_page(
         self,
         text: str,
-    ) -> List[Tuple[Optional[str], str, int]]:
-        parsed: List[Tuple[Optional[str], str, int]] = []
+    ) -> List[Tuple[str, str, int]]:
+        parsed: List[Tuple[str, str, int]] = []
 
         for line in self._clean_lines(text):
             item = self._parse_toc_line(line)
@@ -162,35 +176,24 @@ class ToCExtractor:
         return parsed
 
     def _clean_lines(self, text: str) -> List[str]:
-        """Remove self-referential TOC lines."""
         return [
             ln for ln in text.splitlines()
-            if not self._SELF_REF_RE.match(ln)
+            if not self.__SELF_REF_PATTERN.match(ln)
         ]
 
     def _parse_toc_line(
         self,
         line: str,
-    ) -> Optional[Tuple[Optional[str], str, int]]:
-        for rx in (
-            self._NUMBERED_TOC_RE,
-            self._APPENDIX_TOC_RE,
-            self._FIGURE_TOC_RE,
-            self._TABLE_TOC_RE,
-        ):
+    ) -> Optional[Tuple[str, str, int]]:
+        for rx in self._get_patterns():
             match = rx.match(line)
             if match:
                 sid, title, page = match.groups()
-                return (
-                    sid,
-                    title.strip().rstrip("."),
-                    int(page),
-                )
+                return sid, title.strip().rstrip("."), int(page)
 
-        front = self._FRONT_RE.match(line)
+        front = self.__FRONT_PATTERN.match(line)
         if front:
-            title, page = front.groups()
-            return None, title.strip(), int(page)
+            return None
 
         return None
 
@@ -202,7 +205,7 @@ class ToCExtractor:
     ) -> bool:
         if not sid:
             return False
-        if page > self._max_page:
+        if page > self.__max_page:
             return False
         return not self._is_false_positive(title)
 
@@ -233,7 +236,7 @@ class ToCExtractor:
             page_no = page.get("page", 0)
             text = page.get("text") or ""
 
-            for match in self._BODY_SECTION_RE.finditer(text):
+            for match in self.__BODY_SECTION_PATTERN.finditer(text):
                 sid, title = match.groups()
                 sections.setdefault(
                     sid,
@@ -272,7 +275,7 @@ class ToCExtractor:
         parent = sid.rsplit(".", 1)[0] if "." in sid else None
 
         return TocEntry(
-            doc_title=self._doc_title,
+            doc_title=self.__doc_title,
             section_id=sid,
             title=title,
             page=page,

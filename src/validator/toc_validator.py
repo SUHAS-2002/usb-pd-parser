@@ -19,10 +19,12 @@ class TOCValidator:
     - Save validation report as JSON AND JSONL
 
     Encapsulation:
-    - Minimal public API (`validate`)
-    - All helpers are private
+    - Public API: validate()
+    - ALL internal state uses name-mangled attributes (__attr)
     """
 
+    # ---------------------------------------------------------
+    # Constructor (TRUE PRIVATE STATE)
     # ---------------------------------------------------------
     def __init__(
         self,
@@ -31,22 +33,22 @@ class TOCValidator:
     ) -> None:
         """Initialize validator with dependency injection."""
         if matcher is not None:
-            self._matcher = matcher
+            self.__matcher: SectionMatcher = matcher
         else:
             threshold = (
                 title_threshold
                 if title_threshold is not None
                 else CONFIG.validation.TITLE_SIMILARITY
             )
-            self._matcher = SectionMatcher(threshold)
+            self.__matcher = SectionMatcher(threshold)
 
     # ---------------------------------------------------------
     # Encapsulation
     # ---------------------------------------------------------
     @property
     def matcher(self) -> SectionMatcher:
-        """Return matcher instance."""
-        return self._matcher
+        """Return matcher instance (read-only)."""
+        return self.__matcher
 
     # ---------------------------------------------------------
     # Public API
@@ -68,7 +70,7 @@ class TOCValidator:
         toc = JSONLHandler.load(Path(toc_path))
         chunks = JSONLHandler.load(Path(chunks_path))
 
-        result = self._matcher.match(toc, chunks)
+        result = self.__matcher.match(toc, chunks)
 
         output_path = self._normalize_report_path(report_path)
 
@@ -79,7 +81,7 @@ class TOCValidator:
         return result
 
     # ---------------------------------------------------------
-    # Private helpers (PHASE 3.1)
+    # Private helpers
     # ---------------------------------------------------------
     @staticmethod
     def _normalize_report_path(path: str) -> Path:

@@ -11,9 +11,13 @@ class PDFTextStrategy(ABC, PDFExtractorProtocol):
     Abstract base class for all PDF text extraction strategies.
 
     Strategy Pattern:
-    - Concrete extractors implement `extract_text`
-    - Parser interacts via `PDFExtractorProtocol`
+    - Concrete extractors implement extract_text()
+    - Parser interacts via PDFExtractorProtocol
     - Strategies are interchangeable and testable
+
+    Encapsulation:
+    - No internal state (stateless strategy)
+    - Public API strictly defined by abstract methods
     """
 
     # ---------------------------------------------------------

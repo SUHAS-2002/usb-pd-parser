@@ -24,17 +24,26 @@ class InlineHeadingExtractor(BaseExtractor):
     Extract numeric section headings from PDF body text.
 
     Encapsulation:
-    - Regex patterns are private
+    - Regex patterns are TRUE PRIVATE class constants (__CONSTANT)
+    - Access via protected classmethod
     - All helpers are protected
     """
 
     # --------------------------------------------------------------
-    # Private class constants
+    # TRUE PRIVATE class constant (PHASE 2)
     # --------------------------------------------------------------
-    _SECTION_RE = re.compile(
+    __SECTION_PATTERN = re.compile(
         r"^\s*(\d+(?:\.\d+)*)\s+(.+)$",
         re.MULTILINE,
     )
+
+    # --------------------------------------------------------------
+    # Controlled access to class constant
+    # --------------------------------------------------------------
+    @classmethod
+    def _get_section_pattern(cls) -> re.Pattern:
+        """Get section heading regex pattern (protected)."""
+        return cls.__SECTION_PATTERN
 
     # --------------------------------------------------------------
     # Public API
@@ -83,7 +92,7 @@ class InlineHeadingExtractor(BaseExtractor):
         page_no: int,
         results: List[Dict],
     ) -> None:
-        for sid, title in self._SECTION_RE.findall(text):
+        for sid, title in self._get_section_pattern().findall(text):
             title_clean = title.strip()
 
             results.append(

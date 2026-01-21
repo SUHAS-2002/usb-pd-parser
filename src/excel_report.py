@@ -16,11 +16,21 @@ class ExcelReportGenerator(BaseReportGenerator):
     """
     Excel coverage report generator.
 
-    Implements the BaseReportGenerator template method
-    and supports context manager usage.
+    Encapsulation:
+    - ALL internal state uses name-mangled attributes (__attr)
+    - Public API inherited from BaseReportGenerator
     """
 
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # TRUE PRIVATE class constants
+    # --------------------------------------------------------------
+    __STATUS_MATCHED = "MATCHED"
+    __STATUS_MISSING = "MISSING_IN_CONTENT"
+    __STATUS_EXTRA = "EXTRA_IN_CONTENT"
+
+    # --------------------------------------------------------------
+    # Constructor
+    # --------------------------------------------------------------
     def __init__(
         self,
         toc_path: str,
@@ -29,80 +39,84 @@ class ExcelReportGenerator(BaseReportGenerator):
     ) -> None:
         super().__init__(output_xlsx)
 
-        self._toc_path = Path(toc_path)
-        self._chunks_path = Path(chunks_path)
+        self.__toc_path: Path = Path(toc_path)
+        self.__chunks_path: Path = Path(chunks_path)
 
-        self._colors = {
-            "MATCHED": CONFIG.excel_colors.GREEN,
-            "MISSING_IN_CONTENT": CONFIG.excel_colors.RED,
-            "EXTRA_IN_CONTENT": CONFIG.excel_colors.YELLOW,
+        self.__colors: Dict[str, str] = {
+            self.__STATUS_MATCHED: CONFIG.excel_colors.GREEN,
+            self.__STATUS_MISSING: CONFIG.excel_colors.RED,
+            self.__STATUS_EXTRA: CONFIG.excel_colors.YELLOW,
         }
 
-    # ------------------------------------------------------------------
-    # Special methods (Improvement 10)
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # Read-only properties
+    # --------------------------------------------------------------
+    @property
+    def toc_path(self) -> Path:
+        return self.__toc_path
+
+    @property
+    def chunks_path(self) -> Path:
+        return self.__chunks_path
+
+    # --------------------------------------------------------------
+    # Special methods
+    # --------------------------------------------------------------
     def __str__(self) -> str:
-        """Human-readable description."""
         return (
             "ExcelReportGenerator("
-            f"toc={self._toc_path.name}, "
-            f"chunks={self._chunks_path.name}"
+            f"toc={self.__toc_path.name}, "
+            f"chunks={self.__chunks_path.name}"
             ")"
         )
 
     def __repr__(self) -> str:
-        """Developer-friendly representation."""
         return (
             "ExcelReportGenerator("
-            f"toc_path={self._toc_path!r}, "
-            f"chunks_path={self._chunks_path!r}, "
+            f"toc_path={self.__toc_path!r}, "
+            f"chunks_path={self.__chunks_path!r}, "
             f"output_path={self.output_path!r}"
             ")"
         )
 
     def __eq__(self, other: object) -> bool:
-        """Logical equality based on input sources."""
         if not isinstance(other, ExcelReportGenerator):
             return NotImplemented
         return (
-            self._toc_path == other._toc_path
-            and self._chunks_path == other._chunks_path
+            self.__toc_path == other.__toc_path
+            and self.__chunks_path == other.__chunks_path
             and self.output_path == other.output_path
         )
 
     def __len__(self) -> int:
-        """Number of input sources."""
         return 2
 
-    # ------------------------------------------------------------------
-    # Context Manager Support (Improvement 9)
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
+    # Context manager
+    # --------------------------------------------------------------
     def __enter__(self) -> "ExcelReportGenerator":
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
         return False
 
-    def __del__(self) -> None:
-        pass
-
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     # Template method steps
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     def _validate_inputs(self) -> None:
-        if not self._toc_path.exists():
+        if not self.__toc_path.exists():
             raise FileNotFoundError(
-                f"ToC file not found: {self._toc_path}"
+                f"ToC file not found: {self.__toc_path}"
             )
-        if not self._chunks_path.exists():
+        if not self.__chunks_path.exists():
             raise FileNotFoundError(
-                f"Chunks file not found: {self._chunks_path}"
+                f"Chunks file not found: {self.__chunks_path}"
             )
 
     def _load_data(self) -> Dict[str, Any]:
         return {
-            "toc": JSONLHandler.load(self._toc_path),
-            "chunks": JSONLHandler.load(self._chunks_path),
+            "toc": JSONLHandler.load(self.__toc_path),
+            "chunks": JSONLHandler.load(self.__chunks_path),
         }
 
     def _process_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
@@ -154,16 +168,16 @@ class ExcelReportGenerator(BaseReportGenerator):
         wb.save(final_output)
         return final_output
 
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     # Helpers
-    # ------------------------------------------------------------------
-    @staticmethod
-    def _resolve_status(toc, chunk) -> str:
+    # --------------------------------------------------------------
+    @classmethod
+    def _resolve_status(cls, toc, chunk) -> str:
         if toc and chunk:
-            return "MATCHED"
+            return cls.__STATUS_MATCHED
         if toc:
-            return "MISSING_IN_CONTENT"
-        return "EXTRA_IN_CONTENT"
+            return cls.__STATUS_MISSING
+        return cls.__STATUS_EXTRA
 
     @staticmethod
     def _safe_map(
@@ -193,13 +207,13 @@ class ExcelReportGenerator(BaseReportGenerator):
         except Exception:
             return [9999]
 
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     # Excel formatting
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     def _apply_row_colors(self, ws) -> None:
         for row in ws.iter_rows(min_row=2):
             status = row[5].value
-            color = self._colors.get(
+            color = self.__colors.get(
                 status,
                 CONFIG.excel_colors.WHITE,
             )
@@ -231,9 +245,9 @@ class ExcelReportGenerator(BaseReportGenerator):
             cell.hyperlink = f"#coverage!A{cell.row}"
             cell.style = "Hyperlink"
 
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     # Summary
-    # ------------------------------------------------------------------
+    # --------------------------------------------------------------
     @staticmethod
     def _add_summary_sheet(wb, df: pd.DataFrame) -> None:
         summary = wb.create_sheet("summary")

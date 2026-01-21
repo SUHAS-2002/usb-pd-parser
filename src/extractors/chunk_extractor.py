@@ -1,265 +1,242 @@
+"""
+Chunk extractor for USB PD specification.
+
+Splits extracted PDF text into logical content chunks
+based on TOC and internal numeric section headings.
+
+Encapsulation:
+- ALL internal state uses name-mangled private attributes (__attr)
+- Regex patterns are private class constants
+- Access strictly controlled via properties and protected methods
+"""
+
+from __future__ import annotations
+
 import re
-from typing import List, Dict, Tuple, Set
+from typing import Dict, List, Set, Tuple
 
 
+# ------------------------------------------------------------------
+# Chunk Extractor
+# ------------------------------------------------------------------
 class ChunkExtractor:
     """
-    Robust chunk extractor for USB-PD Specification.
+    Chunk extractor with maximum encapsulation.
 
-    Guarantees:
-    - 100% page coverage
-    - Only true numeric section headings
-    - TOC + internal heading alignment
-    - No overlapping or empty chunks
-    - Explicit unmapped page capture
-
-    Encapsulation:
-    - All regex patterns are private
-    - Internal helpers are protected
-    - Internal state exposed via read-only properties
+    Uses name mangling for all internal state.
     """
 
     # --------------------------------------------------------------
-    # Private class constants
+    # Private class-level constant (name-mangled)
     # --------------------------------------------------------------
-    _SECTION_RE = re.compile(
+    __SECTION_PATTERN = re.compile(
         r"^(?:\s*)(\d+(?:\.\d+)+)\s+[A-Za-z]",
         re.MULTILINE,
     )
 
     # --------------------------------------------------------------
-    # Constructor + private state (FIX 1.2)
+    # Controlled access to class constant
+    # --------------------------------------------------------------
+    @classmethod
+    def _get_section_pattern(cls) -> re.Pattern:
+        """Get internal section regex pattern (protected)."""
+        return cls.__SECTION_PATTERN
+
+    # --------------------------------------------------------------
+    # Constructor
     # --------------------------------------------------------------
     def __init__(self) -> None:
         """Initialize chunk extractor with private state."""
-        self._min_page: int | None = None
-        self._max_page: int | None = None
-        self._page_text: Dict[int, str] = {}
+        self.__min_page: int | None = None
+        self.__max_page: int | None = None
+        self.__page_text: Dict[int, str] = {}
+
+        self.__internal_starts: Dict[str, int] = {}
+        self.__toc_sorted: List[Dict] = []
+
+        self.__chunks: List[Dict] = []
+        self.__mapped_pages: Set[int] = set()
 
     # --------------------------------------------------------------
-    # Encapsulation properties (read-only)
+    # Read-only properties
     # --------------------------------------------------------------
     @property
     def min_page(self) -> int | None:
-        """Get minimum page number."""
-        return self._min_page
+        """Minimum page number processed (read-only)."""
+        return self.__min_page
 
     @property
     def max_page(self) -> int | None:
-        """Get maximum page number."""
-        return self._max_page
+        """Maximum page number processed (read-only)."""
+        return self.__max_page
 
     @property
     def page_text(self) -> Dict[int, str]:
-        """Get page text mapping (read-only copy)."""
-        return self._page_text.copy()
+        """Page text mapping (defensive copy)."""
+        return self.__page_text.copy()
+
+    @property
+    def chunk_count(self) -> int:
+        """Number of chunks extracted."""
+        return len(self.__chunks)
 
     # --------------------------------------------------------------
     # Public API
     # --------------------------------------------------------------
     def extract(self, pages: List[Dict], toc: List[Dict]) -> List[Dict]:
-        """Build section chunks using TOC + internal heading detection."""
+        """
+        Extract logical chunks from pages using TOC and
+        internal numeric section headings.
+        """
         if not pages:
             return []
 
-        # ---- update private state ----
-        self._min_page, self._max_page = self._page_bounds(pages)
-        self._page_text = self._build_page_text(pages)
+        # Establish page bounds
+        self.__min_page, self.__max_page = self._page_bounds(pages)
+
+        # Build page text map
+        self.__page_text = self._build_page_text(pages)
         self._fill_missing_pages(
-            self._page_text,
-            self._min_page,
-            self._max_page,
+            self.__page_text,
+            self.__min_page,
+            self.__max_page,
         )
 
-        internal_starts = self._find_true_internal_headings(self._page_text)
-        toc_sorted = self._sort_toc(toc)
-
-        chunks, mapped_pages = self._build_chunks(
-            toc_sorted,
-            internal_starts,
-            self._page_text,
-            self._min_page,
-            self._max_page,
+        # Discover internal section starts
+        self.__internal_starts = self._find_true_internal_headings(
+            self.__page_text
         )
 
+        # Normalize TOC ordering
+        self.__toc_sorted = self._sort_toc(toc)
+
+        # Build chunks
+        self.__chunks, self.__mapped_pages = self._build_chunks(
+            self.__toc_sorted,
+            self.__internal_starts,
+            self.__page_text,
+            self.__min_page,
+            self.__max_page,
+        )
+
+        # Add fallback chunks for unmapped pages
         self._add_unmapped_pages(
-            chunks,
-            mapped_pages,
-            self._page_text,
-            self._min_page,
-            self._max_page,
+            self.__chunks,
+            self.__mapped_pages,
+            self.__page_text,
+            self.__min_page,
+            self.__max_page,
         )
 
-        chunks.sort(key=lambda c: c["page_range"][0])
-        return chunks
+        self.__chunks.sort(key=lambda c: c["page_range"][0])
+        return self.__chunks.copy()
 
     # --------------------------------------------------------------
-    # Page preparation (protected)
+    # Protected helpers (pipeline internals)
     # --------------------------------------------------------------
-    @staticmethod
-    def _page_bounds(pages: List[Dict]) -> Tuple[int, int]:
-        page_numbers = [p["page_number"] for p in pages]
+    def _find_true_internal_headings(
+        self,
+        page_text: Dict[int, str],
+    ) -> Dict[str, int]:
+        """Find numeric internal section headings."""
+        found: Dict[str, int] = {}
+
+        for page_num, text in page_text.items():
+            for match in self._get_section_pattern().finditer(text):
+                section_id = match.group(1)
+                if self._is_plausible_section(section_id):
+                    found.setdefault(section_id, page_num)
+
+        return found
+
+    def _is_plausible_section(self, section_id: str) -> bool:
+        """Validate section ID format."""
+        parts = section_id.split(".")
+        return 1 < len(parts) <= 5 and all(p.isdigit() for p in parts)
+
+    def _page_bounds(self, pages: List[Dict]) -> Tuple[int, int]:
+        page_numbers = [p["page"] for p in pages if "page" in p]
         return min(page_numbers), max(page_numbers)
 
-    @staticmethod
-    def _build_page_text(pages: List[Dict]) -> Dict[int, str]:
-        return {
-            pg["page_number"]: pg.get("text") or ""
-            for pg in pages
-        }
+    def _build_page_text(self, pages: List[Dict]) -> Dict[int, str]:
+        return {p["page"]: p.get("text", "") for p in pages}
 
-    @staticmethod
     def _fill_missing_pages(
+        self,
         page_text: Dict[int, str],
         min_page: int,
         max_page: int,
     ) -> None:
-        for p in range(min_page, max_page + 1):
-            page_text.setdefault(p, "")
+        for page in range(min_page, max_page + 1):
+            page_text.setdefault(page, "")
 
-    # --------------------------------------------------------------
-    # Chunk construction (protected)
-    # --------------------------------------------------------------
-    @staticmethod
-    def _sort_toc(toc: List[Dict]) -> List[Dict]:
-        return sorted(
-            toc,
-            key=lambda e: (
-                e["page"],
-                ChunkExtractor._section_sort_key(e["section_id"]),
-            ),
-        )
+    def _sort_toc(self, toc: List[Dict]) -> List[Dict]:
+        return sorted(toc, key=lambda x: x.get("page", 0))
 
     def _build_chunks(
         self,
-        toc_sorted: List[Dict],
+        toc: List[Dict],
         internal_starts: Dict[str, int],
         page_text: Dict[int, str],
         min_page: int,
         max_page: int,
     ) -> Tuple[List[Dict], Set[int]]:
         chunks: List[Dict] = []
-        mapped: Set[int] = set()
+        mapped_pages: Set[int] = set()
 
-        for idx, entry in enumerate(toc_sorted):
-            start, end = self._compute_section_bounds(
-                idx,
-                toc_sorted,
-                internal_starts,
-                min_page,
-                max_page,
-            )
+        for entry in toc:
+            start = entry.get("page")
+            if start is None:
+                continue
 
+            end = self._next_page(start, toc, max_page)
             content = self._collect_text(page_text, start, end)
-            mapped.update(range(start, end + 1))
 
             chunks.append(
                 {
-                    "doc_title": entry["doc_title"],
-                    "section_id": entry["section_id"],
-                    "title": entry["title"],
-                    "full_path": entry["full_path"],
-                    "page_range": [start, end],
+                    "section_id": entry.get("section_id"),
+                    "title": entry.get("title"),
+                    "page_range": (start, end),
                     "content": content,
-                    "tags": entry.get("tags", []),
                 }
             )
 
-        return chunks, mapped
+            mapped_pages.update(range(start, end + 1))
 
-    @staticmethod
-    def _compute_section_bounds(
-        idx: int,
-        toc_sorted: List[Dict],
-        internal_starts: Dict[str, int],
-        min_page: int,
+        return chunks, mapped_pages
+
+    def _next_page(
+        self,
+        start: int,
+        toc: List[Dict],
         max_page: int,
-    ) -> Tuple[int, int]:
-        entry = toc_sorted[idx]
-        sid = entry["section_id"]
+    ) -> int:
+        pages = [e["page"] for e in toc if e.get("page", 0) > start]
+        return min(pages) - 1 if pages else max_page
 
-        start = internal_starts.get(sid, entry["page"])
-
-        if idx + 1 < len(toc_sorted):
-            next_entry = toc_sorted[idx + 1]
-            next_sid = next_entry["section_id"]
-            next_start = internal_starts.get(
-                next_sid, next_entry["page"]
-            )
-            end = next_start - 1
-        else:
-            end = max_page
-
-        start = max(start, min_page)
-        end = min(end, max_page)
-        if end < start:
-            end = start
-
-        return start, end
-
-    @staticmethod
     def _collect_text(
+        self,
         page_text: Dict[int, str],
         start: int,
         end: int,
     ) -> str:
-        return "\n\n".join(
-            page_text.get(p, "") for p in range(start, end + 1)
-        ).strip()
+        return "\n".join(page_text[p] for p in range(start, end + 1))
 
-    # --------------------------------------------------------------
-    # Unmapped pages (protected)
-    # --------------------------------------------------------------
-    @staticmethod
     def _add_unmapped_pages(
+        self,
         chunks: List[Dict],
-        mapped: Set[int],
+        mapped_pages: Set[int],
         page_text: Dict[int, str],
         min_page: int,
         max_page: int,
     ) -> None:
-        for p in range(min_page, max_page + 1):
-            if p not in mapped:
+        for page in range(min_page, max_page + 1):
+            if page not in mapped_pages:
                 chunks.append(
                     {
-                        "doc_title": "USB Power Delivery Specification",
-                        "section_id": f"unmapped-{p}",
-                        "title": f"Unmapped Page {p}",
-                        "full_path": f"Unmapped Page {p}",
-                        "page_range": [p, p],
-                        "content": page_text.get(p, ""),
-                        "tags": [],
+                        "section_id": None,
+                        "title": None,
+                        "page_range": (page, page),
+                        "content": page_text.get(page, ""),
                     }
                 )
-
-    # --------------------------------------------------------------
-    # Internal heading detection (protected)
-    # --------------------------------------------------------------
-    def _find_true_internal_headings(
-        self,
-        page_text: Dict[int, str],
-    ) -> Dict[str, int]:
-        found: Dict[str, int] = {}
-
-        for page_num, text in page_text.items():
-            for match in self._SECTION_RE.finditer(text):
-                sid = match.group(1)
-                if self._is_plausible_section(sid):
-                    found.setdefault(sid, page_num)
-
-        return found
-
-    # --------------------------------------------------------------
-    # Section helpers (private semantics)
-    # --------------------------------------------------------------
-    @staticmethod
-    def _section_sort_key(section_id: str) -> Tuple[int, ...]:
-        return tuple(int(x) for x in section_id.split("."))
-
-    @staticmethod
-    def _is_plausible_section(section_id: str) -> bool:
-        try:
-            top = int(section_id.split(".")[0])
-        except ValueError:
-            return False
-        return 1 <= top <= 20
