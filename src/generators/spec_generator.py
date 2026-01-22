@@ -5,9 +5,10 @@ from pathlib import Path
 from typing import List, Dict, Any
 
 from src.utils.jsonl_utils import JSONLHandler
+from src.core.base_generator import BaseGenerator
 
 
-class SpecJSONLGenerator:
+class SpecJSONLGenerator(BaseGenerator):
     """
     Builds the final USB PD specification JSONL file.
 
@@ -95,3 +96,43 @@ class SpecJSONLGenerator:
 
         print(f"Spec JSONL written → {self.output_path}")
         return self.output_path
+    
+    # ---------------------------------------------------------
+    # Polymorphism: Special methods
+    # ---------------------------------------------------------
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"SpecJSONLGenerator(records={self.__records_written}, output={self.__output_path})"
+    
+    def __repr__(self) -> str:
+        """Developer-friendly representation."""
+        return f"SpecJSONLGenerator()"
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on output path and records."""
+        if not isinstance(other, SpecJSONLGenerator):
+            return NotImplemented
+        return (
+            self.__output_path == other.__output_path
+            and self.__records_written == other.__records_written
+        )
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((self.__class__, self.__output_path, self.__records_written))
+    
+    def __len__(self) -> int:
+        """Return number of records written."""
+        return self.__records_written
+    
+    def __bool__(self) -> bool:
+        """Truthiness: True if has written records."""
+        return self.__records_written > 0
+    
+    def __enter__(self) -> "SpecJSONLGenerator":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False

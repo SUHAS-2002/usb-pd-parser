@@ -21,16 +21,21 @@ class ExcelValidationReport(BaseReportGenerator):
     # ------------------------------------------------------------------
     def __init__(self, report_json_path: str, output_xlsx: str) -> None:
         super().__init__(output_xlsx)
-        self._report_json_path = Path(report_json_path)
+        self.__report_json_path: Path = Path(report_json_path)
 
     # ------------------------------------------------------------------
     # Special methods (Improvement 10)
     # ------------------------------------------------------------------
+    @property
+    def report_json_path(self) -> Path:
+        """Get report JSON path (read-only)."""
+        return self.__report_json_path
+    
     def __str__(self) -> str:
         """Human-readable description."""
         return (
             "ExcelValidationReport("
-            f"report={self._report_json_path.name}"
+            f"report={self.__report_json_path.name}"
             ")"
         )
 
@@ -38,7 +43,7 @@ class ExcelValidationReport(BaseReportGenerator):
         """Developer-friendly representation."""
         return (
             "ExcelValidationReport("
-            f"report_json_path={self._report_json_path!r}, "
+            f"report_json_path={self.__report_json_path!r}, "
             f"output_path={self.output_path!r}"
             ")"
         )
@@ -48,7 +53,7 @@ class ExcelValidationReport(BaseReportGenerator):
         if not isinstance(other, ExcelValidationReport):
             return NotImplemented
         return (
-            self._report_json_path == other._report_json_path
+            self.__report_json_path == other.__report_json_path
             and self.output_path == other.output_path
         )
 
@@ -72,13 +77,13 @@ class ExcelValidationReport(BaseReportGenerator):
     # Template method steps
     # ------------------------------------------------------------------
     def _validate_inputs(self) -> None:
-        if not self._report_json_path.exists():
+        if not self.__report_json_path.exists():
             raise FileNotFoundError(
-                f"Validation report not found: {self._report_json_path}"
+                f"Validation report not found: {self.__report_json_path}"
             )
 
     def _load_data(self) -> Dict[str, Any]:
-        with self._report_json_path.open("r", encoding="utf-8") as f:
+        with self.__report_json_path.open("r", encoding="utf-8") as f:
             return json.load(f)
 
     def _process_data(self, data: Dict[str, Any]) -> Dict[str, Any]:

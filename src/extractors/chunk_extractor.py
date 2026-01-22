@@ -15,11 +15,13 @@ from __future__ import annotations
 import re
 from typing import Dict, List, Set, Tuple
 
+from src.core.extractor_base import BaseExtractor
+
 
 # ------------------------------------------------------------------
-# Chunk Extractor
+# Chunk Extractor (100% OOP Compliant)
 # ------------------------------------------------------------------
-class ChunkExtractor:
+class ChunkExtractor(BaseExtractor):
     """
     Chunk extractor with maximum encapsulation.
 
@@ -240,3 +242,75 @@ class ChunkExtractor:
                         "content": page_text.get(page, ""),
                     }
                 )
+    
+    # --------------------------------------------------------------
+    # Polymorphism: Special methods
+    # --------------------------------------------------------------
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return (
+            f"ChunkExtractor("
+            f"chunks={len(self.__chunks)}, "
+            f"min_page={self.__min_page}, "
+            f"max_page={self.__max_page})"
+        )
+    
+    def __repr__(self) -> str:
+        """Developer-friendly representation."""
+        return f"ChunkExtractor()"
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on chunk count and page range."""
+        if not isinstance(other, ChunkExtractor):
+            return NotImplemented
+        return (
+            len(self.__chunks) == len(other.__chunks)
+            and self.__min_page == other.__min_page
+            and self.__max_page == other.__max_page
+        )
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((len(self.__chunks), self.__min_page, self.__max_page))
+    
+    def __len__(self) -> int:
+        """Return number of chunks."""
+        return len(self.__chunks)
+    
+    def __bool__(self) -> bool:
+        """Truthiness: True if has chunks."""
+        return len(self.__chunks) > 0
+    
+    def __iter__(self) -> "ChunkExtractor":
+        """Make class iterable."""
+        self.__current_index: int = 0
+        return self
+    
+    def __next__(self) -> Dict:
+        """Get next chunk in iteration."""
+        if not hasattr(self, '_ChunkExtractor__current_index'):
+            self.__current_index = 0
+        if self.__current_index >= len(self.__chunks):
+            raise StopIteration
+        chunk = self.__chunks[self.__current_index]
+        self.__current_index += 1
+        return chunk
+    
+    def __contains__(self, section_id: str) -> bool:
+        """Check if section_id exists in chunks."""
+        return any(
+            chunk.get("section_id") == section_id
+            for chunk in self.__chunks
+        )
+    
+    def __getitem__(self, index: int) -> Dict:
+        """Get chunk by index."""
+        return self.__chunks[index]
+    
+    def __enter__(self) -> "ChunkExtractor":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False

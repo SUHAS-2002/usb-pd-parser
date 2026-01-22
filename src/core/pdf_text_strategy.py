@@ -56,7 +56,7 @@ class PDFTextStrategy(ABC, PDFExtractorProtocol):
         raise NotImplementedError
 
     # ---------------------------------------------------------
-    # Polymorphism helpers
+    # Polymorphism: Complete special methods
     # ---------------------------------------------------------
     def __str__(self) -> str:
         return f"{self.__class__.__name__}(strategy={self.strategy_name})"
@@ -66,3 +66,36 @@ class PDFTextStrategy(ABC, PDFExtractorProtocol):
             f"{self.__class__.__name__}"
             f"(strategy_name={self.strategy_name!r})"
         )
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on class and strategy name."""
+        if not isinstance(other, PDFTextStrategy):
+            return NotImplemented
+        return (
+            self.__class__ == other.__class__
+            and self.strategy_name == other.strategy_name
+        )
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((self.__class__, self.strategy_name))
+    
+    def __bool__(self) -> bool:
+        """Truthiness: Always True (strategy is always valid)."""
+        return True
+    
+    def __len__(self) -> int:
+        """Return strategy identifier length."""
+        return len(self.strategy_name)
+    
+    def __call__(self, pdf_path: str) -> List[Dict]:
+        """Make class callable - delegates to extract_text()."""
+        return self.extract_text(pdf_path)
+    
+    def __enter__(self) -> "PDFTextStrategy":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False

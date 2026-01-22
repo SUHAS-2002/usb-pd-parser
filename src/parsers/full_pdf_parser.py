@@ -35,7 +35,7 @@ class FullPDFParser(BaseParser):
         - No duplicates
         - No missing gaps
         """
-        raw_pages = self._strategy.extract_text(self.pdf_path)
+        raw_pages = self._pdf_strategy.extract_text(self.pdf_path)
 
         # -----------------------------------------------------------
         # 1. Normalize page structure

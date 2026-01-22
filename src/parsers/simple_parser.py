@@ -28,7 +28,7 @@ class SimpleParser(BaseParser):
         - consistent page_number/text format
         - sorted output
         """
-        raw_pages = self._strategy.extract_text(self.pdf_path)
+        raw_pages = self._pdf_strategy.extract_text(self.pdf_path)
 
         pages: List[Dict] = []
         for entry in raw_pages:

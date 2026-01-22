@@ -29,7 +29,7 @@ class AdvancedParser(BaseParser):
         - cleaned text
         - consistent formatting
         """
-        raw_pages = self._strategy.extract_text(self.pdf_path)
+        raw_pages = self._pdf_strategy.extract_text(self.pdf_path)
 
         pages: List[Dict] = []
         for entry in raw_pages:

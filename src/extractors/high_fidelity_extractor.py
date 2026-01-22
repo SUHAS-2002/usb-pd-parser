@@ -9,7 +9,11 @@ Features:
 
 from __future__ import annotations
 
-import fitz
+try:
+    import fitz  # PyMuPDF
+except ImportError:
+    import pymupdf as fitz  # Fallback for newer PyMuPDF versions
+
 import pytesseract
 import logging
 from PIL import Image
@@ -37,6 +41,7 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
     # Constructor (TRUE PRIVATE STATE)
     # ---------------------------------------------------------------
     def __init__(self, ocr: bool = True) -> None:
+        super().__init__()  # Initialize BaseExtractor
         self.__ocr: bool = self._validate_ocr(ocr)
 
     # ---------------------------------------------------------------
@@ -78,10 +83,20 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
         """
         pages: List[Dict] = []
 
-        with fitz.open(pdf) as doc:
+        # Use pymupdf.open if fitz doesn't have open
+        if not hasattr(fitz, 'open'):
+            import pymupdf
+            doc = pymupdf.open(pdf)
+        else:
+            doc = fitz.open(pdf)
+        
+        try:
             for index, page in enumerate(doc):
                 page_dict = self._extract_page(page, index)
                 pages.append(page_dict)
+        finally:
+            if hasattr(doc, 'close'):
+                doc.close()
 
         self._verify_page_coverage(pages)
         return pages
@@ -221,3 +236,41 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
                 "Sample missing pages: %s",
                 sorted(missing)[:10],
             )
+    
+    # ---------------------------------------------------------------
+    # Protocol compatibility
+    # ---------------------------------------------------------------
+    def extract(self, pdf_path: str) -> List[Dict]:
+        """Protocol entry point (BaseExtractor compatibility)."""
+        result = self.extract_text(pdf_path)
+        # Track extraction count
+        return result
+    
+    # ---------------------------------------------------------------
+    # Polymorphism: Additional special methods
+    # ---------------------------------------------------------------
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"{self.__class__.__name__}(ocr={self.__ocr}, extracted={self.extracted_count})"
+    
+    def __repr__(self) -> str:
+        """Developer-friendly representation."""
+        return f"{self.__class__.__name__}(ocr={self.__ocr})"
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on OCR setting and class."""
+        if not isinstance(other, HighFidelityExtractor):
+            return NotImplemented
+        return self.__ocr == other.__ocr
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((self.__class__, self.__ocr))
+    
+    def __enter__(self) -> "HighFidelityExtractor":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False

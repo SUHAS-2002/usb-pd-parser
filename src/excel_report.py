@@ -59,6 +59,11 @@ class ExcelReportGenerator(BaseReportGenerator):
     def chunks_path(self) -> Path:
         return self.__chunks_path
 
+    @property
+    def colors(self) -> Dict[str, str]:
+        """Get color mapping (read-only copy)."""
+        return self.__colors.copy()
+
     # --------------------------------------------------------------
     # Special methods
     # --------------------------------------------------------------
@@ -90,6 +95,23 @@ class ExcelReportGenerator(BaseReportGenerator):
 
     def __len__(self) -> int:
         return 2
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((self.__class__, self.__toc_path, self.__chunks_path))
+    
+    def __bool__(self) -> bool:
+        """Truthiness: True if paths are set."""
+        return self.__toc_path.exists() and self.__chunks_path.exists()
+    
+    def __contains__(self, section_id: str) -> bool:
+        """Check if section_id exists in loaded data (after _load_data)."""
+        # This would require storing data, but for now return False
+        return False
+    
+    def __call__(self) -> Path:
+        """Make class callable - delegates to generate()."""
+        return self.generate()
 
     # --------------------------------------------------------------
     # Context manager

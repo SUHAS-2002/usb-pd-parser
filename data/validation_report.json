@@ -12,52 +12,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "3.2",
-      "title": "Version:",
-      "page": 1,
-      "level": 2,
-      "parent_id": "3",
-      "full_path": "3.2 Version:",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1.0",
-      "title": "1.0",
-      "page": 2,
-      "level": 2,
-      "parent_id": "1",
-      "full_path": "1.0 1.0",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "2.0",
       "title": "1.0",
       "page": 2,
       "level": 2,
       "parent_id": "2",
       "full_path": "2.0 1.0",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "3.0",
-      "title": "1.0",
-      "page": 2,
-      "level": 2,
-      "parent_id": "3",
-      "full_path": "3.0 1.0",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "3.1",
-      "title": "1.0",
-      "page": 2,
-      "level": 2,
-      "parent_id": "3",
-      "full_path": "3.1 1.0",
       "tags": []
     },
     {
@@ -3456,16 +3416,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "1010",
-      "title": "10110",
-      "page": 80,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1010 10110",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "01011",
       "title": "hex data 5",
       "page": 80,
@@ -3476,42 +3426,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "1011",
-      "title": "10111",
-      "page": 80,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1011 10111",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1100",
-      "title": "11010",
-      "page": 80,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1100 11010",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "01100",
       "title": "Shall Not be used",
       "page": 80,
       "level": 1,
       "parent_id": null,
       "full_path": "01100 Shall Not be used",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1101",
-      "title": "11011",
-      "page": 80,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1101 11011",
       "tags": []
     },
     {
@@ -3536,32 +3456,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "1110",
-      "title": "11100",
-      "page": 80,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1110 11100",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "01111",
       "title": "hex data 7",
       "page": 80,
       "level": 1,
       "parent_id": null,
       "full_path": "01111 hex data 7",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1111",
-      "title": "11101",
-      "page": 80,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1111 11101",
       "tags": []
     },
     {
@@ -3906,16 +3806,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "31302928",
-      "title": "27262524",
-      "page": 88,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "31302928 27262524",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "76543210",
       "title": "Bit",
       "page": 88,
@@ -4076,62 +3966,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.8",
-      "title": "V",
-      "page": 98,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.8 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.075",
-      "title": "V",
-      "page": 98,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.075 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.325",
-      "title": "V",
-      "page": 98,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.325 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.975",
-      "title": "V",
-      "page": 98,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.975 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "0.5625",
       "title": "V",
       "page": 98,
       "level": 2,
       "parent_id": "0",
       "full_path": "0.5625 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1.04",
-      "title": "V",
-      "page": 98,
-      "level": 2,
-      "parent_id": "1",
-      "full_path": "1.04 V",
       "tags": []
     },
     {
@@ -4171,16 +4011,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "1.5325",
-      "title": "V",
-      "page": 102,
-      "level": 2,
-      "parent_id": "1",
-      "full_path": "1.5325 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "01",
       "title": "or 10 transition in addition to the transition at the start of the cell.",
       "page": 105,
@@ -4193,32 +4023,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "3.03",
-      "title": "3.70",
-      "page": 105,
-      "level": 2,
-      "parent_id": "3",
-      "full_path": "3.03 3.70",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "5.8.4.1",
       "title": "BMC Common Parameters",
       "page": 105,
       "level": 4,
       "parent_id": "5.8.4",
       "full_path": "5.8.4.1 BMC Common Parameters",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "270",
-      "title": "300",
-      "page": 105,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "270 300",
       "tags": []
     },
     {
@@ -4259,16 +4069,6 @@
       "level": 1,
       "parent_id": null,
       "full_path": "60 120",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "300",
-      "title": "ns",
-      "page": 106,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "300 ns",
       "tags": []
     },
     {
@@ -4355,52 +4155,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "165",
-      "title": "mV",
-      "page": 110,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "165 mV",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "200",
       "title": "600",
       "page": 110,
       "level": 1,
       "parent_id": null,
       "full_path": "200 600",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "250",
-      "title": "mV",
-      "page": 110,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "250 mV",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "490",
-      "title": "520",
-      "page": 110,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "490 520",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "550",
-      "title": "mV",
-      "page": 110,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "550 mV",
       "tags": []
     },
     {
@@ -8246,76 +8006,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.250",
-      "title": "0.375",
-      "page": 262,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.250 0.375",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.500",
-      "title": "s",
-      "page": 262,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.500 s",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.750",
-      "title": "0.875",
-      "page": 262,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.750 0.875",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1.000",
-      "title": "s",
-      "page": 262,
-      "level": 2,
-      "parent_id": "1",
-      "full_path": "1.000 s",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "4.5",
-      "title": "5.0",
-      "page": 262,
-      "level": 2,
-      "parent_id": "4",
-      "full_path": "4.5 5.0",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "12.0",
-      "title": "13.5",
-      "page": 262,
-      "level": 2,
-      "parent_id": "12",
-      "full_path": "12.0 13.5",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "15.0",
-      "title": "s",
-      "page": 262,
-      "level": 2,
-      "parent_id": "15",
-      "full_path": "15.0 s",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "35",
       "title": "ms",
       "page": 262,
@@ -8346,52 +8036,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "450",
-      "title": "550",
-      "page": 262,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "450 550",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "500",
-      "title": "ms",
-      "page": 262,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "500 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "750",
       "title": "µs",
       "page": 262,
       "level": 1,
       "parent_id": null,
       "full_path": "750 µs",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.9",
-      "title": "1.0",
-      "page": 263,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.9 1.0",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "160",
-      "title": "200",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "160 200",
       "tags": []
     },
     {
@@ -8406,92 +8056,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "240",
-      "title": "ms",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "240 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "310",
-      "title": "465",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "310 465",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "390",
-      "title": "435",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "390 435",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "480",
-      "title": "ms",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "480 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "620",
-      "title": "ms",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "620 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "830",
-      "title": "925",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "830 925",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "920",
-      "title": "ms",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "920 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "1020",
       "title": "tReceive",
       "page": 263,
       "level": 1,
       "parent_id": null,
       "full_path": "1020 tReceive",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1120",
-      "title": "1260",
-      "page": 263,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1120 1260",
       "tags": []
     },
     {
@@ -10041,56 +9611,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "275",
-      "title": "ms",
-      "page": 405,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "275 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.66",
-      "title": "1.0",
-      "page": 407,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.66 1.0",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1.085",
-      "title": "1.425",
-      "page": 407,
-      "level": 2,
-      "parent_id": "1",
-      "full_path": "1.085 1.425",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "285",
-      "title": "ms",
-      "page": 407,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "285 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "650",
-      "title": "ms",
-      "page": 407,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "650 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "700",
       "title": "EPR Mode",
       "page": 407,
@@ -10115,46 +9635,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "280",
-      "title": "ms",
-      "page": 408,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "280 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "690",
-      "title": "ms",
-      "page": 408,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "690 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "325",
-      "title": "ms",
-      "page": 409,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "325 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "760",
-      "title": "ms",
-      "page": 409,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "760 ms",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "0.5",
       "title": "V",
       "page": 410,
@@ -10175,52 +9655,12 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "0.1",
-      "title": "V",
-      "page": 411,
-      "level": 2,
-      "parent_id": "0",
-      "full_path": "0.1 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "230",
-      "title": "mA",
-      "page": 413,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "230 mA",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "55",
-      "title": "V",
-      "page": 414,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "55 V",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "125",
       "title": "mW",
       "page": 414,
       "level": 1,
       "parent_id": null,
       "full_path": "125 mW",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "4.75",
-      "title": "5.5",
-      "page": 415,
-      "level": 2,
-      "parent_id": "4",
-      "full_path": "4.75 5.5",
       "tags": []
     },
     {
@@ -16799,16 +16239,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "220",
-      "title": "240",
-      "page": 1012,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "220 240",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "70",
       "title": "B23…16",
       "page": 1019,
@@ -16821,12 +16251,582 @@
   "missing": [
     {
       "doc_title": "USB Power Delivery Specification",
+      "section_id": "3.2",
+      "title": "Version:",
+      "page": 1,
+      "level": 2,
+      "parent_id": "3",
+      "full_path": "3.2 Version:",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.0",
+      "title": "1.0",
+      "page": 2,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.0 1.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "3.0",
+      "title": "1.0",
+      "page": 2,
+      "level": 2,
+      "parent_id": "3",
+      "full_path": "3.0 1.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "3.1",
+      "title": "1.0",
+      "page": 2,
+      "level": 2,
+      "parent_id": "3",
+      "full_path": "3.1 1.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1010",
+      "title": "10110",
+      "page": 80,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1010 10110",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1011",
+      "title": "10111",
+      "page": 80,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1011 10111",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1100",
+      "title": "11010",
+      "page": 80,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1100 11010",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1101",
+      "title": "11011",
+      "page": 80,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1101 11011",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1110",
+      "title": "11100",
+      "page": 80,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1110 11100",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1111",
+      "title": "11101",
+      "page": 80,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1111 11101",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "31302928",
+      "title": "27262524",
+      "page": 88,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "31302928 27262524",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.8",
+      "title": "V",
+      "page": 98,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.8 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.075",
+      "title": "V",
+      "page": 98,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.075 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.325",
+      "title": "V",
+      "page": 98,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.325 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.975",
+      "title": "V",
+      "page": 98,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.975 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.04",
+      "title": "V",
+      "page": 98,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.04 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.5325",
+      "title": "V",
+      "page": 102,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.5325 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "3.03",
+      "title": "3.70",
+      "page": 105,
+      "level": 2,
+      "parent_id": "3",
+      "full_path": "3.03 3.70",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "270",
+      "title": "300",
+      "page": 105,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "270 300",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "300",
+      "title": "ns",
+      "page": 106,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "300 ns",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
       "section_id": "1024",
       "title": "PRBS bits) within a continuous signal May be considered as the part of the Packet following the Preamble and",
       "page": 107,
       "level": 1,
       "parent_id": null,
       "full_path": "1024 PRBS bits) within a continuous signal May be considered as the part of the Packet following the Preamble and",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "165",
+      "title": "mV",
+      "page": 110,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "165 mV",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "250",
+      "title": "mV",
+      "page": 110,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "250 mV",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "490",
+      "title": "520",
+      "page": 110,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "490 520",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "550",
+      "title": "mV",
+      "page": 110,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "550 mV",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.250",
+      "title": "0.375",
+      "page": 262,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.250 0.375",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.500",
+      "title": "s",
+      "page": 262,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.500 s",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.750",
+      "title": "0.875",
+      "page": 262,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.750 0.875",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.000",
+      "title": "s",
+      "page": 262,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.000 s",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "4.5",
+      "title": "5.0",
+      "page": 262,
+      "level": 2,
+      "parent_id": "4",
+      "full_path": "4.5 5.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "12.0",
+      "title": "13.5",
+      "page": 262,
+      "level": 2,
+      "parent_id": "12",
+      "full_path": "12.0 13.5",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "15.0",
+      "title": "s",
+      "page": 262,
+      "level": 2,
+      "parent_id": "15",
+      "full_path": "15.0 s",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "450",
+      "title": "550",
+      "page": 262,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "450 550",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "500",
+      "title": "ms",
+      "page": 262,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "500 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.9",
+      "title": "1.0",
+      "page": 263,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.9 1.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "160",
+      "title": "200",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "160 200",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "240",
+      "title": "ms",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "240 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "310",
+      "title": "465",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "310 465",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "390",
+      "title": "435",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "390 435",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "480",
+      "title": "ms",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "480 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "620",
+      "title": "ms",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "620 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "830",
+      "title": "925",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "830 925",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "920",
+      "title": "ms",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "920 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1120",
+      "title": "1260",
+      "page": 263,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1120 1260",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "275",
+      "title": "ms",
+      "page": 405,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "275 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.66",
+      "title": "1.0",
+      "page": 407,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.66 1.0",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1.085",
+      "title": "1.425",
+      "page": 407,
+      "level": 2,
+      "parent_id": "1",
+      "full_path": "1.085 1.425",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "285",
+      "title": "ms",
+      "page": 407,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "285 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "650",
+      "title": "ms",
+      "page": 407,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "650 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "280",
+      "title": "ms",
+      "page": 408,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "280 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "690",
+      "title": "ms",
+      "page": 408,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "690 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "325",
+      "title": "ms",
+      "page": 409,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "325 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "760",
+      "title": "ms",
+      "page": 409,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "760 ms",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "0.1",
+      "title": "V",
+      "page": 411,
+      "level": 2,
+      "parent_id": "0",
+      "full_path": "0.1 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "230",
+      "title": "mA",
+      "page": 413,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "230 mA",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "55",
+      "title": "V",
+      "page": 414,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "55 V",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "4.75",
+      "title": "5.5",
+      "page": 415,
+      "level": 2,
+      "parent_id": "4",
+      "full_path": "4.75 5.5",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "220",
+      "title": "240",
+      "page": 1012,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "220 240",
       "tags": []
     },
     {
@@ -16844,38 +16844,14 @@
     {
       "section_id": "1.1",
       "toc_title": "Release Date:",
-      "chunk_title": "ms",
-      "similarity": 0.14285714285714285
-    },
-    {
-      "section_id": "3.2",
-      "toc_title": "Version:",
-      "chunk_title": "1.1",
-      "similarity": 0.0
-    },
-    {
-      "section_id": "1.0",
-      "toc_title": "1.0",
-      "chunk_title": "mA",
-      "similarity": 0.0
+      "chunk_title": "Overview",
+      "similarity": 0.2
     },
     {
       "section_id": "2.0",
       "toc_title": "1.0",
       "chunk_title": "SE0 Noise (b) with USB 2.0 SE0 Noise\". Using Backward Finite Difference Calculator, ΔVcc = Vcc (t) - Vcc(t- Δt),",
       "similarity": 0.02
-    },
-    {
-      "section_id": "3.0",
-      "toc_title": "1.0",
-      "chunk_title": "2.0",
-      "similarity": 0.5
-    },
-    {
-      "section_id": "3.1",
-      "toc_title": "1.0",
-      "chunk_title": "1.9",
-      "similarity": 0.5
     },
     {
       "section_id": "5",
@@ -16940,8 +16916,8 @@
     {
       "section_id": "1.2",
       "toc_title": "Purpose .............................................................................................................................................. 35",
-      "chunk_title": "V",
-      "similarity": 0.0
+      "chunk_title": "Purpose",
+      "similarity": 0.7777777777777778
     },
     {
       "section_id": "1.2.1",
@@ -16960,12 +16936,6 @@
       "toc_title": "Overview . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .53",
       "chunk_title": "Hub detects power adapter disconnect (H1) causing",
       "similarity": 0.1206896551724138
-    },
-    {
-      "section_id": "2.5",
-      "toc_title": "Operational Overview.................................................................................................................. 59",
-      "chunk_title": "mA",
-      "similarity": 0.08
     },
     {
       "section_id": "2.6.1",
@@ -16990,12 +16960,6 @@
       "toc_title": "Electrical Requirements. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .78",
       "chunk_title": "Hub closes the switch (H5) to use the hold-up",
       "similarity": 0.16216216216216217
-    },
-    {
-      "section_id": "5.5",
-      "toc_title": "Transmitted Bit Ordering........................................................................................................... 83",
-      "chunk_title": "s",
-      "similarity": 0.07142857142857142
     },
     {
       "section_id": "5.6.2",
@@ -17180,7 +17144,7 @@
     {
       "section_id": "20",
       "toc_title": "11",
-      "chunk_title": "30",
+      "chunk_title": "dwMaxPeakPowerTime",
       "similarity": 0.0
     },
     {
@@ -17216,14 +17180,8 @@
     {
       "section_id": "30",
       "toc_title": "1",
-      "chunk_title": "45",
-      "similarity": 0.0
-    },
-    {
-      "section_id": "0.25",
-      "toc_title": "UI",
-      "chunk_title": "%",
-      "similarity": 0.0
+      "chunk_title": "10.2.2.2.1",
+      "similarity": 0.2857142857142857
     },
     {
       "section_id": "0.85",
@@ -17262,12 +17220,6 @@
       "similarity": 0.0
     },
     {
-      "section_id": "300",
-      "toc_title": "ns",
-      "chunk_title": "400",
-      "similarity": 0.0
-    },
-    {
       "section_id": "100",
       "toc_title": "ns",
       "chunk_title": "< x ≤ 140",
@@ -17278,18 +17230,6 @@
       "toc_title": "600",
       "chunk_title": "µs",
       "similarity": 0.0
-    },
-    {
-      "section_id": "250",
-      "toc_title": "mV",
-      "chunk_title": "ms",
-      "similarity": 0.5
-    },
-    {
-      "section_id": "550",
-      "toc_title": "mV",
-      "chunk_title": "ms",
-      "similarity": 0.5
     },
     {
       "section_id": "00",
@@ -17306,38 +17246,14 @@
     {
       "section_id": "40",
       "toc_title": "45",
-      "chunk_title": "60",
+      "chunk_title": "CHARGING_POLICY",
       "similarity": 0.0
     },
     {
       "section_id": "50",
       "toc_title": "ms",
-      "chunk_title": "mA",
-      "similarity": 0.5
-    },
-    {
-      "section_id": "450",
-      "toc_title": "550",
-      "chunk_title": "500",
-      "similarity": 0.6666666666666666
-    },
-    {
-      "section_id": "500",
-      "toc_title": "ms",
-      "chunk_title": "mA",
-      "similarity": 0.5
-    },
-    {
-      "section_id": "750",
-      "toc_title": "µs",
-      "chunk_title": "835",
-      "similarity": 0.0
-    },
-    {
-      "section_id": "150",
-      "toc_title": "mA",
-      "chunk_title": "ms",
-      "similarity": 0.5
+      "chunk_title": "Section 6.7.4",
+      "similarity": 0.15384615384615385
     },
     {
       "section_id": "0.5",
@@ -17350,12 +17266,6 @@
       "toc_title": "–",
       "chunk_title": "-30",
       "similarity": 0.0
-    },
-    {
-      "section_id": "125",
-      "toc_title": "mW",
-      "chunk_title": "ms",
-      "similarity": 0.5
     },
     {
       "section_id": "8.3.2.2.2.2",
@@ -17572,18 +17482,6 @@
       "toc_title": "90",
       "chunk_title": "B15",
       "similarity": 0.0
-    },
-    {
-      "section_id": "140",
-      "toc_title": "< x ≤ 180",
-      "chunk_title": "160",
-      "similarity": 0.4444444444444444
-    },
-    {
-      "section_id": "180",
-      "toc_title": "< x ≤ 240",
-      "chunk_title": "200",
-      "similarity": 0.4444444444444444
     }
   ],
   "page_discrepancies": [],

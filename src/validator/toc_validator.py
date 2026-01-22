@@ -5,9 +5,10 @@ from typing import Dict, Any, Optional
 from src.validator.matcher import SectionMatcher
 from src.utils.jsonl_utils import JSONLHandler
 from src.config import CONFIG
+from src.core.base_validator import BaseValidator
 
 
-class TOCValidator:
+class TOCValidator(BaseValidator):
     """
     Validates consistency between:
         • TOC entries
@@ -116,3 +117,36 @@ class TOCValidator:
         jsonl_path = output_path.with_suffix(".jsonl")
         print(f"Validation report saved → {output_path}")
         print(f"Validation report (JSONL) saved → {jsonl_path}")
+    
+    # ---------------------------------------------------------
+    # Polymorphism: Special methods
+    # ---------------------------------------------------------
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"TOCValidator(matcher={self.__matcher!r})"
+    
+    def __repr__(self) -> str:
+        """Developer-friendly representation."""
+        return f"TOCValidator()"
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on matcher."""
+        if not isinstance(other, TOCValidator):
+            return NotImplemented
+        return self.__matcher == other.__matcher
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((self.__class__, self.__matcher))
+    
+    def __bool__(self) -> bool:
+        """Truthiness: Always True (validator is always valid)."""
+        return True
+    
+    def __enter__(self) -> "TOCValidator":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False

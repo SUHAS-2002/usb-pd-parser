@@ -120,7 +120,7 @@ class BaseReportGenerator(ABC):
         return self.__output_path.parent / name
 
     # ---------------------------------------------------------
-    # Polymorphism helpers
+    # Polymorphism: Complete special methods
     # ---------------------------------------------------------
     def __str__(self) -> str:
         return f"{self.__class__.__name__}(output={self.output_path.name})"
@@ -130,3 +130,36 @@ class BaseReportGenerator(ABC):
             f"{self.__class__.__name__}"
             f"(output_path={self.output_path!r})"
         )
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on class and output path."""
+        if not isinstance(other, BaseReportGenerator):
+            return NotImplemented
+        return (
+            self.__class__ == other.__class__
+            and self.__output_path == other.output_path
+        )
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((self.__class__, self.__output_path))
+    
+    def __bool__(self) -> bool:
+        """Truthiness: True if output path is set."""
+        return self.__output_path is not None
+    
+    def __len__(self) -> int:
+        """Return output path length."""
+        return len(str(self.__output_path))
+    
+    def __call__(self) -> Path:
+        """Make class callable - delegates to generate()."""
+        return self.generate()
+    
+    def __enter__(self) -> "BaseReportGenerator":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False

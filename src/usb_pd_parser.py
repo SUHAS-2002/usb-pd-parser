@@ -28,6 +28,7 @@ from src.core.interfaces import (
 )
 from src.core.pdf_text_strategy import PDFTextStrategy
 from src.core.parser_factory import ParserFactory
+from src.core.observer_pattern import Observable, Observer
 
 from src.extractors.high_fidelity_extractor import HighFidelityExtractor
 from src.extractors.toc_extractor import ToCExtractor
@@ -58,7 +59,7 @@ def _write_jsonl(path: Path, items: Iterable[dict]) -> None:
 # ------------------------------------------------------------------
 # Main Orchestrator
 # ------------------------------------------------------------------
-class USBPDParser(BaseParser):
+class USBPDParser(BaseParser, Observable):
     """
     Coordinates the USB PD PDF parsing pipeline.
 
@@ -66,9 +67,20 @@ class USBPDParser(BaseParser):
     - ALL internal state uses name-mangled private attributes (__attr)
     - External access only via properties
     - Workflow decomposed into protected methods
+    
+    Design Patterns:
+    - Observer Pattern: Notifies observers about parsing events
     """
 
-    DOC_TITLE: str = "USB Power Delivery Specification Rev X"
+    # --------------------------------------------------------------
+    # TRUE PRIVATE class constant (encapsulation)
+    # --------------------------------------------------------------
+    __DOC_TITLE: str = "USB Power Delivery Specification Rev X"
+
+    @classmethod
+    def _get_doc_title(cls) -> str:
+        """Get document title (protected class method)."""
+        return cls.__DOC_TITLE
 
     # --------------------------------------------------------------
     # Constructor (AGGRESSIVE ENCAPSULATION)
@@ -93,7 +105,8 @@ class USBPDParser(BaseParser):
             args, strategy, pdf_path, output_dir
         )
 
-        super().__init__(strategy)
+        BaseParser.__init__(self, strategy)
+        Observable.__init__(self)  # Initialize Observer pattern
 
         self.__initialize_state()
 
@@ -235,19 +248,52 @@ class USBPDParser(BaseParser):
         return self.__section_builder
 
     # --------------------------------------------------------------
+    # Read-only data accessors (encapsulation)
+    # --------------------------------------------------------------
+    @property
+    def pages(self) -> list[dict] | None:
+        """Get extracted pages (read-only)."""
+        return self.__pages.copy() if self.__pages else None
+
+    @property
+    def toc(self) -> list[dict] | None:
+        """Get extracted TOC entries (read-only)."""
+        return self.__toc.copy() if self.__toc else None
+
+    @property
+    def headings(self) -> list[dict] | None:
+        """Get extracted inline headings (read-only)."""
+        return self.__headings.copy() if self.__headings else None
+
+    @property
+    def sections(self) -> list[dict] | None:
+        """Get built sections (read-only)."""
+        return self.__sections.copy() if self.__sections else None
+
+    # --------------------------------------------------------------
     # BaseParser contract
     # --------------------------------------------------------------
     def parse(self) -> Dict[str, Any]:
         _logger.info("Starting USB PD parsing pipeline")
+        self.notify("parse_started", {"pdf_path": self.pdf_path})
 
         pages = self._extract_pages()
+        self.notify("pages_extracted", {"count": len(pages)})
+        
         toc = self._extract_toc(pages)
+        self.notify("toc_extracted", {"count": len(toc)})
+        
         headings = self._extract_inline_headings(pages)
+        self.notify("headings_extracted", {"count": len(headings)})
+        
         sections = self._build_sections(pages, toc, headings)
+        self.notify("sections_built", {"count": len(sections)})
 
         self._persist_outputs(toc, sections)
+        self.notify("outputs_persisted", {"output_dir": str(self.output_dir)})
 
         _logger.info("USB PD parsing completed successfully")
+        self.notify("parse_completed", {"success": True})
 
         return {
             "pages_extracted": len(pages),
@@ -291,7 +337,7 @@ class USBPDParser(BaseParser):
             toc=toc,
             pages=pages,
             headings=headings,
-            doc_title=self.DOC_TITLE,
+            doc_title=self._get_doc_title(),
         )
         _logger.info("Built %d spec sections", len(sections))
         self.__sections = sections

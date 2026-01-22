@@ -6,8 +6,10 @@ import re
 from typing import List, Dict, Any
 from difflib import SequenceMatcher
 
+from src.core.base_validator import BaseValidator
 
-class SectionMatcher:
+
+class SectionMatcher(BaseValidator):
     """
     Matches TOC entries against extracted content chunks.
 
@@ -17,7 +19,8 @@ class SectionMatcher:
     - Page-range consistency check (optional)
 
     Encapsulation:
-    - Public API: match()
+    - Public API: validate()
+    - Domain API: match()
     - ALL internal state uses name-mangled attributes (__attr)
     - Helpers are protected
     """
@@ -67,7 +70,22 @@ class SectionMatcher:
         return self.__mismatch_count
 
     # ---------------------------------------------------------
-    # Public API
+    # BaseValidator contract (REQUIRED)
+    # ---------------------------------------------------------
+    def validate(
+        self,
+        toc: List[Dict[str, Any]],
+        chunks: List[Dict[str, Any]],
+    ) -> Dict[str, Any]:
+        """
+        Concrete implementation of BaseValidator.validate().
+
+        Delegates to match() to preserve domain semantics.
+        """
+        return self.match(toc, chunks)
+
+    # ---------------------------------------------------------
+    # Domain API
     # ---------------------------------------------------------
     def match(
         self,
@@ -99,7 +117,7 @@ class SectionMatcher:
         for entry in toc:
             sid = entry.get("section_id")
 
-            # Missing section
+            # ---------------- Missing section ----------------
             if sid not in chunk_map:
                 self.__missing_count += 1
                 missing.append(entry)
@@ -109,7 +127,7 @@ class SectionMatcher:
             self.__matched_count += 1
             matched.append(entry)
 
-            # -------- Title similarity --------
+            # ---------------- Title similarity ----------------
             toc_title = entry.get("title", "")
             chunk_title = chunk.get("title", "")
             sim = self._similarity(toc_title, chunk_title)
@@ -125,7 +143,7 @@ class SectionMatcher:
                     }
                 )
 
-            # -------- Page range check --------
+            # ---------------- Page range check ----------------
             pr = chunk.get("page_range")
             if pr:
                 start, end = pr
@@ -180,3 +198,37 @@ class SectionMatcher:
         a_norm = self._normalize(a)
         b_norm = self._normalize(b)
         return SequenceMatcher(None, a_norm, b_norm).ratio()
+
+    # ---------------------------------------------------------
+    # Polymorphism: Special methods
+    # ---------------------------------------------------------
+    def __str__(self) -> str:
+        return (
+            f"SectionMatcher("
+            f"threshold={self.__threshold}, "
+            f"matched={self.__matched_count}, "
+            f"missing={self.__missing_count})"
+        )
+
+    def __repr__(self) -> str:
+        return f"SectionMatcher(threshold={self.__threshold})"
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, SectionMatcher):
+            return NotImplemented
+        return self.__threshold == other.__threshold
+
+    def __hash__(self) -> int:
+        return hash((self.__class__, self.__threshold))
+
+    def __bool__(self) -> bool:
+        return 0.0 <= self.__threshold <= 1.0
+
+    def __len__(self) -> int:
+        return self.__matched_count
+
+    def __enter__(self) -> "SectionMatcher":
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        return False

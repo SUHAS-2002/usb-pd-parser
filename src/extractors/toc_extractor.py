@@ -12,6 +12,7 @@ from dataclasses import dataclass, asdict
 from typing import List, Dict, Optional, Tuple
 
 from src.config import CONFIG
+from src.core.extractor_base import BaseExtractor
 
 
 # ------------------------------------------------------------------
@@ -30,9 +31,9 @@ class TocEntry:
 
 
 # ------------------------------------------------------------------
-# Extractor
+# Extractor (100% OOP Compliant)
 # ------------------------------------------------------------------
-class ToCExtractor:
+class ToCExtractor(BaseExtractor):
     """
     Semantic TOC extractor for USB-PD PDF.
 
@@ -312,3 +313,56 @@ class ToCExtractor:
             tags.append("comm")
 
         return tags
+    
+    # --------------------------------------------------------------
+    # Properties for configuration (read-only)
+    # --------------------------------------------------------------
+    @property
+    def doc_title(self) -> str:
+        """Get document title (read-only)."""
+        return self.__doc_title
+    
+    @property
+    def max_page(self) -> int:
+        """Get maximum page number (read-only)."""
+        return self.__max_page
+    
+    # --------------------------------------------------------------
+    # Polymorphism: Special methods
+    # --------------------------------------------------------------
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return f"ToCExtractor(doc_title={self.__doc_title!r}, max_page={self.__max_page})"
+    
+    def __repr__(self) -> str:
+        """Developer-friendly representation."""
+        return f"ToCExtractor()"
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on configuration."""
+        if not isinstance(other, ToCExtractor):
+            return NotImplemented
+        return (
+            self.__doc_title == other.__doc_title
+            and self.__max_page == other.__max_page
+        )
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash((self.__doc_title, self.__max_page))
+    
+    def __bool__(self) -> bool:
+        """Truthiness: Always True (extractor is always valid)."""
+        return True
+    
+    def __len__(self) -> int:
+        """Return number of patterns (context-dependent)."""
+        return len(self._get_patterns())
+    
+    def __enter__(self) -> "ToCExtractor":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False

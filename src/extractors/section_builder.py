@@ -345,6 +345,7 @@ class SectionContentBuilder:
         title: str = heading["title"]
         page: int = heading["page"]
 
+        # Assignment format: NO content field, only metadata
         return {
             "doc_title": doc_title,
             "section_id": sid,
@@ -354,6 +355,73 @@ class SectionContentBuilder:
             "level": sid.count(".") + 1,
             "parent_id": sid.rsplit(".", 1)[0]
             if "." in sid else None,
-            "content": content,
             "tags": [],
         }
+    
+    # -----------------------------------------------------------
+    # Polymorphism: Special methods
+    # -----------------------------------------------------------
+    def __str__(self) -> str:
+        """Human-readable representation."""
+        return (
+            f"SectionContentBuilder("
+            f"processed={self.__processed_count}, "
+            f"filtered={self.__filtered_count}, "
+            f"sections={len(self.__sections)})"
+        )
+    
+    def __repr__(self) -> str:
+        """Developer-friendly representation."""
+        return f"SectionContentBuilder()"
+    
+    def __eq__(self, other: object) -> bool:
+        """Equality based on section count."""
+        if not isinstance(other, SectionContentBuilder):
+            return NotImplemented
+        return len(self.__sections) == len(other.__sections)
+    
+    def __hash__(self) -> int:
+        """Hash for use in sets/dicts."""
+        return hash(len(self.__sections))
+    
+    def __len__(self) -> int:
+        """Return number of sections built."""
+        return len(self.__sections)
+    
+    def __bool__(self) -> bool:
+        """Truthiness: True if has sections."""
+        return len(self.__sections) > 0
+    
+    def __iter__(self) -> "SectionContentBuilder":
+        """Make class iterable."""
+        self.__current_index: int = 0
+        return self
+    
+    def __next__(self) -> Dict:
+        """Get next section in iteration."""
+        if not hasattr(self, '_SectionContentBuilder__current_index'):
+            self.__current_index = 0
+        if self.__current_index >= len(self.__sections):
+            raise StopIteration
+        section = self.__sections[self.__current_index]
+        self.__current_index += 1
+        return section
+    
+    def __contains__(self, section_id: str) -> bool:
+        """Check if section_id exists in sections."""
+        return any(
+            section.get("section_id") == section_id
+            for section in self.__sections
+        )
+    
+    def __getitem__(self, index: int) -> Dict:
+        """Get section by index."""
+        return self.__sections[index]
+    
+    def __enter__(self) -> "SectionContentBuilder":
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        """Context manager exit."""
+        return False
