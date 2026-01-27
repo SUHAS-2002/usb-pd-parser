@@ -106,11 +106,17 @@ class TextUtils(BaseTextProcessor):
     # Polymorphism: Special methods
     def __str__(self) -> str:
         """Human-readable representation."""
-        return f"TextUtils(processed={self.__processed_count}, normalized={self.__normalized_count}, stripped={self.__stripped_count})"
+        return (
+            f"TextUtils("
+            f"processed={self.__processed_count}, "
+            f"normalized={self.__normalized_count}, "
+            f"stripped={self.__stripped_count}"
+            f")"
+        )
     
     def __repr__(self) -> str:
         """Developer-friendly representation."""
-        return f"TextUtils()"
+        return "TextUtils()"
     
     def __len__(self) -> int:
         """Return number of texts processed."""

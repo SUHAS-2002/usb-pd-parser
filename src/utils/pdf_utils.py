@@ -82,7 +82,10 @@ class PDFUtils(BasePDFProcessor):
         page_count = self.estimate_page_count(pdf_path)
         self.__processed_count += 1
         self.__estimated_pages[pdf_path] = page_count
-        return {"pdf_path": pdf_path, "estimated_pages": page_count}
+        return {
+            "pdf_path": pdf_path,
+            "estimated_pages": page_count,
+        }
     
     def estimate_page_count(self, pdf_path: str) -> int:
         """Estimate page count for PDF."""
@@ -94,11 +97,16 @@ class PDFUtils(BasePDFProcessor):
     # Polymorphism: Special methods
     def __str__(self) -> str:
         """Human-readable representation."""
-        return f"PDFUtils(processed={self.__processed_count}, estimates={len(self.__estimated_pages)})"
+        return (
+            f"PDFUtils("
+            f"processed={self.__processed_count}, "
+            f"estimates={len(self.__estimated_pages)}"
+            f")"
+        )
     
     def __repr__(self) -> str:
         """Developer-friendly representation."""
-        return f"PDFUtils()"
+        return "PDFUtils()"
     
     def __len__(self) -> int:
         """Return number of PDFs processed."""

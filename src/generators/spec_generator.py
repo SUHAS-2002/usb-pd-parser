@@ -54,7 +54,9 @@ class SpecJSONLGenerator(BaseGenerator):
     def records_written(self, value: int) -> None:
         """Set records written (must be non-negative)."""
         if not isinstance(value, int) or value < 0:
-            raise ValueError("records_written must be a non-negative integer")
+            raise ValueError(
+                "records_written must be a non-negative integer"
+            )
         self.__records_written = value
 
     # ---------------------------------------------------------
@@ -96,18 +98,22 @@ class SpecJSONLGenerator(BaseGenerator):
 
         print(f"Spec JSONL written → {self.output_path}")
         return self.output_path
-    
+
     # ---------------------------------------------------------
     # Polymorphism: Special methods
     # ---------------------------------------------------------
     def __str__(self) -> str:
         """Human-readable representation."""
-        return f"SpecJSONLGenerator(records={self.__records_written}, output={self.__output_path})"
-    
+        return (
+            "SpecJSONLGenerator("
+            f"records={self.__records_written}, "
+            f"output={self.__output_path})"
+        )
+
     def __repr__(self) -> str:
         """Developer-friendly representation."""
-        return f"SpecJSONLGenerator()"
-    
+        return "SpecJSONLGenerator()"
+
     def __eq__(self, other: object) -> bool:
         """Equality based on output path and records."""
         if not isinstance(other, SpecJSONLGenerator):
@@ -116,23 +122,29 @@ class SpecJSONLGenerator(BaseGenerator):
             self.__output_path == other.__output_path
             and self.__records_written == other.__records_written
         )
-    
+
     def __hash__(self) -> int:
         """Hash for use in sets/dicts."""
-        return hash((self.__class__, self.__output_path, self.__records_written))
-    
+        return hash(
+            (
+                self.__class__,
+                self.__output_path,
+                self.__records_written,
+            )
+        )
+
     def __len__(self) -> int:
         """Return number of records written."""
         return self.__records_written
-    
+
     def __bool__(self) -> bool:
         """Truthiness: True if has written records."""
         return self.__records_written > 0
-    
+
     def __enter__(self) -> "SpecJSONLGenerator":
         """Context manager entry."""
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
         """Context manager exit."""
         return False

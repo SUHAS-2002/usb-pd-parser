@@ -1,5 +1,3 @@
-# src/validator/report_generator.py
-
 import json
 from dataclasses import dataclass
 from typing import List, Dict, Any
@@ -65,8 +63,6 @@ class ReportGenerator(BaseReportGenerator):
     """
     Generates a validation scorecard, prints it to console,
     and saves it as JSON.
-
-    Fully compliant with BaseReportGenerator (LSP, OCP).
     """
 
     # ------------------------------------------------------------------
@@ -80,16 +76,14 @@ class ReportGenerator(BaseReportGenerator):
         self.__report: ValidationReport | None = None
 
     # ------------------------------------------------------------------
-    # Properties (PHASE 3)
+    # Properties
     # ------------------------------------------------------------------
     @property
     def raw_validation(self) -> Dict[str, Any]:
-        """Return raw validation input (read-only)."""
         return self.__raw
 
     @property
     def report(self) -> ValidationReport | None:
-        """Return generated validation report (read-only)."""
         return self.__report
 
     # ------------------------------------------------------------------
@@ -102,16 +96,36 @@ class ReportGenerator(BaseReportGenerator):
     def _load_data(self) -> Dict[str, Any]:
         return self.__raw
 
+    # --------------------------------------------------------------
+    # REFACTORED: short orchestrator
+    # --------------------------------------------------------------
     def _process_data(self, raw: Dict[str, Any]) -> ValidationReport:
-        total = raw.get("total_toc", 0)
-        matched = len(raw.get("matched", []))
-        missing = len(raw.get("missing", []))
-        mismatch = len(raw.get("title_mismatches", []))
-        page_err = len(raw.get("page_discrepancies", []))
+        metrics = self._extract_metrics(raw)
+        scores = self._calculate_scores(metrics)
+        recs = self._build_recommendations(metrics)
+        self.__report = self._build_report(metrics, scores, recs)
+        return self.__report
 
-        match_pct = (matched / total * 100) if total else 0
-        title_pct = (1 - mismatch / total) * 100 if total else 0
-        page_pct = (1 - page_err / total) * 100 if total else 0
+    # --------------------------------------------------------------
+    # Metrics & scoring helpers
+    # --------------------------------------------------------------
+    @staticmethod
+    def _extract_metrics(raw: Dict[str, Any]) -> Dict[str, int]:
+        return {
+            "total": raw.get("total_toc", 0),
+            "matched": len(raw.get("matched", [])),
+            "missing": len(raw.get("missing", [])),
+            "mismatch": len(raw.get("title_mismatches", [])),
+            "page_err": len(raw.get("page_discrepancies", [])),
+        }
+
+    @staticmethod
+    def _calculate_scores(metrics: Dict[str, int]) -> Dict[str, float]:
+        total = metrics["total"]
+
+        match_pct = (metrics["matched"] / total * 100) if total else 0
+        title_pct = (1 - metrics["mismatch"] / total) * 100 if total else 0
+        page_pct = (1 - metrics["page_err"] / total) * 100 if total else 0
 
         quality = (
             match_pct * 0.5 +
@@ -119,43 +133,65 @@ class ReportGenerator(BaseReportGenerator):
             page_pct * 0.2
         )
 
+        return {
+            "match_pct": round(match_pct, 2),
+            "title_pct": round(title_pct, 2),
+            "page_pct": round(page_pct, 2),
+            "quality": round(quality, 2),
+        }
+
+    # --------------------------------------------------------------
+    # Recommendation engine
+    # --------------------------------------------------------------
+    @staticmethod
+    def _build_recommendations(metrics: Dict[str, int]) -> List[str]:
         recs: List[str] = []
 
-        if missing > 0:
+        if metrics["missing"] > 0:
             recs.append(
-                "Some TOC sections are missing in content. Improve "
-                "chunk extraction."
+                "Some TOC sections are missing in content. "
+                "Improve chunk extraction."
             )
 
-        if mismatch > 0:
+        if metrics["mismatch"] > 0:
             recs.append(
-                "Section title mismatch detected. Improve parsing or "
-                "adjust similarity threshold."
+                "Section title mismatch detected. Improve parsing "
+                "or adjust similarity threshold."
             )
 
-        if page_err > 0:
+        if metrics["page_err"] > 0:
             recs.append(
-                "Section page boundaries appear inaccurate. Refine "
-                "slicing logic."
+                "Section page boundaries appear inaccurate. "
+                "Refine slicing logic."
             )
 
         if not recs:
             recs.append("Excellent extraction quality.")
 
-        self.__report = ValidationReport(
-            quality_score=round(quality, 2),
-            match_percentage=round(match_pct, 2),
-            title_accuracy=round(title_pct, 2),
-            page_accuracy=round(page_pct, 2),
-            total_toc=total,
-            missing_count=missing,
-            mismatch_count=mismatch,
-            page_error_count=page_err,
+        return recs
+
+    # --------------------------------------------------------------
+    # Report construction
+    # --------------------------------------------------------------
+    @staticmethod
+    def _build_report(
+        metrics: Dict[str, int],
+        scores: Dict[str, float],
+        recs: List[str],
+    ) -> ValidationReport:
+        return ValidationReport(
+            quality_score=scores["quality"],
+            match_percentage=scores["match_pct"],
+            title_accuracy=scores["title_pct"],
+            page_accuracy=scores["page_pct"],
+            total_toc=metrics["total"],
+            missing_count=metrics["missing"],
+            mismatch_count=metrics["mismatch"],
+            page_error_count=metrics["page_err"],
             recommendations=recs,
         )
 
-        return self.__report
-
+    # ------------------------------------------------------------------
     def _format_output(self, report: ValidationReport) -> Dict[str, Any]:
         return report.__dict__
 

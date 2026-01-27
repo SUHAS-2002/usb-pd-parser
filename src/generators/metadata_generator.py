@@ -98,36 +98,40 @@ class MetadataGenerator(BaseGenerator):
 
         print(f"Metadata JSON written → {self.__output_path}")
         return self.__output_path
-    
+
     # -------------------------------------------------------------
     # Polymorphism: Special methods
     # -------------------------------------------------------------
     def __str__(self) -> str:
         """Human-readable representation."""
-        return f"MetadataGenerator(output={self.__output_path}, generated={self.__generated_at})"
-    
+        return (
+            "MetadataGenerator("
+            f"output={self.__output_path}, "
+            f"generated={self.__generated_at})"
+        )
+
     def __repr__(self) -> str:
         """Developer-friendly representation."""
-        return f"MetadataGenerator()"
-    
+        return "MetadataGenerator()"
+
     def __eq__(self, other: object) -> bool:
         """Equality based on output path."""
         if not isinstance(other, MetadataGenerator):
             return NotImplemented
         return self.__output_path == other.__output_path
-    
+
     def __hash__(self) -> int:
         """Hash for use in sets/dicts."""
         return hash((self.__class__, self.__output_path))
-    
+
     def __bool__(self) -> bool:
         """Truthiness: True if has generated metadata."""
         return self.__output_path is not None
-    
+
     def __enter__(self) -> "MetadataGenerator":
         """Context manager entry."""
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
         """Context manager exit."""
         return False

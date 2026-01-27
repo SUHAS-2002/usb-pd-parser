@@ -67,7 +67,7 @@ class SectionContentBuilder:
         return self.__toc_page_count
 
     # -----------------------------------------------------------
-    # Public API
+    # Public API (SHORT & CLEAN)
     # -----------------------------------------------------------
     def build(
         self,
@@ -89,46 +89,72 @@ class SectionContentBuilder:
         self.__sections = []
 
         for idx, heading in enumerate(headings):
-            self.__processed_count += 1
-
-            if not self._is_valid_heading(heading):
-                self.__filtered_count += 1
-                continue
-
-            page = heading["page"]
-            sid = heading["section_id"]
-            title = heading["title"]
-
-            # Exclude ToC pages
-            if CONFIG.pages.TOC_START <= page <= CONFIG.pages.TOC_END:
-                self.__toc_page_count += 1
-                continue
-
-            # Exclude front matter
-            if self._is_front_matter(sid):
-                self.__filtered_count += 1
-                continue
-
-            # Filter false positives
-            if self._is_false_positive(sid, title):
-                self.__filtered_count += 1
-                continue
-
-            content = self._extract_section_content(
+            self._process_heading(
                 index=idx,
+                heading=heading,
                 headings=headings,
-                page_text_map=self.__page_text_map,
-            )
-
-            self.__sections.append(
-                self._build_section_record(
-                    heading=heading,
-                    doc_title=doc_title,
-                    content=content,
-                )
+                doc_title=doc_title,
             )
 
         return self.__sections.copy()
+
+    # -----------------------------------------------------------
+    # Per-heading processing pipeline
+    # -----------------------------------------------------------
+    def _process_heading(
+        self,
+        index: int,
+        heading: Dict,
+        headings: List[Dict],
+        doc_title: str,
+    ) -> None:
+        self.__processed_count += 1
+
+        if not self._should_include_heading(heading):
+            return
+
+        content = self._extract_section_content(
+            index=index,
+            headings=headings,
+            page_text_map=self.__page_text_map,
+        )
+
+        self.__sections.append(
+            self._build_section_record(
+                heading=heading,
+                doc_title=doc_title,
+                content=content,
+            )
+        )
+
+    # -----------------------------------------------------------
+    # Filtering rules (single responsibility)
+    # -----------------------------------------------------------
+    def _should_include_heading(self, heading: Dict) -> bool:
+        if not self._is_valid_heading(heading):
+            self.__filtered_count += 1
+            return False
+
+        page = heading["page"]
+        sid = heading["section_id"]
+        title = heading["title"]
+
+        # Exclude ToC pages
+        if CONFIG.pages.TOC_START <= page <= CONFIG.pages.TOC_END:
+            self.__toc_page_count += 1
+            return False
+
+        # Exclude front matter
+        if self._is_front_matter(sid):
+            self.__filtered_count += 1
+            return False
+
+        # Filter false positives
+        if self._is_false_positive(sid, title):
+            self.__filtered_count += 1
+            return False
+
+        return True
 
     # -----------------------------------------------------------
     # Heading validation
@@ -299,10 +325,7 @@ class SectionContentBuilder:
         if len(section_id) == 1 and section_id.isdigit():
             return True
 
-        if self._is_version_subsection(section_id, title_lower):
-            return True
-
-        return False
+        return self._is_version_subsection(section_id, title_lower)
 
     @staticmethod
     def _contains_month(title_lower: str) -> bool:
@@ -345,7 +368,6 @@ class SectionContentBuilder:
         title: str = heading["title"]
         page: int = heading["page"]
 
-        # Assignment format: NO content field, only metadata
         return {
             "doc_title": doc_title,
             "section_id": sid,
@@ -357,71 +379,59 @@ class SectionContentBuilder:
             if "." in sid else None,
             "tags": [],
         }
-    
+
     # -----------------------------------------------------------
     # Polymorphism: Special methods
     # -----------------------------------------------------------
     def __str__(self) -> str:
-        """Human-readable representation."""
         return (
             f"SectionContentBuilder("
             f"processed={self.__processed_count}, "
             f"filtered={self.__filtered_count}, "
             f"sections={len(self.__sections)})"
         )
-    
+
     def __repr__(self) -> str:
-        """Developer-friendly representation."""
-        return f"SectionContentBuilder()"
-    
+        return "SectionContentBuilder()"
+
     def __eq__(self, other: object) -> bool:
-        """Equality based on section count."""
         if not isinstance(other, SectionContentBuilder):
             return NotImplemented
         return len(self.__sections) == len(other.__sections)
-    
+
     def __hash__(self) -> int:
-        """Hash for use in sets/dicts."""
         return hash(len(self.__sections))
-    
+
     def __len__(self) -> int:
-        """Return number of sections built."""
         return len(self.__sections)
-    
+
     def __bool__(self) -> bool:
-        """Truthiness: True if has sections."""
         return len(self.__sections) > 0
-    
+
     def __iter__(self) -> "SectionContentBuilder":
-        """Make class iterable."""
         self.__current_index: int = 0
         return self
-    
+
     def __next__(self) -> Dict:
-        """Get next section in iteration."""
-        if not hasattr(self, '_SectionContentBuilder__current_index'):
+        if not hasattr(self, "_SectionContentBuilder__current_index"):
             self.__current_index = 0
         if self.__current_index >= len(self.__sections):
             raise StopIteration
         section = self.__sections[self.__current_index]
         self.__current_index += 1
         return section
-    
+
     def __contains__(self, section_id: str) -> bool:
-        """Check if section_id exists in sections."""
         return any(
             section.get("section_id") == section_id
             for section in self.__sections
         )
-    
+
     def __getitem__(self, index: int) -> Dict:
-        """Get section by index."""
         return self.__sections[index]
-    
+
     def __enter__(self) -> "SectionContentBuilder":
-        """Context manager entry."""
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
-        """Context manager exit."""
         return False

@@ -90,19 +90,33 @@ class Validator(BaseValidationUtility):
         """Check if value is a positive integer."""
         result = isinstance(value, int) and value > 0
         self.__validated_count += 1
+
         if result:
             self.__positive_int_count += 1
-        self.__validation_history.append({"value": value, "result": result, "type": "positive_int"})
+
+        self.__validation_history.append(
+            {
+                "value": value,
+                "result": result,
+                "type": "positive_int",
+            }
+        )
+
         return result
     
     # Polymorphism: Special methods
     def __str__(self) -> str:
         """Human-readable representation."""
-        return f"Validator(validated={self.__validated_count}, positive_ints={self.__positive_int_count})"
+        return (
+            f"Validator("
+            f"validated={self.__validated_count}, "
+            f"positive_ints={self.__positive_int_count}"
+            f")"
+        )
     
     def __repr__(self) -> str:
         """Developer-friendly representation."""
-        return f"Validator()"
+        return "Validator()"
     
     def __len__(self) -> int:
         """Return number of validations performed."""
@@ -131,7 +145,10 @@ class Validator(BaseValidationUtility):
     
     def __contains__(self, value: Any) -> bool:
         """Check if value was validated as positive int."""
-        return any(entry["value"] == value and entry["result"] for entry in self.__validation_history)
+        return any(
+            entry["value"] == value and entry["result"]
+            for entry in self.__validation_history
+        )
     
     def __getitem__(self, index: int) -> Dict[str, Any]:
         """Get validation entry by index."""

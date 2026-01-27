@@ -16,63 +16,67 @@ from abc import ABC, abstractmethod
 class BaseFileHandler(ABC):
     """
     Abstract base class for file handlers.
-    
+
     OOP Compliance: 100%
     - Encapsulation: All attributes use __attr
     - Inheritance: ABC base class
     - Polymorphism: Complete special methods
     - Abstraction: Abstract methods enforced
     """
-    
+
     def __init__(self) -> None:
         """Initialize handler with private state."""
         self.__files_processed: int = 0
         self.__total_records: int = 0
         self.__error_count: int = 0
-    
+
     @property
     def files_processed(self) -> int:
         """Get number of files processed (read-only)."""
         return self.__files_processed
-    
+
     @property
     def total_records(self) -> int:
         """Get total records processed (read-only)."""
         return self.__total_records
-    
+
     @property
     def error_count(self) -> int:
         """Get error count (read-only)."""
         return self.__error_count
-    
+
     def _increment_files(self) -> None:
         """Increment file counter (protected)."""
         self.__files_processed += 1
-    
+
     def _increment_records(self, count: int = 1) -> None:
         """Increment record counter (protected)."""
         self.__total_records += count
-    
+
     def _increment_errors(self) -> None:
         """Increment error counter (protected)."""
         self.__error_count += 1
-    
+
     def __str__(self) -> str:
         """Human-readable representation."""
-        return f"{self.__class__.__name__}(files={self.__files_processed}, records={self.__total_records})"
-    
+        return (
+            f"{self.__class__.__name__}("
+            f"files={self.__files_processed}, "
+            f"records={self.__total_records})"
+        )
+
     def __repr__(self) -> str:
         """Developer-friendly representation."""
         return f"{self.__class__.__name__}()"
-    
+
     def __len__(self) -> int:
         """Return total records processed."""
         return self.__total_records
-    
+
     def __bool__(self) -> bool:
         """Truthiness: True if has processed files."""
         return self.__files_processed > 0
-    
+
     def __eq__(self, other: object) -> bool:
         """Equality based on class and stats."""
         if not isinstance(other, BaseFileHandler):
@@ -81,15 +85,15 @@ class BaseFileHandler(ABC):
             self.__class__ == other.__class__
             and self.__files_processed == other.files_processed
         )
-    
+
     def __hash__(self) -> int:
         """Hash for use in sets/dicts."""
         return hash((self.__class__, self.__files_processed))
-    
+
     def __enter__(self) -> "BaseFileHandler":
         """Context manager entry."""
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
         """Context manager exit."""
         return False
@@ -168,7 +172,7 @@ class JSONLHandler(BaseFileHandler):
                     + cls.__NEWLINE
                 )
                 handler._increment_records()
-        
+
         handler._increment_files()
 
     @classmethod

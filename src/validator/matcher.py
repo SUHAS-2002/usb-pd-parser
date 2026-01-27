@@ -1,5 +1,3 @@
-# src/validator/matcher.py
-
 from __future__ import annotations
 
 import re
@@ -29,7 +27,6 @@ class SectionMatcher(BaseValidator):
     # Constructor (TRUE PRIVATE STATE)
     # ---------------------------------------------------------
     def __init__(self, title_threshold: float = 0.85) -> None:
-        """Initialize matcher with name-mangled private state."""
         self.__threshold: float = self._validate_threshold(
             title_threshold
         )
@@ -43,12 +40,10 @@ class SectionMatcher(BaseValidator):
     # ---------------------------------------------------------
     @property
     def threshold(self) -> float:
-        """Return title similarity threshold (read-only)."""
         return self.__threshold
 
     @threshold.setter
     def threshold(self, value: float) -> None:
-        """Set title similarity threshold (0.0–1.0)."""
         self.__threshold = self._validate_threshold(value)
 
     # ---------------------------------------------------------
@@ -56,118 +51,157 @@ class SectionMatcher(BaseValidator):
     # ---------------------------------------------------------
     @property
     def matched_count(self) -> int:
-        """Number of matched sections."""
         return self.__matched_count
 
     @property
     def missing_count(self) -> int:
-        """Number of missing sections."""
         return self.__missing_count
 
     @property
     def mismatch_count(self) -> int:
-        """Number of title mismatches."""
         return self.__mismatch_count
 
     # ---------------------------------------------------------
-    # BaseValidator contract (REQUIRED)
+    # BaseValidator contract
     # ---------------------------------------------------------
     def validate(
         self,
         toc: List[Dict[str, Any]],
         chunks: List[Dict[str, Any]],
     ) -> Dict[str, Any]:
-        """
-        Concrete implementation of BaseValidator.validate().
-
-        Delegates to match() to preserve domain semantics.
-        """
         return self.match(toc, chunks)
 
     # ---------------------------------------------------------
-    # Domain API
+    # Domain API (SHORT & READABLE)
     # ---------------------------------------------------------
     def match(
         self,
         toc: List[Dict[str, Any]],
         chunks: List[Dict[str, Any]],
     ) -> Dict[str, Any]:
-        """
-        Match TOC entries with extracted chunks using:
-        - section_id alignment
-        - fuzzy title similarity
-        - optional page-range validation
-        """
-        # Reset counters
+
+        self._reset_counters()
+
+        chunk_map = self._index_chunks(chunks)
+        results = self._init_results()
+
+        for entry in toc:
+            self._process_entry(
+                entry=entry,
+                chunk_map=chunk_map,
+                results=results,
+            )
+
+        return self._build_report(results, toc)
+
+    # ---------------------------------------------------------
+    # Pipeline helpers
+    # ---------------------------------------------------------
+    def _reset_counters(self) -> None:
         self.__matched_count = 0
         self.__missing_count = 0
         self.__mismatch_count = 0
 
-        chunk_map = {
+    @staticmethod
+    def _index_chunks(
+        chunks: List[Dict[str, Any]],
+    ) -> Dict[str, Dict[str, Any]]:
+        return {
             c.get("section_id"): c
             for c in chunks
             if c.get("section_id")
         }
 
-        matched: List[Dict[str, Any]] = []
-        missing: List[Dict[str, Any]] = []
-        title_miss: List[Dict[str, Any]] = []
-        page_err: List[Dict[str, Any]] = []
-
-        for entry in toc:
-            sid = entry.get("section_id")
-
-            # ---------------- Missing section ----------------
-            if sid not in chunk_map:
-                self.__missing_count += 1
-                missing.append(entry)
-                continue
-
-            chunk = chunk_map[sid]
-            self.__matched_count += 1
-            matched.append(entry)
-
-            # ---------------- Title similarity ----------------
-            toc_title = entry.get("title", "")
-            chunk_title = chunk.get("title", "")
-            sim = self._similarity(toc_title, chunk_title)
-
-            if sim < self.__threshold:
-                self.__mismatch_count += 1
-                title_miss.append(
-                    {
-                        "section_id": sid,
-                        "toc_title": toc_title,
-                        "chunk_title": chunk_title,
-                        "similarity": sim,
-                    }
-                )
-
-            # ---------------- Page range check ----------------
-            pr = chunk.get("page_range")
-            if pr:
-                start, end = pr
-                toc_page = entry.get("page", 0)
-
-                if toc_page < start or toc_page > end:
-                    page_err.append(
-                        {
-                            "section_id": sid,
-                            "toc_page": toc_page,
-                            "chunk_range": pr,
-                        }
-                    )
-
+    @staticmethod
+    def _init_results() -> Dict[str, List[Dict[str, Any]]]:
         return {
-            "matched": matched,
-            "missing": missing,
-            "title_mismatches": title_miss,
-            "page_discrepancies": page_err,
+            "matched": [],
+            "missing": [],
+            "title_mismatches": [],
+            "page_discrepancies": [],
+        }
+
+    def _process_entry(
+        self,
+        entry: Dict[str, Any],
+        chunk_map: Dict[str, Dict[str, Any]],
+        results: Dict[str, List[Dict[str, Any]]],
+    ) -> None:
+        sid = entry.get("section_id")
+
+        if sid not in chunk_map:
+            self.__missing_count += 1
+            results["missing"].append(entry)
+            return
+
+        chunk = chunk_map[sid]
+        self.__matched_count += 1
+        results["matched"].append(entry)
+
+        self._check_title_similarity(entry, chunk, results)
+        self._check_page_range(entry, chunk, results)
+
+    # ---------------------------------------------------------
+    # Validation checks
+    # ---------------------------------------------------------
+    def _check_title_similarity(
+        self,
+        entry: Dict[str, Any],
+        chunk: Dict[str, Any],
+        results: Dict[str, List[Dict[str, Any]]],
+    ) -> None:
+        toc_title = entry.get("title", "")
+        chunk_title = chunk.get("title", "")
+        sim = self._similarity(toc_title, chunk_title)
+
+        if sim < self.__threshold:
+            self.__mismatch_count += 1
+            results["title_mismatches"].append(
+                {
+                    "section_id": entry.get("section_id"),
+                    "toc_title": toc_title,
+                    "chunk_title": chunk_title,
+                    "similarity": sim,
+                }
+            )
+
+    @staticmethod
+    def _check_page_range(
+        entry: Dict[str, Any],
+        chunk: Dict[str, Any],
+        results: Dict[str, List[Dict[str, Any]]],
+    ) -> None:
+        pr = chunk.get("page_range")
+        if not pr:
+            return
+
+        start, end = pr
+        toc_page = entry.get("page", 0)
+
+        if toc_page < start or toc_page > end:
+            results["page_discrepancies"].append(
+                {
+                    "section_id": entry.get("section_id"),
+                    "toc_page": toc_page,
+                    "chunk_range": pr,
+                }
+            )
+
+    # ---------------------------------------------------------
+    # Report builder
+    # ---------------------------------------------------------
+    @staticmethod
+    def _build_report(
+        results: Dict[str, List[Dict[str, Any]]],
+        toc: List[Dict[str, Any]],
+    ) -> Dict[str, Any]:
+        return {
+            **results,
             "total_toc": len(toc),
         }
 
     # ---------------------------------------------------------
-    # Validation helpers (protected)
+    # Validation helpers
     # ---------------------------------------------------------
     @staticmethod
     def _validate_threshold(value: float) -> float:
@@ -185,7 +219,7 @@ class SectionMatcher(BaseValidator):
         return value
 
     # ---------------------------------------------------------
-    # Text normalization & similarity (protected)
+    # Text normalization & similarity
     # ---------------------------------------------------------
     @staticmethod
     def _normalize(text: str) -> str:
@@ -195,12 +229,14 @@ class SectionMatcher(BaseValidator):
         return cleaned.strip()
 
     def _similarity(self, a: str, b: str) -> float:
-        a_norm = self._normalize(a)
-        b_norm = self._normalize(b)
-        return SequenceMatcher(None, a_norm, b_norm).ratio()
+        return SequenceMatcher(
+            None,
+            self._normalize(a),
+            self._normalize(b),
+        ).ratio()
 
     # ---------------------------------------------------------
-    # Polymorphism: Special methods
+    # Polymorphism
     # ---------------------------------------------------------
     def __str__(self) -> str:
         return (
