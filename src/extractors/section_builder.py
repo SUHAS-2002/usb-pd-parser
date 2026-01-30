@@ -82,7 +82,11 @@ class SectionContentBuilder:
         self.__filtered_count = 0
         self.__toc_page_count = 0
 
-        if not headings or not pages:
+        if not headings:
+            _logger.warning("No headings provided to section builder")
+            return []
+        if not pages:
+            _logger.warning("No pages provided to section builder")
             return []
 
         self.__page_text_map = self._build_page_text_map(pages)
@@ -368,7 +372,7 @@ class SectionContentBuilder:
         title: str = heading["title"]
         page: int = heading["page"]
 
-        return {
+        record = {
             "doc_title": doc_title,
             "section_id": sid,
             "title": title,
@@ -379,6 +383,12 @@ class SectionContentBuilder:
             if "." in sid else None,
             "tags": [],
         }
+        
+        # Include content if available (for content coverage)
+        if content and len(content.strip()) > 0:
+            record["content"] = content
+        
+        return record
 
     # -----------------------------------------------------------
     # Polymorphism: Special methods

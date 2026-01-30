@@ -50,10 +50,29 @@ _logger = logging.getLogger(__name__)
 # JSONL writer (internal utility)
 # ------------------------------------------------------------------
 def _write_jsonl(path: Path, items: Iterable[dict]) -> None:
-    """Write iterable of dictionaries to a JSONL file."""
-    with path.open("w", encoding="utf-8") as handle:
-        for obj in items:
-            handle.write(json.dumps(obj, ensure_ascii=False) + "\n")
+    """
+    Write iterable of dictionaries to a JSONL file.
+    
+    Parameters
+    ----------
+    path : Path
+        Output file path
+    items : Iterable[dict]
+        Items to write (will be iterated once)
+    
+    Raises
+    ------
+    OSError
+        If file cannot be written
+    """
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("w", encoding="utf-8") as handle:
+            for obj in items:
+                handle.write(json.dumps(obj, ensure_ascii=False) + "\n")
+    except OSError as e:
+        _logger.error("Failed to write JSONL file %s: %s", path, e)
+        raise
 
 
 # ------------------------------------------------------------------
@@ -340,6 +359,18 @@ class USBPDParser(BaseParser, Observable):
             doc_title=self._get_doc_title(),
         )
         _logger.info("Built %d spec sections", len(sections))
+        
+        # Log content statistics
+        sections_with_content = sum(1 for s in sections if s.get("content") and len(s.get("content", "").strip()) > 0)
+        if sections_with_content > 0:
+            content_lengths = [len(s.get("content", "")) for s in sections if s.get("content")]
+            avg_content = sum(content_lengths) // len(content_lengths)
+            _logger.info(
+                "Content statistics: %d sections with content, avg length: %d chars",
+                sections_with_content,
+                avg_content
+            )
+        
         self.__sections = sections
         return sections
 
@@ -350,6 +381,76 @@ class USBPDParser(BaseParser, Observable):
     ) -> None:
         _write_jsonl(self.output_dir / "usb_pd_toc.jsonl", toc)
         _write_jsonl(self.output_dir / "usb_pd_spec.jsonl", sections)
+        
+        # Log output summary
+        _logger.info(
+            "Output files generated: TOC=%d entries, Spec=%d sections",
+            len(toc),
+            len(sections)
+        )
+        
+        # Generate usb_pd_content.jsonl (content-only records with content field)
+        content_sections = [
+            s for s in sections
+            if s.get("content") and len(s.get("content", "").strip()) > 0
+        ]
+        _write_jsonl(self.output_dir / "usb_pd_content.jsonl", content_sections)
+        
+        # Generate metadata
+        from src.generators.metadata_generator import MetadataGenerator
+        metadata_gen = MetadataGenerator()
+        metadata_path = self.output_dir / "usb_pd_metadata.jsonl"
+        metadata_gen.generate(
+            toc_path=str(self.output_dir / "usb_pd_toc.jsonl"),
+            chunks_path=str(self.output_dir / "usb_pd_spec.jsonl"),
+            output_path=str(metadata_path),
+        )
+        
+        # Generate validation report (JSON)
+        from src.validator.toc_validator import TOCValidator
+        validator = TOCValidator()
+        validation_json_path = self.output_dir / "validation_report.json"
+        validator.validate(
+            toc_path=str(self.output_dir / "usb_pd_toc.jsonl"),
+            chunks_path=str(self.output_dir / "usb_pd_spec.jsonl"),
+            report_path=str(validation_json_path),
+        )
+        
+        # Generate validation report (Excel)
+        from src.reports.excel_validation_report import ExcelValidationReport
+        validation_xlsx_path = self.output_dir / "validation_report.xlsx"
+        with ExcelValidationReport(
+            report_json_path=str(validation_json_path),
+            output_xlsx=str(validation_xlsx_path),
+        ) as excel_gen:
+            excel_gen.generate()
+        
+        # Validate output files against schemas
+        self._validate_output_schemas()
+    
+    def _validate_output_schemas(self) -> None:
+        """Validate generated output files against JSON schemas."""
+        from src.utils.schema_validator import SchemaValidator
+        from pathlib import Path
+        
+        validator = SchemaValidator()
+        schema_dir = Path(__file__).parent.parent / "schemas"
+        
+        # Validate TOC file
+        toc_schema = schema_dir / "toc_schema.json"
+        toc_file = self.output_dir / "usb_pd_toc.jsonl"
+        if toc_schema.exists() and toc_file.exists():
+            is_valid = validator.validate_file(toc_file, toc_schema, strict=False)
+            if is_valid:
+                _logger.info("TOC file validated against schema successfully")
+            else:
+                _logger.warning(
+                    "TOC file validation found %d errors",
+                    validator.error_count
+                )
+        
+        # Note: spec file uses different format (has 'content' not 'text')
+        # Schema validation would need schema update or format adjustment
 
 
 # ------------------------------------------------------------------

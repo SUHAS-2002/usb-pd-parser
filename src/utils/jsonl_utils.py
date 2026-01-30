@@ -161,19 +161,35 @@ class JSONLHandler(BaseFileHandler):
     def save(cls, path: Path, items: List[Dict[str, Any]]) -> None:
         """
         Save a list of dictionaries to a JSONL file.
+        
+        Parameters
+        ----------
+        path : Path
+            Output file path
+        items : List[Dict[str, Any]]
+            List of dictionaries to save
+        
+        Raises
+        ------
+        OSError
+            If file cannot be written
         """
-        path.parent.mkdir(parents=True, exist_ok=True)
-        handler = cls()  # Create instance for tracking
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            handler = cls()  # Create instance for tracking
 
-        with path.open("w", encoding=cls.__ENCODING) as f:
-            for obj in items:
-                f.write(
-                    json.dumps(obj, ensure_ascii=False)
-                    + cls.__NEWLINE
-                )
-                handler._increment_records()
+            with path.open("w", encoding=cls.__ENCODING) as f:
+                for obj in items:
+                    f.write(
+                        json.dumps(obj, ensure_ascii=False)
+                        + cls.__NEWLINE
+                    )
+                    handler._increment_records()
 
-        handler._increment_files()
+            handler._increment_files()
+        except OSError as e:
+            handler._increment_errors()
+            raise OSError(f"Failed to save JSONL file {path}: {e}") from e
 
     @classmethod
     def stream(cls, path: Path) -> Iterator[Dict[str, Any]]:

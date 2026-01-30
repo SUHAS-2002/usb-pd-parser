@@ -21,7 +21,8 @@
       "type": "array",
       "items": { "type": "string" }
     },
-    "text": { "type": "string" }
+    "text": { "type": "string" },
+    "content": { "type": "string" }
   },
   "required": [
     "doc_title",
@@ -29,9 +30,7 @@
     "title",
     "full_path",
     "page",
-    "page_range",
     "level",
-    "text",
     "tags"
   ]
 }

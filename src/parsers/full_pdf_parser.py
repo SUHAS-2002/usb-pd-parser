@@ -49,7 +49,8 @@ class FullPDFParser(BaseParser):
         for page in raw_pages:
             try:
                 num = int(page.get("page_number", 0))
-            except Exception:
+            except (ValueError, TypeError):
+                # Skip pages with invalid page numbers
                 continue
 
             text = page.get("text") or ""

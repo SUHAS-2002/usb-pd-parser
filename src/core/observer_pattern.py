@@ -88,8 +88,15 @@ class Observable(ABC):
         for observer in self.__observers:
             try:
                 observer.update(event, payload)
-            except Exception:
-                # Explicitly continue notifying other observers
+            except Exception as e:
+                # Log error but continue notifying other observers
+                # This prevents one observer's failure from blocking others
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.warning(
+                    f"Observer {observer.__class__.__name__} failed: {e}",
+                    exc_info=True
+                )
                 continue
 
     def clear_history(self) -> None:

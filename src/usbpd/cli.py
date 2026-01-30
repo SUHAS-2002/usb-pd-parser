@@ -4,10 +4,10 @@ from pathlib import Path
 from src.usb_pd_parser import USBPDParser
 from src.validator.toc_validator import TOCValidator
 from src.validator.report_generator import ReportGenerator
-from src.excel_report import ExcelReportGenerator
+from src.reports.excel_coverage_report import ExcelReportGenerator
 from src.generators.spec_generator import SpecJSONLGenerator
 from src.generators.metadata_generator import MetadataGenerator
-from src.excel_validation_report import ExcelValidationReport
+from src.reports.excel_validation_report import ExcelValidationReport
 
 
 DATA_DIR = Path("data")
