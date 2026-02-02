@@ -1,0 +1,14 @@
+{
+  "quality_score": 95.84,
+  "match_percentage": 96.01,
+  "title_accuracy": 92.77,
+  "page_accuracy": 100.0,
+  "total_toc": 1480,
+  "missing_count": 59,
+  "mismatch_count": 107,
+  "page_error_count": 0,
+  "recommendations": [
+    "Some TOC sections are missing in content. Improve chunk extraction.",
+    "Section title mismatch detected. Improve parsing or adjust similarity threshold."
+  ]
+}
