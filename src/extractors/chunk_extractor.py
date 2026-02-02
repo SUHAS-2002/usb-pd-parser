@@ -115,19 +115,17 @@ class ChunkExtractor(BaseExtractor):
         # Build chunks
         self.__chunks, self.__mapped_pages = self._build_chunks(
             self.__toc_sorted,
-            self.__internal_starts,
             self.__page_text,
-            self.__min_page,
             self.__max_page,
         )
 
         # Add fallback chunks for unmapped pages
+        page_range = (self.__min_page, self.__max_page)
         self._add_unmapped_pages(
             self.__chunks,
             self.__mapped_pages,
             self.__page_text,
-            self.__min_page,
-            self.__max_page,
+            page_range,
         )
 
         self.__chunks.sort(key=lambda c: c["page_range"][0])
@@ -178,11 +176,10 @@ class ChunkExtractor(BaseExtractor):
     def _build_chunks(
         self,
         toc: List[Dict],
-        internal_starts: Dict[str, int],
         page_text: Dict[int, str],
-        min_page: int,
         max_page: int,
     ) -> Tuple[List[Dict], Set[int]]:
+        """Build chunks from TOC entries."""
         chunks: List[Dict] = []
         mapped_pages: Set[int] = set()
 
@@ -193,19 +190,26 @@ class ChunkExtractor(BaseExtractor):
 
             end = self._next_page(start, toc, max_page)
             content = self._collect_text(page_text, start, end)
-
-            chunks.append(
-                {
-                    "section_id": entry.get("section_id"),
-                    "title": entry.get("title"),
-                    "page_range": (start, end),
-                    "content": content,
-                }
-            )
-
+            chunk = self._create_chunk(entry, start, end, content)
+            chunks.append(chunk)
             mapped_pages.update(range(start, end + 1))
 
         return chunks, mapped_pages
+    
+    @staticmethod
+    def _create_chunk(
+        entry: Dict,
+        start: int,
+        end: int,
+        content: str,
+    ) -> Dict:
+        """Create a chunk dictionary from entry data."""
+        return {
+            "section_id": entry.get("section_id"),
+            "title": entry.get("title"),
+            "page_range": (start, end),
+            "content": content,
+        }
 
     def _next_page(
         self,
@@ -229,19 +233,27 @@ class ChunkExtractor(BaseExtractor):
         chunks: List[Dict],
         mapped_pages: Set[int],
         page_text: Dict[int, str],
-        min_page: int,
-        max_page: int,
+        page_range: Tuple[int, int],
     ) -> None:
+        """Add unmapped pages as chunks."""
+        min_page, max_page = page_range
         for page in range(min_page, max_page + 1):
             if page not in mapped_pages:
-                chunks.append(
-                    {
-                        "section_id": None,
-                        "title": None,
-                        "page_range": (page, page),
-                        "content": page_text.get(page, ""),
-                    }
-                )
+                chunk = self._create_unmapped_chunk(page, page_text)
+                chunks.append(chunk)
+    
+    @staticmethod
+    def _create_unmapped_chunk(
+        page: int,
+        page_text: Dict[int, str],
+    ) -> Dict:
+        """Create a chunk for an unmapped page."""
+        return {
+            "section_id": None,
+            "title": None,
+            "page_range": (page, page),
+            "content": page_text.get(page, ""),
+        }
     
     # --------------------------------------------------------------
     # Polymorphism: Special methods

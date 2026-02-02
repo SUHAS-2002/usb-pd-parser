@@ -69,11 +69,17 @@ class InlineHeadingExtractor(BaseExtractor):
         pages: List[Dict[str, Any]],
         results: List[Dict],
     ) -> int:
+        from src.config import CONFIG
+        
         processed_pages = set()
 
         for page in pages:
             page_no = page.get("page")
             if not page_no:
+                continue
+            
+            # Exclude ToC pages (13-18) from inline heading extraction
+            if CONFIG.pages.TOC_START <= page_no <= CONFIG.pages.TOC_END:
                 continue
 
             text = page.get("text") or ""
@@ -115,11 +121,43 @@ class InlineHeadingExtractor(BaseExtractor):
         """Enhanced false positive detection at extraction time."""
         import re
         
-        # Version with letter suffix (1.0a, 2.0b, etc.)
-        if re.match(r'^\d+(\.\d+)*[a-z]$', title, re.IGNORECASE):
+        # Filter Figure/Table patterns
+        if re.match(r'^(Figure|Table)\s+\d+', title, re.IGNORECASE):
             return True
         
-        # Very short abbreviations (ms, us, ns, etc.)
+        # Filter section IDs that look like Figure/Table numbers
+        if re.match(r'^\d{3,4}$', section_id):
+            # Check if title suggests it's a figure/table
+            if re.search(r'(Figure|Table|Fig\.|Tbl\.)', title, re.IGNORECASE):
+                return True
+        
+        checks = [
+            InlineHeadingExtractor._is_version_with_suffix,
+            InlineHeadingExtractor._is_short_abbreviation,
+            InlineHeadingExtractor._is_version_number,
+            InlineHeadingExtractor._has_ellipsis_pattern,
+            InlineHeadingExtractor._has_voltage_pattern,
+            InlineHeadingExtractor._is_too_short,
+            InlineHeadingExtractor._is_mostly_symbols,
+            InlineHeadingExtractor._has_math_expression,
+        ]
+        
+        for check in checks:
+            if check(title):
+                return True
+        
+        return False
+    
+    @staticmethod
+    def _is_version_with_suffix(title: str) -> bool:
+        """Check if title is version with letter suffix (1.0a, 2.0b)."""
+        import re
+        return bool(re.match(r'^\d+(\.\d+)*[a-z]$', title, re.IGNORECASE))
+    
+    @staticmethod
+    def _is_short_abbreviation(title: str) -> bool:
+        """Check if title is a short abbreviation."""
+        import re
         short_abbrevs = {
             'ms', 'us', 'ns', 'ps', 'fs',
             'mv', 'kv', 'ma', 'ua', 'na',
@@ -128,39 +166,50 @@ class InlineHeadingExtractor(BaseExtractor):
             'mm', 'cm', 'km', 'in', 'ft',
             'kg', 'g', 'mg', 'lb',
         }
-        if title.lower() in short_abbrevs:
-            return True
-        if re.match(r'^[a-z]{1,3}$', title):
-            return True
-        
-        # Just version numbers (1.0, 2.0, 3.1, etc.)
+        return (
+            title.lower() in short_abbrevs
+            or bool(re.match(r'^[a-z]{1,3}$', title))
+        )
+    
+    @staticmethod
+    def _is_version_number(title: str) -> bool:
+        """Check if title is just a version number."""
+        import re
         if re.match(r'^\d+(\.\d+)*$', title):
-            if len(title) <= 10 and title.count('.') <= 2:
-                return True
-        
-        # Ellipsis patterns (7…6, 14…12)
-        if re.search(r'\d+[…\.]{2,}\d+', title):
-            return True
-        
-        # Voltage patterns (+ 9V, + 15V, - 5V)
-        if re.search(r'[\+\-]\s*\d+V', title, re.IGNORECASE):
-            return True
-        if re.match(r'^[\+\-]?\s*\d+\s*V$', title, re.IGNORECASE):
-            return True
-        
-        # Too short
-        if len(title) < 2:
-            return True
-        
-        # Just symbols and numbers
-        if len([c for c in title if c.isalnum()]) < 2:
-            return True
-        
-        # Mathematical expressions
-        if re.search(r'[\+\-]\s*\d+[\s\+\-]+\d+', title):
-            return True
-        
+            return len(title) <= 10 and title.count('.') <= 2
         return False
+    
+    @staticmethod
+    def _has_ellipsis_pattern(title: str) -> bool:
+        """Check if title has ellipsis pattern."""
+        import re
+        return bool(re.search(r'\d+[…\.]{2,}\d+', title))
+    
+    @staticmethod
+    def _has_voltage_pattern(title: str) -> bool:
+        """Check if title has voltage pattern."""
+        import re
+        return (
+            bool(re.search(r'[\+\-]\s*\d+V', title, re.IGNORECASE))
+            or bool(re.match(r'^[\+\-]?\s*\d+\s*V$', title, re.IGNORECASE))
+        )
+    
+    @staticmethod
+    def _is_too_short(title: str) -> bool:
+        """Check if title is too short."""
+        return len(title) < 2
+    
+    @staticmethod
+    def _is_mostly_symbols(title: str) -> bool:
+        """Check if title is mostly symbols."""
+        alnum_count = len([c for c in title if c.isalnum()])
+        return alnum_count < 2
+    
+    @staticmethod
+    def _has_math_expression(title: str) -> bool:
+        """Check if title has mathematical expression."""
+        import re
+        return bool(re.search(r'[\+\-]\s*\d+[\s\+\-]+\d+', title))
 
     # --------------------------------------------------------------
     # Section helpers (protected)

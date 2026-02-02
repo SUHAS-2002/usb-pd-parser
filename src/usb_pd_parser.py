@@ -361,12 +361,19 @@ class USBPDParser(BaseParser, Observable):
         _logger.info("Built %d spec sections", len(sections))
         
         # Log content statistics
-        sections_with_content = sum(1 for s in sections if s.get("content") and len(s.get("content", "").strip()) > 0)
+        sections_with_content = sum(
+            1 for s in sections
+            if s.get("content") and len(s.get("content", "").strip()) > 0
+        )
         if sections_with_content > 0:
-            content_lengths = [len(s.get("content", "")) for s in sections if s.get("content")]
+            content_lengths = [
+                len(s.get("content", ""))
+                for s in sections if s.get("content")
+            ]
             avg_content = sum(content_lengths) // len(content_lengths)
             _logger.info(
-                "Content statistics: %d sections with content, avg length: %d chars",
+                "Content statistics: %d sections with content, "
+                "avg length: %d chars",
                 sections_with_content,
                 avg_content
             )
@@ -379,54 +386,77 @@ class USBPDParser(BaseParser, Observable):
         toc: list[dict],
         sections: list[dict],
     ) -> None:
+        """Persist all output files."""
+        self._write_core_outputs(toc, sections)
+        self._generate_content_file(sections)
+        self._generate_metadata()
+        self._generate_validation_reports()
+        self._validate_output_schemas()
+        self._generate_summary_output(toc, sections)
+    
+    def _write_core_outputs(
+        self,
+        toc: list[dict],
+        sections: list[dict],
+    ) -> None:
+        """Write core TOC and spec files."""
         _write_jsonl(self.output_dir / "usb_pd_toc.jsonl", toc)
         _write_jsonl(self.output_dir / "usb_pd_spec.jsonl", sections)
-        
-        # Log output summary
         _logger.info(
-            "Output files generated: TOC=%d entries, Spec=%d sections",
+            "Output files generated: TOC=%d entries, "
+            "Spec=%d sections",
             len(toc),
             len(sections)
         )
-        
-        # Generate usb_pd_content.jsonl (content-only records with content field)
+    
+    def _generate_content_file(self, sections: list[dict]) -> None:
+        """Generate content-only JSONL file."""
         content_sections = [
             s for s in sections
             if s.get("content") and len(s.get("content", "").strip()) > 0
         ]
-        _write_jsonl(self.output_dir / "usb_pd_content.jsonl", content_sections)
-        
-        # Generate metadata
+        content_path = self.output_dir / "usb_pd_content.jsonl"
+        _write_jsonl(content_path, content_sections)
+    
+    def _generate_metadata(self) -> None:
+        """Generate metadata JSONL file."""
         from src.generators.metadata_generator import MetadataGenerator
+        
         metadata_gen = MetadataGenerator()
         metadata_path = self.output_dir / "usb_pd_metadata.jsonl"
+        toc_path = self.output_dir / "usb_pd_toc.jsonl"
+        spec_path = self.output_dir / "usb_pd_spec.jsonl"
+        
         metadata_gen.generate(
-            toc_path=str(self.output_dir / "usb_pd_toc.jsonl"),
-            chunks_path=str(self.output_dir / "usb_pd_spec.jsonl"),
+            toc_path=str(toc_path),
+            chunks_path=str(spec_path),
             output_path=str(metadata_path),
         )
-        
-        # Generate validation report (JSON)
+    
+    def _generate_validation_reports(self) -> None:
+        """Generate validation reports (JSON and Excel)."""
         from src.validator.toc_validator import TOCValidator
-        validator = TOCValidator()
+        from src.reports.excel_validation_report import ExcelValidationReport
+        
+        toc_path = self.output_dir / "usb_pd_toc.jsonl"
+        spec_path = self.output_dir / "usb_pd_spec.jsonl"
         validation_json_path = self.output_dir / "validation_report.json"
+        
+        # Generate JSON validation report
+        validator = TOCValidator()
         validator.validate(
-            toc_path=str(self.output_dir / "usb_pd_toc.jsonl"),
-            chunks_path=str(self.output_dir / "usb_pd_spec.jsonl"),
+            toc_path=str(toc_path),
+            chunks_path=str(spec_path),
             report_path=str(validation_json_path),
         )
         
-        # Generate validation report (Excel)
-        from src.reports.excel_validation_report import ExcelValidationReport
+        # Generate Excel validation report
         validation_xlsx_path = self.output_dir / "validation_report.xlsx"
         with ExcelValidationReport(
             report_json_path=str(validation_json_path),
             output_xlsx=str(validation_xlsx_path),
         ) as excel_gen:
             excel_gen.generate()
-        
-        # Validate output files against schemas
-        self._validate_output_schemas()
     
     def _validate_output_schemas(self) -> None:
         """Validate generated output files against JSON schemas."""
@@ -435,22 +465,51 @@ class USBPDParser(BaseParser, Observable):
         
         validator = SchemaValidator()
         schema_dir = Path(__file__).parent.parent / "schemas"
-        
-        # Validate TOC file
         toc_schema = schema_dir / "toc_schema.json"
         toc_file = self.output_dir / "usb_pd_toc.jsonl"
+        
         if toc_schema.exists() and toc_file.exists():
-            is_valid = validator.validate_file(toc_file, toc_schema, strict=False)
+            is_valid = validator.validate_file(
+                toc_file, toc_schema, strict=False
+            )
             if is_valid:
-                _logger.info("TOC file validated against schema successfully")
+                _logger.info(
+                    "TOC file validated against schema successfully"
+                )
             else:
                 _logger.warning(
                     "TOC file validation found %d errors",
                     validator.error_count
                 )
+    
+    def _generate_summary_output(
+        self,
+        toc: list[dict],
+        sections: list[dict],
+    ) -> None:
+        """Generate output.json summary file."""
+        from src.generators.summary_generator import SummaryGenerator
         
-        # Note: spec file uses different format (has 'content' not 'text')
-        # Schema validation would need schema update or format adjustment
+        summary_gen = SummaryGenerator()
+        output_path = self.output_dir / "output.json"
+        
+        toc_path = self.output_dir / "usb_pd_toc.jsonl"
+        spec_path = self.output_dir / "usb_pd_spec.jsonl"
+        content_path = self.output_dir / "usb_pd_content.jsonl"
+        metadata_path = self.output_dir / "usb_pd_metadata.jsonl"
+        validation_path = self.output_dir / "validation_report.json"
+        
+        pages_processed = len(self.__pages) if self.__pages else 0
+        
+        summary_gen.generate(
+            toc_path=str(toc_path),
+            spec_path=str(spec_path),
+            content_path=str(content_path),
+            metadata_path=str(metadata_path),
+            validation_path=str(validation_path),
+            pages_processed=pages_processed,
+            output_path=str(output_path),
+        )
 
 
 # ------------------------------------------------------------------

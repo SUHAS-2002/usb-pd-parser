@@ -3031,46 +3031,6 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
-      "section_id": "1003",
-      "title": "Figure  10.4",
-      "page": 26,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1003 Figure  10.4",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "656",
-      "title": "Table 8.99",
-      "page": 31,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "656 Table 8.99",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1009",
-      "title": "Table 10.14",
-      "page": 33,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1009 Table 10.14",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
-      "section_id": "1042",
-      "title": "Table E.3",
-      "page": 33,
-      "level": 1,
-      "parent_id": null,
-      "full_path": "1042 Table E.3",
-      "tags": []
-    },
-    {
-      "doc_title": "USB Power Delivery Specification",
       "section_id": "2.6.1.1",
       "title": "System Policy Manager",
       "page": 69,
@@ -16291,6 +16251,46 @@
     },
     {
       "doc_title": "USB Power Delivery Specification",
+      "section_id": "1003",
+      "title": "Figure  10.4",
+      "page": 26,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1003 Figure  10.4",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "656",
+      "title": "Table 8.99",
+      "page": 31,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "656 Table 8.99",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1009",
+      "title": "Table 10.14",
+      "page": 33,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1009 Table 10.14",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
+      "section_id": "1042",
+      "title": "Table E.3",
+      "page": 33,
+      "level": 1,
+      "parent_id": null,
+      "full_path": "1042 Table E.3",
+      "tags": []
+    },
+    {
+      "doc_title": "USB Power Delivery Specification",
       "section_id": "1010",
       "title": "10110",
       "page": 80,
@@ -16880,8 +16880,8 @@
     {
       "section_id": "21",
       "toc_title": "June 2018",
-      "chunk_title": "Table 9.8, \"PD Feature Selectors\" gives the Valid feature selectors for the PD class. Refer to Section 9.4.2.1,",
-      "similarity": 0.07207207207207207
+      "chunk_title": ": VDEM",
+      "similarity": 0.15384615384615385
     },
     {
       "section_id": "25",

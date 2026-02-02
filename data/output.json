@@ -1,0 +1,38 @@
+{
+  "document_title": "USB Power Delivery Specification Rev X",
+  "total_sections": 4575,
+  "total_pages_processed": 1047,
+  "pages_covered": [
+    19,
+    1047
+  ],
+  "total_records": 4575,
+  "extraction_timestamp": "2026-02-02T19:30:11.217543+00:00",
+  "status": "success",
+  "summary": {
+    "major_sections": 3120,
+    "subsections": 1455,
+    "key_topics": [
+      "Introduction",
+      "Overview",
+      "USB Type-A and USB Type-B Cable Assemblies and Connectors",
+      "Electrical Requirements",
+      "Physical Layer",
+      "Protocol Layer",
+      "Universal Serial Bus Power Delivery Specification, Revision 3",
+      "Power Supply",
+      "Device Policy",
+      "States and Status Reporting"
+    ],
+    "completeness_percentage": 95.7
+  },
+  "files_generated": [
+    "usb_pd_spec.jsonl",
+    "usb_pd_toc.jsonl",
+    "usb_pd_content.jsonl",
+    "usb_pd_metadata.jsonl",
+    "validation_report.json",
+    "validation_report.xlsx"
+  ],
+  "validation_status": "failed"
+}

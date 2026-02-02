@@ -80,7 +80,11 @@ class PyPDFAdapter(PDFTextStrategy):
     # Polymorphism: Special methods
     def __str__(self) -> str:
         """Human-readable representation."""
-        return f"PyPDFAdapter(extracted={self.__extracted_count}, last_path={self.__last_pdf_path})"
+        return (
+            f"PyPDFAdapter("
+            f"extracted={self.__extracted_count}, "
+            f"last_path={self.__last_pdf_path})"
+        )
     
     def __repr__(self) -> str:
         """Developer-friendly representation."""

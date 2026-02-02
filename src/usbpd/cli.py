@@ -10,8 +10,14 @@ from src.generators.metadata_generator import MetadataGenerator
 from src.reports.excel_validation_report import ExcelValidationReport
 
 
-DATA_DIR = Path("data")
-DATA_DIR.mkdir(exist_ok=True)
+# Private module-level constant
+__DATA_DIR = Path("data")
+__DATA_DIR.mkdir(exist_ok=True)
+
+
+def _get_data_dir() -> Path:
+    """Get data directory path (protected)."""
+    return __DATA_DIR
 
 
 # ------------------------------------------------------------------
@@ -19,7 +25,7 @@ DATA_DIR.mkdir(exist_ok=True)
 # ------------------------------------------------------------------
 def force_data_path(filename: str) -> str:
     """Ensure all output files stay inside /data directory."""
-    return str(DATA_DIR / Path(filename).name)
+    return str(_get_data_dir() / Path(filename).name)
 
 
 # ------------------------------------------------------------------

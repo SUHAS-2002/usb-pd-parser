@@ -1,28 +1,50 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "USB PD Content Section Schema",
-  "description": "Schema for content sections derived from TOC boundaries in the USB PD specification.",
+  "description": "Schema for content sections derived from TOC boundaries and inline headings in the USB PD specification.",
   "type": "object",
   "properties": {
-    "doc_title": { "type": "string" },
-    "section_id": { "type": "string", "pattern": "^\\d+(\\.\\d+)*$" },
-    "title": { "type": "string" },
-    "full_path": { "type": "string" },
-    "page": { "type": "integer", "minimum": 1 },
-    "page_range": {
-      "type": "array",
-      "items": { "type": "integer", "minimum": 1 },
-      "minItems": 2,
-      "maxItems": 2
+    "doc_title": {
+      "type": "string",
+      "description": "Document title"
     },
-    "level": { "type": "integer", "minimum": 1 },
-    "parent_id": { "type": ["string", "null"] },
+    "section_id": {
+      "type": ["string", "null"],
+      "pattern": "^\\d+(\\.\\d+)*$",
+      "description": "Section identifier (e.g., '1.2.3'), null for unmapped pages"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Section title, null for unmapped pages"
+    },
+    "full_path": {
+      "type": ["string", "null"],
+      "description": "Full section path (section_id + title), null for unmapped pages"
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Page number where section starts"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Hierarchical level (1 = top level, 0 = unmapped page)"
+    },
+    "parent_id": {
+      "type": ["string", "null"],
+      "pattern": "^\\d+(\\.\\d+)*$",
+      "description": "Parent section ID (null for top-level sections or unmapped pages)"
+    },
     "tags": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "description": "Additional tags or metadata"
     },
-    "text": { "type": "string" },
-    "content": { "type": "string" }
+    "content": {
+      "type": "string",
+      "description": "Extracted text content for the section"
+    }
   },
   "required": [
     "doc_title",
@@ -31,6 +53,9 @@
     "full_path",
     "page",
     "level",
-    "tags"
-  ]
+    "parent_id",
+    "tags",
+    "content"
+  ],
+  "additionalProperties": false
 }

@@ -99,6 +99,9 @@ class SectionContentBuilder:
                 headings=headings,
                 doc_title=doc_title,
             )
+        
+        # Add unmapped pages as sections to improve coverage
+        self._add_unmapped_pages(headings, doc_title)
 
         return self.__sections.copy()
 
@@ -207,10 +210,18 @@ class SectionContentBuilder:
         end_page = self._find_end_page(index, headings, start_page)
         parts: List[str] = []
 
+        # Exclude ToC pages from content extraction
+        toc_start = CONFIG.pages.TOC_START
+        toc_end = CONFIG.pages.TOC_END
+        
         for page in range(
             start_page,
             min(end_page + 1, start_page + self.__max_scan_pages),
         ):
+            # Skip ToC pages
+            if toc_start <= page <= toc_end:
+                continue
+                
             raw = page_text_map.get(page)
             if not raw:
                 continue
@@ -285,7 +296,19 @@ class SectionContentBuilder:
     # False-positive detection
     # -----------------------------------------------------------
     def _is_false_positive(self, section_id: str, title: str) -> bool:
+        import re
+        
         title_lower = title.lower().strip()
+        
+        # Filter Figure/Table patterns
+        if re.match(r'^(Figure|Table)\s+\d+', title, re.IGNORECASE):
+            return True
+        
+        # Filter section IDs that look like Figure/Table numbers
+        if re.match(r'^\d{3,4}$', section_id):
+            # Check if title suggests it's a figure/table
+            if re.search(r'(Figure|Table|Fig\.|Tbl\.)', title, re.IGNORECASE):
+                return True
 
         if self._is_version_string(title_lower):
             return True
@@ -340,6 +363,73 @@ class SectionContentBuilder:
         }
         return any(month in title_lower for month in months)
 
+    def _is_version_subsection(
+        self,
+        section_id: str,
+        title_lower: str,
+    ) -> bool:
+        if section_id.count(".") != 1:
+            return False
+
+        major, minor = section_id.split(".", 1)
+        if not (major.isdigit() and minor.isdigit()):
+            return False
+
+        if title_lower in {
+            "1.0", "1.1", "1.2", "1.3", "2.0", "3.0",
+        }:
+            return True
+
+        return self._contains_month(title_lower)
+    
+    def _add_unmapped_pages(
+        self,
+        headings: List[Dict],
+        doc_title: str,
+    ) -> None:
+        """Add sections for pages not covered by headings."""
+        # Get all pages covered by headings
+        covered_pages = {
+            h.get("page", 0) for h in headings
+            if h.get("page", 0) > CONFIG.pages.TOC_END
+        }
+        
+        # Get all available pages
+        available_pages = set(self.__page_text_map.keys())
+        
+        # Find unmapped pages (excluding ToC and front matter)
+        toc_end = CONFIG.pages.TOC_END
+        
+        unmapped_pages = [
+            p for p in available_pages
+            if p > toc_end and p not in covered_pages
+        ]
+        
+        # Add sections for unmapped pages
+        for page in sorted(unmapped_pages):
+            content = self._extract_page_content(page)
+            if content and len(content.strip()) > 100:
+                self.__sections.append({
+                    "doc_title": doc_title,
+                    "section_id": None,
+                    "title": None,
+                    "full_path": None,
+                    "page": page,
+                    "level": 0,
+                    "parent_id": None,
+                    "tags": [],
+                    "content": content,
+                })
+    
+    def _extract_page_content(self, page: int) -> str:
+        """Extract content from a single page."""
+        raw = self.__page_text_map.get(page)
+        if not raw:
+            return ""
+        
+        cleaned = self._clean_page_text(raw)
+        return cleaned if cleaned and len(cleaned) > 20 else ""
+    
     def _is_version_subsection(
         self,
         section_id: str,
