@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 
+from src.utils.logger_config import setup_logging
 from src.usb_pd_parser import USBPDParser
 from src.validator.toc_validator import TOCValidator
 from src.validator.report_generator import ReportGenerator
@@ -147,6 +148,7 @@ def _build_parser() -> argparse.ArgumentParser:
 # Entry Point
 # ------------------------------------------------------------------
 def main() -> None:
+    setup_logging(use_console=True)
     parser = _build_parser()
     args = parser.parse_args()
 

@@ -16,6 +16,7 @@ from __future__ import annotations
 import json
 import argparse
 import logging
+import time
 from pathlib import Path
 from typing import Dict, Any, Iterable, Tuple
 
@@ -37,12 +38,8 @@ from src.extractors.section_builder import SectionContentBuilder
 
 
 # ------------------------------------------------------------------
-# Logging
+# Logging (file logging is configured in usbpd.cli via logger_config)
 # ------------------------------------------------------------------
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
 _logger = logging.getLogger(__name__)
 
 
@@ -67,9 +64,16 @@ def _write_jsonl(path: Path, items: Iterable[dict]) -> None:
     """
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
+        count = 0
         with path.open("w", encoding="utf-8") as handle:
             for obj in items:
                 handle.write(json.dumps(obj, ensure_ascii=False) + "\n")
+                count += 1
+        _logger.info(
+            "JSONL written | path=%s | records=%d",
+            path,
+            count,
+        )
     except OSError as e:
         _logger.error("Failed to write JSONL file %s: %s", path, e)
         raise
@@ -293,8 +297,13 @@ class USBPDParser(BaseParser, Observable):
     # BaseParser contract
     # --------------------------------------------------------------
     def parse(self) -> Dict[str, Any]:
-        _logger.info("Starting USB PD parsing pipeline")
+        _logger.info(
+            "Starting USB PD parsing pipeline | pdf_path=%s | output_dir=%s",
+            self.pdf_path,
+            self.output_dir,
+        )
         self.notify("parse_started", {"pdf_path": self.pdf_path})
+        pipeline_start = time.perf_counter()
 
         pages = self._extract_pages()
         self.notify("pages_extracted", {"count": len(pages)})
@@ -311,7 +320,16 @@ class USBPDParser(BaseParser, Observable):
         self._persist_outputs(toc, sections)
         self.notify("outputs_persisted", {"output_dir": str(self.output_dir)})
 
-        _logger.info("USB PD parsing completed successfully")
+        pipeline_elapsed = time.perf_counter() - pipeline_start
+        _logger.info(
+            "USB PD parsing completed successfully | total_time_sec=%.3f | "
+            "pages=%d toc=%d headings=%d sections=%d",
+            pipeline_elapsed,
+            len(pages),
+            len(toc),
+            len(headings),
+            len(sections),
+        )
         self.notify("parse_completed", {"success": True})
 
         return {
@@ -326,23 +344,64 @@ class USBPDParser(BaseParser, Observable):
     # Pipeline steps (protected)
     # --------------------------------------------------------------
     def _extract_pages(self) -> list[dict]:
-        _logger.info("Extracting pages from PDF: %s", self.pdf_path)
-        pages = self.page_extractor.extract(self.pdf_path)
-        if not pages:
-            raise RuntimeError("No pages extracted from PDF")
-        self.__pages = pages
-        return pages
+        _logger.info(
+            "ENTER _extract_pages | input=pdf_path=%s",
+            self.pdf_path,
+        )
+        start = time.perf_counter()
+        try:
+            pages = self.page_extractor.extract(self.pdf_path)
+            if not pages:
+                raise RuntimeError("No pages extracted from PDF")
+            self.__pages = pages
+            elapsed = time.perf_counter() - start
+            total_chars = sum(len(p.get("text", "")) for p in pages)
+            _logger.info(
+                "EXIT _extract_pages | time_sec=%.3f | output_size=%d pages | "
+                "total_text_len=%d",
+                elapsed,
+                len(pages),
+                total_chars,
+            )
+            return pages
+        except Exception as e:
+            _logger.exception(
+                "EXCEPTION _extract_pages after %.3fs: %s",
+                time.perf_counter() - start,
+                e,
+            )
+            raise
 
     def _extract_toc(self, pages: list[dict]) -> list[dict]:
+        _logger.info(
+            "ENTER _extract_toc | input_size=%d pages",
+            len(pages),
+        )
+        start = time.perf_counter()
         toc = self.toc_extractor.extract(pages)
-        _logger.info("Extracted %d TOC entries", len(toc))
+        elapsed = time.perf_counter() - start
+        _logger.info(
+            "EXIT _extract_toc | time_sec=%.3f | output_size=%d TOC entries",
+            elapsed,
+            len(toc),
+        )
         self.__toc = toc
         return toc
 
     def _extract_inline_headings(self, pages: list[dict]) -> list[dict]:
+        _logger.info(
+            "ENTER _extract_inline_headings | input_size=%d pages",
+            len(pages),
+        )
+        start = time.perf_counter()
         data = {"pages": pages}
         headings = self.inline_extractor.extract(data)
-        _logger.info("Extracted %d inline headings", len(headings))
+        elapsed = time.perf_counter() - start
+        _logger.info(
+            "EXIT _extract_inline_headings | time_sec=%.3f | output_size=%d",
+            elapsed,
+            len(headings),
+        )
         self.__headings = headings
         return headings
 
@@ -352,15 +411,25 @@ class USBPDParser(BaseParser, Observable):
         toc: list[dict],
         headings: list[dict],
     ) -> list[dict]:
+        _logger.info(
+            "ENTER _build_sections | toc=%d pages=%d headings=%d",
+            len(toc),
+            len(pages),
+            len(headings),
+        )
+        start = time.perf_counter()
         sections = self.section_builder.build(
             toc=toc,
             pages=pages,
             headings=headings,
             doc_title=self._get_doc_title(),
         )
-        _logger.info("Built %d spec sections", len(sections))
-        
-        # Log content statistics
+        elapsed = time.perf_counter() - start
+        _logger.info(
+            "EXIT _build_sections | time_sec=%.3f | output_size=%d sections",
+            elapsed,
+            len(sections),
+        )
         sections_with_content = sum(
             1 for s in sections
             if s.get("content") and len(s.get("content", "").strip()) > 0
@@ -372,12 +441,11 @@ class USBPDParser(BaseParser, Observable):
             ]
             avg_content = sum(content_lengths) // len(content_lengths)
             _logger.info(
-                "Content statistics: %d sections with content, "
-                "avg length: %d chars",
+                "Content statistics: sections_with_content=%d "
+                "avg_content_len=%d chars",
                 sections_with_content,
-                avg_content
+                avg_content,
             )
-        
         self.__sections = sections
         return sections
 
@@ -387,12 +455,23 @@ class USBPDParser(BaseParser, Observable):
         sections: list[dict],
     ) -> None:
         """Persist all output files."""
+        _logger.info(
+            "ENTER _persist_outputs | toc=%d sections=%d",
+            len(toc),
+            len(sections),
+        )
+        start = time.perf_counter()
         self._write_core_outputs(toc, sections)
         self._generate_content_file(sections)
         self._generate_metadata()
         self._generate_validation_reports()
         self._validate_output_schemas()
         self._generate_summary_output(toc, sections)
+        elapsed = time.perf_counter() - start
+        _logger.info(
+            "EXIT _persist_outputs | time_sec=%.3f",
+            elapsed,
+        )
     
     def _write_core_outputs(
         self,
@@ -519,9 +598,11 @@ ParserFactory.register("usb_pd", USBPDParser)
 
 
 # ------------------------------------------------------------------
-# CLI entry point (UNCHANGED)
+# CLI entry point (standalone script)
 # ------------------------------------------------------------------
 def main() -> None:
+    from src.utils.logger_config import setup_logging
+    setup_logging(use_console=True)
     parser = argparse.ArgumentParser(
         description="USB PD Specification PDF Parser"
     )

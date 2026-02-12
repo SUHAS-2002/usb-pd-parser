@@ -16,6 +16,7 @@ except ImportError:
 
 import pytesseract
 import logging
+import time
 from PIL import Image
 from typing import List, Dict, Iterable, Any
 
@@ -81,6 +82,8 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
 
         Extract text from PDF using high-fidelity OCR strategy.
         """
+        _logger.info("ENTER extract_text | input pdf_path=%s", pdf)
+        start = time.perf_counter()
         pages: List[Dict] = []
 
         if not hasattr(fitz, "open"):
@@ -98,6 +101,15 @@ class HighFidelityExtractor(PDFTextStrategy, BaseExtractor):
                 doc.close()
 
         self._verify_page_coverage(pages)
+        elapsed = time.perf_counter() - start
+        total_chars = sum(len(p.get("text", "")) for p in pages)
+        _logger.info(
+            "EXIT extract_text | time_sec=%.3f | output pages=%d "
+            "total_text_len=%d",
+            elapsed,
+            len(pages),
+            total_chars,
+        )
         return pages
 
     # ---------------------------------------------------------------

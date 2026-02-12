@@ -62,6 +62,28 @@ usb-pd-parser/
 └── README.md                            # This file
 ```
 
+## 📐 Documentation
+
+- **[System Architecture](docs/architecture.md)** – High-level architecture diagram (Mermaid) and component-level details (inputs, processing, outputs) for each major part of the codebase.
+- **[Component / Data Flow Diagram](docs/component_diagram.md)** – Data flow between processes, data stores, and external entities (separate file, DFD style).
+
+**Viewing the Mermaid diagrams:** IntelliJ’s built-in Markdown preview does not render Mermaid. To see the diagrams, view the docs on **GitHub**, install a **Mermaid plugin** in IntelliJ (*Settings → Plugins*), or paste the `mermaid` code block into [mermaid.live](https://mermaid.live).
+
+## 📝 Logging
+
+The project uses a **dedicated logger** (Python `logging` module) configured in `src/utils/logger_config.py`. When you run the CLI (e.g. `python3 -m usbpd.cli parse ...`), logs are written to:
+
+- **File:** `logs/usbpd_parser.log`
+- **Console:** same messages are echoed to stderr
+
+Logs include:
+- **Input/output metadata** for key functions (e.g. number of pages, TOC entries, sections)
+- **Object sizes** (e.g. total text length, record counts)
+- **Execution time** for major pipeline steps and total run
+- **Exceptions and errors** (with stack traces)
+
+This improves **reliability and tracking**: you can trace each run, debug failures, and discuss behavior in interviews using the log file.
+
 ## 🚀 Quick Start
 
 ### Prerequisites

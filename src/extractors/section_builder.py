@@ -8,6 +8,7 @@ inline headings (authoritative source).
 from __future__ import annotations
 
 import logging
+import time
 from typing import List, Dict, Protocol, runtime_checkable
 
 from src.config import CONFIG
@@ -89,6 +90,13 @@ class SectionContentBuilder:
             _logger.warning("No pages provided to section builder")
             return []
 
+        _logger.info(
+            "ENTER build | toc=%d pages=%d headings=%d",
+            len(toc),
+            len(pages),
+            len(headings),
+        )
+        start = time.perf_counter()
         self.__page_text_map = self._build_page_text_map(pages)
         self.__sections = []
 
@@ -103,6 +111,12 @@ class SectionContentBuilder:
         # Add unmapped pages as sections to improve coverage
         self._add_unmapped_pages(headings, doc_title)
 
+        elapsed = time.perf_counter() - start
+        _logger.info(
+            "EXIT build | time_sec=%.3f | output sections=%d",
+            elapsed,
+            len(self.__sections),
+        )
         return self.__sections.copy()
 
     # -----------------------------------------------------------
